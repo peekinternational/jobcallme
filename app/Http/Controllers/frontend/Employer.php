@@ -432,7 +432,7 @@ curl_close ($ch);
     	$app = $request->session()->get('jcmUser');
 
     	/* posted jobs*/
-    	$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_jobs.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
+    	$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_job_applied.userId')->orderBy('jcm_jobs.jobId','desc')->get();
     	/* end */
 //dd($postedJobs);
     	/* recent application */
