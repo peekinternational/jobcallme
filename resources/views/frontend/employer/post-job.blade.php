@@ -325,7 +325,8 @@
 $(document).ready(function(){
     getStates($('.job-country option:selected:selected').val());
     getSubCategories($('.job-category option:selected:selected').val());
-})
+});
+$("#md-radio-2-input").trigger('click');
 $('.job-country').on('change',function(){
     var countryId = $(this).val();
     getStates(countryId)

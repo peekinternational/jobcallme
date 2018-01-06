@@ -230,6 +230,7 @@ Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('jobCallMePayResult','HomeController@jobCallMePayResult');
 
 Route::get('nice', function () {
     return view('frontend.nice');
