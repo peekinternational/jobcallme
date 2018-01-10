@@ -1,6 +1,30 @@
 body{
     background: #eeeeee;
 }
+.foot-links{
+    padding: 50px 0 10px;
+	
+}
+.foot-links li{
+    padding: 5px;
+	color: #d7d7d7;
+    font-size: 11px;
+	text-decoration: none;
+	list-style: none;
+	text-align: center;	
+}
+.foot-links2{ 
+	background-color: #333333;
+}
+.foot-links3{    
+	background-color: #fff;
+}
+.foot-links-hr{  
+	position: relative;
+	width: 100%;
+	margin-top: 100px;
+    border-bottom: 1px solid #6a6a6b;
+}
 .footer-title-box{
     margin-top: 40px;
     text-align: center;
@@ -529,7 +553,7 @@ a.job-location:hover span.shine {
 .ih-item.square.effect15{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: 1px solid #cccccc;
-    height: 179px;
+    height: auto;
 }
 .pj-type-job img{
     width: 175px !important;
@@ -543,7 +567,7 @@ a.job-location:hover span.shine {
 .ih-item.square.effect14{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: 1px solid #cccccc;
-    height: 170px;
+    height: auto;
 }
 .hj-type-job img{
     width: 118px !important;
@@ -558,7 +582,7 @@ a.job-location:hover span.shine {
 .ih-item.square.effect13{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: 1px solid #cccccc;
-    height: 159px;
+    height: auto;
 }
 .ih-item.square.effect13 .info{
     background: rgba(0,0,0,0.8) !important;
@@ -576,7 +600,7 @@ a.job-location:hover span.shine {
 .ih-item.square.effect2{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: 1px solid #cccccc;
-    height: 157px;
+    height: auto;
 }
 
 .sj-job-type img{

@@ -6,34 +6,32 @@
 
 <section style="margin-bottom: 123px;padding-top: 180px;">
     <div class="container">
-	<div class="row">
-      <div class="col-md-12">
-          <h3 style="text-align:center">Select Payment Method</h3>
-          <br>
-          <br>
-		<div class="col-md-6" style="text-align:end">
-		 <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypal') !!}" >
+        <div class="row">
+            <div class="col-md-12">
+                <h3 style="text-align:center">Select payment method</h3>
+                <br>
+                <br>
+                <div class="col-md-6" style="text-align:end">
+                    <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypal') !!}" >
                         {{ csrf_field() }}
-		<button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button>
-		
-		</form>
+                        <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
+                    </form>
+                </div>
+                <div class="col-md-6">
+            
+                    <form action="https://nicepay.outsourcingok.com/nicepay/payRequest.php" method="post" id='nicePayForm'> 
+                        <input type="hidden" value="{!! $am!!}" name="price" >
+                        <input type="hidden" value="1" name="goodscount" >
+                        <input type="hidden" value="jobcallme" name="goodsName" >
+                        <input type="hidden" value="{!! $app->email!!}" name="Email" >
+                        <input type="hidden" value="{!! $app->phoneNumber!!}" name="tel" >
+                        <input type="hidden" value="{!! $app->firstName!!}" name="buyerName" id='buyerName' >
+                        <a href='javascript:void(0)'  class="btn btn-primary btn-lg nicePay">NicePay</a>
+                    </form>
+                
+                </div>
+            </div>
         </div>
-		<div class="col-md-6">
-	
-	<form action="http://peekinternational.com/demos/nicepay/payRequest_utf.php" method="post">
-	  <!-- {!! Form::open(['action'=>['frontend\Employer@getresponse'],'method'=>'post','class'=>'form-horizontal','files'=>true,'enctype'=>'multipart/form-data']) !!} -->
-	    <input type="hidden" value="{!! $am!!}" name="price" >
-	    <input type="hidden" value="1" name="goodscount" >
-	     <input type="hidden" value="{!! $goodsname !!}" name="goodsName" >
-	     <input type="hidden" value="{!! $app->email!!}" name="Email" >
-	     <input type="hidden" value="{!! $app->phoneNumber!!}" name="tel" >
-	      <input type="hidden" value="{!! $app->firstName!!}" name="buyerName" >
-		  <button type="submit" class="btn btn-primary btn-lg">NicePay</button>
-     </form>
-		
-		</div>
-	</div>
-    </div>
 	</div>
 </section>
 <style type="text/css">
@@ -51,6 +49,23 @@
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+
+$(document).on('click','.nicePay',function(){
+    $(this).attr('disabled',true); 
+    $.ajax({
+        type: "POST",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }, 
+        url: "<?=url('account/nicepay')?>",
+        success: function(result){ 
+            
+            $("#buyerName").val(result);
+            // $("#nicePayForm").submit();
+        }
+    });
+});
+
 $(document).ready(function(){
     getCities($('.job-country option:selected:selected').val());
     getSubCategories($('.job-category option:selected:selected').val());
