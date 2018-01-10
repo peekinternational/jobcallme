@@ -438,7 +438,9 @@ curl_close ($ch);
     	$app = $request->session()->get('jcmUser');
 
     	/* posted jobs*/
-    	$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_job_applied.userId')->orderBy('jcm_jobs.jobId','desc')->get();
+    	//$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_job_applied.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
+		//$postedJobs = DB::table('jcm_jobs')->where('userId','=',$app->userId)->orderBy('jobId','desc')->get();
+		$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_jobs.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
     	/* end */
 //dd($postedJobs);
     	/* recent application */
@@ -480,7 +482,7 @@ curl_close ($ch);
     	}
     	$readQry->orderBy('jcm_writings.writingId','desc')->limit(6);
     	$read_record = $readQry->get();
-		//return $applicants;
+		//dd($postedJobs);
 		
 		
 
@@ -1260,6 +1262,12 @@ public function userResume($userId){
         \Session::put('error','Payment failed');
         return Redirect::route('addmoney.frontend.employer.jobupdate');
     }
+	public function deletejob($id){
+		
+			DB::table('jcm_jobs')->where('jobId','=',$id)->delete();
+			Session::flash('message', "Successfully Delete Job");
+			return redirect(url()->previous());
+		}
 		
 
 }

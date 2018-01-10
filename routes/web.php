@@ -165,9 +165,13 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/department/delete/{id}','frontend\Employer@deleteDepartment');
 	Route::post('post','frontend\Employer@post');
 	Route::post('nicepay', 'frontend\Employer@getresponse');
+	Route::get('employer/delete/{id}','frontend\Employer@deletejob');
 	
 	Route::get('employer/nice', function () {
     return view('frontend.employer.nice');
+});
+Route::get('employer/advance_serach', function () {
+    return view('frontend.advance-job');
 });
 
 Route::get('employer/nicerequest', function () {
