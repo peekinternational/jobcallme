@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //use app\Mail\AccountNotification;
 use Mail;
-
+use Storage;
+use App\Jobs;
 class Home extends Controller{
     
     public function notFound(){
@@ -25,6 +26,26 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
     	Mail::send('emails.welcome', $event, function($message){
 		    $message->to('mu.cp15@gmail.com')->subject('Welcome!');
 		});
+    }
+
+	public function jobCallMePayResult()
+    { 
+		$postedData=$_POST;
+		$data=json_encode($_POST);
+		$fileName='test.txt';
+		$fileContents= Storage::disk('local')->get($fileName);
+		$fileContents.=$data." ================================================== ";
+        Storage::disk('local')->put($fileName, $fileContents);
+
+		if($postedData->buyerName){
+			$jobData=Jobs::findOrFail($postedData->buyerName);
+			$jobData->status=1;
+			$jobData->save();
+			$fileContents= Storage::disk('local')->get($fileName);
+			$fileContents.=" <== Run Successfully ====== > ";
+			Storage::disk('local')->put($fileName, $fileContents);
+		}
+		die('hmm');
     }
 }
 ?>
