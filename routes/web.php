@@ -170,6 +170,7 @@ Route::group(['prefix' => 'account'], function () {
 	Route::get('employer/nice', function () {
     return view('frontend.employer.nice');
 });
+Route::get('employer/job_update/{id}','frontend\Employer@updatejob');
 Route::get('employer/advance_serach', function () {
     return view('frontend.advance-job');
 });
@@ -224,6 +225,11 @@ Route::get('account/employer/payment', array('as' => 'addmoney.account/employer/
 Route::post('paypals', array('as' => 'addmoney.paypals','uses' => 'frontend\Employer@postPaymentWithpaypals'));
 Route::post('paypal', array('as' => 'addmoney.paypal','uses' => 'frontend\Employer@postPaymentWithpaypal',));
 Route::get('paypal', array('as' => 'payment.status','uses' => 'frontend\Employer@getPaymentStatus',));
+
+
+Route::post('updatepaypals', array('as' => 'addmoney.updatepaypals','uses' => 'frontend\Employer@updatepostPaymentWithpaypals'));
+Route::post('updatepaypal', array('as' => 'addmoney.paypal','uses' => 'frontend\Employer@updatepostPaymentWithpaypal',));
+Route::get('updatepaypal', array('as' => 'payment.updatestatus','uses' => 'frontend\Employer@updategetPaymentStatus',));
 
 
 Route::get('/redirect', 'SocialAuthFacebookController@redirect');

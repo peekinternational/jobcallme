@@ -77,7 +77,7 @@
 									<div class="col-md-2 pull-right"><div class="dropdown">
 									  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
 									  <div class="dropdown-content">
-										<a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+										<a href="{{url('account/employer/job_update/'.$pjobs->jobId)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
 										<a href="{{url('jobs')}}"><i class="fa fa-filter" aria-hidden="true"></i> Filters</a>
 										<a href=""><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
 										<a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
