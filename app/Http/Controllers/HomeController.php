@@ -26,8 +26,5 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function jobCallMePayResult()
-    {
-        print_r($_POST);
-    }
+
 }

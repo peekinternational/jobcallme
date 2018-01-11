@@ -19,13 +19,13 @@
                 </div>
                 <div class="col-md-6">
             
-                    <form action="https://nicepay.outsourcingok.com/nicepay/payRequest.php" method="post" id='nicePayForm'> 
+                    <form action="{{url('nicepay/payRequest.php')}}" method="post" id='nicePayForm'> 
                         <input type="hidden" value="{!! $am!!}" name="price" >
                         <input type="hidden" value="1" name="goodscount" >
                         <input type="hidden" value="jobcallme" name="goodsName" >
                         <input type="hidden" value="{!! $app->email!!}" name="Email" >
                         <input type="hidden" value="{!! $app->phoneNumber!!}" name="tel" >
-                        <input type="hidden" value="{!! $app->firstName!!}" name="buyerName" id='buyerName' >
+                        <input type="hidden" value="0" name="buyerName" id='buyerName' >
                         <a href='javascript:void(0)'  class="btn btn-primary btn-lg nicePay">NicePay</a>
                     </form>
                 
@@ -58,10 +58,9 @@ $(document).on('click','.nicePay',function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }, 
         url: "<?=url('account/nicepay')?>",
-        success: function(result){ 
-            
+        success: function(result){  
             $("#buyerName").val(result);
-            // $("#nicePayForm").submit();
+            $("#nicePayForm").submit();
         }
     });
 });

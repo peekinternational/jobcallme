@@ -2,26 +2,26 @@
 header("Content-Type:text/html; charset=euc-kr;"); 
 /*
 *******************************************************
-* <°áÁ¦¿äÃ» ÆÄ¶ó¹ÌÅÍ>
-* °áÁ¦½Ã Form ¿¡ º¸³»´Â °áÁ¦¿äÃ» ÆÄ¶ó¹ÌÅÍÀÔ´Ï´Ù.
-* »ùÇÃÆäÀÌÁö¿¡¼­´Â ±âº»(ÇÊ¼ö) ÆÄ¶ó¹ÌÅÍ¸¸ ¿¹½ÃµÇ¾î ÀÖÀ¸¸ç, 
-* Ãß°¡ °¡´ÉÇÑ ¿É¼Ç ÆÄ¶ó¹ÌÅÍ´Â ¿¬µ¿¸Þ´º¾óÀ» Âü°íÇÏ¼¼¿ä.
+* <ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã» ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½>
+* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Form ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã» ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»(ï¿½Ê¼ï¿½) ï¿½Ä¶ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ÃµÇ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 
+* ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.
 *******************************************************
 */
-$merchantKey      = "EYzu8jGGMfqaDEp76gSckuvnaHHu+bC4opsSN6lHv3b2lurNYkVXrZ7Z1AoqQnXI3eLuaUFyoRNC6FkrzVjceg==";   // »óÁ¡Å°
-$merchantID       = "nicepay00m";                           // »óÁ¡¾ÆÀÌµð
-$goodsCnt         = "1";                                    // °áÁ¦»óÇ°°³¼ö
-$goodsName        = "³ªÀÌ½ºÆäÀÌ";                           // °áÁ¦»óÇ°¸í
-$price            = "1004";                                 // °áÁ¦»óÇ°±Ý¾×	
-$buyerName        = "³ªÀÌ½º";                               // ±¸¸ÅÀÚ¸í
-$buyerTel         = "01000000000";                          // ±¸¸ÅÀÚ¿¬¶ôÃ³
-$buyerEmail       = "happy@day.co.kr";                      // ±¸¸ÅÀÚ¸ÞÀÏÁÖ¼Ò
-$moid             = "mnoid1234567890";                      // »óÇ°ÁÖ¹®¹øÈ£
+$merchantKey      = "EYzu8jGGMfqaDEp76gSckuvnaHHu+bC4opsSN6lHv3b2lurNYkVXrZ7Z1AoqQnXI3eLuaUFyoRNC6FkrzVjceg==";   // ï¿½ï¿½ï¿½ï¿½Å°
+$merchantID       = "nicepay00m";                           // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½
+$goodsCnt         = "1";                                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+$goodsName        = "ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½";                           // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½
+$price            = "1004";                                 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Ý¾ï¿½	
+$buyerName        = "ï¿½ï¿½ï¿½Ì½ï¿½";                               // ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½
+$buyerTel         = "01000000000";                          // ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½Ã³
+$buyerEmail       = "happy@day.co.kr";                      // ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½
+$moid             = "mnoid1234567890";                      // ï¿½ï¿½Ç°ï¿½Ö¹ï¿½ï¿½ï¿½È£
 
 /*
 *******************************************************
-* <ÇØ½¬¾ÏÈ£È­> (¼öÁ¤ÇÏÁö ¸¶¼¼¿ä)
-* SHA-256 ÇØ½¬¾ÏÈ£È­´Â °Å·¡ À§º¯Á¶¸¦ ¸·±âÀ§ÇÑ ¹æ¹ýÀÔ´Ï´Ù. 
+* <ï¿½Ø½ï¿½ï¿½ï¿½È£È­> (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+* SHA-256 ï¿½Ø½ï¿½ï¿½ï¿½È£È­ï¿½ï¿½ ï¿½Å·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½. 
 *******************************************************
 */ 
 $ediDate = date("YmdHis");
@@ -29,7 +29,7 @@ $hashString = bin2hex(hash('sha256', $ediDate.$merchantID.$price.$merchantKey, t
 
 /*
 ******************************************************* 
-* <¼­¹ö IP°ª>
+* <ï¿½ï¿½ï¿½ï¿½ IPï¿½ï¿½>
 *******************************************************
 */
 $ip = $_SERVER['REMOTE_ADDR'];    
@@ -43,23 +43,23 @@ $ip = $_SERVER['REMOTE_ADDR'];
 <link rel="stylesheet" type="text/css" href="./css/import.css"/>
 <script src="https://web.nicepay.co.kr/flex/js/nicepay_tr_utf.js" type="text/javascript"></script>
 <script type="text/javascript">
-//°áÁ¦Ã¢ ÃÖÃÊ ¿äÃ»½Ã ½ÇÇàµË´Ï´Ù.
+//ï¿½ï¿½ï¿½ï¿½Ã¢ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ë´Ï´ï¿½.
 function nicepayStart(){
     document.getElementById("vExp").value = getTomorrow();
     goPay(document.payForm);
 }
 
-//°áÁ¦ ÃÖÁ¾ ¿äÃ»½Ã ½ÇÇàµË´Ï´Ù. <<'nicepaySubmit()' ÀÌ¸§ ¼öÁ¤ ºÒ°¡´É>>
+//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ë´Ï´ï¿½. <<'nicepaySubmit()' ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½>>
 function nicepaySubmit(){
     document.payForm.submit();
 }
 
-//°áÁ¦Ã¢ Á¾·á ÇÔ¼ö <<'nicepayClose()' ÀÌ¸§ ¼öÁ¤ ºÒ°¡´É>>
+//ï¿½ï¿½ï¿½ï¿½Ã¢ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ <<'nicepayClose()' ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½>>
 function nicepayClose(){
-    alert("°áÁ¦°¡ Ãë¼Ò µÇ¾ú½À´Ï´Ù");
+    alert("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½");
 }
 
-//°¡»ó°èÁÂÀÔ±Ý¸¸·áÀÏ ¼³Á¤ (today +1)
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (today +1)
 function getTomorrow(){
     var today = new Date();
     var yyyy = today.getFullYear().toString();
@@ -81,64 +81,74 @@ function getTomorrow(){
             <table>
               <colgroup><col width="30%" /><col width="*" /></colgroup>
               <tr>
-                <th><span>°áÁ¦ ¼ö´Ü</span></th>
+                <th><span>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</span></th>
                 <td>
                   <select name="PayMethod">
-                    <option value="CARD">½Å¿ëÄ«µå</option>
-                    <option value="BANK">°èÁÂÀÌÃ¼</option>
-                    <option value="CELLPHONE">ÈÞ´ëÆù°áÁ¦</option>
-                    <option value="VBANK">°¡»ó°èÁÂ</option>
+                    <option value="CARD">ï¿½Å¿ï¿½Ä«ï¿½ï¿½</option>
+                    <option value="BANK">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼</option>
+                    <option value="CELLPHONE">ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</option>
+                    <option value="VBANK">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</option>
                   </select>
                 </td>
-              </tr>            
+              </tr>         
               <tr>
-                <th><span>°áÁ¦ »óÇ°¸í</span></th>
-                <td><input type="text" name="GoodsName" value="<?=$goodsName?>"></td>
-              </tr>			  
+                <th><span>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½Ý¾ï¿½</span></th>
+                <td><?=$price?></td>
+              </tr>   
+              <!--<tr>
+                <th><span>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½</span></th>
+                <td></td>
+              </tr>			  -->
+              <input type="hidden" name="GoodsName" value="<?=$goodsName?>">
+              <!--<tr>
+                <th><span>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½</span></th>
+                <td></td>
+              </tr>	-->
+              <input type="hidden" name="GoodsCnt" value="<?=$goodsCnt?>">  
+              <!--<tr>
+                <th><span>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½Ý¾ï¿½</span></th>
+                <td></td>
+              </tr>	  -->
+              <input type="hidden" name="Amt" value="<?=$price?>">
+              <!--<tr>
+                <th><span>ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½</span></th>
+                <td></td>
+              </tr>	 -->
+              <input type="hidden" name="BuyerName" value="<?=$buyerName?>"> 
               <tr>
-                <th><span>°áÁ¦ »óÇ°°³¼ö</span></th>
-                <td><input type="text" name="GoodsCnt" value="<?=$goodsCnt?>"></td>
-              </tr>	  
-              <tr>
-                <th><span>°áÁ¦ »óÇ°±Ý¾×</span></th>
-                <td><input type="text" name="Amt" value="<?=$price?>"></td>
-              </tr>	  
-              <tr>
-                <th><span>±¸¸ÅÀÚ¸í</span></th>
-                <td><input type="text" name="BuyerName" value="<?=$buyerName?>"></td>
-              </tr>	  
-              <tr>
-                <th><span>±¸¸ÅÀÚ ¿¬¶ôÃ³</span></th>
+                <th><span>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³</span></th>
                 <td><input type="text" name="BuyerTel" value="<?=$buyerTel?>"></td>
               </tr>    
-              <tr>
-                <th><span>»óÇ° ÁÖ¹®¹øÈ£</span></th>
-                <td><input type="text" name="Moid" value="<?=$moid?>"></td>
-              </tr>
-              <tr>
-                <th><span>»óÁ¡ ¾ÆÀÌµð</span></th>
-                <td><input type="text" name="MID" value="<?=$merchantID?>"></td>
-              </tr>              
+              <!--<tr>
+                <th><span>ï¿½ï¿½Ç° ï¿½Ö¹ï¿½ï¿½ï¿½È£</span></th>
+                <td></td>
+              </tr>-->
+              <input type="hidden" name="Moid" value="<?=$moid?>">
+              <!--<tr>
+                <th><span>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½</span></th>
+                <td></td>
+              </tr>         -->
+              <input type="hidden" name="MID" value="<?=$merchantID?>">     
                           
               <!-- IP -->
-              <input type="hidden" name="UserIP" value="<?=$ip?>"/>                         <!-- È¸¿ø»ç°í°´IP -->
+              <input type="hidden" name="UserIP" value="<?=$ip?>"/>                         <!-- È¸ï¿½ï¿½ï¿½ï¿½ï¿½IP -->
               
-              <!-- ¿É¼Ç -->
-              <input type="hidden" name="VbankExpDate" id="vExp"/>                          <!-- °¡»ó°èÁÂÀÔ±Ý¸¸·áÀÏ -->
-              <input type="hidden" name="BuyerEmail" value="<?=$buyerEmail?>"/>             <!-- ±¸¸ÅÀÚ ÀÌ¸ÞÀÏ -->				  
-              <input type="hidden" name="TransType" value="0"/>                             <!-- ÀÏ¹Ý(0)/¿¡½ºÅ©·Î(1) --> 
-              <input type="hidden" name="GoodsCl" value="1"/>                               <!-- »óÇ°±¸ºÐ(½Ç¹°(1),ÄÁÅÙÃ÷(0)) -->              
+              <!-- ï¿½É¼ï¿½ -->
+              <input type="hidden" name="VbankExpDate" id="vExp"/>                          <!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±Ý¸ï¿½ï¿½ï¿½ï¿½ï¿½ -->
+              <input type="hidden" name="BuyerEmail" value="<?=$buyerEmail?>"/>             <!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ -->				  
+              <input type="hidden" name="TransType" value="0"/>                             <!-- ï¿½Ï¹ï¿½(0)/ï¿½ï¿½ï¿½ï¿½Å©ï¿½ï¿½(1) --> 
+              <input type="hidden" name="GoodsCl" value="1"/>                               <!-- ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½(ï¿½Ç¹ï¿½(1),ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(0)) -->              
               
-              <!-- º¯°æ ºÒ°¡´É -->
-              <input type="hidden" name="EncodeParameters" value=""/>                       <!-- ¾ÏÈ£È­´ë»óÇ×¸ñ -->
-              <input type="hidden" name="EdiDate" value="<?=$ediDate?>"/>                   <!-- Àü¹® »ý¼ºÀÏ½Ã -->
-              <input type="hidden" name="EncryptData" value="<?=$hashString?>"/>            <!-- ÇØ½¬°ª	-->
-              <input type="hidden" name="TrKey" value=""/>                                  <!-- ÇÊµå¸¸ ÇÊ¿ä -->
+              <!-- ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ -->
+              <input type="hidden" name="EncodeParameters" value=""/>                       <!-- ï¿½ï¿½È£È­ï¿½ï¿½ï¿½ï¿½×¸ï¿½ -->
+              <input type="hidden" name="EdiDate" value="<?=$ediDate?>"/>                   <!-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½ï¿½ -->
+              <input type="hidden" name="EncryptData" value="<?=$hashString?>"/>            <!-- ï¿½Ø½ï¿½ï¿½ï¿½	-->
+              <input type="hidden" name="TrKey" value=""/>                                  <!-- ï¿½Êµå¸¸ ï¿½Ê¿ï¿½ -->
             </table>
           </div>
         </div>
         <div class="btngroup">
-          <a href="#" class="btn_blue" onClick="nicepayStart();">¿ä Ã»</a>
+          <a href="#" class="btn_blue" onClick="nicepayStart();">ï¿½ï¿½ Ã»</a>
         </div>
       </div>
     </div>

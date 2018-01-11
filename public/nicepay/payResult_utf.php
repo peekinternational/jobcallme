@@ -59,24 +59,133 @@ $vbankBankName  = $responseDTO->getParameterUTF("VbankBankName");  // 가상계�
 $vbankNum       = $responseDTO->getParameter("VbankNum");       // 가상계좌번호
 $vbankExpDate   = $responseDTO->getParameter("VbankExpDate");   // 가상계좌입금예정일
 
+$data = http_build_query(array('resultCode' => $resultCode, 
+                'resultMsg' => $resultMsg, 
+                'authDate' => $authDate, 
+                'authCode' => $authCode, 
+                'buyerName' => $buyerName, 
+                'mallUserID' => $mallUserID, 
+                'goodsName' => $goodsName, 
+                'mid' => $mid, 
+                'tid' => $tid, 
+                'moid' => $moid, 
+                'amt' => $amt,
+                'cardCode' => $cardCode, 
+                'cardQuota' => $cardQuota, 
+                'cardName' => $cardName, 
+                'bankCode' => $bankCode, 
+                'bankName' => $bankName, 
+                'rcptAuthCode' => $rcptAuthCode, 
+                'carrier' => $carrier, 
+                'dstAddr' => $dstAddr, 
+                'vbankBankCode' => $vbankBankCode, 
+                'vbankBankName' => $vbankBankName, 
+                'vbankNum' => $vbankNum, 
+                'vbankExpDate' => $vbankExpDate ));
+ $url = "https://www.jobcallme.com/jobCallMePayResult";
 /*
 *******************************************************
 * <결제 성공 여부 확인>
 *******************************************************
 */
 $paySuccess = false;
-if($payMethod == "CARD"){
-    if($resultCode == "3001") $paySuccess = true;               // 신용카드(정상 결과코드:3001)
-}else if($payMethod == "BANK"){
-    if($resultCode == "4000") $paySuccess = true;               // 계좌이체(정상 결과코드:4000)
-}else if($payMethod == "CELLPHONE"){
-    if($resultCode == "A000") $paySuccess = true;               // 휴대폰(정상 결과코드:A000)
-}else if($payMethod == "VBANK"){
-    if($resultCode == "4100") $paySuccess = true;               // 가상계좌(정상 결과코드:4100)
-}else if($payMethod == "SSG_BANK"){
-    if($resultCode == "0000") $paySuccess = true;               // SSG은행계좌(정상 결과코드:0000)
-}
 
+if($payMethod == "CARD"){
+    if($resultCode == "3001"){
+      $paySuccess = true;               // 신용카드(정상 결과코드:3001)
+      // Send resut to outsourcingok.com
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,$url);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      $server_output = curl_exec ($ch);
+      var_dump($server_output);
+      curl_close ($ch);
+    }
+
+}else if($payMethod == "BANK"){
+    if($resultCode == "4000"){
+      $paySuccess = true;               // 신용카드(정상 결과코드:3001)
+      // Send resut to outsourcingok.com
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,$url);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      $server_output = curl_exec ($ch);
+      var_dump($server_output);
+      curl_close ($ch);
+    }
+    
+}else if($payMethod == "CELLPHONE"){
+    if($resultCode == "A000"){
+      $paySuccess = true;               // 신용카드(정상 결과코드:3001)
+      // Send resut to outsourcingok.com
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,$url);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      $server_output = curl_exec ($ch);
+      var_dump($server_output);
+      curl_close ($ch);
+    }
+    
+}else if($payMethod == "VBANK"){
+    if($resultCode == "4100"){
+      $paySuccess = true;               // 신용카드(정상 결과코드:3001)
+      // Send resut to outsourcingok.com
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,$url);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      $server_output = curl_exec ($ch);
+      var_dump($server_output);
+      curl_close ($ch);
+    }
+    
+}else if($payMethod == "SSG_BANK"){
+    if($resultCode == "0000"){
+      $paySuccess = true;               // 신용카드(정상 결과코드:3001)
+      // Send resut to outsourcingok.com
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,$url);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+      $server_output = curl_exec ($ch);
+      var_dump($server_output);
+      curl_close ($ch);
+    }
+    
+}
 ?>
 <!DOCTYPE html>
 <html>
