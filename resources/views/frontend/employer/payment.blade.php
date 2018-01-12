@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-6">
             
-                    <form action="{{url('nicepay/payRequest.php')}}" method="post" id='nicePayForm'> 
+                    <form action="{{url('nicepay/payRequest_utf.php')}}" method="post" id='nicePayForm'> 
                         <input type="hidden" value="{!! $am!!}" name="price" >
                         <input type="hidden" value="1" name="goodscount" >
                         <input type="hidden" value="jobcallme" name="goodsName" >
