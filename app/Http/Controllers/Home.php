@@ -36,11 +36,21 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 		$fileContents= Storage::disk('local')->get($fileName);
 		$fileContents.=$data." ================================================== ";
         Storage::disk('local')->put($fileName, $fileContents);
+		
 
 		if($postedData->buyerName){
-			$jobData=Jobs::findOrFail($postedData->buyerName);
+			$jId=rtrim($postedData->buyerName.replace(" ",""));
+			$authCode=rtrim($postedData->authCode.replace(" ",""));
+
+			$fileContents= Storage::disk('local')->get($fileName);
+			$fileContents.=" ======== IN TESTING ====== ";
+			Storage::disk('local')->put($fileName, $fileContents);
+
+			$jobData=Jobs::findOrFail($jId);
 			$jobData->status=1;
+			$jobData->pay_id=$authCode;
 			$jobData->save();
+
 			$fileContents= Storage::disk('local')->get($fileName);
 			$fileContents.=" <== Run Successfully ====== > ";
 			Storage::disk('local')->put($fileName, $fileContents);

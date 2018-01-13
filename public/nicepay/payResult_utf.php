@@ -288,5 +288,5 @@ if($payMethod == "CARD"){
 window.setTimeout(function(){ 
     // Move to a new location or you can do something else
     window.location.href = "https://www.jobcallme.com/paymentCompleted"; 
-}, 5000);
+}, 1000);
 </script>
