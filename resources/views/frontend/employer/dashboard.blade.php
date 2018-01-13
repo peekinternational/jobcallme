@@ -8,9 +8,13 @@
 
 @section('content')
 <!--Graph Section-->
+
 <section id="employer-graph">
     <div class="container">
         <div class="row">
+		@if (Session::has('message'))
+   <div class="alert alert-success  alert-dismissable" style="position: absolute;z-index: 999;width: 86%;"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>{{ Session::get('message') }}</div>
+@endif
             <div class="col-md-4">
                 <div class="eg-job-response">
                     <h4>Job Response</h4>
@@ -54,9 +58,11 @@
                         <div class="tab-pane active" id="rtj_tab_posted_jobs">
 						<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
                             @foreach($postedJobs as $pjobs)
-                                <div class="col-md-12 rtj-item">
+							
+                                <div class="col-md-10 rtj-item">
+							
                                     <div class="rtj-details">
-                                        <p><strong><a href="{{ url('jobs/'.$pjobs->jobId) }}">{!! $pjobs->title !!}</a></strong> <i class="fa fa-check-circle-o"></i> </p>
+                                        <p><strong><a href="{{ url('jobs/'.$pjobs->jobId) }}">{!! $pjobs->title !!}</a></strong> <i class="fa fa-check-circle-o"></i></p>
                                         <p>{{ strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open' }} <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}"> {!! $pjobs->p_Category !!}</span>
 										
 										@if ($pjobs->p_Category =='Basic')
@@ -66,9 +72,19 @@
 										 </p>
 										 <p><i class="fa fa-users"></i> {{ $pjobs->count}}</p>
                                     </div>
-										
-										
+									
                                 </div>
+									<div class="col-md-2 pull-right"><div class="dropdown">
+									  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+									  <div class="dropdown-content">
+										<a href="{{url('account/employer/job_update/'.$pjobs->jobId)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
+										<a href="{{url('jobs')}}"><i class="fa fa-filter" aria-hidden="true"></i> Filters</a>
+										<a href=""><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
+										<a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
+										<a href="#"><i class="fa fa-question" aria-hidden="true"></i> Evaluation</a>
+										<a href="{{ url('account/employer/delete/'.$pjobs->jobId) }}"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+									  </div>
+									</div></div>
                             @endforeach
                         </div>
                         <!--Recent Applicant Start-->

@@ -103,16 +103,19 @@ function getTomorrow(){
               </tr>			  
               <tr>
                 <th><span>결제 상품개수</span></th>
-                <td><input type="text" name="GoodsCnt" value="<?=$goodsCnt?>"></td>
+                <td><?=$goodsCnt?></td>
               </tr>	  
+              <input type="hidden" name="GoodsCnt" value="<?=$goodsCnt?>">
               <tr>
                 <th><span>결제 상품금액</span></th>
-                <td><input type="text" name="Amt" value="<?=$price?>"></td>
+                <td><?=$price?></td>
               </tr>	  
-              <tr>
+              <input type="hidden" name="Amt" value="<?=$price?>">
+              <!--<tr>
                 <th><span>구매자명</span></th>
-                <td><input type="text" name="BuyerName" value="<?=$buyerName?>"></td>
-              </tr>	  
+                <td> </td>
+              </tr>	 -->
+              <input type="hidden" name="BuyerName" value="<?=$buyerName?>"> 
               <tr>
                 <th><span>구매자 연락처</span></th>
                 <td><input type="text" name="BuyerTel" value="<?=$buyerTel?>"></td>

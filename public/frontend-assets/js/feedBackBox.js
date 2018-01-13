@@ -12,7 +12,7 @@
                 message: '',
                 ajaxUrl: 'http://..',
                 successMessage: 'Thank your for your feedback.',
-                errorMessage: 'Something wen\'t wrong!'
+                errorMessage: 'Thank your for your feedback.'
             };
 
             var settings = $.extend(true, {}, this.defaultOptions, options);

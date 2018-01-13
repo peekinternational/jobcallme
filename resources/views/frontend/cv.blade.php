@@ -2,6 +2,7 @@
 <html>
 <body>
 
+
  <section class="personal-info-section" id="personal-information">
                  
                         <div class="row">
@@ -22,7 +23,7 @@
                                
                                 <p><span class="pi-title">Age:</span> {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title">Gender:</span>{{ $meta->gender }},<span class="pi-title">Status:</span>{{ $meta->maritalStatus }}</p>
                                 <p><span class="pi-title">Education:</span> {{ $meta->education }}</p>
-                                <p><span class="pi-title">Experiance:</span> {{ $meta->experiance }}</p>
+                                <p><span class="pi-title">Experience:</span> {{ $meta->experiance }}</p>
                                 <p><span class="pi-title">Industry:</span> {{ JobCallMe::categoryTitle($meta->industry) }}</p>
                                 <p><span class="pi-title">Salary:</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
                                 <div class="professional-summary">

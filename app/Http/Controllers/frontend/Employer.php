@@ -63,6 +63,12 @@ class Employer extends Controller{
       
 		return view('frontend.employer.payment');
     }
+	
+	  public function updatepayWithPaypals()
+    {
+      
+		return view('frontend.employer.update-payment');
+    }
     /**
      * Store a details of payment with paypal.
      *
@@ -438,7 +444,9 @@ curl_close ($ch);
     	$app = $request->session()->get('jcmUser');
 
     	/* posted jobs*/
-    	$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_job_applied.userId')->orderBy('jcm_jobs.jobId','desc')->get();
+    	//$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_job_applied.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
+		//$postedJobs = DB::table('jcm_jobs')->where('userId','=',$app->userId)->orderBy('jobId','desc')->get();
+		$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_jobs.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
     	/* end */
 //dd($postedJobs);
     	/* recent application */
@@ -480,7 +488,7 @@ curl_close ($ch);
     	}
     	$readQry->orderBy('jcm_writings.writingId','desc')->limit(6);
     	$read_record = $readQry->get();
-		//return $applicants;
+		//dd($postedJobs);
 		
 		
 
@@ -1259,6 +1267,287 @@ public function userResume($userId){
         }
         \Session::put('error','Payment failed');
         return Redirect::route('addmoney.frontend.employer.jobupdate');
+    }
+	public function deletejob($id){
+		
+			DB::table('jcm_jobs')->where('jobId','=',$id)->delete();
+			Session::flash('message', "Successfully Delete Job");
+			return redirect(url()->previous());
+		}
+		
+		public function updatejob($id){
+			Session::put('jobId', $id);
+		
+			$data = DB::table('jcm_jobs')->where('jobId','=',$id)->get();
+			$result= $data[0];
+			//$input = array('title' => $result->title);
+			//dd($result);
+			return view('frontend.employer.update-job',compact('result'));
+			//Session::flash('message', "Successfully Delete Job");
+			//return redirect(url()->previous());
+		}
+		
+		
+   public function updatepostPaymentWithpaypals(Request $request)
+      {
+		  $jobid = Session::get('jobId');
+        $mul=$request->amount;
+        $am=$mul*1100;
+      //  dd($am);
+        $goodsname = Session::get('p_Category');
+        $app = $request->session()->get('jcmUser');
+		//dd($request->department);
+			$request->session()->put('amount', $request->amount);
+		
+		$request->session()->put('title', $request->title);
+		$request->session()->put('jType', 'Paid');
+		$request->session()->put('department', $request->department);
+		$request->session()->put('category', $request->category);
+		$request->session()->put('subCategory', $request->subCategory);
+		$request->session()->put('careerLevel', $request->careerLevel);
+		$request->session()->put('experience', $request->experience);
+		$request->session()->put('vacancy', $request->vacancy);
+		$request->session()->put('description', $request->description);
+		$request->session()->put('skills', $request->skills);
+		$request->session()->put('qualification', $request->qualification);
+		$request->session()->put('expiryDate', $request->expiryDate);
+		$request->session()->put('minSalary', $request->minSalary);
+		$request->session()->put('maxSalary', $request->maxSalary);
+		$request->session()->put('description', $request->description);
+		$request->session()->put('type', $request->type);
+		$request->session()->put('currency', $request->currency);
+		$request->session()->put('benefits', $request->benefits);
+		$request->session()->put('state', $request->state);
+		$request->session()->put('city', $request->city);
+		$request->session()->put('country', $request->country);
+		$request->session()->put('shift', $request->shift);
+		$request->session()->put('expiryDate', $request->expiryDate);
+		
+		if($request->amount=='20.30')
+		{
+			$request->merge(['p_Category'=>'Gallery']);
+			$request->session()->put('p_Category', $request->p_Category);
+			
+		}
+		elseif($request->amount=='52.20')
+		{
+			$request->merge(['p_Category'=>'Hot']);
+			$request->session()->put('p_Category', $request->p_Category);
+		}
+		elseif($request->amount=='75.40'){
+			$request->merge(['p_Category'=>'Premium']);
+			$request->session()->put('p_Category', $request->p_Category);
+		}
+		else{
+			$request->merge(['p_Category'=>'Basic']);
+		}
+		
+		 $goodsname = Session::get('p_Category');
+		if($request->amount!='0')
+		{
+			$request->merge(['jType'=>'Paid']);
+		}
+		if($request->amount=='0')
+		{
+			$request->merge(['jType'=>'Free']);
+				$app = $request->session()->get('jcmUser');
+
+		$this->validate($request,[
+				'title' => 'required|max:255',
+				'department' => 'required',
+				'category' => 'required',
+				'careerLevel' => 'required',
+				'experience' => 'required',
+				'vacancy' => 'required|numeric',
+				'description' => 'required|max:1024',
+				'skills' => 'required|max:1024',
+				'qualification' => 'required',
+				'expiryDate' => 'required|date',
+				'minSalary' => 'required|numeric',
+				'maxSalary' => 'required|numeric',
+				'state' => 'required',
+			]);
+	
+   
+		extract($request->all());
+
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'department' => $department, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $request->input('benefits')), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
+		if($subCategory == ''){
+			$input['subCategory'] = '';
+		}
+		$jobId = DB::table('jcm_jobs')->where('jobId','=',$jobid)->update($input);
+		echo $jobId;
+		return Redirect::route('addmoney.account/employer/job/share');
+		}	
+		else{
+		$request->session()->forget('postedJobId');  /*For nice pay*/
+		 return view('frontend.employer.update-payment',compact('am','app','goodsname'));
+	//	return Redirect::route('addmoney.account/employer/payment',compact('am','app','goodsname'));
+		}
+	}
+	
+	
+		public function updatepostPaymentWithpaypal(Request $request)
+    {
+		
+		
+	
+		//dd(Session::get('amount'));
+		//exit();
+        $payer = new Payer();
+        $payer->setPaymentMethod('paypal');
+        $item_1 = new Item();
+        $item_1->setName('Item 1') /** item name **/
+            ->setCurrency('USD')
+            ->setQuantity(1)
+            ->setPrice(Session::get('amount')); /** unit price **/
+        $item_list = new ItemList();
+        $item_list->setItems(array($item_1));
+        $amount = new Amount();
+        $amount->setCurrency('USD')
+            ->setTotal(Session::get('amount'));
+        $transaction = new Transaction();
+        $transaction->setAmount($amount)
+            ->setItemList($item_list)
+            ->setDescription('Your transaction description');
+        $redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('payment.updatestatus')) /** Specify return URL **/
+            ->setCancelUrl(URL::route('payment.updatestatus'));
+        $payment = new Payment();
+        $payment->setIntent('Sale')
+            ->setPayer($payer)
+            ->setRedirectUrls($redirect_urls)
+            ->setTransactions(array($transaction));
+            /** dd($payment->create($this->_api_context));exit; **/
+        try {
+            $payment->create($this->_api_context);
+        } catch (\PayPal\Exception\PPConnectionException $ex) {
+            if (\Config::get('app.debug')) {
+                return 'Connection timeout';
+                return Redirect::route('add.frontend.employer.post-job');
+                /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
+                /** $err_data = json_decode($ex->getData(), true); **/
+                /** exit; **/
+            } else {
+                return 'Some error occur, sorry for inconvenient';
+                return Redirect::route('ey.frontend.employer.post-job');
+                /** die('Some error occur, sorry for inconvenient'); **/
+            }
+        }
+        foreach($payment->getLinks() as $link) {
+            if($link->getRel() == 'approval_url') {
+                $redirect_url = $link->getHref();
+                break;
+            }
+        }
+		 $pay_id=$payment->getId();
+         Session::put('paypal_payment_id', $payment->getId());
+        /** add payment ID to session **/
+		// $pay_id=$payment->getId();
+        // Session::put('paypal_payment_id', $payment->getId());
+		// $request->session()->put('amount', $request->amount);
+		// $request->session()->put('p_Category', $request->p_Category);
+		// $request->session()->put('title', $request->title);
+		// $request->session()->put('jType', 'Paid');
+		// $request->session()->put('department', $request->department);
+		// $request->session()->put('category', $request->category);
+		// $request->session()->put('subCategory', $request->subCategory);
+		// $request->session()->put('careerLevel', $request->careerLevel);
+		// $request->session()->put('experience', $request->experience);
+		// $request->session()->put('vacancy', $request->vacancy);
+		// $request->session()->put('description', $request->description);
+		// $request->session()->put('skills', $request->skills);
+		// $request->session()->put('qualification', $request->qualification);
+		// $request->session()->put('expiryDate', $request->expiryDate);
+		// $request->session()->put('minSalary', $request->minSalary);
+		// $request->session()->put('maxSalary', $request->maxSalary);
+		// $request->session()->put('description', $request->description);
+		// $request->session()->put('type', $request->type);
+		// $request->session()->put('currency', $request->currency);
+		// $request->session()->put('benefits', $request->benefits);
+		// $request->session()->put('state', $request->state);
+		// $request->session()->put('city', $request->city);
+		// $request->session()->put('country', $request->country);
+		// $request->session()->put('shift', $request->shift);
+		// $request->session()->put('expiryDate', $request->expiryDate);
+		
+	
+        if(isset($redirect_url)) {
+            /** redirect to paypal **/
+	
+            return Redirect::away($redirect_url);
+        }
+       return 'Unknown error occurred';
+        return Redirect::route('frontend.employer.post-job');
+    
+	}
+    public function updategetPaymentStatus(Request $request)
+    {
+		$jobid = Session::get('jobId');
+		$payment_id = Session::get('paypal_payment_id');
+		$app = $request->session()->get('jcmUser');
+		$amount = Session::get('amount');
+		$jType = Session::get('jType');
+		$p_Category = Session::get('p_Category');
+		$title = Session::get('title');
+		$department =Session::get('department');
+		$category = Session::get('category');
+		$subCategory = Session::get('subCategory');
+		$careerLevel =Session::get('careerLevel');
+		$experience =Session::get('experience');
+		$vacancy = Session::get('vacancy');
+		$skills =Session::get('skills');
+		$qualification = Session::get('qualification');
+		$expiryDate = Session::get('expiryDate');
+		$minSalary = Session::get('minSalary');
+		$maxSalary = Session::get('maxSalary');
+		$description = Session::get('description');
+	    $type = Session::get('type');
+		$currency = Session::get('currency');
+		$benefits = Session::get('benefits');
+		$country = Session::get('country');
+		$shift = Session::get('shift');
+		$city = Session::get('city');
+		$expiryDate = Session::get('expiryDate');
+		$state = Session::get('state');
+
+		
+
+		extract($request->all());
+
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'department' => $department, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
+		if($subCategory == ''){
+			$input['subCategory'] = '';
+		}
+		$jobId = DB::table('jcm_jobs')->where('jobId','=',$jobid)->update($input);
+		echo $jobId;
+        /** Get the payment ID before session clear **/
+        
+        /** clear the session payment ID **/
+        Session::forget('paypal_payment_id');
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+            \Session::put('error','Payment failed');
+            return Redirect::route('addmoney.frontend.employer.post-job');
+        }
+        $payment = Payment::get($payment_id, $this->_api_context);
+        /** PaymentExecution object includes information necessary **/
+        /** to execute a PayPal account payment. **/
+        /** The payer_id is added to the request query parameters **/
+        /** when the user is redirected from paypal back to your site **/
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+        /**Execute the payment **/
+        $result = $payment->execute($execution, $this->_api_context);
+        /** dd($result);exit; /** DEBUG RESULT, remove it later **/
+        if ($result->getState() == 'approved') { 
+            
+            /** it's all right **/
+            /** Here Write your database logic like that insert record or value in database if you want **/
+            \Session::put('success','Payment success');
+            return Redirect::route('addmoney.account/employer/job/share');
+        }
+        \Session::put('error','Payment failed');
+        return Redirect::route('addmoney.frontend.employer.post-job');
     }
 		
 

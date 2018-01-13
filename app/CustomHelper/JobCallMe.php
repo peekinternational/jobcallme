@@ -497,13 +497,14 @@ class JobCallMe{
 
 	public function getHomeCities(){
 		$country = $this->getHomeCountry();
-		if($country == '109'){
-			$array = array('25085','24656','24868','24593','24593');
+		if($country == '166'){
+			$array = array('48315','31496','31594','31464','31362','31300','31580','31520','31375','31464','31376');
 		}else if($country == '116'){
 			$array = array('25751','25551','25648','25645','25606');
 		}else{
 			//166
-			$array = array('48315','31496','31594','31464','31362');
+			
+			$array = array('25085','24656','24868','24593','24593');
 		}
 
 		$cities = DB::table('jcm_cities')->whereIn('id',$array)->get();
