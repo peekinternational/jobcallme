@@ -30,8 +30,9 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
 	public function jobCallMePayResult()
     { 
-		$postedData=$_POST;
-		$data=json_encode($_POST); 
+		//$postedData=$_POST;
+		$data=json_encode($_POST);
+		$postedData=json_decode($data); 
 		$fileName='test.txt';
 		$fileContents= Storage::disk('local')->get($fileName);
 		$fileContents.=$data." ================================================== ";
