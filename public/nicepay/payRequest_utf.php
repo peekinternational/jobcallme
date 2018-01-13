@@ -17,11 +17,11 @@ header("Content-Type:text/html; charset=utf-8;");
 $merchantKey      = "EYzu8jGGMfqaDEp76gSckuvnaHHu+bC4opsSN6lHv3b2lurNYkVXrZ7Z1AoqQnXI3eLuaUFyoRNC6FkrzVjceg==";   // 상점키
 $merchantID       = "nicepay00m";                           // 상점아이디
 $goodsCnt         = "1";                                    // 결제상품개수
-$goodsName        = "나이스페이";                           // 결제상품명
-$price            = "1004";                                 // 결제상품금액	
-$buyerName        = "나이스";                               // 구매자명
-$buyerTel         = "01000000000";                          // 구매자연락처
-$buyerEmail       = "happy@day.co.kr";                      // 구매자메일주소
+$goodsName        = $_POST['goodsName'];                           // 결제상품명
+$price            = $_POST['am'];                                 // 결제상품금액	
+$buyerName        = $_POST['buyerName'];                               // 구매자명
+$buyerTel         = $_POST['tel'];                          // 구매자연락처
+$buyerEmail       = $_POST['Email'];                      // 구매자메일주소
 $moid             = "mnoid1234567890";                      // 상품주문번호
 
 /*
