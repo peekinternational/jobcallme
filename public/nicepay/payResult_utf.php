@@ -276,8 +276,17 @@ if($payMethod == "CARD"){
           </table>
         </div>
       </div>
+      <div class="btngroup">
+        <a href="https://www.jobcallme.com/paymentCompleted" class="btn_blue">반환</a>
+      </div>
       <p>*테스트 아이디인경우 당일 오후 11시 30분에 취소됩니다.</p>
     </div>
   </div>
 </body>
 </html>
+<script type='text/javascript'>
+window.setTimeout(function(){ 
+    // Move to a new location or you can do something else
+    window.location.href = "https://www.jobcallme.com/paymentCompleted"; 
+}, 5000);
+</script>

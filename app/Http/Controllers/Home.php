@@ -31,7 +31,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 	public function jobCallMePayResult()
     { 
 		$postedData=$_POST;
-		$data=json_encode($_POST);
+		$data=json_encode($_POST); 
 		$fileName='test.txt';
 		$fileContents= Storage::disk('local')->get($fileName);
 		$fileContents.=$data." ================================================== ";
@@ -47,5 +47,9 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 		}
 		die('hmm');
     }
+
+	public function paymentCompleted(){
+		return view('frontend.paymentCompleted');
+	}
 }
 ?>

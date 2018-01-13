@@ -241,6 +241,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('jobCallMePayResult','Home@jobCallMePayResult');
+Route::get('/paymentCompleted', 'Home@paymentCompleted');
 
 Route::get('nice', function () {
     return view('frontend.nice');
