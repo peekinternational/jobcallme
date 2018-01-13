@@ -33,23 +33,23 @@
                                 <!---->
                                <input class="mat-radio-input cdk-visually-hidden" type="radio" id="md-radio-2-input" name="amount" value="0" name="md-radio-group-0"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Basic</span></div></label></md-radio-button>
                                 <div>
-                                    <!----><div>
-                                        <ul class="list-unstyled desc">
+                                    <!----><label for="md-radio-2-input">
+                                        <ul class="list-unstyled desc" >
                                             <li>Basic Posting</li>
                                             <li>Lowest Priority</li>
                                         </ul>
                                         <div class="credits b">Free</div>
-                                    </div>
+                                    </label>
                                     <!---->
                                     <!---->
                                     <!---->
                                 </div>
                             </li><li style="position:relative">
                                 <!---->
-                              <input class="mat-radio-input cdk-visually-hidden" type="radio" name="amount" value="20.30"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Gallery</span></div></label></md-radio-button>
+                              <input class="mat-radio-input cdk-visually-hidden" type="radio" name="amount" value="20.30" id="gallery"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Gallery</span></div></label></md-radio-button>
                                 <div>
                                     <!---->
-                                    <!----><div>
+                                    <!----><label for="gallery">
                                         <ul class="list-unstyled desc">
                                             <li>Featured on homepage (3 days)</li>
                                             <li>Priority over Basic jobs</li>
@@ -61,17 +61,17 @@
                                             </div>
                                             <!---->
                                         </div>
-                                    </div>
+                                    </label>
                                     <!---->
                                     <!---->
                                 </div>
                             </li><li style="position:relative">
                                 <!---->
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" name="amount" value="52.20"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Hot</span></div></label></md-radio-button>
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" name="amount" value="52.20" id="hot"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Hot</span></div></label></md-radio-button>
                                 <div>
                                     <!---->
                                     <!---->
-                                    <!----><div>
+                                    <!----><label for="hot">
                                         <ul class="list-unstyled desc">
                                             <li>Featured on homepage (10 days)</li>
                                             <li>Priority over Gallery jobs</li>
@@ -82,17 +82,17 @@
                                             </div>
                                             <!---->
                                         </div>
-                                    </div>
+                                    </label>
                                     <!---->
                                 </div>
                             </li><li style="position:relative">
                                 <!----><div class="ribbon red"><span>Best Value</span></div>
-                           <input class="mat-radio-input cdk-visually-hidden" type="radio" name="amount" value="75.40"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Premium</span></div></label></md-radio-button>
+                           <input class="mat-radio-input cdk-visually-hidden" type="radio" name="amount" value="75.40" id="prime"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Premium</span></div></label></md-radio-button>
                                 <div>
                                     <!---->
                                     <!---->
                                     <!---->
-                                    <!----><div>
+                                    <!----><label for="prime">
                                         <ul class="list-unstyled desc">
                                             <li>Featured on homepage (30 days)</li>
                                             <li>Priority over Hot jobs</li>
@@ -103,7 +103,7 @@
                                               <i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
                                             </div>
                                             <!---->
-                                        </div>
+                                        </label>
                                     </div>
                                 </div>
                             </li>

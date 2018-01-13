@@ -228,7 +228,7 @@ Route::get('paypal', array('as' => 'payment.status','uses' => 'frontend\Employer
 
 
 Route::post('updatepaypals', array('as' => 'addmoney.updatepaypals','uses' => 'frontend\Employer@updatepostPaymentWithpaypals'));
-Route::post('updatepaypal', array('as' => 'addmoney.paypal','uses' => 'frontend\Employer@updatepostPaymentWithpaypal',));
+Route::post('updatepaypal', array('as' => 'addmoney.update','uses' => 'frontend\Employer@updatepostPaymentWithpaypal',));
 Route::get('updatepaypal', array('as' => 'payment.updatestatus','uses' => 'frontend\Employer@updategetPaymentStatus',));
 
 

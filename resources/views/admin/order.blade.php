@@ -26,6 +26,7 @@
 										<th>Amount</th>
 										<th>Job Category</th>
 										<th>Payment Status</th>
+										<th>Payment Type</th>
                                         <th>Payment Date</th>
                                     </thead>
                                     <tbody>
@@ -39,6 +40,11 @@
                                                 <td>${!! $job->amount!!}</td>
 												<td>{!! $job->p_Category!!}</td>
 												<td style="text-align: center;"><label class="label label-success">{!! $job->jType!!}</label></td>
+												@if($job->paymentType==1)
+												<td style="text-align: center;"><label class="label label-success">Paypal</label></td>
+											@else
+												<td style="text-align: center;"><label class="label label-success">Nicepay</label></td>
+											@endif
 												<td>{!! $job->createdTime!!}</td>
                                                    
                                                 

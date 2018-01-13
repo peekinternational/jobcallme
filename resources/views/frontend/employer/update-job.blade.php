@@ -312,7 +312,7 @@
                         </div>
                     </div>
                     <div class="col-md-offset-4 col-md-8  pnj-btns">
-                        <button type="submit" class="btn btn-primary" name="save">POST JOB</button>
+                        <button type="submit" class="btn btn-primary" name="save">UPDATE JOB</button>
                         <a href="{{ url('account/employer') }}" class="btn btn-default">CANCEL</a>
                     </div>
                 </form>
