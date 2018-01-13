@@ -58,6 +58,7 @@ $(document).on('click','.nicePay',function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }, 
         url: "<?=url('account/nicepay')?>",
+        data:{'type':1}, /*make a job post*/
         success: function(result){  
             $("#buyerName").val(result);
             $("#nicePayForm").submit();

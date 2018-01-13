@@ -29,20 +29,22 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
     }
 
 	public function jobCallMePayResult()
-    { 
-		//$postedData=$_POST;
-		$data=json_encode($_POST);
+    {  
+		$data=json_encode($_POST); 
+		/*$postedData='{"resultCode":"3001","resultMsg":"\uce74\ub4dc \uacb0\uc81c \uc131\uacf5                                                                                      ","authDate":"180113205258","authCode":"31976428                      ","buyerName":"66                            ","mallUserID":"                    ","goodsName":"jobcallme                               ","mid":"nicepay00m","tid":"nicepay00m01011801131153025658","moid":"mnoid1234567890                                                 ","amt":"000000022330","cardCode":"01 ","cardQuota":"00","cardName":"\ube44\uc528                                                                                                ","bankCode":"","bankName":"","rcptAuthCode":"","carrier":"","dstAddr":"","vbankBankCode":"","vbankBankName":"","vbankNum":"","vbankExpDate":""}';*/
 		$postedData=json_decode($data); 
+		$jId=rtrim($postedData->buyerName);
+		$authCode=rtrim($postedData->authCode);
+		
+		/*echo $jId;
+		die('hmmmm');*/
+
 		$fileName='test.txt';
 		$fileContents= Storage::disk('local')->get($fileName);
 		$fileContents.=$data." ================================================== ";
         Storage::disk('local')->put($fileName, $fileContents);
-		
-
-		if($postedData->buyerName){
-			$jId=rtrim($postedData->buyerName.replace(" ",""));
-			$authCode=rtrim($postedData->authCode.replace(" ",""));
-
+		 
+		if($jId){ 
 			$fileContents= Storage::disk('local')->get($fileName);
 			$fileContents.=" ======== IN TESTING ====== ";
 			Storage::disk('local')->put($fileName, $fileContents);
