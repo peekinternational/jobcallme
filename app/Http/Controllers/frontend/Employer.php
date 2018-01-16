@@ -1289,9 +1289,10 @@ public function userResume($userId){
 		
    public function updatepostPaymentWithpaypals(Request $request)
       {
-		  $jobid = Session::get('jobId');
-        $mul=$request->amount;
-        $am=$mul*1100;
+		$jobid = Session::get('jobId');
+		Session::put('postedJobId',$jobid);
+		$mul=$request->amount;
+		$am=$mul*1100;
       //  dd($am);
         $goodsname = Session::get('p_Category');
         $app = $request->session()->get('jcmUser');
@@ -1349,9 +1350,9 @@ public function userResume($userId){
 		if($request->amount=='0')
 		{
 			$request->merge(['jType'=>'Free']);
-				$app = $request->session()->get('jcmUser');
+			$app = $request->session()->get('jcmUser');
 
-		$this->validate($request,[
+			$this->validate($request,[
 				'title' => 'required|max:255',
 				'department' => 'required',
 				'category' => 'required',
@@ -1368,19 +1369,19 @@ public function userResume($userId){
 			]);
 	
    
-		extract($request->all());
+			extract($request->all());
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'paymentType' => '0', 'status'=> '2', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'department' => $department, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $request->input('benefits')), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
-		if($subCategory == ''){
-			$input['subCategory'] = '';
-		}
-		$jobId = DB::table('jcm_jobs')->where('jobId','=',$jobid)->update($input);
-		echo $jobId;
-		return Redirect::route('addmoney.account/employer/job/share');
+			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'paymentType' => '0', 'status'=> '2', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'department' => $department, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $request->input('benefits')), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
+			if($subCategory == ''){
+				$input['subCategory'] = '';
+			}
+			$jobId = DB::table('jcm_jobs')->where('jobId','=',$jobid)->update($input);
+			echo $jobId;
+			return Redirect::route('addmoney.account/employer/job/share');
 		}	
-		else{
-		$request->session()->forget('postedJobId');  /*For nice pay*/
-		 return view('frontend.employer.update-payment',compact('am','app','goodsname'));
+		else{ 
+			//$request->session()->forget('postedJobId');  /*For nice pay*/
+		 	return view('frontend.employer.update-payment',compact('am','app','goodsname'));
 	//	return Redirect::route('addmoney.account/employer/payment',compact('am','app','goodsname'));
 		}
 	}
