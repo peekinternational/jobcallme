@@ -150,21 +150,21 @@ curl_close ($ch);
 		
 		if($request->amount=='20.30')
 		{
-			$request->merge(['p_Category'=>'Gallery']);
+			$request->merge(['p_Category'=>'1']);
 			$request->session()->put('p_Category', $request->p_Category);
 			
 		}
 		elseif($request->amount=='52.20')
 		{
-			$request->merge(['p_Category'=>'Hot']);
+			$request->merge(['p_Category'=>'2']);
 			$request->session()->put('p_Category', $request->p_Category);
 		}
 		elseif($request->amount=='75.40'){
-			$request->merge(['p_Category'=>'Premium']);
+			$request->merge(['p_Category'=>'3']);
 			$request->session()->put('p_Category', $request->p_Category);
 		}
 		else{
-			$request->merge(['p_Category'=>'Basic']);
+			$request->merge(['p_Category'=>'0']);
 		}
 		
 		 $goodsname = Session::get('p_Category');
@@ -1325,21 +1325,21 @@ public function userResume($userId){
 		
 		if($request->amount=='20.30')
 		{
-			$request->merge(['p_Category'=>'Gallery']);
+			$request->merge(['p_Category'=>'1']);
 			$request->session()->put('p_Category', $request->p_Category);
 			
 		}
 		elseif($request->amount=='52.20')
 		{
-			$request->merge(['p_Category'=>'Hot']);
+			$request->merge(['p_Category'=>'2']);
 			$request->session()->put('p_Category', $request->p_Category);
 		}
 		elseif($request->amount=='75.40'){
-			$request->merge(['p_Category'=>'Premium']);
+			$request->merge(['p_Category'=>'3']);
 			$request->session()->put('p_Category', $request->p_Category);
 		}
 		else{
-			$request->merge(['p_Category'=>'Basic']);
+			$request->merge(['p_Category'=>'0']);
 		}
 		
 		 $goodsname = Session::get('p_Category');

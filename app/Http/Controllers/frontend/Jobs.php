@@ -76,8 +76,24 @@ class Jobs extends Controller{
 		//dd($result);
 
 		$vhtml = '';
+		$category ='';
 		if(count($result) > 0){
 			foreach($result as $rec){
+				if($rec->p_Category==0)
+				{
+					$category='Basic';
+				}
+				elseif($rec->p_Category==1)
+				{
+					$category='Gallery';
+				}
+				elseif($rec->p_Category==2)
+				{
+					$category='Hot';
+				}
+				else{
+					$category='Premium';
+				}
 				$applyUrl = url('jobs/apply/'.$rec->jobId);
 				$viewUrl = url('jobs/'.$rec->jobId);
 				$vhtml .= '<div class="jobs-suggestions">';
@@ -102,7 +118,7 @@ class Jobs extends Controller{
                     $vhtml .= '</div>';
 				}
 				$colorArr = array('purple','green','darkred','orangered','blueviolet');
-                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_Category.'</span></a></h4>';
+                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$category.'</span></a></h4>';
                     $vhtml .= '<p>'.$rec->companyName.'</p>';
                     $vhtml .= '<ul class="js-listing">';
                     	$vhtml .= '<li>';

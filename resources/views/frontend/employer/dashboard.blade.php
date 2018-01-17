@@ -63,9 +63,14 @@
 							
                                     <div class="rtj-details">
                                         <p><strong><a href="{{ url('jobs/'.$pjobs->jobId) }}">{!! $pjobs->title !!}</a></strong> <i class="fa fa-check-circle-o"></i></p>
-                                        <p>{{ strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open' }} <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}"> {!! $pjobs->p_Category !!}</span>
+                                        <p>{{ strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open' }} <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}"> @if($pjobs->p_Category==0)Basic
+				@elseif($pjobs->p_Category==1)Gallery
+				@elseif($pjobs->p_Category==2)Hot
+				@else
+					Premium
+				@endif</span>
 										
-										@if ($pjobs->p_Category =='Basic')
+										@if ($pjobs->p_Category =='0')
 											<a href="{{ url('account/employer/jobupdate/'.$pjobs->jobId) }}">(Upgrade)</a>
                                          @else
 											 @endif

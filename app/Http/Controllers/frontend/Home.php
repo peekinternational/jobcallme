@@ -17,9 +17,9 @@ class Home extends Controller{
 		$companies = DB::table('jcm_companies')->limit(12)->get();
 
 		/* jobs query */
-		$Gallery = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.p_Category','=','Gallery')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
-		$hot = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.p_Category','=','Hot')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
-		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.p_Category','=','Premium')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
+		$Gallery = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.p_Category','=','1')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
+		$hot = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.p_Category','=','2')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
+		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.p_Category','=','3')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
 //return $companies;
 		return view('frontend.home-page',compact('jobShifts','companies','jobs','Gallery','hot'));
 	}
