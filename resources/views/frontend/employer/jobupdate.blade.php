@@ -55,7 +55,7 @@
                           <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
                                 <input  type="hidden" name="amount" value="20.30" class="ng-untouched ng-pristine ng-valid">
 								<input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-								<input name="p_Category" type="hidden" value="Gallery"/>
+								<input name="p_Category" type="hidden" value="1"/>
 								<input name="jType" type="hidden" value="Paid"/>
                                 <div>
                                     <button class="btn btn-primary" color="primary"  type="submit"><span class="mat-button-wrapper">Buy Now</span><div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div></button>
@@ -93,7 +93,7 @@
                            <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
                                 <input  type="hidden" name="amount" value="52.20" class="ng-untouched ng-pristine ng-valid">
 								<input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-								<input name="p_Category" type="hidden" value="Hot"/>
+								<input name="p_Category" type="hidden" value="2"/>
 								<input name="jType" type="hidden" value="Paid"/>
                                 <div>
                                     <button class="btn btn-primary" color="primary" type="submit"><span class="mat-button-wrapper">Buy Now</span><div class="mat-button-ripple mat-ripple" ></div><div class="mat-button-focus-overlay"></div></button>
@@ -131,7 +131,7 @@
                             <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
                                 <input  type="hidden" name="amount" value="75.40" class="ng-untouched ng-pristine ng-valid">
 								<input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-								<input name="p_Category" type="hidden" value="Premium"/>
+								<input name="p_Category" type="hidden" value="3"/>
 								<input name="jType" type="hidden" value="Paid"/>
 								
                                 <div>

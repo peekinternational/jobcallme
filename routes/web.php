@@ -246,3 +246,12 @@ Route::get('/paymentCompleted', 'Home@paymentCompleted');
 Route::get('nice', function () {
     return view('frontend.nice');
 });
+//Language 
+Route::get('locale', function () {
+    return \App::getLocale();
+});
+
+Route::get('locale/{locale}', function ($locale) {
+    \Session::put('locale', $locale);
+    return redirect()->back();
+});

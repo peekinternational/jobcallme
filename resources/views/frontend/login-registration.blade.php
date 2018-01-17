@@ -13,7 +13,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
 <section id="loginRegistration">
     <div class="container">
         <div id="loginBox" class="col-md-6 col-md-offset-3 loginBox" style="display:{{ $pageType != 'register' ? 'block' : 'none' }}">
-            <h3>Login to Account</h3>
+            <h3>@lang('home.loginaccount')</h3>
             <form id="loginForm" action="{{ url('account/login'.$next) }}" method="post">
                 @if(Session::has('loginAlert'))
                     <div class="alert alert-danger">
@@ -26,25 +26,25 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 {{ csrf_field() }}
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="login-username" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="email">
+                    <input id="login-username" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                    <input id="login-password" type="password" class="form-control" name="password" placeholder="@lang('home.password')">
                 </div>
                 <div class="input-group">
                     <div class="checkbox">
                         <label>
-                            <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                            <input id="login-remember" type="checkbox" name="remember" value="1">@lang('home.remember')
                         </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary btn-block login-btn" name="login">LOGIN</button>
+                        <button type="submit" class="btn btn-primary btn-block login-btn" name="login">@lang('home.login')</button>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-default btn-block" onClick="switchPage('register')">REGISTRATION</button>
+                        <button type="button" class="btn btn-default btn-block" onClick="switchPage('register')">@lang('home.register')</button>
                     </div>
                 </div>
                
@@ -58,7 +58,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 </div>
         </div>
         <div id="signupBox" class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
-            <h3>Create New Account</h3>
+            <h3>@lang('home.createaccount')</h3>
             <form id="signUpForm" action="{{ url('account/register') }}" method="post">
                 @if(Session::has('registerAlert'))
                     <div class="alert alert-danger">
@@ -79,7 +79,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 @endif
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" value="{{ old('password') }}" placeholder="Password">
@@ -87,10 +87,10 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="firstName" value="{{ old('firstName') }}" placeholder="First Name">
+                            <input type="text" class="form-control" name="firstName" value="{{ old('firstName') }}" placeholder="@lang('home.fname')">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="lastName" value="{{ old('lastName') }}" placeholder="Last Name">
+                            <input type="text" class="form-control" name="lastName" value="{{ old('lastName') }}" placeholder="@lang('home.lname')">
                         </div>
                     </div>
                 </div>
@@ -108,18 +108,18 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <select class="form-control select2 job-city" name="city"></select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="Phone Number">
+                    <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber')">
                 </div>
                 <div class="input-group">
                     <div class="checkbox">
                         <label>
-                            <input id="job-alert" type="checkbox" name="remember" value="1"> Job alert
+                            <input id="job-alert" type="checkbox" name="remember" value="1"> @lang('home.jobalert')
                         </label>
                     </div>
                 </div>
-                <p class="terms-condition">You agree to accept <a href="{{ url('terms-conditions') }}">Terms of Services</a> (TOS) and <a href="{{ url('privacy-policy') }}">Privacy Policy</a> of the website.</p>
-                <button type="submit" class="btn btn-primary btn-block" name="register">REGISTER</button>
-                <p class="text-center show-loginBox">Already have account? <a href="javascript:;" onclick="switchPage('login')">Login here</a></p>
+                <p class="terms-condition">@lang('home.agree')<a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.website')</p>
+                <button type="submit" class="btn btn-primary btn-block" name="register">@lang('home.register')</button>
+                <p class="text-center show-loginBox">@lang('home.alreadyaccount') <a href="javascript:;" onclick="switchPage('login')">@lang('home.loginhere')</a></p>
             </form>
         </div>
     </div>

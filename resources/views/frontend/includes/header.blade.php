@@ -30,52 +30,58 @@ $cPage = Request::segment(2);
             <div>
                 <ul class="nav navbar-nav top-navigation">
                     <li class="{{ $cPage == 'jobseeker' ? 'active' : '' }}">
-                        <a href="{{ url('account/jobseeker') }}">Jobseeker</a>
+                        <a href="{{ url('account/jobseeker') }}">@lang('home.jobseeker')</a>
                     </li>
                     <li class="{{ $cPage == 'employer' ? 'active' : '' }}">
-                        <a href="{{ url('account/employer') }}">Employer</a>
+                        <a href="{{ url('account/employer') }}">@lang('home.Employer')</a>
                     </li>
                     <li class="{{ Request::segment(1) == 'jobs' ? 'active' : '' }}">
-                        <a href="{{ url('jobs') }}">Jobs</a>
+                        <a href="{{ url('jobs') }}">@lang('home.jobs')</a>
                     </li>
                     <li class="{{ Request::segment(1) == 'people' ? 'active' : '' }}">
-                        <a href="{{ url('account/people') }}">Peoples</a>
+                        <a href="{{ url('account/people') }}">@lang('home.peoples')</a>
                     </li>
                     <li class="{{ Request::segment(1) == 'read' ? 'active' : '' }}">
-                        <a href="{{ url('read') }}">Read</a>
+                        <a href="{{ url('read') }}">@lang('home.read')</a>
                     </li>
                     <?php if(Session()->has('jcmUser')){?>
                     <li class="{{ Request::segment(2) == 'writings' ? 'active' : '' }}">
-                        <a href="{{ url('account/writings') }}">Writing</a>
+                        <a href="{{ url('account/writings') }}">@lang('home.writing')</a>
                     </li>
                     <?php } ?>
                     <li class="{{ Request::segment(1) == 'learn' ? 'active' : '' }}">
-                        <a href="{{ url('learn') }}">Learn</a>
+                        <a href="{{ url('learn') }}">@lang('home.learn')</a>
                     </li>
                     <?php if(Session()->has('jcmUser')){?>
                     <li class="{{ Request::segment(2) == 'upskill' ? 'active' : '' }}">
-                        <a href="{{ url('account/upskill') }}">Upskill</a>
+                        <a href="{{ url('account/upskill') }}">@lang('home.upskill')</a>
                     </li>
                     <?php }else{ ?>
                     <li class="hidden-sm {{ Request::segment(1) == 'companies' ? 'active' : '' }}">
-                        <a href="{{ url('companies') }}">Companies</a>
+                        <a href="{{ url('companies') }}">@lang('home.companies')</a>
                     </li>
                     <?php } ?>
                     <li class="hidden-sm {{ Request::segment(1) == 'about' ? 'active' : '' }}">
-                        <a href="{{ url('about') }}">About</a>
+                        <a href="{{ url('about') }}">@lang('home.about')</a>
                     </li>
                     <li class="{{ Request::segment(1) == 'contact' ? 'active' : '' }}">
-                        <a href="{{ url('contact') }}">Contact</a>
+                        <a href="{{ url('contact') }}">@lang('home.contact')</a>
+                    </li>
+					<li class="{{ Request::segment(1) == 'contact' ? 'active' : '' }}">
+                        <a href="{{ url('locale/en') }}">English</a>
+                    </li>
+					<li class="{{ Request::segment(1) == 'contact' ? 'active' : '' }}">
+                        <a href="{{ url('locale/kr') }}">Korean</a>
                     </li>
                 </ul>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <!--Show on Large and Medium screen-->
                 @if(Session::has('jcmUser'))
-                    <li class="hidden-md"><a href="{{ url('account/manage') }}"><i class="fa fa-gear"></i> Manage</a> </li>
-                    <li class="hidden-md"><a href="{{ url('account/logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    <li class="hidden-md"><a href="{{ url('account/manage') }}"><i class="fa fa-gear"></i> @lang('home.manage')</a> </li>
+                    <li class="hidden-md"><a href="{{ url('account/logout') }}"><i class="fa fa-sign-out"></i> @lang('home.logout')</a></li>
                 @else
-                    <li class="hidden-md"><a href="{{ url('account/login') }}"><i class="fa fa-user"></i> Login</a></li>
+                    <li class="hidden-md"><a href="{{ url('account/login') }}"><i class="fa fa-user"></i> @lang('home.login')</a></li>
                 @endif
 
                 <!---->

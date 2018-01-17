@@ -22,19 +22,19 @@ $lToken = csrf_token();
                             <div class="tabbable-line">
                                 <ul class="nav nav-tabs ">
                                     <li class="active">
-                                        <a href="#search_tab_1" data-toggle="tab">Jobs </a>
+                                        <a href="#search_tab_1" data-toggle="tab">@lang('home.jobs')</a>
                                     </li>
                                     <li>
-                                        <a href="#search_tab_2" data-toggle="tab">Companies </a>
+                                        <a href="#search_tab_2" data-toggle="tab">@lang('home.companies') </a>
                                     </li>
                                     <li>
-                                        <a href="#search_tab_3" data-toggle="tab">Peoples</a>
+                                        <a href="#search_tab_3" data-toggle="tab">@lang('home.peoples')</a>
                                     </li>
                                     <li>
-                                        <a href="#search_tab_4" data-toggle="tab">Read</a>
+                                        <a href="#search_tab_4" data-toggle="tab">@lang('home.read')</a>
                                     </li>
                                     <li>
-                                        <a href="#search_tab_5" data-toggle="tab">Learn</a>
+                                        <a href="#search_tab_5" data-toggle="tab">@lang('home.learn')</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
@@ -42,11 +42,11 @@ $lToken = csrf_token();
                                         <form role="form" action="#">
                                             <div class="input-fields">
                                                 <div class="search-field-box search-item">
-                                                    <input type="search" placeholder="Looking for job..." name="searchByJob">
+                                                    <input type="search" placeholder="@lang('home.lookingjob')" name="searchByJob">
                                                 </div>
                                                 <div class="search-field-box search-location">
                                                     <select class="location" name="search-by-location">
-                                                        <option value="AL">All Location</option>
+                                                        <option value="AL">@lang('home.alllocation')</option>
                                                          @foreach(JobCallMe::getJobCountries() as $country)
                                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                     @endforeach
@@ -115,15 +115,15 @@ $lToken = csrf_token();
                     <div class=" hi-icon-effect-8">
                     <a href="" class="hi-icon"> <i style="margin-top: 16px;"  class='fa fa-user'></a></i>
                     </div>
-                    <p>I AM A JOBSEEKER</p>
-                    <span>POST RESUME AND APPLY FOR JOB</span>
+                    <p>@lang('home.ijobseeker')</p>
+                    <span>@lang('home.postresume')</span>
                 </div>
                 <div class="col-md-6 login-type ">
                     <div class="hi-icon-effect-8">
                         <a href="" class="hi-icon"> <i style="margin-top: 16px;" class='fa fa-globe'></a></i>
                     </div>
-                    <p>I AM AN EMPLOYER</p>
-                    <span>POST JOBS AND START HIRING</span>
+                    <p>@lang('home.iemployer')</p>
+                    <span>@lang('home.postjob')</span>
                 </div>
             </div>
 			<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
@@ -165,7 +165,7 @@ $lToken = csrf_token();
     <!--Premium Jobs Section Start-->
     <section class="job-types-section">
         <div class="container">
-            <h3>Premium Jobs</h3>
+            <h3>@lang('home.prjob')</h3>
             <!-- Left to right-->
             <div class="row">
                 <!--Premium Job Single item Start-->
@@ -208,7 +208,7 @@ $lToken = csrf_token();
     <!--Top Companies Section Start-->
     <section class="feature-companies">
         <div class="container">
-            <h2 class="text-center">Top Companies</h2>
+            <h2 class="text-center">@lang('home.topcompanies')</h2>
             <!--<p class="text-center" id="feature-companies-caption">Sigh ever way now many. Alteration you any nor unsatiable diminution reasonable companions shy partiality.</p>-->
             <!-- Scale up-->
             <div class="row">
@@ -243,7 +243,7 @@ $lToken = csrf_token();
     <!--Hot Jobs Section Start-->
     <section class="job-types-section">
         <div class="container">
-            <h3>Hot Jobs</h3>
+            <h3>@lang('home.hotjob')</h3>
             <div class="row">
                 <!--Hot Job Single item Start-->
 				 @foreach($hot as $job)
@@ -285,7 +285,7 @@ $lToken = csrf_token();
     <!--Latest Jobs Section Start-->
     <section class="job-types-section" id="latest-jobs">
         <div class="container">
-            <h3>Latest Jobs</h3>
+            <h3>@lang('home.latestjob')</h3>
             <div class="row">
                 <!--Latest Job Single item Start-->
 				@foreach($Gallery as $job)
@@ -328,7 +328,7 @@ $lToken = csrf_token();
     <!--Special Jobs Section Start-->
     <section class="job-types-section">
         <div class="container">
-            <h3>Special Jobs</h3>
+            <h3>@lang('home.specialjob')</h3>
             <div class="row">
 			@foreach($jobs as $job)
                 <!--Special Job Single item Start-->
@@ -372,7 +372,7 @@ $lToken = csrf_token();
     <!--Golden Jobs Section Start-->
     <section class="job-types-section" style="background-color: #FFFFFF">
         <div class="container">
-            <h3>Golden Jobs</h3>
+            <h3>@lang('home.goldjob')</h3>
             <div class="row">
                 <!--Golden Job Single item Start-->
 					@foreach($jobs as $job)

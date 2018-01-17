@@ -11,7 +11,7 @@ $app = Session::get('jcmUser');
 $next = Request::route()->uri;
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
     <head>
         <title>@yield('title') &raquo; {{ $headerWeb['webTitle'] }}</title>
         <meta charset="utf-8">
