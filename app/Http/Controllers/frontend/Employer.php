@@ -26,6 +26,7 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
+use App\Jobs;
 
 class Employer extends Controller{
 	/*paypal*/
@@ -377,10 +378,8 @@ curl_close ($ch);
 	
 	
 	public function getresponse(Request $request){
-		if(!Session::get('postedJobId')):
-			// dd($request->all());
-			$apps = $request->session()->get('jcmUser');
-			//dd($apps);
+		if(!Session::get('postedJobId')): 
+			$apps = $request->session()->get('jcmUser'); 
 			$payment = "123";
 			
 			$amounts = Session::get('amount');
@@ -418,20 +417,18 @@ curl_close ($ch);
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
 			Session::put('postedJobId',$jobId);
 		else: 
+			if(Session::get('p_Category')):
+				$p_Categorys = Session::get('p_Category');
+			else:
+				$jobData=Jobs::where('jobId',$p_Categorys)->first();
+				$p_Categorys = $jobData->p_Category;
+			endif;
+			
 			$jobId=Session::get('postedJobId');
 		endif;
-		echo $jobId;
-	    die();  
-      //  $am=$amounts*1100;
-     //   $goodsname = Session::get('p_Category');
-     //   $email=$apps->email;
-      //  $name=$apps->firstName;
-      //  $tel=$apps->phoneNumber;
-	//	echo $jobId;
-		// return "hello";
-		return Redirect::route('addmoney.account/employer/job/share');
-//	return true;
-  // return Redirect::to('http://peekinternational.com/demos/nicepay///payRequest_utf.php?price='.$am.'&goodsName='.$goodsname.'&buyerName='//.$name.'&tel='.$tel.'&Email='.$email);
+
+		echo $jobId.'-'.$p_Categorys;
+	    die();   
 	 }
 	
 	

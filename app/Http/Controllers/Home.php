@@ -49,10 +49,12 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 			$fileContents= Storage::disk('local')->get($fileName);
 			$fileContents.=" ======== IN TESTING ====== ";
 			Storage::disk('local')->put($fileName, $fileContents);
-
-			$jobData=Jobs::findOrFail($jId); 
+			$jId=explode('-',$jId);
+			$jobData=Jobs::findOrFail($jId[0]); 
 			$jobData->status=1;
 			$jobData->pay_id=$authCode;
+			$jobData->p_Category=$jId[1];
+			$jobData->package_start_time=date('Y-m-d H:i:s');
 			$jobData->save();
 
 			$fileContents= Storage::disk('local')->get($fileName);
