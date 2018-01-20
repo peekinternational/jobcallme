@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="pnj-box">
                     <h3>
-                        Promote Your Offerings
+                        @lang('home.promoteofferings')
                         <a class="btn btn-primary pull-right" href="{{ url('account/upskill/add') }}" style="border-radius: 50%;margin-top: -5px;">
                             <i class="fa fa-plus"></i>
                         </a>
@@ -18,11 +18,11 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <th>Title</th>
-                                    <th>Type</th>
-                                    <th>Address</th>
-                                    <th>Created On</th>
-                                    <th>Action</th>
+                                    <th>@lang('home.title')</th>
+                                    <th>@lang('home.type')</th>
+                                    <th>@lang('home.address')</th>
+                                    <th>@lang('home.createdon')</th>
+                                    <th>@lang('home.action')</th>
                                 </thead>
                                 <tbody>
                                     @foreach($upskills as $skill)
@@ -46,10 +46,10 @@
         @else
             <div class="col-md-9">
                 <div class="pnj-box">
-                    <h3>Promote Your Offerings</h3>
+                    <h3>@lang('home.promoteofferings')</h3>
                     <div class="upskill-box">
-                        <p>Advertise Your Courses, Conferences, Trainings, Workshops and Seminars</p>
-                        <a href="{{ url('account/upskill/add') }}" class="btn btn-primary">ADVERTISE NOW</a>
+                        <p>@lang('home.advertisecourses')</p>
+                        <a href="{{ url('account/upskill/add') }}" class="btn btn-primary">@lang('home.advertisenow')</a>
                     </div>
                 </div>
             </div>

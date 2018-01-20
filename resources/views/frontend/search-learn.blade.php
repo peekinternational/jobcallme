@@ -8,11 +8,11 @@
     <div class="container">
         <div class="col-md-9">
             <div class="search-courses-box">
-                <h2>Search Courses</h2>
+                <h2>@lang('home.searchcourses')</h2>
                 <form class="form-inline" class="search-form" method="post">
                     {{ csrf_field() }}
-                    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Keyword" value="{{ Request::input('keyword') }}">
-                    <input type="text" class="form-control" id="city" name="city" placeholder="City" value="{{ Request::input('city') }}">
+                    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="@lang('home.key')" value="{{ Request::input('keyword') }}">
+                    <input type="text" class="form-control" id="city" name="city" placeholder="@lang('home.city')" value="{{ Request::input('city') }}">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> </button>
                 </form>
             </div>

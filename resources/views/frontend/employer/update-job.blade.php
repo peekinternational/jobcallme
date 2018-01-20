@@ -10,7 +10,7 @@
         <div class="col-md-9">
 		
             <div class="pnj-box">
-			  <h3>Job Update</h3>
+			  <h3>@lang('home.jobupdate')</h3>
 					<div class="col-md-12">
 					   <div class="form-group error-group" style="display: none;">
                             <label class="control-label col-sm-3">&nbsp;</label>
@@ -120,16 +120,16 @@
                     <div class="pnj-form-section">
                        
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Title</label>
+                            <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control" value="{!! $result->title !!}" name="title" id="title" required >
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Department</label>
+                            <label class="control-label col-sm-3">@lang('home.s_department')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="department">
-                                    <option value="">Select Department</option>
+                                    <option value="">@lang('home.s_epartment')</option>
                                     @foreach(JobCallMe::getDepartments() as $depart)
                                         <option value="{!! $depart->departmentId !!}" {{ $result->department == $depart->departmentId ? 'selected="selected"' : '' }}>{!! $depart->name !!}</option>
                                     @endforeach
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Category</label>
+                            <label class="control-label col-sm-3">@lang('home.category')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-category" name="category" onchange="getSubCategories(this.value)">
                                     @foreach(JobCallMe::getCategories() as $cat)
@@ -147,14 +147,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Sub Category</label>
+                            <label class="control-label col-sm-3">@lang('home.Subcategory')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-sub-category" name="subCategory">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Career Level</label>
+                            <label class="control-label col-sm-3">@lang('home.careerlevel')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="careerLevel">
                                     @foreach(JobCallMe::getCareerLevel() as $career)
@@ -164,7 +164,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Experience Level</label>
+                            <label class="control-label col-sm-3">@lang('home.experiencelevel')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="experience">
                                     @foreach(JobCallMe::getExperienceLevel() as $experience)
@@ -174,41 +174,41 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Vacancy</label>
+                            <label class="control-label col-sm-3">@lang('home.vacancy')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control" name="vacancy"  value="{!! $result->vacancies !!}" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Description</label>
+                            <label class="control-label col-sm-3">@lang('home.description')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <textarea name="description" class="form-control tex-editor">{!! $result->description !!}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Require Skills</label>
+                            <label class="control-label col-sm-3">@lang('home.requireskills')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <textarea name="skills" class="form-control tex-editor">{!! $result->skills !!}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Qualification</label>
+                            <label class="control-label col-sm-3">@lang('home.qualification')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control" value="{!! $result->qualification !!}" name="qualification" placeholder="Qualification" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Expiry Date</label>
+                            <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control date-picker" value="{!! $result->expiryDate !!}"  name="expiryDate" onkeypress="return false">
                             </div>
                         </div>
                     </div>
 
-                    <h3>Nature of Job</h3>
+                    <h3>@lang('home.naturejob')</h3>
                     <div class="pnj-form-section">
                        <div class="form-group">
-                           <label class="control-label col-sm-3">Type</label>
+                           <label class="control-label col-sm-3">@lang('home.type')</label>
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control select2" name="type">
                                     @foreach(JobCallMe::getJobType() as $jtype)
@@ -218,7 +218,7 @@
                            </div>
                        </div>
                        <div class="form-group">
-                           <label class="control-label col-sm-3">Shift</label>
+                           <label class="control-label col-sm-3">@lang('home.shift')</label>
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control select2" name="shift">
                                     @foreach(JobCallMe::getJobShifts() as $jshift)
@@ -229,10 +229,10 @@
                        </div>
                    </div>
 
-                    <h3>Compensation & Benefits</h3>
+                    <h3>@lang('home.compensationbenefits')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Salary</label>
+                            <label class="control-label col-sm-3">@lang('home.salary')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     <div class="col-md-4 pnj-salary">
@@ -252,7 +252,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Benefits</label>
+                            <label class="control-label col-sm-3">@lang('home.benefits')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     @foreach(JobCallMe::jobBenefits() as $benefit)
@@ -267,10 +267,10 @@
                         </div>
                     </div>
 
-                    <h3>Location</h3>
+                    <h3>@lang('home.location')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Country</label>
+                            <label class="control-label col-sm-3">@lang('home.country')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -280,14 +280,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">State</label>
+                            <label class="control-label col-sm-3">@lang('home.state')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-state" name="state" data-state="{{ $result->state }}">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">City</label>
+                            <label class="control-label col-sm-3">@lang('home.city')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-city" name="city" data-city="{{ $result->city }}">
                                 </select>
@@ -295,25 +295,25 @@
                         </div>
                     </div>
 
-                    <h3>Declaration and Acknowledgement</h3>
+                    <h3>@lang('home.declarationandacknowledgement')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
                             <label class="control-label col-sm-3"></label>
                             <div class="col-sm-9 da-box">
-                                <p>Please read it carefully, before posting this job!</p>
+                                <p>@lang('home.readcarefully')</p>
                                 <ul>
-                                    <li>I hereby declare that there is a genuine requirement for this job in my organization.</li>
-                                    <li>I am the authorized person to advertise jobs on behalf of my organization.</li>
-                                    <li>The above job doesn't contain gender, age, ethnic, religion or any other discriminatory text, unless the employer can prove that a genuine occupational requirement (GOR) or, in the case of gender or race, genuine occupational qualification (GOQ) exists.</li>
-                                    <li>The resumes collected in response to this ad will be used for the hiring process of this job only and not for any other purpose; violation of this term may lead to stern legal action.</li>
+                                    <li>@lang('home.postli1')</li>
+                                    <li>@lang('home.postl12')</li>
+                                    <li>@lang('home.postli3')</li>
+                                    <li>@lang('home.postli4')</li>
                                 </ul>
-                                <p>I understand that if I violate any of the above terms, my job(s) could be removed and my account could be blocked permanently.</p>
+                                <p>@lang('home.postp')</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-offset-4 col-md-8  pnj-btns">
-                        <button type="submit" class="btn btn-primary" name="save">UPDATE JOB</button>
-                        <a href="{{ url('account/employer') }}" class="btn btn-default">CANCEL</a>
+                        <button type="submit" class="btn btn-primary" name="save">@lang('home.updatejob')</button>
+                        <a href="{{ url('account/employer') }}" class="btn btn-default">@lang('home.CANCEL')</a>
                     </div>
                 </form>
             </div>

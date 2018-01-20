@@ -12,24 +12,24 @@
                                    
                                 </div>
                                 <h3 class="hidden-md hidden-lg" style="font-weight: 600">{{ $user->firstName.' '.$user->lastName }}</h3>
-                                <p><span class="pi-title">Father Name:</span> {{ $meta->fatherName }}</p>
-                                <p><span class="pi-title">Email:</span> {{ $user->email }}</p>
-                                <p><span class="pi-title">Mobile:</span> {{ $user->phoneNumber }}</p>
-                                <p><span class="pi-title">CNIC:</span> {{ $meta->cnicNumber }}</p>
-                                <p><span class="pi-title">Address:</span> {!! $meta->address.' ,'.JobCallMe::cityName($user->city).' ,'.JobCallMe::countryName($user->country) !!}</p>
+                                <p><span class="pi-title">@lang('home.fathername'):</span> {{ $meta->fatherName }}</p>
+                                <p><span class="pi-title">@lang('home.email'):</span> {{ $user->email }}</p>
+                                <p><span class="pi-title">@lang('home.mobile'):</span> {{ $user->phoneNumber }}</p>
+                                <p><span class="pi-title">@lang('home.cnic'):</span> {{ $meta->cnicNumber }}</p>
+                                <p><span class="pi-title">@lang('home.address'):</span> {!! $meta->address.' ,'.JobCallMe::cityName($user->city).' ,'.JobCallMe::countryName($user->country) !!}</p>
                             </div>
                             <div class="col-md-9 personal-info-right">
                                
                                
-                                <p><span class="pi-title">Age:</span> {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title">Gender:</span>{{ $meta->gender }},<span class="pi-title">Status:</span>{{ $meta->maritalStatus }}</p>
-                                <p><span class="pi-title">Education:</span> {{ $meta->education }}</p>
-                                <p><span class="pi-title">Experience:</span> {{ $meta->experiance }}</p>
-                                <p><span class="pi-title">Industry:</span> {{ JobCallMe::categoryTitle($meta->industry) }}</p>
-                                <p><span class="pi-title">Salary:</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
+                                <p><span class="pi-title">@lang('home.age'):</span> {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title">Gender:</span>{{ $meta->gender }},<span class="pi-title">Status:</span>{{ $meta->maritalStatus }}</p>
+                                <p><span class="pi-title">@lang('home.education'):</span> {{ $meta->education }}</p>
+                                <p><span class="pi-title">@lang('home.experience'):</span> {{ $meta->experiance }}</p>
+                                <p><span class="pi-title">@lang('home.industry'):</span> {{ JobCallMe::categoryTitle($meta->industry) }}</p>
+                                <p><span class="pi-title">@lang('home.salary'):</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
                                 <div class="professional-summary">
-                                    <h4>Professional Summary</h4>
+                                    <h4>@lang('home.p_summary')</h4>
                                     <p>{!! $user->about !!}</p>
-                                    <p><span class="pi-title">Further Expertise</span></p>
+                                    <p><span class="pi-title">@lang('home.furtherexpertise')</span></p>
                                     <ul style="margin-left: 50px;padding-left: 0;">
                                         @if($meta->expertise != '')
                                             @foreach(@explode(',',$meta->expertise) as $exper)
@@ -43,7 +43,7 @@
                     </section>
 					  <section class="resume-box" id="academic">
                         <a class="btn btn-primary r-add-btn" onclick="addAcademic()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  Academic</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.academic')</h4>
                         <?php //print_r($resume); ?>
                         <ul class="resume-details">
                             @if(count($resume['academic']) > 0)
@@ -71,7 +71,7 @@
                     </section>
 					  <section class="resume-box" id="certification">
                         <a class="btn btn-primary r-add-btn" onclick="addCertification()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  Certification</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.certification')</h4>
                         <ul class="resume-details">
                             @if(count($resume['certification']) > 0)
                                 @foreach($resume['certification'] as $resumeId => $certification)
@@ -98,7 +98,7 @@
                     </section>
 					    <section class="resume-box" id="experience">
                         <a class="btn btn-primary r-add-btn" onclick="addExperience()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  Experiences</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>@lang('home.experiences')</h4>
                         <ul class="resume-details">
                             @if(count($resume['experience']) > 0)
                                 @foreach($resume['experience'] as $resumeId => $experience)
@@ -125,7 +125,7 @@
 					  <!--Skills Section Start-->
                     <section class="resume-box" id="skills">
                         <a class="btn btn-primary r-add-btn" onclick="addSkills()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  Skills</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.skills')</h4>
                         <ul class="resume-details">
                             @if(count($resume['skills']) > 0)
                                 @foreach($resume['skills'] as $resumeId => $skills)

@@ -6,16 +6,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
+use Illuminate\Support\Facades\Lang;
 
 class Jobs extends Controller{
     public function home(){
+		//dd(trans('home.welcome'));
 		return view('frontend.view-jobs');
+		
 	}
 
 	public function searchJobs(Request $request){
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}
+		
 		$_find = trim($request->input('_find'));
 		$keyword = trim($request->input('keyword'));
 		$categoryId = trim($request->input('categoryId'));
@@ -109,11 +113,11 @@ class Jobs extends Controller{
 				}
 				else{
 					$vhtml .= '<div class="js-action">';
-                        $vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">Applied</a>';
+                        $vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">'.trans('home.applied').'</a>';
                         if(in_array($rec->jobId, $savedJobArr)){
-	                        $vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-success btn-xs" style="margin-left: 10px;">Saved</a>';
+	                        $vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-success btn-xs" style="margin-left: 10px;">'.trans('home.saved').'</a>';
 	                    }else{
-	                    	$vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-default btn-xs" style="margin-left: 10px;">Save</a>';
+	                    	$vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-default btn-xs" style="margin-left: 10px;">'.trans('home.save').'</a>';
 	                    }
                     $vhtml .= '</div>';
 				}
@@ -122,27 +126,27 @@ class Jobs extends Controller{
                     $vhtml .= '<p>'.$rec->companyName.'</p>';
                     $vhtml .= '<ul class="js-listing">';
                     	$vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">Job Type</p>';
+                            $vhtml .= '<p class="js-title">'.trans('home.jobtype').'</p>';
                             $vhtml .= '<p>'.$rec->jobType.'</p>';
                         $vhtml .= '</li>';
                         $vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">Shift</p>';
+                            $vhtml .= '<p class="js-title">'.trans('home.shift').'</p>';
                             $vhtml .= '<p>'.$rec->jobShift.'</p>';
                         $vhtml .= '</li>';
                         $vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">Experience</p>';
+                            $vhtml .= '<p class="js-title">'.trans('home.experience').'</p>';
                             $vhtml .= '<p>'.$rec->experience.'</p>';
                         $vhtml .= '</li>';
                         $vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">Salary</p>';
+                            $vhtml .= '<p class="js-title">'.trans('home.salary').'</p>';
                             $vhtml .= '<p>'.$rec->minSalary.' - '.$rec->maxSalary.' '.$rec->currency.'</p>';
                         $vhtml .= '</li>';
 						$vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">Post On</p>';
+                            $vhtml .= '<p class="js-title">'.trans('home.poston').'</p>';
                             $vhtml .= '<p>'.date('M d, Y',strtotime($rec->createdTime)).'</p>';
                         $vhtml .= '</li>';
 						$vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">Last Date</p>';
+                            $vhtml .= '<p class="js-title">'.trans('home.lastdate').'</p>';
                             $vhtml .= '<p>'.date('M d, Y',strtotime($rec->expiryDate)).'</p>';
                         $vhtml .= '</li>';
                     $vhtml .= '</ul>';

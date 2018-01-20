@@ -8,7 +8,7 @@
         <div class="col-md-12 view-venue">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Interview Venues
+                    @lang('home.interviewvenues')
                     <button class="btn btn-primary pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="Add New Interview Venue" data-placement="bottom" onclick="addVeneu()">
                         <i class="fa fa-plus"></i>
                     </button>
@@ -17,9 +17,9 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead>
-                                <th>Venue</th>
-                                <th>Location</th>
-                                <th>Action</th>
+                                <th>@lang('home.venue')</th>
+                                <th>@lang('home.location')</th>
+                                <th>@lang('home.action')</th>
                             </thead>
                             <tbody>
                                 @foreach($venues as $venue)
@@ -46,7 +46,7 @@
         <div class="col-md-12 add-edit-venue" style="display: none">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="panel-title">Add Interview Venue</span>
+                    <span class="panel-title">@lang('home.addinterviewvenue')</span>
                     <button class="btn btn-warning pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="Go Back" data-placement="bottom" onclick="goBack()">
                         <i class="fa fa-arrow-left"></i>
                     </button>
@@ -56,13 +56,13 @@
                         <input type="hidden" name="_token" class="venue-token">
                         <input type="hidden" name="venueId" class="venueId" value="0">
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Title</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.title')</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control input-sm" name="title" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Address</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.address')</label>
                             <div class="col-md-6">
                                 <textarea class="form-control input-sm" name="address" style="resize: vertical;" required=""></textarea>
                             </div>
@@ -71,7 +71,7 @@
                         $vApp = Session()->get('jcmUser');
                         ?>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Country</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.country')</label>
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -81,49 +81,49 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">State</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.state')</label>
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-state" name="state" data-state="{{ $vApp->state }}" required=""></select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">City</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.city')</label>
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-city" name="city" data-city="{{ $vApp->city }}" required=""></select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Contact Person</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.contactperson')</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control input-sm" name="contact_person" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Email</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.email')</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control input-sm" name="email">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Mobile</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.mobile')</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control input-sm" name="mobile">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Phone</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.phone')</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control input-sm" name="phone">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Fax</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.fax')</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control input-sm" name="fax">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Instruction</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.instruction')</label>
                             <div class="col-md-6">
                                 <textarea class="form-control input-sm" name="instruction" style="resize: vertical;"></textarea>
                             </div>
@@ -131,8 +131,8 @@
                         <div class="form-group">
                             <label class="control-label col-md-3 text-right">&nbsp;</label>
                             <div class="col-md-6">
-                                <button class="btn btn-primary" type="submit" name="save">Save</button>
-                                <button class="btn btn-default" onclick="goBack()" type="button">Cancel</button>
+                                <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                <button class="btn btn-default" onclick="goBack()" type="button">@lang('home.cancel')</button>
                             </div>
                         </div>
                     </form>

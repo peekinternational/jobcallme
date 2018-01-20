@@ -9,7 +9,7 @@
             <div class="jobs-suggestions">
             	@include('frontend.includes.alerts')
                 <h4>{{ $job->title }}</h4>
-                <p class="text-success">Almost done, few questions before your resume is accepted for this job.</p>
+                <p class="text-success">@lang('home.almostdone')</p>
                 <hr>
                 <form action="" method="post">
                 	{{ csrf_field() }}
@@ -19,7 +19,7 @@
                             <input type="checkbox" id="qualification" class="switch-field" name="qualification" value="yes"/>
                             <label for="qualification" class="switch-label"><span class="ui"></span></label>
                         </div>
-                        <p class="ja-question">Q: Do you have any of the following or equivalent qualification?</p>
+                        <p class="ja-question">@lang('home.q1')</p>
                         <div class="ja-specification">
                             {{ $job->qualification }}
                         </div>
@@ -29,14 +29,14 @@
                             <input type="checkbox" id="experience" class="switch-field" name="experience" value="yes" />
                             <label for="experience" class="switch-label"><span class="ui"></span></label>
                         </div>
-                        <p class="ja-question">Q: Do you have work experience of {{ $job->experience }}?</p>
+                        <p class="ja-question">@lang('home.q2') {{ $job->experience }}?</p>
                     </div>
                     <div class="ja-question-box">
                         <div class="pull-right ja-check">
                             <input type="checkbox" id="skills" class="switch-field" name="skills" value="yes" />
                             <label for="skills" class="switch-label"><span class="ui"></span></label>
                         </div>
-                        <p class="ja-question">Q: Do you have the following skills?</p>
+                        <p class="ja-question">@lang('home.q3')</p>
                         <p>{!! $job->skills !!}</p>
                     </div>
                     <div class="ja-question-box">
@@ -44,18 +44,18 @@
                             <input type="checkbox" id="location" class="switch-field" name="location"/>
                             <label for="location" class="switch-label"><span class="ui"></span></label>
                         </div>
-                        <p class="ja-question">Q: Are you located in one of the following cities or willing to relocate?</p>
+                        <p class="ja-question">@lang('home.q4')</p>
                         <div class="ja-specification">
                             {!! JobCallMe::cityName($job->city) !!}, {!! JobCallMe::countryName($job->country) !!}
                         </div>
                     </div>
                     @if(strtotime($job->expiryDate) < strtotime(date('Y-m-d')))
-                        <button type="button" class="btn btn-danger" disabled="disabled">This job has been closed</button>
+                        <button type="button" class="btn btn-danger" disabled="disabled">@lang('home.hasbeenclose')</button>
                     @elseif($jobApplied == true)
-                        <button type="button" class="btn btn-success">You have already applied to this job</button>
+                        <button type="button" class="btn btn-success">@lang('home.alreadyapply')</button>
                         <a href="{{ url('jobs/'.$job->jobId) }}" class="btn btn-default">CANCEL</a>
                     @else
-                        <button type="submit" class="btn btn-primary" id="submitbutton" disabled="disabled">APPLY</button>
+                        <button type="submit" class="btn btn-primary" id="submitbutton" disabled="disabled">@lang('home.apply')</button>
                         <a href="{{ url('jobs/'.$job->jobId) }}" class="btn btn-default">CANCEL</a>
                     @endif
                 </form>

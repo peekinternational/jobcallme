@@ -11,60 +11,60 @@ if($user->profilePhoto != ''){
 ?>
 <section id="jobs">
     <div class="container">
-        <h3>Settings</h3>
+        <h3>@lang('home.setting')</h3>
         <div class="col-md-2 jobApp-tabs">
-            <h5 class="mtab-heading">Account</h5>
-            <a id="password" class="btn btn-block jaTabBtn ja-tab-active">Change Password</a>
-            <a id="profile" class="btn btn-block jaTabBtn">Edit Profile</a>
-            <a id="notification" class="btn btn-block jaTabBtn">Notification</a>
-            <a id="privacy" class="btn btn-block jaTabBtn">Privacy</a>
-            <h5 class="mtab-heading">Organization</h5>
-            <a href="{{ url('account/employer/departments') }}" class="btn btn-block jaTabBtn">Departments</a>
-            <a href="{{ url('account/employer/organization') }}" class="btn btn-block jaTabBtn ext-link">Edit Organization</a>
-            <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link">Interview Venues</a>
-			<a href="#" class="btn btn-block jaTabBtn ext-link">Users</a>
-			<a href="#" class="btn btn-block jaTabBtn ext-link">Evaluation Forms</a>
-			<a href="#" class="btn btn-block jaTabBtn ext-link">Questionnaires</a>
+            <h5 class="mtab-heading">@lang('home.account')</h5>
+            <a id="password" class="btn btn-block jaTabBtn ja-tab-active">@lang('home.changepassword')</a>
+            <a id="profile" class="btn btn-block jaTabBtn">@lang('home.editprofile')</a>
+            <a id="notification" class="btn btn-block jaTabBtn">@lang('home.notification')</a>
+            <a id="privacy" class="btn btn-block jaTabBtn">@lang('home.p_privacy')</a>
+            <h5 class="mtab-heading">@lang('home.organization')</h5>
+            <a href="{{ url('account/employer/departments') }}" class="btn btn-block jaTabBtn">@lang('home.departments')</a>
+            <a href="{{ url('account/employer/organization') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.editorganization')</a>
+            <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.interviewvenues')</a>
+			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.users')</a>
+			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.evaluationforms')</a>
+			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.questionnaires')</a>
             <!-- <a class="btn btn-block jaTabBtn">Users</a>
             <a class="btn btn-block jaTabBtn">Evaluation Form</a>
             <a class="btn btn-block jaTabBtn">Questionnaires</a> -->
-			<h5 class="mtab-heading">Subscription </h5>
-			<a href="#" class="btn btn-block jaTabBtn ext-link">Credits</a>
-			<a href="#" class="btn btn-block jaTabBtn ext-link">Orders</a>
+			<h5 class="mtab-heading">@lang('home.subscription')</h5>
+			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.credits')</a>
+			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.orders')</a>
 			
 			
-            <h5 class="mtab-heading">Deactivation</h5>
-            <a class="btn btn-block" data-popup-open="popup-1">Deactivate Account</a>
+            <h5 class="mtab-heading">@lang('home.deactivation')</h5>
+            <a class="btn btn-block" data-popup-open="popup-1">@lang('home.deactivateaccount')</a>
         </div>
         <div class="col-md-10">
             <div class="ja-content">
                 <!--Change Password-->
                 <div id="password-show" class="ja-content-item mc-item">
-                    <h4>Change Password</h4>
+                    <h4>@lang('home.changepassword')</h4>
                     <form class="form-horizontal password-form" method="post" action="">
                         <input type="hidden" name="_token" value="">
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Old Password</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.oldpassword')</label>
                             <div class="col-md-6">
-                                <input type="password" name="oldPassword" class="form-control input-sm" placeholder="Old Password">
+                                <input type="password" name="oldPassword" class="form-control input-sm" placeholder="@lang('home.oldpassword')">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">New Password</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.newpassword')</label>
                             <div class="col-md-6">
-                                <input type="password" name="password" class="form-control input-sm" placeholder="New Password">
+                                <input type="password" name="password" class="form-control input-sm" placeholder="@lang('home.newpassword')">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Confirm Password</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.confirmpassword')</label>
                             <div class="col-md-6">
-                                <input type="password" name="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                                <input type="password" name="password_confirmation" class="form-control input-sm" placeholder="@lang('home.confirmpassword')">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3 text-right">&nbsp;</label>
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block" type="submit" name="save">Save</button>
+                                <button class="btn btn-primary btn-block" type="submit" name="save">@lang('home.save')</button>
                             </div>
                         </div>
                     </form>
@@ -72,17 +72,17 @@ if($user->profilePhoto != ''){
 
                 <!--Edit Profile-->
                 <div id="profile-show" class="ja-content-item mc-item" style="display: none">
-                    <h4>Edit Profile</h4>
+                    <h4>@lang('home.editprofile')</h4>
                     <form class="form-horizontal profile-form" method="post" action="">
                         <input type="hidden" name="_token" value="">
                         <div class="form-group">
-                             <label class="control-label col-md-3 text-right">Profile Photo</label>
+                             <label class="control-label col-md-3 text-right">@lang('home.profilephoto')</label>
                             <div class="col-md-6">
                                 <div class="re-img-box">
                                     <img src="{{ $userImage }}" class="img-circle">
                                     <div class="re-img-toolkit">
                                         <div class="mc-file-btn">
-                                             <i class="fa fa-camera"></i> Change
+                                             <i class="fa fa-camera"></i>@lang('home.change')
                                             <input class="upload profile-pic" name="image" type="file">
                                         </div>
                                     </div>
@@ -90,7 +90,7 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Name</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.name')</label>
                             <div class="col-md-6">
                                 <div class="col-md-6 f-name" style="margin-bottom: 5px;padding-left: 0px;">
                                     <input type="text" class="form-control input-sm" name="firstName" value="{{ $user->firstName }}">
@@ -101,25 +101,25 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Email</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.email')</label>
                             <div class="col-md-6">
                                 <input type="email" name="email" class="form-control input-sm" value="{{ $user->email }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Phone Number</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.phonenumber')</label>
                             <div class="col-md-6">
                                 <input type="text" name="phoneNumber" class="form-control input-sm" value="{{ $user->phoneNumber }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Address</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.address')</label>
                             <div class="col-md-6">
                                 <textarea name="address" class="form-control input-sm">{{ $meta->address }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Country</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.country')</label>
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -129,13 +129,13 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">State</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.state')</label>
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-state" name="state" data-state="{{ $user->state }}"></select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">City</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.city')</label>
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-city" name="city" data-city="{{ $user->city }}"></select>
                             </div>
@@ -143,7 +143,7 @@ if($user->profilePhoto != ''){
                         <div class="form-group">
                             <label class="control-label col-md-3 text-right">&nbsp;</label>
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block" type="submit" name="save">Save</button>
+                                <button class="btn btn-primary btn-block" type="submit" name="save">@lang('home.save')</button>
                             </div>
                         </div>
                     </form>
@@ -152,11 +152,11 @@ if($user->profilePhoto != ''){
                 <!--Notification-->
                 <div id="notification-show" class="ja-content-item mc-item" style="display: none;">
                     <form class="form-horizontal notification-form" method="post" action="">
-                        <h4>Account</h4>
+                        <h4>@lang('home.account')</h4>
                         <input type="hidden" name="_token" value="">
                         <div class="form-group">
                             <div class="col-md-12 mc-notification">
-                                <label class="col-md-3 control-label">Service Alerts</label>
+                                <label class="col-md-3 control-label">@lang('home.servicealerts')</label>
                                 <div class="col-md-9">
                                     <p style="margin-top: 4px">
                                         <input type="checkbox" id="service-alert" class="switch-field" name="serviceAlert" {{ $noti->serviceAlert == 'Yes' ? 'checked=""' : '' }} >
@@ -167,7 +167,7 @@ if($user->profilePhoto != ''){
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 mc-notification">
-                                <label class="col-md-3 control-label">Messages</label>
+                                <label class="col-md-3 control-label">@lang('home.messages')</label>
                                 <div class="col-md-9">
                                     <p style="margin-top: 4px">
                                         <input type="checkbox" id="message-alert" class="switch-field" name="messageAlert" {{ $noti->messageAlert == 'Yes' ? 'checked=""' : '' }}>
@@ -176,10 +176,10 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                         </div>
-                        <h4>Employer Account</h4>
+                        <h4>@lang('home.employeraccount')</h4>
                         <div class="form-group">
                             <div class="col-md-12 mc-notification">
-                                <label class="col-md-3 control-label">Daily Job Alerts</label>
+                                <label class="col-md-3 control-label">@lang('home.dailyalerts')</label>
                                 <div class="col-md-9">
                                     <p style="margin-top: 4px">
                                         <input type="checkbox" id="new-application" class="switch-field" name="newApplication" {{ $noti->newApplication == 'Yes' ? 'checked=""' : '' }}>
@@ -191,7 +191,7 @@ if($user->profilePhoto != ''){
 
                         <div class="form-group">
                             <div class="col-md-12 mc-notification">
-                                <label class="col-md-3 control-label">Closing Jobs</label>
+                                <label class="col-md-3 control-label">@lang('home.closingjobs')</label>
                                 <div class="col-md-9">
                                     <p style="margin-top: 4px">
                                         <input type="checkbox" id="closing-jobs" class="switch-field" name="closingJobs" {{ $noti->closingJobs == 'Yes' ? 'checked=""' : '' }}>
@@ -200,9 +200,9 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                         </div>
-                        <h4>Job Alerts</h4>
+                        <h4>@lang('home.jobalerts')</h4>
                         <div class="col-md-12 mc-notification">
-                            <label class="col-md-3 control-label">Daily Job Alerts</label>
+                            <label class="col-md-3 control-label">@lang('home.dailyalerts')</label>
                             <div class="col-md-9">
                                 <p style="margin-top: 4px">
                                     <input type="checkbox" id="job-alert" class="switch-field" name="jobAlert" {{ $noti->jobAlert == 'Yes' ? 'checked=""' : '' }}>
@@ -211,7 +211,7 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Country</label>
+                            <label class="col-md-3 control-label">@lang('home.country')</label>
                             <div class="col-md-9">
                                 <select class="form-control input-sm mc-field jjob-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -221,21 +221,21 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">State</label>
+                            <label class="col-md-3 control-label">@lang('home.state')</label>
                             <div class="col-md-9">
                                 <select class="form-control input-sm mc-field jjob-state" name="state" data-state="{{ $noti->state }}">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">City</label>
+                            <label class="col-md-3 control-label">@lang('home.city')</label>
                             <div class="col-md-9">
                                 <select class="form-control input-sm mc-field jjob-city" name="city" data-city="{{ $noti->city }}">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Category</label>
+                            <label class="col-md-3 control-label">@lang('home.category')</label>
                             <div class="col-md-9">
                                 <select class="form-control input-sm mc-field" name="category">
                                     @foreach(JobCallMe::getCategories() as $cat)
@@ -247,7 +247,7 @@ if($user->profilePhoto != ''){
                         <div class="form-group">
                             <label class="control-label col-md-3 text-right">&nbsp;</label>
                             <div class="col-md-6">
-                                <button class="btn btn-primary" type="submit" name="save">Save</button>
+                                <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
                             </div>
                         </div>
                     </form>
@@ -257,35 +257,35 @@ if($user->profilePhoto != ''){
                 <div id="privacy-show" class="ja-content-item mc-item" style="display: none;">
                     <form class="form-horizontal privacy-form" method="post" action="">
                         <input type="hidden" name="_token" value="">
-                        <h4>Privacy Settings</h4>
+                        <h4>@lang('home.privacysettings')</h4>
                         <div class="col-md-12">
                             <p style="margin-top: 4px">
                                 <input type="checkbox" id="profile-visible" class="switch-field" name="profile" {{ $privacy->profile != 'No' ? 'checked=""' : '' }}>
-                                <label for="profile-visible" class="switch-label"></label> <span>Make Profile Visible</span>
+                                <label for="profile-visible" class="switch-label"></label> <span>@lang('home.profilevisible')</span>
                             </p>
                         </div>
                         <div class="col-md-12">
                             <p style="margin-top: 4px">
                                 <input type="checkbox" id="image-visible" class="switch-field" name="profileImage" {{ $privacy->profileImage != 'No' ? 'checked=""' : '' }}>
-                                <label for="image-visible" class="switch-label"></label> <span>Make Profile Picture Visible</span>
+                                <label for="image-visible" class="switch-label"></label> <span>@lang('home.picturevisible')</span>
                             </p>
                         </div>
                         <div class="col-md-12">
                             <p style="margin-top: 4px">
                                 <input type="checkbox" id="academic-visible" class="switch-field" name="academic" {{ $privacy->academic != 'No' ? 'checked=""' : '' }}>
-                                <label for="academic-visible" class="switch-label"></label> <span>Make Academic Visible</span>
+                                <label for="academic-visible" class="switch-label"></label> <span>@lang('home.academicvisible')</span>
                             </p>
                         </div>
                         <div class="col-md-12">
                             <p style="margin-top: 4px">
                                 <input type="checkbox" id="experience-visible" class="switch-field" name="experience" {{ $privacy->experience != 'No' ? 'checked=""' : '' }}>
-                                <label for="experience-visible" class="switch-label"></label> <span>Make Experience Visible</span>
+                                <label for="experience-visible" class="switch-label"></label> <span>@lang('home.experiencevisible')</span>
                             </p>
                         </div>
                         <div class="col-md-12">
                             <p style="margin-top: 4px">
                                 <input type="checkbox" id="skills-visible" class="switch-field" name="skills" {{ $privacy->skills != 'No' ? 'checked=""' : '' }}>
-                                <label for="skills-visible" class="switch-label"></label> <span>Make Skills Visible</span>
+                                <label for="skills-visible" class="switch-label"></label> <span>@lang('home.skillsvisible')</span>
                             </p>
                         </div>
                     </form>
@@ -294,10 +294,10 @@ if($user->profilePhoto != ''){
                 <!--Deactivate account-->
                 <div class="popup" data-popup="popup-1">
                     <div class="popup-inner">
-                        <h4>Deactivate Account</h4>
-                        <p>Warning! Once deactivated you wont be able to login to your account, Are you sure you want to deactivate your account?</p>
-                        <button href="#" class="btn btn-danger">YES DEACTIVATE MY ACCOUNT</button>
-                        <button class="btn btn-default" data-popup-close="popup-1" >CLOSE</button>
+                        <h4>@lang('home.deactivateaccount')</h4>
+                        <p>@lang('home.warningdeactive')</p>
+                        <button href="#" class="btn btn-danger">@lang('home.yesdeactive')</button>
+                        <button class="btn btn-default" data-popup-close="popup-1" >@lang('home.close')</button>
                         <a class="popup-close" data-popup-close="popup-1" href="#">&times;</a>
                     </div>
                 </div>

@@ -6,7 +6,7 @@
 <section id="learn-section">
     <div class="container">
         <div class="col-md-12 learn-search-box">
-            <h2 class="text-center">Read! To Enhance Your Knowlegde</h2>
+            <h2 class="text-center">@lang('home.read_heading')</h2>
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
                     <div class="ls-box">
@@ -14,11 +14,11 @@
                             {{ csrf_field() }}
                             <div class="input-fields">
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="Keywords" name="keyword">
+                                    <input type="search" placeholder="@lang('home.key')" name="keyword">
                                 </div>
                                 <div class="search-field-box search-item">
                                     <select class="form-control select2" name="category">
-                                        <option value="0">Select Type</option>
+                                        <option value="0">@lang('home.s_type')</option>
                                         @foreach(JobCallMe::getCategories() as $cat)
                                             <option value="{!! $cat->categoryId !!}">{!! $cat->name !!}</option>
                                         @endforeach
@@ -43,7 +43,7 @@
                         <?php if($i == 5){ break; } $i++; } ?>
                     </div>
                     <div class="promote-learning-box">
-                        <a href="{{ url('account/writings/article/add') }}" class="promote-learning-btn"><i class="fa fa-edit"></i>&nbsp; WRITE AN ARTICLE</a>
+                        <a href="{{ url('account/writings/article/add') }}" class="promote-learning-btn"><i class="fa fa-edit"></i>&nbsp; @lang('home.warticle')</a>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
 <!--Read Articles-->
 <section id="learn-articles">
     <div class="container">
-        <h1 style="margin-left: 15px">Latest Articles</h1>
+        <h1 style="margin-left: 15px">@lang('home.larticle')</h1>
         <div class="grid">
             <div class="grid-sizer col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>
             <!--Article Item-->

@@ -7,10 +7,10 @@
     <div class="container">
 		
   <ul class="nav nav-tabs" style="margin-top:20px">
-    <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-user" aria-hidden="true"></i> Resume</a></li>
-    <li><a data-toggle="tab" href="#menu1"><i class="fa fa-comments" aria-hidden="true"></i> Conversation</a></li>
-    <li><a data-toggle="tab" href="#menu2"><i class="fa fa-clipboard" aria-hidden="true"></i> Questionnaire</a></li>
-    <li><a data-toggle="tab" href="#menu3"><i class="fa fa-calendar" aria-hidden="true"></i> Interviews</a></li>
+    <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-user" aria-hidden="true"></i> @lang('home.resume')</a></li>
+    <li><a data-toggle="tab" href="#menu1"><i class="fa fa-comments" aria-hidden="true"></i> @lang('home.conversation')</a></li>
+    <li><a data-toggle="tab" href="#menu2"><i class="fa fa-clipboard" aria-hidden="true"></i> @lang('home.questionnaires')</a></li>
+    <li><a data-toggle="tab" href="#menu3"><i class="fa fa-calendar" aria-hidden="true"></i> @lang('home.interviews')</a></li>
   </ul>
         <div class="row">
       <div class="col-md-12">
@@ -24,18 +24,18 @@
                                 <div>
                                     <img src="{{ url('profile-photos/'.$applicant->profilePhoto) }}" style="width: 100%;height:221px;">
                                 </div>
-                                <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">$applicant->firstName Smith</h3>
+                                <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">$applicant->firstName</h3>
                                 <p class="text-center hidden-md hidden-lg jp-profession-heading">Web Developer and Designer</p>
-                                <a href="#" class="btn btn-primary btn-block jp-contact-btn">CONTACT DETAILS</a>
+                                <a href="#" class="btn btn-primary btn-block jp-contact-btn">@lang('home.contactdetail')</a>
                             </div>
                             <div class="col-md-9 personal-info-right">
                                 <h3 class="hidden-sm hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}}</h3>
                                 <p class="jp-profession-heading hidden-sm hidden-xs">Web Developer and Designer</p>
-                                <p><span class="pi-title">Experiance:</span>{{$applicant->experiance}}</p>
-                                <p><span class="pi-title">Industry:</span> {{ JobCallMe::categoryTitle($applicant->industry) }}</p>
-                                <p><span class="pi-title">Salary:</span> {{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',2).' '.$applicant->currency }}</p>
+                                <p><span class="pi-title">@lang('home.experiance'):</span>{{$applicant->experiance}}</p>
+                                <p><span class="pi-title">@lang('home.industry'):</span> {{ JobCallMe::categoryTitle($applicant->industry) }}</p>
+                                <p><span class="pi-title">@lang('home.salary'):</span> {{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',2).' '.$applicant->currency }}</p>
                                 <div class="professional-summary">
-                                    <h4>Professional Summary</h4>
+                                    <h4>@lang('home.p_summary')</h4>
                                     <p>{{$applicant->about}}
                                     </p>
                                 </div>
@@ -46,7 +46,7 @@
 
                     <!--Academic Section Start-->
                     <section class="resume-box" id="academic">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  Academic</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.academic')</h4>
                         <ul class="resume-details">
                            @if(count($resume['academic']) > 0)
                                 @foreach($resume['academic'] as $resumeId => $academic)
@@ -68,7 +68,7 @@
 
                     <!--Academic Section Start-->
                     <section class="resume-box" id="experience">
-                        <h4><i class="fa fa-star r-icon bg-primary"></i>  Experience</h4>
+                        <h4><i class="fa fa-star r-icon bg-primary"></i>  @lang('home.experience')</h4>
                         <ul class="resume-details">
                          @if(count($resume['experience']) > 0)
                                 @foreach($resume['experience'] as $resumeId => $experience)
@@ -89,7 +89,7 @@
 
                     <!--Academic Section Start-->
                     <section class="resume-box" id="projects">
-                        <h4><i class="fa fa-edit r-icon bg-primary"></i>  Projects</h4>
+                        <h4><i class="fa fa-edit r-icon bg-primary"></i>  @lang('home.projects')</h4>
                         <ul class="resume-details">
                             <li>
                                 <div class="col-md-12">
@@ -108,7 +108,7 @@
 
                     <!--Academic Section Start-->
                     <section class="resume-box" id="certification">
-                        <h4><i class="fa fa-certificate r-icon bg-primary"></i>  Certification</h4>
+                        <h4><i class="fa fa-certificate r-icon bg-primary"></i>  @lang('home.certification')</h4>
                         <ul class="resume-details">
                             @if(count($resume['certification']) > 0)
                                 @foreach($resume['certification'] as $resumeId => $certification)
@@ -142,7 +142,7 @@
 </div>
 						</div>
 						<div class="col-md-10">
-						<button  type="button" class="btn btn-success pull-right" style="margin-top:12px">Send</button>
+						<button  type="button" class="btn btn-success pull-right" style="margin-top:12px">@lang('home.send')</button>
 						</div>
 						</div>
 						</section>
@@ -163,7 +163,7 @@
                             <form action="#" method="" class="form-horizontal interview-forms">
                                 <input type="hidden" name="_token" class="token">
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">Applicants</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.applicants')</label>
                                     <div class="col-md-6">
 									 <input type="text" class="form-control date-picker" name="applicantInter[]" value="{{$applicant->firstName}} {{$applicant->lastName}}" onkeypress="return false">
                                        
@@ -171,19 +171,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">From</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.from')</label>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control date-picker" name="fromDate" value="{{ date('Y-m-d',strtotime('+1 Day')) }}" onkeypress="return false">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">To</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.to')</label>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control date-picker" name="toDate" value="{{ date('Y-m-d',strtotime('+2 Day')) }}" onkeypress="return false">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">Time per interview</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.timeinterview')</label>
                                     <div class="col-md-6">
                                         <select class="form-control select2" name="perInterview">
                                             @for($i = 1; $i < 10; $i++)
@@ -193,7 +193,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">Interview Venue</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.interviewvenue')</label>
                                     <div class="col-md-6">
                                         <select class="form-control select2" name="venue">
                                             @foreach(JobCallMe::interviewVenue() as $venue)
@@ -205,7 +205,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4 text-right">&nbsp;</label>
                                     <div class="col-md-6">
-                                        <button type="submit" name="save" class="btn btn-primary pull-right">Save</button>
+                                        <button type="submit" name="save" class="btn btn-primary pull-right">@lang('home.save')</button>
                                        <!-- <button type="button" class="btn btn-default" onclick="$('.ea-scheduleInerview').fadeOut()">Cancel</button> !-->
                                     </div>
                                 </div>

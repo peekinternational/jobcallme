@@ -22,7 +22,7 @@ $cPage = Request::segment(2);
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('') }}"><img src="{{ $headerWebLogo }}" class="logo-img"></a>
+            <a class="navbar-brand" style="padding-left:0px" href="{{ url('') }}"><img src="{{ $headerWebLogo }}" class="logo-img"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -61,18 +61,16 @@ $cPage = Request::segment(2);
                         <a href="{{ url('companies') }}">@lang('home.companies')</a>
                     </li>
                     <?php } ?>
+					 @if(Session::has('jcmUser'))
+						 
+						  @else
                     <li class="hidden-sm {{ Request::segment(1) == 'about' ? 'active' : '' }}">
                         <a href="{{ url('about') }}">@lang('home.about')</a>
                     </li>
                     <li class="{{ Request::segment(1) == 'contact' ? 'active' : '' }}">
                         <a href="{{ url('contact') }}">@lang('home.contact')</a>
                     </li>
-					<li class="{{ Request::segment(1) == 'contact' ? 'active' : '' }}">
-                        <a href="{{ url('locale/en') }}">English</a>
-                    </li>
-					<li class="{{ Request::segment(1) == 'contact' ? 'active' : '' }}">
-                        <a href="{{ url('locale/kr') }}">Korean</a>
-                    </li>
+					@endif
                 </ul>
             </div>
             <ul class="nav navbar-nav navbar-right">
@@ -91,7 +89,17 @@ $cPage = Request::segment(2);
                 @else
                     <li class="hidden-lg hidden-sm hidden-xs"><a href="{{ url('account/login') }}"><i class="fa fa-user"></i></a></li>
                 @endif
+				<li>		<div class="dropdown">
+  <button class="language btn btn-primary dropdown-toggle" style="background:transparent" type="button" data-toggle="dropdown">Language
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="{{ url('locale/en') }}">English</a></li>
+    <li><a href="{{ url('locale/kr') }}">Korean</a></li>
+  
+  </ul>
+</div></li>
             </ul>
+	
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

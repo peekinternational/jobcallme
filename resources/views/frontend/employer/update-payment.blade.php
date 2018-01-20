@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 style="text-align:center">Select payment method</h3>
+                <h3 style="text-align:center">@lang('home.selectpaymentmethod')</h3>
                 <br>
                 <br>
                 <div class="col-md-6" style="text-align:end">

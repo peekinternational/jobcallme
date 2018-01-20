@@ -8,16 +8,16 @@
         <div class="col-md-12">
 		
             <div class="col-md-3 job-search-box">
-			<span>Refine Your Search</span>
+			<span>@lang('home.refinesearch')</span>
 			<br>
                 <form action="" method="post" class="search-job" style="padding-top:13px">
                 	<input type="hidden" name="_token" class="token">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="keyword" value="{{ Request::input('keyword') }}" placeholder="Keyword">
+                        <input type="text" class="form-control" name="keyword" value="{{ Request::input('keyword') }}" placeholder="@lang('home.key')">
                     </div>
                     <div class="form-group">
                        <select class="form-control" name="categoryId">
-                       		<option value="">Select Category</option>
+                       		<option value="">@lang('home.s_category')</option>
                        		@foreach(JobCallMe::getCategories() as $cat)
                                 <option value="{!! $cat->categoryId !!}" {{ $cat->categoryId == Request::input('category') ? 'selected="selected"' : '' }}>{!! $cat->name !!}</option>
                             @endforeach
@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="jobType">
-                            <option value="">Select Type</option>
+                            <option value="">@lang('home.s_type')</option>
                             @foreach(JobCallMe::getJobType() as $jtype)
                                 <option value="{!! $jtype->name !!}" {{ $jtype->name == Request::input('type') ? 'selected="selected"' : '' }}>{!! $jtype->name !!}</option>
                             @endforeach
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="jobShift">
-                            <option value="">Select Shift</option>
+                            <option value="">@lang('home.s_shift')</option>
                             @foreach(JobCallMe::getJobShifts() as $jshift)
                                 <option value="{!! $jshift->name !!}" {{ $jshift->name == Request::input('shift') ? 'selected="selected"' : '' }}>{!! $jshift->name !!}</option>
                             @endforeach
@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="careerLevel">
-                            <option value="">Select Career level</option>
+                            <option value="">@lang('home.s_career')</option>
                             @foreach(JobCallMe::getCareerLevel() as $career)
                                 <option value="{!! $career !!}" {{ $career == Request::input('career') ? 'selected="selected"' : '' }}>{!! $career !!}</option>
                             @endforeach
@@ -49,21 +49,21 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="experience">
-                            <option value="">Select Experience</option>
+                            <option value="">@lang('home.s_experience')</option>
                             @foreach(JobCallMe::getExperienceLevel() as $experience)
                                 <option value="{!! $experience !!}" {{ $experience == Request::input('experience') ? 'selected="selected"' : '' }}>{!! $experience !!}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="minSalary" value="" placeholder="Minimum Salary ">
+                        <input type="text" class="form-control" name="minSalary" value="" placeholder="@lang('home.minsalary') ">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="maxSalary" value="" placeholder="Maximum Salary">
+                        <input type="text" class="form-control" name="maxSalary" value="" placeholder="@lang('home.maxsalary')">
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="currency">
-                            <option value="">Select Currency</option>
+                            <option value="">@lang('home.s_currency')</option>
                             @foreach(JobCallMe::siteCurrency() as $currency)
                                 <option value="{{ $currency }}">{{ $currency }}</option>
                             @endforeach
@@ -71,7 +71,7 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control job-country" name="country">
-                            <option value="0">Select Country</option>
+                            <option value="0">@lang('home.country')</option>
                             @foreach(JobCallMe::getJobCountries() as $country)
                                 <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>{{ $country->name }}</option>
                             @endforeach
@@ -79,16 +79,16 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control job-state" name="state" data-state="{{ Request::input('state') }}">
-                            <option value="0">Select City</option>
+                            <option value="0">@lang('home.state')</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <select class="form-control job-city" name="city" data-city="{{ Request::input('city') }}">
-                            <option value="0">Select City</option>
+                            <option value="0">@lang('home.city')</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary btn-block" type="submit" name="save">SEARCH</button>
+                        <button class="btn btn-primary btn-block" type="submit" name="save">@lang('home.search')</button>
                     </div>
                 </form>
             </div>

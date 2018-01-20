@@ -9,17 +9,17 @@
 	<div class="col-md-2">
 	</div>
 				<div class="col-md-8 company-box-left">
-				<span><b>Facebook Careers Tab</b></span>
+				<span><b>@lang('home.facebookcareerstab')</b></span>
 				<br>
 				<br>
 				
-				<span><b>Add Careers Tab to Your Facebook Page</b></span>
+				<span><b>@lang('home.addcareerstab')</b></span>
 				<br>
-				<span style="font-size: 12px;">Do you have a Facebook page for your organization? Add <b>Careers Tab</b> to it and let Jobseekers find your jobs through social media. Its Free!</span>
+				<span style="font-size: 12px;">@lang('home.careertab1')<b>@lang('home.careerstab')</b> @lang('home.careertab2')</span>
 				<br>
 				<br>
 				<br>
-				   <button type="submit" class="btn btn-primary">Add Careers Tab to Your Facebook Page</button>
+				   <button type="submit" class="btn btn-primary">@lang('home.facebookcareerstab')</button>
 				</div>
 			   <div class="col-md-2">
 	</div>

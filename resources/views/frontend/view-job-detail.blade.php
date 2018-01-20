@@ -15,13 +15,13 @@
 			@else
 				  <div class="jd-action-btn">
                     @if(strtotime($job->expiryDate) < strtotime(date('Y-m-d')))
-                        <button class="btn btn-danger">Closed</button>
+                        <button class="btn btn-danger">@lang('home.s_close')</button>
                     @else
-                        <a href="{{ url('jobs/apply/'.$job->jobId) }}" class="btn btn-primary">Applied</a>
+                        <a href="{{ url('jobs/apply/'.$job->jobId) }}" class="btn btn-primary">@lang('home.applied')</a>
                         @if(in_array($job->jobId, $savedJobArr))
-                            <a href="javascript:;" onclick="saveJob({{ $job->jobId }},this)" class="btn btn-success" style="margin-left: 10px;">Saved</a>
+                            <a href="javascript:;" onclick="saveJob({{ $job->jobId }},this)" class="btn btn-success" style="margin-left: 10px;">@lang('home.saved')</a>
                         @else
-                            <a href="javascript:;" onclick="saveJob({{ $job->jobId }},this)" class="btn btn-default" style="margin-left: 10px;">Save</a>
+                            <a href="javascript:;" onclick="saveJob({{ $job->jobId }},this)" class="btn btn-default" style="margin-left: 10px;">@lang('home.save')</a>
                         @endif
                     @endif
                 </div>
@@ -52,27 +52,27 @@
                 </div>
                 <ul class="js-listing">
                     <li>
-                        <p class="js-title">Job Type</p>
+                        <p class="js-title">@lang('home.jobtype')</p>
                         <p>{{ $job->jobType }}</p>
                     </li>
                     <li>
-                        <p class="js-title">Shift</p>
+                        <p class="js-title">@lang('home.shift')</p>
                         <p>{{ $job->jobShift }}</p>
                     </li>
                     <li>
-                        <p class="js-title">Experience</p>
+                        <p class="js-title">@lang('home.experience')</p>
                         <p>{{ $job->experience }}</p>
                     </li>
                     <li>
-                        <p class="js-title">Salary</p>
+                        <p class="js-title">@lang('home.salary')</p>
                         <p>{{ number_format($job->minSalary) }} - {{ number_format($job->maxSalary) }} {{ $job->currency }}</p>
                     </li>
 					<li>
-                        <p class="js-title">Post On</p>
+                        <p class="js-title">@lang('home.poston')</p>
                         <p>{{ date('M d, Y',strtotime($job->createdTime))}}</p>
                     </li>
 					<li>
-                        <p class="js-title">Last Date</p>
+                        <p class="js-title">@lang('home.lastdate')</p>
                         <p>{{ date('M d, Y',strtotime($job->expiryDate))}}</p>
                     </li>
                 </ul>
@@ -86,25 +86,25 @@
                 <table class="table table-bordered hidden-xs hidden-sm">
                     <tbody>
                     <tr>
-                        <td class="active">Category</td>
+                        <td class="active">@lang('home.category')</td>
                         <td>{{ JobCallMe::categoryTitle($job->category) }}</td>
-                        <td class="active">Career Level</td>
+                        <td class="active">@lang('home.careerlevel')</td>
                         <td>{{ $job->careerLevel }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Qualification</td>
+                        <td class="active">@lang('home.qualification')</td>
                         <td>{{ $job->qualification }}</td>
-                        <td class="active">Total Vacancies</td>
+                        <td class="active">@lang('home.totalvacancies')</td>
                         <td>{{ $job->vacancies }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Post on</td>
+                        <td class="active">@lang('home.poston')</td>
                         <td>{{ date('M d, Y',strtotime($job->createdTime))}}</td>
-                        <td class="active">Last Date</td>
+                        <td class="active">@lang('home.lastdate')</td>
                         <td>{{ date('M d, Y',strtotime($job->expiryDate))}}</td>
                     </tr>
                     <tr>
-                        <td class="active">Location</td>
+                        <td class="active">@lang('home.location')</td>
                         <td colspan="3">{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</td>
                     </tr>
                     </tbody>
@@ -114,37 +114,37 @@
                 <table class="table table-bordered table-responsive hidden-md hidden-lg">
                     <tbody>
                     <tr>
-                        <td class="active">Category</td>
+                        <td class="active">@lang('home.category')</td>
                         <td>{{ JobCallMe::categoryTitle($job->category) }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Career Level</td>
+                        <td class="active">@lang('home.careerlevel')</td>
                         <td>{{ $job->careerLevel }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Qualification</td>
+                        <td class="active">@lang('home.qualification')</td>
                         <td>{{ $job->qualification }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Post on</td>
+                        <td class="active">@lang('home.poston')</td>
                         <td>{{ date('M d, Y',strtotime($job->createdTime))}}</td>
                     </tr>
                     <tr>
-                        <td class="active">Last Date</td>
+                        <td class="active">@lang('home.lastdate')</td>
                         <td>{{ date('M d, Y',strtotime($job->expiryDate))}}</td>
                     </tr>
                     <tr>
-                        <td class="active">Location</td>
+                        <td class="active">@lang('home.location')</td>
                         <td>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</td>
                     </tr>
                     </tbody>
                 </table>
-                <h4>Description</h4>
+                <h4>@lang('home.description')</h4>
                 <p><strong>We are conveniently located in {{ JobCallMe::getCompany($job->companyId)->companyAddress }}.</strong></p>
                 <p>{!! $job->description !!}</p>
-                <h4>Skills</h4>
+                <h4>@lang('home.skills')</h4>
                 <p>{!! $job->skills !!}</p>
-                <h4>Rewards and Benefits</h4>
+                <h4>@lang('home.rewardsbenefits')</h4>
                 @if($job->benefits != '')
 	                <ul class="jd-rewards">
 	                	@foreach(@explode(',',$job->benefits) as $benefits)
@@ -158,9 +158,9 @@
             <div class="jobs-suggestions">
                 <div class="jd-action-btn">
                     @if(in_array($job->companyId,$followArr))
-                        <a href="javascript:;" onclick="followCompany({{ $job->companyId }},this)" class="btn btn-success">Following</a>
+                        <a href="javascript:;" onclick="followCompany({{ $job->companyId }},this)" class="btn btn-success">@lang('home.following')</a>
                     @else
-                        <a href="javascript:;" onclick="followCompany({{ $job->companyId }},this)" class="btn btn-primary">Follow</a>
+                        <a href="javascript:;" onclick="followCompany({{ $job->companyId }},this)" class="btn btn-primary">@lang('home.follow')</a>
                     @endif
                 </div>
                 <h4>{{ $job->companyName }} </h4>

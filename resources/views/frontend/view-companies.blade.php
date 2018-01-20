@@ -6,7 +6,7 @@
 <section id="companies-section">
     <div class="container">
         <div class="col-md-12 learn-search-box">
-            <h2 class="text-center">Companies in {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</h2>
+            <h2 class="text-center">@lang('home.companiesin') {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</h2>
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
                     <div class="ls-box">
@@ -14,10 +14,10 @@
                             {{ csrf_field() }}
                             <div class="input-fields">
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="Keywords" name="keyword">
+                                    <input type="search" placeholder="@lang('home.key')" name="keyword">
                                 </div>
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="City" name="city">
+                                    <input type="search" placeholder="@lang('home.city')" name="city">
                                 </div>
                                 <button type="submit" class="search-btn">
                                     <i class="fa fa-search"></i>
@@ -34,7 +34,7 @@
             </div>-->
             <div class="row text-sm  companies-list">
                 <div class="col-md-12">
-                    <h4 class="category-label">Companies by Industry</h4>
+                    <h4 class="category-label">@lang('home.companiesindustry')</h4>
                     <div class="col-md-4">
                     <ul class="list-unstyled">
                     <?php 

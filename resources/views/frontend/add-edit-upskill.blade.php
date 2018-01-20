@@ -21,25 +21,25 @@ if($upskill->country != 0){
 <section id="postNewJob">
     <div class="container">
         <div class="col-md-9">
-            <h2>Advertise a Course, Seminar, Workshop You're Offering</h2>
+            <h2>@lang('home.up_heading')</h2>
             <div class="pnj-box">
                 <form id="pnj-form" action="" method="post" class="upskill-form">
                     {{ csrf_field() }}
                     <input type="hidden" name="skillId" value="{{ $upskill->skillId }}">
                     <input type="hidden" name="prevIcon" value="{{ $upskill->upskillImage }}">
-                    <h3>Basic Information</h3>
+                    <h3>@lang('home.basicinformation')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Title</label>
+                            <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="title" id="title" placeholder="Title" value="{{ $upskill->title }}">
+                                <input type="text" class="form-control" name="title" id="title" placeholder="@lang('home.title')" value="{{ $upskill->title }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Type</label>
+                            <label class="control-label col-sm-3">@lang('home.type')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="type" required="">
-                                    <option value="">Select Type</option>
+                                    <option value="">@lang('home.s_type')</option>
                                     @foreach(JobCallMe::getUpkillsType() as $skill)
                                         <option value="{!! $skill !!}" {{ $skill == $upskill->type ? 'selected="selected"' : '' }}>{!! $skill !!}</option>
                                     @endforeach
@@ -47,7 +47,7 @@ if($upskill->country != 0){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Organiser</label>
+                            <label class="control-label col-sm-3">@lang('home.organiser')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control" name="oType" onchange="orgFun(this.value)">
                                     <option value="user">{{ Session()->get('jcmUser')->firstName.' '.Session()->get('jcmUser')->lastName}}</option>
@@ -57,24 +57,24 @@ if($upskill->country != 0){
                         </div>
 
                         <div class="form-group col-organiser" style="display: none;">
-                            <label class="control-label col-sm-3">Organiser</label>
+                            <label class="control-label col-sm-3">@lang('home.organiser')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control" name="organiser" value="{{ $upskill->organiser }}">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Description</label>
+                            <label class="control-label col-sm-3">@lang('home.description')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <textarea name="description" class="form-control tex-editor">{{ $upskill->description }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Cost</label>
+                            <label class="control-label col-sm-3">@lang('home.cost')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="number" class="form-control" name="cost" placeholder="Cost" value="{{ $upskill->cost }}">
+                                        <input type="number" class="form-control" name="cost" placeholder="@lang('home.cost')" value="{{ $upskill->cost }}">
                                     </div>
 
                                     <div class="col-md-4">
@@ -88,7 +88,7 @@ if($upskill->country != 0){
                                         <div class=" benefits-checks">
                                             <input id="free" type="checkbox" class="cbx-field" name="accommodation" {{ $upskill->cost == '0' ? 'checked=""' : '' }}>
                                             <label class="cbx" for="free"></label>
-                                            <label class="lbl" for="free">Free</label>
+                                            <label class="lbl" for="free">@lang('home.free')</label>
                                         </div>
                                     </div>
                                 </div>
@@ -96,16 +96,16 @@ if($upskill->country != 0){
                         </div>
                     </div>
 
-                    <h3>Venue</h3>
+                    <h3>@lang('home.venue')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Address</label>
+                            <label class="control-label col-sm-3">@lang('home.address')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <textarea name="address" class="form-control" placeholder="Address">{{ $upskill->address }}</textarea>
+                                <textarea name="address" class="form-control" placeholder="@lang('home.address')">{{ $upskill->address }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Country</label>
+                            <label class="control-label col-sm-3">@lang('home.country')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -115,14 +115,14 @@ if($upskill->country != 0){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">State</label>
+                            <label class="control-label col-sm-3">@lang('home.state')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-state" name="state" data-state="{{ $gState }}">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">City</label>
+                            <label class="control-label col-sm-3">@lang('home.city')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-city" name="city" data-city="{{ $gCity }}">
                                 </select>
@@ -130,38 +130,38 @@ if($upskill->country != 0){
                         </div>
                     </div>
 
-                    <h3>Contact Information</h3>
+                    <h3>@lang('home.contactinformation')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Contact Person</label>
+                            <label class="control-label col-sm-3">@lang('home.contactperson')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" name="contact" class="form-control" placeholder="Contact Person" value="{{ $upskill->contact }}">
+                                <input type="text" name="contact" class="form-control" placeholder="@lang('home.contactperson')" value="{{ $upskill->contact }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Email</label>
+                            <label class="control-label col-sm-3">@lang('home.email')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="email" name="email" class="form-control" placeholder="Email" value="{{ $gEmail }}">
+                                <input type="email" name="email" class="form-control" placeholder="@lang('home.email')" value="{{ $gEmail }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Phone</label>
+                            <label class="control-label col-sm-3">@lang('home.phone')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" name="phone" class="form-control" placeholder="Phone" value="{{ $gPhone }}">
+                                <input type="text" name="phone" class="form-control" placeholder="@lang('home.phone')" value="{{ $gPhone }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Mobile</label>
+                            <label class="control-label col-sm-3">@lang('home.mobile')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" name="mobile" class="form-control" placeholder="Mobile" value="{{ $upskill->mobile }}">
+                                <input type="text" name="mobile" class="form-control" placeholder="@lang('home.mobile')" value="{{ $upskill->mobile }}">
                             </div>
                         </div>
                     </div>
 
-                    <h3>Online Presence</h3>
+                    <h3>@lang('home.onlinepresenc')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Website</label>
+                            <label class="control-label col-sm-3">@lang('home.website')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control" name="website" id="website" placeholder="https://www.example.com" value="{{ $upskill->website }}">
                             </div>
@@ -192,16 +192,16 @@ if($upskill->country != 0){
                         </div>
                     </div>
 
-                    <h3>Duration & Schedule</h3>
+                    <h3>@lang('home.durationschedule')</h3>
                     <div class="pnj-form-section us-duration">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Start Date</label>
+                            <label class="control-label col-sm-3">@lang('home.sdate')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control date-picker" name="startDate" onkeypress="return false;" value="{{ $upskill->startDate }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">End Date</label>
+                            <label class="control-label col-sm-3">@lang('home.edate')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control date-picker" name="endDate" onkeypress="return false;" value="{{ $upskill->endDate }}">
                             </div>
@@ -209,10 +209,10 @@ if($upskill->country != 0){
                         <hr>
                         <!--Monday Schedule-->
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Monday</label>
+                            <label class="control-label col-sm-3">@lang('home.monday')</label>
                             <div class="col-sm-4 pnj-form-field">
                                 <select name="opHours[mon][]" class="form-control">
-                                    <option value="">From</option>
+                                    <option value="">@lang('home.from')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['mon']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -220,7 +220,7 @@ if($upskill->country != 0){
                             </div>
                             <div class="col-sm-4 pnj-form-field ">
                                 <select name="opHours[mon][]" class="form-control">
-                                    <option value="">To</option>
+                                    <option value="">@lang('home.to')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['mon']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -231,10 +231,10 @@ if($upskill->country != 0){
 
                         <!--Tuesday Schedule-->
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Tuesday</label>
+                            <label class="control-label col-sm-3">@lang('home.tuesday')</label>
                             <div class="col-sm-4 pnj-form-field">
                                 <select name="opHours[tue][]" class="form-control">
-                                    <option value="">From</option>
+                                    <option value="">@lang('home.from')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['tue']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -242,7 +242,7 @@ if($upskill->country != 0){
                             </div>
                             <div class="col-sm-4 pnj-form-field ">
                                 <select name="opHours[tue][]" class="form-control">
-                                    <option value="">To</option>
+                                    <option value="">@lang('home.to')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['tue']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -253,10 +253,10 @@ if($upskill->country != 0){
 
                         <!--Wednesday Schedule-->
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Wednesday</label>
+                            <label class="control-label col-sm-3">@lang('home.wednesday')</label>
                             <div class="col-sm-4 pnj-form-field">
                                 <select name="opHours[wed][]" class="form-control">
-                                    <option value="">From</option>
+                                    <option value="">@lang('home.from')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['wed']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -264,7 +264,7 @@ if($upskill->country != 0){
                             </div>
                             <div class="col-sm-4 pnj-form-field ">
                                 <select name="opHours[wed][]" class="form-control">
-                                    <option value="">To</option>
+                                    <option value="">@lang('home.to')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['wed']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -275,10 +275,10 @@ if($upskill->country != 0){
 
                         <!--Thursday Schedule-->
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Thursday</label>
+                            <label class="control-label col-sm-3">@lang('home.thursday')</label>
                             <div class="col-sm-4 pnj-form-field">
                                 <select name="opHours[thu][]" class="form-control">
-                                    <option value="">From</option>
+                                    <option value="">@lang('home.from')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['thu']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -286,7 +286,7 @@ if($upskill->country != 0){
                             </div>
                             <div class="col-sm-4 pnj-form-field ">
                                 <select name="opHours[thu][]" class="form-control">
-                                    <option value="">To</option>
+                                    <option value="">@lang('home.to')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['thu']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -297,10 +297,10 @@ if($upskill->country != 0){
 
                         <!--Friday Schedule-->
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Friday</label>
+                            <label class="control-label col-sm-3">@lang('home.friday')</label>
                             <div class="col-sm-4 pnj-form-field">
                                 <select name="opHours[fri][]" class="form-control">
-                                    <option value="">From</option>
+                                    <option value="">@lang('home.from')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['fri']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -308,7 +308,7 @@ if($upskill->country != 0){
                             </div>
                             <div class="col-sm-4 pnj-form-field ">
                                 <select name="opHours[fri][]" class="form-control">
-                                    <option value="">To</option>
+                                    <option value="">@lang('home.to')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['fri']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -319,10 +319,10 @@ if($upskill->country != 0){
 
                         <!--Saturday Schedule-->
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Saturday</label>
+                            <label class="control-label col-sm-3">@lang('home.saturday')</label>
                             <div class="col-sm-4 pnj-form-field">
                                 <select name="opHours[sat][]" class="form-control">
-                                    <option value="">From</option>
+                                    <option value="">@lang('home.from')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['sat']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -330,7 +330,7 @@ if($upskill->country != 0){
                             </div>
                             <div class="col-sm-4 pnj-form-field ">
                                 <select name="opHours[sat][]" class="form-control">
-                                    <option value="">To</option>
+                                    <option value="">@lang('home.to')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['sat']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -341,10 +341,10 @@ if($upskill->country != 0){
 
                         <!--Sunday Schedule-->
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Sunday</label>
+                            <label class="control-label col-sm-3">@lang('home.sunday')</label>
                             <div class="col-sm-4 pnj-form-field">
                                 <select name="opHours[sun][]" class="form-control">
-                                    <option value="">From</option>
+                                    <option value="">@lang('home.from')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['sun']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -352,7 +352,7 @@ if($upskill->country != 0){
                             </div>
                             <div class="col-sm-4 pnj-form-field ">
                                 <select name="opHours[sun][]" class="form-control">
-                                    <option value="">To</option>
+                                    <option value="">@lang('home.to')</option>
                                     @foreach(JobCallMe::timeArray() as $time)
                                         <option value="{!! $time !!}" {!! $time == $opHour['sun']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                     @endforeach
@@ -361,7 +361,7 @@ if($upskill->country != 0){
                         </div>
                     </div>
 
-                    <h3>Upskill Image</h3>
+                    <h3>@lang('home.upskillimage')</h3>
                     <div class="png-form-section us-duration">
                         <div class="form-group">
                             <label class="control-label col-sm-3">&nbsp;</label>
@@ -382,8 +382,8 @@ if($upskill->country != 0){
                     </div>
 
                     <div class="col-md-offset-4 col-md-8  pnj-btns">
-                        <button type="submit" class="btn btn-primary">SAVE</button>
-                        <a href="{{ url('account/upskill') }}" class="btn btn-default">CANCEL</a>
+                        <button type="submit" class="btn btn-primary">@lang('home.save')</button>
+                        <a href="{{ url('account/upskill') }}" class="btn btn-default">@lang('home.cancel')</a>
                     </div>
                 </form>
             </div>

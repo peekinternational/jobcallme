@@ -20,7 +20,7 @@ if($company->companyLogo != ''){
                 <img src="{{ $cCover }}" class="eo-timeline-cover">
                 <input type="file" id="eo-timeline" class="compnay-cover">
                 <div class="eo-timeline-toolkit">
-                    <label for="eo-timeline"><i class="fa fa-camera"></i> &nbsp;Change</label>
+                    <label for="eo-timeline"><i class="fa fa-camera"></i> &nbsp;@lang('home.change')</label>
                 </div>
             </div>
             <div class="col-md-12">
@@ -29,70 +29,70 @@ if($company->companyLogo != ''){
                        <img src="{{ $cLogo }}" class="eo-dp eo-c-logo">
                        <div class="eo-dp-toolkit">
                            <input type="file" id="eo-dp" class="compnay-logo">
-                           <label for="eo-dp"><i class="fa fa-camera"></i> Change</label>
+                           <label for="eo-dp"><i class="fa fa-camera"></i> @lang('home.change')</label>
                        </div>
                    </div>
                    <div class="col-md-10 eo-timeline-details">
                        <h1><a href="">{{ $company->companyName }}</a></h1>
                        <div class="col-md-6 eo-section">
-                           <h4>Basic Information</h4>
+                           <h4>@lang('home.basicinformation')</h4>
                            <div class="eo-details">
-                               <span>Designation:</span> HR
+                               <span>@lang('home.designation'):</span> HR
                            </div>
                            <div class="eo-details">
-                               <span>Industry:</span> {{ JobCallMe::categoryName($company->category) }}
+                               <span>@lang('home.industry'):</span> {{ JobCallMe::categoryName($company->category) }}
                            </div>
                            <div class="eo-details">
-                               <span>Address:</span> {{ $company->companyAddress.' '.JobCallMe::cityName($company->companyCity).' , '.JobCallMe::countryName($company->companyCountry) }}
+                               <span>@lang('home.address'):</span> {{ $company->companyAddress.' '.JobCallMe::cityName($company->companyCity).' , '.JobCallMe::countryName($company->companyCountry) }}
                            </div>
                            <div class="eo-details">
-                               <span>Email:</span> {{ $company->companyEmail }}
+                               <span>@lang('home.email'):</span> {{ $company->companyEmail }}
                            </div>
                            <div class="eo-details">
-                               <span>Phone:</span> {{ $company->companyPhoneNumber }}
+                               <span>@lang('home.phone'):</span> {{ $company->companyPhoneNumber }}
                            </div>
                            <div class="eo-details">
-                               <span>Website:</span> <a href="{{ $company->companyWebsite }}">{{ $company->companyWebsite }}</a>
+                               <span>@lang('home.website'):</span> <a href="{{ $company->companyWebsite }}">{{ $company->companyWebsite }}</a>
                            </div>
                            <div class="eo-details">
-                               <span>Established In:</span> {{ date('M Y',strtotime($company->companyEstablishDate)) }}
+                               <span>@lang('home.establishedin'):</span> {{ date('M Y',strtotime($company->companyEstablishDate)) }}
                            </div>
                            <div class="eo-details">
-                               <span>No. of Employees:</span> {{ $company->companyNoOfUsers }}
+                               <span>@lang('home.noemployees'):</span> {{ $company->companyNoOfUsers }}
                            </div>
                        </div>
                        <div class="col-md-6 eo-section">
                            <a class="btn btn-primary eo-edit-btn" onClick="$('.eo-section').hide(); $('.eo-edit-section').show()"><i class="fa fa-edit"></i> </a>
-                           <h4>Operation Hours</h4>
+                           <h4>@lang('home.operationhours')</h4>
                            <?php $opHour = json_decode($company->companyOperationalHour,true); ?>
                            <table class="table">
                                <tbody>
                                    <tr>
-                                       <td>MON</td>
+                                       <td>@lang('home.monday')</td>
                                        <td>{!! $opHour['mon']['from'] !!} - {!! $opHour['mon']['to'] !!}</td>
                                    </tr>
                                    <tr>
-                                       <td>TUE</td>
+                                       <td>@lang('home.tuesday')</td>
                                        <td>{!! $opHour['tue']['from'] !!} - {!! $opHour['thu']['to'] !!}</td>
                                    </tr>
                                    <tr>
-                                       <td>WED</td>
+                                       <td>@lang('home.wednesday')</td>
                                        <td>{!! $opHour['wed']['from'] !!} - {!! $opHour['wed']['to'] !!}</td>
                                    </tr>
                                    <tr>
-                                       <td>THU</td>
+                                       <td>@lang('home.thuresday')</td>
                                        <td>{!! $opHour['thu']['from'] !!} - {!! $opHour['thu']['to'] !!}</td>
                                    </tr>
                                    <tr>
-                                       <td>FRI</td>
+                                       <td>@lang('home.friday')</td>
                                        <td>{!! $opHour['fri']['from'] !!} - {!! $opHour['fri']['to'] !!}</td>
                                    </tr>
                                    <tr>
-                                       <td>SAT</td>
+                                       <td>@lang('home.saturday')</td>
                                        <td>{!! $opHour['sat']['from'] !!} - {!! $opHour['sat']['to'] !!}</td>
                                    </tr>
                                    <tr>
-                                       <td>SUN</td>
+                                       <td>@lang('home.sunday')</td>
                                        <td>{!! $opHour['sun']['from'] !!} - {!! $opHour['sun']['to'] !!}</td>
                                    </tr>
                                </tbody>
@@ -103,16 +103,16 @@ if($company->companyLogo != ''){
                                 <input type="hidden" name="_token" class="token">
                                <div class="pnj-form-section">
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Company</label>
+                                       <label class="control-label col-sm-3">@lang('home.company')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <input type="text" class="form-control companyName" name="companyName" id="companyName" placeholder="Company Title" value="{{ $company->companyName }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Industry</label>
+                                       <label class="control-label col-sm-3">@lang('home.industry')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <select class="form-control select2" name="industry">
-                                               <option value="">Select Industry</option>
+                                               <option value="">@lang('home.selectindustry')</option>
                                                @foreach(JobCallMe::getCategories() as $cat)
                                                 <option value="{{ $cat->categoryId }}" {{ $cat->categoryId == $company->category ? 'selected="selected"' : '' }}>{{ $cat->name }}</option>
                                                @endforeach
@@ -120,13 +120,13 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Address</label>
+                                       <label class="control-label col-sm-3">@lang('home.address')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <textarea class="form-control companyAddress" placeholder="Address" name="companyAddress" style="resize: vertical">{{ $company->companyAddress }}</textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Country</label>
+                                       <label class="control-label col-sm-3">@lang('home.country')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                             <select class="form-control input-sm select2 job-country companyCountry" name="companyCountry">
                                                 @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -136,33 +136,33 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">State</label>
+                                       <label class="control-label col-sm-3">@lang('home.state')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                             <select class="form-control input-sm select2 job-state companyState" name="companyState" data-state="{{ $company->companyState }}"></select>
                                            </select>
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">City</label>
+                                       <label class="control-label col-sm-3">@lang('home.city')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                             <select class="form-control input-sm select2 job-city companyCity" name="companyCity" data-city="{{ $company->companyCity }}"></select>
                                            </select>
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Phone</label>
+                                       <label class="control-label col-sm-3">@lang('home.phone')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <input type="text" class="form-control companyPhoneNumber" name="companyPhoneNumber" id="companyPhoneNumber" placeholder="Phone" value="{{ $company->companyPhoneNumber }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Email</label>
+                                       <label class="control-label col-sm-3">@lang('home.email')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <input type="text" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Website</label>
+                                       <label class="control-label col-sm-3">@lang('home.website')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <input type="text" class="form-control companyWebsite" name="companyWebsite" id="companyWebsite" placeholder="https://www.example.com" value="{{ $company->companyWebsite }}">
                                        </div>
@@ -192,7 +192,7 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Establish In</label>
+                                        <label class="col-sm-3 control-label">@lang('home.establishin')</label>
                                         <div class="col-sm-9 pnj-form-field">
                                             <input class="form-control date-picker companyEstablishDate" type="text" name="companyEstablishDate" value="{{ $company->companyEstablishDate }}">
                                         </div>
@@ -201,10 +201,10 @@ if($company->companyLogo != ''){
                                    <hr>
                                    <!--Monday Schedule-->
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Monday</label>
+                                       <label class="control-label col-sm-3">@lang('home.monday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[mon][]" class="form-control">
-                                                <option value="">From</option>
+                                                <option value="">@lang('home.from')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['mon']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -212,7 +212,7 @@ if($company->companyLogo != ''){
                                        </div>
                                        <div class="col-sm-4 pnj-form-field ">
                                            <select name="opHours[mon][]" class="form-control">
-                                                <option value="">To</option>
+                                                <option value="">@lang('home.to')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['mon']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -223,10 +223,10 @@ if($company->companyLogo != ''){
 
                                    <!--Tuesday Schedule-->
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Tuesday</label>
+                                       <label class="control-label col-sm-3">@lang('home.tuesday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[tue][]" class="form-control">
-                                                <option value="">From</option>
+                                                <option value="">@lang('home.from')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['tue']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -234,7 +234,7 @@ if($company->companyLogo != ''){
                                        </div>
                                        <div class="col-sm-4 pnj-form-field ">
                                            <select name="opHours[tue][]" class="form-control">
-                                                <option value="">To</option>
+                                                <option value="">@lang('home.to')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['tue']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -245,10 +245,10 @@ if($company->companyLogo != ''){
 
                                    <!--Wednesday Schedule-->
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Wednesday</label>
+                                       <label class="control-label col-sm-3">@lang('home.wednesday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[wed][]" class="form-control">
-                                                <option value="">From</option>
+                                                <option value="">@lang('home.from')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['wed']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -256,7 +256,7 @@ if($company->companyLogo != ''){
                                        </div>
                                        <div class="col-sm-4 pnj-form-field ">
                                            <select name="opHours[wed][]" class="form-control">
-                                                <option value="">To</option>
+                                                <option value="">@lang('home.to')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['wed']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -267,10 +267,10 @@ if($company->companyLogo != ''){
 
                                    <!--Thursday Schedule-->
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Thursday</label>
+                                       <label class="control-label col-sm-3">@lang('home.thursday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[thu][]" class="form-control">
-                                                <option value="">From</option>
+                                                <option value="">@lang('home.from')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['thu']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -278,7 +278,7 @@ if($company->companyLogo != ''){
                                        </div>
                                        <div class="col-sm-4 pnj-form-field ">
                                            <select name="opHours[thu][]" class="form-control">
-                                                <option value="">To</option>
+                                                <option value="">@lang('home.to')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['thu']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -289,10 +289,10 @@ if($company->companyLogo != ''){
 
                                    <!--Friday Schedule-->
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Friday</label>
+                                       <label class="control-label col-sm-3">@lang('home.friday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[fri][]" class="form-control">
-                                                <option value="">From</option>
+                                                <option value="">@lang('home.from')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['fri']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -300,7 +300,7 @@ if($company->companyLogo != ''){
                                        </div>
                                        <div class="col-sm-4 pnj-form-field ">
                                            <select name="opHours[fri][]" class="form-control">
-                                                <option value="">To</option>
+                                                <option value="">@lang('home.to')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['fri']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -311,10 +311,10 @@ if($company->companyLogo != ''){
 
                                    <!--Saturday Schedule-->
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Saturday</label>
+                                       <label class="control-label col-sm-3">@lang('home.saturday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[sat][]" class="form-control">
-                                                <option value="">From</option>
+                                                <option value="">@lang('home.from')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['sat']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -322,7 +322,7 @@ if($company->companyLogo != ''){
                                        </div>
                                        <div class="col-sm-4 pnj-form-field ">
                                            <select name="opHours[sat][]" class="form-control">
-                                                <option value="">To</option>
+                                                <option value="">@lang('home.to')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['sat']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -333,10 +333,10 @@ if($company->companyLogo != ''){
 
                                    <!--Sunday Schedule-->
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Sunday</label>
+                                       <label class="control-label col-sm-3">@lang('home.sunday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[sun][]" class="form-control">
-                                                <option value="">From</option>
+                                                <option value="">@lang('home.from')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['sun']['from'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
@@ -344,7 +344,7 @@ if($company->companyLogo != ''){
                                        </div>
                                        <div class="col-sm-4 pnj-form-field ">
                                            <select name="opHours['sun'][]" class="form-control">
-                                                <option value="">To</option>
+                                                <option value="">@lang('home.to')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['sun']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach

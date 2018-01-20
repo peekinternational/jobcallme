@@ -6,7 +6,7 @@
 <section id="learn-section">
     <div class="container">
         <div class="col-md-12 learn-search-box">
-            <h2 class="text-center">Search People in {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</h2>
+            <h2 class="text-center">@lang('home.searchpeople') {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</h2>
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
                     <div class="ls-box">
@@ -14,10 +14,10 @@
                             {{ csrf_field() }}
                             <div class="input-fields">
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="Keywords" name="keyword">
+                                    <input type="search" placeholder="@lang('home.key')" name="keyword">
                                 </div>
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="City" name="city">
+                                    <input type="search" placeholder="@lang('home.city')" name="city">
                                 <button type="submit" class="search-btn" style="width:9% !important">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -46,21 +46,21 @@
 		<div class="col-md-6">
                 <div class="form-group">
                                  <div class=" pnj-form-field">
-                                   <input type="text" class="form-control" name="keyword" placeholder="Keywords">
+                                   <input type="text" class="form-control" name="keyword" placeholder="@lang('home.key')">
                                  </div>
                                 </div>
 						      </div>
 								 <div class="col-md-6">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                  <input type="text" class="form-control" name="city" placeholder="City">
+                                  <input type="text" class="form-control" name="city" placeholder="@lang('home.city')">
                               </div>
                            </div>
 					   </div>
 					   	 <div class="col-md-6">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                  <input type="text" class="form-control" name="name" placeholder="Name">
+                                  <input type="text" class="form-control" name="name" placeholder="@lang('home.name')">
                               </div>
                            </div>
 					   </div>
@@ -68,7 +68,7 @@
                        <div class="form-group">
                        
                         <select class="form-control" name="category" >
-						 <option value="">Select Industry</option>
+						 <option value="">@lang('home.selectindustry')</option>
                            @foreach(JobCallMe::getCategories() as $cat)
                                 <option value="{!! $cat->categoryId !!}">{!! $cat->name !!}</option>
                              @endforeach
@@ -79,7 +79,7 @@
 								<div class="col-md-6">
 								   <div class="form-group">
                                     <select class="form-control" name="degreeLevel">
-									<option value="">Select Degree Level</option>
+									<option value="">@lang('home.selectdegree')</option>
                                         <option value="High School">High School</option>
                                         <option value="Intermediate">Intermediate</option>
                                         <option value="Bachelor">Bachelor</option>
@@ -91,42 +91,42 @@
 								 <div class="col-md-6">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                   <input type="text" class="form-control" name="degree" placeholder="Degree" >
+                                   <input type="text" class="form-control" name="degree" placeholder="@lang('home.degree')" >
                                  </div>
                                </div>
 						    </div>
 							<div class="col-md-6">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                   <input type="text" class="form-control" name="minsalary" placeholder="Min Salary">
+                                   <input type="text" class="form-control" name="minsalary" placeholder="@lang('home.minsalary')">
                                  </div>
                                </div>
 						    </div>
 							<div class="col-md-6">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                   <input type="text" class="form-control" name="maxsalary" placeholder="Max Salary">
+                                   <input type="text" class="form-control" name="maxsalary" placeholder="@lang('home.maxsalary')">
                                  </div>
                                </div>
 						    </div>
 						<div class="col-md-6">
 							<div class="form-group">
                                     <select class="form-control" name="gender">
-									<option value="">Select Gender</option>
-                                        <option value="Male" >Male</option>
-                                        <option value="Female">Female</option>
+									<option value="">@lang('home.selectgender')</option>
+                                        <option value="Male" >@lang('home.male')</option>
+                                        <option value="Female">@lang('home.female')</option>
                                     </select>
                                 </div>
                             </div>
 							<div class="col-md-6">
 							 <div class="form-group">
                                     <select class="form-control" name="maritalStatus">
-									<option value="">Select Marital Status</option>
-                                        <option value="Single" >Single</option>
-                                        <option value="Engaged" >Engaged</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Widowed">Widowed</option>
-                                        <option value="Divorced">Divorced</option>
+									<option value="">@lang('home.selectmarital')</option>
+                                        <option value="Single" >@lang('home.single')</option>
+                                        <option value="Engaged" >@lang('home.engaged')</option>
+                                        <option value="Married">@lang('home.married')</option>
+                                        <option value="Widowed">@lang('home.widowed')</option>
+                                        <option value="Divorced">@lang('home.divorced')</option>
                                     </select>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
 			</div>
                    </div>
         <div class="modal-footer">
-          <button type="submit" style="float:left" class="btn btn-success" >Search</button>   <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" style="float:left" class="btn btn-success" >@lang('home.search')</button>   <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">@lang('home.close')</button>
         </div>
       </form>	
       </div>

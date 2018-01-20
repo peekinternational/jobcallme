@@ -6,7 +6,7 @@
 <section id="learn-section">
     <div class="container">
         <div class="col-md-12 learn-search-box">
-            <h2 class="text-center">Learn! To Enhance Your Competitive Advantage</h2>
+            <h2 class="text-center">@lang('home.l_heading')</h2>
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
                     <div class="ls-box">
@@ -14,10 +14,10 @@
                             {{ csrf_field() }}
                             <div class="input-fields">
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="Keywords" name="learn-keyword">
+                                    <input type="search" placeholder="@lang('home.key')" name="learn-keyword">
                                 </div>
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="City" name="learn-city">
+                                    <input type="search" placeholder="@lang('home.city')" name="learn-city">
                                 </div>
                                 <button type="submit" class="search-btn">
                                     <i class="fa fa-search"></i>
@@ -38,7 +38,7 @@
                         <?php $i++; } ?>
                     </div>
                     <div class="promote-learning-box">
-                        <a href="{{ url('account/upskill/add') }}" class="promote-learning-btn"><i class="fa fa-bullhorn"></i>&nbsp; Promote Your Learning Solutions</a>
+                        <a href="{{ url('account/upskill/add') }}" class="promote-learning-btn"><i class="fa fa-bullhorn"></i>&nbsp; @lang('home.promotesoluction')</a>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
 <!--Learn Articles-->
 <section id="learn-articles">
     <div class="container">
-        <h1 style="margin-left: 15px">Latest Courses</h1>
+        <h1 style="margin-left: 15px">@lang('home.latestcourses')</h1>
         <div class="grid">
             <div class="grid-sizer col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>
             <!--Article Item-->

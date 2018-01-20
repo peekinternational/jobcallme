@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="pnj-box">
                     <h3>
-                        My Writing 
+                        @lang('home.mywriting') 
                         <a class="btn btn-primary pull-right" href="{{ url('account/writings/article/add') }}" style="border-radius: 50%;margin-top: -5px;">
                             <i class="fa fa-plus"></i>
                         </a>
@@ -18,11 +18,11 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <th>Title</th>
-                                    <th>Category</th>
-                                    <th>Status</th>
-                                    <th>Created On</th>
-                                    <th>Action</th>
+                                    <th>@lang('home.title')</th>
+                                    <th>@lang('home.category')</th>
+                                    <th>@lang('home.status')</th>
+                                    <th>@lang('home.createdon')</th>
+                                    <th>@lang('home.action')</th>
                                 </thead>
                                 <tbody>
                                     @foreach($writing as $write)
@@ -46,11 +46,11 @@
         @else
             <div class="col-md-9">
                 <div class="pnj-box">
-                    <h3>My Writing</h3>
+                    <h3>@lang('home.mywriting')</h3>
                     <div class="upskill-box">
-                        <h2>Got creative writing skill? Show it to the world!</h2>
-                        <p>We are eagerly waiting to see your writings</p>
-                        <a href="{{ url('account/writings/article/add') }}" class="btn btn-primary">WRITE YOUR FIRST ARTICLE</a>
+                        <h2>@lang('home.creativewriting')</h2>
+                        <p>@lang('home.eagerlywaiting')</p>
+                        <a href="{{ url('account/writings/article/add') }}" class="btn btn-primary">@lang('home.WRITE YOUR FIRST ARTICLE')</a>
                     </div>
                 </div>
             </div>

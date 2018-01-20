@@ -6,28 +6,29 @@
 <section id="postNewJob">
     <div class="container">
         <div class="col-md-12 cVenue-box">
-            <h3>{!! $venue->title !!}  <a href="{{ url('account/employer/interview-venues') }}" class="pull-right" style="font-size: 12px"><i class="fa fa-arrow-left"></i> Go to back</a></h3>
+            <h3>{!! $venue->title !!}  <a href="{{ url('account/employer/interview-venues') }}" class="pull-right" style="font-size: 12px"><i class="fa fa-arrow-left"></i> @lang('home.goback')</a></h3>
 
             <table class="table table-bordered">
                 <tbody>
                     <tr>
-                        <td class="active">Contact Person</td>
+                        <td class="active">@lang('home.contactperson')</td>
                         <td>{!! $venue->contact !!}</td>
                     </tr>
                     <tr>
-                        <td class="active">Phone</td>
+                        <td class="active">@lang('home.phone')</td>
                         <td>{!! $venue->phone !!}</td>
                     </tr>
+					
                     <tr>
-                        <td class="active">Mobile</td>
+                        <td class="active">@lang('home.mobile')</td>
                         <td>{!! $venue->mobile !!}</td>
                     </tr>
                     <tr>
-                        <td class="active">Email</td>
+                        <td class="active">@lang('home.email')</td>
                         <td>{!! $venue->email !!}</td>
                     </tr>
                     <tr>
-                        <td class="active">Address</td>
+                        <td class="active">@lang('home.address')</td>
                         <td>{!! $venue->address !!} </td>
                     </tr>
                 </tbody>

@@ -30,39 +30,39 @@
                 </div>
                 <table class="table table-bordered">
                     <tr>
-                        <td class="active">Organizer</td>
+                        <td class="active">@lang('home.organizer')</td>
                         <td>{{ $record->organiser != '' ?  $record->organiser : JobCallMe::userName($record->userId) }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Starting on</td>
+                        <td class="active">@lang('home.startingon')</td>
                         <td>{{ date('d F, Y',strtotime($record->startDate))}}</td>
                     </tr>
                     <tr>
-                        <td class="active">Duration</td>
+                        <td class="active">@lang('home.duration')</td>
                         <td>{{ JobCallMe::timeDuration($record->startDate,$record->endDate )}}</td>
                     </tr>
                     <tr>
-                        <td class="active">Cost</td>
+                        <td class="active">@lang('home.cost')</td>
                         <td>{{ $record->currency.' '.number_format($record->cost)}}/-</td>
                     </tr>
                     <tr>
-                        <td class="active">Contact Person</td>
+                        <td class="active">@lang('home.contactperson')</td>
                         <td>{{ $record->contact }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Phone</td>
+                        <td class="active">@lang('home.phone')</td>
                         <td>{{ $record->phone }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Mobile</td>
+                        <td class="active">@lang('home.mobile')</td>
                         <td>{{ $record->mobile }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Website</td>
+                        <td class="active">@lang('home.website')</td>
                         <td>{{ $record->website }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Social</td>
+                        <td class="active">@lang('home.social')</td>
                         <td>
                             <div class="jd-share-btn">
                                 <a href="{{ $record->facebook }}"><i class="fa fa-facebook" style="background: #2e6da4;"></i> </a>
@@ -73,15 +73,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="active">Posted on</td>
+                        <td class="active">@lang('home.postedon')</td>
                         <td>{{ date('d F, Y',strtotime($record->createdTime)) }}</td>
                     </tr>
                     <tr>
-                        <td class="active">Venue</td>
+                        <td class="active">@lang('home.venue')</td>
                         <td>{{ $record->address }} , {{ JobCallMe::cityName($record->city) }}</td>
                     </tr>
                 </table>
-                <h3>Schedule</h3>
+                <h3>@lang('home.schedule')</h3>
                 <table class="table">
                     <?php
                     $opHour = @json_decode($record->timing,true);
@@ -96,7 +96,7 @@
                     }
                     ?>
                 </table>
-                <h3>Details</h3>
+                <h3>@lang('home.details')</h3>
                 <p>{!! $record->description !!}</p>
             </div>
         </div>

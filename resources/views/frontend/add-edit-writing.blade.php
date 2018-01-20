@@ -11,19 +11,19 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="prevIcon" value="{{ $article->wIcon }}">
                     <input type="hidden" name="writingId" value="{{ $article->writingId }}">
-                    <h3>Write an Article</h3>
+                    <h3>@lang('home.warticle')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Title</label>
+                            <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="title" id="title" placeholder="Title" required="" value="{{ $article->title }}">
+                                <input type="text" class="form-control" name="title" id="title" placeholder="@lang('home.title')" required="" value="{{ $article->title }}">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Category</label>
+                            <label class="control-label col-sm-3">@lang('home.category')</label>
                             <div class="col-sm-9 pnj-form-field">
                                <select class="form-control select2" name="category" required="">
-                                    <option value="">Select Type</option>
+                                    <option value="">@lang('home.s_type')</option>
                                     @foreach(JobCallMe::getCategories() as $cat)
                                         <option value="{!! $cat->categoryId !!}" {{ $cat->categoryId == $article->category ? 'selected="selected"' : '' }}>{!! $cat->name !!}</option>
                                     @endforeach
@@ -31,15 +31,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Description</label>
+                            <label class="control-label col-sm-3">@lang('home.description')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <textarea name="description" class="form-control tex-editor">{{ $article->description }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Citation</label>
+                            <label class="control-label col-sm-3">@lang('home.citation')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <textarea name="citation" class="form-control" placeholder="Citation" required="" rows="6">{{ $article->citation }}</textarea>
+                                <textarea name="citation" class="form-control" placeholder="@lang('home.citation')" required="" rows="6">{{ $article->citation }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -61,9 +61,9 @@
                     </div>
 
                     <div class="col-md-offset-4 col-md-8  pnj-btns">
-                        <button type="submit" class="btn btn-primary" name="publis" onclick="saveOption('p')">PUBLISH</button>
-                        <button type="submit" class="btn btn-default" name="draft" onclick="saveOption('d')">DRAFT</button>
-                        <a href="{{ url('account/writings') }}" class="btn btn-default">CANCEL</a>
+                        <button type="submit" class="btn btn-primary" name="publis" onclick="saveOption('p')">@lang('home.publish')</button>
+                        <button type="submit" class="btn btn-default" name="draft" onclick="saveOption('d')">@lang('home.draft')</button>
+                        <a href="{{ url('account/writings') }}" class="btn btn-default">@lang('home.cancel')</a>
                     </div>
                 </form>
             </div>

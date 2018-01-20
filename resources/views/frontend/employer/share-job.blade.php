@@ -22,7 +22,7 @@
                 <?php Session::forget('error');?>
                 @endif
             <div class="pnj-box">
-                <h3>Share Job</h3>
+                <h3>@lang('home.sharejob')</h3>
                 <div class="pnj-form-section">
                     <div class="jd-share-btn" style="text-align: center;">
                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('jobs/'.$jobId) }}" target="_blank">
@@ -37,7 +37,7 @@
                         <a href="https://plus.google.com/share?url={{ url('jobs/'.$jobId) }}" target="_blank">
                             <i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                         </a>
-                        <a href="{{ url('jobs/'.$jobId) }}" style="display: block;margin-top: 25px;">Skip</a>
+                        <a href="{{ url('jobs/'.$jobId) }}" style="display: block;margin-top: 25px;">@lang('home.Skip')</a>
                     </div>
                 </div>
             </div>

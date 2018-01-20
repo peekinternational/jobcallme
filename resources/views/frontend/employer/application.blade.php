@@ -17,14 +17,14 @@ if(Request::input('show') != ''){
             <div class="col-md-2 ">
                 <div class="row">
                     <div class="col-md-12 jobApp-tabs">
-                        <a id="inbox" class="btn btn-block jaTabBtn {{ $inbox }}"><i class="fa fa-users"></i>  Inbox</a>
-                        <a id="junk" class="btn btn-block jaTabBtn {{ $junk }}"><i class="fa fa-ban"></i>  Junks</a>
-                        <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}"><i class="fa fa-thumbs-up"></i>  Shortlists</a>
-                        <a id="screened" class="btn btn-block jaTabBtn {{ $screened }}"><i class="fa fa-mobile"></i>  Screened</a>
-                        <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}"><i class="fa fa-calendar"></i>  interviews</a>
-                        <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  Offered</a>
-                        <a id="hire" class="btn btn-block jaTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  Hire</a>
-                        <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  Reject</a>
+                        <a id="inbox" class="btn btn-block jaTabBtn {{ $inbox }}"><i class="fa fa-users"></i> @lang('home.inbox')</a>
+                        <a id="junk" class="btn btn-block jaTabBtn {{ $junk }}"><i class="fa fa-ban"></i>  @lang('home.junks')</a>
+                        <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}"><i class="fa fa-thumbs-up"></i>  @lang('home.shortlists')</a>
+                        <a id="screened" class="btn btn-block jaTabBtn {{ $screened }}"><i class="fa fa-mobile"></i>  @lang('home.screened')</a>
+                        <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}"><i class="fa fa-calendar"></i>  @lang('home.interviews')</a>
+                        <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  @lang('home.offered')</a>
+                        <a id="hire" class="btn btn-block jaTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
+                        <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
                     </div>
                 </div>
             </div>
@@ -32,45 +32,45 @@ if(Request::input('show') != ''){
                 <div class="ja-content">
                     <div class="ea-top-panel">
                         <button type="button" class="ea-panel-btn hidden-sm hidden-xs" id="full-screen"><i class="fa fa-arrows-alt"></i>
-                            <div class="ea-toolkit">Toggle Full screen</div>
+                            <div class="ea-toolkit">@lang('home.togglescreen')</div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="shortlist">
                             <i class="fa fa-thumbs-up"></i>
-                            <div class="ea-toolkit">Shortlist Selected Applicant</div>
+                            <div class="ea-toolkit">@lang('home.shortlistapplicant')</div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="reject">
                             <i class="fa fa-thumbs-down"></i>
-                            <div class="ea-toolkit">Reject Selected Applicant</div>
+                            <div class="ea-toolkit">@lang('home.rejectapplicant')</div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="screened">
                             <i class="fa fa-mobile"></i>
-                            <div class="ea-toolkit"><p>Mark Selected as Phone Screened </p></div>
+                            <div class="ea-toolkit"><p>@lang('home.markscreened') </p></div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="offer">
                             <i class="fa fa-ticket"></i>
-                            <div class="ea-toolkit"><p>Send job offer to selected applicants </p></div>
+                            <div class="ea-toolkit"><p>@lang('home.sendjoboffer') </p></div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="hire">
                             <i class="fa fa-archive"></i>
-                            <div class="ea-toolkit">Mark Selected as Hired</div>
+                            <div class="ea-toolkit">@lang('home.markhired')</div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk">
                             <i class="fa fa-ban"></i>
-                            <div class="ea-toolkit">Mark Selected as Junk</div>
+                            <div class="ea-toolkit">@lang('home.markjunk')</div>
                         </button>
                         <button type="button" class="ea-panel-btn" id="ea-showFrom" style="display: none;">
                             <i class="fa fa-envelope"></i>
-                            <div class="ea-toolkit">Send Message to Selected Applicant</div>
+                            <div class="ea-toolkit">@lang('home.sendmessageapplicant')</div>
                         </button>
                         <button type="button" class="ea-panel-btn" id="ea-scheduleInerview">
                             <i class="fa fa-briefcase"></i>
-                            <div class="ea-toolkit">Schedule Interview of Selected Applicant</div>
+                            <div class="ea-toolkit">@lang('home.scheduleinterview')</div>
                         </button>
                         <button type="button" class="ea-panel-btn"><i class="fa fa-download"></i>
-                            <div class="ea-toolkit">Export Selected</div>
+                            <div class="ea-toolkit">@lang('home.exportselected')</div>
                         </button>
                         <select class="form-control pull-right select-jobs" style="width: 150px;height: 30px;" onchange="findApplication(this.value)">
-                            <option value="0">All Jobs</option>
+                            <option value="0">@lang('home.alljobs')</option>
                             @foreach($jobs as $job)
                                 <option value="{!! $job->jobId !!}">{!! $job->title !!}</option>
                             @endforeach
@@ -88,7 +88,7 @@ if(Request::input('show') != ''){
                                     <textarea class="form-control" name="applicant-msg"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary pull-right">Send</button>
+                                    <button type="submit" class="btn btn-primary pull-right">@lang('home.send')</button>
                                 </div>
                             </form>
                         </div>
@@ -100,26 +100,26 @@ if(Request::input('show') != ''){
                             <form action="#" method="" class="form-horizontal interview-form">
                                 <input type="hidden" name="_token" class="token">
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">Applicants</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.applicants')</label>
                                     <div class="col-md-6">
                                         <select class="form-control select2 mul-appl" name="applicantInter[]" multiple="">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">From</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.from')</label>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control date-picker" name="fromDate" value="{{ date('Y-m-d',strtotime('+1 Day')) }}" onkeypress="return false">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">To</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.to')</label>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control date-picker" name="toDate" value="{{ date('Y-m-d',strtotime('+2 Day')) }}" onkeypress="return false">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">Time per interview</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.timeinterview')</label>
                                     <div class="col-md-6">
                                         <select class="form-control select2" name="perInterview">
                                             @for($i = 1; $i < 10; $i++)
@@ -129,7 +129,7 @@ if(Request::input('show') != ''){
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">Interview Venue</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.interviewvenue')</label>
                                     <div class="col-md-6">
                                         <select class="form-control select2" name="venue">
                                             @foreach(JobCallMe::interviewVenue() as $venue)
@@ -141,8 +141,8 @@ if(Request::input('show') != ''){
                                 <div class="form-group">
                                     <label class="control-label col-md-4 text-right">&nbsp;</label>
                                     <div class="col-md-6">
-                                        <button type="submit" name="save" class="btn btn-primary pull-right">Save</button>
-                                        <button type="button" class="btn btn-default" onclick="$('.ea-scheduleInerview').fadeOut()">Cancel</button>
+                                        <button type="submit" name="save" class="btn btn-primary pull-right">@lang('home.save')</button>
+                                        <button type="button" class="btn btn-default" onclick="$('.ea-scheduleInerview').fadeOut()">@lang('home.cancel')</button>
                                     </div>
                                 </div>
                             </form>

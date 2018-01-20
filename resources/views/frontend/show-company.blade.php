@@ -29,27 +29,27 @@ $opHour = json_decode($company->companyOperationalHour,true);
                        <h1><a href="{{ url('companies/company/'.$company->companyId) }}">{!! $company->companyName !!}</a></h1>
                        <div class="col-md-8 eo-section">
                            <div class="eo-details">
-                               <span>Industry:</span> {!! JobCallMe::categoryName($company->category) !!}
+                               <span>@lang('home.industry'):</span> {!! JobCallMe::categoryName($company->category) !!}
                            </div>
                            <div class="eo-details">
-                               <span>Established In:</span>  {!! date('M d, Y',strtotime($company->companyEstablishDate)) !!}
+                               <span>@lang('home.established'):</span>  {!! date('M d, Y',strtotime($company->companyEstablishDate)) !!}
                            </div>
                            <div class="eo-details">
-                               <span>No. of Employees:</span>  {!! $company->companyNoOfUsers !!}
+                               <span>@lang('home.noemployees'):</span>  {!! $company->companyNoOfUsers !!}
                            </div>
                            <div class="eo-details">
-                               <span>Location:</span>  {!! JobCallMe::cityName($company->companyCity).', '.JobCallMe::stateName($company->companyState).', '.JobCallMe::countryName($company->companyCountry) !!}
+                               <span>@lang('home.location'):</span>  {!! JobCallMe::cityName($company->companyCity).', '.JobCallMe::stateName($company->companyState).', '.JobCallMe::countryName($company->companyCountry) !!}
                            </div>
                            <div class="eo-details">
-                               <span>Website:</span> <a href="{!! $company->companyWebsite !!}">{!! $company->companyWebsite !!}</a>
+                               <span>@lang('home.website'):</span> <a href="{!! $company->companyWebsite !!}">{!! $company->companyWebsite !!}</a>
                            </div>
                        </div>
                        <div class="col-md-4 eo-section text-right">
                            <div class="row">
                                 @if(in_array($company->companyId,$followArr))
-                                    <a href="javascript:;" onclick="followCompany({{ $company->companyId }},this)" class="btn btn-success hvr-sweep-to-right">Following</a>
+                                    <a href="javascript:;" onclick="followCompany({{ $company->companyId }},this)" class="btn btn-success hvr-sweep-to-right">@lang('home.following')</a>
                                 @else
-                                    <a href="javascript:;" onclick="followCompany({{ $company->companyId }},this)" class="btn btn-primary hvr-sweep-to-right">Follow</a>
+                                    <a href="javascript:;" onclick="followCompany({{ $company->companyId }},this)" class="btn btn-primary hvr-sweep-to-right">@lang('home.follow')</a>
                                 @endif
                                <div class="jd-share-btn cp-social">
                                    <a href="{!! $company->companyFb !!}"><i class="fa fa-facebook" style="background: #2e6da4;"></i> </a>
@@ -65,20 +65,20 @@ $opHour = json_decode($company->companyOperationalHour,true);
         <div class="col-md-9 rtj-box">
             <ul class="nav nav-tabs ">
                 <li class="active">
-                    <a href="#rtj_tab_about" data-toggle="tab"><i class="fa fa-list"></i> About</a>
+                    <a href="#rtj_tab_about" data-toggle="tab"><i class="fa fa-list"></i> @lang('home.about')</a>
                 </li>
                 <li>
-                    <a href="#rtj_tab_jobs" data-toggle="tab"><i class="fa fa-briefcase"></i> Jobs </a>
+                    <a href="#rtj_tab_jobs" data-toggle="tab"><i class="fa fa-briefcase"></i> @lang('home.jobs') </a>
                 </li>
                 <li>
-                    <a href="#rtj_tab_operation" data-toggle="tab"><i class="fa fa-clock-o"></i> Operation Hours</a>
+                    <a href="#rtj_tab_operation" data-toggle="tab"><i class="fa fa-clock-o"></i> @lang('home.operationhours')</a>
                 </li>
             </ul>
             <div class="tab-content">
                 <!--ABOUT-->
                 <div class="tab-pane active" id="rtj_tab_about">
                     <div class="col-md-12">
-                        <h4>About Us</h4>
+                        <h4>@lang('home.aboutus')</h4>
                         <p>{!! $company->companyAbout !!}</p>
                     </div>
                 </div>
@@ -97,31 +97,31 @@ $opHour = json_decode($company->companyOperationalHour,true);
 
                 <!--OPERATION HOURS-->
                 <div class="tab-pane" id="rtj_tab_operation">
-                    <h4>Operation Hours</h4>
+                    <h4>@lang('home.operationhours')</h4>
                     <table class="table">
                         <tbody>
                         <tr>
-                            <td>MON</td>
+                            <td>@lang('home.monday')</td>
                             <td>{!! $opHour['mon']['from'] !!} - {!! $opHour['mon']['to'] !!}</td>
                         </tr>
                         <tr>
-                            <td>TUE</td>
+                            <td>@lang('home.tuesday')</td>
                             <td>{!! $opHour['tue']['from'] !!} - {!! $opHour['thu']['to'] !!}</td>
                         </tr>
                         <tr>
-                            <td>WED</td>
+                            <td>@lang('home.wednesday')</td>
                             <td>{!! $opHour['wed']['from'] !!} - {!! $opHour['wed']['to'] !!}</td>
                         </tr>
                         <tr>
-                            <td>THU</td>
+                            <td>@lang('home.thursday')</td>
                             <td>{!! $opHour['thu']['from'] !!} - {!! $opHour['thu']['to'] !!}</td>
                         </tr>
                         <tr>
-                            <td>FRI</td>
+                            <td>@lang('home.friday')</td>
                             <td>{!! $opHour['fri']['from'] !!} - {!! $opHour['fri']['to'] !!}</td>
                         </tr>
                         <tr>
-                            <td>SAT</td>
+                            <td>@lang('home.saturday')</td>
                             <td>{!! $opHour['sat']['from'] !!} - {!! $opHour['sat']['to'] !!}</td>
                         </tr>
                         </tbody>

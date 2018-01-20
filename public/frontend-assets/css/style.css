@@ -1,6 +1,16 @@
 body{
     background: #eeeeee;
 }
+.language{
+background: transparent;
+    border: none;
+    color: #9d9d9d;
+    padding-top: 15px;
+    padding-right: 0px;
+	}
+.drop{
+position:absolute;
+}
 .dropbtn {
     background-color: #4CAF50;
     color: white;
@@ -3573,7 +3583,7 @@ curveIn {  0% {
 }
 @media (min-width: 1200px){
 .container {
-    width: 1170px;
+    width: 1195px;
 }
 }
 .mat-card:not([class*=mat-elevation-z]) {

@@ -8,7 +8,7 @@
         <div class="col-md-12 view-department">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Departments
+                    @lang('home.departments')
                     <button class="btn btn-primary pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="Add New Department" data-placement="bottom" onclick="addDepartment()">
                         <i class="fa fa-plus"></i>
                     </button>
@@ -17,9 +17,9 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead>
-                                <th>Department</th>
-                                <th>Location</th>
-                                <th>Action</th>
+                                <th>@lang('home.departments')</th>
+                                <th>@lang('home.location')</th>
+                                <th>@lang('home.action')</th>
                             </thead>
                             <tbody>
                                 @foreach($departments as $department)
@@ -46,7 +46,7 @@
         <div class="col-md-12 add-edit-department" style="display: none">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="panel-title">Add Department</span>
+                    <span class="panel-title">@lang('home.addDepartment')</span>
                     <button class="btn btn-warning pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="Go Back" data-placement="bottom" onclick="goBack()">
                         <i class="fa fa-arrow-left"></i>
                     </button>
@@ -56,13 +56,13 @@
                         <input type="hidden" name="_token" class="department-token">
                         <input type="hidden" name="departmentId" class="departmentId" value="0">
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Name</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.name')</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control input-sm" name="name" required="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Country</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.country')</label>
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -72,19 +72,19 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">State</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.state')</label>
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-state" name="state" data-state="" required=""></select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">City</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.city')</label>
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-city" name="city" data-city="" required=""></select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">Description</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.description')</label>
                             <div class="col-md-6">
                                 <textarea class="form-control input-sm" name="description" style="resize: vertical;"></textarea>
                             </div>
@@ -92,8 +92,8 @@
                         <div class="form-group">
                             <label class="control-label col-md-3 text-right">&nbsp;</label>
                             <div class="col-md-6">
-                                <button class="btn btn-primary" type="submit" name="save">Save</button>
-                                <button class="btn btn-default" onclick="goBack()" type="button">Cancel</button>
+                                <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                <button class="btn btn-default" onclick="goBack()" type="button">@lang('home.cancel')</button>
                             </div>
                         </div>
                     </form>

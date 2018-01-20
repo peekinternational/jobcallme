@@ -17,19 +17,19 @@
 @endif
             <div class="col-md-4">
                 <div class="eg-job-response">
-                    <h4>Job Response</h4>
+                    <h4>@lang('home.jobresponse')</h4>
                     <canvas id="job-response"></canvas>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="eg-job-response">
-                    <h4>Experience Level</h4>
+                    <h4>@lang('home.experiencelevel')</h4>
                     <canvas id="experience-level"></canvas>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="eg-job-response">
-                    <h4>Recruitment Activity</h4>
+                    <h4>@lang('home.recruitmentactivity')</h4>
                     <canvas id="recruitment-activity"></canvas>
                 </div>
             </div>
@@ -45,13 +45,13 @@
                 <div class="rtj-box">
                     <ul class="nav nav-tabs ">
                         <li class="active">
-                            <a href="#rtj_tab_posted_jobs" data-toggle="tab"><i class="fa fa-bars" aria-hidden="true"></i> Posted Jobs</a>
+                            <a href="#rtj_tab_posted_jobs" data-toggle="tab"><i class="fa fa-bars" aria-hidden="true"></i> @lang('home.postedjobs')</a>
                         </li>
                         <li>
-                            <a href="#rtj_tab_recent_application" data-toggle="tab"><i class="fa fa-address-book"></i> Recent Applicant</a>
+                            <a href="#rtj_tab_recent_application" data-toggle="tab"><i class="fa fa-address-book"></i> @lang('home.recentapplicant')</a>
                         </li>
                         <li>
-                            <a href="#rtj_tab_interview" data-toggle="tab"><i class="fa fa-calendar"></i> Upcoming interviews </a>
+                            <a href="#rtj_tab_interview" data-toggle="tab"><i class="fa fa-calendar"></i> @lang('home.upcominginterviews') </a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -71,7 +71,7 @@
 				@endif</span>
 										
 										@if ($pjobs->p_Category =='0')
-											<a href="{{ url('account/employer/jobupdate/'.$pjobs->jobId) }}">(Upgrade)</a>
+											<a href="{{ url('account/employer/jobupdate/'.$pjobs->jobId) }}">(@lang('home.upgrade'))</a>
                                          @else
 											 @endif
 										 </p>
@@ -79,15 +79,15 @@
                                     </div>
 									
                                 </div>
-									<div class="col-md-2 pull-right"><div class="dropdown">
+									<div class="col-md-2"><div class="dropdown">
 									  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
 									  <div class="dropdown-content">
-										<a href="{{url('account/employer/job_update/'.$pjobs->jobId)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
-										<a href="{{url('jobs')}}"><i class="fa fa-filter" aria-hidden="true"></i> Filters</a>
-										<a href="{{url('account/employer/job/share/'.$pjobs->jobId)}}"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
-										<a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
-										<a href="#"><i class="fa fa-question" aria-hidden="true"></i> Evaluation</a>
-										<a href="{{ url('account/employer/delete/'.$pjobs->jobId) }}"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+										<a href="{{url('account/employer/job_update/'.$pjobs->jobId)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')</a>
+										<a href="{{url('jobs')}}"><i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')</a>
+										<a href="{{url('account/employer/job/share/'.$pjobs->jobId)}}"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
+										<a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')</a>
+										<a href="#"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
+										<a href="{{ url('account/employer/delete/'.$pjobs->jobId) }}"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')</a>
 									  </div>
 									</div></div>
                             @endforeach
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <a href="#" class="pull-right" style="padding-top: 5px">View all</a>
+                                <a href="#" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                             </div>
                         </div>
                         <!--Upcoming Interviews End-->
@@ -131,7 +131,7 @@
             <div class="col-md-6">
                 <!--Follow Companies - Start -->
                 <div class="follow-companies">
-                    <h4>Suggested People</h4>
+                    <h4>@lang('home.suggestedpeople')</h4>
                     <hr>
                     <div class="row">
 					@foreach($applicants as $appl)
@@ -155,8 +155,8 @@
 
                 <!--Suggested Reading - Start -->
                 <div class="suggested-reading">
-                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> Write</a>
-                    <h4>Suggested Reading</h4>
+                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.write')</a>
+                    <h4>@lang('home.suggestedreading')</h4>
                     <hr>
 					   @foreach($read_record as $rec)
                     <div class="col-md-6 sr-item">
@@ -169,7 +169,7 @@
 					   @endforeach
 
                     <div class="col-md-12">
-                        <a href="{{ url('read') }}" class="pull-right" style="padding-top: 5px">View all</a>
+                        <a href="{{ url('read') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                     </div>
                 </div>
 
