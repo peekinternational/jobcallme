@@ -14,11 +14,11 @@ if(Request::input('show') != ''){
 <section id="jobsApplications">
     <div class="container">
         <div class="col-md-2 jobApp-tabs">
-            <a id="delivered" class="btn btn-block jaTabBtn {{ $delivered }}">Delivered</a>
-            <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}">Shortlisted</a>
-            <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}">Interviews</a>
-            <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}">Offered</a>
-            <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}">Unsuccessful</a>
+            <a id="delivered" class="btn btn-block jaTabBtn {{ $delivered }}">@lang('home.delivered')</a>
+            <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}">@lang('home.shortlisted')</a>
+            <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}">@lang('home.interviews')</a>
+            <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}">@lang('home.offered')</a>
+            <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}">@lang('home.unsuccessful')</a>
         </div>
         <div class="col-md-10">
             <div class="ja-content">

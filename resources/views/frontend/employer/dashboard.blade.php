@@ -135,8 +135,14 @@
                     <hr>
                     <div class="row">
 					@foreach($applicants as $appl)
+					 <?php
+                        $pImage = url('profile-photos/profile-logo.jpg');
+                        if($appl->profilePhoto != '' && $appl->profilePhoto != NULL){
+                            $pImage = url('profile-photos/'.$appl->profilePhoto);
+                        }
+                        ?>
                         <div class="col-md-4 col-xs-6 sp-item">
-                            <img src="images/jobseekers/user-10.jpg">
+                            <img src="{{ $pImage }}">
                             <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
                             <p>{!! $appl->companyName !!}</p>
                             <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
@@ -159,8 +165,14 @@
                     <h4>@lang('home.suggestedreading')</h4>
                     <hr>
 					   @foreach($read_record as $rec)
+					   <?php
+                        $pImage = url('profile-photos/profile-logo.jpg');
+                        if($rec->wIcon != '' && $rec->wIcon != NULL){
+                            $pImage = url('article-images/'.$rec->wIcon);
+                        }
+                        ?>
                     <div class="col-md-6 sr-item">
-                        <img src="{{ url('article-images/'.$rec->wIcon) }}" style="height:49px">
+                        <img src="{{ $pImage }}" style="height:49px">
                         <div class="sr-details">
                             <p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
                             <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> {{ $rec->name }}</a> </p>

@@ -25,7 +25,7 @@ if($user->profilePhoto != ''){
                                     <img src="{{ $userImage }}" class="img-circle">
                                     <div class="re-img-toolkit">
                                         <div class="re-file-btn">
-                                            Change <i class="fa fa-camera"></i>
+                                            @lang('home.change') <i class="fa fa-camera"></i>
                                             <input type="file" class="upload profile-pic" name="image" />
                                         </div>
                                         <!-- <span id="remove-re-image">Remove <i class="fa fa-remove"></i></span> -->
@@ -37,23 +37,23 @@ if($user->profilePhoto != ''){
                                     <a href="{{ $meta->linkedin }}"><i class="fa fa-linkedin-square"></i></a>
                                     <a href="{{ $meta->facebook }}"><i class="fa fa-facebook-square"></i></a>
                                 </p>
-                                <p><span class="pi-title">Email:</span> {{ $user->email }}</p>
-                                <p><span class="pi-title">Mobile:</span> {{ $user->phoneNumber }}</p>
-                                <p><span class="pi-title">CNIC:</span> {{ $meta->cnicNumber }}</p>
-                                <p><span class="pi-title">Address:</span> {!! $meta->address.' ,'.JobCallMe::cityName($user->city).' ,'.JobCallMe::countryName($user->country) !!}</p>
+                                <p><span class="pi-title">@lang('home.email'):</span> {{ $user->email }}</p>
+                                <p><span class="pi-title">@lang('home.mobile'):</span> {{ $user->phoneNumber }}</p>
+                                <p><span class="pi-title">@lang('home.cnic'):</span> {{ $meta->cnicNumber }}</p>
+                                <p><span class="pi-title">@lang('home.address'):</span> {!! $meta->address.' ,'.JobCallMe::cityName($user->city).' ,'.JobCallMe::countryName($user->country) !!}</p>
                             </div>
                             <div class="col-md-9 personal-info-right">
                                 <h3 class="hidden-sm hidden-xs">{{ $user->firstName.' '.$user->lastName }}</h3>
-                                <p><span class="pi-title">Father Name:</span> {{ $meta->fatherName }}</p>
-                                <p><span class="pi-title">Age:</span> {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title">Gender:</span>{{ $meta->gender }},<span class="pi-title">Status:</span>{{ $meta->maritalStatus }}</p>
-                                <p><span class="pi-title">Education:</span> {{ $meta->education }}</p>
-                                <p><span class="pi-title">Experiance:</span> {{ $meta->experiance }}</p>
-                                <p><span class="pi-title">Industry:</span> {{ JobCallMe::categoryTitle($meta->industry) }}</p>
-                                <p><span class="pi-title">Salary:</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
+                                <p><span class="pi-title">@lang('home.fathername'):</span> {{ $meta->fatherName }}</p>
+                                <p><span class="pi-title">@lang('home.age'):</span> {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title">Gender:</span>{{ $meta->gender }},<span class="pi-title">Status:</span>{{ $meta->maritalStatus }}</p>
+                                <p><span class="pi-title">@lang('home.education'):</span> {{ $meta->education }}</p>
+                                <p><span class="pi-title">@lang('home.experiance'):</span> {{ $meta->experiance }}</p>
+                                <p><span class="pi-title">@lang('home.industry'):</span> {{ JobCallMe::categoryTitle($meta->industry) }}</p>
+                                <p><span class="pi-title">@lang('home.salary'):</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
                                 <div class="professional-summary">
-                                    <h4>Professional Summary</h4>
+                                    <h4>@lang('home.p_summary')</h4>
                                     <p>{!! $user->about !!}</p>
-                                    <p><span class="pi-title">Further Expertise</span></p>
+                                    <p><span class="pi-title">@lang('home.furtherexpertise')</span></p>
                                     <ul style="margin-left: 50px;padding-left: 0;">
                                         @if($meta->expertise != '')
                                             @foreach(@explode(',',$meta->expertise) as $exper)
@@ -66,7 +66,7 @@ if($user->profilePhoto != ''){
                         </div>
                     </section>
                     <section class="personal-info-section" id="personal-information-edit" style="display: none;">
-                        <h4><i class="fa fa-edit r-icon bg-primary"></i>  Edit Personal Info</h4>
+                        <h4><i class="fa fa-edit r-icon bg-primary"></i>@lang('home.editpersonalinfo')</h4>
                         <form action="" method="post" class="form-horizontal form-personal-info">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="metaId" value="{{ $meta->metaId }}">
@@ -75,7 +75,7 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Name</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.name')</label>
                                 <div class="col-md-6">
                                     <div class="col-md-6 f-name" style="margin-bottom: 5px;padding-left: 0;">
                                         <input type="text" class="form-control input-sm" name="firstName" value="{{ $user->firstName }}">
@@ -86,64 +86,64 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Father Name</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.fathername')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="fatherName" value="{{ $meta->fatherName }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">CNIC Number</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.cnic')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="cnicNumber" value="{{ $meta->cnicNumber }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Gender</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.gender')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="gender">
-                                        <option value="Male" {{ $meta->gender == 'Male' ? 'selected="selected"' : '' }}>Male</option>
-                                        <option value="Female" {{ $meta->gender == 'Female' ? 'selected="selected"' : '' }}>Female</option>
+                                        <option value="Male" {{ $meta->gender == 'Male' ? 'selected="selected"' : '' }}>@lang('home.male')</option>
+                                        <option value="Female" {{ $meta->gender == 'Female' ? 'selected="selected"' : '' }}>@lang('home.female')</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Marital status</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.maritalstatus')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="maritalStatus">
-                                        <option value="Single" {{ $meta->maritalStatus == 'Single' ? 'selected="selected"' : '' }}>Single</option>
-                                        <option value="Engaged" {{ $meta->maritalStatus == 'Engaged' ? 'selected="selected"' : '' }}>Engaged</option>
-                                        <option value="Married" {{ $meta->maritalStatus == 'Married' ? 'selected="selected"' : '' }}>Married</option>
-                                        <option value="Widowed" {{ $meta->maritalStatus == 'Widowed' ? 'selected="selected"' : '' }}>Widowed</option>
-                                        <option value="Divorced" {{ $meta->maritalStatus == 'Divorced' ? 'selected="selected"' : '' }}>Divorced</option>
+                                        <option value="Single" {{ $meta->maritalStatus == 'Single' ? 'selected="selected"' : '' }}>@lang('home.single')</option>
+                                        <option value="Engaged" {{ $meta->maritalStatus == 'Engaged' ? 'selected="selected"' : '' }}>@lang('home.engaged')</option>
+                                        <option value="Married" {{ $meta->maritalStatus == 'Married' ? 'selected="selected"' : '' }}>@lang('home.married')</option>
+                                        <option value="Widowed" {{ $meta->maritalStatus == 'Widowed' ? 'selected="selected"' : '' }}>@lang('home.widowed')</option>
+                                        <option value="Divorced" {{ $meta->maritalStatus == 'Divorced' ? 'selected="selected"' : '' }}>@lang('home.divorced')</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Date Of Birth</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.datebirth')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-picker" name="dateOfBirth" value="{{ $meta->dateOfBirth }}" onkeypress="return false">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Email</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.email')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="email" value="{{ $user->email }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Phone Number</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.phonenumber')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="phoneNumber" value="{{ $user->phoneNumber }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Address</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.address')</label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm" name="address">{{ $meta->address }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Country</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2 job-country" name="country">
                                         @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -153,19 +153,19 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">State</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.state')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2 job-state" name="state" data-state="{{ $user->state }}"></select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">City</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.city')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2 job-city" name="city" data-city="{{ $user->city }}"></select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Experiance level</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.experiancelevel')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="experiance">
                                         @foreach(JobCallMe::getExperienceLevel() as $el)
@@ -175,13 +175,13 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                              <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Education</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.education')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Industry</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.industry')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="industry">
                                         @foreach(JobCallMe::getCategories() as $cat)
@@ -191,19 +191,19 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Current Salary</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.currentsalary')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="currentSalary" value="{{ $meta->currentSalary }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Eexpected Salary</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.expectedsalary')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="expectedSalary" value="{{ $meta->expectedSalary }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Currency</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.currency')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="currency">
                                         @foreach(JobCallMe::siteCurrency() as $currency)
@@ -213,14 +213,14 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Expertise</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.expertise')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="expertise" value="{{ $meta->expertise }}">
                                     <p class="help-block">Enter comma seperated expertise</p>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Professional Summary</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.p_summary')</label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm" name="about">{{ $user->about }}</textarea>
                                 </div>
@@ -256,8 +256,8 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary" type="submit" name="save">Save</button>
-                                    <button class="btn btn-default" type="button" onclick="cancelProfile()">Cancel</button>
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="cancelProfile()">@lang('home.cancel')</button>
                                 </div>
                             </div>
                         </form>
@@ -267,7 +267,7 @@ if($user->profilePhoto != ''){
                     <!--Academic Section Start-->
                     <section class="resume-box" id="academic">
                         <a class="btn btn-primary r-add-btn" onclick="addAcademic()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  Academic</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.academic')</h4>
                         <?php //print_r($resume); ?>
                         <ul class="resume-details">
                             @if(count($resume['academic']) > 0)
@@ -294,7 +294,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="academic-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>Add Academic</c></h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addacademic')</c></h4>
                         <form class="form-horizontal form-academic" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -303,25 +303,25 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Degree Level</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.degreelevel')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="degreeLevel">
-                                        <option value="High School">High School</option>
-                                        <option value="Intermediate">Intermediate</option>
-                                        <option value="Bachelor">Bachelor</option>
-                                        <option value="Master">Master</option>
-                                        <option value="PhD">PhD</option>
+                                        <option value="High School">@lang('home.highschool')</option>
+                                        <option value="Intermediate">@lang('home.intermediate')</option>
+                                        <option value="Bachelor">@lang('home.bachelor')</option>
+                                        <option value="Master">@lang('home.master')</option>
+                                        <option value="PhD">@lang('home.PhD')</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Degree</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.degree')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="degree">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Completion Date</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.completiondate')</label>
                                 <div class="col-md-6">
                                     <input type="date" class="form-control input-sm date-picker" name="completionDate">
                                 </div>
@@ -333,13 +333,13 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Institution</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.institution')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="institution">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Country</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="country">
                                         @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -349,7 +349,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Details</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm" name="details"></textarea>
                                 </div>
@@ -357,7 +357,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary" type="submit" name="save">Save</button>
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
                                     <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">Cancel</button>
                                 </div>
                             </div>
@@ -368,7 +368,7 @@ if($user->profilePhoto != ''){
                     <!--Certification Section Start-->
                     <section class="resume-box" id="certification">
                         <a class="btn btn-primary r-add-btn" onclick="addCertification()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  Certification</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.certification')</h4>
                         <ul class="resume-details">
                             @if(count($resume['certification']) > 0)
                                 @foreach($resume['certification'] as $resumeId => $certification)
@@ -394,7 +394,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="certification-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>Add Certification</c></h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addcertification')</c></h4>
                         <form class="form-horizontal form-certification" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -403,31 +403,31 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Certification</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.certification')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="certificate">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Completion Date</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.completiondate')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-picker" name="completionDate">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Score</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.score')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="score">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Institution</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.institution')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="institution">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Country</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="country">
                                         @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -437,7 +437,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Details</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm" name="details"></textarea>
                                 </div>
@@ -445,7 +445,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary" type="submit" name="save">Save</button>
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
                                     <button class="btn btn-default" type="button" onclick="$('#certification').fadeIn();$('#certification-edit').hide();$('html, body').animate({scrollTop:$('#certification').position().top}, 700);">Cancel</button>
                                 </div>
                             </div>
@@ -456,7 +456,7 @@ if($user->profilePhoto != ''){
                     <!--Experience Section Start-->
                     <section class="resume-box" id="experience">
                         <a class="btn btn-primary r-add-btn" onclick="addExperience()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  Experiences</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.experiences')</h4>
                         <ul class="resume-details">
                             @if(count($resume['experience']) > 0)
                                 @foreach($resume['experience'] as $resumeId => $experience)
@@ -481,7 +481,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="experience-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>Add Experience</c></h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
                         <form class="form-horizontal form-experience" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -490,25 +490,25 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Job Title</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.jobtitle')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="jobTitle">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Organization</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="organization">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Start Date</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.sdate')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-picker" name="startDate">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">End Date</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.edate')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-picker" name="endDate">
                                 </div>
@@ -519,12 +519,12 @@ if($user->profilePhoto != ''){
                                     <div class="cntr">
                                         <input id="Currently" type="checkbox" class="cbx-field" name="currently" value="yes">
                                         <label class="cbx" for="Currently"></label>
-                                        <label class="lbl" for="Currently">Currently Working</label>
+                                        <label class="lbl" for="Currently">@lang('home.currentlyworking')</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Country</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="country">
                                         @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -534,7 +534,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Details</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm" name="details"></textarea>
                                 </div>
@@ -542,8 +542,8 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary" type="submit" name="save">Save</button>
-                                    <button class="btn btn-default" type="button" onclick="$('#experience').fadeIn();$('#experience-edit').hide();$('html, body').animate({scrollTop:$('#experience').position().top}, 700);">Cancel</button>
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#experience').fadeIn();$('#experience-edit').hide();$('html, body').animate({scrollTop:$('#experience').position().top}, 700);">@lang('home.cancel')</button>
                                 </div>
                             </div>
                         </form>
@@ -553,7 +553,7 @@ if($user->profilePhoto != ''){
                     <!--Skills Section Start-->
                     <section class="resume-box" id="skills">
                         <a class="btn btn-primary r-add-btn" onclick="addSkills()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  Skills</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>@lang('home.skills')</h4>
                         <ul class="resume-details">
                             @if(count($resume['skills']) > 0)
                                 @foreach($resume['skills'] as $resumeId => $skills)
@@ -576,7 +576,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="skills-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>Add Experience</c></h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
                         <form class="form-horizontal form-skills" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -585,26 +585,26 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Skill</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.skill')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="skill">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">Level</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.level')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="level">
-                                        <option value="Beginner">Beginner</option>
-                                        <option value="Intermediate">Intermediate</option>
-                                        <option value="Expert">Expert</option>
+                                        <option value="Beginner">@lang('home.beginner')</option>
+                                        <option value="Intermediate">@lang('home.intermediate')</option>
+                                        <option value="Expert">@lang('home.expert')</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary" type="submit" name="save">Save</button>
-                                    <button class="btn btn-default" type="button" onclick="$('#skills').fadeIn();$('#skills-edit').hide();$('html, body').animate({scrollTop:$('#skills').position().top}, 700);">Cancel</button>
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#skills').fadeIn();$('#skills-edit').hide();$('html, body').animate({scrollTop:$('#skills').position().top}, 700);">@lang('home.cancel')</button>
                                 </div>
                             </div>
                         </form>
@@ -613,33 +613,33 @@ if($user->profilePhoto != ''){
                 </div>
                 <div class="col-md-3">
                     <div class="resume-listing-section hidden-sm hidden-xs">
-                        <h4>Resume Sections</h4>
+                        <h4>@lang('home.resumesections')</h4>
                         <hr>
                         <ul class="rls" style="padding-left: 0;">
                             <li>
-                                <a id="#" onclick="$('#personal-information').fadeIn();$('#personal-information-edit').hide();">Personal Information</a> 
+                                <a id="#" onclick="$('#personal-information').fadeIn();$('#personal-information-edit').hide();">@lang('home.personalinformation')</a> 
                                 <a id="#" onclick="$('#personal-information').hide();$('#personal-information-edit').fadeIn()"><i class="fa fa-edit pull-right"></i> </a> 
                             </li>
                             <li>
-                                <a id="#" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">Academics</a> 
+                                <a id="#" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">@lang('home.academic')</a> 
                                 <a id="#" onclick="addAcademic();$('html, body').animate({scrollTop:$('#academic-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
                             </li>
                             <li>
-                                <a id="#" onclick="$('#certification').fadeIn();$('#certification-edit').hide();$('html, body').animate({scrollTop:$('#certification').position().top}, 700);">Certifications</a> 
+                                <a id="#" onclick="$('#certification').fadeIn();$('#certification-edit').hide();$('html, body').animate({scrollTop:$('#certification').position().top}, 700);">@lang('home.certifications')</a> 
                                 <a id="#" onclick="addCertification();$('html, body').animate({scrollTop:$('#certification-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
                             </li>
                             <li>
-                                <a id="#" onclick="$('#experience').fadeIn();$('#experience-edit').hide();$('html, body').animate({scrollTop:$('#experience').position().top}, 700);">Experiences</a> 
+                                <a id="#" onclick="$('#experience').fadeIn();$('#experience-edit').hide();$('html, body').animate({scrollTop:$('#experience').position().top}, 700);">@lang('home.experiences')</a> 
                                 <a id="#" onclick="addExperience();$('html, body').animate({scrollTop:$('#experience-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
                             </li>
                             <li>
-                                <a id="#" onclick="$('#skills').fadeIn();$('#skills-edit').hide();$('html, body').animate({scrollTop:$('#skills').position().top}, 700);">Skills</a> 
+                                <a id="#" onclick="$('#skills').fadeIn();$('#skills-edit').hide();$('html, body').animate({scrollTop:$('#skills').position().top}, 700);">@lang('home.skills')</a> 
                                 <a id="#" onclick="addSkills();$('html, body').animate({scrollTop:$('#skills-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
                             </li>
                         </ul>
                     </div>
                     <div class="download-resume">
-                        <a href="cv" class="btn btn-primary btn-block">DOWNLOAD RESUME</a>
+                        <a href="cv" class="btn btn-primary btn-block">@lang('home.DOWNLOADRESUME')</a>
                     </div>
                 </div>
             </div>
@@ -766,7 +766,7 @@ function firstCapital(myString){
 }
 function addAcademic(){
     $('.form-academic input').val('');
-    $('#academic-edit h4 c').text('Add Academics');
+    $('#academic-edit h4 c').text('@lang('home.addacademics')');
     $('#academic').hide();
     $('#academic-edit').fadeIn();
 }

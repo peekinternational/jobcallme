@@ -354,8 +354,8 @@ if($company->companyLogo != ''){
                                    <div class="col-md-12">
                                        <div class="row">
                                            <div class="col-md-offset-3 col-md-9">
-                                               <button type="submit" class="btn btn-primary col-md-3" name="save" style="margin-right:5px">SAVE</button>
-                                               <button type="button" class="btn btn-default col-md-3" onClick="$('.eo-edit-section').hide(); $('.eo-section').show()">CANCEL</button>
+                                               <button type="submit" class="btn btn-primary col-md-3" name="save" style="margin-right:5px">@lang('home.SAVE')</button>
+                                               <button type="button" class="btn btn-default col-md-3" onClick="$('.eo-edit-section').hide(); $('.eo-section').show()">@lang('home.CANCEL')</button>
                                            </div>
                                        </div>
                                    </div>
@@ -369,7 +369,7 @@ if($company->companyLogo != ''){
 
         <div class="eo-box eo-about">
             <a class="btn btn-primary r-add-btn hideThis" onClick="$('.eo-about-org').hide(); $('.hideThis').hide();$('.eo-about-editor').show(); "><i class="fa fa-edit"></i> </a>
-            <h3 class="eo-about-heading">About Organization</h3>
+            <h3 class="eo-about-heading">@lang('home.aboutorganization')</h3>
             <div class="eo-about-org">
                 <p>{!! $company->companyAbout !!}</p>
             </div>
@@ -385,8 +385,8 @@ if($company->companyLogo != ''){
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn btn-primary col-md-3" name="save" style="margin-right:5px">SAVE</button>
-                                <button type="button" class="btn btn-default col-md-3" onClick="$('.eo-about-org').show(); $('.hideThis').show();$('.eo-about-editor').hide();">CANCEL</button>
+                                <button type="submit" class="btn btn-primary col-md-3" name="save" style="margin-right:5px">@lang('home.SAVE')</button>
+                                <button type="button" class="btn btn-default col-md-3" onClick="$('.eo-about-org').show(); $('.hideThis').show();$('.eo-about-editor').hide();">@lang('home.CANCEL')</button>
                             </div>
                         </div>
                     </div>

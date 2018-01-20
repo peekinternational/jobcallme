@@ -15,16 +15,16 @@
                <div class="rtj-box">
                    <ul class="nav nav-tabs ">
                        <li class="active">
-                           <a href="#rtj_tab_suggested" data-toggle="tab"><i class="fa fa-info-circle"></i> Suggested</a>
+                           <a href="#rtj_tab_suggested" data-toggle="tab"><i class="fa fa-info-circle"></i> @lang('home.suggested')</a>
                        </li>
                        <li>
-                           <a href="#rtj_tab_saved" data-toggle="tab"><i class="fa fa-heart"></i> Saved Jobs </a>
+                           <a href="#rtj_tab_saved" data-toggle="tab"><i class="fa fa-heart"></i> @lang('home.savedjobs') </a>
                        </li>
                        <li>
-                           <a href="#rtj_tab_application" data-toggle="tab"><i class="fa fa-file-text"></i> Applications </a>
+                           <a href="#rtj_tab_application" data-toggle="tab"><i class="fa fa-file-text"></i> @lang('home.applications') </a>
                        </li>
                        <li>
-                           <a href="#rtj_tab_interview" data-toggle="tab"><i class="fa fa-calendar"></i> Interviews</a>
+                           <a href="#rtj_tab_interview" data-toggle="tab"><i class="fa fa-calendar"></i> @lang('home.interviews')</a>
                        </li>
                    </ul>
                    <div class="tab-content">
@@ -50,7 +50,7 @@
                                 @endforeach
                             @endif
                            <div class="col-md-12">
-                               <a href="{{ url('jobs') }}" class="pull-right" style="padding-top: 5px">View all</a>
+                               <a href="{{ url('jobs') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                            </div>
                        </div>
                        <div class="tab-pane" id="rtj_tab_saved">
@@ -148,7 +148,7 @@
            <div class="col-md-6">
                <!--Follow Companies - Start -->
                <div class="follow-companies">
-                   <h4>Companies to follow</h4>
+                   <h4>@lang('home.companiesfollow')</h4>
                    <hr>
                    <div class="row">
                         @foreach($companies as $comp)
@@ -163,15 +163,15 @@
                                <img src="{{ $cLogo }}">
                                <p><a href="{{ url('companies/company/'.$comp->companyId) }}">{!! $company->companyName !!}</a></p>
                                @if(in_array($comp->companyId,$followArr))
-                                    <a href="javascript:;" onclick="followCompany({{ $comp->companyId }},this)" class="btn btn-success btn-xs">Following</a>
+                                    <a href="javascript:;" onclick="followCompany({{ $comp->companyId }},this)" class="btn btn-success btn-xs">@lang('home.following')</a>
                                 @else
-                                    <a href="javascript:;" onclick="followCompany({{ $comp->companyId }},this)" class="btn btn-primary btn-xs">Follow</a>
+                                    <a href="javascript:;" onclick="followCompany({{ $comp->companyId }},this)" class="btn btn-primary btn-xs">@lang('home.follow')</a>
                                 @endif
                            </div>
                        @endforeach
                        <hr>
                        <div class="col-md-12">
-                           <a href="{{ url('companies') }}" class="pull-right" style="padding-top: 5px">View all</a>
+                           <a href="{{ url('companies') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                        </div>
                    </div>
                </div>

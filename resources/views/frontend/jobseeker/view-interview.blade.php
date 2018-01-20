@@ -7,7 +7,7 @@
     <div class="container">
         <div class="col-md-12 view-venue">
             <div class="panel panel-default">
-                <div class="panel-heading">Job Interview</div>
+                <div class="panel-heading">@lang('home.jobinterview')</div>
                 <div class="panel-body">
                     <?php
                     $venue = JobCallMe::getVeneue($interview->venueId);
@@ -18,42 +18,42 @@
                         <table class="table table-bordered">
                             <tbody>
                                 <tr>
-                                    <th width="50%">Job</th>
+                                    <th width="50%">@lang('home.job')</th>
                                     <td width="50%"><a href="{{ url('jobs/'.$interview->jobId) }}">{!! $interview->title !!}</a></td>
                                 </tr>
                                 <tr>
-                                    <th width="50%">Company</th>
+                                    <th width="50%">@lang('home.company')</th>
                                     <td width="50%">{!! $company->companyName !!}</td>
                                 </tr>
                                 <tr>
-                                    <th width="50%">Location</th>
+                                    <th width="50%">@lang('home.location')</th>
                                     <td width="50%"><a href="http://maps.google.com/?q={!! $venue->address !!}" target="_blank"><i class="fa fa-map-marker"></i>&nbsp;{!! $venue->address !!}</a></td>
                                 </tr>
                                 <tr>
-                                    <th width="50%">Contact Person</th>
+                                    <th width="50%">@lang('home.contactperson')</th>
                                     <td width="50%">{!! $venue->contact !!}</td>
                                 </tr>
                                 <tr>
-                                    <th width="50%">Email</th>
+                                    <th width="50%">@lang('home.email')</th>
                                     <td width="50%">{!! $venue->email !!}</td>
                                 </tr>
                                 <tr>
-                                    <th width="50%">Phone Number</th>
+                                    <th width="50%">@lang('home.phonenumber')</th>
                                     <td width="50%">{!! $venue->phone !!}</td>
                                 </tr>
                                 <tr>
-                                    <th width="50%">Mobile Number</th>
+                                    <th width="50%">@lang('home.mobile')</th>
                                     <td width="50%">{!! $venue->mobile !!}</td>
                                 </tr>
                                 <tr>
-                                    <th width="50%">Interview Date / Time</th>
+                                    <th width="50%">@lang('home.interviewdate')</th>
                                     <td width="50%">
-                                        <b>Date</b> <i>{{ $interview->fromDate }}</i> To <i>{{ $interview->toDate }}</i><br>
-                                        <b>Timing</b> <i>09:00 AM</i> To <i>05:00 PM</i>
+                                        <b>@lang('home.date')</b> <i>{{ $interview->fromDate }}</i> @lang('home.to') <i>{{ $interview->toDate }}</i><br>
+                                        <b>@lang('home.timing')</b> <i>09:00 AM</i> @lang('home.to') <i>05:00 PM</i>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th width="50%">Instruction</th>
+                                    <th width="50%">@lang('home.instruction')</th>
                                     <td width="50%">{!! $venue->instruction !!}</td>
                                 </tr>
                             </tbody>
