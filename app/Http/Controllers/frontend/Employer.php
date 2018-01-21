@@ -375,7 +375,18 @@ curl_close ($ch);
     }
 	
 	
-	
+	public function completePayment(Request $request){
+		/*Sessions for nicepay*/
+		Session::put('p_Category',$request->p_Category); 
+		Session::put('postedJobId',Session::get('id')); 
+		/***/
+		$am=$request->amount;
+		$p_Category=$request->p_Category;
+		$jType=$request->jType;
+		$app = $request->session()->get('jcmUser');
+		//Session::get('postedJobId')	
+		return view('frontend.employer.payment',compact('am','app','p_Category','jType'));
+	}		
 	
 	public function getresponse(Request $request){
 		if(!Session::get('postedJobId')): 

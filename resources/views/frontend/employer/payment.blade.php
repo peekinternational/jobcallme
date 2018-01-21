@@ -12,10 +12,22 @@
                 <br>
                 <br>
                 <div class="col-md-6" style="text-align:end">
-                    <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypal') !!}" >
-                        {{ csrf_field() }}
-                        <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
-                    </form>
+                    @if($jType)
+                        <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
+                            <input  type="hidden" name="amount" value="{!! $am!!}" class="ng-untouched ng-pristine ng-valid">
+                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                            <input name="p_Category" type="hidden" value="{!! $p_Category!!}"/>
+                            <input name="jType" type="hidden" value="{!! $jType!!}"/>
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
+                            </div>
+                        </form>
+                    @else
+                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypal') !!}" >
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
+                        </form>
+                    @endif
                 </div>
                 <div class="col-md-6">
             

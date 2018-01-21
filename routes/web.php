@@ -144,7 +144,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/application','frontend\Employer@application');
     Route::get('employer/application/{id}','frontend\Employer@getApplication');
 	Route::get('employer/jobupdate/{id}','frontend\Employer@jobupdate');
-	
+	Route::post('completePayment','frontend\Employer@completePayment');
+
     Route::post('employer/update/application','frontend\Employer@updateApplication');
     Route::get('employer/interview-venues','frontend\Employer@interviewVenues');
     Route::post('employer/interview-venues/save','frontend\Employer@saveInterviewVeneu');

@@ -52,7 +52,7 @@
                                 </span>
                             </div>
 
-                          <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
+                          <form class="ng-untouched ng-pristine ng-valid" action="{{ url('account/completePayment') }}" method="post">
                                 <input  type="hidden" name="amount" value="20.30" class="ng-untouched ng-pristine ng-valid">
 								<input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 								<input name="p_Category" type="hidden" value="1"/>
@@ -90,7 +90,7 @@
                                 </span>
                             </div>
 
-                           <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
+                           <form class="ng-untouched ng-pristine ng-valid" action="{{ url('account/completePayment') }}" method="post">
                                 <input  type="hidden" name="amount" value="52.20" class="ng-untouched ng-pristine ng-valid">
 								<input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 								<input name="p_Category" type="hidden" value="2"/>
@@ -128,7 +128,7 @@
                                 </span>
                             </div>
 
-                            <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
+                            <form class="ng-untouched ng-pristine ng-valid" action="{{ url('account/completePayment') }}" method="post">
                                 <input  type="hidden" name="amount" value="75.40" class="ng-untouched ng-pristine ng-valid">
 								<input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 								<input name="p_Category" type="hidden" value="3"/>
