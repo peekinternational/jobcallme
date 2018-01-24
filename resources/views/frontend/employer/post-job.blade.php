@@ -29,84 +29,34 @@
                 
  
                         <ul id="post-job-ad-types">
+						 @foreach($rec as $payment)
+						 
                             <!----><li style="position:relative">
                                 <!---->
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="md-radio-2-input" name="amount" value="0" name="md-radio-group-0"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Basic</span></div></label></md-radio-button>
+
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="amount" value="{!! $payment->price!!}">
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+<span class="b">@lang('home.'.$payment->title)</span></div>
                                 <div>
-                                    <!----><label for="md-radio-2-input">
+                                    <!----><label for="{!! $payment->id!!}">
                                         <ul class="list-unstyled desc" >
-                                            <li>Basic Posting</li>
-                                            <li>Lowest Priority</li>
+                                            <li>{!! $payment->tag1!!}</li>
+                                             <li>{!! $payment->tag2!!}</li>
                                         </ul>
-                                        <div class="credits b">Free</div>
+										
+                                        <div class="credits b">@if($payment->price ==0)
+										Free
+										@else
+										<span class="text-success">$ {!! $payment->price!!}</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									@endif</div>
                                     </label>
                                     <!---->
                                     <!---->
                                     <!---->
-                                </div>
-                            </li><li style="position:relative">
-                                <!---->
-                              <input class="mat-radio-input cdk-visually-hidden" type="radio" name="amount" value="20.30" id="gallery"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Gallery</span></div></label></md-radio-button>
-                                <div>
-                                    <!---->
-                                    <!----><label for="gallery">
-                                        <ul class="list-unstyled desc">
-                                            <li>Featured on homepage (3 days)</li>
-                                            <li>Priority over Basic jobs</li>
-                                        </ul>
-                                        <div class="credits b">
-                                            <!----><div class="">
-                                                <span class="text-success">Rs.2,030 / $20.30</span>
-                                                <i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
-                                            </div>
-                                            <!---->
-                                        </div>
-                                    </label>
-                                    <!---->
-                                    <!---->
-                                </div>
-                            </li><li style="position:relative">
-                                <!---->
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" name="amount" value="52.20" id="hot"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Hot</span></div></label></md-radio-button>
-                                <div>
-                                    <!---->
-                                    <!---->
-                                    <!----><label for="hot">
-                                        <ul class="list-unstyled desc">
-                                            <li>Featured on homepage (10 days)</li>
-                                            <li>Priority over Gallery jobs</li>
-                                        </ul>
-                                        <div class="credits b">
-                                            <!----><div class="">
-                                                <span class="text-success">Rs.5,220 /$52.20 <i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i></span>
-                                            </div>
-                                            <!---->
-                                        </div>
-                                    </label>
-                                    <!---->
-                                </div>
-                            </li><li style="position:relative">
-                                <!----><div class="ribbon red"><span>Best Value</span></div>
-                           <input class="mat-radio-input cdk-visually-hidden" type="radio" name="amount" value="75.40" id="prime"><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">Premium</span></div></label></md-radio-button>
-                                <div>
-                                    <!---->
-                                    <!---->
-                                    <!---->
-                                    <!----><label for="prime">
-                                        <ul class="list-unstyled desc">
-                                            <li>Featured on homepage (30 days)</li>
-                                            <li>Priority over Hot jobs</li>
-                                        </ul>
-                                        <div class="credits b">
-                                            <!----><div class="">
-                                                <span class="text-success">Rs.7,540 / $75.40</span>
-                                              <i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
-                                            </div>
-                                            <!---->
-                                        </label>
-                                    </div>
                                 </div>
                             </li>
+							@endforeach
                         </ul>
                  
 
@@ -326,7 +276,7 @@ $(document).ready(function(){
     getStates($('.job-country option:selected:selected').val());
     getSubCategories($('.job-category option:selected:selected').val());
 });
-$("#md-radio-2-input").trigger('click');
+$(".cdk-visually-hidden").trigger('click');
 $('.job-country').on('change',function(){
     var countryId = $(this).val();
     getStates(countryId)

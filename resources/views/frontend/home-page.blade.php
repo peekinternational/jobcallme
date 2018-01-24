@@ -44,7 +44,7 @@ $lToken = csrf_token();
                                                 <div class="search-field-box search-item">
                                                     <input type="search" placeholder="@lang('home.lookingjob')" name="searchByJob">
                                                 </div>
-                                                <div class="search-field-box search-location">
+                                                 <div class="search-field-box search-location">
                                                     <select class="location" name="search-by-location">
                                                         <option value="AL">@lang('home.alllocation')</option>
                                                          @foreach(JobCallMe::getJobCountries() as $country)
@@ -113,14 +113,14 @@ $lToken = csrf_token();
             <div class="col-md-6 col-md-offset-3">
                 <div class="col-md-6 login-type ">
                     <div class=" hi-icon-effect-8">
-                    <a href="" class="hi-icon"> <i style="margin-top: 16px;"  class='fa fa-user'></a></i>
+                    <a href="{{ url('account/jobseeker') }}" class="hi-icon"> <i style="margin-top: 16px;"  class='fa fa-user'></a></i>
                     </div>
                     <p>@lang('home.ijobseeker')</p>
                     <span>@lang('home.postresume')</span>
                 </div>
                 <div class="col-md-6 login-type ">
                     <div class="hi-icon-effect-8">
-                        <a href="" class="hi-icon"> <i style="margin-top: 16px;" class='fa fa-globe'></a></i>
+                        <a href="{{ url('account/employer') }}" class="hi-icon"> <i style="margin-top: 16px;" class='fa fa-globe'></a></i>
                     </div>
                     <p>@lang('home.iemployer')</p>
                     <span>@lang('home.postjob')</span>
@@ -186,12 +186,13 @@ $lToken = csrf_token();
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p>Description goes here</p>
+								<p>{!! $job->description !!}</p>
+                                
                                 <div class="job-status eye-icon">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>3 days left</span>
+                                    <span>{{ JobCallMe::timeInDays($job->expiryDate) }} days left</span>
                                 </div>
                             </div>
                         </a>
@@ -224,7 +225,7 @@ $lToken = csrf_token();
 							<span class="brand-jobs-link">View 2 jobs</span>
                             <div class="info">
                                 <h3>{!! $comp->companyName !!}</h3>
-                                <p>Description goes here</p>
+                                <p>{!! $comp->companyAbout !!}</p>
                               
                             </div>
 							  
@@ -263,7 +264,7 @@ $lToken = csrf_token();
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p>Description goes here</p>
+                                <p>{!! $job->description !!}</p>
                                 <div class="job-status eye-icon">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
@@ -305,7 +306,7 @@ $lToken = csrf_token();
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p>Description goes here</p>
+                                <p>{!! $job->description !!}</p>
                                 <div class="job-status eye-icon">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
@@ -348,7 +349,7 @@ $lToken = csrf_token();
                         </div>
                         <div class="info">
                             <h3>{!! $job->companyName !!}</h3>
-                            <p>Description goes here</p>
+                            <p>{!! $job->description !!}</p>
                             <div class="job-status eye-icon">
                                 <i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                             </div>
@@ -392,7 +393,7 @@ $lToken = csrf_token();
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p>Description goes here</p>
+                                <p>{!! $job->description !!}</p>
                                 <div class="job-status eye-icon">
                                     <i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>

@@ -32,7 +32,7 @@
                     <a href="{{ url('account/people') }}">
                         <i class="fa fa-users"></i>
                         <div class="udp-type">@lang('home.Find Peoples')</div>
-                    </a>
+                     </a>
                 </li>
                 <li>
                     <a href="{{ url('learn') }}">

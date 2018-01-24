@@ -18,7 +18,7 @@
                            <a href="#rtj_tab_suggested" data-toggle="tab"><i class="fa fa-info-circle"></i> @lang('home.suggested')</a>
                        </li>
                        <li>
-                           <a href="#rtj_tab_saved" data-toggle="tab"><i class="fa fa-heart"></i> @lang('home.savedjobs') </a>
+                            <a href="#rtj_tab_saved" data-toggle="tab"><i class="fa fa-heart"></i> @lang('home.savedjobs') </a>
                        </li>
                        <li>
                            <a href="#rtj_tab_application" data-toggle="tab"><i class="fa fa-file-text"></i> @lang('home.applications') </a>

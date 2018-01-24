@@ -31,7 +31,7 @@ class Home extends Controller{
 	public function contactUs(Request $request){
 		if($request->isMethod('post')){
 			print_r($request->all());exit;
-		}
+		} 
 		return view('frontend.contact-us');
 	}
 
@@ -330,6 +330,7 @@ class Home extends Controller{
     }
 
     public function searchSkills(Request $request){
+		//dd($request->input('country'));
     	/* search upskills */
     	$learnQry = DB::table('jcm_upskills');
     	if($request->input('type') != ''){
@@ -343,6 +344,12 @@ class Home extends Controller{
     		if($cityId != '0'){
 	    		$learnQry->where('city','=',$cityId);
 	    	}
+    	}
+		if($request->input('country') != ''){
+    		
+	    		$learnQry->where('country','=',$request->input('country'));
+				
+	    	
     	}
     	$record = $learnQry->orderBy('skillId','desc')->paginate(30);
 

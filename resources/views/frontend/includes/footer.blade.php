@@ -5,7 +5,7 @@
             <h5><span class="footer-title-box" style="background-color: #9b9b36">@lang('home.catocc')</span></h5>
             <ul class="quick-links">
                 @foreach(JobCallMe::getCategories() as $fCat)
-                    <li><a href="{{ url('jobs?category='.$fCat->categoryId) }}"><span class="lh-eff34 c18-cyan-1"><span></span>{{ ucfirst($fCat->name) }}</span></a></li>
+                    <li><a href="{{ url('jobs?category='.$fCat->categoryId) }}"><span class="lh-eff34 c18-cyan-1"><span></span>@lang('home.'.ucfirst($fCat->name))</span></a></li>
                 @endforeach
             </ul>
         </div>
@@ -15,9 +15,9 @@
 @lang('home.hourwork')</span></h5>
             <ul class="quick-links">
                 @foreach(JobCallMe::getJobShifts() as $fShift)
-                    <li><a href="{{ url('jobs?shift='.$fShift->name) }}"><span class="lh-eff34 c18-cyan-3"><span></span>{{ ucfirst($fShift->name) }}</span></a></li>
+                    <li><a href="{{ url('jobs?shift='.$fShift->name) }}"><span class="lh-eff34 c18-cyan-3"><span></span>@lang('home.'.ucfirst($fShift->name))</span></a></li>
                 @endforeach
-            </ul>
+             </ul>
 			<br>
 				 <h5><span class="footer-title-box2"><a href="#" style="background-color: #428f7e">@lang('home.abouthead')</a></span></h5><br>
 				 <h5><span class="footer-title-box2"><a href="#" style="background-color: #956f4f">
@@ -29,7 +29,7 @@
                                @lang('home.jobcareer')</span></h5>
             <ul class="quick-links">
                 @foreach(JobCallMe::getCareerLevel() as $career)
-                    <li><a href="{{ url('jobs?career='.$career) }}"><span class="lh-eff34 c18-cyan-2"><span></span>{{ $career }}</span></a></li>
+                    <li><a href="{{ url('jobs?career='.$career) }}"><span class="lh-eff34 c18-cyan-2"><span></span>@lang('home.'.$career)</span></a></li>
                 @endforeach
             </ul>
         </div>
@@ -38,7 +38,7 @@
             <h5><span class="footer-title-box" style="background-color: #4e6c7c">@lang('home.jobinformationtype')</span></h5>
             <ul class="quick-links">
                 @foreach(JobCallMe::getJobType() as $fType)
-                    <li><a href="{{ url('jobs?type='.$fType->name) }}"><span class="lh-eff34 c18-cyan-4"><span></span>{{ ucfirst($fType->name) }}</span></a></li>
+                    <li><a href="{{ url('jobs?type='.$fType->name) }}"><span class="lh-eff34 c18-cyan-4"><span></span>@lang('home.'.ucfirst($fType->name))</span></a></li>
                 @endforeach
             </ul>
         </div>
@@ -47,7 +47,7 @@
             <h5><span class="footer-title-box" style="background-color: #b0a48a">@lang('home.jobin') {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</span></h5>
             <ul class="quick-links">
                 @foreach(JobCallMe::getHomeCities() as $loca)
-                    <li><a href="{{ url('jobs?country='.JobCallMe::getHomeCountry().'&state='.$loca->state_id.'&city='.$loca->id )}}"><span class="lh-eff34 c18-cyan-5"><span></span>Jobs in {{ $loca->name }}</span></a></li>
+                    <li><a href="{{ url('jobs?country='.JobCallMe::getHomeCountry().'&state='.$loca->state_id.'&city='.$loca->id )}}"><span class="lh-eff34 c18-cyan-5"><span></span>@lang('home.jobin')  {{ $loca->name }}</span></a></li>
                 @endforeach
             </ul>
         </div>

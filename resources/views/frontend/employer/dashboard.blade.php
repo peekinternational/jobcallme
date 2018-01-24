@@ -54,7 +54,7 @@
                             <a href="#rtj_tab_interview" data-toggle="tab"><i class="fa fa-calendar"></i> @lang('home.upcominginterviews') </a>
                         </li>
                     </ul>
-                    <div class="tab-content">
+                    <div class="tab-content joblisting">
                         <div class="tab-pane active" id="rtj_tab_posted_jobs">
 						<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
                             @foreach($postedJobs as $pjobs)
@@ -63,7 +63,7 @@
 							
                                     <div class="rtj-details">
                                         <p><strong><a href="{{ url('jobs/'.$pjobs->jobId) }}">{!! $pjobs->title !!}</a></strong> <i class="fa fa-check-circle-o"></i></p>
-                                        <p>{{ strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open' }} <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}"> @if($pjobs->p_Category==0)Basic
+                                         <p>{{ strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open' }} <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}"> @if($pjobs->p_Category==0)Basic
 				@elseif($pjobs->p_Category==1)Gallery
 				@elseif($pjobs->p_Category==2)Hot
 				@else

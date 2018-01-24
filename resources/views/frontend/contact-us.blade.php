@@ -18,7 +18,7 @@ $headerC = json_decode(file_get_contents(public_path('website/web-setting.info')
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
-                        </ul>
+                         </ul>
                     </div>
                 @endif
                 {{ csrf_field() }}

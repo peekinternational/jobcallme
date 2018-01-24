@@ -37,7 +37,7 @@
 <style type="text/css">
 .jd-share-btn a > i {
     border-radius: 50%;
-    color: #ffffff;
+     color: #ffffff;
     font-size: 30px;
     height: 50px;
     margin-right: 2px;

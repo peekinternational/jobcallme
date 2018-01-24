@@ -229,7 +229,7 @@ class Jobseeker extends Controller{
 			DB::table('jcm_resume')->insert($input);
 		}
 		exit('1');
-	}
+ 	}
 
 	public function getResume(Request $request){
 		if(!$request->ajax()){

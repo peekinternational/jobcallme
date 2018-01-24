@@ -14,7 +14,7 @@
             <div class="job-search-box">
 			
                 <form action="" method="post" class="search-job" style="padding-top:13px">
-                	<input type="hidden" name="_token" class="token">
+                 	<input type="hidden" name="_token" class="token">
                     <div class="form-group">
                         <input type="text" class="form-control" name="keyword" value="{{ Request::input('keyword') }}" placeholder="Keyword">
                     </div>

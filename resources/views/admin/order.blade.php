@@ -29,7 +29,7 @@
 										<th>Payment Type</th>
                                         <th>Payment Date</th>
                                     </thead>
-                                    <tbody>
+                                     <tbody>
                                         @foreach($jobs as $i => $job)
                                             <tr>
                                                 <td>{{ ++$startI }}</td>

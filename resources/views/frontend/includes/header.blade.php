@@ -39,7 +39,7 @@ $cPage = Request::segment(2);
                         <a href="{{ url('jobs') }}">@lang('home.jobs')</a>
                     </li>
                     <li class="{{ Request::segment(1) == 'people' ? 'active' : '' }}">
-                        <a href="{{ url('account/people') }}">@lang('home.peoples')</a>
+                         <a href="{{ url('account/people') }}">@lang('home.peoples')</a>
                     </li>
                     <li class="{{ Request::segment(1) == 'read' ? 'active' : '' }}">
                         <a href="{{ url('read') }}">@lang('home.read')</a>

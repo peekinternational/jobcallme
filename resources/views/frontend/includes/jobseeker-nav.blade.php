@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('learn') }}">
+                     <a href="{{ url('learn') }}">
                         <i class="fa fa-line-chart"></i>
                         <div class="udp-type">@lang('home.LEARN')</div>
                     </a>

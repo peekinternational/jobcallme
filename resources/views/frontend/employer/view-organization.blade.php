@@ -373,7 +373,7 @@ if($company->companyLogo != ''){
             <div class="eo-about-org">
                 <p>{!! $company->companyAbout !!}</p>
             </div>
-            <div class="eo-about-editor">
+             <div class="eo-about-editor">
                 <form action="" id="pnj-form" method="post" class="organization-desc-form">
                     <input type="hidden" name="_token" class="token">
                     <div class="form-group">

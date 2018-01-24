@@ -454,6 +454,7 @@ $('form.password-form').submit(function(e){
             })
             $('.password-form button[name="save"]').prop('disabled',false);
         }
+		
     })
     e.preventDefault();
 })

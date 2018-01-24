@@ -56,7 +56,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <button class="google-btn">GOOGLE</button>
                     <button class="in-btn">LINKEDIN</button>
                 </div>
-        </div>
+        </div> 
         <div id="signupBox" class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
             <h3>@lang('home.createaccount')</h3>
             <form id="signUpForm" action="{{ url('account/register') }}" method="post">

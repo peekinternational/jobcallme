@@ -41,7 +41,7 @@ if($user->profilePhoto != ''){
                                 <p><span class="pi-title">@lang('home.mobile'):</span> {{ $user->phoneNumber }}</p>
                                 <p><span class="pi-title">@lang('home.cnic'):</span> {{ $meta->cnicNumber }}</p>
                                 <p><span class="pi-title">@lang('home.address'):</span> {!! $meta->address.' ,'.JobCallMe::cityName($user->city).' ,'.JobCallMe::countryName($user->country) !!}</p>
-                            </div>
+                             </div>
                             <div class="col-md-9 personal-info-right">
                                 <h3 class="hidden-sm hidden-xs">{{ $user->firstName.' '.$user->lastName }}</h3>
                                 <p><span class="pi-title">@lang('home.fathername'):</span> {{ $meta->fatherName }}</p>
@@ -639,8 +639,45 @@ if($user->profilePhoto != ''){
                         </ul>
                     </div>
                     <div class="download-resume">
-                        <a href="cv" class="btn btn-primary btn-block">@lang('home.DOWNLOADRESUME')</a>
+                        <a href="cv" class="btn btn-primary btn-block ">@lang('home.DOWNLOADRESUME')</a>
                     </div>
+					 <!--privacy-->
+                <div id="privacy-show" class="ja-content-item mc-item resume-listing-section" style="">
+                    <form class="form-horizontal privacy-form" method="post" action="">
+                        <input type="hidden" name="_token" value="">
+                        <h4>@lang('home.privacysettings')</h4>
+                        <div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="profile-visible" class="switch-field" name="profile" {{ $privacy->profile != 'No' ? 'checked=""' : '' }}>
+                                <label for="profile-visible" class="switch-label"></label> <span>@lang('home.profilevisible')</span>
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="image-visible" class="switch-field" name="profileImage" {{ $privacy->profileImage != 'No' ? 'checked=""' : '' }}>
+                                <label for="image-visible" class="switch-label"></label> <span>@lang('home.picturevisible')</span>
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="academic-visible" class="switch-field" name="academic" {{ $privacy->academic != 'No' ? 'checked=""' : '' }}>
+                                <label for="academic-visible" class="switch-label"></label> <span>@lang('home.academicvisible')</span>
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="experience-visible" class="switch-field" name="experience" {{ $privacy->experience != 'No' ? 'checked=""' : '' }}>
+                                <label for="experience-visible" class="switch-label"></label> <span>@lang('home.experiencevisible')</span>
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="skills-visible" class="switch-field" name="skills" {{ $privacy->skills != 'No' ? 'checked=""' : '' }}>
+                                <label for="skills-visible" class="switch-label"></label> <span>@lang('home.skillsvisible')</span>
+                            </p>
+                        </div>
+                    </form>
+                </div>
                 </div>
             </div>
         </div>
@@ -661,6 +698,7 @@ textarea.form-control{resize: vertical;}
 }
 </style>
 <script type="text/javascript">
+
 var pageToken = '{{ csrf_token() }}';
 $(document).ready(function(){
     getStates($('.job-country option:selected:selected').val());
@@ -1030,5 +1068,15 @@ $('.profile-pic').on('change',function(){
         }
     });
 });
+$('.privacy-form input[type="checkbox"]').click(function(){
+    $('.privacy-form input[name="_token"]').val(pageToken);
+    $.ajax({
+        type: 'post',
+        data: $('.privacy-form').serialize(),
+        url: "{{ url('account/privacy/save') }}",
+        success: function(response){
+        }
+    })
+})
 </script>
 @endsection

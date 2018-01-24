@@ -28,7 +28,7 @@
                                 <tr>
                                     <th width="50%">@lang('home.location')</th>
                                     <td width="50%"><a href="http://maps.google.com/?q={!! $venue->address !!}" target="_blank"><i class="fa fa-map-marker"></i>&nbsp;{!! $venue->address !!}</a></td>
-                                </tr>
+                                 </tr>
                                 <tr>
                                     <th width="50%">@lang('home.contactperson')</th>
                                     <td width="50%">{!! $venue->contact !!}</td>

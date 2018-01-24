@@ -17,7 +17,7 @@ class Dashboard extends Controller{
 
 		return view('admin.dashboard');
 	}
-	public function home(){
+	 public function home(){
 		/* job shift query */
 		//$jobShifts = DB::table('jcm_job_shift')->get();
 

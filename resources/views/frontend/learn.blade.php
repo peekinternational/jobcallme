@@ -13,15 +13,43 @@
                         <form role="form" action="{{ url('learn/search')}}" method="post">
                             {{ csrf_field() }}
                             <div class="input-fields">
-                                <div class="search-field-box search-item">
+                                <div class="search-field-box search-item" id="l_key">
                                     <input type="search" placeholder="@lang('home.key')" name="learn-keyword">
                                 </div>
-                                <div class="search-field-box search-item">
+                                <div class="search-field-box search-item" id="l_city">
                                     <input type="search" placeholder="@lang('home.city')" name="learn-city">
-                                </div>
-                                <button type="submit" class="search-btn">
+										<button type="submit" id="l_fasearch" style="width:9% !important" class="search-btn">
                                     <i class="fa fa-search"></i>
-                                </button>
+                                </button> 
+                                </div>
+								<div class="search-field-box search-item" id="l_type" style="display:none;padding-top: 14px;">
+								<select class="form-control select2 job-country" name="type" >
+                                     <option value="">@lang('home.type')</option>
+                              @foreach(JobCallMe::getUpkillsType() as $skill)
+                                <option value="{!! $skill !!}">{!! $skill !!}</option>
+                              @endforeach
+                          </select>
+									<button  type="submit" class="btn btn-success" style="margin-top: 12px;">
+                                Search</button>
+								<button  type="button" id="l_close" class="btn btn-default" style="margin-top: 12px;">
+                                Close</button>
+                                </div>
+                                
+                                <div class="search-field-box search-item" id="l_country" style="display:none;padding-top: 14px;">
+								
+                                    <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                    @endforeach
+									</select>
+									
+									
+                                </div>
+							
+                                
+								<button  type="button" id="l_search" style="margin-left: 9px;width: 21px;height: 33px;background: transparent;">
+                                <span class="caret" style="color:white"></span></button>
+								
                             </div>
                         </form>
                     </div>
@@ -137,5 +165,24 @@ function lightboxOnResize() {
 
     }
 }
+ $("#l_search").click(function(){
+        $("#l_type").fadeIn();
+		 $("#l_country").fadeIn();
+		 $('.ls-box').css('height', '175px');
+		 $('#l_city input[name="learn-city"]').css('width', '100%');
+		 $('#l_type').css('padding-right', '40px');
+		 $('#l_fasearch').hide();
+		 $('#l_search').hide();
+        
+    });
+	$("#l_close").click(function(){
+        $("#l_type").fadeOut();
+		 $("#l_country").fadeOut();
+		 $('.ls-box').css('height', 'auto');
+		 $('#l_city input[name="learn-city"]').css('width', '88%');
+		 $('#l_fasearch').show();
+		 $('#l_search').show();
+        
+    });
 </script>
 @endsection

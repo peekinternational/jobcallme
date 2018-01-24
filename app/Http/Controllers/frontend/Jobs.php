@@ -143,7 +143,7 @@ class Jobs extends Controller{
                         $vhtml .= '</li>';
 						$vhtml .= '<li>';
                             $vhtml .= '<p class="js-title">'.trans('home.poston').'</p>';
-                            $vhtml .= '<p>'.date('M d, Y',strtotime($rec->createdTime)).'</p>';
+                             $vhtml .= '<p>'.date('M d, Y',strtotime($rec->createdTime)).'</p>';
                         $vhtml .= '</li>';
 						$vhtml .= '<li>';
                             $vhtml .= '<p class="js-title">'.trans('home.lastdate').'</p>';

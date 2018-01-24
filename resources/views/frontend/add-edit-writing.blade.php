@@ -20,14 +20,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.category')</label>
+                            <label class="control-label col-sm-3">@lang('home.tags')</label>
                             <div class="col-sm-9 pnj-form-field">
-                               <select class="form-control select2" name="category" required="">
+                               <select class="form-control select2" name="category[]" multiple required="">
                                     <option value="">@lang('home.s_type')</option>
                                     @foreach(JobCallMe::getCategories() as $cat)
                                         <option value="{!! $cat->categoryId !!}" {{ $cat->categoryId == $article->category ? 'selected="selected"' : '' }}>{!! $cat->name !!}</option>
                                     @endforeach
                                 </select>
+								
                             </div>
                         </div>
                         <div class="form-group">

@@ -19,7 +19,7 @@ if(Request::input('show') != ''){
             <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}">@lang('home.interviews')</a>
             <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}">@lang('home.offered')</a>
             <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}">@lang('home.unsuccessful')</a>
-        </div>
+         </div>
         <div class="col-md-10">
             <div class="ja-content">
                 <!--Application-->

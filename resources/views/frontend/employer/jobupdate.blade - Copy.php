@@ -34,7 +34,7 @@
                             <div class="desc">
                                 <!----><ul class="list-unstyled">
                                     <li>Exposure: Basic</li>
-                                    <li>On Homepage: 3 days</li>
+                                     <li>On Homepage: 3 days</li>
                                     <li>Job Mail 2 times</li>
                                     <li>Notifications: Multiple</li>
                                     <li>Priority over Basic jobs</li>
@@ -48,12 +48,12 @@
                             <div class="price">
                                 <span class="text-success">
                                     <!---->
-                                    <span class="text-md b">$20</span>
+                                    <span class="text-md b">$20.30</span>
                                 </span>
                             </div>
 
-                          <form class="ng-untouched ng-pristine ng-valid" action="{{ url('account/completePayment') }}" method="post">
-                                <input  type="hidden" name="amount" value="20" class="ng-untouched ng-pristine ng-valid">
+                          <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
+                                <input  type="hidden" name="amount" value="20.30" class="ng-untouched ng-pristine ng-valid">
 								<input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 								<input name="p_Category" type="hidden" value="1"/>
 								<input name="jType" type="hidden" value="Paid"/>
@@ -86,12 +86,12 @@
                             <div class="price">
                                 <span class="text-success">
                                     <!---->
-                                    <span class="text-md b">$52</span>
+                                    <span class="text-md b">$52.20</span>
                                 </span>
                             </div>
 
-                           <form class="ng-untouched ng-pristine ng-valid" action="{{ url('account/completePayment') }}" method="post">
-                                <input  type="hidden" name="amount" value="52" class="ng-untouched ng-pristine ng-valid">
+                           <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
+                                <input  type="hidden" name="amount" value="52.20" class="ng-untouched ng-pristine ng-valid">
 								<input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 								<input name="p_Category" type="hidden" value="2"/>
 								<input name="jType" type="hidden" value="Paid"/>
@@ -124,12 +124,12 @@
                             <div class="price">
                                 <span class="text-success">
                                     <!---->
-                                    <span class="text-md b">$75</span>
+                                    <span class="text-md b">$75.40</span>
                                 </span>
                             </div>
 
-                            <form class="ng-untouched ng-pristine ng-valid" action="{{ url('account/completePayment') }}" method="post">
-                                <input  type="hidden" name="amount" value="75" class="ng-untouched ng-pristine ng-valid">
+                            <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
+                                <input  type="hidden" name="amount" value="75.40" class="ng-untouched ng-pristine ng-valid">
 								<input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 								<input name="p_Category" type="hidden" value="3"/>
 								<input name="jType" type="hidden" value="Paid"/>
