@@ -126,6 +126,11 @@ Route::group(['prefix' => 'account'], function () {
     Route::post('jobseeker/resume/certification/save','frontend\Jobseeker@saveCertification');
     Route::post('jobseeker/resume/experience/save','frontend\Jobseeker@saveExperience');
     Route::post('jobseeker/resume/skills/save','frontend\Jobseeker@saveSkills');
+	Route::post('jobseeker/resume/refer/save','frontend\Jobseeker@saverefer');
+	Route::post('jobseeker/resume/publish/save','frontend\Jobseeker@savepublish');
+	Route::post('jobseeker/resume/project/save','frontend\Jobseeker@saveproject');
+	Route::post('jobseeker/resume/language/save','frontend\Jobseeker@savelanguage');
+	Route::post('jobseeker/resume/award/save','frontend\Jobseeker@saveaward');
     Route::post('jobseeker/profile/picture','frontend\Jobseeker@profilePicture');
     Route::post('password/save','frontend\Jobseeker@savePassword');
     Route::post('profile/save','frontend\Jobseeker@saveProfile');

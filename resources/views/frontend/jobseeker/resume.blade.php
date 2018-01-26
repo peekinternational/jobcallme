@@ -553,7 +553,7 @@ if($user->profilePhoto != ''){
                     <!--Skills Section Start-->
                     <section class="resume-box" id="skills">
                         <a class="btn btn-primary r-add-btn" onclick="addSkills()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>@lang('home.skills')</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.skills')</h4>
                         <ul class="resume-details">
                             @if(count($resume['skills']) > 0)
                                 @foreach($resume['skills'] as $resumeId => $skills)
@@ -609,7 +609,589 @@ if($user->profilePhoto != ''){
                             </div>
                         </form>
                     </section>
-                    <!--Portfolio Section End-->
+					<!---Project -->
+					   <section class="resume-box" id="ski">
+                        <a class="btn btn-primary r-add-btn" onclick="addProject()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.project')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['project']) > 0)
+                                @foreach($resume['project'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getProject('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
+											<p class="rd-location"> {!! $skills->startmonth !!} {!! $skills->startyear !!} - {!! $skills->endmonth !!} {!! $skills->endyear !!}</p>
+											<p class="rd-location"> As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+											
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    <section class="resume-box" id="ski-edit" style="display: none;">
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.project')</c></h4>
+                        <form class="form-horizontal form-ski" method="post" action="">
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="resumeId" value="">
+                            <div class="form-group error-group" style="display: none;">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6"><div class="alert alert-danger"></div></div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.title')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="title">
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.position')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="position">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.type')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" name="type">
+                                        <option value="@lang('home.academic')">@lang('home.academic')</option>
+                                        <option value="@lang('home.academicsearch')">@lang('home.academicsearch')</option>
+                                        <option value="@lang('home.professional')">@lang('home.professional')</option>
+										<option value="@lang('home.professionalsearch')">@lang('home.professionalsearch')</option>
+										
+                                    </select>
+                                </div>
+                            </div>
+							 
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.occupation')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="occupation">
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="organization">
+                                </div>
+                            </div>
+							  <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.startyear')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="syear" name="startyear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.startmonth')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="smonth" name="startmonth">
+									<option value=''>Select Month</option>
+										<option value='Jan'>Jan</option>
+										<option value='Feb'>Feb</option>
+										<option value='Mar'>Mar</option>
+										<option value='Apr'>Apr</option>
+										<option value='May'>May</option>
+										<option value='Jun'>Jun</option>
+										<option value='Jul'>Jul</option>
+										<option value='Aug'>Aug</option>
+										<option value='Sep'>Sep</option>
+										<option value='Oct'>Oct</option>
+										<option value='Nov'>Nov</option>
+										<option value='Dec'>Dec</option>
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							    <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.endyear')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="eyear" name="endyear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.endmonth')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="emonth" name="endmonth">
+									<option value=''>Select Month</option>
+										<option value='Jan'>Jan</option>
+										<option value='Feb'>Feb</option>
+										<option value='Mar'>Mar</option>
+										<option value='Apr'>Apr</option>
+										<option value='May'>May</option>
+										<option value='Jun'>Jun</option>
+										<option value='Jul'>Jul</option>
+										<option value='Aug'>Aug</option>
+										<option value='Sep'>Sep</option>
+										<option value='Oct'>Oct</option>
+										<option value='Nov'>Nov</option>
+										<option value='Dec'>Dec</option>
+                                    </select>
+                                </div>
+                            </div>
+							<div class="form-group">
+                            <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
+                            <div class="col-md-6">
+                                <textarea name="detail" class="form-control tex-editor"></textarea>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#ski').fadeIn();$('#ski-edit').hide();$('html, body').animate({scrollTop:$('#ski').position().top}, 700);">@lang('home.cancel')</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                    <!--Project Section End-->
+					
+					<!---Project -->
+					   <section class="resume-box" id="sk">
+                        <a class="btn btn-primary r-add-btn" onclick="addLanguage()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.language')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['language']) > 0)
+                                @foreach($resume['language'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getLanguage('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->language !!}</p>
+											<p class="rd-location"> ({!! $skills->level !!})</p>
+											
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    <section class="resume-box" id="sk-edit" style="display: none;">
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.language')</c></h4>
+                        <form class="form-horizontal form-sk" method="post" action="">
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="resumeId" value="">
+                            <div class="form-group error-group" style="display: none;">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6"><div class="alert alert-danger"></div></div>
+                            </div>
+							
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.language')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" name="language">
+                                          <option value="Afrikanns">Afrikanns</option>
+										  <option value="Albanian">Albanian</option>
+										  <option value="Arabic">Arabic</option>
+										  <option value="Armenian">Armenian</option>
+										  <option value="Basque">Basque</option>
+										  <option value="Bengali">Bengali</option>
+										  <option value="Bulgarian">Bulgarian</option>
+										  <option value="Catalan">Catalan</option>
+										  <option value="Cambodian">Cambodian</option>
+										  <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+										  <option value="Croation">Croation</option>
+										  <option value="Czech">Czech</option>
+										  <option value="Danish">Danish</option>
+										  <option value="Dutch">Dutch</option>
+										  <option value="English">English</option>
+										  <option value="Estonian">Estonian</option>
+										  <option value="Fiji">Fiji</option>
+										  <option value="Finnish">Finnish</option>
+										  <option value="French">French</option>
+										  <option value="Georgian">Georgian</option>
+										  <option value="German">German</option>
+										  <option value="Greek">Greek</option>
+										  <option value="Gujarati">Gujarati</option>
+										  <option value="Hebrew">Hebrew</option>
+										  <option value="Hindi">Hindi</option>
+										  <option value="Hungarian">Hungarian</option>
+										  <option value="Icelandic">Icelandic</option>
+										  <option value="Indonesian">Indonesian</option>
+										  <option value="Irish">Irish</option>
+										  <option value="Italian">Italian</option>
+										  <option value="Japanese">Japanese</option>
+										  <option value="Javanese">Javanese</option>
+										  <option value="Korean">Korean</option>
+										  <option value="Latin">Latin</option>
+										  <option value="Latvian">Latvian</option>
+										  <option value="Lithuanian">Lithuanian</option>
+										  <option value="Macedonian">Macedonian</option>
+										  <option value="Malay">Malay</option>
+										  <option value="Malayalam">Malayalam</option>
+										  <option value="Maltese">Maltese</option>
+										  <option value="Maori">Maori</option>
+										  <option value="Marathi">Marathi</option>
+										  <option value="Mongolian">Mongolian</option>
+										  <option value="Nepali">Nepali</option>
+										  <option value="Norwegian">Norwegian</option>
+										  <option value="Persian">Persian</option>
+										  <option value="Polish">Polish</option>
+										  <option value="Portuguese">Portuguese</option>
+										  <option value="Punjabi">Punjabi</option>
+										  <option value="Quechua">Quechua</option>
+										  <option value="Romanian">Romanian</option>
+										  <option value="Russian">Russian</option>
+										  <option value="Samoan">Samoan</option>
+										  <option value="Serbian">Serbian</option>
+										  <option value="Slovak">Slovak</option>
+										  <option value="Slovenian">Slovenian</option>
+										  <option value="Spanish">Spanish</option>
+										  <option value="Swahili">Swahili</option>
+										  <option value="Swedish ">Swedish </option>
+										  <option value="Tamil">Tamil</option>
+										  <option value="Tatar">Tatar</option>
+										  <option value="Telugu">Telugu</option>
+										  <option value="Thai">Thai</option>
+										  <option value="Tibetan">Tibetan</option>
+										  <option value="Tonga">Tonga</option>
+										  <option value="Turkish">Turkish</option>
+										  <option value="Ukranian">Ukranian</option>
+										  <option value="Urdu">Urdu</option>
+										  <option value="Uzbek">Uzbek</option>
+										  <option value="Vietnamese">Vietnamese</option>
+										  <option value="Welsh">Welsh</option>
+										  <option value="Xhosa">Xhosa</option>
+										
+                                    </select>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.proficiencylevel')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" name="level">
+									<option value="@lang('home.Basic - Familiar')">@lang('home.Basic - Familiar')</option>
+                                        <option value="@lang('home.Conversational - Limited')">@lang('home.Conversational - Limited')</option>
+                                        <option value="@lang('home.Conversational')">@lang('home.Conversational')</option>
+										<option value="@lang('home.Conversational - Advanced')">@lang('home.Conversational - Advanced')</option>
+										<option value="@lang('home.Fluent - Wide Knowledge')">@lang('home.Fluent - Wide Knowledge')</option>
+										<option value="@lang('home.Fluent - Full Knowledge')">@lang('home.Fluent - Full Knowledge')</option>
+
+										
+                                    </select>
+                                </div>
+                            </div>
+							 
+							 
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#sk').fadeIn();$('#sk-edit').hide();$('html, body').animate({scrollTop:$('#sk').position().top}, 700);">@lang('home.cancel')</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+					       <section class="resume-box" id="skill">
+                        <a class="btn btn-primary r-add-btn" onclick="addSkill()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.references')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['reference']) > 0)
+                                @foreach($resume['reference'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getSkill('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->name !!}</p>
+											<p class="rd-location"> Job Title: {!! $skills->jobtitle !!}</p>
+											<p class="rd-location">Organization: {!! $skills->organization !!}</p>
+                                           <p class="rd-location">Phone Number : {!! $skills->phone !!}</p>
+										   <p class="rd-location">Email : {!! $skills->email !!}</p>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    <section class="resume-box" id="skill-edit" style="display: none;">
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
+                        <form class="form-horizontal form-skill" method="post" action="">
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="resumeId" value="">
+                            <div class="form-group error-group" style="display: none;">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6"><div class="alert alert-danger"></div></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.name')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="name">
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.jobtitle')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="jobtitle">
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="organization">
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.phone')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="phone">
+                                </div>
+                            </div>
+							  <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.email')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#skill').fadeIn();$('#skill-edit').hide();$('html, body').animate({scrollTop:$('#skill').position().top}, 700);">@lang('home.cancel')</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+					<!---Publication -->
+					   <section class="resume-box" id="skil">
+                        <a class="btn btn-primary r-add-btn" onclick="addSkil()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.publication')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['publish']) > 0)
+                                @foreach($resume['publish'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getSkil('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->pu_type !!})</span></p>
+											<p class="rd-location"> {!! $skills->month !!}-{!! $skills->year !!}</p>
+											<p class="rd-location"> Author: {!! $skills->author !!}</p>
+											<p class="rd-location">Publisher: {!! $skills->publisher !!}</p>
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    <section class="resume-box" id="skil-edit" style="display: none;">
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.publication')</c></h4>
+                        <form class="form-horizontal form-skil" method="post" action="">
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="resumeId" value="">
+                            <div class="form-group error-group" style="display: none;">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6"><div class="alert alert-danger"></div></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.type')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" name="pu_type">
+                                        <option value="@lang('home.book')">@lang('home.book')</option>
+                                        <option value="@lang('home.bookchapter')">@lang('home.bookchapter')</option>
+                                        <option value="@lang('home.Peer-reviewed')">@lang('home.Peer-reviewed')</option>
+										<option value="@lang('home.Non-peer-reviewed')">@lang('home.Non-peer-reviewed')</option>
+										<option value="@lang('home.Report')">@lang('home.Report')</option>
+										<option value="@lang('home.Patents')">@lang('home.Patents')</option>
+                                    </select>
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.title')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="title">
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Author')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="author">
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.publisher')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="publisher">
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.year')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="year">
+                                </div>
+                            </div>
+							  <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.month')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="month">
+                                </div>
+                            </div>
+							<div class="form-group">
+                            <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
+                            <div class="col-md-6">
+                                <textarea name="detail" class="form-control tex-editor"></textarea>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#skil').fadeIn();$('#skil-edit').hide();$('html, body').animate({scrollTop:$('#skil').position().top}, 700);">@lang('home.cancel')</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+					
+					 <section class="resume-box" id="s">
+                        <a class="btn btn-primary r-add-btn" onclick="addAward()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.award')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['award']) > 0)
+                                @foreach($resume['award'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getAward('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->title !!}</p>
+											<p class="rd-location"> {!! $skills->type !!},{!! $skills->startmonth !!} {!! $skills->startyear !!}</p>
+											<p class="rd-location"> {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+											
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    <section class="resume-box" id="s-edit" style="display: none;">
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.award')</c></h4>
+                        <form class="form-horizontal form-s" method="post" action="">
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="resumeId" value="">
+                            <div class="form-group error-group" style="display: none;">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6"><div class="alert alert-danger"></div></div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.title')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="title">
+                                </div>
+                            </div>
+							
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.type')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" name="type">
+                                        <option value="@lang('home.academic')">@lang('home.academic')</option>
+                                        <option value="@lang('home.professional')">@lang('home.professional')</option>
+										<option value="@lang('home.Extracurricular')">@lang('home.Extracurricular')</option>
+										
+                                    </select>
+                                </div>
+                            </div>
+							 
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.occupation')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="occupation">
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="organization">
+                                </div>
+                            </div>
+							  <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.year')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="years" name="startyear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.month')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="smonth" name="startmonth">
+									<option value=''>Select Month</option>
+										<option value='Jan'>Jan</option>
+										<option value='Feb'>Feb</option>
+										<option value='Mar'>Mar</option>
+										<option value='Apr'>Apr</option>
+										<option value='May'>May</option>
+										<option value='Jun'>Jun</option>
+										<option value='Jul'>Jul</option>
+										<option value='Aug'>Aug</option>
+										<option value='Sep'>Sep</option>
+										<option value='Oct'>Oct</option>
+										<option value='Nov'>Nov</option>
+										<option value='Dec'>Dec</option>
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							 
+							<div class="form-group">
+                            <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
+                            <div class="col-md-6">
+                                <textarea name="detail" class="form-control tex-editor"></textarea>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#s').fadeIn();$('#s-edit').hide();$('html, body').animate({scrollTop:$('#s').position().top}, 700);">@lang('home.cancel')</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                    <!--Project Section End-->
                 </div>
                 <div class="col-md-3">
                     <div class="resume-listing-section hidden-sm hidden-xs">
@@ -635,6 +1217,14 @@ if($user->profilePhoto != ''){
                             <li>
                                 <a id="#" onclick="$('#skills').fadeIn();$('#skills-edit').hide();$('html, body').animate({scrollTop:$('#skills').position().top}, 700);">@lang('home.skills')</a> 
                                 <a id="#" onclick="addSkills();$('html, body').animate({scrollTop:$('#skills-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
+                            </li>
+							<li>
+                                <a id="#" onclick="$('#skill').fadeIn();$('#skill-edit').hide();$('html, body').animate({scrollTop:$('#skill').position().top}, 700);">@lang('home.references')</a> 
+                                <a id="#" onclick="addSkill();$('html, body').animate({scrollTop:$('#skill-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
+                            </li>
+							<li>
+                                <a id="#" onclick="$('#skil').fadeIn();$('#skil-edit').hide();$('html, body').animate({scrollTop:$('#skil').position().top}, 700);">@lang('home.publication')</a> 
+                                <a id="#" onclick="addSkil();$('html, body').animate({scrollTop:$('#skil-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
                             </li>
                         </ul>
                     </div>
@@ -1047,6 +1637,308 @@ function getSkills(resumeId){
         }
     })
 }
+//
+function addSkill(){
+    $('.form-skill input').val('');
+    $('#skill-edit h4 c').text('Add Reference');
+    $('#skill').hide();
+    $('#skill-edit').fadeIn();
+}
+$('form.form-skill').submit(function(e){
+    $('.form-skill input[name="_token"]').val(pageToken);
+    $('.form-skill button[name="save"]').prop('disabled',true);
+    $('.form-skill .error-group').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.form-skill').serialize(),
+        url: "{{ url('account/jobseeker/resume/refer/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.form-skill .error-group').show();
+                $('.form-skill .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
+                $('html, body').animate({scrollTop:$('#skill-edit').position().top}, 1000);
+                $('.form-skill button[name="save"]').prop('disabled',false);
+            }else{
+                window.location.href = "{{ url('account/jobseeker/resume') }}";
+            }
+            Pace.stop;
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            var vErrors = '';
+            $.each(errors, function(i,k){
+                vErrors += '<li>'+k+'</li>';
+            })
+            $('.form-skill .error-group').show();
+            $('.form-skill .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
+            $('.form-skill button[name="save"]').prop('disabled',false);
+            Pace.stop;
+            $('html, body').animate({scrollTop:$('#skill-edit').position().top}, 1000);
+        }
+    })
+    e.preventDefault();
+})
+function getSkill(resumeId){
+    $.ajax({
+        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.form-skill input[name="resumeId"]').val(resumeId);
+            $('.form-skill input[name="name"]').val(obj.name);
+            $('.form-skill input[name="jobtitle"]').val(obj.jobtitle);
+			$('.form-skill input[name="organization"]').val(obj.organization);
+            $('.form-skill input[name="phone"]').val(obj.phone);
+			$('.form-skill input[name="email"]').val(obj.email);
+            $('#skill-edit h4 c').text('Edit Reference');
+            $('#skill').hide();
+            $('#skill-edit').fadeIn();
+        }
+    })
+}
+//
+//
+function addSkil(){
+    $('.form-skil input').val('');
+    $('#skil-edit h4 c').text('Add Publisher');
+    $('#skil').hide();
+    $('#skil-edit').fadeIn();
+}
+$('form.form-skil').submit(function(e){
+    $('.form-skil input[name="_token"]').val(pageToken);
+    $('.form-skil button[name="save"]').prop('disabled',true);
+    $('.form-skil .error-group').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.form-skil').serialize(),
+        url: "{{ url('account/jobseeker/resume/publish/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.form-skil .error-group').show();
+                $('.form-skil .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
+                $('html, body').animate({scrollTop:$('#skil-edit').position().top}, 1000);
+                $('.form-skil button[name="save"]').prop('disabled',false);
+            }else{
+                window.location.href = "{{ url('account/jobseeker/resume') }}";
+            }
+            Pace.stop;
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            var vErrors = '';
+            $.each(errors, function(i,k){
+                vErrors += '<li>'+k+'</li>';
+            })
+            $('.form-skill .error-group').show();
+            $('.form-skill .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
+            $('.form-skill button[name="save"]').prop('disabled',false);
+            Pace.stop;
+            $('html, body').animate({scrollTop:$('#skil-edit').position().top}, 1000);
+        }
+    })
+    e.preventDefault();
+})
+function getSkil(resumeId){
+    $.ajax({
+        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.form-skil input[name="resumeId"]').val(resumeId);
+            $('.form-skil select[name="pu_type"]').val(obj.pu_type).trigger('change');
+            $('.form-skil input[name="title"]').val(obj.title);
+			$('.form-skil input[name="author"]').val(obj.author);
+			$('.form-skil input[name="publisher"]').val(obj.publisher);
+            $('.form-skil input[name="year"]').val(obj.year);
+			$('.form-skil input[name="month"]').val(obj.month);
+			$('.form-skil textarea[name="detail"]').val(obj.detail);
+            $('#skil-edit h4 c').text('Edit Publisher');
+            $('#skil').hide();
+            $('#skil-edit').fadeIn();
+        }
+    })
+}
+//
+
+//
+function addProject(){
+    $('.form-ski input').val('');
+    $('#ski-edit h4 c').text('Add Project');
+    $('#ski').hide();
+    $('#ski-edit').fadeIn();
+}
+$('form.form-ski').submit(function(e){
+    $('.form-ski input[name="_token"]').val(pageToken);
+    $('.form-ski button[name="save"]').prop('disabled',true);
+    $('.form-ski .error-group').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.form-ski').serialize(),
+        url: "{{ url('account/jobseeker/resume/project/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.form-ski .error-group').show();
+                $('.form-ski .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
+                $('html, body').animate({scrollTop:$('#ski-edit').position().top}, 1000);
+                $('.form-ski button[name="save"]').prop('disabled',false);
+            }else{
+                window.location.href = "{{ url('account/jobseeker/resume') }}";
+            }
+            Pace.stop;
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            var vErrors = '';
+            $.each(errors, function(i,k){
+                vErrors += '<li>'+k+'</li>';
+            })
+            $('.form-ski .error-group').show();
+            $('.form-ski .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
+            $('.form-ski button[name="save"]').prop('disabled',false);
+            Pace.stop;
+            $('html, body').animate({scrollTop:$('#ski-edit').position().top}, 1000);
+        }
+    })
+    e.preventDefault();
+})
+function getProject(resumeId){
+    $.ajax({
+        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.form-ski input[name="resumeId"]').val(resumeId);
+			$('.form-ski input[name="title"]').val(obj.title);
+			$('.form-ski input[name="position"]').val(obj.position);
+            $('.form-ski select[name="type"]').val(obj.type).trigger('change');
+			$('.form-ski input[name="occupation"]').val(obj.occupation);
+			$('.form-ski input[name="organization"]').val(obj.organization);
+			$('.form-ski select[name="startyear"]').val(obj.startyear).trigger('change');
+            $('.form-ski select[name="startmonth"]').val(obj.startmonth).trigger('change');
+			$('.form-ski select[name="endyear"]').val(obj.endyear).trigger('change');
+			$('.form-ski select[name="endmonth"]').val(obj.endmonth).trigger('change');
+			$('.form-ski textarea[name="detail"]').val(obj.detail);
+            $('#ski-edit h4 c').text('Edit Project');
+            $('#ski').hide();
+            $('#ski-edit').fadeIn();
+        }
+    })
+}
+//
+function addLanguage(){
+    $('.form-sk input').val('');
+    $('#sk-edit h4 c').text('Add Language');
+    $('#sk').hide();
+    $('#sk-edit').fadeIn();
+}
+$('form.form-sk').submit(function(e){
+    $('.form-sk input[name="_token"]').val(pageToken);
+    $('.form-sk button[name="save"]').prop('disabled',true);
+    $('.form-sk .error-group').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.form-sk').serialize(),
+        url: "{{ url('account/jobseeker/resume/language/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.form-sk .error-group').show();
+                $('.form-sk .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
+                $('html, body').animate({scrollTop:$('#sk-edit').position().top}, 1000);
+                $('.form-sk button[name="save"]').prop('disabled',false);
+            }else{
+                window.location.href = "{{ url('account/jobseeker/resume') }}";
+            }
+            Pace.stop;
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            var vErrors = '';
+            $.each(errors, function(i,k){
+                vErrors += '<li>'+k+'</li>';
+            })
+            $('.form-sk .error-group').show();
+            $('.form-sk .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
+            $('.form-sk button[name="save"]').prop('disabled',false);
+            Pace.stop;
+            $('html, body').animate({scrollTop:$('#ski-edit').position().top}, 1000);
+        }
+    })
+    e.preventDefault();
+})
+function getLanguage(resumeId){
+    $.ajax({
+        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.form-sk input[name="resumeId"]').val(resumeId);
+			$('.form-sk select[name="language"]').val(obj.language).trigger('change');
+			$('.form-sk select[name="level"]').val(obj.level).trigger('change');
+			
+            $('#sk-edit h4 c').text('Edit Award');
+            $('#sk').hide();
+            $('#sk-edit').fadeIn();
+        }
+    })
+}
+//
+//
+function addAward(){
+    $('.form-s input').val('');
+    $('#s-edit h4 c').text('Add Language');
+    $('#s').hide();
+    $('#s-edit').fadeIn();
+}
+$('form.form-s').submit(function(e){
+    $('.form-s input[name="_token"]').val(pageToken);
+    $('.form-s button[name="save"]').prop('disabled',true);
+    $('.form-s.error-group').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.form-s').serialize(),
+        url: "{{ url('account/jobseeker/resume/award/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.form-s.error-group').show();
+                $('.form-s.error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
+                $('html, body').animate({scrollTop:$('#sk-edit').position().top}, 1000);
+                $('.form-s button[name="save"]').prop('disabled',false);
+            }else{
+                window.location.href = "{{ url('account/jobseeker/resume') }}";
+            }
+            Pace.stop;
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            var vErrors = '';
+            $.each(errors, function(i,k){
+                vErrors += '<li>'+k+'</li>';
+            })
+            $('.form-s .error-group').show();
+            $('.form-s .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
+            $('.form-s button[name="save"]').prop('disabled',false);
+            Pace.stop;
+            $('html, body').animate({scrollTop:$('#s-edit').position().top}, 1000);
+        }
+    })
+    e.preventDefault();
+})
+function getAward(resumeId){
+    $.ajax({
+        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.form-s input[name="resumeId"]').val(resumeId);
+			$('.form-s input[name="title"]').val(obj.title);
+            $('.form-s select[name="type"]').val(obj.type).trigger('change');
+			$('.form-s input[name="occupation"]').val(obj.occupation);
+			$('.form-s input[name="organization"]').val(obj.organization);
+			$('.form-s select[name="startyear"]').val(obj.startyear).trigger('change');
+            $('.form-s select[name="startmonth"]').val(obj.startmonth).trigger('change');
+			
+            $('#s-edit h4 c').text('Edit Language');
+            $('#s').hide();
+            $('#s-edit').fadeIn();
+        }
+    })
+}
+//
 $('.profile-pic').on('change',function(){
     var formData = new FormData();
     formData.append('profilePicture', $(this)[0].files[0]);
@@ -1068,6 +1960,22 @@ $('.profile-pic').on('change',function(){
         }
     });
 });
+tinymce.init({
+    selector: '.tex-editor',
+    setup: function (editor) {
+        editor.on('change', function () {
+            editor.save();
+        });
+    },
+    height: 200,
+    menubar: false,
+    plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table contextmenu paste code'
+    ],
+    toolbar: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify bullist numlist outdent indent | link'
+});
 $('.privacy-form input[type="checkbox"]').click(function(){
     $('.privacy-form input[name="_token"]').val(pageToken);
     $.ajax({
@@ -1078,5 +1986,32 @@ $('.privacy-form input[type="checkbox"]').click(function(){
         }
     })
 })
+
+var start = 1950;
+var end = new Date().getFullYear();
+var options = "";
+for(var year = end ; year >=start; year--){
+  options += "<option value="+year+">"+ year +"</option>";
+}
+document.getElementById("syear").innerHTML = options;
+//
+
+var estart = 1950;
+var eend = new Date().getFullYear();
+var eoptions = "";
+for(var eyear = eend ; eyear >=estart; eyear--){
+  eoptions += "<option value="+eyear+">"+ eyear +"</option>";
+}
+document.getElementById("eyear").innerHTML = eoptions;
+//
+
+var starts = 1950;
+var ends = new Date().getFullYear();
+var option = "";
+for(var years = ends ; years >=starts; years--){
+  option += "<option value="+years+">"+ years +"</option>";
+}
+document.getElementById("years").innerHTML = option;
+
 </script>
 @endsection

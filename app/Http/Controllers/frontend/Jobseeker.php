@@ -338,6 +338,137 @@ class Jobseeker extends Controller{
 		}
 		exit('1');
 	}
+	
+	public function saverefer(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$this->validate($request, [
+				'name' => 'required|max:255',
+				'phone' => 'required'
+			]);
+
+		extract(array_map('trim', $request->all()));
+
+		$skillsQry = array('name' => $name, 'jobtitle' => $jobtitle, 'organization' => $organization, 'phone' => $phone, 'email' => $email);
+
+		$input = array('type' => 'reference', 'resumeData' => @json_encode($skillsQry));
+
+		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
+			DB::table('jcm_resume')->where('resumeId','=',$resumeId)->update($input);
+		}else{
+			$input['userId'] = $app->userId;
+			$input['createdTime'] = date('Y-m-d H:i:s');
+			DB::table('jcm_resume')->insert($input);
+		}
+		exit('1');
+	}
+	
+	public function savepublish(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$this->validate($request, [
+				'pu_type' => 'required|max:255',
+				'title' => 'required'
+			]);
+
+		extract(array_map('trim', $request->all()));
+
+		$skillsQry = array('pu_type' => $pu_type, 'title' => $title, 'author' => $author, 'publisher' => $publisher, 'year' => $year, 'month' => $month, 'detail' => $detail);
+
+		$input = array('type' => 'publish', 'resumeData' => @json_encode($skillsQry));
+
+		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
+			DB::table('jcm_resume')->where('resumeId','=',$resumeId)->update($input);
+		}else{
+			$input['userId'] = $app->userId;
+			$input['createdTime'] = date('Y-m-d H:i:s');
+			DB::table('jcm_resume')->insert($input);
+		}
+		exit('1');
+	}
+	
+	public function saveproject(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$this->validate($request, [
+				'type' => 'required|max:255',
+				'title' => 'required'
+			]);
+
+		extract(array_map('trim', $request->all()));
+
+		$skillsQry = array('title' => $title, 'position' => $position, 'type' => $type, 'occupation' => $occupation, 'organization' => $organization, 'startyear' => $startyear, 'startmonth' => $startmonth,'endyear' => $endyear, 'endmonth' => $endmonth, 'detail' => $detail);
+
+		$input = array('type' => 'project', 'resumeData' => @json_encode($skillsQry));
+
+		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
+			DB::table('jcm_resume')->where('resumeId','=',$resumeId)->update($input);
+		}else{
+			$input['userId'] = $app->userId;
+			$input['createdTime'] = date('Y-m-d H:i:s');
+			DB::table('jcm_resume')->insert($input);
+		}
+		exit('1');
+	}
+
+	
+	public function savelanguage(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$this->validate($request, [
+				'language' => 'required|max:255',
+				'level' => 'required'
+			]);
+
+		extract(array_map('trim', $request->all()));
+
+		$skillsQry = array('language' => $language, 'level' => $level);
+
+		$input = array('type' => 'language', 'resumeData' => @json_encode($skillsQry));
+
+		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
+			DB::table('jcm_resume')->where('resumeId','=',$resumeId)->update($input);
+		}else{
+			$input['userId'] = $app->userId;
+			$input['createdTime'] = date('Y-m-d H:i:s');
+			DB::table('jcm_resume')->insert($input);
+		}
+		exit('1');
+	}
+	
+	public function saveaward(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$this->validate($request, [
+				'type' => 'required|max:255',
+				'title' => 'required'
+			]);
+
+		extract(array_map('trim', $request->all()));
+
+		$skillsQry = array('title' => $title,'type' => $type, 'occupation' => $occupation, 'organization' => $organization, 'startyear' => $startyear, 'startmonth' => $startmonth, 'detail' => $detail);
+
+		$input = array('type' => 'award', 'resumeData' => @json_encode($skillsQry));
+
+		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
+			DB::table('jcm_resume')->where('resumeId','=',$resumeId)->update($input);
+		}else{
+			$input['userId'] = $app->userId;
+			$input['createdTime'] = date('Y-m-d H:i:s');
+			DB::table('jcm_resume')->insert($input);
+		}
+		exit('1');
+	}
 
 	public function savePassword(Request $request){
 		if(!$request->ajax()){
