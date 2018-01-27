@@ -30,8 +30,8 @@ if($dbms == "mssql" && file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR.'sqlsrv
 
 define('DB_SERVER',			'localhost'				); // Database host
 define('DB_PORT',			"3306"											); // Database port
-define('DB_USERNAME',		'jobcallme'		); // Database username
-define('DB_PASSWORD',		'jcm1411'			); // Database password
+define('DB_USERNAME',		'root'		); // Database username
+define('DB_PASSWORD',		''			); // Database password
 define('DB_NAME',			'jobcallme'			); // Database name
 
 
