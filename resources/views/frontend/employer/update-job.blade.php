@@ -32,7 +32,7 @@
 						@foreach($recs as $payment)
                             <!----><li style="position:relative">
                                 <!---->
-                                <input class="mat-radio-input cdk-visually-hidden" type="radio" id="md-radio-2-input" name="amount" 
+                                <input class="mat-radio-input cdk-visually-hidden" type="radio" id="md-radio-2-input" name="p_Category" 
 								   value="{!! $payment->id!!}" name="md-radio-group-0" @if($result->amount == $payment->price) checked @endif><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">{!! $payment->title!!}</span></div></label></md-radio-button>
                                 <div>
                                   <!----><label for="{!! $payment->id!!}">

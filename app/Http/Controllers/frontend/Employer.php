@@ -365,7 +365,9 @@ curl_close ($ch);
 		Session::put('p_Category',$request->p_Category); 
 		Session::put('postedJobId',Session::get('id')); 
 		/***/
-		$am=$request->amount;
+		$rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
+	   $amount=$rec[0]->price;
+		$am=$amount;
 		$p_Category=$request->p_Category;
 		$jType=$request->jType;
 		$app = $request->session()->get('jcmUser');
@@ -1291,9 +1293,10 @@ public function userResume($userId){
 		$jobid = Session::get('jobId');
 		Session::put('postedJobId',$jobid);
 	 $rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
+	
 	   $amount=$rec[0]->price;
-	   //dd();
-
+	   
+ //dd($amount);
         $mul=$amount;
         $am=$mul*1100;
       //  dd($am);
@@ -1504,7 +1507,7 @@ public function userResume($userId){
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
-		dd($input);
+		//dd($input);
 		$jobId = DB::table('jcm_jobs')->where('jobId','=',$jobid)->update($input);
 		echo $jobId;
         /** Get the payment ID before session clear **/
