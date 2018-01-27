@@ -154,10 +154,10 @@ $lToken = csrf_token();
                 <p>Breaking News</p>
             </div>-->
             <ul>
-                <div><li><span>Web Developer Required &ndash; <a href="#">Latest Job</a></span></li></div>
-                <div><li><span>CSR urgent required, Satellite Town  &ndash; <a href="#">Latest Job</a></span></li></div>
-                <div><li><span>Experience Software Engineer Required, Islamabad  &ndash; <a href="#">Latest Job</a></span></li></div>
-                <div><li><span>Office Boy Required  &ndash; <a href="#">Latest Job</a></span></li></div>
+			@foreach($jobs as $job)
+                <div><li><span>{!! $job->title !!} &ndash; <a href="{{ url('jobs/'.$job->jobId) }}">Latest Job</a></span></li></div>
+				@endforeach
+               
             </ul>
         </div>
     </section>

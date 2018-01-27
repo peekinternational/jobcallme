@@ -45,6 +45,13 @@ $next = Request::route()->uri;
         <?php if(in_array($navPage, $navArr)){ if(!Session::has('jcmUser')){ ?>
             <script type="text/javascript"> window.location.href = "{{ url('account/login?next='.$next) }}"</script>
         <?php }} ?>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9433529110214297",
+    enable_page_level_ads: true
+  });
+</script>
         <style type="text/css">
             .mce-branding-powered-by {display: none;}
             .udp-items li {width: 10%;}
