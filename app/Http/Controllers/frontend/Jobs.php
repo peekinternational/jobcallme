@@ -42,8 +42,9 @@ class Jobs extends Controller{
 			$savedJobArr = @explode(',', $meta->saved);
 		}
 
-		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyName','jcm_companies.companyLogo');
+		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
+		$jobs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
 		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
 		//$jobs->where('jcm_jobs.country','=',$country);
 		/*if($_find == '0'){
@@ -83,21 +84,7 @@ class Jobs extends Controller{
 		$category ='';
 		if(count($result) > 0){
 			foreach($result as $rec){
-				if($rec->p_Category==0)
-				{
-					$category='Basic';
-				}
-				elseif($rec->p_Category==1)
-				{
-					$category='Gallery';
-				}
-				elseif($rec->p_Category==2)
-				{
-					$category='Hot';
-				}
-				else{
-					$category='Premium';
-				}
+				
 				$applyUrl = url('jobs/apply/'.$rec->jobId);
 				$viewUrl = url('jobs/'.$rec->jobId);
 				$vhtml .= '<div class="jobs-suggestions">';
@@ -122,7 +109,7 @@ class Jobs extends Controller{
                     $vhtml .= '</div>';
 				}
 				$colorArr = array('purple','green','darkred','orangered','blueviolet');
-                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$category.'</span></a></h4>';
+                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_title.'</span></a></h4>';
                     $vhtml .= '<p>'.$rec->companyName.'</p>';
                     $vhtml .= '<ul class="js-listing">';
                     	$vhtml .= '<li>';
@@ -168,8 +155,10 @@ class Jobs extends Controller{
 
 	public function viewJob(Request $request){
 		$jobId = $request->segment(2);
-		$jobrs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.*');
+		$jobrs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.*');
 		$jobrs->join('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId');
+		$jobrs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
+		
 		$jobrs->where('jcm_jobs.jobId','=',$jobId);
 		$job = $jobrs->first();
 		//dd($job);

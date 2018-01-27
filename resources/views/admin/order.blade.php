@@ -38,11 +38,7 @@
                                                 <td>{!! $job->title !!}</td>
 												<td>{!! $job->email!!}</td>
                                                 <td>${!! $job->amount!!}</td>
-												<td>@if($job->p_Category==1)Gallery
-				@elseif($job->p_Category==2)Hot
-				@else
-					Premium
-				@endif</td>
+												<td>{!! $job->p_title!!}</td>
 												<td style="text-align: center;"><label class="label label-success">{!! $job->jType!!}</label></td>
 												@if($job->paymentType==1)
 												<td style="text-align: center;"><label class="label label-success">Paypal</label></td>
