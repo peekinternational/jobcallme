@@ -86,6 +86,8 @@ class Home extends Controller{
 					$request->session()->put('fNotice',$fNotice);
 				}
 				$request->session()->put('jcmUser', $user);
+				setcookie('cc_data', $user->userId, time() + (86400 * 30), "/");
+				
 				if($next != ''){
 					return redirect($next);
 				}else{
