@@ -1,0 +1,1 @@
+a:4:{s:5:"value";s:146:"a:2:{s:2:"en";a:1:{s:4:"core";a:1:{s:7:"default";a:1:{s:3:"rtl";s:1:"0";}}}s:2:"ko";a:1:{s:4:"core";a:1:{s:7:"default";a:1:{s:3:"rtl";s:1:"0";}}}}";s:10:"write_time";s:10:"1517023480";s:10:"expired_in";i:3600;s:12:"expired_time";i:1517027080;}
