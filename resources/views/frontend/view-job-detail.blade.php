@@ -28,12 +28,7 @@
 			@endif
 			<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
                 <h4>{{ $job->title }} <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">
-				@if($job->p_Category==0)Basic
-				@elseif($job->p_Category==1)Gallery
-				@elseif($job->p_Category==2)Hot
-				@else
-					Premium
-				@endif
+				{{ $job->p_title }}
 				</span></h4>
                 <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }} </p>
                 <div class="jd-share-btn">

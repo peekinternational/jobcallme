@@ -34,7 +34,7 @@
                             <!----><li style="position:relative">
                                 <!---->
 
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="amount" value="{!! $payment->price!!}">
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
                              <span class="b">@lang('home.'.$payment->title)</span></div>
                                 <div>

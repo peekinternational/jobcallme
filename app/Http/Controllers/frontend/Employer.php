@@ -117,14 +117,18 @@ curl_close ($ch);
 	 
     public function postPaymentWithpaypals(Request $request)
     {
-        $mul=$request->amount;
+	   $rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
+	   $amount=$rec[0]->price;
+	   //dd();
+
+        $mul=$amount;
         $am=$mul*1100;
       //  dd($am);
+	  $request->session()->put('p_Category', $request->p_Category);
         $goodsname = Session::get('p_Category');
         $app = $request->session()->get('jcmUser');
 		//dd($request->department);
-			$request->session()->put('amount', $request->amount);
-		
+		$request->session()->put('amount', $amount);
 		$request->session()->put('title', $request->title);
 		$request->session()->put('jType', 'Paid');
 		$request->session()->put('department', $request->department);
@@ -149,31 +153,12 @@ curl_close ($ch);
 		$request->session()->put('shift', $request->shift);
 		$request->session()->put('expiryDate', $request->expiryDate);
 		
-		if($request->amount=='20')
-		{
-			$request->merge(['p_Category'=>'1']);
-			$request->session()->put('p_Category', $request->p_Category);
-			
-		}
-		elseif($request->amount=='52')
-		{
-			$request->merge(['p_Category'=>'2']);
-			$request->session()->put('p_Category', $request->p_Category);
-		}
-		elseif($request->amount=='75'){
-			$request->merge(['p_Category'=>'3']);
-			$request->session()->put('p_Category', $request->p_Category);
-		}
-		else{
-			$request->merge(['p_Category'=>'0']);
-		}
-		
 		 $goodsname = Session::get('p_Category');
-		if($request->amount!='0')
+		if($amount!='0')
 		{
 			$request->merge(['jType'=>'Paid']);
 		}
-		if($request->amount=='0')
+		if($amount=='0')
 		{
 			$request->merge(['jType'=>'Free']);
 				$app = $request->session()->get('jcmUser');
@@ -380,7 +365,9 @@ curl_close ($ch);
 		Session::put('p_Category',$request->p_Category); 
 		Session::put('postedJobId',Session::get('id')); 
 		/***/
-		$am=$request->amount;
+		$rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
+	   $amount=$rec[0]->price;
+		$am=$amount;
 		$p_Category=$request->p_Category;
 		$jType=$request->jType;
 		$app = $request->session()->get('jcmUser');
@@ -453,7 +440,7 @@ curl_close ($ch);
     	/* posted jobs*/
     	//$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_job_applied.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
 		//$postedJobs = DB::table('jcm_jobs')->where('userId','=',$app->userId)->orderBy('jobId','desc')->get();
-		$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_jobs.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
+		$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*,jcm_payments.title as p_title'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_jobs.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
     	/* end */
 //dd($postedJobs);
     	/* recent application */
@@ -497,9 +484,9 @@ curl_close ($ch);
     	$read_record = $readQry->get();
 		//dd($postedJobs);
 		
-		
+		$lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(8)->get();
 
-		return view('frontend.employer.dashboard',compact('postedJobs','applicant','applicants','response','experience','recruit','read_record'));
+		return view('frontend.employer.dashboard',compact('postedJobs','applicant','applicants','response','experience','recruit','read_record','lear_record'));
 	}
 
 	public function getJobResponse($app){
@@ -1165,7 +1152,8 @@ public function userResume($userId){
 	
 	public function jobupdate(Request $request ,$jobId){
 		Session::put('id', $jobId);
-		return view('frontend.employer.jobupdate',compact('jobId'));
+		$recs = DB::table('jcm_payments')->get();
+		return view('frontend.employer.jobupdate',compact('jobId','recs'));
 	}
 	public function update(Request $request){
 		//return $request->all();
@@ -1218,8 +1206,10 @@ public function userResume($userId){
             }
         }
         /** add payment ID to session **/
+		$rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
+	   $amount=$rec[0]->price;
 		Session::put('payment_id', $payment->getId());
-		$request->session()->put('amount', $request->amount);
+		$request->session()->put('amount', $amount);
 		$request->session()->put('p_Category', $request->p_Category);
 		$request->session()->put('jType', $request->jType);
         if(isset($redirect_url)) {
@@ -1290,7 +1280,9 @@ public function userResume($userId){
 			$result= $data[0];
 			//$input = array('title' => $result->title);
 			//dd($result);
-			return view('frontend.employer.update-job',compact('result'));
+			$recs = DB::table('jcm_payments')->get();
+			
+			return view('frontend.employer.update-job',compact('result','recs'));
 			//Session::flash('message', "Successfully Delete Job");
 			//return redirect(url()->previous());
 		}
@@ -1300,14 +1292,19 @@ public function userResume($userId){
       {
 		$jobid = Session::get('jobId');
 		Session::put('postedJobId',$jobid);
-		$mul=$request->amount;
-		$am=$mul*1100;
+	 $rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
+	
+	   $amount=$rec[0]->price;
+	   
+ //dd($amount);
+        $mul=$amount;
+        $am=$mul*1100;
       //  dd($am);
+	  $request->session()->put('p_Category', $request->p_Category);
         $goodsname = Session::get('p_Category');
         $app = $request->session()->get('jcmUser');
 		//dd($request->department);
-			$request->session()->put('amount', $request->amount);
-		
+		$request->session()->put('amount', $amount);
 		$request->session()->put('title', $request->title);
 		$request->session()->put('jType', 'Paid');
 		$request->session()->put('department', $request->department);
@@ -1332,31 +1329,13 @@ public function userResume($userId){
 		$request->session()->put('shift', $request->shift);
 		$request->session()->put('expiryDate', $request->expiryDate);
 		
-		if($request->amount=='20')
-		{
-			$request->merge(['p_Category'=>'1']);
-			$request->session()->put('p_Category', $request->p_Category);
-			
-		}
-		elseif($request->amount=='52')
-		{
-			$request->merge(['p_Category'=>'2']);
-			$request->session()->put('p_Category', $request->p_Category);
-		}
-		elseif($request->amount=='75'){
-			$request->merge(['p_Category'=>'3']);
-			$request->session()->put('p_Category', $request->p_Category);
-		}
-		else{
-			$request->merge(['p_Category'=>'0']);
-		}
-		
+	
 		 $goodsname = Session::get('p_Category');
-		if($request->amount!='0')
+		if($amount!='0')
 		{
 			$request->merge(['jType'=>'Paid']);
 		}
-		if($request->amount=='0')
+		if($amount=='0')
 		{
 			$request->merge(['jType'=>'Free']);
 			$app = $request->session()->get('jcmUser');
@@ -1528,6 +1507,7 @@ public function userResume($userId){
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
+		//dd($input);
 		$jobId = DB::table('jcm_jobs')->where('jobId','=',$jobid)->update($input);
 		echo $jobId;
         /** Get the payment ID before session clear **/

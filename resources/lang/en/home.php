@@ -481,6 +481,13 @@ return [
 	'proficiencylevel' => 'Proficiency Level',
 	'Extracurricular' => 'Extracurricular',
 	'award' => 'Honours & Awards',
+	'ImproveCompetitiveAdvantage' => 'Improve Competitive Advantage',
+	'ADVERTISE' => 'ADVERTISE',
+	'' => '',
+	'' => '',
+	'' => '',
+	'' => '',
+	'' => '',
 	
 	
 	

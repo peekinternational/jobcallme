@@ -63,14 +63,11 @@
 							
                                     <div class="rtj-details">
                                         <p><strong><a href="{{ url('jobs/'.$pjobs->jobId) }}">{!! $pjobs->title !!}</a></strong> <i class="fa fa-check-circle-o"></i></p>
-                                         <p>{{ strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open' }} <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}"> @if($pjobs->p_Category==0)Basic
-				@elseif($pjobs->p_Category==1)Gallery
-				@elseif($pjobs->p_Category==2)Hot
-				@else
-					Premium
-				@endif</span>
+                                         <p>{{ strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open' }} 
+										 <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">{!! $pjobs->p_title !!}</span>
+										 
 										
-										@if ($pjobs->p_Category =='0')
+										@if ($pjobs->p_title =='Basic')
 											<a href="{{ url('account/employer/jobupdate/'.$pjobs->jobId) }}">(@lang('home.upgrade'))</a>
                                          @else
 											 @endif
@@ -128,7 +125,7 @@
             <!--RTJ- Left end-->
 
             <!--RTJ- Right start-->
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <!--Follow Companies - Start -->
                 <div class="follow-companies">
                     <h4>@lang('home.suggestedpeople')</h4>
@@ -141,12 +138,16 @@
                             $pImage = url('profile-photos/'.$appl->profilePhoto);
                         }
                         ?>
-                        <div class="col-md-4 col-xs-6 sp-item">
+                        <div class="col-md-12 col-xs-12 sp-item">
+						<div class="col-md-4 col-xs-4 sp-item">
                             <img src="{{ $pImage }}">
+							</div>
+							<div class="col-md-8 col-xs-8 sp-item">
                             <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
                             <p>{!! $appl->companyName !!}</p>
                             <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
                         </div>
+						</div>
 						 @endforeach
 
                       
@@ -157,9 +158,11 @@
                         </div>
                     </div>
                 </div>
+				</div>
                 <!--Follow Companies - End -->
 
                 <!--Suggested Reading - Start -->
+				<div class="col-md-3">
                 <div class="suggested-reading">
                     <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.write')</a>
                     <h4>@lang('home.suggestedreading')</h4>
@@ -171,12 +174,16 @@
                             $pImage = url('article-images/'.$rec->wIcon);
                         }
                         ?>
-                    <div class="col-md-6 sr-item">
+                    <div class="col-md-12 sr-item">
+					 <div class="col-md-5">
                         <img src="{{ $pImage }}" style="height:49px">
+						</div>
+						 <div class="col-md-7">
                         <div class="sr-details">
                             <p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
                             <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> {{ $rec->name }}</a> </p>
                         </div>
+						</div>
                     </div>
 					   @endforeach
 
@@ -187,6 +194,43 @@
 
             </div>
             <!--RTJ- Right end-->
+			<div class="col-md-6 col-xs-6 sp-item pull-right">
+			   <div class="follow-companies">
+                    <h4 class="pull-left">@lang('home.ImproveCompetitiveAdvantage')</h4><h5 class="pull-right">@lang('home.ADVERTISE')</h5>
+                    <hr style="margin-top:44px !important">
+                    <div class="row">
+				            @foreach($lear_record as $rec)
+                   
+                      <div class="la-item">
+				      <div class="col-md-4 sp-item">
+                        @if($rec->upskillImage != '')
+                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="">
+                        @else
+                        <img src="{{ url('upskill-images/d-cover.jpg') }}">
+                        @endif
+						</div>
+                        <div class="col-md-8" style="margin-top: 34px;">
+                            <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
+                            
+                            <span>{{ $rec->type }}</span>
+                            <p><i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</p>
+                            
+                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
+                            
+                       </div>
+                   </div>
+                
+            @endforeach
+
+                      
+
+                        <hr>
+                        <div class="col-md-12">
+                            <a href="learn" class="pull-right" style="padding-top: 5px">View all</a>
+                        </div>
+                    </div>
+                </div>
+			</div>
         </div>
     </div>
 </section>

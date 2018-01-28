@@ -26,7 +26,7 @@ class Dashboard extends Controller{
 		$admin = DB::table('jcm_users')->get();
 
 		/* jobs query */
-		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo','jcm_users.email')->leftJoin('jcm_users','jcm_users.companyId','=','jcm_jobs.companyId')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.status','=','1')->where('jcm_jobs.jType','=','Paid')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
+		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo','jcm_users.email')->leftJoin('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id')->leftJoin('jcm_users','jcm_users.companyId','=','jcm_jobs.companyId')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.status','=','1')->where('jcm_jobs.jType','=','Paid')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
 		
 
 		return view('admin.order',compact('jobs'));

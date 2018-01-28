@@ -79,6 +79,8 @@
             <li>Copyrihgt &copy; 2017 Jobcallme Co.,Ltd.(RN 201-86-41011)</li>                
         </ul>				
     </div>
-    <script type="text/javascript" charset="utf-8" src="{{asset('cometchat/js.php')}}"></script>
-    <link type="text/css" rel="stylesheet" media="all" href="{{asset('cometchat/css.php')}}" />
+    @if(Session::has('jcmUser'))
+        <script type="text/javascript" charset="utf-8" src="{{asset('cometchat/js.php')}}"></script>
+        <link type="text/css" rel="stylesheet" media="all" href="{{asset('cometchat/css.php')}}" />
+    @endif
 </footer>
