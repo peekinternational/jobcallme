@@ -1,1 +1,0 @@
-<?php $licensekey = 'CS3PC-PTCY5-PL4PE-ZQFG2-VL5HU';?>
