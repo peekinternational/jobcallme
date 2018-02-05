@@ -163,7 +163,7 @@ class Home extends Controller{
 
 	public function logout(Request $request){
     	$request->session()->flush('jcmUser');
-    	//$request->session()->destroy();
+    	setcookie('cc_data', '', -time() + (86400 * 30), "/");
     	return redirect('');
     }
 
