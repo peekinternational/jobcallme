@@ -1,7 +1,9 @@
- @extends('layouts.app')
+@extends('frontend.layouts.app')
+
+@section('title', 'Rest Password')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top:149px; margin-bottom:60px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -73,4 +75,8 @@
         </div>
     </div>
 </div>
+@endsection
+@section('page-footer')
+<script type="text/javascript">
+</script>
 @endsection

@@ -32,6 +32,9 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input id="login-password" type="password" class="form-control" name="password" placeholder="@lang('home.password')">
                 </div>
+				<div class="">
+				<h5><a href="{{url('password/reset')}}">Forget Password ?</a></h5>
+				</div>
                 <div class="input-group">
                     <div class="checkbox">
                         <label>
