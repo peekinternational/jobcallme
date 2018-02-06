@@ -10,7 +10,7 @@ $lToken = csrf_token();
         <div class="container">
             <div class="hp_strip">
                 <div class="wrapper">
-                    <h1 class="text-center"><div id="hp_text2"></div></h1>
+                    <h1 class="text-center">Finding your next job or career more 1000+ availabilities</h1>
                 </div>
             </div>
             <div class="col-md-12 job-search">

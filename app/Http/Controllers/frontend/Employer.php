@@ -1304,9 +1304,9 @@ public function userResume($userId){
         $goodsname = Session::get('p_Category');
         $app = $request->session()->get('jcmUser');
 		//dd($request->department);
-		$request->session()->put('amount', $amount);
+		//$request->session()->put('amount', $amount);
 		$request->session()->put('title', $request->title);
-		$request->session()->put('jType', 'Paid');
+		//$request->session()->put('jType', 'Paid');
 		$request->session()->put('department', $request->department);
 		$request->session()->put('category', $request->category);
 		$request->session()->put('subCategory', $request->subCategory);
@@ -1316,7 +1316,7 @@ public function userResume($userId){
 		$request->session()->put('description', $request->description);
 		$request->session()->put('skills', $request->skills);
 		$request->session()->put('qualification', $request->qualification);
-		$request->session()->put('expiryDate', $request->expiryDate);
+		//$request->session()->put('expiryDate', $request->expiryDate);
 		$request->session()->put('minSalary', $request->minSalary);
 		$request->session()->put('maxSalary', $request->maxSalary);
 		$request->session()->put('description', $request->description);
@@ -1327,18 +1327,18 @@ public function userResume($userId){
 		$request->session()->put('city', $request->city);
 		$request->session()->put('country', $request->country);
 		$request->session()->put('shift', $request->shift);
-		$request->session()->put('expiryDate', $request->expiryDate);
+		//$request->session()->put('expiryDate', $request->expiryDate);
 		
 	
 		 $goodsname = Session::get('p_Category');
-		if($amount!='0')
-		{
-			$request->merge(['jType'=>'Paid']);
-		}
-		if($amount=='0')
-		{
-			$request->merge(['jType'=>'Free']);
-			$app = $request->session()->get('jcmUser');
+		//if($amount!='0')
+		//{
+		//	$request->merge(['jType'=>'Paid']);
+		//}
+		//if($amount=='0')
+		//{
+			//$request->merge(['jType'=>'Free']);
+			//$app = $request->session()->get('jcmUser');
 
 			$this->validate($request,[
 				'title' => 'required|max:255',
@@ -1359,19 +1359,20 @@ public function userResume($userId){
    
 			extract($request->all());
 
-			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'paymentType' => '0', 'status'=> '2', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'department' => $department, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $request->input('benefits')), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
+			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'title' => $title, 'department' => $department, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $request->input('benefits')), 'country' => $country, 'state' => $state, 'city' => $city);
 			if($subCategory == ''){
 				$input['subCategory'] = '';
 			}
 			$jobId = DB::table('jcm_jobs')->where('jobId','=',$jobid)->update($input);
 			echo $jobId;
+			\Session::put('success','Job Update Successfully');
 			return Redirect::route('addmoney.account/employer/job/share');
-		}	
-		else{ 
+		//}	
+		//else{ 
 			//$request->session()->forget('postedJobId');  /*For nice pay*/
-		 	return view('frontend.employer.update-payment',compact('am','app','goodsname'));
+		 //	return view('frontend.employer.update-payment',compact('am','app','goodsname'));
 	//	return Redirect::route('addmoney.account/employer/payment',compact('am','app','goodsname'));
-		}
+		//}
 	}
 	
 	
