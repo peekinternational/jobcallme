@@ -24,19 +24,19 @@
                         {{ csrf_field() }}
 						
                     
-					<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;">
+				<!--  	<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;">
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                 
  
                         <ul id="post-job-ad-types">
 						@foreach($recs as $payment)
-                            <!----><li style="position:relative">
+                            <!----<li style="position:relative">
                                 <!---->
-                                <input class="mat-radio-input cdk-visually-hidden" type="radio" id="md-radio-2-input" name="p_Category" 
+                                <!--  <input class="mat-radio-input cdk-visually-hidden" type="radio" id="md-radio-2-input" name="p_Category" 
 								   value="{!! $payment->id!!}" name="md-radio-group-0" @if($result->amount == $payment->price) checked @endif><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">{!! $payment->title!!}</span></div></label></md-radio-button>
                                 <div>
-                                  <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
+                                  <!----<label for="{!! $payment->id!!}">
+                                     <!--     <ul class="list-unstyled desc" >
                                             <li>{!! $payment->tag1!!}</li>
                                             <li>{!! $payment->tag2!!}</li>
                                         </ul>
@@ -51,7 +51,7 @@
                                     <!---->
                                     <!---->
                                     <!---->
-                                </div>
+                                <!--  </div>
                             </li>
 							@endforeach
                         </ul>
@@ -59,7 +59,7 @@
 
                     
                 </div>
-            </div>
+            </div> -->
 		</div>
                
                   
@@ -143,7 +143,7 @@
                                 <input type="text" class="form-control" value="{!! $result->qualification !!}" name="qualification" placeholder="Qualification" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="display:none">
                             <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control date-picker" value="{!! $result->expiryDate !!}"  name="expiryDate" onkeypress="return false">
