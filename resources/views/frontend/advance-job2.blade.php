@@ -1,27 +1,19 @@
 @extends('frontend.layouts.app')
-
-@section('title', 'Find Job')
-
-@section('content')
 <section id="jobs">
     <div class="container">
-	<div class="row">
-	 <div class="job-search-box">
-	<h3 style="text-align:center">Advance Search</h3>
-	</div>
-        <div class="col-md-6">
-		
+    <div class="row">
+        <div class="col-md-3">
             <div class="job-search-box">
-			
+                <h3 style="text-align:center">Advance Search</h3>
                 <form action="" method="post" class="search-job" style="padding-top:13px">
-                 	<input type="hidden" name="_token" class="token">
+                    <input type="hidden" name="_token" class="token">
                     <div class="form-group">
                         <input type="text" class="form-control" name="keyword" value="{{ Request::input('keyword') }}" placeholder="Keyword">
                     </div>
                     <div class="form-group">
                        <select class="form-control" name="categoryId">
-                       		<option value="">Select Category</option>
-                       		@foreach(JobCallMe::getCategories() as $cat)
+                            <option value="">Select Category</option>
+                            @foreach(JobCallMe::getCategories() as $cat)
                                 <option value="{!! $cat->categoryId !!}" {{ $cat->categoryId == Request::input('category') ? 'selected="selected"' : '' }}>{!! $cat->name !!}</option>
                             @endforeach
                        </select>
@@ -50,7 +42,7 @@
                             @endforeach
                         </select>
                     </div>
-					
+                    
                     <div class="form-group">
                         <select class="form-control" name="experience">
                             <option value="">Select Experience</option>
@@ -59,10 +51,8 @@
                             @endforeach
                         </select>
                     </div>
-					</div>
-					</div>
-					<div class="col-md-6">
-					<div class="job-search-box">
+                    
+                    
                     <div class="form-group">
                         <input type="text" class="form-control" name="minSalary" value="" placeholder="Minimum Salary ">
                     </div>
@@ -87,7 +77,7 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control job-state" name="state" data-state="{{ Request::input('state') }}">
-                            <option value="0">Select State</option>
+                            <option value="0">Select City</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -100,13 +90,14 @@
                     </div>
                 </form>
             </div>
-            
+        </div>
+        <div class="col-md-9 show-jobs">
+            <?php echo preg_replace("/<!--.*?-->/", "", $vhtml);?>
         </div>
      </div>
-	 </div>
+     </div>
 </section>
-@endsection
-@section('page-footer')
+
 <style type="text/css">
 .jobs-suggestions:hover {background-color: #f9f9f9;}
 .jobs-suggestions img {
@@ -114,11 +105,11 @@
     right: 24px;
     top: 54%;
     vertical-align: top;
-	width:7%;
-	border-radius: 50%;
+    width:7%;
+    border-radius: 50%;
     height: 70px;
 }
 </style>
+<script type="text/javascript">
 
-
-@endsection
+</script>

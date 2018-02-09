@@ -16,6 +16,7 @@ class Jobs extends Controller{
 	}
 
 	public function searchJobs(Request $request){
+
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}
@@ -34,8 +35,8 @@ class Jobs extends Controller{
 		$city = trim($request->input('city'));
 		$currency = trim($request->input('currency'));
 		$userinfo=$request->session()->get('jcmUser')->userId;
-		//dd($userinfo);
-
+		//dd($request->all());
+		
 		$savedJobArr = array();
 		if($request->session()->has('jcmUser')){
 			$meta = JobCallMe::getUserMeta($request->session()->get('jcmUser')->userId);
@@ -45,7 +46,7 @@ class Jobs extends Controller{
 		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
 		$jobs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
-		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
+		//$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
 		//$jobs->where('jcm_jobs.country','=',$country);
 		/*if($_find == '0'){
 			if($request->session()->has('jcmUser')){
@@ -55,7 +56,7 @@ class Jobs extends Controller{
 				}
 			}
 		}*/
-		if($country != '0') $jobs->where('jcm_jobs.country','=',$country);
+		if($country != 0) $jobs->where('jcm_jobs.country','=',$country);
 		if($categoryId != '') $jobs->where('jcm_jobs.category','=',$categoryId);
 		if($jobType != '') $jobs->where('jcm_jobs.jobType','=',$jobType);
 		if($jobShift != '') $jobs->where('jcm_jobs.jobShift','=',$jobShift);
@@ -63,11 +64,12 @@ class Jobs extends Controller{
 		if($experience != '') $jobs->where('jcm_jobs.experience','=',$experience);
 		if($minSalary != '') $jobs->where('jcm_jobs.minSalary','<=',$minSalary);
 		if($maxSalary != '') $jobs->where('jcm_jobs.maxSalary','>=',$maxSalary);
-		if($state != '0') $jobs->where('jcm_jobs.state','=',$city);
-		if($city != '0') $jobs->where('jcm_jobs.city','=',$city);
+		if($state != 0) $jobs->where('jcm_jobs.state','=',$state);
+		if($city != '') $jobs->where('jcm_jobs.city','=',$city);
 		if($currency != '') $jobs->where('jcm_jobs.currency','=',$currency);
 
 		if($keyword != ''){
+			
 			$jobs->where(function ($query) use ($keyword) {
 				$expl = @explode(' ', $keyword);
 				foreach($expl as $kw){
@@ -152,6 +154,111 @@ class Jobs extends Controller{
 		}
 		echo $vhtml;
 	}
+	public function homePageJobSerach(Request $request){
+
+		/*if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}*/
+		$keyword = trim($request->input('keyword'));
+		$city = trim($request->input('city'));
+		
+		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo','jcm_cities.name');
+		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
+		$jobs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
+		$jobs->Join('jcm_cities','jcm_jobs.city','=','jcm_cities.id');
+		
+		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
+		if($keyword != '') $jobs->where('jcm_jobs.title','=',$keyword);
+		if($city != '') $jobs->where('jcm_cities.name','=',$city);
+
+		/*if($keyword != ''){
+			$jobs->where('jcm_jobs.title','=',$keyword);
+			$jobs->where(function ($query) use ($keyword) {
+				$expl = @explode(' ', $keyword);
+				foreach($expl as $kw){
+					$query->orWhere('jcm_jobs.title','LIKE','%'.$kw.'%');
+					$query->orWhere('jcm_jobs.skills','LIKE','%'.$kw.'%');
+				}
+			});
+		}*/
+
+		$result = $jobs->orderBy('jobId','desc')->limit(100)->get();
+		
+		
+		$vhtml = '';
+		$category ='';
+		if(count($result) > 0){
+			foreach($result as $rec){
+				
+				$applyUrl = url('jobs/apply/'.$rec->jobId);
+				$viewUrl = url('jobs/'.$rec->jobId);
+				$vhtml .= '<div class="jobs-suggestions">';
+				if($rec->userId == $userinfo ){
+					$vhtml .= '<div class="js-action" style="display:none">';
+                        //$vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs"></a>';
+                        if(in_array($rec->jobId, $savedJobArr)){
+	                        //$vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-success btn-xs" style="margin-left: 10px;"></a>';
+	                    }else{
+	                    	//$vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-default btn-xs" style="margin-left: 10px;"></a>';
+	                    }
+                    $vhtml .= '</div>';
+				}
+				else{
+					$vhtml .= '<div class="js-action">';
+                        $vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">'.trans('home.applied').'</a>';
+                        if(in_array($rec->jobId, $savedJobArr)){
+	                        $vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-success btn-xs" style="margin-left: 10px;">'.trans('home.saved').'</a>';
+	                    }else{
+	                    	$vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-default btn-xs" style="margin-left: 10px;">'.trans('home.save').'</a>';
+	                    }
+                    $vhtml .= '</div>';
+				}
+				$colorArr = array('purple','green','darkred','orangered','blueviolet');
+                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_title.'</span></a></h4>';
+                    $vhtml .= '<p>'.$rec->companyName.'</p>';
+                    $vhtml .= '<ul class="js-listing">';
+                    	$vhtml .= '<li>';
+                            $vhtml .= '<p class="js-title">'.trans('home.jobtype').'</p>';
+                            $vhtml .= '<p>'.$rec->jobType.'</p>';
+                        $vhtml .= '</li>';
+                        $vhtml .= '<li>';
+                            $vhtml .= '<p class="js-title">'.trans('home.shift').'</p>';
+                            $vhtml .= '<p>'.$rec->jobShift.'</p>';
+                        $vhtml .= '</li>';
+                        $vhtml .= '<li>';
+                            $vhtml .= '<p class="js-title">'.trans('home.experience').'</p>';
+                            $vhtml .= '<p>'.$rec->experience.'</p>';
+                        $vhtml .= '</li>';
+                        $vhtml .= '<li>';
+                            $vhtml .= '<p class="js-title">'.trans('home.salary').'</p>';
+                            $vhtml .= '<p>'.$rec->minSalary.' - '.$rec->maxSalary.' '.$rec->currency.'</p>';
+                        $vhtml .= '</li>';
+						$vhtml .= '<li>';
+                            $vhtml .= '<p class="js-title">'.trans('home.poston').'</p>';
+                             $vhtml .= '<p>'.date('M d, Y',strtotime($rec->createdTime)).'</p>';
+                        $vhtml .= '</li>';
+						$vhtml .= '<li>';
+                            $vhtml .= '<p class="js-title">'.trans('home.lastdate').'</p>';
+                            $vhtml .= '<p>'.date('M d, Y',strtotime($rec->expiryDate)).'</p>';
+                        $vhtml .= '</li>';
+                    $vhtml .= '</ul>';
+                    $cLogo = url('compnay-logo/default-logo.jpg');
+                    if($rec->companyLogo != ''){
+                    	$cLogo = url('compnay-logo/'.$rec->companyLogo);
+                    }
+                    $vhtml .= '<p class="js-note">'.$rec->description.'<img src="'.$cLogo.'" width="100"></p>';
+                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.JobCallMe::cityName($rec->city).', '.JobCallMe::countryName($rec->country).'<span class="pull-right" style="color: #999999;">'.date('M d,Y',strtotime($rec->createdTime)).'</span></p>';
+				$vhtml .= '</div>';
+			}
+		}else{
+			$vhtml  = '<div class="jobs-suggestions">';
+				$vhtml .= '<p class="js-note" style="text-align:center;">No Matching record found</p>';
+			$vhtml .= '</div>';
+		}
+		return view('frontend.advance-job2',compact('vhtml'));
+
+	}
+
 
 	public function viewJob(Request $request){
 		$jobId = $request->segment(2);
