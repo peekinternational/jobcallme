@@ -172,6 +172,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Stevebauman\Location\LocationServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -241,7 +242,7 @@ return [
 		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 		'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-		
+		'Location' => Stevebauman\Location\Facades\Location::class
     ],
 
 ];

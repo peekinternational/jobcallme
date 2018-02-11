@@ -20,6 +20,8 @@ return [
 	///end navbar//
 	
 	//Homepage//
+	'Cities' => 'Cities',
+	'headerHeading' => 'Finding your next job or career more 1000+ availabilities',
 	'lookingjob' => 'Looking for job...',
 	'alllocation' => 'All Location',
 	'ijobseeker' => 'I AM A JOBSEEKER',

@@ -17,7 +17,7 @@
                                     <input type="search" placeholder="@lang('home.key')" name="learn-keyword">
                                 </div>
                                 <div class="search-field-box search-item" id="l_city">
-                                    <input type="search" placeholder="@lang('home.city')" name="learn-city">
+                                    <input type="search" placeholder="@lang('home.city')" name="city">
 										<button type="submit" id="l_fasearch" style="width:9% !important" class="search-btn">
                                     <i class="fa fa-search"></i>
                                 </button> 
@@ -38,6 +38,7 @@
                                 <div class="search-field-box search-item" id="l_country" style="display:none;padding-top: 14px;">
 								
                                     <select class="form-control select2 job-country" name="country">
+                                        <option value="">select country</option>
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
                                         <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
                                     @endforeach

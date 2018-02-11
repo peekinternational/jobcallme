@@ -285,6 +285,122 @@ $next = Request::route()->uri;
         @yield('page-footer')
     </body>
 </html>
+<script type="text/javascript">
+   var isFirst = 0;
+var token = "{{ csrf_token() }}";
+/*$(document).ready(function(){
+    $('.search-job').submit();
+    getStates($('.job-country option:selected:selected').val());
+})*/
+$('.job-country').on('change',function(){
+    var countryId = $(this).val();
+    getStates(countryId)
+})
+function getStates(countryId){
+    $.ajax({
+        url: "{{ url('account/get-state') }}/"+countryId,
+        success: function(response){
+            var currentState = $('.job-state').attr('data-state');
+            var obj = $.parseJSON(response);
+            $(".job-state").html('');
+            var newOption = new Option('Select State', '0', true, false);
+            $(".job-state").append(newOption).trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = k.id == currentState ? true : false;
+                var newOption = new Option(firstCapital(k.name), k.id, true, vOption);
+                $(".job-state").append(newOption);
+            })
+            $(".job-state").trigger('change');
+        }
+    })
+}
+$('.job-state').on('change',function(){
+    var stateId = $(this).val();
+    getCities(stateId)
+})
+function getCities(stateId){
+    if(stateId == '0'){
+        $(".job-city").html('').trigger('change');
+        var newOption = new Option('Select City', '0', true, false);
+        $(".job-city").append(newOption).trigger('change');
+        return false;
+    }
+    $.ajax({
+        url: "{{ url('account/get-city') }}/"+stateId,
+        success: function(response){
+            var currentCity = $('.job-city').attr('data-city');
+            var obj = $.parseJSON(response);
+            $(".job-city").html('').trigger('change');
+            var newOption = new Option('Select City', '0', true, false);
+            $(".job-city").append(newOption).trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = k.id == currentCity ? true : false;
+                var newOption = new Option(k.name, k.id, true, vOption);
+                $(".job-city").append(newOption).trigger('change');
+            })
+        }
+    })
+}
+function firstCapital(myString){
+    firstChar = myString.substring( 0, 1 );
+    firstChar = firstChar.toUpperCase();
+    tail = myString.substring( 1 );
+    return firstChar + tail;
+}
+$('form.search-job').submit(function(e){
+    //$('.search-job button[name="save"]').prop('disabled',true);
+    $('.search-job .token').val(token);
+    $.ajax({
+        type: 'post',
+        data: $('.search-job').serialize(),
+        url: "{{ url('jobs/search') }}?_find="+isFirst,
+        success: function(response){
+            $('.show-jobs').html(response);
+            $('.search-job button[name="save"]').prop('disabled',false);
+
+            $('.jobs-suggestions').hover(function () {
+                $(this).children(".js-action").fadeIn('slow');
+
+            });
+            $('.jobs-suggestions').mouseleave(function () {
+                $(this).children(".js-action").fadeOut('fast');
+            });
+
+            $('.search-job select option[value=""]').prop('selected',true);
+            $('.search-job input').val('');
+            $('.search-job .job-city').html('<option value="">Select City</option>');
+        }
+    })
+    isFirst = 1;
+    e.preventDefault();
+})
+function saveJob(jobId,obj){
+    if($(obj).hasClass('btn-default')){
+        var type = 'save';
+    }else{
+        var type = 'remove';
+    }
+    $.ajax({
+        url: "{{ url('account/jobseeker/job/action') }}?jobId="+jobId+"&type="+type,
+        success: function(response){
+            if($.trim(response) == 'redirect'){
+                window.location.href = "{{ url('account/login?next='.Request::route()->uri) }}";
+            }else if($.trim(response) == 'done'){
+                if($(obj).hasClass('btn-default')){
+                    $(obj).removeClass('btn-default');
+                    $(obj).addClass('btn-success');
+                    $(obj).text('Saved');
+                }else{
+                    $(obj).removeClass('btn-success');
+                    $(obj).addClass('btn-default');
+                    $(obj).text('Save');
+                }
+            }
+        }
+    })
+}
+</script>
+
 @if(Session()->has('fNotice'))
 <div class="popup" data-popup="popup-1010">
     <div class="popup-inner">

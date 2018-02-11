@@ -20,6 +20,8 @@ return [
 	///end navbar//
 	
 	//Homepage//
+	'Cities' => '도시',
+	'headerHeading' => '다음 직업 또는 경력 찾기 1000 개가 넘는 사용 가능 여부',
 	'lookingjob' => '채용정보 검색...',
 	'alllocation' => '전국',
 	'ijobseeker' => '개인전용',

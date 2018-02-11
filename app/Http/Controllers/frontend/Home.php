@@ -10,6 +10,9 @@ use DB;
 class Home extends Controller{
 
 	public function home(){
+		$ip = \Request::ip();
+		$position = \Location::get($ip);
+		 //print_r($position->countryCode);die;
 		/* job shift query */
 		$jobShifts = DB::table('jcm_job_shift')->get();
 
@@ -17,9 +20,60 @@ class Home extends Controller{
 		$companies = DB::table('jcm_companies')->limit(12)->get();
 
 		/* jobs query */
-		$Gallery = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.p_Category','=','2')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
-		$hot = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.p_Category','=','3')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
-		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')->where('jcm_jobs.p_Category','=','4')->where('jcm_jobs.expiryDate','>',date('Y-m-d'))->orderBy('jcm_jobs.jobId','desc')->limit(12)->get();
+		$Gallery = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+			->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+			->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
+			->where('jcm_jobs.p_Category','=','2')
+			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+			->where('jcm_countries.sortname','=',$position->countryCode)
+			->orderBy('jcm_jobs.jobId','desc')
+			->limit(12)
+			->get();
+		if(sizeof($Gallery) == 0){
+			$Gallery = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+			->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+			->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
+			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+			->where('jcm_jobs.p_Category','=','2')
+			->orderBy('jcm_jobs.jobId','desc')
+			->limit(12)
+			->get();
+		}
+		$hot = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+			->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+			->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
+			->where('jcm_jobs.p_Category','=','3')
+			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+			->where('jcm_countries.sortname','=',$position->countryCode)
+			->orderBy('jcm_jobs.jobId','desc')
+			->limit(12)
+			->get();
+		if(sizeof($hot) == 0){
+			$hot = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+			->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+			->where('jcm_jobs.p_Category','=','3')
+			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+			->orderBy('jcm_jobs.jobId','desc')
+			->limit(12)
+			->get();
+		}
+
+		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+		->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
+		->where('jcm_jobs.p_Category','=','4')
+		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->where('jcm_countries.sortname','=',$position->countryCode)
+		->orderBy('jcm_jobs.jobId','desc')
+		->limit(12)->get();
+		if(sizeof($hot) == 0){
+		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+		->where('jcm_jobs.p_Category','=','4')
+		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->orderBy('jcm_jobs.jobId','desc')
+		->limit(12)->get();
+		}
 //return $companies;
 		return view('frontend.home-page',compact('jobShifts','companies','jobs','Gallery','hot'));
 	}
@@ -182,6 +236,7 @@ class Home extends Controller{
     }
 
     public function people(Request $request){
+    	$request->all();
     	/* peoples query */
     	$people = DB::table('jcm_users');
     	$people->select('jcm_users.*');
@@ -287,6 +342,7 @@ class Home extends Controller{
 
     public function read(Request $request){
     	/* read query */
+    	
     	$readQry = DB::table('jcm_writings')->join('jcm_users','jcm_users.userId','=','jcm_writings.userId');
     	$readQry->leftJoin('jcm_categories','jcm_categories.categoryId','=','jcm_writings.category');
     	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_categories.name');
@@ -298,7 +354,7 @@ class Home extends Controller{
     	}
     	$readQry->orderBy('jcm_writings.writingId','desc')->limit(12);
     	$read_record = $readQry->get();
-
+    	
     	return view('frontend.read',compact('read_record'));
     }
 
@@ -331,32 +387,29 @@ class Home extends Controller{
     	return view('frontend.view-course',compact('record'));
     }
 
-    public function searchSkills(Request $request){
-		//dd($request->input('country'));
-    	/* search upskills */
-    	$learnQry = DB::table('jcm_upskills');
-    	if($request->input('type') != ''){
-    		$learnQry->where('type','=',ucfirst($request->input('type')));
-    	}
-    	if($request->input('keyword') != ''){
-    		$learnQry->where('title','LIKE','%'.$request->input('keyword').'%');
-    	}
-    	if($request->input('city') != ''){
-    		$cityId = JobCallMe::cityId($request->input('city'));
-    		if($cityId != '0'){
-	    		$learnQry->where('city','=',$cityId);
-	    	}
-    	}
-		if($request->input('country') != ''){
-    		
-	    		$learnQry->where('country','=',$request->input('country'));
-				
-	    	
-    	}
-    	$record = $learnQry->orderBy('skillId','desc')->paginate(30);
+    public function searchSkills(Request $request){  
+    //dd($request->input('country'));     / search upskills /  
+    //dd($request->all());     
+    $learnQry = DB::table('jcm_upskills'); 
 
-    	return view('frontend.search-learn',compact('record'));
-    }
+    if($request->input('type') != ''){      
+    	$learnQry->where('type','=',ucfirst($request->input('type')));
+    	}         
+    	if($request->input('keyword') != ''){      
+    		$learnQry->where('title','LIKE','%'.$request->input('keyword').'%'); 
+    		}  
+    		if($request->input('city') != ''){      
+    			$cityId = JobCallMe::cityId($request->input('city'));      
+    			if($cityId != '0'){       
+    				$learnQry->where('city','=',$cityId);      
+    			}     
+    		}  
+
+    			if($request->input('country') != ''){             
+    				$learnQry->where('country','=',$request->input('country'));               }     
+    				$record = $learnQry->orderBy('skillId','desc')->paginate(30);     return view('frontend.search-learn',compact('record'));    
+	}
+
 
     public function companies(Request $request){
     	/* companies query */

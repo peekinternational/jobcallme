@@ -10,7 +10,9 @@ $lToken = csrf_token();
         <div class="container">
             <div class="hp_strip">
                 <div class="wrapper">
-                    <h1 class="text-center">Finding your next job or career more 1000+ availabilities</h1>
+                    <h1 class="text-center">
+                        @lang('home.headerHeading')
+                    </h1>
                 </div>
             </div>
             <div class="col-md-12 job-search">
@@ -39,19 +41,16 @@ $lToken = csrf_token();
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="search_tab_1">
-                                        <form role="form" action="#">
+                                        <form method="post" action="{{ url('jobs/homeJobSearch') }}">
                                             <div class="input-fields">
                                                 <div class="search-field-box search-item">
-                                                    <input type="search" placeholder="@lang('home.lookingjob')" name="searchByJob">
+                                                    <input type="search" placeholder="@lang('home.lookingjob')" name="keyword">
                                                 </div>
-                                                 <div class="search-field-box search-location">
-                                                    <select class="location" name="search-by-location">
-                                                        <option value="AL">@lang('home.alllocation')</option>
-                                                         @foreach(JobCallMe::getJobCountries() as $country)
-                                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                                    @endforeach
-                                                    </select>
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <div class="search-field-box search-item">
+                                                    <input type="search" placeholder="@lang('home.Cities')" name="city" style="width:100%">
                                                 </div>
+                                                
                                                 <button type="submit" class="search-btn">
                                                     <i class="fa fa-search"></i>
                                                 </button>
@@ -59,18 +58,14 @@ $lToken = csrf_token();
                                         </form>
                                     </div>
                                     <div class="tab-pane" id="search_tab_2">
-                                        <form role="form" action="#">
+                                        <form role="form" method="POST" action="{{ url('companies')}}">
                                             <div class="input-fields">
                                                 <div class="search-field-box search-item">
-                                                    <input type="search" placeholder="Looking for company..." name="searchByCompany">
+                                                    <input type="search" placeholder="Looking for company..." name="keyword">
                                                 </div>
-                                                <div class="search-field-box search-location">
-                                                    <select class="location" name="search-by-location">
-                                                        <option value="AL">All Location</option>
-                                                       @foreach(JobCallMe::getCategories() as $cat)
-                                                        <option value="{{ $cat->categoryId }}">{{ $cat->name }}</option>
-                                                    @endforeach
-                                                    </select>
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <div class="search-field-box search-item">
+                                                    <input type="search" placeholder="City" name="city" style="width: 100%">
                                                 </div>
                                                 <button type="submit" class="search-btn">
                                                     <i class="fa fa-search"></i>
@@ -79,18 +74,53 @@ $lToken = csrf_token();
                                         </form>
                                     </div>
                                     <div class="tab-pane" id="search_tab_3">
-                                        <form role="form" action="#">
+                                        <form role="form" method="POST" action="{{url('account/people')}}">
                                             <div class="input-fields">
                                                 <div class="search-field-box search-item">
-                                                    <input type="search" placeholder="Looking for people..." name="searchByPeople">
+                                                    <input type="search" placeholder="Looking for people..." name="keyword" >
                                                 </div>
-                                                <div class="search-field-box search-location">
-                                                    <select class="location" name="search-by-location">
-                                                        <option value="AL">All Location</option>
-                                                       @foreach(JobCallMe::getCategories() as $cat)
-                                                        <option value="{{ $cat->categoryId }}">{{ $cat->name }}</option>
-                                                    @endforeach
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <div class="search-field-box search-item">
+                                                    <input type="search" placeholder="City" name="city" style="width: 100%">
+                                                </div>
+                                                <button type="submit" class="search-btn">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- read tab starts from here -->
+                                    <div class="tab-pane" id="search_tab_4">
+                                        <form role="form" method="POST" action="{{url('read')}}">
+                                            <div class="input-fields">
+                                                <div class="search-field-box search-item">
+                                                    <input type="search" placeholder="keywords" name="keyword">
+                                                </div>
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <div class="search-field-box search-item">
+                                                    <select class="form-control" id="home-cat" name="category" style="background: transparent;color: #fff">
+                                                        <option value="0">Category</option>
+                                                        @foreach(JobCallMe::getCategories() as $cat)
+                                                        <option value="{{$cat->categoryId}}">{{$cat->name}}</option>
+                                                        @endforeach
                                                     </select>
+                                                </div>
+                                                <button type="submit" class="search-btn">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- learn tab starts from here -->
+                                    <div class="tab-pane" id="search_tab_5">
+                                        <form role="form" method="POST" action="{{url('learn/search')}}">
+                                            <div class="input-fields">
+                                                <div class="search-field-box search-item">
+                                                    <input type="search" placeholder="keywords" name="keyword" >
+                                                </div>
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <div class="search-field-box search-item">
+                                                    <input type="search" placeholder="City" name="city" style="width: 100%">
                                                 </div>
                                                 <button type="submit" class="search-btn">
                                                     <i class="fa fa-search"></i>
@@ -375,6 +405,7 @@ $lToken = csrf_token();
         <div class="container">
             <h3>@lang('home.goldjob')</h3>
             <div class="row">
+                <div id="check"></div>
                 <!--Golden Job Single item Start-->
 					@foreach($jobs as $job)
                 <div class="col-sm-4">
@@ -414,5 +445,31 @@ $lToken = csrf_token();
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#home-cat').select2();
+        $('#homeJobSearch').on('submit',function(e){
+            e.preventDefault();
+            window.location.href = 'jobs/homeJobSearch';
+            /*$.ajax({
+                url:'jobs/homeJobSearch',
+                data:new FormData(this),
+                type:'POST',
+                processData: false,
+                contentType: false,
+                cache:false,
+                success:function(res){
+                    $('#check').html(res);
+                    console.log(res);
+                }
+            });*/
+        });  
+    });
+  
 </script>
 @endsection
+<style type="text/css">
+    select option{
+        color:#000;
+    }
+</style>

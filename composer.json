@@ -11,8 +11,8 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "paypal/rest-api-sdk-php": "^1.12",
-        "laravelcollective/html": "~5.0"
-
+        "laravelcollective/html": "~5.0",
+        "stevebauman/location": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

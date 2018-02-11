@@ -12,7 +12,14 @@
 */
 
 /* admin panel */
-
+if (version_compare(PHP_VERSION, '7.2.0', '>=')) {    // Ignores notices and reports all other kinds... and warnings    
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);    // error_reporting(E_ALL ^ E_WARNING); // Maybe this is enough
+}
+Route::get('get-location-from-ip',function(){
+    $ip= \Request::ip();
+    $data = \Location::get($ip);
+    dd($data);
+});
 Route::group(['prefix' => 'admin'], function () {
 	Auth::routes();
     Route::match(['get','post'],'/','admin\Home@login');
@@ -87,8 +94,9 @@ Route::match(['get','post'],'account/login','frontend\Home@accountLogin');
 Route::match(['get','post'],'account/register','frontend\Home@accountRegister');
 Route::get('account/logout','frontend\Home@logout');
 Route::get('account/manage','frontend\Home@manageUser');
-Route::match(['get','post'],'account/people','frontend\Home@people');Route::match(['get','post'],'account/peoples','frontend\Home@peoples');
-Route::get('learn','frontend\Home@learn');
+Route::match(['get','post'],'account/people','frontend\Home@people');
+Route::match(['get','post'],'account/peoples','frontend\Home@peoples');
+Route::match(['get','post'],'learn','frontend\Home@learn');
 Route::match(['get','post'],'read','frontend\Home@read');
 Route::get('read/article/{id}','frontend\Home@viewArticle');
 Route::get('learn/conference/{id}','frontend\Home@viewUpskill');
@@ -196,6 +204,7 @@ Route::get('employer/niceresult', function () {
 /* jobs */
 Route::get('jobs','frontend\Jobs@home');
 Route::post('jobs/search','frontend\Jobs@searchJobs');
+Route::match(['get','post'],'jobs/homeJobSearch','frontend\Jobs@homePageJobSerach');
 Route::match(['get','post'],'jobs/{id}','frontend\Jobs@viewJob');
 Route::match(['get','post'],'jobs/apply/{id}','frontend\Jobs@jobApply');
 

@@ -251,6 +251,13 @@ class JobCallMe{
 			if(\Session::get('jcmUser')->country != '0'){
 				return \Session::get('jcmUser')->country;
 			}
+		}else{
+			$ip = \Request::ip();
+			$position = \Location::get($ip);
+			$countryCode = $position->countryCode;
+
+			$currentCountry = DB::table('jcm_countries')->where('sortname','=',$countryCode)->get();
+			return $currentCountry[0]->id;
 		}
 		$requestIp = \Request::ip();
 		$ip = $requestIp == '::1' ? '39.33.134.24' : $requestIp;
@@ -487,15 +494,18 @@ class JobCallMe{
 	}
 
 	public function getHomeCountry(){
-		$country = $this->getVisitorCountry();
-		if($country == '109' || $country == '116' || $country == '166'){
+		return $country = $this->getVisitorCountry();
+		/*if($country == '109' || $country == '116' || $country == '166'){
 			return $country;
 		}else{
 			return '166';
-		}
+		}*/
 	}
 
 	public function getHomeCities(){
+		
+		/* the below code work to show citie on home page dynamic through ip*/
+
 		$country = $this->getHomeCountry();
 		if($country == '166'){
 			$array = array('48315','31496','31594','31464','31362','31300','31580','31520','31375','31464','31376');
