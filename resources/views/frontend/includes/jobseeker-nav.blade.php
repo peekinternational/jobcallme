@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ url('messages') }}">
                         <i class="fa fa-envelope"></i>
                         <div class="udp-type">@lang('home.MESSAGE')</div>
                     </a>
