@@ -74,6 +74,12 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/jobtype/save','admin\Cms@saveJobType');
 	Route::get('cms/jobtype/get/{id}','admin\Cms@getJobType');
 	Route::delete('cms/jobtype/delete','admin\Cms@deleteJobType');
+	
+	/* upskill type */
+	Route::match(['get','post'],'cms/upskilltype','admin\Cms@viewupskillType');
+	Route::post('cms/upskilltype/save','admin\Cms@saveupskillType');
+	Route::get('cms/upskilltype/get/{id}','admin\Cms@getupskillType');
+	Route::delete('cms/upskill/delete','admin\Cms@deleteupskillType');
 
 	/* pages */
 	Route::get('cms/pages','admin\Cms@viewPages');

@@ -37,7 +37,7 @@ class Jobseeker extends Controller{
 		/* companies */
 		$company = DB::table('jcm_companies');
     	$company->orderBy('companyId','desc');
-    	$company->limit(8);
+    	$company->limit(4);
     	$companies = $company->get();
 
     	$followArr = array();
@@ -46,8 +46,20 @@ class Jobseeker extends Controller{
 			$savedJobArr = @explode(',', $meta->saved);
 			$followArr = @explode(',', $meta->follow);
 		}
-
-		return view('frontend.jobseeker.dashboard',compact('savedJobs','suggested','application','interview','companies','followArr'));
+$lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(6)->get();
+	/* Related read */
+		$readQry = DB::table('jcm_writings')->join('jcm_users','jcm_users.userId','=','jcm_writings.userId');
+    	$readQry->leftJoin('jcm_categories','jcm_categories.categoryId','=','jcm_writings.category');
+    	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_categories.name');
+    	if($request->input('category') != '0' && $request->input('category') != ''){
+    		$readQry->where('jcm_writings.category','=',$request->input('category'));
+    	}
+    	if($request->input('keyword') != ''){
+    		$readQry->where('jcm_writings.title','LIKE','%'.$request->input('keyword').'%');
+    	}
+      $readQry->orderBy('jcm_writings.writingId','desc')->limit(7);
+    	$read_record = $readQry->get();
+		return view('frontend.jobseeker.dashboard',compact('savedJobs','suggested','application','interview','companies','followArr','lear_record','read_record'));
 	}
 
 	public function suggestedJob($meta){

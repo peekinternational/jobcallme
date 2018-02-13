@@ -41,7 +41,7 @@ if($upskill->country != 0){
                                 <select class="form-control select2" name="type" required="">
                                     <option value="">@lang('home.s_type')</option>
                                     @foreach(JobCallMe::getUpkillsType() as $skill)
-                                        <option value="{!! $skill !!}" {{ $skill == $upskill->type ? 'selected="selected"' : '' }}>{!! $skill !!}</option>
+                                        <option value="{!! $skill->name !!}" {{ $skill->name == $upskill->type ? 'selected="selected"' : '' }}>{!! $skill->name !!}</option>
                                     @endforeach
                                 </select>
                             </div>

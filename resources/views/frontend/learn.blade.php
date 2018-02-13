@@ -26,7 +26,7 @@
 								<select class="form-control select2 job-country" name="type" >
                                      <option value="">@lang('home.type')</option>
                               @foreach(JobCallMe::getUpkillsType() as $skill)
-                                <option value="{!! $skill !!}">{!! $skill !!}</option>
+                                <option value="{!! $skill->name !!}">{!! $skill->name !!}</option>
                               @endforeach
                           </select>
 									<button  type="submit" class="btn btn-success" style="margin-top: 12px;">
@@ -63,7 +63,7 @@
                         $cArr = array('purple','green','darkred','orangered','blueviolet','#122b40');
                         $i = 0;
                         foreach(JobCallMe::getUpkillsType() as $skill){ ?>
-                            <a href="{{ url('learn/search?type='.strtolower($skill)) }}" style="background-color: {{ $cArr[$i] }}">{!! $skill !!}</a>
+                            <a href="{{ url('learn/search?type='.strtolower($skill->name)) }}" style="background-color: {{ $cArr[$i] }}">{!! $skill->name !!}</a>
                         <?php $i++; } ?>
                     </div>
                     <div class="promote-learning-box">

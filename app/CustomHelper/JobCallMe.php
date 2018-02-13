@@ -305,7 +305,9 @@ class JobCallMe{
 	}
 
 	public function getUpkillsType(){
-		return array('Conference','Course','Seminar','Training','Webinar','Workshop');
+		$upskill = DB::table('jcm_upskilltype')->get();
+		return $upskill;
+		//return array('Conference','Course','Seminar','Training','Webinar','Workshop');
 	}
 
 	public function getExperienceLevel(){
