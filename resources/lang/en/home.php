@@ -485,7 +485,7 @@ return [
 	'award' => 'Honours & Awards',
 	'ImproveCompetitiveAdvantage' => 'Improve Competitive Advantage',
 	'ADVERTISE' => 'ADVERTISE',
-	'' => '',
+	'NOTIFICATION' => 'NOTIFICATIONS',
 	'' => '',
 	'' => '',
 	'' => '',

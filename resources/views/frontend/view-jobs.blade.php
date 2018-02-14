@@ -94,6 +94,7 @@
             </div>
             <div class="col-md-9 show-jobs">
                 <p style="text-align:center;">Loading ....</p>
+				
             </div>
         </div>
      </div>

@@ -49,7 +49,8 @@ if($user->profilePhoto != ''){
                                 <p><span class="pi-title">@lang('home.education'):</span> {{ $meta->education }}</p>
                                 <p><span class="pi-title">@lang('home.experiance'):</span> {{ $meta->experiance }}</p>
                                 <p><span class="pi-title">@lang('home.industry'):</span> {{ JobCallMe::categoryTitle($meta->industry) }}</p>
-                                <p><span class="pi-title">@lang('home.salary'):</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
+                                <p><span class="pi-title">@lang('home.currentsalary'):</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
+								<p><span class="pi-title">@lang('home.expectedsalary'):</span> {{ number_format($meta->expectedSalary  != '' ? $meta->expectedSalary  : '0',2).' '.$meta->currency }}</p>
                                 <div class="professional-summary">
                                     <h4>@lang('home.p_summary')</h4>
                                     <p>{!! $user->about !!}</p>

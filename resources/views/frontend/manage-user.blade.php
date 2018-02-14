@@ -313,6 +313,16 @@ if($user->profilePhoto != ''){
 <script type="text/javascript">
 var pageToken = '{{ csrf_token() }}';
 $(document).ready(function(){
+	 var url = window.location.href;
+    // alert(url);
+    var id = url.substring(url.lastIndexOf('?') + 1);
+	//alert(id);
+	if(id=='noti'){
+	$('#notification').addClass( "ja-tab-active" );
+	$('#password').removeClass( "ja-tab-active" );
+	$('#notification-show').show();
+	$('#password-show').hide();
+	}
     getStates($('.job-country option:selected:selected').val(),'job-state');
     getStates($('.job-country option:selected:selected').val(),'jjob-state');
 })
