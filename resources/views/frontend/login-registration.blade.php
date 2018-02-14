@@ -23,6 +23,14 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                         </button>
                     </div>
                 @endif
+                @if(Session::has('subscribeAlert'))
+                    <div class="alert alert-danger">
+                        {{Session::get('subscribeAlert')}} 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 {{ csrf_field() }}
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

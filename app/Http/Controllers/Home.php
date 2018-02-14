@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use app\Mail\AccountNotification;
+//use app\Mail\jobsnotifications;
 use Mail;
 use Storage;
 use App\Jobs;
@@ -22,10 +22,12 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
     	$event = array('name' => 'M Umair', 'msgBody' => $message, 'subject' => 'Welcome');
     	//print_r($event);exit;
-    	//Mail::to('mu.cp15@gmail.com')->send(new \app\Mail\AccountNotification($event));
-    	Mail::send('emails.welcome', $event, function($message){
-		    $message->to('mu.cp15@gmail.com')->subject('Welcome!');
+    	/*Mail::to('muhammadsajid9005@gmail.com')->send(new jobsnotifications($name = 'sajid'));*/
+    	
+    	Mail::send('emails.jobs', $event, function($message){
+		    $message->to('muhammadsajid9005@gmail.com')->subject('Welcome!');
 		});
+		
     }
 
 	 public function jobCallMePayResult()

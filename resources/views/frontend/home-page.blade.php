@@ -448,6 +448,10 @@ $lToken = csrf_token();
 
     $(document).ready(function(){
         $('#home-cat').select2();
+        $('#feed').on('mouseover',function(){
+            $('#fpi_content form input[type="hidden"]').remove();
+            $('#fpi_content form').append('<input type="hidden" name="_token" value="{{ csrf_token() }}">');
+        });
         $('#homeJobSearch').on('submit',function(e){
             e.preventDefault();
             window.location.href = 'jobs/homeJobSearch';

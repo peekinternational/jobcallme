@@ -254,6 +254,10 @@
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+ function appendtoken(){
+    $('#fpi_content form input[type="hidden"]').remove();
+    $('#fpi_content form').append('<input type="hidden" name="_token" value="{{ csrf_token() }}">');
+};
 function removeJob(jobId){
     var type = 'remove';
     $('#saved-'+jobId).remove();

@@ -20,8 +20,9 @@ $next = Request::route()->uri;
 		<meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="shortcut icon" href="{{ $headerFavicon }}">
 		
-         <!-- Bootstrap -->
+         <!-- Bootstrap checking -->
         <link href="{{ asset('frontend-assets/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('frontend-assets/css/sajid.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/style.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/font-awesome.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/animate.css') }}" rel="stylesheet">
@@ -81,6 +82,7 @@ $next = Request::route()->uri;
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="{{ asset('frontend-assets/js/jquery.min.js') }}"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="{{ asset('frontend-assets/js/sajid.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/select2.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/bootstrap-datetimepicker.js') }}"></script>

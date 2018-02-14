@@ -143,5 +143,6 @@ function doAction(){
         alert('delete this '+userId);
     }
 }
+
 </script>
 @endsection
