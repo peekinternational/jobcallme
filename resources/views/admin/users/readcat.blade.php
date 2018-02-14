@@ -100,7 +100,7 @@ $('body #updateread').on('click',function(){
 });
 function deleteread(id){
  $.ajax({
-     url:'adeletereadCat',
+     url:'deletereadCat',
      data:{id:id,_token:'{{ csrf_token()}}'},
      type:"post",
      success:function(res){

@@ -556,5 +556,13 @@ public function addreadCat(Request $request){
 		}
 	}
 }
+public function deletereadCat(Request $request){
+	$id = $request->input('id');
+	if(DB::table('jcm_read_category')->where('id',$id)->delete()){
+		echo 1;
+	}else{
+		echo 2;
+	}
+}
 }
 ?>

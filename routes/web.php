@@ -23,6 +23,7 @@ Route::get('get-location-from-ip',function(){
 
 Route::get('readCat','frontend\Home@readCat');
 Route::post('addreadCat','frontend\Home@addreadCat');
+Route::post('deletereadCat','frontend\Home@deletereadCat');
 Route::get('getfeedback','frontend\Home@getfeedback');
 Route::post('feedback','frontend\Home@feedback');
 Route::post('editfeedback','frontend\Home@editfeedback');
