@@ -212,9 +212,10 @@ class Home extends Controller{
 
 			DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
 			/* end */
+			$toemail = $input['email'];
 			$secidtoview = array('id' => $input['secretId'],'Name' => $input['firstName']);
-			Mail::send('emails.reg',$secidtoview,function($message){
-				$message->to("muhammadsajid9005@gmail.com")->subject('Account Verification');
+			Mail::send('emails.reg',$secidtoview,function($message) use ($toemail) {
+				$message->to($toemail)->subject('Account Verification');
 			});
 			/*$user = $this->doLogin($request->input('email'),$request->input('password'));
 			$request->session()->put('jcmUser', $user);*/

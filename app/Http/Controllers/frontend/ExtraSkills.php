@@ -55,18 +55,22 @@ class ExtraSkills extends Controller{
             }
 
             $input['title'] = $request->input('title');
-            $input['category'] = (int)$request->input('category');
+            $input['category'] = $request->input('category');
             $input['description'] = $request->input('description');
             $input['citation'] = $request->input('citation');
             $input['status'] = $request->input('option');
            // $input['title'] = $request->input('title');
-            
+           //print_r($input['category']);die;
             if($request->input('writingId') != '' && $request->input('writingId') != '0'){
             	DB::table('jcm_writings')->where('writingId','=',$request->input('writingId'))->update($input);
             }else{
-            	$input['userId'] = $app->userId;
-            	$input['createdTime'] = date('Y-m-d H:i:s');
-            	DB::table('jcm_writings')->insert($input);
+                foreach ($input['category'] as $key => $value) {
+                    $input['userId'] = $app->userId;
+                    $input['createdTime'] = date('Y-m-d H:i:s');
+                    $input['category'] = $value;
+                    DB::table('jcm_writings')->insert($input);
+                }
+            	
             }
             exit('1');
     	}

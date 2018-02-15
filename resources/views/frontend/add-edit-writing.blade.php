@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.tags')</label>
                             <div class="col-sm-9 pnj-form-field">
-                               <select class="form-control" name="category" required="">
+                               <select class="form-control" id="readcat" multiple name="category[]" required="">
                                     <option value="">@lang('home.s_type')</option>
                                     @foreach(JobCallMe::getReadCategories() as $cat)
                                         <option value="{{ $cat->id }}">{!! $cat->name !!}</option>
@@ -81,6 +81,9 @@ input[type="file"] {
 .text-danger{color: #ff0000 !important;}
 </style>
 <script type="text/javascript">
+$(document).ready(function(){
+    $('#readcat').select2();
+});
 tinymce.init({
     selector: '.tex-editor',
     setup: function (editor) {
