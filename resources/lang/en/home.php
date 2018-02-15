@@ -486,10 +486,13 @@ return [
 	'ImproveCompetitiveAdvantage' => 'Improve Competitive Advantage',
 	'ADVERTISE' => 'ADVERTISE',
 	'NOTIFICATION' => 'NOTIFICATIONS',
-	'' => '',
-	'' => '',
-	'' => '',
-	'' => '',
+	'Personal' => 'Personal',
+	'Superior' => 'Superior',
+	'Peer' => 'Peer',
+	'Subordinate' => 'Subordinate',
+	'Professor' => 'Professor',
+	'Client' => 'Client',
+	'other' => 'Other',
 	
 	
 	

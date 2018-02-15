@@ -229,7 +229,7 @@ $lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(6)->g
 
 		extract(array_map('trim', $request->all()));
 
-		$academicQry = array('degreeLevel' => $degreeLevel, 'degree' => $degree, 'completionDate' => $completionDate, 'grade' => $grade, 'institution' => $institution, 'country' => $country, 'details' => $details);
+		$academicQry = array('degreeLevel' => $degreeLevel, 'degree' => $degree, 'completionDate' => $completionDate, 'grade' => $grade, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
 
 		$input = array('type' => 'academic', 'resumeData' => @json_encode($academicQry));
 
@@ -275,7 +275,7 @@ $lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(6)->g
 
 		extract(array_map('trim', $request->all()));
 
-		$certificationQry = array('certificate' => $certificate, 'completionDate' => $completionDate, 'score' => $score, 'institution' => $institution, 'country' => $country, 'details' => $details);
+		$certificationQry = array('certificate' => $certificate, 'completionDate' => $completionDate, 'score' => $score, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city,  'details' => $details);
 
 		$input = array('type' => 'certification', 'resumeData' => @json_encode($certificationQry));
 
@@ -308,7 +308,7 @@ $lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(6)->g
 			$currently = 'no';
 		}
 
-		$experienceQry = array('jobTitle' => $jobTitle, 'organization' => $organization, 'currently' => $currently, 'startDate' => $startDate, 'country' => $country, 'details' => $details);
+		$experienceQry = array('jobTitle' => $jobTitle, 'organization' => $organization, 'currently' => $currently, 'startDate' => $startDate, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
 		if($currently == 'no'){
 			$experienceQry['endDate'] = $endDate;
 		}
@@ -360,10 +360,10 @@ $lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(6)->g
 				'name' => 'required|max:255',
 				'phone' => 'required'
 			]);
-
+ 
 		extract(array_map('trim', $request->all()));
 
-		$skillsQry = array('name' => $name, 'jobtitle' => $jobtitle, 'organization' => $organization, 'phone' => $phone, 'email' => $email);
+		$skillsQry = array('name' => $name, 'jobtitle' => $jobtitle, 'organization' => $organization, 'phone' => $phone, 'email' => $email, 'country' => $country,'state' => $state,'city' => $city,'type' => $type);
 
 		$input = array('type' => 'reference', 'resumeData' => @json_encode($skillsQry));
 
@@ -389,7 +389,7 @@ $lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(6)->g
 
 		extract(array_map('trim', $request->all()));
 
-		$skillsQry = array('pu_type' => $pu_type, 'title' => $title, 'author' => $author, 'publisher' => $publisher, 'year' => $year, 'month' => $month, 'detail' => $detail);
+		$skillsQry = array('pu_type' => $pu_type, 'title' => $title, 'author' => $author, 'publisher' => $publisher, 'year' => $year, 'month' => $month, 'country' => $country,'state' => $state,'city' => $city, 'detail' => $detail);
 
 		$input = array('type' => 'publish', 'resumeData' => @json_encode($skillsQry));
 
@@ -415,8 +415,11 @@ $lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(6)->g
 
 		extract(array_map('trim', $request->all()));
 
-		$skillsQry = array('title' => $title, 'position' => $position, 'type' => $type, 'occupation' => $occupation, 'organization' => $organization, 'startyear' => $startyear, 'startmonth' => $startmonth,'endyear' => $endyear, 'endmonth' => $endmonth, 'detail' => $detail);
-
+		$skillsQry = array('title' => $title, 'position' => $position, 'type' => $type, 'occupation' => $occupation, 'organization' => $organization, 'startyear' => $startyear, 'startmonth' => $startmonth,'currently' => $currently,'detail' => $detail);
+            if($currently == 'no'){
+			    $skillsQry['endyear'] = $endyear;
+				$skillsQry['endmonth'] = $endmonth;
+	        	}
 		$input = array('type' => 'project', 'resumeData' => @json_encode($skillsQry));
 
 		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
@@ -497,6 +500,32 @@ $lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(6)->g
 		$skillsQry = array('title' => $title,'type' => $type, 'occupation' => $occupation, 'organization' => $organization, 'startyear' => $startyear, 'startmonth' => $startmonth, 'detail' => $detail);
 
 		$input = array('type' => 'award', 'resumeData' => @json_encode($skillsQry));
+
+		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
+			DB::table('jcm_resume')->where('resumeId','=',$resumeId)->update($input);
+		}else{
+			$input['userId'] = $app->userId;
+			$input['createdTime'] = date('Y-m-d H:i:s');
+			DB::table('jcm_resume')->insert($input);
+		}
+		exit('1');
+	}
+	
+		public function saveportfolio(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$this->validate($request, [
+				'type' => 'required|max:255',
+				'title' => 'required'
+			]);
+
+		extract(array_map('trim', $request->all()));
+
+		$skillsQry = array('title' => $title,'type' => $type, 'occupation' => $occupation, 'startyear' => $startyear, 'startmonth' => $startmonth, 'website' => $website, 'detail' => $detail);
+
+		$input = array('type' => 'portfolio', 'resumeData' => @json_encode($skillsQry));
 
 		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
 			DB::table('jcm_resume')->where('resumeId','=',$resumeId)->update($input);

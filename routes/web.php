@@ -154,6 +154,7 @@ Route::group(['prefix' => 'account'], function () {
     Route::post('jobseeker/resume/skills/save','frontend\Jobseeker@saveSkills');
 	Route::post('jobseeker/resume/refer/save','frontend\Jobseeker@saverefer');
 	Route::post('jobseeker/resume/affiliation/save','frontend\Jobseeker@saveaffiliation');
+	Route::post('jobseeker/resume/portfolio/save','frontend\Jobseeker@saveportfolio');
 	Route::post('jobseeker/resume/publish/save','frontend\Jobseeker@savepublish');
 	Route::post('jobseeker/resume/project/save','frontend\Jobseeker@saveproject');
 	Route::post('jobseeker/resume/language/save','frontend\Jobseeker@savelanguage');
