@@ -4,6 +4,7 @@
 	<title>Verification</title>
 </head>
 <body>
-<a href="{{url('auth/'.$input->secretId)}}"></a>
+<h1>Welcome {{$Name}}</h1>
+<a href="{{ url('verifyUser/'.$id)}}">Click to verify</a>
 </body>
 </html>

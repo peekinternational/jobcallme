@@ -212,8 +212,9 @@ class Home extends Controller{
 
 			DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
 			/* end */
-			Mail::send('emails.reg',$input,function($message){
-				$message->to($request->input('email'))->subject('Account Verification');
+			$secidtoview = array('id' => $input['secretId'],'Name' => $input['firstName']);
+			Mail::send('emails.reg',$secidtoview,function($message){
+				$message->to("muhammadsajid9005@gmail.com")->subject('Account Verification');
 			});
 			/*$user = $this->doLogin($request->input('email'),$request->input('password'));
 			$request->session()->put('jcmUser', $user);*/
@@ -566,11 +567,16 @@ public function deletereadCat(Request $request){
 		echo 2;
 	}
 }
-public function auth(Request $request){
-	$data = DB::table('users')->where('secretId',$secretId)->first();
+public function verifyUser(Request $request){
+	$secretId = trim($request->segment(2));
+	$data = DB::table('jcm_users')->where('secretId',$secretId)->first();
 	if($data > 0){
-		session()->put('jcmUser',$data);
-		redirect('');
+		
+		DB::table('jcm_users')->where('secretId',$secretId)->update(['user_status' => 'Y']);
+		$request->session()->flash('loginAlert', 'Your account is Verified Please Login');
+		return redirect('account/login');
+	}else{
+		echo "There is a issue in your secret code kindly contact with administration thanks";
 	}
 }
 }

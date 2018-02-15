@@ -21,7 +21,7 @@ Route::get('get-location-from-ip',function(){
     dd($data);
 });
 
-Route::get('auth/{{id}}','frontend\Home@auth');
+Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');
 Route::post('addreadCat','frontend\Home@addreadCat');
 Route::post('deletereadCat','frontend\Home@deletereadCat');
