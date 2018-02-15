@@ -22,10 +22,10 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.tags')</label>
                             <div class="col-sm-9 pnj-form-field">
-                               <select class="form-control select2" name="category[]" multiple required="">
+                               <select class="form-control" name="category" required="">
                                     <option value="">@lang('home.s_type')</option>
-                                    @foreach(JobCallMe::getCategories() as $cat)
-                                        <option value="{!! $cat->categoryId !!}" {{ $cat->categoryId == $article->category ? 'selected="selected"' : '' }}>{!! $cat->name !!}</option>
+                                    @foreach(JobCallMe::getReadCategories() as $cat)
+                                        <option value="{{ $cat->id }}">{!! $cat->name !!}</option>
                                     @endforeach
                                 </select>
 								
@@ -120,6 +120,7 @@ $('form.writing-form').submit(function(e){
         data: formData,
         async: false,
         success: function(response) {
+            console.log(response);
             isARunning = false;
             toastr.success('Article successfully saved', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
             window.location.href = "{{ url('account/writings') }}";

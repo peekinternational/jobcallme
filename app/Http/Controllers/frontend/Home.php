@@ -163,7 +163,7 @@ class Home extends Controller{
 
 	public function doLogin($email,$password){
 		/* do login */
-		$user = DB::table('jcm_users')->where('email','=',$email)->where('password','=',md5($password))->where('status','Active')->where('type','<>','Admin')->first();
+		$user = DB::table('jcm_users')->where('email','=',$email)->where('password','=',md5($password))->where('user_status','Y')->where('type','<>','Admin')->first();
 		if(count($user) == 0){
 			return 'invalid';
 		}else{
@@ -212,12 +212,14 @@ class Home extends Controller{
 
 			DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
 			/* end */
-
-			$user = $this->doLogin($request->input('email'),$request->input('password'));
-			$request->session()->put('jcmUser', $user);
-			$fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume';
+			Mail::send('emails.reg',$input,function($message){
+				$message->to($request->input('email'))->subject('Account Verification');
+			});
+			/*$user = $this->doLogin($request->input('email'),$request->input('password'));
+			$request->session()->put('jcmUser', $user);*/
+			$fNotice = 'Please check your email to verify';
 			$request->session()->put('fNotice',$fNotice);
-			return redirect('account/jobseeker');
+			return redirect('account/register');
 		}
 		$pageType = \Request::segment('2');
 		return view('frontend.login-registration',compact('pageType'));
@@ -354,8 +356,8 @@ class Home extends Controller{
     	/* read query */
     	
     	$readQry = DB::table('jcm_writings')->join('jcm_users','jcm_users.userId','=','jcm_writings.userId');
-    	$readQry->leftJoin('jcm_categories','jcm_categories.categoryId','=','jcm_writings.category');
-    	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_categories.name');
+    	$readQry->leftJoin('jcm_read_category','jcm_read_category.id','=','jcm_writings.category');
+    	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_read_category.name');
     	if($request->input('category') != '0' && $request->input('category') != ''){
     		$readQry->where('jcm_writings.category','=',$request->input('category'));
     	}
@@ -562,6 +564,13 @@ public function deletereadCat(Request $request){
 		echo 1;
 	}else{
 		echo 2;
+	}
+}
+public function auth(Request $request){
+	$data = DB::table('users')->where('secretId',$secretId)->first();
+	if($data > 0){
+		session()->put('jcmUser',$data);
+		redirect('');
 	}
 }
 }

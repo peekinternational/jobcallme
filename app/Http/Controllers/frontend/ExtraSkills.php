@@ -10,6 +10,7 @@ use DB;
 class ExtraSkills extends Controller{
     
     public function writings(Request $request){
+
     	if(!$request->session()->has('jcmUser')){
     		return redirect('account/login?next='.$request->route()->uri);
     	}
@@ -24,6 +25,7 @@ class ExtraSkills extends Controller{
     }
 
     public function addEditArticle(Request $request){
+
     	$app = $request->session()->get('jcmUser');
     	if($request->ajax()){
     		$this->validate($request,[
@@ -53,12 +55,12 @@ class ExtraSkills extends Controller{
             }
 
             $input['title'] = $request->input('title');
-            $input['category'] = $request->input('category');
+            $input['category'] = (int)$request->input('category');
             $input['description'] = $request->input('description');
             $input['citation'] = $request->input('citation');
             $input['status'] = $request->input('option');
            // $input['title'] = $request->input('title');
-
+            
             if($request->input('writingId') != '' && $request->input('writingId') != '0'){
             	DB::table('jcm_writings')->where('writingId','=',$request->input('writingId'))->update($input);
             }else{

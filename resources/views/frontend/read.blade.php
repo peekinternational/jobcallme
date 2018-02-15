@@ -19,8 +19,8 @@
                                 <div class="search-field-box search-item">
                                     <select class="form-control select2" name="category">
                                         <option value="0">@lang('home.category')</option>
-                                        @foreach(JobCallMe::getCategories() as $cat)
-                                            <option value="{!! $cat->categoryId !!}">{!! $cat->name !!}</option>
+                                        @foreach(JobCallMe::getReadCategories() as $cat)
+                                            <option value="{!! $cat->id !!}">{!! $cat->name !!}</option>
                                         @endforeach
                                     </select>
                                  </div>
