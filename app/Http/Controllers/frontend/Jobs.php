@@ -159,6 +159,11 @@ class Jobs extends Controller{
 		/*if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}*/
+		$savedJobArr = array();
+		if($request->session()->has('jcmUser')){
+			$meta = JobCallMe::getUserMeta($request->session()->get('jcmUser')->userId);
+			$savedJobArr = @explode(',', $meta->saved);
+		}
 		$keyword = trim($request->input('keyword'));
 		$city = trim($request->input('city'));
 		
@@ -182,7 +187,7 @@ class Jobs extends Controller{
 			});
 		}*/
 
-		$result = $jobs->orderBy('jobId','desc')->limit(100)->get();
+		$result = $jobs->orderBy('jobId','desc')->paginate(3);
 		
 		
 		$vhtml = '';
@@ -255,7 +260,7 @@ class Jobs extends Controller{
 				$vhtml .= '<p class="js-note" style="text-align:center;">No Matching record found</p>';
 			$vhtml .= '</div>';
 		}
-		return view('frontend.advance-job2',compact('vhtml'));
+		return view('frontend.advance-job2',compact('vhtml','result'));
 
 	}
 

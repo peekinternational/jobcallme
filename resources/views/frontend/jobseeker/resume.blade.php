@@ -762,6 +762,155 @@ if($user->profilePhoto != ''){
                     </section>
                     <!--Project Section End-->
 					
+					<!---Affilation -->
+					   <section class="resume-box" id="aff">
+                        <a class="btn btn-primary r-add-btn" onclick="addAffi()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Affiliation')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['affiliation']) > 0)
+                                @foreach($resume['affiliation'] as $resumeId => $afflls)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getAffi('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $afflls->pos !!}</p>
+											<p class="rd-location"> {!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}</p>
+											<p class="rd-location">{!! $afflls->org .', '.JobCallMe::cityName($afflls->city).' ,'.JobCallMe::countryName($afflls->country) !!}
+											
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    <section class="resume-box" id="aff-edit" style="display: none;">
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.Affiliation')</c></h4>
+                        <form class="form-horizontal form-aff" method="post" action="">
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="resumeId" value="">
+                            <div class="form-group error-group" style="display: none;">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6"><div class="alert alert-danger"></div></div>
+                            </div>
+							 
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="org">
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.position')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="pos">
+                                </div>
+                            </div>
+                            
+							
+							  <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.startyear')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="ssyear" name="stayear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.startmonth')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="startmonth" name="stamonth">
+									<option value=''>Select Month</option>
+										<option value='Jan'>Jan</option>
+										<option value='Feb'>Feb</option>
+										<option value='Mar'>Mar</option>
+										<option value='Apr'>Apr</option>
+										<option value='May'>May</option>
+										<option value='Jun'>Jun</option>
+										<option value='Jul'>Jul</option>
+										<option value='Aug'>Aug</option>
+										<option value='Sep'>Sep</option>
+										<option value='Oct'>Oct</option>
+										<option value='Nov'>Nov</option>
+										<option value='Dec'>Dec</option>
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							    <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.endyear')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="esyear" name="enyear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.endmonth')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="endmonth" name="enmonth">
+									<option value=''>Select Month</option>
+										<option value='Jan'>Jan</option>
+										<option value='Feb'>Feb</option>
+										<option value='Mar'>Mar</option>
+										<option value='Apr'>Apr</option>
+										<option value='May'>May</option>
+										<option value='Jun'>Jun</option>
+										<option value='Jul'>Jul</option>
+										<option value='Aug'>Aug</option>
+										<option value='Sep'>Sep</option>
+										<option value='Oct'>Oct</option>
+										<option value='Nov'>Nov</option>
+										<option value='Dec'>Dec</option>
+                                    </select>
+                                </div>
+                            </div>
+							
+							<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.country')</label>
+                            <div class="col-sm-6 ">
+                                <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-state" name="state">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-city" name="city">
+                                </select>
+                            </div>
+                        </div>
+							
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#aff').fadeIn();$('#aff-edit').hide();$('html, body').animate({scrollTop:$('#aff').position().top}, 700);">@lang('home.cancel')</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                    <!--Affilation Section End-->
+					
 					<!---Project -->
 					   <section class="resume-box" id="sk">
                         <a class="btn btn-primary r-add-btn" onclick="addLanguage()"><i class="fa fa-plus"></i> </a>
@@ -1823,6 +1972,77 @@ function getProject(resumeId){
     })
 }
 //
+
+//Affilation
+function addAffi(){
+    $('.form-aff input').val('');
+    $('#aff-edit h4 c').text('Add Affiliation');
+    $('#aff').hide();
+    $('#aff-edit').fadeIn();
+}
+$('form.form-aff').submit(function(e){
+    $('.form-aff input[name="_token"]').val(pageToken);
+    $('.form-aff button[name="save"]').prop('disabled',true);
+    $('.form-aff .error-group').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.form-aff').serialize(),
+        url: "{{ url('account/jobseeker/resume/affiliation/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.form-aff .error-group').show();
+                $('.form-aff .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
+                $('html, body').animate({scrollTop:$('#aff-edit').position().top}, 1000);
+                $('.form-aff button[name="save"]').prop('disabled',false);
+            }else{
+                window.location.href = "{{ url('account/jobseeker/resume') }}";
+            }
+            Pace.stop;
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            var vErrors = '';
+            $.each(errors, function(i,k){
+                vErrors += '<li>'+k+'</li>';
+            })
+            $('.form-aff .error-group').show();
+            $('.form-aff .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
+            $('.form-aff button[name="save"]').prop('disabled',false);
+            Pace.stop;
+            $('html, body').animate({scrollTop:$('#aff-edit').position().top}, 1000);
+        }
+    })
+    e.preventDefault();
+})
+function getAffi(resumeId){
+    $.ajax({
+        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.form-aff input[name="resumeId"]').val(resumeId);
+			//$('.form-aff input[name="title"]').val(obj.title);
+			$('.form-aff input[name="pos"]').val(obj.pos);
+           // $('.form-aff select[name="type"]').val(obj.type).trigger('change');
+			//$('.form-aff input[name="occupation"]').val(obj.occupation);
+			$('.form-aff input[name="org"]').val(obj.org);
+			$('.form-aff select[name="stayear"]').val(obj.stayear).trigger('change');
+            $('.form-aff select[name="stamonth"]').val(obj.stamonth).trigger('change');
+			$('.form-aff select[name="enyear"]').val(obj.enyear).trigger('change');
+			$('.form-aff select[name="enmonth"]').val(obj.enmonth).trigger('change');
+			$('.form-aff select[name="country"]').val(obj.country).trigger('change');
+			$('.form-aff select[name="state"]').val(obj.state).trigger('change');
+			$('.form-aff select[name="city"]').val(obj.city).trigger('change');
+			//$('.form-aff textarea[name="detail"]').val(obj.detail);
+            $('#aff-edit h4 c').text('Edit Affiliation');
+            $('#aff').hide();
+            $('#aff-edit').fadeIn();
+        }
+    })
+}
+//Affilation end
+
+
+
 function addLanguage(){
     $('.form-sk input').val('');
     $('#sk-edit h4 c').text('Add Language');
@@ -1996,6 +2216,22 @@ for(var year = end ; year >=start; year--){
 }
 document.getElementById("syear").innerHTML = options;
 //
+var start = 1950;
+var end = new Date().getFullYear();
+var options = "";
+for(var year = end ; year >=start; year--){
+  options += "<option value="+year+">"+ year +"</option>";
+}
+document.getElementById("ssyear").innerHTML = options;
+//
+
+var start = 1950;
+var end = new Date().getFullYear();
+var options = "";
+for(var year = end ; year >=start; year--){
+  options += "<option value="+year+">"+ year +"</option>";
+}
+document.getElementById("esyear").innerHTML = options;
 
 var estart = 1950;
 var eend = new Date().getFullYear();
@@ -2014,5 +2250,13 @@ for(var years = ends ; years >=starts; years--){
 }
 document.getElementById("years").innerHTML = option;
 
+
+var sta = 1950;
+var en = new Date().getFullYear();
+var op = "";
+for(var ye= en ; ye >=sta; ye--){
+  option += "<option value="+ye+">"+ ye +"</option>";
+}
+document.getElementById("stayear").innerHTML = op;
 </script>
 @endsection

@@ -428,7 +428,33 @@ $lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(6)->g
 		}
 		exit('1');
 	}
+	//Affilation
+	public function saveaffiliation(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$this->validate($request, [
+				'pos' => 'required|max:255',
+				'org' => 'required'
+			]);
 
+		extract(array_map('trim', $request->all()));
+
+		$skillsQry = array('org' => $org,'pos' => $pos,'stayear' => $stayear, 'stamonth' => $stamonth,'enyear' => $enyear, 'enmonth' => $enmonth, 'country' => $country, 'state' => $state, 'city' => $city);
+
+		$input = array('type' => 'affiliation', 'resumeData' => @json_encode($skillsQry));
+
+		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
+			DB::table('jcm_resume')->where('resumeId','=',$resumeId)->update($input);
+		}else{
+			$input['userId'] = $app->userId;
+			$input['createdTime'] = date('Y-m-d H:i:s');
+			DB::table('jcm_resume')->insert($input);
+		}
+		exit('1');
+	}
+	//
 	
 	public function savelanguage(Request $request){
 		if(!$request->ajax()){
