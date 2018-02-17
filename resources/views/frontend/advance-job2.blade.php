@@ -93,6 +93,7 @@
         </div>
         <div class="col-md-9 show-jobs">
             <?php echo preg_replace("/<!--.*?-->/", "", $vhtml);?>
+			<?php echo $result->render(); ?>
         </div>
      </div>
      </div>

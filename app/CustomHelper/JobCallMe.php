@@ -305,7 +305,9 @@ class JobCallMe{
 	}
 
 	public function getUpkillsType(){
-		return array('Conference','Course','Seminar','Training','Webinar','Workshop');
+		$upskill = DB::table('jcm_upskilltype')->get();
+		return $upskill;
+		//return array('Conference','Course','Seminar','Training','Webinar','Workshop');
 	}
 
 	public function getExperienceLevel(){
@@ -320,9 +322,16 @@ class JobCallMe{
 		$categories = DB::table('jcm_categories')->get();
 		return $categories;
 	}
+	public function getReadCategories(){
+		$readcategories = DB::table('jcm_read_category')->get();
+		return $readcategories;
+	}
 
 	public function categoryName($categoryId){
 		return DB::table('jcm_categories')->where('categoryId','=',$categoryId)->first()->name;
+	}
+	public function readCategoryName($categoryId){
+		return DB::table('jcm_read_category')->where('id','=',$categoryId)->first()->name;
 	}
 
 	public function getSubCategories($categoryId){

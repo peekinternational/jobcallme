@@ -88,6 +88,7 @@
 									  </div>
 									</div></div>
                             @endforeach
+						<div style="text-align:center"><?php	echo $postedJobs->render(); ?></div>
                         </div>
                         <!--Recent Applicant Start-->
                         <div class="tab-pane" id="rtj_tab_recent_application">

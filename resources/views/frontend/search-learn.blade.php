@@ -6,17 +6,50 @@
 <!--Read upskills-->
 <section id="postNewJob">
     <div class="container">
-        <div class="col-md-9">
+	<div class="row">
+        <div class="col-md-4">
             <div class="search-courses-box">
                 <h2>@lang('home.searchcourses')</h2>
-                <form class="form-inline" class="search-form" method="post">
+                <form class="" class="search-form" method="post">
                     {{ csrf_field() }}
-                    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="@lang('home.key')" value="{{ Request::input('keyword') }}">
-                    <input type="text" class="form-control" id="city" name="city" placeholder="@lang('home.city')" value="{{ Request::input('city') }}">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> </button>
+					<div class="form-group">
+                          <input type="text" class="form-control" id="keyword" name="keyword" placeholder="@lang('home.key')" value="{{ Request::input('keyword') }}">
+						</div>	  
+						<div class="form-group">
+				           <input type="text" class="form-control select2" id="city" name="city" placeholder="@lang('home.city')" value="{{ Request::input('city') }}">
+							    </div>
+								<div class="form-group">
+					         <select class="form-control select2 job-country" name="type" >
+                                     <option value="">@lang('home.type')</option>
+                              @foreach(JobCallMe::getUpkillsType() as $skill)
+                                <option value="{!! $skill->name !!}">{!! $skill->name !!}</option>
+                              @endforeach
+                               </select>
+							      </div>
+						    <div class="form-group">
+                                <select class="form-control select2 job-country" name="country">
+								 <option value="" >Select Country</option>
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" >{{ $cntry->name }}</option>
+                                    @endforeach
+                                </select>
+                        </div>
+                        <div class="form-group">
+                                <select class="form-control select2 job-state" name="state">
+                                </select>
+                        </div>
+                        <div class="form-group">
+                                <select class="form-control select2 job-city" name="city">
+                                </select>
+                          
+                        </div>
+                    <button style="width: 100%;" type="submit" class="btn btn-primary"><i class="fa fa-search"></i> </button>
                 </form>
             </div>
-            <!--Search Item-->
+            
+        </div>
+        <div class="col-md-8">
+<!--Search Item-->
             @foreach($record as $rec)
                 <div class="sc-item">
                     <div class="sc-thumbnail">
@@ -45,10 +78,8 @@
 
             {!! $record->render() !!}
         </div>
-        <div class="col-md-3">
-
-        </div>
     </div>
+	</div>
 </section>
 <style type="text/css">
 .sc-thumbnail img {margin-left: 0;}

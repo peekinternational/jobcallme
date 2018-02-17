@@ -10,7 +10,7 @@
                 userName: '',
                 isUsernameEnabled: true,
                 message: '',
-                ajaxUrl: 'http://..',
+                ajaxUrl: 'feedback',
                 successMessage: 'Thank your for your feedback.',
                 errorMessage: 'Thank your for your feedback.'
             };
@@ -32,9 +32,10 @@
                                 '<h2>' + thisSettings.title + '</h2>' +
                             '</div>' +
                             '<div id="fpi_content"><div id="fpi_header_message">' + thisSettings.titleMessage + '</div>' +
-                            '<form>' +
+                            '<form method="POST">' +
                                 '<div class="form-group"> ' +
-                                    '<select class="form-control" id="sel1"> ' +
+                                    '<input type="email" placeholder="enter your email" class="form-control" name="email" style="margin-bottom:10px">'+
+                                    '<select class="form-control" name="type" id="sel1"> ' +
                                         '<option>Select Type</option> ' +
                                         '<option>Bug Report</option> ' +
                                         '<option>Feature Report</option> ' +
@@ -47,7 +48,7 @@
                                 '</div>'+
                                 '<div id="fpi_submit_loading"></div>' +
                                 '<div id="fpi_submit_submit">' +
-                                    '<button type="submit" class="btn btn-primary btn-block">SUBMIT</button>'+
+                                    '<button type="submit" onmouseover="appendtoken()" id="feed" class="btn btn-primary btn-block">SUBMIT</button>'+
                                 '</div>' +
                             '</form>' +
                             '<div id="fpi_ajax_message">' +
@@ -106,6 +107,9 @@
                             },
                             success: function () {
                                 $('#fpi_content form').hide();
+                                $('#fpi_content form input').val('');
+                                $('#fpi_content form select').val('');
+                                $('#fpi_content form textarea').val('');
                                 $('#fpi_content #fpi_ajax_message h2').html(thisSettings.successMessage);
                             }
                         });

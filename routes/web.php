@@ -20,6 +20,16 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
+
+Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
+Route::get('readCat','frontend\Home@readCat');
+Route::post('addreadCat','frontend\Home@addreadCat');
+Route::post('deletereadCat','frontend\Home@deletereadCat');
+Route::get('getfeedback','frontend\Home@getfeedback');
+Route::post('feedback','frontend\Home@feedback');
+Route::post('editfeedback','frontend\Home@editfeedback');
+Route::post('deletefeedback','frontend\Home@deletefeedback');
+
 Route::group(['prefix' => 'admin'], function () {
 	Auth::routes();
     Route::match(['get','post'],'/','admin\Home@login');
@@ -74,6 +84,12 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/jobtype/save','admin\Cms@saveJobType');
 	Route::get('cms/jobtype/get/{id}','admin\Cms@getJobType');
 	Route::delete('cms/jobtype/delete','admin\Cms@deleteJobType');
+	
+	/* upskill type */
+	Route::match(['get','post'],'cms/upskilltype','admin\Cms@viewupskillType');
+	Route::post('cms/upskilltype/save','admin\Cms@saveupskillType');
+	Route::get('cms/upskilltype/get/{id}','admin\Cms@getupskillType');
+	Route::delete('cms/upskill/delete','admin\Cms@deleteupskillType');
 
 	/* pages */
 	Route::get('cms/pages','admin\Cms@viewPages');
@@ -84,8 +100,9 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 /* frontend */
-
+Route::match(['post','get'],'/subscribe', 'frontend\Home@subscribe');
 Route::get('/', 'frontend\Home@home');
+Route::get('notification', 'frontend\Home@getjobnotifications');
 Route::match(['get','post'],'contact','frontend\Home@contactUs');
 Route::get('about','frontend\Home@aboutUs');
 Route::get('terms-conditions','frontend\Home@termConditions');
@@ -111,6 +128,7 @@ Route::get('companies/company/{id}','frontend\Home@viewCompany');
 
 Route::group(['prefix' => 'account'], function () {
 	/* generals */
+	Route::post('feedback','frontend\Home@feedback');
 	Route::get('writings','frontend\ExtraSkills@writings');
 	Route::match(['get','post'],'writings/article/add','frontend\ExtraSkills@addEditArticle');
 	Route::match(['get','post'],'writings/article/edit/{id}','frontend\ExtraSkills@addEditArticle');
@@ -135,6 +153,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::post('jobseeker/resume/experience/save','frontend\Jobseeker@saveExperience');
     Route::post('jobseeker/resume/skills/save','frontend\Jobseeker@saveSkills');
 	Route::post('jobseeker/resume/refer/save','frontend\Jobseeker@saverefer');
+	Route::post('jobseeker/resume/affiliation/save','frontend\Jobseeker@saveaffiliation');
+	Route::post('jobseeker/resume/portfolio/save','frontend\Jobseeker@saveportfolio');
 	Route::post('jobseeker/resume/publish/save','frontend\Jobseeker@savepublish');
 	Route::post('jobseeker/resume/project/save','frontend\Jobseeker@saveproject');
 	Route::post('jobseeker/resume/language/save','frontend\Jobseeker@savelanguage');

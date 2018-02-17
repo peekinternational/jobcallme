@@ -145,10 +145,10 @@
            <!--RTJ- Left end-->
 
            <!--RTJ- Right start-->
-           <div class="col-md-6">
+           <div class="col-md-3">
                <!--Follow Companies - Start -->
                <div class="follow-companies">
-                   <h4>@lang('home.companiesfollow')</h4>
+                   <h4 style="text-align:center">@lang('home.companiesfollow')</h4>
                    <hr>
                    <div class="row">
                         @foreach($companies as $comp)
@@ -159,15 +159,21 @@
                               $cLogo = url('compnay-logo/'.$comp->companyLogo);
                             }
                             ?>
-                           <div class="col-md-3 col-xs-6 fc-item">
+                           <div class="col-md-12 col-xs-12 sp-item">
+						
                                <img src="{{ $cLogo }}">
-                               <p><a href="{{ url('companies/company/'.$comp->companyId) }}">{!! $company->companyName !!}</a></p>
+						
+                               <p><a href="{{ url('companies/company/'.$comp->companyId) }}">{!! $comp->companyName !!}</a></p>
+							   
                                @if(in_array($comp->companyId,$followArr))
                                     <a href="javascript:;" onclick="followCompany({{ $comp->companyId }},this)" class="btn btn-success btn-xs">@lang('home.following')</a>
                                 @else
                                     <a href="javascript:;" onclick="followCompany({{ $comp->companyId }},this)" class="btn btn-primary btn-xs">@lang('home.follow')</a>
                                 @endif
-                           </div>
+                           <br>
+						   <hr>
+							   <p></p>
+						   </div>
                        @endforeach
                        <hr>
                        <div class="col-md-12">
@@ -176,13 +182,82 @@
                    </div>
                </div>
            </div>
+		    <!--Suggested Reading - Start -->
+				<div class="col-md-3">
+                <div class="suggested-reading">
+                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.write')</a>
+                    <h4>@lang('home.suggestedreading')</h4>
+                    <hr>
+					   @foreach($read_record as $rec)
+					   <?php
+                        $pImage = url('profile-photos/profile-logo.jpg');
+                        if($rec->wIcon != '' && $rec->wIcon != NULL){
+                            $pImage = url('article-images/'.$rec->wIcon);
+                        }
+                        ?>
+                    <div class="col-md-12 sr-item">
+					 <div class="col-md-5">
+                        <img src="{{ $pImage }}" style="height:49px">
+						</div>
+						 <div class="col-md-7">
+                        <div class="sr-details">
+                            <p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
+                            <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> {{ $rec->name }}</a> </p>
+                        </div>
+						</div>
+                    </div>
+					   @endforeach
+
+                    <div class="col-md-12">
+                        <a href="{{ url('read') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                    </div>
+                </div>
+            </div>
+			<div class="col-md-3 pull-left">
+                <div class="suggested-reading">
+                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.write')</a>
+                    <h4>@lang('home.suggestedreading')</h4>
+                    <hr>
+					   @foreach($lear_record as $rec)
+					   <?php
+                        $pImage = url('profile-photos/profile-logo.jpg');
+                        if($rec->upskillImage != '' && $rec->upskillImage != NULL){
+                            $pImage = url('upskill-images/'.$rec->upskillImage);
+                        }
+                        ?>
+                    <div class="col-md-12 sr-item">
+					 <div class="col-md-5">
+                        <img src="{{ $pImage }}" style="height:49px">
+						</div>
+						 <div class="col-md-7">
+                        <div class="sr-details">
+                            <p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
+							<span>{{ $rec->type }}</span><br>
+                            <span style="font-size: 10px;"><i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}}<br> <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</span>
+                            <br>
+                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
+                        </div>
+						</div>
+                    </div>
+					   @endforeach
+
+                    <div class="col-md-12">
+                        <a href="{{ url('read') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                    </div>
+                </div>
+            </div>
            <!--RTJ- Right end-->
+		   
        </div>
     </div>
 </section>
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+ function appendtoken(){
+    $('#fpi_content form input[type="hidden"]').remove();
+    $('#fpi_content form').append('<input type="hidden" name="_token" value="{{ csrf_token() }}">');
+};
 function removeJob(jobId){
     var type = 'remove';
     $('#saved-'+jobId).remove();

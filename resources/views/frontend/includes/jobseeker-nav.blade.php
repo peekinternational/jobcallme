@@ -46,9 +46,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fa fa-shopping-cart"></i>
-                        <div class="udp-type">@lang('home.UPGRADE')</div>
+                    <a href="{{url('account/manage?noti')}}">
+                        <i class="fa fa-bell"></i>
+                        <div class="udp-type">@lang('home.NOTIFICATION')</div>
                     </a>
                 </li>
             </ul>

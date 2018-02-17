@@ -56,6 +56,7 @@ if(file_exists('/website/'.$headerWeb['webFavicon'])){
 .is-loading {cursor: wait;}
 </style>
 <script type="text/javascript">
+
 var isAjaxRunning = false;
 $( document ).ajaxStart(function() {
     $('.ajax-laoding').show();

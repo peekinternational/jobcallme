@@ -49,7 +49,8 @@ if($user->profilePhoto != ''){
                                 <p><span class="pi-title">@lang('home.education'):</span> {{ $meta->education }}</p>
                                 <p><span class="pi-title">@lang('home.experiance'):</span> {{ $meta->experiance }}</p>
                                 <p><span class="pi-title">@lang('home.industry'):</span> {{ JobCallMe::categoryTitle($meta->industry) }}</p>
-                                <p><span class="pi-title">@lang('home.salary'):</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
+                                <p><span class="pi-title">@lang('home.currentsalary'):</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
+								<p><span class="pi-title">@lang('home.expectedsalary'):</span> {{ number_format($meta->expectedSalary  != '' ? $meta->expectedSalary  : '0',2).' '.$meta->currency }}</p>
                                 <div class="professional-summary">
                                     <h4>@lang('home.p_summary')</h4>
                                     <p>{!! $user->about !!}</p>
@@ -285,7 +286,7 @@ if($user->profilePhoto != ''){
                                             <p class="rd-date">{!! date('M, Y',strtotime($academic->completionDate)) !!}</p>
                                             <p class="rd-title">{!! $academic->degree !!}</p>
                                             <p class="rd-organization">{!! $academic->institution !!}</p>
-                                            <p class="rd-location">{!! ucfirst($academic->country) !!}</p>
+                                            <p class="rd-location">{!! JobCallMe::cityName($academic->city).' ,'.JobCallMe::countryName($academic->country)!!}</p>
                                             <p class="rd-grade">Grade/GPA : {!! $academic->grade !!}</p>
                                         </div>
                                     </li>
@@ -338,20 +339,34 @@ if($user->profilePhoto != ''){
                                     <input type="text" class="form-control input-sm" name="institution">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm select2" name="country">
-                                        @foreach(JobCallMe::getJobCountries() as $cntry)
-                                            <option value="{{ $cntry->name }}" {{ $user->country == $cntry->id ? 'selected="selected"' : '' }}>{{ ucfirst($cntry->name) }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                           <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.country')</label>
+                            <div class="col-sm-6 ">
+                                <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-state" name="state">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-city" name="city">
+                                </select>
+                            </div>
+                        </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm" name="details"></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -385,7 +400,7 @@ if($user->profilePhoto != ''){
                                             <p class="rd-date">{!! date('M, Y',strtotime($certification->completionDate)) !!}</p>
                                             <p class="rd-title">{!! $certification->certificate !!}</p>
                                             <p class="rd-organization">{!! $certification->institution !!}</p>
-                                            <p class="rd-location">{!! ucfirst($certification->country) !!}</p>
+                                            <p class="rd-location">{!! JobCallMe::cityName($certification->city).' ,'.JobCallMe::countryName($certification->country)!!}</p>
                                             <p class="rd-grade">Score : {!! $certification->score !!}</p>
                                         </div>
                                     </li>
@@ -426,20 +441,35 @@ if($user->profilePhoto != ''){
                                     <input type="text" class="form-control input-sm" name="institution">
                                 </div>
                             </div>
-                            <div class="form-group">
+                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.country')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control input-sm select2" name="country">
-                                        @foreach(JobCallMe::getJobCountries() as $cntry)
-                                            <option value="{{ $cntry->name }}" {{ $user->country == $cntry->id ? 'selected="selected"' : '' }}>{{ ucfirst($cntry->name) }}</option>
-                                        @endforeach
-                                    </select>
+                                    <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                    @endforeach
+                                </select>
                                 </div>
                             </div>
+							   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-state" name="state">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-city" name="city">
+                                </select>
+                            </div>
+							</div>
+							
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm" name="details"></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -473,7 +503,7 @@ if($user->profilePhoto != ''){
                                             <p class="rd-date">{!! date('M, Y',strtotime($experience->startDate)) !!} - {{ $experience->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($experience->endDate)) }}</p>
                                             <p class="rd-title">{!! $experience->jobTitle !!}</p>
                                             <p class="rd-organization">{!! $experience->organization !!}</p>
-                                            <p class="rd-location">{!! ucfirst($experience->country) !!}</p>
+                                            <p class="rd-location">{!! JobCallMe::cityName($experience->city).' ,'.JobCallMe::countryName($academic->country)!!}</p>
                                         </div>
                                     </li>
                                 @endforeach
@@ -526,17 +556,31 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.country')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control input-sm select2" name="country">
-                                        @foreach(JobCallMe::getJobCountries() as $cntry)
-                                            <option value="{{ $cntry->name }}" {{ $user->country == $cntry->id ? 'selected="selected"' : '' }}>{{ ucfirst($cntry->name) }}</option>
-                                        @endforeach
-                                    </select>
+                                    <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                    @endforeach
+                                </select>
                                 </div>
                             </div>
+							   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-state" name="state">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-city" name="city">
+                                </select>
+                            </div>
+							</div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm" name="details"></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -627,7 +671,7 @@ if($user->profilePhoto != ''){
                                                 </a>&nbsp;
                                             </span>
                                             <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
-											<p class="rd-location"> {!! $skills->startmonth !!} {!! $skills->startyear !!} - {!! $skills->endmonth !!} {!! $skills->endyear !!}</p>
+											<p class="rd-location"> {!! $skills->startmonth !!} {!! $skills->startyear !!} - {{ $skills->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($skills->endDate)) }}</p>
 											<p class="rd-location"> As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
 											
                                            <p class="rd-location">{!! $skills->detail !!}</p>
@@ -715,6 +759,16 @@ if($user->profilePhoto != ''){
                                     </select>
                                 </div>
                             </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <div class="cntr">
+                                        <input id="currently" type="checkbox" class="cbx-field" name="currently" value="yes">
+                                        <label class="cbx" for="currently"></label>
+                                        <label class="lbl" for="currently">@lang('home.currentlyworking')</label>
+                                    </div>
+                                </div>
+                            </div>
 							    <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.endyear')</label>
                                 <div class="col-md-6">
@@ -760,6 +814,155 @@ if($user->profilePhoto != ''){
                         </form>
                     </section>
                     <!--Project Section End-->
+					
+					<!---Affilation -->
+					   <section class="resume-box" id="aff">
+                        <a class="btn btn-primary r-add-btn" onclick="addAffi()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Affiliation')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['affiliation']) > 0)
+                                @foreach($resume['affiliation'] as $resumeId => $afflls)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getAffi('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $afflls->pos !!}</p>
+											<p class="rd-location"> {!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}</p>
+											<p class="rd-location">{!! $afflls->org .', '.JobCallMe::cityName($afflls->city).' ,'.JobCallMe::countryName($afflls->country) !!}
+											
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    <section class="resume-box" id="aff-edit" style="display: none;">
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.Affiliation')</c></h4>
+                        <form class="form-horizontal form-aff" method="post" action="">
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="resumeId" value="">
+                            <div class="form-group error-group" style="display: none;">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6"><div class="alert alert-danger"></div></div>
+                            </div>
+							 
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="org">
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.position')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="pos">
+                                </div>
+                            </div>
+                            
+							
+							  <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.startyear')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="ssyear" name="stayear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.startmonth')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="startmonth" name="stamonth">
+									<option value=''>Select Month</option>
+										<option value='Jan'>Jan</option>
+										<option value='Feb'>Feb</option>
+										<option value='Mar'>Mar</option>
+										<option value='Apr'>Apr</option>
+										<option value='May'>May</option>
+										<option value='Jun'>Jun</option>
+										<option value='Jul'>Jul</option>
+										<option value='Aug'>Aug</option>
+										<option value='Sep'>Sep</option>
+										<option value='Oct'>Oct</option>
+										<option value='Nov'>Nov</option>
+										<option value='Dec'>Dec</option>
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							    <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.endyear')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="esyear" name="enyear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.endmonth')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="endmonth" name="enmonth">
+									<option value=''>Select Month</option>
+										<option value='Jan'>Jan</option>
+										<option value='Feb'>Feb</option>
+										<option value='Mar'>Mar</option>
+										<option value='Apr'>Apr</option>
+										<option value='May'>May</option>
+										<option value='Jun'>Jun</option>
+										<option value='Jul'>Jul</option>
+										<option value='Aug'>Aug</option>
+										<option value='Sep'>Sep</option>
+										<option value='Oct'>Oct</option>
+										<option value='Nov'>Nov</option>
+										<option value='Dec'>Dec</option>
+                                    </select>
+                                </div>
+                            </div>
+							
+							<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.country')</label>
+                            <div class="col-sm-6 ">
+                                <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-state" name="state">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-city" name="city">
+                                </select>
+                            </div>
+                        </div>
+							
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#aff').fadeIn();$('#aff-edit').hide();$('html, body').animate({scrollTop:$('#aff').position().top}, 700);">@lang('home.cancel')</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                    <!--Affilation Section End-->
 					
 					<!---Project -->
 					   <section class="resume-box" id="sk">
@@ -920,9 +1123,9 @@ if($user->profilePhoto != ''){
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
-                                            <p class="rd-title">{!! $skills->name !!}</p>
+                                            <p class="rd-title">{!! $skills->name !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
 											<p class="rd-location"> Job Title: {!! $skills->jobtitle !!}</p>
-											<p class="rd-location">Organization: {!! $skills->organization !!}</p>
+											<p class="rd-location">Organization: {!! $skills->organization .', '.JobCallMe::cityName($skills->city).', '.JobCallMe::countryName($skills->country)  !!}</p>
                                            <p class="rd-location">Phone Number : {!! $skills->phone !!}</p>
 										   <p class="rd-location">Email : {!! $skills->email !!}</p>
                                         </div>
@@ -970,6 +1173,45 @@ if($user->profilePhoto != ''){
                                     <input type="text" class="form-control input-sm" name="email">
                                 </div>
                             </div>
+							    <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                    @endforeach
+                                </select>
+                                </div>
+                            </div>
+							   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-state" name="state">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-city" name="city">
+                                </select>
+                            </div>
+							</div>
+							                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.type')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" name="type">
+                                        <option value="@lang('home.professional')">@lang('home.professional')</option>
+                                        <option value="@lang('home.Personal')">@lang('home.Personal')</option>
+                                        <option value="@lang('home.Superior')">@lang('home.Superior')</option>
+										<option value="@lang('home.Peer')">@lang('home.Peer')</option>
+										<option value="@lang('home.Subordinate')">@lang('home.Subordinate')</option>
+										<option value="@lang('home.Professor')">@lang('home.Professor')</option>
+										<option value="@lang('home.Client')">@lang('home.Client')</option>
+										<option value="@lang('home.other')">@lang('home.other')</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
@@ -999,7 +1241,7 @@ if($user->profilePhoto != ''){
                                             <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->pu_type !!})</span></p>
 											<p class="rd-location"> {!! $skills->month !!}-{!! $skills->year !!}</p>
 											<p class="rd-location"> Author: {!! $skills->author !!}</p>
-											<p class="rd-location">Publisher: {!! $skills->publisher !!}</p>
+											<p class="rd-location">Publisher: {!! $skills->publisher.', '.JobCallMe::cityName($skills->city).' ,'.JobCallMe::countryName($skills->country)  !!}</p>
                                            <p class="rd-location">{!! $skills->detail !!}</p>
 										  
                                         </div>
@@ -1048,6 +1290,30 @@ if($user->profilePhoto != ''){
                                     <input type="text" class="form-control input-sm" name="publisher">
                                 </div>
                             </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                    @endforeach
+                                </select>
+                                </div>
+                            </div>
+							   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-state" name="state">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <div class="col-sm-6">
+                                <select class="form-control select2 job-city" name="city">
+                                </select>
+                            </div>
+							</div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.year')</label>
                                 <div class="col-md-6">
@@ -1192,6 +1458,126 @@ if($user->profilePhoto != ''){
                         </form>
                     </section>
                     <!--Project Section End-->
+					
+					<!--Portfolio Section-->
+					<section class="resume-box" id="port">
+                        <a class="btn btn-primary r-add-btn" onclick="addPortfolio()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Portfolio')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['portfolio']) > 0)
+                                @foreach($resume['portfolio'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getPortfolio('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->title !!}<span class="rd-location">({!! $skills->type !!})</span></p>
+											<p class="rd-location">{!! $skills->startmonth !!} {!! $skills->startyear !!}</p>
+											<p class="rd-location">http://{!! $skills->website !!}</p>
+											<p class="rd-location"> {!! $skills->occupation !!}</p>
+											
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    <section class="resume-box" id="port-edit" style="display: none;">
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.Portfolio')</c></h4>
+                        <form class="form-horizontal form-port" method="post" action="">
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="resumeId" value="">
+                            <div class="form-group error-group" style="display: none;">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6"><div class="alert alert-danger"></div></div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.title')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="title">
+                                </div>
+                            </div>
+							
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.type')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" name="type">
+                                        <option value="@lang('home.academic')">@lang('home.academic')</option>
+                                        <option value="@lang('home.professional')">@lang('home.professional')</option>
+										<option value="@lang('home.Extracurricular')">@lang('home.Extracurricular')</option>
+										
+                                    </select>
+                                </div>
+                            </div>
+							 
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.occupation')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="occupation">
+                                </div>
+                            </div>
+							 
+							  <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.year')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="yearss" name="startyear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.month')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="smonth" name="startmonth">
+									<option value=''>Select Month</option>
+										<option value='Jan'>Jan</option>
+										<option value='Feb'>Feb</option>
+										<option value='Mar'>Mar</option>
+										<option value='Apr'>Apr</option>
+										<option value='May'>May</option>
+										<option value='Jun'>Jun</option>
+										<option value='Jul'>Jul</option>
+										<option value='Aug'>Aug</option>
+										<option value='Sep'>Sep</option>
+										<option value='Oct'>Oct</option>
+										<option value='Nov'>Nov</option>
+										<option value='Dec'>Dec</option>
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							 <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.website')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="website">
+                                </div>
+                            </div>
+							<div class="form-group">
+                            <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
+                            <div class="col-md-6">
+                                <textarea name="detail" class="form-control tex-editor"></textarea>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#port').fadeIn();$('#port-edit').hide();$('html, body').animate({scrollTop:$('#port').position().top}, 700);">@lang('home.cancel')</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                    <!--Project Section End-->
+					
                 </div>
                 <div class="col-md-3">
                     <div class="resume-listing-section hidden-sm hidden-xs">
@@ -1225,6 +1611,26 @@ if($user->profilePhoto != ''){
 							<li>
                                 <a id="#" onclick="$('#skil').fadeIn();$('#skil-edit').hide();$('html, body').animate({scrollTop:$('#skil').position().top}, 700);">@lang('home.publication')</a> 
                                 <a id="#" onclick="addSkil();$('html, body').animate({scrollTop:$('#skil-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
+                            </li>
+							<li>
+                                <a id="#" onclick="$('#ski').fadeIn();$('#ski-edit').hide();$('html, body').animate({scrollTop:$('#ski').position().top}, 700);">@lang('home.project')</a> 
+                                <a id="#" onclick="addProject();$('html, body').animate({scrollTop:$('#ski-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
+                            </li>
+							<li>
+                                <a id="#" onclick="$('#s').fadeIn();$('#s-edit').hide();$('html, body').animate({scrollTop:$('#s').position().top}, 700);">@lang('home.award')</a> 
+                                <a id="#" onclick="addAward();$('html, body').animate({scrollTop:$('#s-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
+                            </li>
+							<li>
+                                <a id="#" onclick="$('#sk').fadeIn();$('#sk-edit').hide();$('html, body').animate({scrollTop:$('#sk').position().top}, 700);">@lang('home.language')</a> 
+                                <a id="#" onclick="addLanguage();$('html, body').animate({scrollTop:$('#sk-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
+                            </li>
+							<li>
+                                <a id="#" onclick="$('#aff').fadeIn();$('#aff-edit').hide();$('html, body').animate({scrollTop:$('#aff').position().top}, 700);">@lang('home.Affiliation')</a> 
+                                <a id="#" onclick="addAffi();$('html, body').animate({scrollTop:$('#aff-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
+                            </li>
+							<li>
+                                <a id="#" onclick="$('#port').fadeIn();$('#port-edit').hide();$('html, body').animate({scrollTop:$('#port').position().top}, 700);">@lang('home.Portfolio')</a> 
+                                <a id="#" onclick="addPortfolio();$('html, body').animate({scrollTop:$('#port-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
                             </li>
                         </ul>
                     </div>
@@ -1264,6 +1670,18 @@ if($user->profilePhoto != ''){
                             <p style="margin-top: 4px">
                                 <input type="checkbox" id="skills-visible" class="switch-field" name="skills" {{ $privacy->skills != 'No' ? 'checked=""' : '' }}>
                                 <label for="skills-visible" class="switch-label"></label> <span>@lang('home.skillsvisible')</span>
+                            </p>
+                        </div>
+						<div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="project-visible" class="switch-field" name="project" {{ $privacy->project != 'No' ? 'checked=""' : '' }}>
+                                <label for="project-visible" class="switch-label"></label> <span>@lang('home.projectsvisible')</span>
+                            </p>
+                        </div>
+						<div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="publication-visible" class="switch-field" name="publication" {{ $privacy->publication != 'No' ? 'checked=""' : '' }}>
+                                <label for="publication-visible" class="switch-label"></label> <span>@lang('home.publicationsvisible')</span>
                             </p>
                         </div>
                     </form>
@@ -1444,6 +1862,8 @@ function getAcademic(resumeId){
             $('.form-academic input[name="grade"]').val(obj.grade);
             $('.form-academic input[name="institution"]').val(obj.institution);
             $('.form-academic select[name="country"]').val(obj.country).trigger('change');
+			$('.form-academic select[name="state"]').val(obj.state).trigger('change');
+			$('.form-academic select[name="city"]').val(obj.city).trigger('change');
             $('.form-academic textarea[name="details"]').val(obj.details);
             $('#academic-edit h4 c').text('Edit Academics');
             $('#academic').hide();
@@ -1512,6 +1932,8 @@ function getCertification(resumeId){
             $('.form-certification input[name="score"]').val(obj.score);
             $('.form-certification input[name="institution"]').val(obj.institution);
             $('.form-certification select[name="country"]').val(obj.country).trigger('change');
+            $('.form-certification select[name="state"]').val(obj.state).trigger('change');
+            $('.form-certification select[name="city"]').val(obj.city).trigger('change');
             $('.form-certification textarea[name="details"]').val(obj.details);
             $('#certification-edit h4 c').text('Edit Certificate');
             $('#certification').hide();
@@ -1576,6 +1998,9 @@ function getExperience(resumeId){
                 $('.form-experience input[name="currently"]').prop('checked',false);
             }            
             $('.form-experience select[name="country"]').val(obj.country).trigger('change');
+			$('.form-experience select[name="state"]').val(obj.state).trigger('change');
+			$('.form-experience select[name="city"]').val(obj.city).trigger('change');
+			
             $('.form-experience textarea[name="details"]').val(obj.details);
             $('#experience-edit h4 c').text('Edit Experience');
             $('#experience').hide();
@@ -1689,6 +2114,10 @@ function getSkill(resumeId){
 			$('.form-skill input[name="organization"]').val(obj.organization);
             $('.form-skill input[name="phone"]').val(obj.phone);
 			$('.form-skill input[name="email"]').val(obj.email);
+			$('.form-skill select[name="country"]').val(obj.country).trigger('change');
+			$('.form-skill select[name="state"]').val(obj.state).trigger('change');
+			$('.form-skill select[name="city"]').val(obj.city).trigger('change');
+			$('.form-skill select[name="type"]').val(obj.type).trigger('change');
             $('#skill-edit h4 c').text('Edit Reference');
             $('#skill').hide();
             $('#skill-edit').fadeIn();
@@ -1749,6 +2178,9 @@ function getSkil(resumeId){
 			$('.form-skil input[name="publisher"]').val(obj.publisher);
             $('.form-skil input[name="year"]').val(obj.year);
 			$('.form-skil input[name="month"]').val(obj.month);
+			$('.form-skil select[name="country"]').val(obj.country).trigger('change');
+			$('.form-skil select[name="state"]').val(obj.state).trigger('change');
+			$('.form-skil select[name="city"]').val(obj.city).trigger('change');
 			$('.form-skil textarea[name="detail"]').val(obj.detail);
             $('#skil-edit h4 c').text('Edit Publisher');
             $('#skil').hide();
@@ -1761,6 +2193,7 @@ function getSkil(resumeId){
 //
 function addProject(){
     $('.form-ski input').val('');
+	$('.form-ski input[name="currently"]').val('yes');
     $('#ski-edit h4 c').text('Add Project');
     $('#ski').hide();
     $('#ski-edit').fadeIn();
@@ -1812,8 +2245,13 @@ function getProject(resumeId){
 			$('.form-ski input[name="organization"]').val(obj.organization);
 			$('.form-ski select[name="startyear"]').val(obj.startyear).trigger('change');
             $('.form-ski select[name="startmonth"]').val(obj.startmonth).trigger('change');
-			$('.form-ski select[name="endyear"]').val(obj.endyear).trigger('change');
-			$('.form-ski select[name="endmonth"]').val(obj.endmonth).trigger('change');
+			$('.form-ski input[name="currently"]').prop('checked',true);
+			 if(obj.currently == 'no'){
+                $('.form-ski select[name="endyear"]').val(obj.endyear).trigger('change');
+		     	$('.form-ski select[name="endmonth"]').val(obj.endmonth).trigger('change');
+                $('.form-ski input[name="currently"]').prop('checked',false);
+            } 
+			
 			$('.form-ski textarea[name="detail"]').val(obj.detail);
             $('#ski-edit h4 c').text('Edit Project');
             $('#ski').hide();
@@ -1822,6 +2260,76 @@ function getProject(resumeId){
     })
 }
 //
+
+//Affilation
+function addAffi(){
+    $('.form-aff input').val('');
+    $('#aff-edit h4 c').text('Add Affiliation');
+    $('#aff').hide();
+    $('#aff-edit').fadeIn();
+}
+$('form.form-aff').submit(function(e){
+    $('.form-aff input[name="_token"]').val(pageToken);
+    $('.form-aff button[name="save"]').prop('disabled',true);
+    $('.form-aff .error-group').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.form-aff').serialize(),
+        url: "{{ url('account/jobseeker/resume/affiliation/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.form-aff .error-group').show();
+                $('.form-aff .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
+                $('html, body').animate({scrollTop:$('#aff-edit').position().top}, 1000);
+                $('.form-aff button[name="save"]').prop('disabled',false);
+            }else{
+                window.location.href = "{{ url('account/jobseeker/resume') }}";
+            }
+            Pace.stop;
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            var vErrors = '';
+            $.each(errors, function(i,k){
+                vErrors += '<li>'+k+'</li>';
+            })
+            $('.form-aff .error-group').show();
+            $('.form-aff .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
+            $('.form-aff button[name="save"]').prop('disabled',false);
+            Pace.stop;
+            $('html, body').animate({scrollTop:$('#aff-edit').position().top}, 1000);
+        }
+    })
+    e.preventDefault();
+})
+function getAffi(resumeId){
+    $.ajax({
+        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.form-aff input[name="resumeId"]').val(resumeId);
+			//$('.form-aff input[name="title"]').val(obj.title);
+			$('.form-aff input[name="pos"]').val(obj.pos);
+           // $('.form-aff select[name="type"]').val(obj.type).trigger('change');
+			//$('.form-aff input[name="occupation"]').val(obj.occupation);
+			$('.form-aff input[name="org"]').val(obj.org);
+			$('.form-aff select[name="stayear"]').val(obj.stayear).trigger('change');
+            $('.form-aff select[name="stamonth"]').val(obj.stamonth).trigger('change');
+			$('.form-aff select[name="enyear"]').val(obj.enyear).trigger('change');
+			$('.form-aff select[name="enmonth"]').val(obj.enmonth).trigger('change');
+			
+			
+			//$('.form-aff textarea[name="detail"]').val(obj.detail);
+            $('#aff-edit h4 c').text('Edit Affiliation');
+            $('#aff').hide();
+            $('#aff-edit').fadeIn();
+        }
+    })
+}
+//Affilation end
+
+
+
 function addLanguage(){
     $('.form-sk input').val('');
     $('#sk-edit h4 c').text('Add Language');
@@ -1881,7 +2389,7 @@ function getLanguage(resumeId){
 //
 function addAward(){
     $('.form-s input').val('');
-    $('#s-edit h4 c').text('Add Language');
+    $('#s-edit h4 c').text('Add  Honours & Awards');
     $('#s').hide();
     $('#s-edit').fadeIn();
 }
@@ -1932,13 +2440,75 @@ function getAward(resumeId){
 			$('.form-s select[name="startyear"]').val(obj.startyear).trigger('change');
             $('.form-s select[name="startmonth"]').val(obj.startmonth).trigger('change');
 			
-            $('#s-edit h4 c').text('Edit Language');
+            $('#s-edit h4 c').text('Edit  Honours & Awards');
             $('#s').hide();
             $('#s-edit').fadeIn();
         }
     })
 }
 //
+//
+function addPortfolio(){
+    $('.form-port input').val('');
+    $('#port-edit h4 c').text('Add Portfolio');
+    $('#port').hide();
+    $('#port-edit').fadeIn();
+}
+$('form.form-port').submit(function(e){
+    $('.form-port input[name="_token"]').val(pageToken);
+    $('.form-port button[name="save"]').prop('disabled',true);
+    $('.form-prt.error-group').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.form-port').serialize(),
+        url: "{{ url('account/jobseeker/resume/portfolio/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.form-port.error-group').show();
+                $('.form-port.error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
+                $('html, body').animate({scrollTop:$('#sk-edit').position().top}, 1000);
+                $('.form-port button[name="save"]').prop('disabled',false);
+            }else{
+                window.location.href = "{{ url('account/jobseeker/resume') }}";
+            }
+            Pace.stop;
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            var vErrors = '';
+            $.each(errors, function(i,k){
+                vErrors += '<li>'+k+'</li>';
+            })
+            $('.form-port .error-group').show();
+            $('.form-port .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
+            $('.form-port button[name="save"]').prop('disabled',false);
+            Pace.stop;
+            $('html, body').animate({scrollTop:$('#port-edit').position().top}, 1000);
+        }
+    })
+    e.preventDefault();
+})
+function getPortfolio(resumeId){
+    $.ajax({
+        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.form-port input[name="resumeId"]').val(resumeId);
+			$('.form-port input[name="title"]').val(obj.title);
+            $('.form-port select[name="type"]').val(obj.type).trigger('change');
+			$('.form-port input[name="occupation"]').val(obj.occupation);
+			$('.form-port select[name="startyear"]').val(obj.startyear).trigger('change');
+            $('.form-port select[name="startmonth"]').val(obj.startmonth).trigger('change');
+			$('.form-port input[name="website"]').val(obj.organization);
+			
+            $('#port-edit h4 c').text('Edit Portfolio');
+            $('#port').hide();
+            $('#port-edit').fadeIn();
+        }
+    })
+}
+//
+
 $('.profile-pic').on('change',function(){
     var formData = new FormData();
     formData.append('profilePicture', $(this)[0].files[0]);
@@ -1995,6 +2565,22 @@ for(var year = end ; year >=start; year--){
 }
 document.getElementById("syear").innerHTML = options;
 //
+var start = 1950;
+var end = new Date().getFullYear();
+var options = "";
+for(var year = end ; year >=start; year--){
+  options += "<option value="+year+">"+ year +"</option>";
+}
+document.getElementById("ssyear").innerHTML = options;
+//
+
+var start = 1950;
+var end = new Date().getFullYear();
+var options = "";
+for(var year = end ; year >=start; year--){
+  options += "<option value="+year+">"+ year +"</option>";
+}
+document.getElementById("esyear").innerHTML = options;
 
 var estart = 1950;
 var eend = new Date().getFullYear();
@@ -2013,5 +2599,21 @@ for(var years = ends ; years >=starts; years--){
 }
 document.getElementById("years").innerHTML = option;
 
+var starts = 1950;
+var ends = new Date().getFullYear();
+var option = "";
+for(var years = ends ; years >=starts; years--){
+  option += "<option value="+years+">"+ years +"</option>";
+}
+document.getElementById("yearss").innerHTML = option;
+
+
+var sta = 1950;
+var en = new Date().getFullYear();
+var op = "";
+for(var ye= en ; ye >=sta; ye--){
+  option += "<option value="+ye+">"+ ye +"</option>";
+}
+document.getElementById("stayear").innerHTML = op;
 </script>
 @endsection

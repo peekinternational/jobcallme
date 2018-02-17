@@ -60,12 +60,16 @@
                 <li><a href="{{ url('privacy-policy') }}"><span class="lh-eff34 c18-cyan-6"><span></span>Privacy Policy</span></a></li>
                 <li><a href="{{ url('terms-conditions') }}"><span class="lh-eff34 c18-cyan-6"><span></span>Terms & Conditions</span></a></li>
                 <li><a href="{{ url('account/register') }}"><span class="lh-eff34 c18-cyan-6"><span></span>Signup Now</span></a></li>
+				<li><a href="{{ url('account/register') }}"><span class="lh-eff34 c18-cyan-6"><span></span>Signup Now</span></a></li>
             </ul>
             <ul class="social-links">
                 <li><a href="https://facebook.com"><i class="fa fa-facebook-square"></i> </a> </li>
                 <li><a href="https://twitter.com"><i class="fa fa-twitter-square"></i> </a> </li>
                 <li><a href="https://linkedin.com"><i class="fa fa-linkedin-square"></i> </a> </li>
             </ul>
+			<br>
+			<br>
+			<button class="btn btn-warning"><a style="color:white" target="_blank" href="https://www.outsourcingok.com/">www.outsourcingok.com</a></button>
         </div>
 		
     </div>

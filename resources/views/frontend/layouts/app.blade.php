@@ -23,6 +23,7 @@ $next = Request::route()->uri;
          <!-- Bootstrap -->
         <link href="{{ asset('frontend-assets/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('frontend-assets/css/sajid.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/font-awesome.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/animate.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/select2.css') }}" rel="stylesheet">
@@ -69,10 +70,10 @@ $next = Request::route()->uri;
         @yield('content')
 
         @include('frontend.includes.footer')
-
-       <a href="#" class="job-notification">
-        <i class="fa fa-bell"></i>
-        <span class="notification-label">Subscribe for job notifications</span>
+    
+    <a href="{{ url('/subscribe')}}" class="job-notification" style="@if(session()->has('bell_color')) background:{{ session()->get('bell_color') }} @endif">
+        <i class="fa fa-bell" style=" @if(session()->has('bell_color')) background:{{ session()->get('bell_color') }} @endif"></i>
+        <span class="notification-label">@if(session()->has('bell_color')) @if(session()->get('bell_color') == '#45c536') Subscribed @else Subscribe for job notifications @endif @else Subscribe for job notifications @endif</span>
     </a>
 
     <a href="#" class="back-to-top" style="display: inline;">
@@ -82,6 +83,7 @@ $next = Request::route()->uri;
         <script src="{{ asset('frontend-assets/js/jquery.min.js') }}"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="{{ asset('frontend-assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('frontend-assets/js/sajid.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/select2.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/bootstrap-datetimepicker.js') }}"></script>
 		<!--For Text animation-->
@@ -116,7 +118,7 @@ $next = Request::route()->uri;
     });
 </script>
 <!--FeedBack Form-->
-<script src="js/feedBackBox.js"></script>
+<!-- <script src="js/feedBackBox.js"></script> -->
 <script type="text/javascript">
     $(document).ready(function () {
         $('#feedback-Form').feedBackBox();
@@ -399,6 +401,8 @@ function saveJob(jobId,obj){
         }
     })
 }
+
+    
 </script>
 
 @if(Session()->has('fNotice'))
@@ -416,6 +420,7 @@ function saveJob(jobId,obj){
         $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
         e.preventDefault();
     });
+
 </script>
 {{ Session()->forget('fNotice') }}
 @endif

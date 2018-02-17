@@ -47,6 +47,9 @@ $$nav = 'active';
                             <li class="{{ $company }}">
                                 <a href="{{ url('admin/users/company') }}">Companies</a>
                             </li>
+							<li class="{{ $getfeedback }}">
+                                <a href="{{ url('getfeedback') }}">Feedback</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="sidenav-item has-subnav {{ $cms }}">
@@ -62,12 +65,16 @@ $$nav = 'active';
                             <li class="{{ $shift }}">
                                 <a href="{{ url('admin/cms/shift') }}">Job Shift</a>
                             </li>
+							<li class="{{ $readCat }}">
+                                <a href="{{ url('readCat') }}">Read Category</a>
+                            </li>
                             <li class="{{ $jobtype }}">
                                 <a href="{{ url('admin/cms/jobtype') }}">Job Type</a>
                             </li>
                             <li class="{{ $upskill }}">
-                                <a href="{{ url('admin/cms/upskill') }}">Upskill Type</a>
+                                <a href="{{ url('admin/cms/upskilltype') }}">Upskill Type</a>
                             </li>
+							
                             <li class="{{ $pages }}">
                                 <a href="{{ url('admin/cms/pages') }}">Pages</a>
                             </li>

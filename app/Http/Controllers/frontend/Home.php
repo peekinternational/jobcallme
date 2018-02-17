@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
-
+use Mail;
 class Home extends Controller{
 
 	public function home(){
@@ -141,7 +141,15 @@ class Home extends Controller{
 				}
 				$request->session()->put('jcmUser', $user);
 				setcookie('cc_data', $user->userId, time() + (86400 * 30), "/");
-				
+				if($user->subscribe == 'N'){
+					
+					Session()->put('bell_color','#2e6da4');
+					//echo session('bell_color');die;
+				}else{
+					
+					session()->put('bell_color','#45c536');
+					//echo session('bell_color');die;
+				}
 				if($next != ''){
 					return redirect($next);
 				}else{
@@ -155,7 +163,7 @@ class Home extends Controller{
 
 	public function doLogin($email,$password){
 		/* do login */
-		$user = DB::table('jcm_users')->where('email','=',$email)->where('password','=',md5($password))->where('status','Active')->where('type','<>','Admin')->first();
+		$user = DB::table('jcm_users')->where('email','=',$email)->where('password','=',md5($password))->where('user_status','Y')->where('type','<>','Admin')->first();
 		if(count($user) == 0){
 			return 'invalid';
 		}else{
@@ -172,8 +180,8 @@ class Home extends Controller{
 			$this->validate($request,[
 				'email' => 'required|email|unique:jcm_users,email',
 				'password' => 'required|min:6|max:16',
-				'firstName' => 'required|min:2|max:50',
-				'lastName' => 'required|min:2|max:50',
+				'firstName' => 'required|min:1|max:50',
+				'lastName' => 'required|min:1|max:50',
 				'country' => 'required',
 				'state' => 'required',
 				'phoneNumber' => 'required|digits_between:10,12',
@@ -204,12 +212,16 @@ class Home extends Controller{
 
 			DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
 			/* end */
-
-			$user = $this->doLogin($request->input('email'),$request->input('password'));
-			$request->session()->put('jcmUser', $user);
-			$fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume';
+			$toemail = $input['email'];
+			$secidtoview = array('id' => $input['secretId'],'Name' => $input['firstName']);
+			Mail::send('emails.reg',$secidtoview,function($message) use ($toemail) {
+				$message->to($toemail)->subject('Account Verification');
+			});
+			/*$user = $this->doLogin($request->input('email'),$request->input('password'));
+			$request->session()->put('jcmUser', $user);*/
+			$fNotice = 'Please check your email to verify';
 			$request->session()->put('fNotice',$fNotice);
-			return redirect('account/jobseeker');
+			return redirect('account/register');
 		}
 		$pageType = \Request::segment('2');
 		return view('frontend.login-registration',compact('pageType'));
@@ -217,6 +229,8 @@ class Home extends Controller{
 
 	public function logout(Request $request){
     	$request->session()->flush('jcmUser');
+		$request->session()->flush('bell_color');
+    	//$request->session()->destroy();
     	setcookie('cc_data', '', -time() + (86400 * 30), "/");
     	return redirect('');
     }
@@ -344,8 +358,8 @@ class Home extends Controller{
     	/* read query */
     	
     	$readQry = DB::table('jcm_writings')->join('jcm_users','jcm_users.userId','=','jcm_writings.userId');
-    	$readQry->leftJoin('jcm_categories','jcm_categories.categoryId','=','jcm_writings.category');
-    	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_categories.name');
+    	$readQry->leftJoin('jcm_read_category','jcm_read_category.id','=','jcm_writings.category');
+    	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_read_category.name');
     	if($request->input('category') != '0' && $request->input('category') != ''){
     		$readQry->where('jcm_writings.category','=',$request->input('category'));
     	}
@@ -456,5 +470,115 @@ class Home extends Controller{
     	$type = trim($request->input('type'));
     	echo @json_encode(array('status' => 'success'));
     }
+	/* the below code written fo subscribe functionality*/
+    public function subscribe(Request $request){
+
+    	/* check if person is login or not*/
+	  if(session()->has('jcmUser')){
+	  	/* get user id and on that it get user data*/
+	  	$userId = \Session::get('jcmUser')->userId;
+	  	$subscribe = DB::table('jcm_users')->where('userId','=',$userId)->first();
+	  	/* check if user subscribe then change to unsubscribe else subscribe*/
+	  	if($subscribe->subscribe == 'N'){
+	  		DB::table('jcm_users')->where('userId','=',$userId)->update(array('subscribe' => 'Y'));
+	  		Session()->put('bell_color','#45c536');
+	  		//echo session('bell_color');die;
+	  	}else{
+	  		DB::table('jcm_users')->where('userId','=',$userId)->update(array('subscribe' => 'N'));
+	  		session()->put('bell_color','#2e6da4');
+	  		//echo session('bell_color');die;
+	  	}
+	  	/*here after updating the database redirect to home page*/
+	  	return redirect('/');
+	  }else{
+	  	$request->session()->flash('subscribeAlert', 'please login to subscribe');
+	  	return redirect('account/login');
+	  }
+}
+
+public function getjobnotifications(Request $request){
+	if(!session()->has('jcmUser')){
+		return redirect('account/login');
+	}
+
+	$userid = session()->get('jcmUser')->userId;
+	$getCat = DB::table('jcm_users_meta')->where('userId',$userid)->first()->industry;
+	$jobs = DB::table('jcm_jobs')->where('category',$getCat)->get();
+	$jobstoview = array('jobs' => $jobs);
+	$currentDate = \Carbon\Carbon::now();
+	print_r($currentDate->toDateTimeString());die;
+	Mail::send('emails.jobs',$jobstoview,function($message){
+		$message->to(session()->get('jcmUser')->email)->subject('Latest jobs');
+	});
+}
+public function feedback(Request $request){
+		$data['email'] = $request->input('email');
+		$data['type'] = $request->input('type');
+		$data['message'] = $request->input('message');
+		DB::table('feedback')->insert($data);
+}
+public function getfeedback(Request $request){
+		$data = DB::table('feedback')->get();
+		return view('admin.users.feedback',compact('data'));
+}
+public function editfeedback(Request $request){
+	$id = $request->input('id');
+	$data = DB::table('feedback')->where('id',$id)->first();
+	echo json_encode($data);
+}
+
+public function deletefeedback(Request $request){
+	$id = $request->input('id');
+	if(DB::table('feedback')->where('id',$id)->delete()){
+		echo 1;
+	}else{
+		echo 2;
+	}
+
+}
+public function readCat(){
+		$data = DB::table('jcm_read_category')->get();
+       return view('admin.users.readcat',compact('data'));
+}
+public function addreadCat(Request $request){
+	if(!$request->input('id')){
+		$name = $request->input('name');
+		$data = array('name' => $name);
+		if(DB::table('jcm_read_category')->insert($data)){
+			echo 1;
+		}else{
+			echo 2;
+		}
+	}else{
+		$id = $request->input('id');
+		$name = $request->input('name');
+		$data = array('name' => $name);
+		if(DB::table('jcm_read_category')->where('id',$id)->update($data)){
+			echo 1;
+		}else{
+			echo 2;
+		}
+	}
+}
+public function deletereadCat(Request $request){
+	$id = $request->input('id');
+	if(DB::table('jcm_read_category')->where('id',$id)->delete()){
+		echo 1;
+	}else{
+		echo 2;
+	}
+}
+public function verifyUser(Request $request){
+	$secretId = trim($request->segment(2));
+	$data = DB::table('jcm_users')->where('secretId',$secretId)->first();
+	if($data > 0){
+		
+		DB::table('jcm_users')->where('secretId',$secretId)->update(['user_status' => 'Y']);
+		$request->session()->flash('loginAlert', 'Your account is Verified Please Login');
+		return redirect('account/login');
+	}else{
+		echo "There is a issue in your secret code kindly contact with administration thanks";
+	}
+}
 }
 ?>

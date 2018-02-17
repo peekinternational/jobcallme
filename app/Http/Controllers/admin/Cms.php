@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
+use App\UpskillType;
 
 class Cms extends Controller{
     
@@ -264,6 +265,8 @@ class Cms extends Controller{
 
         return view('admin.cms.job-type',compact('jobType','startI'));
     }
+	
+	
 
     public function saveJobType(Request $request){
         if(!$request->ajax()){
@@ -310,6 +313,63 @@ class Cms extends Controller{
         }
         return redirect(url()->previous());
     }
+	
+	/* UpSkill */
+	
+	 public function viewupskillType(Request $request){
+      
+        $startI = $request->input('page',1);
+        $startI = ($startI - 1) * 25;
+        return view('admin.cms.upskill-type',compact('startI'));
+    }
+
+    public function saveupskillType(Request $request){
+        if(!$request->ajax()){
+            exit('Directory access is forbidden');
+        }
+        $upskillid = trim($request->input('upskillid'));
+        $name = trim($request->input('name'));
+
+        if($name == ''){
+            exit('Please enter job type.');
+        }
+        $cat = UpskillType::where('name','=',$name)->where('upskillid','<>',$upskillid)->first();
+        if(count($cat) > 0){
+            exit('UpSkill Type <b>'.$name.'</b> already exist.');
+        }
+
+        $input = array('name' => $name, 'updated_at' => date('Y-m-d H:i:s'));
+        if($upskillid != '0'){
+            UpskillType::where('upskillid','=',$upskillid)->update($input);
+            $sMsg = 'Job Type Updated';
+        }else{
+            $input['created_at'] = date('Y-m-d H:i:s');
+            UpskillType::insert($input);
+            $sMsg = 'New UpSkill Type Added';
+        }
+        $request->session()->flash('alert',['message' => $sMsg, 'type' => 'success']);
+        exit('1');
+    }
+
+    public function getupskillType(Request $request){
+        if(!$request->ajax()){
+            exit('Directory access is forbidden');
+        }
+        $upskillid = $request->segment(5);
+        $cat = UpskillType::where('upskillid',$upskillid)->first();
+        echo @json_encode($cat);
+    }
+
+    public function deleteupskillType(Request $request){
+        if($request->isMethod('delete')){
+            $upskillid = $request->input('upskillid');
+            UpskillType::where('upskillid','=',$upskillid)->delete();
+            $request->session()->flash('alert',['message' => 'UpSkill Type Deleted','type' => 'success']);
+        }
+        return redirect(url()->previous());
+    }
+	
+	/* End UpSkill */
 
     public function viewPages(Request $request){
         JobCallMe::necessaryPages();
