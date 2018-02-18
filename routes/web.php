@@ -96,7 +96,9 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::match(['get','post'],'cms/pages/new','admin\Cms@addEditPage');
 	Route::match(['get','post'],'cms/pages/edit/{id}','admin\Cms@addEditPage');
 	Route::delete('cms/pages/delete','admin\Cms@deletePage');
-
+	/* Aprove Writing*/
+	Route::get('cms/aprovewriting','admin\Cms@writing');
+	Route::post('cms/writestatupdate','admin\Cms@writestatupdate');
 });
 
 /* frontend */

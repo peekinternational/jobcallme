@@ -63,7 +63,7 @@
                         <img class=" img-responsive" src="{{ url('article-images/'.$rec->wIcon) }}" alt="">
                         <div class="col-md-12">
                             <p> <a href="{{ url('read/article/'.$rec->writingId ) }}" class="la-title">{!! $rec->title !!}</a></p>
-                            <span>{{ $rec->name }}</span>
+                            <span>{{ $rec->cat_names }}</span>
                             <div class="la-text">{!! $rec->citation !!}</div>
                             <div class="ra-author-box">
                                 <img src="{{ url('profile-photos/'.$rec->profilePhoto) }}" class="img-circle" alt="{{ $rec->firstName }}">

@@ -18,7 +18,7 @@ class ExtraSkills extends Controller{
 
     	/* writing query */
     	$writings = DB::table('jcm_writings')->where('userId','=',$app->userId);
-    	$writings->orderBy('writingId','desc');
+    	$writings->orderBy('writingId','desc')->groupBy('title');
     	$writing = $writings->get();
 
     	return view('frontend.view-writings',compact('writing'));
@@ -64,8 +64,14 @@ class ExtraSkills extends Controller{
             if($request->input('writingId') != '' && $request->input('writingId') != '0'){
             	DB::table('jcm_writings')->where('writingId','=',$request->input('writingId'))->update($input);
             }else{
+                $catnames = "";
+                foreach ($input['category'] as $value) {
+                    $catnames .= DB::table('jcm_read_category')->where('id',$value)->first()->name.",";
+                }
+                
                 foreach ($input['category'] as $key => $value) {
                     $input['userId'] = $app->userId;
+                    $input['cat_names'] = $catnames;
                     $input['createdTime'] = date('Y-m-d H:i:s');
                     $input['category'] = $value;
                     DB::table('jcm_writings')->insert($input);

@@ -28,7 +28,7 @@
                                     @foreach($writing as $write)
                                         <tr id="write-{{ $write->writingId }}">
                                             <td><a href="{{ url('read/article/'.$write->writingId ) }}">{!! $write->title !!}</a></td>
-                                            <td>{!! JobCallMe::readCategoryName($write->category) !!}</td>
+                                            <td>{!! $write->cat_names !!}</td>
                                             <td>{!! $write->status !!}</td>
                                             <td>{!! date('M d, Y',strtotime($write->createdTime)) !!}</td>
                                             <td>

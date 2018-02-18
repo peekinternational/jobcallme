@@ -447,5 +447,19 @@ class Cms extends Controller{
         }
         return redirect(url()->previous());
     }
+    public function writing(Request $request){
+        $writings = DB::table('jcm_writings')->groupBy('title')->orderBy('writingId','desc')->get();
+        return view('admin.cms.writing',compact('writings'));
+    }
+    public function writestatupdate(Request $request){
+        $id = $request->input('id');
+        $status = $request->input('status');
+        $check = DB::table('jcm_writings')->where('title',$id)->update(['status'=>$status]);
+        if($check){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
 
 }

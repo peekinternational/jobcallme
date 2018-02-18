@@ -74,7 +74,9 @@ $$nav = 'active';
                             <li class="{{ $upskill }}">
                                 <a href="{{ url('admin/cms/upskilltype') }}">Upskill Type</a>
                             </li>
-							
+							<li class="{{ $AproveWriting }}">
+                                <a href="{{ url('admin/cms/aprovewriting') }}">Aprove Writing</a>
+                            </li>
                             <li class="{{ $pages }}">
                                 <a href="{{ url('admin/cms/pages') }}">Pages</a>
                             </li>

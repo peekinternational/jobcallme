@@ -331,7 +331,7 @@ class JobCallMe{
 		return DB::table('jcm_categories')->where('categoryId','=',$categoryId)->first()->name;
 	}
 	public function readCategoryName($categoryId){
-		return DB::table('jcm_read_category')->where('id','=',$categoryId)->first()->name;
+		return DB::table('jcm_read_category')->where('id','=',$categoryId)->first();
 	}
 
 	public function getSubCategories($categoryId){
