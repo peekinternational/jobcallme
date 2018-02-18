@@ -99,6 +99,8 @@ Route::group(['prefix' => 'admin'], function () {
 	/* Aprove Writing*/
 	Route::get('cms/aprovewriting','admin\Cms@writing');
 	Route::post('cms/writestatupdate','admin\Cms@writestatupdate');
+	Route::post('cms/viewwriting','admin\Cms@viewwriting');
+	Route::post('cms/deletewriting','admin\Cms@deletewriting');
 });
 
 /* frontend */

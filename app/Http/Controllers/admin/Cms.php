@@ -461,5 +461,26 @@ class Cms extends Controller{
             echo 2;
         }
     }
+    public function viewwriting(Request $request){
+        $id = $request->input('id');
+        
+        $check = DB::table('jcm_writings')->where('writingId',$id)->first();
+        if($check){
+          echo json_encode($check);
+        }else{
+            echo 2;
+        }
+
+    }
+    public function deletewriting(Request $request){
+        $id = $request->input('id');
+        
+        $check = DB::table('jcm_writings')->where('writingId',$id)->delete();
+        if($check){
+          echo 1;
+        }else{
+            echo 2;
+        }
+    }
 
 }
