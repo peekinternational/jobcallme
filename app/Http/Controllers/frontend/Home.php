@@ -66,7 +66,7 @@ class Home extends Controller{
 		->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
-		if(sizeof($hot) == 0){
+		if(sizeof($jobs) == 0){
 		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 		->where('jcm_jobs.p_Category','=','4')

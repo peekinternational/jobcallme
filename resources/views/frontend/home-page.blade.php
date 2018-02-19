@@ -204,7 +204,7 @@ $lToken = csrf_token();
                     <div class="ih-item square effect15 left_to_right">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img pj-type-job">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width: 85px !important;height:85px;" alt="img">
+                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px" alt="img">
                                 <b class="pull-right">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
                                 <hr>
@@ -250,8 +250,10 @@ $lToken = csrf_token();
                         <a href="{{ url('companies/company/'.$comp->companyId) }}">
                             <div class="img">
                                 <img src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width:180px;height:180px;margin-bottom: 17px;" alt="img">
-                              
+                            <br>
+							<span>{!! $comp->companyName !!}</span>
                             </div>
+							<br>
 							<span class="brand-jobs-link">View 2 jobs</span>
                             <div class="info">
                                 <h3>{!! $comp->companyName !!}</h3>
@@ -282,7 +284,7 @@ $lToken = csrf_token();
                     <div class="ih-item square effect14 left_to_right">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img hj-type-job">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width: 85px !important;height:85px;"  alt="img">
+                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width:110px !important;height:42px;"  alt="img">
                                 <b class="pull-right">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
                                 <hr>
@@ -320,11 +322,11 @@ $lToken = csrf_token();
             <div class="row">
                 <!--Latest Job Single item Start-->
 				@foreach($Gallery as $job)
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="ih-item square effect13 left_to_right">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img lj-type-job">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width: 85px !important;height:85px;" alt="img">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width: 85px !important;height:35px;" alt="img">
                                 <b class="pull-right">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
                                 <hr>
@@ -363,11 +365,11 @@ $lToken = csrf_token();
             <div class="row">
 			@foreach($jobs as $job)
                 <!--Special Job Single item Start-->
-                <div class="col-sm-4">
+                <div class="col-md-5ths">
                     <div class="ih-item square effect2">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                         <div class="img sj-job-type">
-                            <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width: 85px !important;height:85px;"  alt="img">
+                            <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width: 50px !important;height:21px;"  alt="img">
                             <b class="pull-right">{!! $job->companyName !!}</b>
                             <div class="clearfix"></div>
                             <hr>
@@ -408,11 +410,11 @@ $lToken = csrf_token();
                 <div id="check"></div>
                 <!--Golden Job Single item Start-->
 					@foreach($jobs as $job)
-                <div class="col-sm-4">
+                <div class="col-md-5ths">
                     <div class="ih-item square effect2">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img sj-job-type">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width: 85px !important;height:85px;" alt="img">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width: 50px !important;height:21px;" alt="img">
                                 <b class="pull-right">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
                                 <hr>

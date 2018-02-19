@@ -217,6 +217,8 @@ Route::get('employer/nicerequest', function () {
     return view('frontend.employer.nicerequest');
 });
 
+
+
 Route::get('employer/niceresult', function () {
     return view('frontend.employer.niceresult');
 });
@@ -284,6 +286,9 @@ Route::get('/paymentCompleted', 'Home@paymentCompleted');
 
 Route::get('nice', function () {
     return view('frontend.nice');
+});
+Route::get('/safety', function () {
+    return view('frontend.neverpay');
 });
 //Language 
 Route::get('locale', function () {

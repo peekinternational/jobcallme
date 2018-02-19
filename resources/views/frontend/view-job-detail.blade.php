@@ -41,8 +41,13 @@ if($job->companyLogo != ''){
                             <a href="javascript:;" onclick="saveJob({{ $job->jobId }},this)" class="btn btn-default" style="margin-left: 10px;">@lang('home.save')</a>
                         @endif
                     @endif
+					
                 </div>
 			@endif
+			<div class="jd-action-btn">
+					<span style="float: right;font-size:9px;MARGIN-TOP: 69px;">Never pay for job application, test or interview. <a href="{{ url('/safety')}}">more</a></span>
+                </div>
+			
 		
                 
                 <div class="jd-share-btn">
