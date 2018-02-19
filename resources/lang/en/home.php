@@ -493,6 +493,7 @@ return [
 	'Professor' => 'Professor',
 	'Client' => 'Client',
 	'other' => 'Other',
+	'similarjob' => 'Similar Jobs in',
 	
 	
 	

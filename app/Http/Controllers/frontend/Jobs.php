@@ -288,8 +288,16 @@ class Jobs extends Controller{
 			$savedJobArr = @explode(',', $meta->saved);
 			$followArr = @explode(',', $meta->follow);
 		}
+		
+		$sug = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.*');
+		$sug->join('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId');
+		$sug->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
+		
+		$suggest=$sug->where('jcm_jobs.country','=',JobCallMe::getHomeCountry())->limit(5)->get();
+		
+		//dd($suggest);
 
-		return view('frontend.view-job-detail',compact('job','savedJobArr','followArr','userId'));
+		return view('frontend.view-job-detail',compact('job','savedJobArr','followArr','userId','suggest'));
 		//print_r($job);
 	}
 

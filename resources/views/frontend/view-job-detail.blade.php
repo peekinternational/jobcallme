@@ -3,10 +3,27 @@
 @section('title', "$job->title")
 
 @section('content')
+<?php
+$userImage = url('compnay-logo/profile-logo.jpg');
+if($job->companyLogo != ''){
+    $userImage = url('compnay-logo/'.$job->companyLogo);
+}
+?>
 <section id="jobs">
     <div class="container">
-        <div class="col-md-10">
+        <div class="col-md-9">
+		
             <div class="jobs-suggestions">
+			<div style="display: -webkit-box;">
+			 <img src="{{$userImage}}"  style="width:110px;height:110px;border-radius: 50px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
+			<div style="padding-left: 42px;">
+			<span style="text-transform: uppercase;font-size: 26px;">{{$job->companyName}}</span>
+                <p style="font-size: 18px;margin-top: 24px; margin-left: 6px;">{{ $job->title }},  &nbsp;<span style="font-size: 13px; padding-top: 9px;">{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }} </span> &nbsp;<span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">
+				{{ $job->p_title }}
+				</span></p>
+				</div>
+				</div>
+			 
 			@if($job->userId == $userId )
                 <div class="jd-action-btn">
 
@@ -26,11 +43,8 @@
                     @endif
                 </div>
 			@endif
-			<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
-                <h4>{{ $job->title }} <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">
-				{{ $job->p_title }}
-				</span></h4>
-                <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }} </p>
+		
+                
                 <div class="jd-share-btn">
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('jobs/'.$job->jobId) }}">
                     	<i class="fa fa-facebook" style="background: #2e6da4;"></i> 
@@ -166,6 +180,47 @@
                 </div>
             </div>
         </div>
+		<div class="col-md-3">
+		    <!--Follow Companies - Start -->
+                <div class="follow-companies">
+                    <h4>@lang('home.similarjob') {{JobCallMe::countryName(JobCallMe::getHomeCountry())}}</h4>
+                    <hr>
+                    <div class="row">
+					@foreach($suggest as $appl)
+					 <?php
+                        $userImage = url('compnay-logo/profile-logo.jpg');
+                         if($appl->companyLogo != ''){
+                          $userImage = url('compnay-logo/'.$appl->companyLogo);
+                               }
+?>
+                        <div class="col-md-12 col-xs-12 sp-item">
+						<div class="col-md-4 col-xs-4 sp-item">
+                            <img src="{{ $userImage }}" style="height:70px">
+							</div>
+							<div class="col-md-8 col-xs-8 sp-item">
+                            <p><a href="{{ url('jobs/'.$appl->jobId) }}">{!! $appl->title!!}</a></p>
+                            <p>{!! $appl->companyName !!}</p>
+                            <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
+							 <span class="rtj-action">
+                                                <a href="{{ url('jobs/apply/'.$sJob->jobId) }}" title="Apply">
+                                                    <i class="fa fa-paper-plane"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" onclick="removeJob({{ $sJob->jobId }})" title="Remove" class="application-remove">
+                                                    <i class="fa fa-remove"></i>
+                                                </a>
+                                            </span>
+                        </div>
+						
+						</div>
+						 @endforeach
+
+                      
+
+                        <hr>
+                        
+                    </div>
+                </div>
+		</div>
     </div>
 </section>
 @endsection
