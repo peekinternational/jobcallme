@@ -495,6 +495,7 @@ return [
 	'other' => 'Other',
 	'similarjob' => 'Similar Jobs in',
 	'postjoblike' => 'Post Jobs Like This',
+	'Courses/Trainings' => 'Courses/Trainings',
 	
 	
 	

@@ -181,6 +181,37 @@
                        </div>
                    </div>
                </div>
+			       <div class="suggested-reading">
+                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.write')</a>
+                    <h4>@lang('home.Courses/Trainings')</h4>
+                    <hr>
+					   @foreach($lear_record as $rec)
+					   <?php
+                        $pImage = url('profile-photos/profile-logo.jpg');
+                        if($rec->upskillImage != '' && $rec->upskillImage != NULL){
+                            $pImage = url('upskill-images/'.$rec->upskillImage);
+                        }
+                        ?>
+                    <div class="col-md-12 sr-item">
+					 <div class="col-md-5">
+                        <img src="{{ $pImage }}" style="height:49px">
+						</div>
+						 <div class="col-md-7">
+                        <div class="sr-details">
+                            <p class="sr-title"><a href="{{ url('learn') }}">{!! $rec->title !!} </a> </p>
+							<span>{{ $rec->type }}</span><br>
+                            <span style="font-size: 10px;"><i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}}<br> <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</span>
+                            <br>
+                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
+                        </div>
+						</div>
+                    </div>
+					   @endforeach
+
+                    <div class="col-md-12">
+                        <a href="{{ url('learn') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                    </div>
+                </div>
            </div>
 		    <!--Suggested Reading - Start -->
 				<div class="col-md-3">
@@ -201,7 +232,7 @@
 						</div>
 						 <div class="col-md-7">
                         <div class="sr-details">
-                            <p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
+                            <p class="sr-title"><a href="{{ url('read') }}" style="text-overflow: ellipsis;">{!! $rec->title !!} </a> </p>
                             <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> {{ $rec->name }}</a> </p>
                         </div>
 						</div>
@@ -213,39 +244,7 @@
                     </div>
                 </div>
             </div>
-			<div class="col-md-3 pull-left">
-                <div class="suggested-reading">
-                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.write')</a>
-                    <h4>@lang('home.suggestedreading')</h4>
-                    <hr>
-					   @foreach($lear_record as $rec)
-					   <?php
-                        $pImage = url('profile-photos/profile-logo.jpg');
-                        if($rec->upskillImage != '' && $rec->upskillImage != NULL){
-                            $pImage = url('upskill-images/'.$rec->upskillImage);
-                        }
-                        ?>
-                    <div class="col-md-12 sr-item">
-					 <div class="col-md-5">
-                        <img src="{{ $pImage }}" style="height:49px">
-						</div>
-						 <div class="col-md-7">
-                        <div class="sr-details">
-                            <p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
-							<span>{{ $rec->type }}</span><br>
-                            <span style="font-size: 10px;"><i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}}<br> <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</span>
-                            <br>
-                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
-                        </div>
-						</div>
-                    </div>
-					   @endforeach
-
-                    <div class="col-md-12">
-                        <a href="{{ url('read') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
-                    </div>
-                </div>
-            </div>
+			
            <!--RTJ- Right end-->
 		   
        </div>

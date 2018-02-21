@@ -167,8 +167,8 @@ $lToken = csrf_token();
                     </div>
                     <div class="clearfix"></div>
                     <div class="job-schedule-box">
-					 @foreach($jobShifts as $shift)
-                        <a href="{{ url('jobs?shift='.$shift->name) }}" class="hvr-shutter-in-horizontal">{{ $shift->name }}</a>
+					 @foreach(JobCallMe::getJobType() as $shift)
+                        <a href="{{ url('jobs?type='.$shift->name) }}" class="hvr-shutter-in-horizontal">{{ $shift->name }}</a>
                     @endforeach
                       
                         

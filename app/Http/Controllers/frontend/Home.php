@@ -366,7 +366,7 @@ class Home extends Controller{
     	if($request->input('keyword') != ''){
     		$readQry->where('jcm_writings.title','LIKE','%'.$request->input('keyword').'%');
     	}
-    	$readQry->orderBy('jcm_writings.writingId','desc')->limit(12);
+    	$readQry->orderBy('jcm_writings.writingId','desc')->limit(120);
     	$read_record = $readQry->get();
     	
     	return view('frontend.read',compact('read_record'));
