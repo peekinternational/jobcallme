@@ -817,4 +817,12 @@ $lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(6)->g
     	  $pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
           return $pdf->download($name.'_cv.pdf');
 	}
+	public function removeProPic(Request $request){
+		 $id = $request->input('userId');
+		if( DB::table('jcm_users')->where('userId',$id)->update(['profilePhoto'=>'']) ){
+			echo 1;
+		}else{
+			echo 2;
+		}
+	}
 }

@@ -23,6 +23,7 @@ $next = Request::route()->uri;
          <!-- Bootstrap -->
         <link href="{{ asset('frontend-assets/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('admin-assets/css/cropper.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/sajid.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/font-awesome.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/animate.css') }}" rel="stylesheet">
@@ -83,6 +84,7 @@ $next = Request::route()->uri;
         <script src="{{ asset('frontend-assets/js/jquery.min.js') }}"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="{{ asset('frontend-assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('admin-assets/js/cropper.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/sajid.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/select2.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/bootstrap-datetimepicker.js') }}"></script>

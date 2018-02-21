@@ -18,6 +18,7 @@ if(file_exists('/website/'.$headerWeb['webFavicon'])){
         <link rel="stylesheet" href="{{ asset('admin-assets/css/vendor.min.css') }}">
         <link rel="stylesheet" href="{{ asset('admin-assets/css/bootstrap-toggle.min.css') }}">
         <link rel="stylesheet" href="{{ asset('admin-assets/css/elephant.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('admin-assets/css/cropper.css') }}">
         <link rel="stylesheet" href="{{ asset('admin-assets/css/application.min.css') }}">
         <style type="text/css"> .pagination {float: right;} </style>
         @if(!JobCallMe::isAdminLoggedIn())
@@ -37,6 +38,7 @@ if(file_exists('/website/'.$headerWeb['webFavicon'])){
         <script src="{{ asset('admin-assets/js/elephant.min.js') }}"></script>
         <script src="{{ asset('admin-assets/js/application.min.js') }}"></script>
         <script src="{{ asset('admin-assets/js/bootstrap-toggle.min.js') }}"></script>
+        <script src="{{ asset('admin-assets/js/cropper.js') }}"></script>
 
         @yield('page-footer');
 

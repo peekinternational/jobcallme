@@ -101,6 +101,8 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/writestatupdate','admin\Cms@writestatupdate');
 	Route::post('cms/viewwriting','admin\Cms@viewwriting');
 	Route::post('cms/deletewriting','admin\Cms@deletewriting');
+	/*profile pic*/
+	Route::post('manage/removeProPic','frontend\jobseeker@removeProPic');
 });
 
 /* frontend */

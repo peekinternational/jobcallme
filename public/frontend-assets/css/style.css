@@ -888,6 +888,7 @@ a.job-location:hover span.shine {
 .re-img-box{
     position: relative;
     width: 150px;
+    height: 150px;
     border-radius: 50%;
     margin-bottom: 20px;
     margin-right: 17px;
@@ -897,7 +898,7 @@ a.job-location:hover span.shine {
     opacity: 1;
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
     transition: .5s ease;
     backface-visibility: hidden;
 }
