@@ -78,15 +78,19 @@ class Jobs extends Controller{
 				}
 			});
 		}
+		$app = $request->session()->get('jcmUser');
 
 		$result = $jobs->orderBy('jobId','desc')->limit(100)->get();
+		
 		//dd($result);
 
 		$vhtml = '';
 		$category ='';
 		if(count($result) > 0){
 			foreach($result as $rec){
+				$jobApplied = JobCallMe::isAppliedToJob($app->userId,$rec->jobId);
 				
+				//dd($jobApplied);
 				$applyUrl = url('jobs/apply/'.$rec->jobId);
 				$viewUrl = url('jobs/'.$rec->jobId);
 				$vhtml .= '<div class="jobs-suggestions">';
@@ -102,7 +106,12 @@ class Jobs extends Controller{
 				}
 				else{
 					$vhtml .= '<div class="js-action">';
-                        $vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">'.trans('home.applied').'</a>';
+					if($jobApplied == true){
+                        $vhtml .= '<a href="'.$applyUrl.'" class="btn btn-success btn-xs">'.trans('home.applied').'</a>';
+					}
+					else{
+						$vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">'.trans('home.apply').'</a>';
+					}
                         if(in_array($rec->jobId, $savedJobArr)){
 	                        $vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-success btn-xs" style="margin-left: 10px;">'.trans('home.saved').'</a>';
 	                    }else{
@@ -294,11 +303,12 @@ class Jobs extends Controller{
 		$sug->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
 		
 		$suggest=$sug->where('jcm_jobs.country','=',JobCallMe::getHomeCountry())->limit(5)->get();
-		
-		//dd($suggest);
+		$jobApplied = JobCallMe::isAppliedToJob($userId,$jobId);
+				
+		//dd($jobApplied);
 
-		return view('frontend.view-job-detail',compact('job','savedJobArr','followArr','userId','suggest'));
-		//print_r($job);
+		return view('frontend.view-job-detail',compact('job','savedJobArr','followArr','userId','suggest','jobApplied'));
+		
 	}
 
 	public function jobApply(Request $request){

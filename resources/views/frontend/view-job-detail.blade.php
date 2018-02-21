@@ -22,6 +22,9 @@ if($job->companyLogo != ''){
 				{{ $job->p_title }}
 				</span></p>
 				</div>
+				
+					<span style="float: right;font-size:9px;MARGIN-TOP: 69px;">Never pay for job application, test or interview. <a href="{{ url('/safety')}}">more</a></span>
+               
 				</div>
 			 
 			@if($job->userId == $userId )
@@ -34,7 +37,11 @@ if($job->companyLogo != ''){
                     @if(strtotime($job->expiryDate) < strtotime(date('Y-m-d')))
                         <button class="btn btn-danger">@lang('home.s_close')</button>
                     @else
-                        <a href="{{ url('jobs/apply/'.$job->jobId) }}" class="btn btn-primary">@lang('home.applied')</a>
+						@if($jobApplied == true)
+                        <a href="{{ url('jobs/apply/'.$job->jobId) }}" class="btn btn-success">@lang('home.applied')</a>
+					@else
+						<a href="{{ url('jobs/apply/'.$job->jobId) }}" class="btn btn-primary">@lang('home.apply')</a>
+					@endif
                         @if(in_array($job->jobId, $savedJobArr))
                             <a href="javascript:;" onclick="saveJob({{ $job->jobId }},this)" class="btn btn-success" style="margin-left: 10px;">@lang('home.saved')</a>
                         @else
@@ -44,9 +51,7 @@ if($job->companyLogo != ''){
 					
                 </div>
 			@endif
-			<div class="jd-action-btn">
-					<span style="float: right;font-size:9px;MARGIN-TOP: 69px;">Never pay for job application, test or interview. <a href="{{ url('/safety')}}">more</a></span>
-                </div>
+			
 			
 		
                 

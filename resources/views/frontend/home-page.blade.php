@@ -195,7 +195,9 @@ $lToken = csrf_token();
     <!--Premium Jobs Section Start-->
     <section class="job-types-section">
         <div class="container">
-            <h3>@lang('home.prjob')</h3>
+		<div>
+            <p style="font-size: 24px;margin-top: 12px;"><span>@lang('home.prjob')</span><span style="float:right"><a style="color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+			</div>
             <!-- Left to right-->
             <div class="row">
                 <!--Premium Job Single item Start-->
@@ -204,7 +206,7 @@ $lToken = csrf_token();
                     <div class="ih-item square effect15 left_to_right">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img pj-type-job">
-                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px" alt="img">
+                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px;width:200px !important" alt="img">
                                 <b class="pull-right">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
                                 <hr>
@@ -239,22 +241,21 @@ $lToken = csrf_token();
     <!--Top Companies Section Start-->
     <section class="feature-companies">
         <div class="container">
-            <h2 class="text-center">@lang('home.topcompanies')</h2>
+		<p style="font-size: 24px;margin-top: 12px;"><span>@lang('home.topcompanies')</span><span style="float:right"><a style="color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+            
             <!--<p class="text-center" id="feature-companies-caption">Sigh ever way now many. Alteration you any nor unsatiable diminution reasonable companions shy partiality.</p>-->
             <!-- Scale up-->
             <div class="row">
 			@foreach($companies as $comp)
-                <div class="col-sm-3">
+                <div class="col-md-5ths">
                     <!-- colored -->
                     <div class="ih-item square effect8 scale_up tc-box">
                         <a href="{{ url('companies/company/'.$comp->companyId) }}">
-                            <div class="img">
-                                <img src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width:180px;height:180px;margin-bottom: 17px;" alt="img">
-                            <br>
-							<span>{!! $comp->companyName !!}</span>
+                            <div class="img-class">
+                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="" alt="img">
+<span>{!! $comp->companyName !!}</span>
                             </div>
-							<br>
-							<span class="brand-jobs-link">View 2 jobs</span>
+							<span class="brand-jobs-link">View {!! $comp->count !!}jobs</span>
                             <div class="info">
                                 <h3>{!! $comp->companyName !!}</h3>
                                 <p>{!! $comp->companyAbout !!}</p>
@@ -276,7 +277,8 @@ $lToken = csrf_token();
     <!--Hot Jobs Section Start-->
     <section class="job-types-section">
         <div class="container">
-            <h3>@lang('home.hotjob')</h3>
+			<p style="font-size: 24px;margin-top: 12px;"><span>@lang('home.hotjob')</span><span style="float:right"><a style="color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+          
             <div class="row">
                 <!--Hot Job Single item Start-->
 				 @foreach($hot as $job)
@@ -284,7 +286,7 @@ $lToken = csrf_token();
                     <div class="ih-item square effect14 left_to_right">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img hj-type-job">
-                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width:110px !important;height:42px;"  alt="img">
+                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width:150px !important;height:50px;"  alt="img">
                                 <b class="pull-right">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
                                 <hr>
@@ -318,7 +320,8 @@ $lToken = csrf_token();
     <!--Latest Jobs Section Start-->
     <section class="job-types-section" id="latest-jobs">
         <div class="container">
-            <h3>@lang('home.latestjob')</h3>
+		<p style="font-size: 24px;margin-top: 12px;"><span>@lang('home.latestjob')</span><span style="float:right"><a style="color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+          
             <div class="row">
                 <!--Latest Job Single item Start-->
 				@foreach($Gallery as $job)
@@ -326,7 +329,7 @@ $lToken = csrf_token();
                     <div class="ih-item square effect13 left_to_right">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img lj-type-job">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width: 85px !important;height:35px;" alt="img">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="width:115px !important;height:35px;" alt="img">
                                 <b class="pull-right">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
                                 <hr>
@@ -361,7 +364,8 @@ $lToken = csrf_token();
     <!--Special Jobs Section Start-->
     <section class="job-types-section">
         <div class="container">
-            <h3>@lang('home.specialjob')</h3>
+		<p style="font-size: 24px;margin-top: 12px;"><span>@lang('home.specialjob')</span><span style="float:right"><a style="color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+
             <div class="row">
 			@foreach($jobs as $job)
                 <!--Special Job Single item Start-->
@@ -405,7 +409,8 @@ $lToken = csrf_token();
     <!--Golden Jobs Section Start-->
     <section class="job-types-section" style="background-color: #FFFFFF">
         <div class="container">
-            <h3>@lang('home.goldjob')</h3>
+		<p style="font-size: 24px;margin-top: 12px;"><span>@lang('home.goldjob')</span><span style="float:right"><a style="color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+
             <div class="row">
                 <div id="check"></div>
                 <!--Golden Job Single item Start-->

@@ -451,6 +451,7 @@ return [
 	'Part Time' => '파트타임',
 	'Internship' => '인턴',
 	'Seasonal' => '계절별',
+	'postjoblike' => '상품안내보기',
 	
 	
 	
