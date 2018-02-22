@@ -15,15 +15,16 @@ if($job->companyLogo != ''){
 		
             <div class="jobs-suggestions">
 			<div style="display: -webkit-box;">
-			 <img src="{{$userImage}}"  style="width:110px;height:110px;border-radius: 50px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
+			 <img src="{{$userImage}}"  style="width:118px;margin-top:32px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
 			<div style="padding-left: 42px;">
 			<span style="text-transform: uppercase;font-size: 26px;">{{$job->companyName}}</span>
                 <p style="font-size: 18px;margin-top: 24px; margin-left: 6px;">{{ $job->title }},  &nbsp;<span style="font-size: 13px; padding-top: 9px;">{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }} </span> &nbsp;<span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">
 				{{ $job->p_title }}
-				</span></p>
+				</span><span style="font-size:9px;margin-left:100px">Never pay for job application, test or interview. <a href="{{ url('/safety')}}">more</a></span></p>
+				
 				</div>
 				
-					<span style="float: right;font-size:9px;MARGIN-TOP: 69px;">Never pay for job application, test or interview. <a href="{{ url('/safety')}}">more</a></span>
+					
                
 				</div>
 			 
@@ -205,9 +206,9 @@ if($job->companyLogo != ''){
 ?>
                         <div class="col-md-12 col-xs-12 sp-item">
 						<div class="col-md-4 col-xs-4 sp-item">
-                            <img src="{{ $userImage }}" style="height:70px">
+                            <img src="{{ $userImage }}" style="">
 							</div>
-							<div class="col-md-8 col-xs-8 sp-item">
+							<div class="col-md-8 col-xs-8 sp-item" style="text-align:left !important">
                             <p><a href="{{ url('jobs/'.$appl->jobId) }}">{!! $appl->title!!}</a></p>
                             <p>{!! $appl->companyName !!}</p>
                             <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
