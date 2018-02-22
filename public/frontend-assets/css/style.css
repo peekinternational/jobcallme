@@ -1619,12 +1619,12 @@ ul.jd-rewards li i{
     font-weight: normal;
 }
 .eo-dp-box{
-    top: -69px;
+    top: -33px;
     position: relative;
 }
 .eo-dp{
-    width: 150px;
-    height: 150px;
+    width: 93%;
+	height:50px;
     border: 4px solid #ffffff;
 }
 .eo-dp-box:hover .eo-dp-toolkit{
@@ -1633,7 +1633,7 @@ ul.jd-rewards li i{
 .eo-dp-toolkit{
     display: none;
     position: absolute;
-    top: 89px;
+    top: 50px;
     left: 19px;
     width: 142px;
     height: 57px;

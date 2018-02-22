@@ -814,6 +814,8 @@ class Jobseeker extends Controller{
 		//return $name;
 		$meta = DB::table('jcm_users_meta')->where('userId',$app->userId)->first();
 		$resume = $this->userResume($app->userId);
+		//dd($resume);
+		
 	//return view('frontend.jobseeker.resume');
     	  $pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
           return $pdf->download($name.'_cv.pdf');

@@ -147,6 +147,207 @@
                             @endif
                         </ul>
                     </section>
+					<!---Project -->
+					   <section class="resume-box" id="ski">
+                        <a class="btn btn-primary r-add-btn" onclick="addProject()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.project')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['project']) > 0)
+                                @foreach($resume['project'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getProject('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
+											<p class="rd-location"> {!! $skills->startmonth !!} {!! $skills->startyear !!} - {{ $skills->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($skills->endDate)) }}</p>
+											<p class="rd-location"> As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+											
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					<!---Affilation -->
+					   <section class="resume-box" id="aff">
+                        <a class="btn btn-primary r-add-btn" onclick="addAffi()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Affiliation')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['affiliation']) > 0)
+                                @foreach($resume['affiliation'] as $resumeId => $afflls)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getAffi('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $afflls->pos !!}</p>
+											<p class="rd-location"> {!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}</p>
+											<p class="rd-location">{!! $afflls->org .', '.JobCallMe::cityName($afflls->city).' ,'.JobCallMe::countryName($afflls->country) !!}
+											
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					
+					 <section class="resume-box" id="sk">
+                        <a class="btn btn-primary r-add-btn" onclick="addLanguage()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.language')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['language']) > 0)
+                                @foreach($resume['language'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getLanguage('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->language !!}</p>
+											<p class="rd-location"> ({!! $skills->level !!})</p>
+											
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					
+					  <section class="resume-box" id="skill">
+                        <a class="btn btn-primary r-add-btn" onclick="addSkill()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.references')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['reference']) > 0)
+                                @foreach($resume['reference'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getSkill('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->name !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
+											<p class="rd-location"> Job Title: {!! $skills->jobtitle !!}</p>
+											<p class="rd-location">Organization: {!! $skills->organization .', '.JobCallMe::cityName($skills->city).', '.JobCallMe::countryName($skills->country)  !!}</p>
+                                           <p class="rd-location">Phone Number : {!! $skills->phone !!}</p>
+										   <p class="rd-location">Email : {!! $skills->email !!}</p>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					
+						<!---Publication -->
+					   <section class="resume-box" id="skil">
+                        <a class="btn btn-primary r-add-btn" onclick="addSkil()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.publication')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['publish']) > 0)
+                                @foreach($resume['publish'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getSkil('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->pu_type !!})</span></p>
+											<p class="rd-location"> {!! $skills->month !!}-{!! $skills->year !!}</p>
+											<p class="rd-location"> Author: {!! $skills->author !!}</p>
+											<p class="rd-location">Publisher: {!! $skills->publisher.', '.JobCallMe::cityName($skills->city).' ,'.JobCallMe::countryName($skills->country)  !!}</p>
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					 <section class="resume-box" id="s">
+                        <a class="btn btn-primary r-add-btn" onclick="addAward()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.award')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['award']) > 0)
+                                @foreach($resume['award'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getAward('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->title !!}</p>
+											<p class="rd-location"> {!! $skills->type !!},{!! $skills->startmonth !!} {!! $skills->startyear !!}</p>
+											<p class="rd-location"> {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+											
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					
+					<!--Portfolio Section-->
+					<section class="resume-box" id="port">
+                        <a class="btn btn-primary r-add-btn" onclick="addPortfolio()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Portfolio')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['portfolio']) > 0)
+                                @foreach($resume['portfolio'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getPortfolio('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">{!! $skills->title !!}<span class="rd-location">({!! $skills->type !!})</span></p>
+											<p class="rd-location">{!! $skills->startmonth !!} {!! $skills->startyear !!}</p>
+											<p class="rd-location">http://{!! $skills->website !!}</p>
+											<p class="rd-location"> {!! $skills->occupation !!}</p>
+											
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
 
 </body>
 </html>
