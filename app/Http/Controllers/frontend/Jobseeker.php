@@ -621,7 +621,7 @@ class Jobseeker extends Controller{
         if($pImage != ''){
             @unlink(public_path('/profile-photos/'.$pImage));
         }
-        DB::table('jcm_users')->where('userId',$app->userId)->update(array('profilePhoto' => $profilePicture));
+        DB::table('jcm_users')->where('userId',$app->userId)->update(array('profilePhoto' => $profilePicture,'profileImage'=>''));
         echo url('profile-photos/'.$profilePicture);
 	}
 
@@ -822,7 +822,8 @@ class Jobseeker extends Controller{
 	}
 	public function removeProPic(Request $request){
 		 $id = $request->input('userId');
-		if( DB::table('jcm_users')->where('userId',$id)->update(['profilePhoto'=>'']) ){
+		 
+		if( DB::table('jcm_users')->where('userId',$id)->update(['profilePhoto'=>'','profileImage'=>'']) ){
 			echo 1;
 		}else{
 			echo 2;

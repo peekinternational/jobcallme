@@ -580,5 +580,13 @@ public function verifyUser(Request $request){
 		echo "There is a issue in your secret code kindly contact with administration thanks";
 	}
 }
+public function changepropic(Request $request){
+	$userid = $request->input('userId');
+	
+	$profileImage = $request->input('profileImage');
+	
+	DB::table('jcm_users')->where('userId',$userid)->update(['profileImage' => $profileImage,'profilePhoto'=>'']);
+
+}
 }
 ?>

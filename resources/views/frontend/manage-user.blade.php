@@ -79,7 +79,7 @@ if($user->profilePhoto != ''){
                              <label class="control-label col-md-3 text-right">@lang('home.profilephoto')</label>
                             <div class="col-md-6">
                                 <div class="re-img-box">
-                                    <img src="{{ $userImage }}" class="img-circle">
+                                    <img src="@if($user->profileImage != '') {{ $user->profileImage }} @else {{ $userImage }} @endif" class="img-circle">
                                     <div class="re-img-toolkit">
                                         <div class="mc-file-btn">
                                              <i class="fa fa-camera"></i>&nbsp;@lang('home.change')
@@ -611,9 +611,18 @@ if($user->profilePhoto != ''){
     $('#proEditImg img').on('rcrop-changed', function(){
         var srcOriginal = $(this).rcrop('getDataURL');
         var srcResized = $(this).rcrop('getDataURL', 50,50);
-        
+        var userId = "{{ session()->get('jcmUser')->userId }}";
         $('.img-circle').attr('src',srcOriginal);
-       
+
+        $.ajax({
+            url:'{{ url("cropProfileImage") }}',
+            type:'POST',
+            data:{profileImage:srcOriginal,_token:"{{ csrf_token() }}",userId:userId},
+            success:function(res){
+                console.log(res);
+            }
+
+        });
         
         /*$('#cropped-resized').append('<img src="'+srcResized+'">');*/
     });
