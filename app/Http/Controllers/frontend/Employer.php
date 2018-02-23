@@ -1080,13 +1080,15 @@ public function userResume($userId){
 
 		extract($request->all());
 
-		$dataArray = array('profile' => 'No', 'profileImage' => 'No', 'academic' => 'No', 'experience' => 'No', 'skills' => 'No');
+		$dataArray = array('profile' => 'No', 'profileImage' => 'No', 'academic' => 'No', 'experience' => 'No', 'skills' => 'No', 'projectVisible' => 'No', 'publicationsVisible' => 'No');
 
 		if($profile == 'on') $dataArray['profile'] = 'Yes';
 		if($profileImage == 'on') $dataArray['profileImage'] = 'Yes';
 		if($academic == 'on') $dataArray['academic'] = 'Yes';
 		if($experience == 'on') $dataArray['experience'] = 'Yes';
 		if($skills == 'on') $dataArray['skills'] = 'Yes';
+		if($projectVisible == 'on') $dataArray['projectVisible'] = 'Yes';
+		if($publicationsVisible == 'on') $dataArray['publicationsVisible'] = 'Yes';
 
 		$isExist = DB::table('jcm_privacy_setting')->where('userId','=',$app->userId)->get();
 		if(count($isExist) == 0){

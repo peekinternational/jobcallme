@@ -212,6 +212,7 @@ return [
 	'messages' => 'Messages',
 	'employeraccount' => 'Employer Account',
 	'newapplications' => 'New Applications',
+	'projectVisible' => 'Make Project Visible',
 	'dailyalerts' => 'Daily Job Alerts',
 	'closingjobs' => 'Closing Jobs',
 	'jobalerts' => 'Job Alerts',

@@ -430,7 +430,7 @@ if($user->profilePhoto != ''){
                         <h4>@lang('home.employeraccount')</h4>
                         <div class="form-group">
                             <div class="col-md-12 mc-notification">
-                                <label class="col-md-3 control-label">@lang('home.dailyalerts')</label>
+                                <label class="col-md-3 control-label">@lang('home.newapplications')</label>
                                 <div class="col-md-9">
                                     <p style="margin-top: 4px">
                                         <input type="checkbox" id="new-application" class="switch-field" name="newApplication" {{ $noti->newApplication == 'Yes' ? 'checked=""' : '' }}>
@@ -537,6 +537,19 @@ if($user->profilePhoto != ''){
                             <p style="margin-top: 4px">
                                 <input type="checkbox" id="skills-visible" class="switch-field" name="skills" {{ $privacy->skills != 'No' ? 'checked=""' : '' }}>
                                 <label for="skills-visible" class="switch-label"></label> <span>@lang('home.skillsvisible')</span>
+                            </p>
+                        </div>
+                        <!-- add two extra category 2/23/2018 -->
+                        <div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="project-visible" class="switch-field" name="projectVisible" {{ $privacy->projectVisible != 'No' ? 'checked=""' : '' }}>
+                                <label for="project-visible" class="switch-label"></label> <span>@lang('home.projectVisible')</span>
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="publications-visible" class="switch-field" name="publicationsVisible" {{ $privacy->publicationsVisible != 'No' ? 'checked=""' : '' }}>
+                                <label for="publications-visible" class="switch-label"></label> <span>@lang('home.publicationsvisible')</span>
                             </p>
                         </div>
                     </form>

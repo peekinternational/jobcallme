@@ -199,6 +199,7 @@ return [
 	'users' => '이용자',
 	'evaluationforms' => '평가표',
 	'questionnaires' => '질문사항',
+	'projectVisible' => '프로젝트 보이기',
 	'subscription' => '구독',
 	'credits' => '결제',
 	'orders' => '주문',
