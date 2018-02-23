@@ -138,7 +138,7 @@ Route::group(['prefix' => 'account'], function () {
 	Route::get('writings','frontend\ExtraSkills@writings');
 	Route::match(['get','post'],'writings/article/add','frontend\ExtraSkills@addEditArticle');
 	Route::match(['get','post'],'writings/article/edit/{id}','frontend\ExtraSkills@addEditArticle');
-	Route::get('writings/article/delete/{id}','frontend\ExtraSkills@deleteArticle');
+	Route::post('writings/article/delete','frontend\ExtraSkills@deleteArticle');
 
 	Route::get('upskill','frontend\ExtraSkills@upskill');
 	Route::match(['get','post'],'upskill/add','frontend\ExtraSkills@addEditUpskill');

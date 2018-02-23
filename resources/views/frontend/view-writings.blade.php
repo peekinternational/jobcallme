@@ -63,7 +63,9 @@
 function deleteArticle(writingId){
     if(confirm('Are you sure?')){
         $.ajax({
-            url: "{{ url('account/writings/delete') }}/"+writingId,
+            url: "{{ url('account/writings/article/delete') }}",
+            type:"POST",
+            data:{writingId:writingId,_token:"{{ csrf_token() }}"},
             success: function(response){
                 if($.trim(response) != '1'){
                     toastr.error(response, '', {timeOut: 5000, positionClass: "toast-top-center"});

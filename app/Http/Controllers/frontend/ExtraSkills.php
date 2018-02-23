@@ -62,21 +62,28 @@ class ExtraSkills extends Controller{
            // $input['title'] = $request->input('title');
            //print_r($input['category']);die;
             if($request->input('writingId') != '' && $request->input('writingId') != '0'){
+                $catnames = "";
+                foreach ($input['category'] as $value) {
+                    $catnames .= DB::table('jcm_read_category')->where('id',$value)->first()->name.",";
+                }
+                $input['cat_names'] = $catnames;    
             	DB::table('jcm_writings')->where('writingId','=',$request->input('writingId'))->update($input);
             }else{
                 $catnames = "";
                 foreach ($input['category'] as $value) {
                     $catnames .= DB::table('jcm_read_category')->where('id',$value)->first()->name.",";
                 }
-                
-                foreach ($input['category'] as $key => $value) {
+                $input['userId'] = $app->userId;
+                $input['createdTime'] = date('Y-m-d H:i:s');
+                $input['cat_names'] = $catnames;    
+                /*foreach ($input['category'] as $key => $value) {
                     $input['userId'] = $app->userId;
                     $input['cat_names'] = $catnames;
                     $input['createdTime'] = date('Y-m-d H:i:s');
                     $input['category'] = $value;
-                    DB::table('jcm_writings')->insert($input);
-                }
-            	
+                    
+                }*/
+            	DB::table('jcm_writings')->insert($input);
             }
             exit('1');
     	}
@@ -97,12 +104,13 @@ class ExtraSkills extends Controller{
     	return view('frontend.add-edit-writing',compact('article'));
     }
 
-    public function deleteArticle(Request $request,$writingId){
+    public function deleteArticle(Request $request){
+        
     	if(!$request->ajax()){
     		exit('Directory access is forbidden');
     	}
     	$app = $request->session()->get('jcmUser');
-
+        $writingId = $request->input('writingId');
     	DB::table('jcm_writings')->where('userId','=',$app->userId)->where('writingId','=',$writingId)->delete();
     	exit('1');
     }

@@ -552,6 +552,9 @@ class JobCallMe{
 		$rec = DB::table('jcm_jobs')->where('companyId','=',$companyId)->get();
 		return count($rec);
 	}
+	public function getreadcat($id){
+		return DB::table('jcm_read_category')->where('id','=',$id)->first()->name;
+	}
 
 	public function randomString($length = 32) {
 	    $keys = array_merge(range(0,9), range('a', 'z'));

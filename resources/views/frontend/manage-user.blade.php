@@ -83,7 +83,7 @@ if($user->profilePhoto != ''){
                                     <div class="re-img-toolkit">
                                         <div class="mc-file-btn">
                                              <i class="fa fa-camera"></i>&nbsp;@lang('home.change')
-                                            <input class="upload profile-pic" name="image" type="file">
+                                            <input class="upload profile-pic" name="image" type="file" onchange="changeProfile()">
                                         </div>
                                         <div style="color:white;padding-left:42px;cursor: pointer;" onclick="editpic()">
                                              <i class="fa fa-pencil"></i> Edit
@@ -567,10 +567,19 @@ if($user->profilePhoto != ''){
         <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-       <img src="" id="proEditImg" class="img-responsive">
+       <div class="row">
+           <div class="col-md-9">
+                <div id="proEditImg">
+                    <img src="" class="img-responsive">
+                </div>
+           </div>
+           <div class="col-md-3">
+               <div id="custom-preview-wrapper"></div>
+           </div>
+       </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Crop</button>
       </div>
     </div>
 
@@ -586,21 +595,28 @@ if($user->profilePhoto != ''){
     function editpic(){
         var proImg = $('.img-circle').attr('src');
        $('#editProModel').modal('show');
-       $('#proEditImg').attr('src',proImg);
-        $('#proEditImg').cropper({
-           aspectRatio: 16 / 9,
-           crop: function(e) {
-           // Output the result data for cropping image.
-           console.log(e.x);
-           console.log(e.y);
-           console.log(e.width);
-           console.log(e.height);
-           console.log(e.rotate);
-           console.log(e.scaleX);
-           console.log(e.scaleY);
-         }
-       });
+       $('#proEditImg img').attr('src',proImg);
+       $('#proEditImg img').rcrop({
+            minSize : [100,100],
+            preserveAspectRatio : true,
+            
+            preview : {
+                display: true,
+                size : [100,100],
+                wrapper : '#custom-preview-wrapper'
+            }
+        });
+      
     }
+    $('#proEditImg img').on('rcrop-changed', function(){
+        var srcOriginal = $(this).rcrop('getDataURL');
+        var srcResized = $(this).rcrop('getDataURL', 50,50);
+        
+        $('.img-circle').attr('src',srcOriginal);
+       
+        
+        /*$('#cropped-resized').append('<img src="'+srcResized+'">');*/
+    });
     function removepic(){
        var userId = $('#userID').val();
        //alert(userId);
@@ -712,9 +728,10 @@ function firstCapital(myString){
     tail = myString.substring( 1 );
     return firstChar + tail;
 }
-$('.profile-pic').on('change',function(){
+function changeProfile(){
+
     var formData = new FormData();
-    formData.append('profilePicture', $(this)[0].files[0]);
+    formData.append('profilePicture', $(".profile-pic")[0].files[0]);
     formData.append('_token', pageToken);
 
     $.ajax({
@@ -732,7 +749,7 @@ $('.profile-pic').on('change',function(){
             }
         }
     });
-});
+};
 $('.jaTabBtn').click(function () {
     $(this).addClass('ja-tab-active').siblings().removeClass('ja-tab-active');
     if($(this).hasClass('ext-link')){

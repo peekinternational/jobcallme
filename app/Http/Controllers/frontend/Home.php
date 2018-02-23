@@ -356,12 +356,12 @@ class Home extends Controller{
 
     public function read(Request $request){
     	/* read query */
-    	
+    	$category = JobCallMe::getreadcat($request->input('category'));
     	$readQry = DB::table('jcm_writings')->join('jcm_users','jcm_users.userId','=','jcm_writings.userId');
     	$readQry->leftJoin('jcm_read_category','jcm_read_category.id','=','jcm_writings.category');
     	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_read_category.name')->groupBy('jcm_writings.title');
     	if($request->input('category') != '0' && $request->input('category') != ''){
-    		$readQry->where('jcm_writings.category','=',$request->input('category'));
+    		$readQry->where('jcm_writings.cat_names','LIKE','%'.$category.'%');
     	}
     	if($request->input('keyword') != ''){
     		$readQry->where('jcm_writings.title','LIKE','%'.$request->input('keyword').'%');
