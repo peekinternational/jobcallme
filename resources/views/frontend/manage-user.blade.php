@@ -643,7 +643,7 @@ if($user->profilePhoto != ''){
        var userId = $('#userID').val();
        //alert(userId);
        $.ajax({
-        url:'{{ url("admin/manage/removeProPic") }}',
+        url:'{{ url("account/manage/removeProPic") }}',
         data:{userId:userId,_token:'{{ csrf_token() }}'},
         type:'POST',
         success:function(res){

@@ -103,7 +103,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/viewwriting','admin\Cms@viewwriting');
 	Route::post('cms/deletewriting','admin\Cms@deletewriting');
 	/*profile pic*/
-	Route::post('manage/removeProPic','frontend\jobseeker@removeProPic');
+	
 });
 
 /* frontend */
@@ -145,7 +145,7 @@ Route::group(['prefix' => 'account'], function () {
 	Route::match(['get','post'],'upskill/add','frontend\ExtraSkills@addEditUpskill');
 	Route::match(['get','post'],'upskill/edit/{id}','frontend\ExtraSkills@addEditUpskill');
 	Route::get('upskill/delete/{id}','frontend\ExtraSkills@deleteUpskill');
-
+	Route::post('manage/removeProPic','frontend\jobseeker@removeProPic');
 	/* job seeker */
     Route::get('jobseeker','frontend\Jobseeker@home');
     Route::get('jobseeker/resume','frontend\Jobseeker@resume');
