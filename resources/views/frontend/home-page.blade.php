@@ -11,13 +11,11 @@ $lToken = csrf_token();
             <div class="hp_strip">
                 <div class="wrapper">
                     <h2 class="text-center" style="padding-top:85px;">
-                        <?
-							if(app()->getLocale() == "kr"){
-						?>
-						<div id="hp_text"></div><!-- @lang('home.headerHeading') -->
-						<?}else{?>
-						<div id="hp_text2"></div><!-- @lang('home.headerHeading') -->
-						<?}?>
+                        @if(app()->getLocale() == "kr")
+						    <div id="hp_text"></div><!-- @lang('home.headerHeading') -->
+						@else
+						    <div id="hp_text2"></div><!-- @lang('home.headerHeading') -->
+						@endif
                     </h2>
                 </div>
             </div>
