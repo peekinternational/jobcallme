@@ -60,10 +60,10 @@
 .c18-cyan-6::before, .c18-cyan-6::after, .c18-cyan-6 span::before, .c18-cyan-6 span::after { border-color: rgba(113,113,133,1); }
 
 .c18-cyan-7::before, .c18-cyan-7::after, .c18-cyan-7 span::before, .c18-cyan-7 span::after { background-color: #0e8bcb; width:250px; }
-.c18-cyan-1:hover { border-color: rgba(155,155,54,1); background-color: rgba(155,155,54,1); color:#fff; padding: 8px 14px; margin-right: 2px; margin-bottom: 10px; width:250px;}
+.c18-cyan-1:hover { border-color: rgba(155,155,54,1); background-color: rgba(155,155,54,1); color:#fff; padding: 8px 2px; margin-right: 2px; margin-bottom: 10px; width:250px;}
 .c18-cyan-2:hover { border-color: rgba(148,165,165,1); background-color: rgba(148,165,165,1); color:#fff; padding: 8px 14px; margin-right: 2px; margin-bottom: 10px; width:250px;}
 .c18-cyan-3:hover { border-color: rgba(141,125,141,1); background-color: rgba(141,125,141,1); color:#fff; padding: 8px 14px; margin-right: 2px; margin-bottom: 10px; width:250px;}
-.c18-cyan-4:hover { border-color: rgba(78,108,124,1); background-color: rgba(78,108,124,1); color:#fff; padding: 8px 14px; margin-right: 2px; margin-bottom: 10px; width:250px;}
+.c18-cyan-4:hover { border-color: rgba(78,108,124,1); background-color: rgba(78,108,124,1); color:#fff; padding: 8px 7px; margin-right: 2px; margin-bottom: 10px; width:250px;}
 .c18-cyan-5:hover { border-color: rgba(176,164,138,1); background-color: rgba(176,164,138,1); color:#fff; padding: 8px 14px; margin-right: 2px; margin-bottom: 10px; width:250px;}
 .c18-cyan-6:hover { border-color: rgba(113,113,133,1); background-color: rgba(113,113,133,1); color:#fff; padding: 8px 14px; margin-right: 2px; margin-bottom: 10px; width:250px;}
 

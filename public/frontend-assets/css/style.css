@@ -81,12 +81,12 @@ position:absolute;
     text-align: center;
 	display: inline-block;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 8px 14px;
+    padding: 8px 7px;
     color: #ffffff;
     font-size: 15px;
     margin-right: 2px;
     margin-bottom: 10px;
-	width:150px;
+	width:200px;
 }
 
 .footer-title-box2{
@@ -101,7 +101,7 @@ position:absolute;
     font-size: 15px;
     margin-right: 2px;
     margin-bottom: 10px;
-	width:150px;
+	width:200px;
 }
 .logo-img{
     width: 120px;
@@ -145,7 +145,7 @@ ul.nav li.active{
 
 
 .main-slide{
-    min-height: 435px;
+    min-height: 500px;
     background-image: url("../images/careerBanner.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -206,7 +206,7 @@ ul.nav li.active{
 }
 
 .job-search{
-    padding-top: 35px;
+    padding-top: 110px;
 }
 .job-search h1{
     color: #ffffff;
@@ -340,10 +340,10 @@ ul.nav li.active{
     text-align: center;
 }
 .login-type .hi-icon-effect-8 .hi-icon{
-    background-color: #666666;
+    background-color: #eeeeee;
 }
 .login-type .hi-icon-effect-8 .hi-icon:hover{
-    background-color: #2e6da4;
+    background-color: #eeeeee;
 }
 .login-type i{
     color: #fff;
@@ -356,19 +356,20 @@ ul.nav li.active{
     text-decoration: none;
 }
 .login-type span{
-    color: #e6b706;
-    font-size: 10px;
+    color: #d2a42a;
+    font-size: 14px;
+	font-weight: 600;
 }
 .job-locations-box{
-    margin-top: 40px;
+    margin-top: 70px;
     text-align: center;
 }
 
 
 a.job-location {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 9.5%;
-    padding: 5px 0;
+    width: 10.5%;
+    padding: 10px 0;
     color: #ffffff;
     font-size: 12px;
     margin-bottom: 10px;
@@ -432,26 +433,30 @@ a.job-location:hover span.shine {
 }
 
 .job-schedule-box .hvr-shutter-in-horizontal:before{
-    background: #666666 !important;
+    background: #424645 !important;
 }
 
 .job-schedule-box{
-    margin-top: 20px;
+    margin-top: 50px;
     text-align: center;
+	border-radius: 5px;
+
 }
 
 .job-schedule-box  a{
     display: inline-block;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 4px 10px;
+    padding: 5px 10px;
     color: #ffffff;
     font-size: 12px;
     background-color: #333333;
     margin-right: 2px;
     margin-bottom: 10px;
+	border-radius: 5px;
+	
 }
 .ticker-container{
-    background-color: #222222;
+    background-color: #363b3f;
 }
 .ticker-container ul div li{
     color: #fff !important;
@@ -462,7 +467,7 @@ a.job-location:hover span.shine {
 }
 
 .feature-companies{
-    background-image: url("../images/bg-1.jpg");
+    /*background-image: url("../images/bg-1.jpg");*/
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -549,6 +554,7 @@ a.job-location:hover span.shine {
     margin-bottom: 0;
     font-weight: 600;
     color: #337ab7;
+	padding-top:-5px;
 }
 .lj-single-details p:nth-child(2){
     margin-bottom: 0;
@@ -620,6 +626,9 @@ a.job-location:hover span.shine {
     border: 1px solid #cccccc;
     height: auto;
 }
+.hj-type-job{   
+    height: 150px;    
+}
 .hj-type-job img{
     width: 118px !important;
     display: block;
@@ -638,6 +647,9 @@ a.job-location:hover span.shine {
 .ih-item.square.effect13 .info{
     background: rgba(0,0,0,0.8) !important;
 }
+.lj-type-job{   
+    height: 130px;    
+}
 .lj-type-job img{
     width: 82px !important;
     display: block;
@@ -653,12 +665,33 @@ a.job-location:hover span.shine {
     border: 1px solid #cccccc;
     height: auto;
 }
-
+.sj-job-type{   
+    height: 130px;    
+}
 .sj-job-type img{
     width: 82px !important;
     display: block;
 }
 .sj-job-type hr{
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+
+/*Golden Job*/
+.ih-item.square.effect2{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #cccccc;
+    height: auto;
+}
+.gj-job-type{   
+    height: 120px;    
+}
+.gj-job-type img{
+    width: 82px !important;
+    display: block;
+}
+.gj-job-type hr{
     margin-top: 0;
     margin-bottom: 8px;
 }
@@ -679,7 +712,7 @@ a.job-location:hover span.shine {
     padding-bottom: 10px;
     margin-bottom: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    background: #ffffff;
+    background: #363b3f;
 }
 .udp-itemss{
     width: 100%;
@@ -691,8 +724,8 @@ a.job-location:hover span.shine {
     text-align: center;
     color: #666666;
     float: left;
-    border-right: 1px solid #cccccc;
-    padding: 20px 0;
+    border-right: 0px solid #cccccc;
+    padding: 0px 0;
 }
 
 .udp-itemss li:last-child{
@@ -700,11 +733,11 @@ a.job-location:hover span.shine {
 }
 
 .udp-itemss li a{
-    color: #999;
+    color: #fff;
 }
 .udp-itemss li a:hover{
     text-decoration: none;
-    color: #666666;
+    color: #ffc900;
 }
 .udp-itemss li i{
     font-size: 30px;
@@ -719,8 +752,8 @@ a.job-location:hover span.shine {
     text-align: center;
     color: #666666;
     float: left;
-    border-right: 1px solid #cccccc;
-    padding: 20px 0;
+    border-right: 0px solid #cccccc;
+    padding: 0px 0;
 }
 
 .udp-items li:last-child{
@@ -728,11 +761,11 @@ a.job-location:hover span.shine {
 }
 
 .udp-items li a{
-    color: #999;
+    color: #fff;
 }
 .udp-items li a:hover{
     text-decoration: none;
-    color: #666666;
+    color: #ffc900;
 }
 .udp-items li i{
     font-size: 30px;
@@ -888,7 +921,6 @@ a.job-location:hover span.shine {
 .re-img-box{
     position: relative;
     width: 150px;
-    height: 150px;
     border-radius: 50%;
     margin-bottom: 20px;
     margin-right: 17px;
@@ -898,7 +930,7 @@ a.job-location:hover span.shine {
     opacity: 1;
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
     transition: .5s ease;
     backface-visibility: hidden;
 }
@@ -1094,7 +1126,7 @@ a.job-location:hover span.shine {
 }
 .job-search-box{
     padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 1);
     border: 1px solid #cccccc;
     margin-bottom: 20px;
     background: #ffffff;
@@ -1619,12 +1651,12 @@ ul.jd-rewards li i{
     font-weight: normal;
 }
 .eo-dp-box{
-    top: -33px;
+    top: -69px;
     position: relative;
 }
 .eo-dp{
-    width: 93%;
-	height:50px;
+    width: 150px;
+    height: 150px;
     border: 4px solid #ffffff;
 }
 .eo-dp-box:hover .eo-dp-toolkit{
@@ -1633,7 +1665,7 @@ ul.jd-rewards li i{
 .eo-dp-toolkit{
     display: none;
     position: absolute;
-    top: 50px;
+    top: 89px;
     left: 19px;
     width: 142px;
     height: 57px;
@@ -1760,15 +1792,16 @@ ul.jd-rewards li i{
 .la-item{
     overflow: auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     background-color: #ffffff;
 }
 .la-item img{
     margin: 0 auto;
     text-align: center;
     /* width: 100%; */
-    height: 150px;
+    height: 100px;
     margin-bottom: 10px;
+	margin-top: 10px;
 }
 .la-pad{
     padding: 10px;
@@ -1962,13 +1995,12 @@ ul.jd-rewards li i{
 }
 .sp-item{
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 .sp-item img{
     display: inline-block;
     width: 70px;
-    margin-bottom: 10px;
-	margin-top: 24px;
+    margin-bottom: 0px;
 }
 .sp-item p{
     margin-bottom: 2px;
@@ -3585,9 +3617,9 @@ curveIn {  0% {
     list-style: none;
     font-size: 10px;
 }
-@media (min-width: 1200px){
+@media (min-width: 1500px){
 .container {
-    width: 1195px;
+    width: 1400px;
 }
 }
 .mat-card:not([class*=mat-elevation-z]) {
@@ -3682,7 +3714,7 @@ border-top-color: rgb(255, 255, 255) !important;
 position: absolute;
     background-color: white;
     left: 16px;
-    width: 94.7%;
+    width: 95.5%;
     top: 88px;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 16px 20px 0 rgba(0, 0, 0, 0.19);}
 	
@@ -3695,19 +3727,21 @@ position: absolute;
     top: 88px;
     box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);}
 }
+
 .col-xs-5ths,
 .col-sm-5ths,
 .col-md-5ths,
 .col-lg-5ths {
-    position: relative;
-    min-height: 1px;
+    position: relative;  
     padding-right: 15px;
     padding-left: 15px;
+
 }
 
 .col-xs-5ths {
     width: 20%;
     float: left;
+	
 }
 @media (min-width: 768px) {
 .col-sm-5ths {
@@ -3730,8 +3764,9 @@ position: absolute;
 
 .img-class{
 width:100%;
-height:25%;
+height:15%;
 overflow:hidden;
+margin-bottom:50px;
 }
 .img-inner{
 margin-bottom: 17px;

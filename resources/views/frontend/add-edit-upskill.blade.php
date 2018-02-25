@@ -28,6 +28,120 @@ if($upskill->country != 0){
                     <input type="hidden" name="skillId" value="{{ $upskill->skillId }}">
                     <input type="hidden" name="prevIcon" value="{{ $upskill->upskillImage }}">
                     <h3>@lang('home.basicinformation')</h3>
+
+				
+					<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:30px;"">
+                <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
+                
+ 
+                        <ul id="post-job-ad-types">
+							
+							<li style="position:relative">
+                                <!---->
+
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                             <span class="b">Seminar | Exhibition | Webinar</span></div>
+                                <div>
+                                    <!----><label for="{!! $payment->id!!}">
+                                        <ul class="list-unstyled desc" >
+                                            <li>Seminar | Exhibition Postings (1days)</li>
+                                            <li>Lowest Priority</li>
+                                        </ul>
+										
+                                        <div class="credits b">
+										<span class="text-success">$ 1.00</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </li>
+
+							<li style="position:relative">
+                                <!---->
+
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                             <span class="b">Conference</span></div>
+                                <div>
+                                    <!----><label for="{!! $payment->id!!}">
+                                        <ul class="list-unstyled desc" >
+                                            <li>Conference Postings (2days)</li>
+                                            <li>Lowest Priority</li>
+                                        </ul>
+										
+                                        <div class="credits b">
+										<span class="text-success">$ 3.00</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </li>
+
+							<li style="position:relative">
+                                <!---->
+
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                             <span class="b">Training | Workshop</span></div>
+                                <div>
+                                    <!----><label for="{!! $payment->id!!}">
+                                        <ul class="list-unstyled desc" >
+                                            <li>Training | Workshop Postings (3days)</li>
+                                            <li>Lowest Priority</li>
+                                        </ul>
+										
+                                        <div class="credits b">
+										<span class="text-success">$ 4.00</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </li>
+
+
+						 
+                            <!----><li style="position:relative">
+                                <!---->
+
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                             <span class="b">Course</span></div>
+                                <div>
+                                    <!----><label for="{!! $payment->id!!}">
+                                        <ul class="list-unstyled desc" >
+                                            <li>Featured on homepage (4days)</li>
+                                            <li>Lowest Priority</li>
+                                        </ul>
+										
+                                        <div class="credits b">
+										<span class="text-success">$ 5.00</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </li>
+							
+                        </ul>
+                 
+
+                    
+                </div>
+            </div>
+
+
                     <div class="pnj-form-section">
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.title')</label>
@@ -41,7 +155,7 @@ if($upskill->country != 0){
                                 <select class="form-control select2" name="type" required="">
                                     <option value="">@lang('home.s_type')</option>
                                     @foreach(JobCallMe::getUpkillsType() as $skill)
-                                        <option value="{!! $skill->name !!}" {{ $skill->name == $upskill->type ? 'selected="selected"' : '' }}>{!! $skill->name !!}</option>
+                                        <option value="{!! $skill->name !!}" {{ $skill->name == $upskill->type ? 'selected="selected"' : '' }}>@lang('home.'.$skill->name)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -94,6 +208,29 @@ if($upskill->country != 0){
                                 </div>
                             </div>
                         </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.Cost of Description')</label>
+                            <div class="col-sm-9 pnj-form-field">                                
+                                    
+                                        <input type="text" class="form-control" name="costdescription" id="costdescription" placeholder="@lang('home.type on your details of cost')" value="{{ $upskill->costdescription }}">
+                            </div>
+                        </div>
+
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.adduration')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control" name="adduration">
+                                    <?for($i=4; $i<31; $i++){?>
+                                        <option value="{!! $i !!}">{!! $i !!}@lang('home.adday')</option>
+                                    <?}?>
+                               </select>
+								
+                            </div>
+                        </div>
+
+
                     </div>
 
                     <h3>@lang('home.venue')</h3>
@@ -380,8 +517,12 @@ if($upskill->country != 0){
                         </div>
                         @endif
                     </div>
+					
+					<div class="col-md-offset-2 col-md-3  pnj-btns">
+                        <span style="font-size:17px;padding-right:50px;">Total Amount : US$ </span>						
+                    </div>
 
-                    <div class="col-md-offset-4 col-md-8  pnj-btns">
+                    <div class="col-md-6  pnj-btns">
                         <button type="submit" class="btn btn-primary">@lang('home.save')</button>
                         <a href="{{ url('account/upskill') }}" class="btn btn-default">@lang('home.cancel')</a>
                     </div>

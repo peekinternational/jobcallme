@@ -44,13 +44,13 @@
             <div class="col-md-6">
                 <div class="rtj-box">
                     <ul class="nav nav-tabs ">
-                        <li class="active">
+                        <li class="active" style="width:33.3%">
                             <a href="#rtj_tab_posted_jobs" data-toggle="tab"><i class="fa fa-bars" aria-hidden="true"></i> @lang('home.postedjobs')</a>
                         </li>
-                        <li>
+                        <li style="width:33.3%">
                             <a href="#rtj_tab_recent_application" data-toggle="tab"><i class="fa fa-address-book"></i> @lang('home.recentapplicant')</a>
                         </li>
-                        <li>
+                        <li style="width:33.3%">
                             <a href="#rtj_tab_interview" data-toggle="tab"><i class="fa fa-calendar"></i> @lang('home.upcominginterviews') </a>
                         </li>
                     </ul>
@@ -63,7 +63,8 @@
 							
                                     <div class="rtj-details">
                                         <p><strong><a href="{{ url('jobs/'.$pjobs->jobId) }}">{!! $pjobs->title !!}</a></strong> <i class="fa fa-check-circle-o"></i></p>
-                                         <p>{{ strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open' }} 
+										<?($opcl = strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open')?>
+                                         <p>@lang('home.'.$opcl)                                        
 										 <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">{!! $pjobs->p_title !!}</span>
 										 
 										
@@ -139,9 +140,9 @@
                             $pImage = url('profile-photos/'.$appl->profilePhoto);
                         }
                         ?>
-                        <div class="col-md-12 col-xs-12 sp-item">
+                        <div class="col-md-12 col-xs-12 sp-item" style="padding-top:10px">
 						<div class="col-md-4 col-xs-4 sp-item">
-                            <img src="{{ $pImage }}">
+                            <img src="{{ $pImage }}" style="width: 70px;height:75px;">
 							</div>
 							<div class="col-md-8 col-xs-8 sp-item">
                             <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
@@ -155,7 +156,7 @@
 
                         <hr>
                         <div class="col-md-12">
-                            <a href="people" class="pull-right" style="padding-top: 5px">View all</a>
+                            <a href="people" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                         </div>
                     </div>
                 </div>
@@ -177,12 +178,12 @@
                         ?>
                     <div class="col-md-12 sr-item">
 					 <div class="col-md-5">
-                        <img src="{{ $pImage }}" style="height:49px">
+                        <img src="{{ $pImage }}" style="width: 100%;height:90px;">
 						</div>
-						 <div class="col-md-7">
+						 <div class="col-md-12" style="padding-top:10px">
                         <div class="sr-details">
                             <p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
-                            <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> {{ $rec->name }}</a> </p>
+                            <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.'.$rec->name)</a> </p>
                         </div>
 						</div>
                     </div>
@@ -195,7 +196,7 @@
 
             </div>
             <!--RTJ- Right end-->
-			<div class="col-md-6 col-xs-6 sp-item pull-right">
+			<div class="col-md-6 col-xs-12 sp-item pull-right">
 			   <div class="follow-companies">
                     <h4 class="pull-left">@lang('home.ImproveCompetitiveAdvantage')</h4><h5 class="pull-right">@lang('home.ADVERTISE')</h5>
                     <hr style="margin-top:44px !important">
@@ -205,16 +206,16 @@
                       <div class="la-item">
 				      <div class="col-md-4 sp-item">
                         @if($rec->upskillImage != '')
-                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="">
+                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 180px;height:80px;">
                         @else
-                        <img src="{{ url('upskill-images/d-cover.jpg') }}">
+                        <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 180px;height:80px;">
                         @endif
 						</div>
                         <div class="col-md-8" style="margin-top: 34px;">
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
                             
-                            <span>{{ $rec->type }}</span>
-                            <p><i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</p>
+                            <span>@lang('home.'.$rec->type)</span>
+                            <p><i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</p>
                             
                             <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
                             
@@ -227,7 +228,7 @@
 
                         <hr>
                         <div class="col-md-12">
-                            <a href="learn" class="pull-right" style="padding-top: 5px">View all</a>
+                            <a href="learn" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                         </div>
                     </div>
                 </div>
@@ -309,7 +310,7 @@
         data: {
             labels: [{!! implode(',',$recruit[0]) !!}],
             datasets: [{
-                label: 'Job Posted',
+                label: "@lang('home.recruitmentactivity')",
                 data: [{!! implode(',',$recruit[1]) !!}],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',

@@ -6,7 +6,7 @@
 <section id="learn-section">
     <div class="container">
         <div class="col-md-12 learn-search-box">
-            <h2 class="text-center">@lang('home.searchpeople') {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</h2>
+            <h2 class="text-center">@lang('home.searchpeople') <!--  {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }} --></h2>
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
                     <div class="ls-box">
@@ -14,10 +14,10 @@
                             {{ csrf_field() }}
                             <div class="input-fields">
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="@lang('home.key')" name="keyword">
+                                    <input type="search" placeholder="@lang('home.lookingpeople')" name="keyword">
                                 </div>
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="@lang('home.city')" name="city">
+                                    <input type="search" placeholder="@lang('home.Cities')" name="city">
                                 <button type="submit" class="search-btn" style="width:9% !important">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -169,7 +169,7 @@
   
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <?php $colorArr = array('purple','green','darkred','orangered','blueviolet','#122b40'); $i=0; ?>
+                    <?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9','#9e947b'); $i=0; ?>
                     <div class="job-locations-box">
                         @foreach(JobCallMe::getCategories() as $cat)
                             <a  href="{{ url('account/people?industry='.$cat->categoryId) }}" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -183,7 +183,7 @@
     /* float: left; */
     margin-right: 0.5%;
     overflow: hidden;
-    text-decoration: none;"><span class="text">{!! $cat->name !!}</span></a>
+    text-decoration: none;"><span class="text">@lang('home.'.$cat->name)</span></a>
                         @endforeach
                     </div>
                     <div class="job-schedule-box">

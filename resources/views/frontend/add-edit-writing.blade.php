@@ -12,7 +12,72 @@
                     <input type="hidden" name="prevIcon" value="{{ $article->wIcon }}">
                     <input type="hidden" name="writingId" value="{{ $article->writingId }}">
                     <h3>@lang('home.warticle')</h3>
-                    <div class="pnj-form-section">
+                    
+
+					<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:50px;">
+                <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
+                
+ 
+                        <ul id="post-job-ad-types">
+						
+							<li style="position:relative">
+                                <!---->
+
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                             <span class="b">Basic</span></div>
+                                <div>
+                                    <!----><label for="{!! $payment->id!!}">
+                                        <ul class="list-unstyled desc" >
+                                            <li>Featured on homepage</li>
+                                            <li>Lowest Priority</li>
+                                        </ul>
+										
+                                        <div class="credits b">
+										<span class="text-success">Free</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </li>
+
+
+                            <!----><li style="position:relative">
+                                <!---->
+
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Free till End of April
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                             <span class="b">Read</span></div>
+                                <div>
+                                    <!----><label for="{!! $payment->id!!}">
+                                        <ul class="list-unstyled desc" >
+                                            <li>Featured on homepage (3days)</li>
+                                            <li>Lowest Priority</li>
+                                        </ul>
+										
+                                        <div class="credits b">
+										<span class="text-success">$ 2.00</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </li>
+							
+                        </ul>
+                 
+
+                    
+                </div>
+            </div>
+
+
+					<div class="pnj-form-section">
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
@@ -25,7 +90,7 @@
                                <select class="form-control" id="readcat" multiple name="category[]" required="">
                                     <option value="">@lang('home.s_type')</option>
                                     @foreach(JobCallMe::getReadCategories() as $cat)
-                                        <option value="{{ $cat->id }}">{!! $cat->name !!}</option>
+                                        <option value="{{ $cat->id }}">@lang('home.'.$cat->name)</option>
                                     @endforeach
                                 </select>
 								
@@ -59,9 +124,26 @@
                             </div>
                         </div>
                         @endif
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.adduration')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control" name="adduration">
+                                    <?for($i=3; $i<31; $i++){?>
+                                        <option value="{!! $i !!}">{!! $i !!}@lang('home.adday')</option>
+                                    <?}?>
+                               </select>
+								
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="col-md-offset-4 col-md-8  pnj-btns">
+					<div class="col-md-offset-2 col-md-3  pnj-btns">
+                        <span style="font-size:17px;padding-right:50px;">Total Amount : US$ </span>						
+                    </div>
+
+                    <div class="col-md-6  pnj-btns">
                         <button type="submit" class="btn btn-primary" name="publis" onclick="saveOption('p')">@lang('home.publish')</button>
                         <button type="submit" class="btn btn-default" name="draft" onclick="saveOption('d')">@lang('home.draft')</button>
                         <a href="{{ url('account/writings') }}" class="btn btn-default">@lang('home.cancel')</a>

@@ -9,8 +9,9 @@ return [
 	'jobseeker' => '개인전용',
 	'peoples' => '인재정보',
 	'read' => '실시간 정보',
+	'read_search' => '실정보',
 	'learn' => '지식정보',
-	'companies' => '취업정보',
+	'companies' => '기업정보',
 	'about' => '회사소개',
 	'contact' => '고객문의',
 	'writing' => '지식등록',
@@ -21,7 +22,7 @@ return [
 	///end navbar//
 	
 	//Homepage//
-	'Cities' => '글로벌 시ㆍ도를 작성바랍니다(예시-서울 또는 경기도)',
+	'Cities' => '글로벌 시ㆍ도를 작성바랍니다(예-서울 또는 세종)',
 	'headerHeading' => '다음 직업 또는 경력 찾기 1000 개가 넘는 사용 가능 여부',
 	'lookingjob' => '채용정보 검색...',
 	'alllocation' => '전국',
@@ -30,7 +31,7 @@ return [
 	'postresume' => '이력서 등록ㆍ취업신청',
 	'postjobs' => '인재등록ㆍ채용',
 	'prjob' => '프리미엄잡',
-	'topcompanies' =>'탑컴퍼니',
+	'topcompanies' =>'탑잡',
 	'hotjob' => '핫 채용',
 	'latestjob' =>'레이스트 채용',
 	'specialjob' => '스페셜 채용',
@@ -686,6 +687,45 @@ return [
 
 	'Apply'=>'지원',
 	'View'=>'보기',
-	'postjoblike' => '상품안내보기',
+	'postjoblike' => '상품안내보기 >',
+
+
+	'footerselect1'=>'직업별 카테고리',
+	'footerselect2'=>'근무조건',
+	'footerselect3'=>'경력조건',
+	'footerselect4'=>'고용형태',
+	'footerselect5'=>'국내외 채용정보',
+	'footerselect6'=>'회시소개',
+	'Nosavedjobs'=>'등록된 관심기업이 없습니다.',
+	'Nojobapplications'=>'입시지원 정보가 없습니다.',
+	'NoInterviewschedule'=>'인터뷰 일정이 없습니다.',
+
+	'Single' => '미혼',
+	'Married' => '결혼',
+	'Engaged' => '약혼',
+	'Widowed' => '미망인',
+	'Divorced' => '이혼',
+
+	'Male' => '남성',
+	'Female' => '여성',
+
+	'commaexpertise' => '전문기술을 쉼표로 구분해서 작성하시기 바랍니다 예)IT,건축',
+
+	'WebsiteBlog' => '웹사이트/블로그',
+
+	'Edit' => '수정',
+	'Delete' => '삭제',
+
+	'Open' => '채용 진행중',
+	'Closed' => '채용 마감',
+
+	'postcate1' => '헤드헌팅인 경우',
+	'postcate2' => '파견ㆍ대행인 경우',
+
+	'adduration' => '광고 기간',
+
+	'adday' => '일',
+
+	'Companiesad' => '회사 광고',
 
 ];

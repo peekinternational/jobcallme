@@ -68,7 +68,9 @@
                   
                     <div class="pnj-form-section">
                        
-                        <div class="form-group">
+                        
+
+						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control" name="title" id="title" required >
@@ -90,7 +92,7 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-category" name="category" onchange="getSubCategories(this.value)">
                                     @foreach(JobCallMe::getCategories() as $cat)
-                                        <option value="{!! $cat->categoryId !!}">{!! $cat->name !!}</option>
+                                        <option value="{!! $cat->categoryId !!}">@lang('home.'.$cat->name)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -107,7 +109,7 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="careerLevel">
                                     @foreach(JobCallMe::getCareerLevel() as $career)
-                                        <option value="{!! $career !!}">{!! $career !!}</option>
+                                        <option value="{!! $career !!}">@lang('home.'.$career)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -117,7 +119,7 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="experience">
                                     @foreach(JobCallMe::getExperienceLevel() as $experience)
-                                        <option value="{!! $experience !!}">{!! $experience !!}</option>
+                                        <option value="{!! $experience !!}">@lang('home.'.$experience)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -152,6 +154,17 @@
                                 <input type="text" class="form-control date-picker" name="expiryDate" onkeypress="return false">
                             </div>
                         </div>
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.adduration')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control" name="adduration">
+                                    <?for($i=2; $i<31; $i++){?>
+                                        <option value="{!! $i !!}">{!! $i !!}@lang('home.adday')</option>
+                                    <?}?>
+                               </select>
+								
+                            </div>
+                        </div>
                     </div>
 
                     <h3>@lang('home.naturejob')</h3>
@@ -161,7 +174,7 @@
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control select2" name="type">
                                     @foreach(JobCallMe::getJobType() as $jtype)
-                                        <option value="{!! $jtype->name !!}">{!! $jtype->name !!}</option>
+                                        <option value="{!! $jtype->name !!}">@lang('home.'.$jtype->name)</option>
                                     @endforeach
                                </select>
                            </div>
@@ -171,11 +184,43 @@
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control select2" name="shift">
                                     @foreach(JobCallMe::getJobShifts() as $jshift)
-                                        <option value="{!! $jshift->name !!}">{!! $jshift->name !!}</option>
+                                        <option value="{!! $jshift->name !!}">@lang('home.'.$jshift->name)</option>
                                     @endforeach
                                </select>
                            </div>
                        </div>
+
+					   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.postcate1')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                
+                                        <div class="col-md-4 benefits-checks">
+                                            <input id="head" type="checkbox" class="cbx-field" name="head" value="head">								
+											<label class="cbx" for="head"></label>
+                                            <label class="lbl" for="head">@lang('home.abouthead')</label>
+                                            
+                                        </div>
+                              
+                                </div>
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.postcate2')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                
+                                        <div class="col-md-4 benefits-checks">                                        
+											<input id="dispatch" type="checkbox" class="cbx-field" name="dispatch" value="dispatch">
+											<label class="cbx" for="dispatch"></label>
+                                            <label class="lbl" for="dispatch">@lang('home.dispatchinformation')</label>
+                                        </div>
+                              
+                                </div>
+                            </div>
+                        </div>
+
                    </div>
 
                     <h3>@lang('home.compensationbenefits')</h3>
@@ -260,8 +305,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-offset-4 col-md-8  pnj-btns">
-                        <button type="submit" class="btn btn-primary" name="save">@lang('home.postjob')</button>
+					<div class="col-md-offset-3 col-md-2  pnj-btns">
+                        <span style="font-size:17px;padding-right:50px;">Total Amount : US$ </span>						
+                    </div>
+                    <div class="col-md-6  pnj-btns">                        
+						<button type="submit" class="btn btn-primary" name="save">@lang('home.postjob')</button>
                         <a href="{{ url('account/employer') }}" class="btn btn-default">@lang('home.CANCEL')</a>
                     </div>
                 </form>

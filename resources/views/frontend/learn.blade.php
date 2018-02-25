@@ -17,7 +17,7 @@
                                     <input type="search" placeholder="@lang('home.key')" name="learn-keyword">
                                 </div>
                                 <div class="search-field-box search-item" id="l_city">
-                                    <input type="search" placeholder="@lang('home.city')" name="city">
+                                    <input type="search" placeholder="@lang('home.Cities')" name="city">
 										<button type="submit" id="l_fasearch" style="width:9% !important" class="search-btn">
                                     <i class="fa fa-search"></i>
                                 </button> 
@@ -40,7 +40,7 @@
                                     <select class="form-control select2 job-country" name="country">
                                         <option value="">select country</option>
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
                                     @endforeach
 									</select>
 
@@ -61,10 +61,21 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="job-locations-box">
                         <?php 
-                        $cArr = array('purple','green','darkred','orangered','blueviolet','#122b40');
+                        $cArr = array('#0e8bcc','#94a5a5','#8d846e','#4e6c7c','#919090','#b0a48a','#8d7e8d','#a69b82','#6b91a7','#9b9b36');
                         $i = 0;
                         foreach(JobCallMe::getUpkillsType() as $skill){ ?>
-                            <a href="{{ url('learn/search?type='.strtolower($skill->name)) }}" style="background-color: {{ $cArr[$i] }}">{!! $skill->name !!}</a>
+                            <a href="{{ url('learn/search?type='.strtolower($skill->name)) }}" style="background-color: {{ $cArr[$i] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* width: 9.5%; */
+    padding: 5px 5px;
+    color: #ffffff;
+    font-size: 12px;
+    margin-bottom: 10px;
+    /* display: block; */
+    position: relative;
+    /* float: left; */
+    margin-right: 0.5%;
+    overflow: hidden;
+    text-decoration: none;">@lang('home.'.$skill->name)</a>
                         <?php $i++; } ?>
                     </div>
                     <div class="promote-learning-box">

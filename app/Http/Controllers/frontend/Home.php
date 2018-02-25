@@ -17,7 +17,7 @@ class Home extends Controller{
 		$jobShifts = DB::table('jcm_job_shift')->get();
 
 		/* companies query */
-		$companies = DB::table('jcm_companies')->orderBy('companyId','asc')->limit(15)->get();
+		$companies = DB::table('jcm_companies')->orderBy('companyId','desc')->limit(15)->get();
 
 		/* jobs query */
 		$Gallery = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')

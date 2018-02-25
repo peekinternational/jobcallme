@@ -146,7 +146,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
 @endsection
 @section('page-footer')
 <style type="text/css">
-.select2-selection__rendered {background-color: #fff;}
+/*.select2-selection__rendered {background-color: #fff;}*/
 </style>
 <script type="text/javascript">
 $(document).ready(function(){

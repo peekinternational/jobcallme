@@ -3,65 +3,93 @@
     <div class="container">
         <div class="col-md-2">
             <h5><span class="footer-title-box" style="background-color: #9b9b36">@lang('home.catocc')</span></h5>
-            <ul class="quick-links">
-                @foreach(JobCallMe::getCategories() as $fCat)
-                    <li><a href="{{ url('jobs?category='.$fCat->categoryId) }}"><span class="lh-eff34 c18-cyan-1"><span></span>@lang('home.'.ucfirst($fCat->name))</span></a></li>
-                @endforeach
-            </ul>
+            <div style="width:200px;height:50px;overflow: visible;">
+			<select class="form-control select2" name="career" onchange="location.href=this.value" style="width:200px;overflow: visible;">
+										<option value="">@lang('home.footerselect1')</option>
+									@foreach(JobCallMe::getCategories() as $fCat)
+                                        <option value="{{ url('jobs?category='.$fCat->categoryId) }}">@lang('home.'.ucfirst($fCat->name))<!-- {!! $cat->name !!} --></option>
+                                    @endforeach
+            </select>
+			</div>
+
+
+			<div style="padding-top:20px">
+				<h5><span class="footer-title-box2"><a href="#" style="background-color: #428f7e">@lang('home.abouthead')</a></span></h5><br>
+				<h5><span class="footer-title-box2"><a href="#" style="background-color: #956f4f">@lang('home.dispatchinformation')</a></span></h5>         
+				
+			</div>
+
+
         </div>
 
         <div class="col-md-2">
             <h5><span class="footer-title-box" style="background-color: #8d7d8d">
 @lang('home.hourwork')</span></h5>
-            <ul class="quick-links">
-                @foreach(JobCallMe::getJobShifts() as $fShift)
-                    <li><a href="{{ url('jobs?shift='.$fShift->name) }}"><span class="lh-eff34 c18-cyan-3"><span></span>@lang('home.'.ucfirst($fShift->name))</span></a></li>
-                @endforeach
-             </ul>
-			<br>
-				 <h5><span class="footer-title-box2"><a href="#" style="background-color: #428f7e">@lang('home.abouthead')</a></span></h5><br>
-				 <h5><span class="footer-title-box2"><a href="#" style="background-color: #956f4f">
-                               @lang('home.dispatchinformation')</a></span></h5>
+            <div style="width:200px;height:50px;overflow: visible;">
+			<select class="form-control select2" name="career" onchange="location.href=this.value" style="width:200px;overflow: auto;">
+										<option value="">@lang('home.footerselect2')</option>
+									 @foreach(JobCallMe::getJobShifts() as $fShift)
+                                        <option value="{{ url('jobs?shift='.$fShift->name) }}">@lang('home.'.ucfirst($fShift->name))<!-- {!! $cat->name !!} --></option>
+                                    @endforeach
+            </select>
+			</div>
+			
          </div>
 
          <div class="col-md-2">
             <h5><span class="footer-title-box" style="background-color: #94a5a5">
                                @lang('home.jobcareer')</span></h5>
-            <ul class="quick-links">
-                @foreach(JobCallMe::getCareerLevel() as $career)
-                    <li><a href="{{ url('jobs?career='.$career) }}"><span class="lh-eff34 c18-cyan-2"><span></span>@lang('home.'.$career)</span></a></li>
-                @endforeach
-            </ul>
+            <div style="width:200px;height:50px;overflow: visible;">
+			<select class="form-control select2" name="career" onchange="location.href=this.value" style="width:200px;overflow: auto;">
+										<option value="">@lang('home.footerselect3')</option>
+									@foreach(JobCallMe::getExperienceLevel() as $career)
+                                        <option value="{{ url('jobs?career='.$career) }}">@lang('home.'.$career)<!-- {!! $cat->name !!} --></option>
+                                    @endforeach
+            </select>
+			</div>
         </div>
 
         <div class="col-md-2">
             <h5><span class="footer-title-box" style="background-color: #4e6c7c">@lang('home.jobinformationtype')</span></h5>
-            <ul class="quick-links">
-                @foreach(JobCallMe::getJobType() as $fType)
-                    <li><a href="{{ url('jobs?type='.$fType->name) }}"><span class="lh-eff34 c18-cyan-4"><span></span>@lang('home.'.ucfirst($fType->name))</span></a></li>
-                @endforeach
-            </ul>
+            <div style="width:200px;height:50px;overflow: visible;">
+			<select class="form-control select2" name="career" onchange="location.href=this.value" style="width:200px;overflow: auto;">
+										<option value="">@lang('home.footerselect4')</option>
+									 @foreach(JobCallMe::getJobType() as $fType)
+                                        <option value="{{ url('jobs?type='.$fType->name) }}">@lang('home.'.ucfirst($fType->name))<!-- {!! $cat->name !!} --></option>
+                                    @endforeach
+            </select>
+			</div>
         </div>
 
         <div class="col-md-2">
             <h5><span class="footer-title-box" style="background-color: #b0a48a">@lang('home.jobin') {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</span></h5>
-            <ul class="quick-links">
-                @foreach(JobCallMe::getHomeCities() as $loca)
-                    <li><a href="{{ url('jobs?country='.JobCallMe::getHomeCountry().'&state='.$loca->state_id.'&city='.$loca->id )}}"><span class="lh-eff34 c18-cyan-5"><span></span>@lang('home.jobin')  {{ $loca->name }}</span></a></li>
-                @endforeach
-            </ul>
+            <div style="width:200px;height:50px;overflow: visible;">
+			<select class="form-control select2" name="career" onchange="location.href=this.value" style="width:200px;overflow: auto;">
+										<option value="">@lang('home.footerselect5')</option>
+									 @foreach(JobCallMe::getJobStates(JobCallMe::getHomeCountry()) as $loca2)
+                                        <option value="{{ url('jobs?country='.JobCallMe::getHomeCountry().'&state='.$loca2->id )}}">@lang('home.'.$loca2->name)<!--  @lang('home.jobsin') --></option>
+                                    @endforeach
+										<option value="{{ url('jobs?country='.JobCallMe::getHomeCountry().'&state='.$loca2->id )}}">@lang('home.globalOverseas')<!--  @lang('home.jobsin') --></option>
+            </select>
+			</div>
         </div>
 
         <div class="col-md-2">
             <h5><span class="footer-title-box" style="background-color: #717171">@lang('home.aboutus')</span></h5>
-            <ul class="quick-links">
-                <li><a href="{{ url('about') }}"><span class="lh-eff34 c18-cyan-6"><span></span>@lang('home.about')</span></a></li>
-                <li><a href="{{ url('contact') }}"><span class="lh-eff34 c18-cyan-6"><span></span>@lang('home.contact')</span></a></li>
-                <li><a href="{{ url('privacy-policy') }}"><span class="lh-eff34 c18-cyan-6"><span></span>Privacy Policy</span></a></li>
-                <li><a href="{{ url('terms-conditions') }}"><span class="lh-eff34 c18-cyan-6"><span></span>Terms & Conditions</span></a></li>
-                <li><a href="{{ url('account/register') }}"><span class="lh-eff34 c18-cyan-6"><span></span>Signup Now</span></a></li>
-				<li><a href="{{ url('account/register') }}"><span class="lh-eff34 c18-cyan-6"><span></span>Signup Now</span></a></li>
-            </ul>
+            <div style="width:200px;height:50px;overflow: visible;">
+			<select class="form-control select2" name="career" onchange="location.href=this.value" style="width:200px;overflow: auto;">
+										
+										<option value="">@lang('home.footerselect6')</option>
+                                        <option value="{{ url('about') }}">@lang('home.about')</option>
+										<option value="{{ url('contact') }}">@lang('home.contact')</option>
+										<option value="{{ url('privacy-policy') }}">@lang('home.Privacy Policy')</option>
+										<option value="{{ url('terms-conditions') }}">@lang('home.Terms & Conditions')</option>
+										<option value="{{ url('account/register') }}">@lang('home.Login')</option>
+										<option value="{{ url('account/register') }}">@lang('home.Signup')</option>
+										<option value="{{ url('account/register') }}">@lang('home.Companiesad')</option>
+										
+            </select>
+			</div>
             <ul class="social-links">
                 <li><a href="https://facebook.com"><i class="fa fa-facebook-square"></i> </a> </li>
                 <li><a href="https://twitter.com"><i class="fa fa-twitter-square"></i> </a> </li>
@@ -71,6 +99,9 @@
 			<br>
 			<button class="btn btn-warning"><a style="color:white" target="_blank" href="https://www.outsourcingok.com/">www.outsourcingok.com</a></button>
         </div>
+
+		
+
 		
     </div>
 	<div class="foot-links-hr"></div>

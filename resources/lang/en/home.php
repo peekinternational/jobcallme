@@ -9,6 +9,7 @@ return [
 	'jobseeker' => 'Jobseeker',
 	'peoples' => 'Peoples',
 	'read' => 'Read',
+	'read_search' => 'Read',
 	'learn' => 'Learn',
 	'companies' => 'Companies',
 	'about' => 'About',
@@ -30,7 +31,7 @@ return [
 	'postresume' => 'POST RESUME AND APPLY FOR JOB',
 	'postjob' => 'POST JOBS AND START HIRING',
 	'prjob' => 'Premium Jobs',
-	'topcompanies' =>'Top Companies',
+	'topcompanies' =>'Top Jobs',
 	'hotjob' => 'Hot Jobs',
 	'latestjob' =>'Latest Jobs',
 	'specialjob' => 'Special Jobs',
@@ -485,12 +486,12 @@ return [
 	'Manager' => 'Manager',
 	'Student' => 'Student',
 	'Full Time' => 'Full Time',
-	'Contract Workers' => 'Contract Workers',
+	'Contract Workers' => 'Contract',
 	'Part Time' => 'Part Time',
-	'Internship' => 'Internship',
+	'Internship' => 'Intern',
 	'Freelancer' => 'Freelancer',
-	'Daily Workers' => 'Daily Workers',
-	'Military Service Exception' => 'Military Service Exception',
+	'Daily Workers' => 'Daily',
+	'Military Service Exception' => 'M.S Exception',
 	'Disabled' => 'Disabled',
 	'Seasonal' => 'Seasonal',
 	'references' => 'References',
@@ -545,7 +546,7 @@ return [
 	'Client' => 'Client',
 	'other' => 'Other',
 	'similarjob' => 'Similar Jobs in',
-	'postjoblike' => 'Post Jobs Like This',
+	'postjoblike' => 'Post Jobs Like This >',
 	'Courses/Trainings' => 'Courses/Trainings',
 	
 
@@ -730,6 +731,39 @@ return [
 	
 	'Apply'=>'Apply',
 	'View'=>'View',
+
+	'footerselect'=>'Select',
+	'Nosavedjobs'=>'No saved jobs',
+	'Nojobapplications'=>'No job applications',
+	'NoInterviewschedule'=>'NoInterviewschedule',
+
+	'Single' => 'Single',
+	'Married' => 'Married',
+	'Engaged' => 'Engaged',
+	'Widowed' => 'Widowed',
+	'Divorced' => 'Divorced',
+
+	'Male' => 'Website/Blog',
+	'Female' => 'Female',
+
+	'commaexpertise' => 'Enter comma seperated expertise ex)IT,architecture',
+
+	'WebsiteBlog' => 'Website/Blog',
+
+	'Edit' => 'Edit',
+	'Delete' => 'Delete',
+
+	'Open' => 'Open',
+	'Closed' => 'Closed',
+
+	'postcate1' => 'Headhunting',
+	'postcate2' => 'Dispatch & Agency',
+
+	'adduration' => 'AD Duration',
+
+	'adday' => 'Day',
+
+	'Companiesad' => 'Companies Advertisement',
 
 	
 

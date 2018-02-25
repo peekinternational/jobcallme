@@ -155,39 +155,25 @@ $next = Request::route()->uri;
                 cycle:true,
                 sequence:[
 
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool84", stagger:200},
-                    {action:"animation", animation:"cool138", stagger:200},
-                    {action:"animation", delay:2, animation:"cool264", stagger:200},
+                    {action:"update", text:"전세계 회원 모두 무료 정보열람 등록 지원 제공!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600},
 
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool92", stagger:200},
-                    {action:"animation", animation:"cool150", stagger:200},
-                    {action:"animation", delay:2, animation:"cool237", stagger:200},
+					{action:"update", text:"실시간 화상채팅으로 전세계 회원과 무료면접 지원!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600},
+					
+					{action:"update", text:"회원가입 순간 정보열람 등록 지원 실시간 지원!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600},
 
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool16", stagger:200},
-                    {action:"animation", animation:"cool103", stagger:200},
-                    {action:"animation", delay:2, animation:"cool266", stagger:200},
+					{action:"update", text:"세계최초 화상면접으로 전세계 회원들과 실시간 인터뷰 지원!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600},
 
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool71", elements:"words", stagger:200},
-                    {action:"animation", delay:1, animation:"cool263", elements:"words", stagger:200},
-
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool77", stagger:200, css:{color:"#ffffff", textShadow:"3px 3px 4px #999"}},
-                    {action:"animation", animation:"cool112", css:{color:"white", textShadow:""},  stagger:200},
-                    {action:"animation", delay:2, animation:"cool213", stagger:200},
-
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool32", stagger:200},
-                    {action:"animation", animation:"cool193", stagger:200},
-                    {action:"animation", delay:2, animation:"cool205", stagger:200},
-
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool95", stagger:200},
-                    {action:"animation", animation:"cool181", stagger:200},
-                    {action:"animation", delay:3, animation:"cool229", stagger:200}
+					{action:"update", text:"다중ㆍ다자간 화상채팅면접 해외 실시간 인터뷰 지원!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600}
                 ]
             });
 
@@ -201,44 +187,30 @@ $next = Request::route()->uri;
             $("#hp_text2").cooltext({
                 cycle:true,
                 sequence:[
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool43", stagger:200},
-                    {action:"animation", animation:"cool120", stagger:200},
-                    {action:"animation", animation:"cool215", stagger:200},
+                    {action:"update", text:"Jobcallme provides free information access, registration, and support to all members of the world!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:4, animation:"cool266", stagger:600},
 
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool84", stagger:200},
-                    {action:"animation", animation:"cool138", stagger:200},
-                    {action:"animation", animation:"cool264", stagger:200},
+					{action:"update", text:"Jobcallme Live video chatting is the best interview,you can trust among members around the world!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:4, animation:"cool266", stagger:600},
+					
+					{action:"update", text:"You can view, register and support the information on a real-time basis for free when joined!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:4, animation:"cool266", stagger:600},
 
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool92", stagger:200},
-                    {action:"animation", animation:"cool150", stagger:200},
-                    {action:"animation", animation:"cool237", stagger:200},
+					{action:"update", text:"You can interview global member via Jobcallme the world's first video chat!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:4, animation:"cool266", stagger:600},
 
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool16", stagger:200},
-                    {action:"animation", animation:"cool103", stagger:200},
-                    {action:"animation", animation:"cool266", stagger:200},
-
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool71", elements:"words", stagger:200},
-                    {action:"animation", delay:1, animation:"cool263", elements:"words", stagger:200},
-
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool77", stagger:200, css:{color:"#F3BB11", textShadow:"3px 3px 4px #999"}},
-                    {action:"animation", animation:"cool112", css:{color:"white", textShadow:""},  stagger:200},
-                    {action:"animation", animation:"cool213", stagger:200},
-
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool32", stagger:200},
-                    {action:"animation", animation:"cool193", stagger:200},
-                    {action:"animation", animation:"cool205", stagger:200},
-
-                    {action:"update", text:"Finding your next job or career more 1000+ availabilities"},
-                    {action:"animation", animation:"cool95", stagger:200},
-                    {action:"animation", animation:"cool181", stagger:200},
-                    {action:"animation", delay:3, animation:"cool229", stagger:200}
+					{action:"update", text:"Available with multi-party video chatting from all over the world through real-time interviews!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:4, animation:"cool266", stagger:600}
                 ]
             });
 

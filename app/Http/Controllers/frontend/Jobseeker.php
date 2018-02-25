@@ -159,9 +159,9 @@ class Jobseeker extends Controller{
 		}
 		$app = $request->session()->get('jcmUser');
 		$this->validate($request, [
-				'firstName' => 'required|min:2|max:50',
-				'lastName' => 'required|min:2|max:50',
-				'fatherName' => 'required|min:2|max:50',
+				'firstName' => 'required|min:1|max:50',
+				'lastName' => 'required|min:1|max:50',
+				'fatherName' => 'required|min:1|max:50',
 				'cnicNumber' => 'required|max:15',
 				'gender' => 'required',
 				'maritalStatus' => 'required',

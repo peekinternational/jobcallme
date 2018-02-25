@@ -11,19 +11,19 @@
     <div class="container">
        <div class="row">
            <!--RTJ- Left start-->
-           <div class="col-md-6">
+           <div class="col-md-7">
                <div class="rtj-box">
                    <ul class="nav nav-tabs ">
-                       <li class="active">
+                       <li class="active" style="width:21%">
                            <a href="#rtj_tab_suggested" data-toggle="tab"><i class="fa fa-info-circle"></i> @lang('home.suggested')</a>
                        </li>
-                       <li>
+                       <li style="width:29%">
                             <a href="#rtj_tab_saved" data-toggle="tab"><i class="fa fa-heart"></i> @lang('home.savedjobs') </a>
                        </li>
-                       <li>
-                           <a href="#rtj_tab_application" data-toggle="tab"><i class="fa fa-file-text"></i> @lang('home.applications') </a>
+                       <li style="width:25%">
+                           <a href="#rtj_tab_application" data-toggle="tab"><i class="fa fa-file-text"></i> @lang('home.APPLICATION') </a>
                        </li>
-                       <li>
+                       <li style="width:25%">
                            <a href="#rtj_tab_interview" data-toggle="tab"><i class="fa fa-calendar"></i> @lang('home.interviews')</a>
                        </li>
                    </ul>
@@ -32,7 +32,7 @@
                              @if(count($suggested) > 0)
                                 @foreach($suggested as $sgJob)
                                     <div class="col-md-12 rtj-item" id="suggested-{{ $sgJob->jobId }}">
-                                        <img src="{{ url('compnay-logo/'.$sgJob->companyLogo) }}" style="width: 50px">
+                                        <img src="{{ url('compnay-logo/'.$sgJob->companyLogo) }}" style="width: 55px;height:60px;">
                                         <div class="rtj-details">
                                             <p><strong><a href="{{ url('jobs/'.$sgJob->jobId) }}">{!! $sgJob->title !!}</a></strong></p>
                                             <p>{!! $sgJob->companyName !!}</p>
@@ -80,7 +80,7 @@
                                    </div>
                                @endforeach
                             @else
-                                <p>No saved jobs</p>
+                                <p>@lang('home.Nosavedjobs')</p>
                             @endif
                        </div>
                        <div class="tab-pane" id="rtj_tab_application">
@@ -107,7 +107,7 @@
                                    </div>
                        			@endforeach
                        		@else
-                       			<p>No job applications</p>
+                       			<p>@lang('home.Nojobapplications')</p>
                        		@endif
                        </div>
                        <div class="tab-pane" id="rtj_tab_interview">
@@ -136,7 +136,7 @@
                                    </div>
                                 @endforeach
                             @else
-                                <p>No Interview schedule</p>
+                                <p>@lang('home.Nojobapplications')</p>
                             @endif
                        </div>
                    </div>
@@ -144,11 +144,48 @@
            </div>
            <!--RTJ- Left end-->
 
+
+		   <div class="col-md-5">		
+                <div class="suggested-reading">
+                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.ADVERTISE')</a>
+                    <h4>@lang('home.ImproveCompetitiveAdvantage')</h4>
+                    <hr>
+					   @foreach($lear_record as $rec)
+					   <?php
+                        $pImage = url('profile-photos/profile-logo.jpg');
+                        if($rec->upskillImage != '' && $rec->upskillImage != NULL){
+                            $pImage = url('upskill-images/'.$rec->upskillImage);
+                        }
+                        ?>
+                    <div class="col-md-12 sr-item">
+					 <div class="col-md-5">
+                        <img src="{{ $pImage }}" style="width: 170px;height:80px;">
+						</div>
+						 <div class="col-md-7">
+                        <div class="sr-details">
+                            <p class="sr-title"><a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}">{!! $rec->title !!} </a> </p>
+							<span>@lang('home.'.$rec->type)</span><br>
+                            <span style="font-size: 10px;"><i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}}<br> <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</span>
+                            <br>
+                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
+                        </div>
+						</div>
+                    </div>
+					   @endforeach
+
+                    <div class="col-md-12">
+                        <a href="{{ url('learn') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                    </div>
+                </div>
+    
+
+
+
            <!--RTJ- Right start-->
-           <div class="col-md-3">
+           <div class="col-md-5" pull-left>
                <!--Follow Companies - Start -->
                <div class="follow-companies">
-                   <h4 style="text-align:center">@lang('home.companiesfollow')</h4>
+                   <h4 style="text-align:center">@lang('home.companiesfollow')</h4><a href="{{ url('account/upskill/add') }}"><h5 class="pull-right">@lang('home.ADVERTISE')</h5></a>
                    <hr>
                    <div class="row">
                         @foreach($companies as $comp)
@@ -181,40 +218,10 @@
                        </div>
                    </div>
                </div>
-			       <div class="suggested-reading">
-                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.write')</a>
-                    <h4>@lang('home.Courses/Trainings')</h4>
-                    <hr>
-					   @foreach($lear_record as $rec)
-					   <?php
-                        $pImage = url('profile-photos/profile-logo.jpg');
-                        if($rec->upskillImage != '' && $rec->upskillImage != NULL){
-                            $pImage = url('upskill-images/'.$rec->upskillImage);
-                        }
-                        ?>
-                    <div class="col-md-12 sr-item">
-					 <div class="col-md-5">
-                        <img src="{{ $pImage }}" style="height:49px">
-						</div>
-						 <div class="col-md-7">
-                        <div class="sr-details">
-                            <p class="sr-title"><a href="{{ url('learn') }}">{!! $rec->title !!} </a> </p>
-							<span>{{ $rec->type }}</span><br>
-                            <span style="font-size: 10px;"><i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}}<br> <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</span>
-                            <br>
-                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
-                        </div>
-						</div>
-                    </div>
-					   @endforeach
-
-                    <div class="col-md-12">
-                        <a href="{{ url('learn') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
-                    </div>
-                </div>
+			       
            </div>
 		    <!--Suggested Reading - Start -->
-				<div class="col-md-3">
+				<div>
                 <div class="suggested-reading">
                     <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.write')</a>
                     <h4>@lang('home.suggestedreading')</h4>

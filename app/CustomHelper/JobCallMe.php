@@ -301,7 +301,7 @@ class JobCallMe{
 	}
 
 	public function getCareerLevel(){
-		return array('Entry Level','Executive','Experienced','Manager','Student');
+		return array('Entry ~ Employee','Chief ~ Asst.Manager','Manager ~ Deputy General Manager','General Manager','Executive ~ CEO');
 	}
 
 	public function getUpkillsType(){
@@ -519,7 +519,7 @@ class JobCallMe{
 		if($country == '166'){
 			$array = array('48315','31496','31594','31464','31362','31300','31580','31520','31375','31464','31376');
 		}else if($country == '116'){
-			$array = array('25751','25551','25648','25645','25606');
+			$array = array('48316','48317','48318','48319','48320','48321','48322','48323','48324','48334','48325','48326','48327','48328','48329','48330','48331','48332','48333');
 		}else{
 			//166
 			
