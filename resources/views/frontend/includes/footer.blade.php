@@ -115,7 +115,7 @@
         </ul>				
     </div>
     @if(Session::has('jcmUser'))
-        <!-- <script type="text/javascript" charset="utf-8" src="{{asset('cometchat/js.php')}}"></script>
-        <link type="text/css" rel="stylesheet" media="all" href="{{asset('cometchat/css.php')}}" /> -->
+        <script type="text/javascript" charset="utf-8" src="{{asset('cometchat/js.php')}}"></script>
+        <link type="text/css" rel="stylesheet" media="all" href="{{asset('cometchat/css.php')}}" /> 
     @endif
 </footer>
