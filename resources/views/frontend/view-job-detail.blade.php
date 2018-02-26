@@ -4,10 +4,25 @@
 
 @section('content')
 <?php
+$head='';		
+$dispatch='';
 $userImage = url('compnay-logo/profile-logo.jpg');
 if($job->companyLogo != ''){
     $userImage = url('compnay-logo/'.$job->companyLogo);
 }
+  if($job->head == "yes")		
+					{		
+				$head='<span class="label" style="background-color:green">Headhunting</span>';		
+				}		
+				else{		
+					$head="";		
+				}		
+					if($job->dispatch == "yes")		
+					{		
+						$dispatch='<span class="label" style="background-color:blue">Dispatch & Agency</span>';		
+					}						else{		
+					$dispatch="";		
+				}
 ?>
 <section id="jobs">
     <div class="container">
@@ -20,7 +35,7 @@ if($job->companyLogo != ''){
 			<span style="text-transform: uppercase;font-size: 26px;">{{$job->companyName}}</span>
                 <p style="font-size: 18px;margin-top: 24px; margin-left: 6px;">{{ $job->title }},  &nbsp;<span style="font-size: 13px; padding-top: 9px;">{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }} </span> &nbsp;<span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">
 				{{ $job->p_title }}
-				</span><span style="font-size:9px;margin-left:13px">Never pay for job application, test or interview. <a href="{{ url('/safety')}}">more</a></span></p>
+				</span> &nbsp;{!! $head !!} <span style="font-size:9px;margin-left:13px">Never pay for job application, test or interview. <a href="{{ url('/safety')}}">more</a></span></p>
 				
 				</div>
 				

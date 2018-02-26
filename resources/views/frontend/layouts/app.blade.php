@@ -81,6 +81,7 @@ $next = Request::route()->uri;
         <i class="fa fa-arrow-up"></i>
     </a>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
         <script src="{{ asset('frontend-assets/js/jquery.min.js') }}"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="{{ asset('frontend-assets/js/bootstrap.min.js') }}"></script>

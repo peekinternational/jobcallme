@@ -173,6 +173,36 @@
                                </select>
                            </div>
                        </div>
+					     <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.postcate1')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                
+                                        <div class="col-md-4 benefits-checks">
+                                            <input id="head" type="checkbox" class="cbx-field" name="head" value="yes" {{ $result->head == 'yes' ? 'checked=""' : '' }}>								
+											<label class="cbx" for="head"></label>
+                                            <label class="lbl" for="head">@lang('home.abouthead')</label>
+                                            
+                                        </div>
+                              
+                                </div>
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.postcate2')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                
+                                        <div class="col-md-4 benefits-checks">                                        
+											<input id="dispatch" type="checkbox" class="cbx-field" name="dispatch" value="yes" {{ $result->dispatch == 'yes' ? 'checked=""' : '' }}>
+											<label class="cbx" for="dispatch"></label>
+                                            <label class="lbl" for="dispatch">@lang('home.dispatchinformation')</label>
+                                        </div>
+                              
+                                </div>
+                            </div>
+                        </div>
                    </div>
 
                     <h3>@lang('home.compensationbenefits')</h3>

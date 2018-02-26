@@ -190,7 +190,7 @@ $lToken = csrf_token();
                 <p>Breaking News</p>
             </div>-->
             <ul>
-			@foreach($jobs as $job)
+			@foreach($premium as $job)
                 <div><li><span>{!! $job->title !!} &ndash; <a href="{{ url('jobs/'.$job->jobId) }}">Latest Job</a></span></li></div>
 				@endforeach
                
@@ -207,7 +207,7 @@ $lToken = csrf_token();
             <!-- Left to right-->
             <div class="row">
                 <!--Premium Job Single item Start-->
-				@foreach($jobs as $job)
+				@foreach($premium as $job)
                 <div class="col-sm-4">
                     <div class="ih-item square effect15 left_to_right">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
@@ -252,19 +252,19 @@ $lToken = csrf_token();
             <!--<p class="text-center" id="feature-companies-caption">Sigh ever way now many. Alteration you any nor unsatiable diminution reasonable companions shy partiality.</p>-->
             <!-- Scale up-->
             <div class="row">
-			@foreach($companies as $comp)
+			@foreach($top_jobs as $comp)
                 <div class="col-md-5ths">
                     <!-- colored -->
                     <div class="ih-item square effect8 scale_up tc-box">
                         <a href="{{ url('companies/company/'.$comp->companyId) }}">
                             <div class="img-class">
                                 <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="" alt="img">
-<span>{!! $comp->companyName !!}</span>
+<span>{!! $comp->title !!}</span>
                             </div>
 							<span class="brand-jobs-link">View {!! $comp->count !!}jobs</span>
                             <div class="info">
-                                <h3>{!! $comp->companyName !!}</h3>
-                                <p>{!! $comp->companyAbout !!}</p>
+                                <h3>{!! $comp->title !!}</h3>
+                                <p>{!! $comp->description !!}</p>
                               
                             </div>
 							  
@@ -330,7 +330,7 @@ $lToken = csrf_token();
           
             <div class="row">
                 <!--Latest Job Single item Start-->
-				@foreach($Gallery as $job)
+				@foreach($latest as $job)
                 <div class="col-sm-4">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:130px">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
@@ -373,7 +373,7 @@ $lToken = csrf_token();
 		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.specialjob')</span><span style="float:right"><a style="font-size: 12px;color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
 
             <div class="row">
-			@foreach($jobs as $job)
+			@foreach($special as $job)
                 <!--Special Job Single item Start-->
                 <div class="col-md-3">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:130px">
@@ -420,7 +420,7 @@ $lToken = csrf_token();
             <div class="row">
                 <div id="check"></div>
                 <!--Golden Job Single item Start-->
-					@foreach($jobs as $job)
+					@foreach($golden as $job)
                 <div class="col-md-5ths">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:130px">
                         <a href="{{ url('jobs/'.$job->jobId) }}">

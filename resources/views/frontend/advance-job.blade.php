@@ -112,10 +112,10 @@
 .jobs-suggestions img {
     position: absolute;
     right: 24px;
-    top: 64%;
+    top: 60%;
     vertical-align: top;
 	width:11%;
-	
+	height:57px;
 }
 </style>
 

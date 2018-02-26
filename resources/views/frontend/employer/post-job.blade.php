@@ -33,8 +33,10 @@
 						 
                             <!----><li style="position:relative">
                                 <!---->
-
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
+								<span class="pay_blog">
+									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
+									<input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
+								</span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
                              <span class="b">@lang('home.'.$payment->title)</span></div>
                                 <div>
@@ -151,17 +153,13 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" name="expiryDate" onkeypress="return false">
+                                <input type="text" class="form-control date-picker" id="secondDate" name="expiryDate" onkeypress="return false">
                             </div>
                         </div>
 						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.adduration')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control" name="adduration">
-                                    <?for($i=2; $i<31; $i++){?>
-                                        <option value="{!! $i !!}">{!! $i !!}@lang('home.adday')</option>
-                                    <?}?>
-                               </select>
+                             <input type="text" id="pas" class="form-control" name="duration">
 								
                             </div>
                         </div>
@@ -196,7 +194,7 @@
                                 <div class="row">
                                 
                                         <div class="col-md-4 benefits-checks">
-                                            <input id="head" type="checkbox" class="cbx-field" name="head" value="head">								
+                                            <input id="head" type="checkbox" class="cbx-field" name="head" value="yes">								
 											<label class="cbx" for="head"></label>
                                             <label class="lbl" for="head">@lang('home.abouthead')</label>
                                             
@@ -212,7 +210,7 @@
                                 <div class="row">
                                 
                                         <div class="col-md-4 benefits-checks">                                        
-											<input id="dispatch" type="checkbox" class="cbx-field" name="dispatch" value="dispatch">
+											<input id="dispatch" type="checkbox" class="cbx-field" name="dispatch" value="yes">
 											<label class="cbx" for="dispatch"></label>
                                             <label class="lbl" for="dispatch">@lang('home.dispatchinformation')</label>
                                         </div>
@@ -306,7 +304,7 @@
                         </div>
                     </div>
 					<div class="col-md-offset-3 col-md-2  pnj-btns">
-                        <span style="font-size:17px;padding-right:50px;">Total Amount : US$ </span>						
+                        <span style="font-size:17px;padding-right:50px;" id="total"></span>						
                     </div>
                     <div class="col-md-6  pnj-btns">                        
 						<button type="submit" class="btn btn-primary" name="save">@lang('home.postjob')</button>
@@ -320,10 +318,36 @@
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+var alrt="";
 $(document).ready(function(){
+	$('body').on('click','.pay_blog',function(e){
+		console.log($(e.target).val());
+	 alrt=$(e.target).siblings('input').val();
+	 console.log(alrt);
+		
+	})
+
     getStates($('.job-country option:selected:selected').val());
     getSubCategories($('.job-category option:selected:selected').val());
 });
+	  $('#secondDate').on('change', function() {
+				  myfunc()
+			  });
+      
+       function myfunc(){
+       var start = new Date();
+      // var start= $("#firstDate").datepicker("getDate");
+    	var end= $("#secondDate").datetimepicker("getDate");
+   		days = (end- start) / (1000 * 60 * 60 * 24);
+      var to= Math.round(days);
+      var total= to * alrt;
+      $('#pas').val(to);
+	  $('#total').html("Total Amount : "+total+" $" );
+      
+      // alert(total);
+       
+       }
+  
 $(".cdk-visually-hidden").trigger('click');
 $('.job-country').on('change',function(){
     var countryId = $(this).val();
