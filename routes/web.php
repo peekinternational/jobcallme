@@ -102,6 +102,11 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/writestatupdate','admin\Cms@writestatupdate');
 	Route::post('cms/viewwriting','admin\Cms@viewwriting');
 	Route::post('cms/deletewriting','admin\Cms@deletewriting');
+	/*Aprove Upskills*/
+	Route::get('cms/aproveskills','admin\Cms@upskills');
+	Route::post('cms/viewskill','admin\Cms@viewskill');
+	Route::post('cms/deleteskill','admin\Cms@deleteskill');
+	Route::post('cms/upskillstatupdate','admin\Cms@upskillstatupdate');
 	/*profile pic*/
 	
 });

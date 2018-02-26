@@ -366,6 +366,7 @@ class Home extends Controller{
     	if($request->input('keyword') != ''){
     		$readQry->where('jcm_writings.title','LIKE','%'.$request->input('keyword').'%');
     	}
+		$readQry->where('jcm_writings.status','Publish');
     	$readQry->orderBy('jcm_writings.writingId','desc')->limit(12);
     	$read_record = $readQry->get();
     	
@@ -582,10 +583,14 @@ public function verifyUser(Request $request){
 }
 public function changepropic(Request $request){
 	$userid = $request->input('userId');
-	
-	$profileImage = $request->input('profileImage');
-	
-	DB::table('jcm_users')->where('userId',$userid)->update(['profileImage' => $profileImage,'profilePhoto'=>'']);
+	$imagelink = $request->input('imagelink');
+	$oldImageName = pathinfo($imagelink);
+	$image = $_FILES['profileImage'];
+	$tmp = $image['tmp_name'];
+	$newfile = $oldImageName['basename'];
+	unlink('profile-photos/'.$newfile);
+	move_uploaded_file($tmp, 'profile-photos/'.$newfile);
+	/*DB::table('jcm_users')->where('userId',$userid)->update(['profileImage' => $profileImage,'profilePhoto'=>'']);*/
 
 }
 }

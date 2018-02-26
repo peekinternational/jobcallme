@@ -98,7 +98,8 @@ $next = Request::route()->uri;
         <!-- <script src="{{ asset('frontend-assets/js/ticker.js') }}"></script> -->
         <script src="{{ asset('frontend-assets/js/toastr.min.js') }}"></script>
         <!--FeedBack Form-->
-        <script src="{{ asset('frontend-assets/js/feedBackBox.js') }}"></script>
+       <!-- check if session is set then not include else include -->
+        @if(!session()->has('jcmUser'))<script src="{{ asset('frontend-assets/js/feedBackBox.js') }}"></script>@endif
         <!-- pace -->
         <script type="text/javascript" src="{{ asset('frontend-assets/pace/pace.js') }}"></script>
         <script src="{{ asset('frontend-assets/tinymce/tinymce.min.js') }}"></script>
