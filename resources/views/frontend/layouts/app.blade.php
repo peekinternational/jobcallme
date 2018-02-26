@@ -122,11 +122,12 @@ $next = Request::route()->uri;
 </script>
 <!--FeedBack Form-->
 <!-- <script src="js/feedBackBox.js"></script> -->
-<script type="text/javascript">
+@if(!session()->has('jcmUser'))<script type="text/javascript">
     $(document).ready(function () {
         $('#feedback-Form').feedBackBox();
     });
 </script>
+@endif
 <!--Scroll to top Button-->
 <script>
     jQuery(document).ready(function() {
@@ -231,7 +232,7 @@ $next = Request::route()->uri;
         });
         $(document).ready(function() {
             $(".location,.select2").select2();
-            $('#feedback-Form').feedBackBox();
+            @if(!session()->has('jcmUser'))$('#feedback-Form').feedBackBox();@endif
             var offset = 250;
             var duration = 300;
             $(window).scroll(function() {

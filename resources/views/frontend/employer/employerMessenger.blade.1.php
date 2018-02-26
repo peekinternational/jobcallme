@@ -461,11 +461,12 @@
         }).parent().addClass('active');
     });
 </script>
-<script type="text/javascript">
+@if(!session()->has('jcmUser'))<script type="text/javascript">
     $(document).ready(function () {
         $('#feedback-Form').feedBackBox();
     });
 </script>
+@endif
 <!--Scroll to top Button-->
 <script>
     jQuery(document).ready(function() {

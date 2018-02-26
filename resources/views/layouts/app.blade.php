@@ -119,11 +119,13 @@ $next = Request::route()->uri;
 </script>
 <!--FeedBack Form-->
 <script src="js/feedBackBox.js"></script>
+@if(!session()->has('jcmUser'))
 <script type="text/javascript">
     $(document).ready(function () {
         $('#feedback-Form').feedBackBox();
     });
 </script>
+@endif
 <!--Scroll to top Button-->
 <script>
     jQuery(document).ready(function() {
