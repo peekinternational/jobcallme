@@ -349,7 +349,7 @@ class Home extends Controller{
 
     public function learn(Request $request){
     	/* read query */
-    	$lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(12)->get();
+    	$lear_record = DB::table('jcm_upskills')->where('status','=','Active')->orderBy('skillId','desc')->limit(12)->get();
 
     	return view('frontend.learn',compact('lear_record'));
     }
