@@ -205,7 +205,7 @@ class Home extends Controller{
 			$input['modifiedTime'] = date('Y-m-d H:i:s');
 
 			$userId = DB::table('jcm_users')->insertGetId($input);
-
+			setcookie('cc_data', $userId, time() + (86400 * 30), "/");
 			extract($request->all());
 			$cInput = array('companyName' => $firstName.' '.$lastName, 'companyEmail' => $email, 'companyPhoneNumber' => $phoneNumber, 'companyCountry' => $country, 'companyState' => $state, 'companyCity' => $city, 'category' => '0', 'companyCreatedTime' => date('Y-m-d H:i:s'), 'companyModifiedTime' => date('Y-m-d H:i:s'));
 			$companyId = DB::table('jcm_companies')->insertGetId($cInput);
