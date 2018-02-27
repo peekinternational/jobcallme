@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
+use Mapper;
 
 class ExtraSkills extends Controller{
     
@@ -231,6 +232,8 @@ class ExtraSkills extends Controller{
                 return redirect('account/upskill');
             }
         }
+         Mapper::map(33.6844,  73.0479);
+
     	return view('frontend.add-edit-upskill',compact('upskill'));
     }
 
