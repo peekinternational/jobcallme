@@ -118,4 +118,14 @@
         <script type="text/javascript" charset="utf-8" src="{{asset('cometchat/js.php')}}"></script>
         <link type="text/css" rel="stylesheet" media="all" href="{{asset('cometchat/css.php')}}" /> 
     @endif
+    <script type="text/javascript">
+        
+        function url(){
+            return  "{{ url("") }}";
+        }
+        function getToken(){
+            return  "{{ csrf_token() }}";
+        }
+    </script>
+    
 </footer>

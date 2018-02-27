@@ -175,7 +175,7 @@ if($job->companyLogo != ''){
             </div>
 
             <!--ABOUT Organization-->
-            <div class="jobs-suggestions">
+            <!-- <div class="jobs-suggestions">
                 <div class="jd-action-btn">
                     @if(in_array($job->companyId,$followArr))
                         <a href="javascript:;" onclick="followCompany({{ $job->companyId }},this)" class="btn btn-success">@lang('home.following')</a>
@@ -189,7 +189,109 @@ if($job->companyLogo != ''){
                     <p>{!! $job->companyAbout !!}
                     </p>
                 </div>
+            </div> -->
+            <div class="jobs-suggestions">
+                <div class="jd-action-btn">
+                    @if(in_array($job->companyId,$followArr))
+                        <a href="javascript:;" onclick="followCompany({{ $job->companyId }},this)" class="btn btn-success">@lang('home.following')</a>
+                    @else
+                        <a href="javascript:;" onclick="followCompany({{ $job->companyId }},this)" class="btn btn-primary">@lang('home.follow')</a>
+                    @endif   
+                    <a href="javascript:;" class="btn btn-default">Write Review</a>   
+                </div>
+                <h4>{{ $job->companyName }} </h4>
+                <p>{{ JobCallMe::cityName($job->companyCity) }}, {{ JobCallMe::countryName($job->companyCountry) }}</p>
+                <div class="jd-about-organization">
+                    <p>{!! $job->companyAbout !!}</p>
+                </div>
+                <p align="center">
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i><br>
+                        View all 0 reviews
+                </p>
+                <hr>
+                <p>
+                    <table>
+                        <tr>
+                            <td>Career Growth</td>
+                            <td>&nbsp;&nbsp;</td>
+                            <td>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Compensation & Benefits</td>
+                            <td>&nbsp;&nbsp;</td>
+                            <td>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Work/Life Balance</td>
+                            <td>&nbsp;&nbsp;</td>
+                            <td>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Management</td>
+                            <td>&nbsp;&nbsp;</td>
+                            <td>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Culture</td>
+                            <td>&nbsp;&nbsp;</td>
+                            <td>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </p>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-4">
+                        <div class="row" align="center">
+                            <div class="col-md-4">
+                                <span style="font-size:12px">Not Rated Yet</span>
+                                <p>CEO Recommended</p>
+                            </div>
+                            <div class="col-md-4">
+                                <span style="font-size:12px">Not Rated Yet</span>
+                                <p>Recommend to a friend</p>
+                            </div>
+                            <div class="col-md-4">
+                                <span style="font-size:12px">&nbsp;</span>
+                                <p>Future Expectations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
 		<div class="col-md-3">
 		    <!--Follow Companies - Start -->
@@ -231,7 +333,9 @@ if($job->companyLogo != ''){
                         
                     </div>
                 </div>
+
 		</div>
+        
     </div>
 </section>
 @endsection

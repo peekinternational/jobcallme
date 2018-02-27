@@ -30,6 +30,7 @@ Route::post('feedback','frontend\Home@feedback');
 Route::post('editfeedback','frontend\Home@editfeedback');
 Route::post('deletefeedback','frontend\Home@deletefeedback');
 Route::post('cropProfileImage','frontend\Home@changepropic');
+Route::post('deactiveUser','frontend\Home@deactiveUser');
 
 Route::group(['prefix' => 'admin'], function () {
 	Auth::routes();

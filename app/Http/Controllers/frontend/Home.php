@@ -593,5 +593,15 @@ public function changepropic(Request $request){
 	/*DB::table('jcm_users')->where('userId',$userid)->update(['profileImage' => $profileImage,'profilePhoto'=>'']);*/
 
 }
+public function deactiveUser(Request $request){
+	$id = $request->input('id');
+	if(DB::table('jcm_users')->where('userId','=',$id)->update(['user_status'=>'N'])){
+		$request->session()->flush('jcmUser');
+		$request->session()->flash('loginAlert', 'Your Account is Deactivated for activation contact Administration thanks');
+		   echo 1;
+	}else{
+		echo 'error in home controller line number 598';
+	}
+}
 }
 ?>

@@ -560,7 +560,7 @@ if($user->profilePhoto != ''){
                     <div class="popup-inner">
                         <h4>@lang('home.deactivateaccount')</h4>
                         <p>@lang('home.warningdeactive')</p>
-                        <button href="#" class="btn btn-danger">@lang('home.yesdeactive')</button>
+                        <button href="#" onclick="deactive({{session()->get('jcmUser')->userId}})" class="btn btn-danger">@lang('home.yesdeactive')</button>
                         <button class="btn btn-default" data-popup-close="popup-1" >@lang('home.close')</button>
                         <a class="popup-close" data-popup-close="popup-1" href="#">&times;</a>
                     </div>

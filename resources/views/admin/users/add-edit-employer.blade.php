@@ -118,12 +118,12 @@ if($user['profilePhoto'] != ''){
                                     <label class="control-label col-md-3 text-right">Status :</label>
                                     <div class="col-md-6">
                                         <label class="custom-control custom-control-primary custom-radio">
-                                            <input name="status" class="custom-control-input" type="radio" value="Active" {{ $user['status'] != 'Inactive' ? 'checked=""' : '' }}>
+                                            <input name="status" class="custom-control-input" type="radio" value="Y" {{ $user['user_status'] == 'Y' ? 'checked="checked"' : '' }}>
                                             <span class="custom-control-indicator"></span>
                                             <span class="custom-control-label">Active</span>
                                         </label>
                                         <label class="custom-control custom-control-primary custom-radio">
-                                            <input name="status" class="custom-control-input" type="radio" value="Inactive" {{ $user['status'] == 'Inactive' ? 'checked=""' : '' }}>
+                                            <input name="status" class="custom-control-input" type="radio" value="N" {{ $user['user_status'] != 'Y' ? 'checked="checked"' : '' }}>
                                             <span class="custom-control-indicator"></span>
                                             <span class="custom-control-label">Inactive</span>
                                         </label>
