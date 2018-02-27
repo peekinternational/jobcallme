@@ -17,7 +17,7 @@
                                     <input type="search" placeholder="@lang('home.key')" name="keyword">
                                 </div>
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="@lang('home.city')" name="city">
+                                    <input type="search" placeholder="@lang('home.city')" name="city" style="width: 100%">
                                 </div>
                                 <button type="submit" class="search-btn">
                                     <i class="fa fa-search"></i>
@@ -70,11 +70,11 @@
                       $cLogo = url('compnay-logo/'.$company->companyLogo);
                     }
                     ?>
-                    <div class="col-md-2 hvr-bob">
+                    <div class="col-md-2 hvr-bob" style="padding-right: 0px">
                         <!-- normal -->
                         <div class="ih-item square effect8 scale_up">
                             <a href="{{ url('companies/company/'.$company->companyId) }}">
-                            <div class="img"><img src="{{ $cLogo }}" alt="img"></div>
+                            <div class="img" style="height: 100%;"><img src="{{ $cLogo }}" alt="img" class="img-resposive"></div>
                             <div class="info">
                                 <h3>{!! $company->companyName !!}</h3>
                                 <p>{!! substr(strip_tags($company->companyAbout),0,100) !!}</p>

@@ -24,6 +24,7 @@
 										<th>Job Tittle</th>
 										<th>Email</th>
 										<th>Amount</th>
+										<th>Ad Duration Days</th>
 										<th>Job Category</th>
 										<th>Payment Status</th>
 										<th>Payment Type</th>
@@ -31,6 +32,9 @@
                                     </thead>
                                      <tbody>
                                         @foreach($jobs as $i => $job)
+										<?php 
+										$sum=$job->amount*$job->duration;
+										?>
                                             <tr>
                                                 <td>{{ ++$startI }}</td>
 												<td>{!! $job->pay_id!!}</td>
@@ -38,6 +42,7 @@
                                                 <td>{!! $job->title !!}</td>
 												<td>{!! $job->email!!}</td>
                                                 <td>${!! $job->amount!!}</td>
+												<td>{!! $job->duration!!}</td>
 												<td>{!! $job->p_title!!}</td>
 												<td style="text-align: center;"><label class="label label-success">{!! $job->jType!!}</label></td>
 												@if($job->paymentType==1)

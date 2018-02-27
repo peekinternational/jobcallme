@@ -47,6 +47,7 @@ class Jobs extends Controller{
 		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
 		$jobs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
+		$jobs->where('jcm_jobs.status','=','1');
 		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
 		//$jobs->where('jcm_jobs.country','=',$country);
 		/*if($_find == '0'){
@@ -83,7 +84,7 @@ class Jobs extends Controller{
 		$result = $jobs->orderBy('jobId','desc')->limit(100)->get();
 		
 		//dd($result);
-
+        $head = '';
 		$vhtml = '';
 		$category ='';
 		if(count($result) > 0){
@@ -119,8 +120,22 @@ class Jobs extends Controller{
 	                    }
                     $vhtml .= '</div>';
 				}
+				if($rec->head == "yes")
+				{
+					$head='<span class="label" style="background-color:green">Headhunting</span>';
+				}
+				else{
+					$head="";
+				}
+				if($rec->dispatch == "yes")
+				{
+					$dispatch='<span class="label" style="background-color:blue">Dispatch & Agency</span>';
+				}
+				else{
+					$dispatch="";
+				}
 				$colorArr = array('purple','green','darkred','orangered','blueviolet');
-                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_title.'</span></a></h4>';
+                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_title.'</span></a>  '.$head.' '.$dispatch.' </h4>';
                     $vhtml .= '<p>'.$rec->companyName.'</p>';
                     $vhtml .= '<ul class="js-listing">';
                     	$vhtml .= '<li>';
@@ -180,6 +195,7 @@ class Jobs extends Controller{
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
 		$jobs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
 		$jobs->Join('jcm_cities','jcm_jobs.city','=','jcm_cities.id');
+		$jobs->where('jcm_jobs.status','=','1');
 		
 		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
 		if($keyword != '') $jobs->where('jcm_jobs.title','=',$keyword);
@@ -279,7 +295,7 @@ class Jobs extends Controller{
 		$jobrs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.*');
 		$jobrs->join('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId');
 		$jobrs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
-		
+		$jobrs->where('jcm_jobs.status','=','1');
 		$jobrs->where('jcm_jobs.jobId','=',$jobId);
 		$job = $jobrs->first();
 		//dd($job);

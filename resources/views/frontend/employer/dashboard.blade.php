@@ -63,7 +63,7 @@
 							
                                     <div class="rtj-details">
                                         <p><strong><a href="{{ url('jobs/'.$pjobs->jobId) }}">{!! $pjobs->title !!}</a></strong> <i class="fa fa-check-circle-o"></i></p>
-										<?($opcl = strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open')?>
+										<?php ($opcl = strtotime($pjobs->expiryDate) <= strtotime(date('Y-m-d')) ? 'Closed' : 'Open')?>
                                          <p>@lang('home.'.$opcl)                                        
 										 <span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">{!! $pjobs->p_title !!}</span>
 										 

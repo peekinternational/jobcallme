@@ -497,7 +497,11 @@ if($upskill->country != 0){
                             </div>
                         </div>
                     </div>
-
+                    <!-- map area -->
+                    <div style="width: 100%; height: 500px;">
+                        {!! Mapper::render() !!}
+                    </div>
+                    <!-- map end -->
                     <h3>@lang('home.upskillimage')</h3>
                     <div class="png-form-section us-duration">
                         <div class="form-group">

@@ -30,6 +30,7 @@ Route::post('feedback','frontend\Home@feedback');
 Route::post('editfeedback','frontend\Home@editfeedback');
 Route::post('deletefeedback','frontend\Home@deletefeedback');
 Route::post('cropProfileImage','frontend\Home@changepropic');
+Route::post('deactiveUser','frontend\Home@deactiveUser');
 
 Route::group(['prefix' => 'admin'], function () {
 	Auth::routes();
@@ -102,6 +103,11 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/writestatupdate','admin\Cms@writestatupdate');
 	Route::post('cms/viewwriting','admin\Cms@viewwriting');
 	Route::post('cms/deletewriting','admin\Cms@deletewriting');
+	/*Aprove Upskills*/
+	Route::get('cms/aproveskills','admin\Cms@upskills');
+	Route::post('cms/viewskill','admin\Cms@viewskill');
+	Route::post('cms/deleteskill','admin\Cms@deleteskill');
+	Route::post('cms/upskillstatupdate','admin\Cms@upskillstatupdate');
 	/*profile pic*/
 	
 });
@@ -207,6 +213,7 @@ Route::group(['prefix' => 'account'], function () {
 	Route::post('post','frontend\Employer@post');
 	Route::post('nicepay', 'frontend\Employer@getresponse');
 	Route::get('employer/delete/{id}','frontend\Employer@deletejob');
+	Route::match(['get','post'],'employer/orders','frontend\Employer@orders');
 	
 	Route::get('employer/nice', function () {
     return view('frontend.employer.nice');

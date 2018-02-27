@@ -30,7 +30,7 @@ if($user->profilePhoto != ''){
             <a class="btn btn-block jaTabBtn">Questionnaires</a> -->
 			<h5 class="mtab-heading">@lang('home.subscription')</h5>
 			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.credits')</a>
-			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.orders')</a>
+			<a href="{{ url('account/employer/orders') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.orders')</a>
 			
 			
             <h5 class="mtab-heading">@lang('home.deactivation')</h5>
@@ -79,7 +79,7 @@ if($user->profilePhoto != ''){
                              <label class="control-label col-md-3 text-right">@lang('home.profilephoto')</label>
                             <div class="col-md-6">
                                 <div class="re-img-box">
-                                    <img src="@if($user->profileImage != '') {{ $user->profileImage }} @else {{ $userImage }} @endif" class="img-circle">
+                                    <img src="{{ $userImage }}" class="img-circle">
                                     <div class="re-img-toolkit">
                                         <div class="mc-file-btn">
                                              <i class="fa fa-camera"></i>&nbsp;@lang('home.change')
@@ -560,7 +560,7 @@ if($user->profilePhoto != ''){
                     <div class="popup-inner">
                         <h4>@lang('home.deactivateaccount')</h4>
                         <p>@lang('home.warningdeactive')</p>
-                        <button href="#" class="btn btn-danger">@lang('home.yesdeactive')</button>
+                        <button href="#" onclick="deactive({{session()->get('jcmUser')->userId}})" class="btn btn-danger">@lang('home.yesdeactive')</button>
                         <button class="btn btn-default" data-popup-close="popup-1" >@lang('home.close')</button>
                         <a class="popup-close" data-popup-close="popup-1" href="#">&times;</a>
                     </div>
@@ -604,7 +604,22 @@ if($user->profilePhoto != ''){
 .text-danger{color: #ff0000 !important;}
 </style>
 <script type="text/javascript">
+    //**dataURL to blob**
+    function dataURLtoBlob(dataurl) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type:mime});
+    }
 
+    //**blob to dataURL**
+    function blobToDataURL(blob, callback) {
+        var a = new FileReader();
+        a.onload = function(e) {callback(e.target.result);}
+        a.readAsDataURL(blob);
+    }
     function editpic(){
         var proImg = $('.img-circle').attr('src');
        $('#editProModel').modal('show');
@@ -626,16 +641,36 @@ if($user->profilePhoto != ''){
         var srcResized = $(this).rcrop('getDataURL', 50,50);
         var userId = "{{ session()->get('jcmUser')->userId }}";
         $('.img-circle').attr('src',srcOriginal);
+        //test:
+        var blob = dataURLtoBlob(srcOriginal);
+        var imagelink = $('#proEditImg img').attr('src');
 
+        /*blobToDataURL(blob, function(dataurl){
+            console.log(dataurl);
+        });*/
+        var fd = new FormData();
+        fd.append('profileImage', blob);
+        fd.append('_token', "{{ csrf_token() }}");
+        fd.append('userId', userId);
+        fd.append('imagelink', imagelink);
         $.ajax({
+            type: 'POST',
+            url: '{{ url("cropProfileImage") }}',
+            data: fd,
+            processData: false,
+            contentType: false
+        }).done(function(data) {
+               console.log(data);
+        });
+        /*$.ajax({
             url:'{{ url("cropProfileImage") }}',
             type:'POST',
-            data:{profileImage:srcOriginal,_token:"{{ csrf_token() }}",userId:userId},
+            data:{profileImage:blob,_token:"{{ csrf_token() }}",userId:userId},
             success:function(res){
                 console.log(res);
             }
 
-        });
+        });*/
         
         /*$('#cropped-resized').append('<img src="'+srcResized+'">');*/
     });

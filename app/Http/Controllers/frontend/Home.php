@@ -20,62 +20,127 @@ class Home extends Controller{
 		$companies = DB::table('jcm_companies')->orderBy('companyId','desc')->limit(15)->get();
 
 		/* jobs query */
-		$Gallery = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		$premium = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+		->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
+		->where('jcm_jobs.p_Category','=','7')
+		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->where('jcm_countries.sortname','=',$position->countryCode)
+		->orderBy('jcm_jobs.jobId','desc')
+		->limit(12)->get();
+		if(sizeof($premium) == 0){
+		$premium = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+		->where('jcm_jobs.p_Category','=','7')
+		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->orderBy('jcm_jobs.jobId','desc')
+		->limit(12)->get();
+		}
+		
+		/* jobs query top jobs */
+		$top_jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+		->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
+		->where('jcm_jobs.p_Category','=','6')
+		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->where('jcm_countries.sortname','=',$position->countryCode)
+		->orderBy('jcm_jobs.jobId','desc')
+		->limit(12)->get();
+		if(sizeof($top_jobs) == 0){
+		$top_jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+		->where('jcm_jobs.p_Category','=','6')
+		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->orderBy('jcm_jobs.jobId','desc')
+		->limit(12)->get();
+		}
+		
+		/* jobs query hot jobs */
+		$hot = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+		->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
+		->where('jcm_jobs.p_Category','=','5')
+		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->where('jcm_countries.sortname','=',$position->countryCode)
+		->orderBy('jcm_jobs.jobId','desc')
+		->limit(12)->get();
+		if(sizeof($hot) == 0){
+		$hot = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
+		->where('jcm_jobs.p_Category','=','5')
+		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->orderBy('jcm_jobs.jobId','desc')
+		->limit(12)->get();
+		}
+		
+		$latest = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 			->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 			->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
-			->where('jcm_jobs.p_Category','=','2')
+			->where('jcm_jobs.p_Category','=','4')
+			->where('jcm_jobs.status','=','1')
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 			->where('jcm_countries.sortname','=',$position->countryCode)
 			->orderBy('jcm_jobs.jobId','desc')
 			->limit(12)
 			->get();
-		if(sizeof($Gallery) == 0){
-			$Gallery = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		if(sizeof($latest) == 0){
+			$latest = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 			->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 			->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
-			->where('jcm_jobs.p_Category','=','2')
+			->where('jcm_jobs.p_Category','=','4')
+			->where('jcm_jobs.status','=','1')
 			->orderBy('jcm_jobs.jobId','desc')
 			->limit(12)
 			->get();
 		}
-		$hot = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		$special = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 			->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 			->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
 			->where('jcm_jobs.p_Category','=','3')
+			->where('jcm_jobs.status','=','1')
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 			->where('jcm_countries.sortname','=',$position->countryCode)
 			->orderBy('jcm_jobs.jobId','desc')
 			->limit(12)
 			->get();
-		if(sizeof($hot) == 0){
-			$hot = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		if(sizeof($special) == 0){
+			$special = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 			->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 			->where('jcm_jobs.p_Category','=','3')
+			->where('jcm_jobs.status','=','1')
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 			->orderBy('jcm_jobs.jobId','desc')
 			->limit(12)
 			->get();
 		}
 
-		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		$golden = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 		->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
-		->where('jcm_jobs.p_Category','=','4')
+		->where('jcm_jobs.p_Category','=','2')
+		->where('jcm_jobs.status','=','1')
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
-		if(sizeof($jobs) == 0){
-		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
+		if(sizeof($golden) == 0){
+		$golden = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
-		->where('jcm_jobs.p_Category','=','4')
+		->where('jcm_jobs.p_Category','=','2')
+		->where('jcm_jobs.status','=','1')
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
 		}
 //return $companies;
-		return view('frontend.home-page',compact('jobShifts','companies','jobs','Gallery','hot'));
+		return view('frontend.home-page',compact('jobShifts','companies','premium','top_jobs','hot','latest','special','golden'));
 	}
 	public function nicepay(Request $request){
 		//return $request->all();
@@ -349,7 +414,7 @@ class Home extends Controller{
 
     public function learn(Request $request){
     	/* read query */
-    	$lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(12)->get();
+    	$lear_record = DB::table('jcm_upskills')->where('status','=','Active')->orderBy('skillId','desc')->limit(12)->get();
 
     	return view('frontend.learn',compact('lear_record'));
     }
@@ -366,6 +431,7 @@ class Home extends Controller{
     	if($request->input('keyword') != ''){
     		$readQry->where('jcm_writings.title','LIKE','%'.$request->input('keyword').'%');
     	}
+		$readQry->where('jcm_writings.status','Publish');
     	$readQry->orderBy('jcm_writings.writingId','desc')->limit(12);
     	$read_record = $readQry->get();
     	
@@ -582,11 +648,25 @@ public function verifyUser(Request $request){
 }
 public function changepropic(Request $request){
 	$userid = $request->input('userId');
-	
-	$profileImage = $request->input('profileImage');
-	
-	DB::table('jcm_users')->where('userId',$userid)->update(['profileImage' => $profileImage,'profilePhoto'=>'']);
+	$imagelink = $request->input('imagelink');
+	$oldImageName = pathinfo($imagelink);
+	$image = $_FILES['profileImage'];
+	$tmp = $image['tmp_name'];
+	$newfile = $oldImageName['basename'];
+	unlink('profile-photos/'.$newfile);
+	move_uploaded_file($tmp, 'profile-photos/'.$newfile);
+	/*DB::table('jcm_users')->where('userId',$userid)->update(['profileImage' => $profileImage,'profilePhoto'=>'']);*/
 
+}
+public function deactiveUser(Request $request){
+	$id = $request->input('id');
+	if(DB::table('jcm_users')->where('userId','=',$id)->update(['user_status'=>'N'])){
+		$request->session()->flush('jcmUser');
+		$request->session()->flash('loginAlert', 'Your Account is Deactivated for activation contact Administration thanks');
+		   echo 1;
+	}else{
+		echo 'error in home controller line number 598';
+	}
 }
 }
 ?>

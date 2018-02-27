@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Cornford\Googlmapper\MapperServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -242,7 +243,8 @@ return [
 		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 		'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-		'Location' => Stevebauman\Location\Facades\Location::class
+		'Location' => Stevebauman\Location\Facades\Location::class,
+        'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class
     ],
 
 ];

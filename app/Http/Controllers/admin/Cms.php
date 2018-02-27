@@ -472,12 +472,50 @@ class Cms extends Controller{
         }
 
     }
+    
     public function deletewriting(Request $request){
         $id = $request->input('id');
         
         $check = DB::table('jcm_writings')->where('writingId',$id)->delete();
         if($check){
           echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    
+    /* Approve upskills*/
+    public function upskills(Request $request){
+        $upskills = DB::table('jcm_upskills')->orderBy('skillId','desc')->get();
+        return view('admin.cms.upskills',compact('upskills'));
+    }
+    public function viewskill(Request $request){
+        $id = $request->input('id');
+        
+        $check = DB::table('jcm_upskills')->where('skillId',$id)->first();
+        if($check){
+          echo json_encode($check);
+        }else{
+            echo 2;
+        }
+
+    }
+    public function deleteskill(Request $request){
+        $id = $request->input('id');
+        
+        $check = DB::table('jcm_upskills')->where('skillId',$id)->delete();
+        if($check){
+          echo 1;
+        }else{
+            echo 2;
+        }
+    }
+    public function upskillstatupdate(Request $request){
+        $id = $request->input('id');
+        $status = $request->input('status');
+        $check = DB::table('jcm_upskills')->where('skillId',$id)->update(['status'=>$status]);
+        if($check){
+            echo 1;
         }else{
             echo 2;
         }

@@ -106,11 +106,11 @@
 .jobs-suggestions img {
     position: absolute;
     right: 24px;
-    top: 54%;
+    top: 60%;
     vertical-align: top;
-	width:7%;
-	border-radius: 50%;
-    height: 70px;
+	width:11%;
+	
+    height: 57px;
 
 }
 </style>

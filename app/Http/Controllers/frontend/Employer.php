@@ -120,16 +120,19 @@ curl_close ($ch);
 	   $rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
 	   $amount=$rec[0]->price;
 	   //dd();
+	   $durations= $amount*$request->duration;
 
-        $mul=$amount;
+        $mul=$durations;
         $am=$mul*1100;
       //  dd($am);
 	  $request->session()->put('p_Category', $request->p_Category);
         $goodsname = Session::get('p_Category');
         $app = $request->session()->get('jcmUser');
 		//dd($request->department);
-		$request->session()->put('amount', $amount);
+		$request->session()->put('amount', $durations);
 		$request->session()->put('title', $request->title);
+		$request->session()->put('head', $request->head);
+		$request->session()->put('dispatch', $request->dispatch);
 		$request->session()->put('jType', 'Paid');
 		$request->session()->put('department', $request->department);
 		$request->session()->put('category', $request->category);
@@ -151,6 +154,7 @@ curl_close ($ch);
 		$request->session()->put('city', $request->city);
 		$request->session()->put('country', $request->country);
 		$request->session()->put('shift', $request->shift);
+		$request->session()->put('duration', $request->duration);
 		$request->session()->put('expiryDate', $request->expiryDate);
 		
 		 $goodsname = Session::get('p_Category');
@@ -182,7 +186,7 @@ curl_close ($ch);
    
 		extract($request->all());
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'department' => $department, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $request->input('benefits')), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $request->input('benefits')), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
@@ -317,6 +321,9 @@ curl_close ($ch);
 		$country = Session::get('country');
 		$shift = Session::get('shift');
 		$city = Session::get('city');
+		$head = Session::get('head');
+		$dispatch = Session::get('dispatch');
+		$duration = Session::get('duration');
 		$expiryDate = Session::get('expiryDate');
 		$state = Session::get('state');
 
@@ -324,7 +331,7 @@ curl_close ($ch);
 
 		extract($request->all());
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' =>'1', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'department' => $department, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' =>'1', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'dispatch' => $dispatch, 'head' => $head, 'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
@@ -440,7 +447,7 @@ curl_close ($ch);
     	/* posted jobs*/
     	//$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_job_applied.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
 		//$postedJobs = DB::table('jcm_jobs')->where('userId','=',$app->userId)->orderBy('jobId','desc')->get();
-		$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*,jcm_payments.title as p_title'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_jobs.jobId')->orderBy('jcm_jobs.jobId','desc')->paginate(8);
+		$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*,jcm_payments.title as p_title'))->where('jcm_jobs.status','=','1')->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_jobs.jobId')->orderBy('jcm_jobs.jobId','desc')->paginate(8);
     	/* end */
 //dd($postedJobs);
     	/* recent application */
@@ -1292,6 +1299,7 @@ public function userResume($userId){
 		
    public function updatepostPaymentWithpaypals(Request $request)
       {
+		  //dd($request->all());
 		$jobid = Session::get('jobId');
 		Session::put('postedJobId',$jobid);
 	 $rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
@@ -1309,6 +1317,8 @@ public function userResume($userId){
 		//$request->session()->put('amount', $amount);
 		$request->session()->put('title', $request->title);
 		//$request->session()->put('jType', 'Paid');
+		$request->session()->put('head', $request->head);
+		$request->session()->put('dispatch', $request->dispatch);
 		$request->session()->put('department', $request->department);
 		$request->session()->put('category', $request->category);
 		$request->session()->put('subCategory', $request->subCategory);
@@ -1361,7 +1371,7 @@ public function userResume($userId){
    
 			extract($request->all());
 
-			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'title' => $title, 'department' => $department, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $request->input('benefits')), 'country' => $country, 'state' => $state, 'city' => $city);
+			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'title' => $title, 'department' => $department, 'category' => $category, 'head' => $head,'dispatch' => $dispatch,'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $request->input('benefits')), 'country' => $country, 'state' => $state, 'city' => $city);
 			if($subCategory == ''){
 				$input['subCategory'] = '';
 			}
@@ -1540,6 +1550,23 @@ public function userResume($userId){
         }
         \Session::put('error','Payment failed');
         return Redirect::route('addmoney.frontend.employer.post-job');
+    }
+    public function orders(Request $request){
+    	$to = $request->input('to');
+    	$from = $request->input('from');
+    	$orderId = $request->input('order_id');
+    	$status = $request->input('status');
+    	$payment_mode = $request->input('payment_mode');
+    	$id = session()->get('jcmUser')->userId;
+    	$db = DB::table('jcm_orders');
+    	if( $orderId != '' ) $db->where('order_id','=',$orderId);
+    	if( $status != '' ) $db->where('status','=',$status);
+    	if( $payment_mode != '' ) $db->where('payment_mode','LIKE','%'.$payment_mode.'%');
+    	if( $from != '' && $to != '') $db->whereBetween('date', array($from, $to));
+    	$db->where('user_id','=',$id);
+    	$data = $db->get();
+    	
+    	return view('frontend.employer.orders',compact('data'));
     }
 		
 

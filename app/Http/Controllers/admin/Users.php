@@ -96,7 +96,7 @@ class Users extends Controller{
             if($request->input('password') != '' && $request->input('password') != NULL){
                 $input['password'] = md5($request->input('password'));
             }
-            $input['status'] = $request->input('status');
+            $input['user_status'] = $request->input('status');
             $input['about'] = $request->input('about');
             $input['type'] = 'User';
             $input['modifiedTime'] = date('Y-m-d H:i:s');

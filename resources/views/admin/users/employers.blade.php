@@ -74,10 +74,10 @@ $s_app = Session()->get('employersSearch');
                                                 <td>{{ $user->username }}</td>
                                                 <td>{{ $user->phoneNumber }}</td>
                                                 <td>
-                                                    @if($user->status == 'Active')
-                                                        <label class="label label-success">{{ $user->status }}</label>
+                                                    @if($user->user_status == 'Y')
+                                                        <label class="label label-success">{{ Active }}</label>
                                                     @else
-                                                        <label class="label label-danger">{{ $user->status }}</label>
+                                                        <label class="label label-danger">{{ Inactive }}</label>
                                                     @endif
                                                 </td>
                                                 <td>{{ JobCallMe::reportDate($user->createdTime) }}</td>
