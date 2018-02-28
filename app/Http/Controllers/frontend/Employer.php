@@ -1551,6 +1551,23 @@ public function userResume($userId){
         \Session::put('error','Payment failed');
         return Redirect::route('addmoney.frontend.employer.post-job');
     }
+    public function orders(Request $request){
+    	$to = $request->input('to');
+    	$from = $request->input('from');
+    	$orderId = $request->input('order_id');
+    	$status = $request->input('status');
+    	$payment_mode = $request->input('payment_mode');
+    	$id = session()->get('jcmUser')->userId;
+    	$db = DB::table('jcm_orders');
+    	if( $orderId != '' ) $db->where('order_id','=',$orderId);
+    	if( $status != '' ) $db->where('status','=',$status);
+    	if( $payment_mode != '' ) $db->where('payment_mode','LIKE','%'.$payment_mode.'%');
+    	if( $from != '' && $to != '') $db->whereBetween('date', array($from, $to));
+    	$db->where('user_id','=',$id);
+    	$data = $db->get();
+    	
+    	return view('frontend.employer.orders',compact('data'));
+    }
 		
 
 }

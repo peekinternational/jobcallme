@@ -86,7 +86,7 @@
 										<option value="{{ url('terms-conditions') }}">@lang('home.Terms & Conditions')</option>
 										<option value="{{ url('account/register') }}">@lang('home.Login')</option>
 										<option value="{{ url('account/register') }}">@lang('home.Signup')</option>
-										<option value="{{ url('account/register') }}">@lang('home.Companiesad')</option>
+										<option value="{{ url('companies') }}">@lang('home.Companiesad')</option>
 										
             </select>
 			</div>

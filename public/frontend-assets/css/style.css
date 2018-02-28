@@ -600,8 +600,9 @@ a.job-location:hover span.shine {
     width: 100% !important;
     background-color: #fff;
     border: none !important;
-    padding: 15px;
-    margin-bottom: 30px;
+   /* padding: 15px;*/
+    margin-bottom: 10px;
+
 }
 .tc-box{
     text-align: center;
@@ -1911,7 +1912,7 @@ ul.jd-rewards li i{
 }
 
 .hvr-bob .ih-item.square.effect8{
-    height: 115px;
+    height: 150px;
 }
 /*==================================
       Companies Page

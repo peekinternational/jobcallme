@@ -213,6 +213,7 @@ Route::group(['prefix' => 'account'], function () {
 	Route::post('post','frontend\Employer@post');
 	Route::post('nicepay', 'frontend\Employer@getresponse');
 	Route::get('employer/delete/{id}','frontend\Employer@deletejob');
+	Route::match(['get','post'],'employer/orders','frontend\Employer@orders');
 	
 	Route::get('employer/nice', function () {
     return view('frontend.employer.nice');
