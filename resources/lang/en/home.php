@@ -764,6 +764,7 @@ return [
 	'adday' => 'Day',
 
 	'Companiesad' => 'Companies Advertisement',
+	'travelling' => 'Requires Travelling',
 
 	
 

@@ -120,6 +120,7 @@ Route::match(['get','post'],'contact','frontend\Home@contactUs');
 Route::get('about','frontend\Home@aboutUs');
 Route::get('terms-conditions','frontend\Home@termConditions');
 Route::get('privacy-policy','frontend\Home@privacyPolicy');
+Route::get('companies-advertisement','frontend\Home@advertisement');
 Route::match(['get','post'],'account/login','frontend\Home@accountLogin');
 Route::match(['get','post'],'account/register','frontend\Home@accountRegister');
 Route::get('account/logout','frontend\Home@logout');
@@ -255,6 +256,7 @@ Route::get('send_test_email', function(){
 	});
 });
  Route::get('account/jobseeker/cv','frontend\Jobseeker@convertpdf');
+ Route::get('account/jobseeker/cv/{id}','frontend\Jobseeker@convertpdffile');
 Route::get('download', function () {
     return view('frontend.employer.download');
 });
@@ -264,9 +266,19 @@ Route::get('career-tab', function () {
 Route::get('test', function () {
     return view('welcome');
 });
+
+Route::get('skillpayment', function () {
+    return view('frontend.skillpayment');
+});
 Route::get('messages', function () {
     return view('frontend.employer.employerMessenger');
 });
+
+//upskill
+Route::post('skillpaypal', array('as' => 'addmoney.skillpaypal','uses' => 'frontend\ExtraSkills@postPaymentWithpaypal',));
+Route::get('skillpaypal', array('as' => 'payment.skillstatus','uses' => 'frontend\ExtraSkills@getPaymentStatus',));
+
+
 Route::get('account/employer/job/share', array('as' => 'addmoney.account/employer/job/share','uses' => 'frontend\Employer@jobupdate',));
 Route::post('employer/update', array('as' => 'addmoney.paypal','uses' => 'frontend\Employer@update',));
 Route::get('employer/update', array('as' => 'payment.edit','uses' => 'frontend\Employer@updateStatus',));

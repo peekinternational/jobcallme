@@ -234,7 +234,9 @@ class ExtraSkills extends Controller{
         }
          Mapper::map(33.6844,  73.0479);
 
-    	return view('frontend.add-edit-upskill',compact('upskill'));
+    	$uppayment = DB::table('jcm_upskillpayment')->get();
+		//dd($uppayment);
+    	return view('frontend.add-edit-upskill',compact('upskill','uppayment'));
     }
 
     public function deleteUpskill(Request $request,$skillId){

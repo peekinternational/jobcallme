@@ -42,7 +42,7 @@
                         </div>
                     </section>
 					  <section class="resume-box" id="academic">
-                        <a class="btn btn-primary r-add-btn" onclick="addAcademic()"><i class="fa fa-plus"></i> </a>
+                   
                         <h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.academic')</h4>
                         <?php //print_r($resume); ?>
                         <ul class="resume-details">
@@ -50,14 +50,7 @@
                                 @foreach($resume['academic'] as $resumeId => $academic)
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
-                                            <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getAcademic('{{ $resumeId }}')">
-                                                    <i class="fa fa-pencil"></i>
-                                                </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>&nbsp;
-                                            </span>
+                                           
                                             <p class="rd-date">{!! date('M, Y',strtotime($academic->completionDate)) !!}</p>
                                             <p class="rd-title">{!! $academic->degree !!}</p>
                                             <p class="rd-organization">{!! $academic->institution !!}</p>
@@ -70,7 +63,7 @@
                         </ul>
                     </section>
 					  <section class="resume-box" id="certification">
-                        <a class="btn btn-primary r-add-btn" onclick="addCertification()"><i class="fa fa-plus"></i> </a>
+                      
                         <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.certification')</h4>
                         <ul class="resume-details">
                             @if(count($resume['certification']) > 0)
@@ -97,7 +90,7 @@
                         </ul>
                     </section>
 					    <section class="resume-box" id="experience">
-                        <a class="btn btn-primary r-add-btn" onclick="addExperience()"><i class="fa fa-plus"></i> </a>
+                      
                         <h4><i class="fa fa-book r-icon bg-primary"></i>@lang('home.experiences')</h4>
                         <ul class="resume-details">
                             @if(count($resume['experience']) > 0)
@@ -124,7 +117,7 @@
                     </section>
 					  <!--Skills Section Start-->
                     <section class="resume-box" id="skills">
-                        <a class="btn btn-primary r-add-btn" onclick="addSkills()"><i class="fa fa-plus"></i> </a>
+                     
                         <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.skills')</h4>
                         <ul class="resume-details">
                             @if(count($resume['skills']) > 0)

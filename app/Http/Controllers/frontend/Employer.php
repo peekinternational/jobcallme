@@ -816,7 +816,15 @@ curl_close ($ch);
 		$app = $request->session()->get('jcmUser');
 		$resume = $this->userResume($userId);
 		//print_r($resume);exit;
-		return view('frontend.employer.view-applicant',compact('applicant','resume'));
+		$people = DB::table('jcm_users');
+    	$people->select('jcm_users.*');
+    	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
+		$people->limit(4);
+		$people->inRandomOrder();
+		$Query=$people->get();
+		//dd($applicant);
+		return view('frontend.employer.view-applicant',compact('applicant','resume','Query'));
+		//return view('frontend.employer.view-applicant',compact('applicant','resume'));
 	}
 		public function viewApplicants(Request $request){
 		if(!$request->session()->has('jcmUser')){
@@ -838,7 +846,15 @@ curl_close ($ch);
 		$app = $request->session()->get('jcmUser');
 		$resume = $this->userResume($userId);
 		//print_r($resume);exit;
-		return view('frontend.employer.appcandidate',compact('applicant','resume'));
+		//dd($applicant);
+		$people = DB::table('jcm_users');
+    	$people->select('jcm_users.*');
+    	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
+		$people->limit(4);
+		$people->inRandomOrder();
+		$Query=$people->get();
+		//dd($applicant);
+		return view('frontend.employer.view-applicant',compact('applicant','resume','Query'));
 	}
 public function userResume($userId){
 		$record = DB::table('jcm_resume')->where('userId','=',$userId)->orderBy('resumeId','asc')->get();

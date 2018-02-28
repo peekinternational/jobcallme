@@ -35,22 +35,24 @@ if($upskill->country != 0){
                 
  
                         <ul id="post-job-ad-types">
-							
+							@foreach($uppayment as $payment)
 							<li style="position:relative">
                                 <!---->
-
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
+                          <span class="pay_skill">
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="cat_id" value="{!! $payment->cat_id!!}">
+							   <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
+							   </span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">Seminar | Exhibition | Webinar</span></div>
+                             <span class="b">{!! $payment->title!!}</span></div>
                                 <div>
                                     <!----><label for="{!! $payment->id!!}">
                                         <ul class="list-unstyled desc" >
-                                            <li>Seminar | Exhibition Postings (1days)</li>
-                                            <li>Lowest Priority</li>
+                                            <li>{!! $payment->tag1!!}</li>
+                                            <li>{!! $payment->tag2!!}</li>
                                         </ul>
 										
                                         <div class="credits b">
-										<span class="text-success">$ 1.00</span>
+										<span class="text-success">$ {!! $payment->price!!}.00</span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									</div>
                                     </label>
@@ -59,80 +61,8 @@ if($upskill->country != 0){
                                     <!---->
                                 </div>
                             </li>
+							@endforeach
 
-							<li style="position:relative">
-                                <!---->
-
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
-							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">Conference</span></div>
-                                <div>
-                                    <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
-                                            <li>Conference Postings (2days)</li>
-                                            <li>Lowest Priority</li>
-                                        </ul>
-										
-                                        <div class="credits b">
-										<span class="text-success">$ 3.00</span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
-									</div>
-                                    </label>
-                                    <!---->
-                                    <!---->
-                                    <!---->
-                                </div>
-                            </li>
-
-							<li style="position:relative">
-                                <!---->
-
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
-							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">Training | Workshop</span></div>
-                                <div>
-                                    <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
-                                            <li>Training | Workshop Postings (3days)</li>
-                                            <li>Lowest Priority</li>
-                                        </ul>
-										
-                                        <div class="credits b">
-										<span class="text-success">$ 4.00</span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
-									</div>
-                                    </label>
-                                    <!---->
-                                    <!---->
-                                    <!---->
-                                </div>
-                            </li>
-
-
-						 
-                            <!----><li style="position:relative">
-                                <!---->
-
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
-							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">Course</span></div>
-                                <div>
-                                    <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
-                                            <li>Featured on homepage (4days)</li>
-                                            <li>Lowest Priority</li>
-                                        </ul>
-										
-                                        <div class="credits b">
-										<span class="text-success">$ 5.00</span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
-									</div>
-                                    </label>
-                                    <!---->
-                                    <!---->
-                                    <!---->
-                                </div>
-                            </li>
 							
                         </ul>
                  
@@ -218,17 +148,7 @@ if($upskill->country != 0){
                         </div>
 
 
-						<div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.adduration')</label>
-                            <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control" name="adduration">
-                                    <?for($i=4; $i<31; $i++){?>
-                                        <option value="{!! $i !!}">{!! $i !!}@lang('home.adday')</option>
-                                    <?}?>
-                               </select>
-								
-                            </div>
-                        </div>
+					
 
 
                     </div>
@@ -334,13 +254,20 @@ if($upskill->country != 0){
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.sdate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" name="startDate" onkeypress="return false;" value="{{ $upskill->startDate }}">
+                                <input type="text" class="form-control date-picker" id="firstDate" name="startDate" onkeypress="return false;" value="{{ $upskill->startDate }}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.edate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" name="endDate" onkeypress="return false;" value="{{ $upskill->endDate }}">
+                                <input type="text" class="form-control date-picker" id="second" name="endDate" onkeypress="return false;" value="{{ $upskill->endDate }}">
+                            </div>
+                        </div>
+							<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.adduration')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                              <input type="text" class="form-control" id="adduration" name="duration" value="{{ $upskill->duration }}" >
+								
                             </div>
                         </div>
                         <hr>
@@ -497,11 +424,12 @@ if($upskill->country != 0){
                             </div>
                         </div>
                     </div>
-                    <!-- map area -->
+					  <!-- map area -->
                     <div style="width: 100%; height: 500px;">
-                        {!! Mapper::render() !!}
-                    </div>
+	                        {!! Mapper::render() !!}
+	                    </div>
                     <!-- map end -->
+
                     <h3>@lang('home.upskillimage')</h3>
                     <div class="png-form-section us-duration">
                         <div class="form-group">
@@ -523,7 +451,7 @@ if($upskill->country != 0){
                     </div>
 					
 					<div class="col-md-offset-2 col-md-3  pnj-btns">
-                        <span style="font-size:17px;padding-right:50px;">Total Amount : US$ </span>						
+                        <span style="font-size:17px;padding-right:50px;" id="totalam"></span>						
                     </div>
 
                     <div class="col-md-6  pnj-btns">
@@ -545,10 +473,35 @@ input[type="file"] {
 .text-danger{color: #ff0000 !important;}
 </style>
 <script type="text/javascript">
+var alt="";
 $(document).ready(function(){
+	$('body').on('click','.pay_skill',function(e){
+		console.log($(e.target).val());
+	 alt=$(e.target).siblings('input').val();
+	 console.log(alrt);
+		
+	})
     getStates($('.job-country option:selected:selected').val());
     orgFun("{{ $upskill->organiser != '' ? 'other' : 'user'}}");
 })
+  $('#second').on('change', function() {
+				  myfun()
+			  });
+      
+       function myfun(){
+       var start =$("#firstDate").datetimepicker("getDate");
+      // var start= $("#firstDate").datepicker("getDate");
+    	var end= $("#second").datetimepicker("getDate");
+   		days = (end- start) / (1000 * 60 * 60 * 24);
+      var to= Math.round(days);
+      var total= to * alt;
+      $('#adduration').val(to);
+	  $('#totalam').html("Total Amount : "+total+" $" );
+      
+      // alert(total);
+       
+       }
+
 $('.job-country').on('change',function(){
     var countryId = $(this).val();
     getStates(countryId)

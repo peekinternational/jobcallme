@@ -41,9 +41,11 @@
                                                 <a href="{{ url('jobs/apply/'.$sgJob->jobId) }}" title="Apply">
                                                     <i class="fa fa-paper-plane"></i>
                                                 </a>&nbsp;
-                                                <a href="{{ url('jobs/'.$sgJob->jobId) }}" title="View">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
+                                               @if(in_array($sgJob->jobId, $savedJobArr))
+                            <a href="javascript:;" onclick="saveJob({{ $sgJob->jobId }},this)" class="" style="margin-left: 10px;"><i class="fa fa-heart"></i></a>
+                        @else
+                            <a href="javascript:;" onclick="saveJob({{ $sgJob->jobId }},this)" class="" style="margin-left: 10px;"><i class="fa fa-heart"></i></a>
+                        @endif
                                             </span>
                                        </div>
                                     </div>
@@ -260,6 +262,31 @@
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+function saveJob(jobId,obj){
+    if($(obj).hasClass('btn-default')){
+        var type = 'save';
+    }else{
+        var type = 'remove';
+    }
+    $.ajax({
+        url: "{{ url('account/jobseeker/job/action') }}?jobId="+jobId+"&type="+type,
+        success: function(response){
+            if($.trim(response) == 'redirect'){
+                window.location.href = "{{ url('account/login?next='.Request::route()->uri) }}";
+            }else if($.trim(response) == 'done'){
+                if($(obj).hasClass('btn-default')){
+                    $(obj).removeClass('btn-default');
+                    $(obj).addClass('btn-success');
+                    $(obj).html('<i class="fa fa-heart"></i>');
+                }else{
+                    $(obj).removeClass('btn-success');
+                    $(obj).addClass('btn-default');
+                    $(obj).html('<i class="fa fa-heart"></i>');
+                }
+            }
+        }
+    })
+}
  function appendtoken(){
     $('#fpi_content form input[type="hidden"]').remove();
     $('#fpi_content form').append('<input type="hidden" name="_token" value="{{ csrf_token() }}">');

@@ -60,7 +60,7 @@ class Jobseeker extends Controller{
       $readQry->orderBy('jcm_writings.writingId','desc')->limit(6);
     	$read_record = $readQry->get();
 		//dd($read_record );
-		return view('frontend.jobseeker.dashboard',compact('savedJobs','suggested','application','interview','companies','followArr','lear_record','read_record'));
+		return view('frontend.jobseeker.dashboard',compact('savedJobs','savedJobArr','suggested','application','interview','companies','followArr','lear_record','read_record'));
 	}
 
 	public function suggestedJob($meta){
@@ -814,6 +814,21 @@ class Jobseeker extends Controller{
 		//return $name;
 		$meta = DB::table('jcm_users_meta')->where('userId',$app->userId)->first();
 		$resume = $this->userResume($app->userId);
+		//dd($resume);
+		
+	//return view('frontend.jobseeker.resume');
+    	  $pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+          return $pdf->download($name.'_cv.pdf');
+	}
+	
+		public function convertpdffile(Request $request, $id){
+		$app = $request->session()->get('jcmUser');
+		
+		$user = DB::table('jcm_users')->where('userId',$id)->first();
+		$name= $user->firstName;
+		//return $name;
+		$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
+		$resume = $this->userResume($id);
 		//dd($resume);
 		
 	//return view('frontend.jobseeker.resume');

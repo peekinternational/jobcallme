@@ -320,10 +320,10 @@ class Jobs extends Controller{
 		
 		$suggest=$sug->where('jcm_jobs.country','=',JobCallMe::getHomeCountry())->limit(5)->get();
 		$jobApplied = JobCallMe::isAppliedToJob($userId,$jobId);
-				
-		//dd($jobApplied);
+				$benefits = @explode(',', $job->benefits);
+		     //dd($benefits);
 
-		return view('frontend.view-job-detail',compact('job','savedJobArr','followArr','userId','suggest','jobApplied'));
+		return view('frontend.view-job-detail',compact('job','savedJobArr','followArr','userId','suggest','jobApplied','benefits'));
 		
 	}
 

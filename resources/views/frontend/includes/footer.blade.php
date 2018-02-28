@@ -84,6 +84,7 @@
 										<option value="{{ url('contact') }}">@lang('home.contact')</option>
 										<option value="{{ url('privacy-policy') }}">@lang('home.Privacy Policy')</option>
 										<option value="{{ url('terms-conditions') }}">@lang('home.Terms & Conditions')</option>
+										<option value="{{ url('companies-advertisement') }}">@lang('home.companies-advertisement')</option>
 										<option value="{{ url('account/register') }}">@lang('home.Login')</option>
 										<option value="{{ url('account/register') }}">@lang('home.Signup')</option>
 										<option value="{{ url('companies') }}">@lang('home.Companiesad')</option>

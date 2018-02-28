@@ -163,6 +163,11 @@ class Home extends Controller{
 		$record = DB::table('jcm_cms_pages')->where('slug','term-conditions')->first();
 		return view('frontend.term-conditions',compact('record'));
 	}
+	
+	public function advertisement(){
+		$record = DB::table('jcm_cms_pages')->where('slug','companies-advertisement')->first();
+		return view('frontend.companies-advertisement',compact('record'));
+	}
 
 	public function privacyPolicy(){
 		$record = DB::table('jcm_cms_pages')->where('slug','privacy-policy')->first();
@@ -318,7 +323,7 @@ class Home extends Controller{
     	$request->all();
     	/* peoples query */
     	$people = DB::table('jcm_users');
-    	$people->select('jcm_users.*');
+    	$people->select('*');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
 		//$people->leftJoin('jcm_resume','jcm_resume.userId','=','jcm_users.userId');
 
@@ -343,8 +348,8 @@ class Home extends Controller{
 	    }
     	$people->limit(30);
     	$people->orderBy('jcm_users.userId','desc');
-    	$peoples = $people->get();
-        //dd($peoples);
+    	$peoples = $people->paginate(18);
+      // dd($peoples);
 
     	return view('frontend.people',compact('peoples'));
     }
@@ -432,8 +437,8 @@ class Home extends Controller{
     		$readQry->where('jcm_writings.title','LIKE','%'.$request->input('keyword').'%');
     	}
 		$readQry->where('jcm_writings.status','Publish');
-    	$readQry->orderBy('jcm_writings.writingId','desc')->limit(12);
-    	$read_record = $readQry->get();
+    	$readQry->orderBy('jcm_writings.writingId','desc');
+    	$read_record = $readQry->paginate(12);
     	
     	return view('frontend.read',compact('read_record'));
     }
@@ -449,8 +454,16 @@ class Home extends Controller{
     	if(count($record) == 0){
     		return redirect('read');
     	}
-
-    	return view('frontend.view-article',compact('record'));
+        $read = DB::table('jcm_writings')->join('jcm_users','jcm_users.userId','=','jcm_writings.userId');
+    	$read->leftJoin('jcm_categories','jcm_categories.categoryId','=','jcm_writings.category');
+    	$read->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_categories.name');
+		$read->limit(4);
+		$read->inRandomOrder();
+		$Qry=$read->get();
+		//dd($Qry);
+		
+		
+    	return view('frontend.view-article',compact('record','Qry'));
     }
 
     public function viewUpskill(Request $request,$skillId){
@@ -463,8 +476,9 @@ class Home extends Controller{
     	if(count($record) == 0){
     		return redirect('learn');
     	}
-
-    	return view('frontend.view-course',compact('record'));
+     $Qry = DB::table('jcm_upskills')->limit(4)->inRandomOrder()->get();
+	// dd($Qry);
+    	return view('frontend.view-course',compact('record','Qry'));
     }
 
     public function searchSkills(Request $request){  

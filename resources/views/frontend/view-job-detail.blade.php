@@ -4,7 +4,8 @@
 
 @section('content')
 <?php
-$head='';		
+$head='';
+$travelFound=false;			
 $dispatch='';
 $userImage = url('compnay-logo/profile-logo.jpg');
 if($job->companyLogo != ''){
@@ -137,11 +138,32 @@ if($job->companyLogo != ''){
                         <td>{{ date('M d, Y',strtotime($job->createdTime))}}</td>
                         <td class="active">@lang('home.lastdate')</td>
                         <td>{{ date('M d, Y',strtotime($job->expiryDate))}}</td>
+						
                     </tr>
                     <tr>
-                        <td class="active">@lang('home.location')</td>
-                        <td colspan="3">{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</td>
+					 <td class="active">@lang('home.location')</td>
+                        <td>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</td>
+                        <td class="active">@lang('home.travelling')</td>
+                        <td>@if($benefits != '')
+							@foreach( $benefits as $benefit)
+						     @if($benefit == 'Travelling')
+							   <?php $travelFound = true; ?>
+						     @endif
+						    @endforeach
+							
+							@endif
+							<?php if($travelFound){
+								 echo Yes;
+							}
+							else{
+								echo No;
+							}
+							?>
+							
+						</td>
+						
                     </tr>
+					
                     </tbody>
                 </table>
 
@@ -156,6 +178,7 @@ if($job->companyLogo != ''){
                         <td class="active">@lang('home.careerlevel')</td>
                         <td>{{ $job->careerLevel }}</td>
                     </tr>
+					
                     <tr>
                         <td class="active">@lang('home.qualification')</td>
                         <td>{{ $job->qualification }}</td>
@@ -169,9 +192,10 @@ if($job->companyLogo != ''){
                         <td>{{ date('M d, Y',strtotime($job->expiryDate))}}</td>
                     </tr>
                     <tr>
-                        <td class="active">@lang('home.location')</td>
+                        <td class="active">@lang('home.locationsss')</td>
                         <td>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</td>
                     </tr>
+					
                     </tbody>
                 </table>
                 <h4>@lang('home.description')</h4>
@@ -180,10 +204,11 @@ if($job->companyLogo != ''){
                 <h4>@lang('home.skills')</h4>
                 <p>{!! $job->skills !!}</p>
                 <h4>@lang('home.rewardsbenefits')</h4>
-                @if($job->benefits != '')
+                @if($benefits != '')
 	                <ul class="jd-rewards">
-	                	@foreach(@explode(',',$job->benefits) as $benefits)
-	                		<li><i class="fa fa-check-circle"></i> {{ $benefits }}</li>
+	                	@foreach( $benefits as $benefit)
+						
+	                		<li><i class="fa fa-check-circle"></i> {{ $benefit }}</li>
 	                	@endforeach
 	                </ul>
                 @endif
