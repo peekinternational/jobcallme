@@ -43,6 +43,29 @@
         </div>
         <div class="col-md-3">
             <div class="ld-right">
+			<h5>You May Also Like</h5>
+			   @foreach($Qry as $rec)
+					   <?php
+                        
+                        if($rec->wIcon != '' && $rec->wIcon != NULL){
+                            $pImage = url('article-images/'.$rec->wIcon);
+                        }
+						else{
+							$pImage = url('profile-photos/profile-1516811529-515092.png');
+						}
+                        ?>
+                    <div class="col-md-12 sr-item">
+					 <div class="col-md-4">
+                        <img src="{{ $pImage }}" style="width: 100%;height:70px;">
+						</div>
+						 <div class="col-md-8" style="padding-top:10px">
+                        <div class="sr-details">
+                            <p class="sr-title"><a href="{{ url('read/article/'.$rec->writingId ) }}">{!! $rec->title !!} </a> </p>
+                            <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.'.$rec->name)</a> </p>
+                        </div>
+						</div>
+                    </div>
+					   @endforeach
                 
             </div>
         </div>

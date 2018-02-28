@@ -38,7 +38,7 @@
                         <?php 
                         $cArr = array('#0e8bcc','#94a5a5','#8d846e','#4e6c7c','#919090','#b0a48a','#8d7e8d','#a69b82','#6b91a7','#9b9b36');
                         $i = 0;
-                        foreach(JobCallMe::getCategories() as $cat){ ?>
+                        foreach(JobCallMe::getReadCategories() as $cat){ ?>
                             <a href="{{ url('read?category='.$cat->categoryId) }}" style="background-color: {{ $cArr[$i] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* width: 9.5%; */
     padding: 5px 5px;
@@ -87,7 +87,9 @@
                     </div>
                 </div>
             @endforeach
+		
         </div>
+			<div style="text-align:center"><?php	echo $read_record->render(); ?></div>
     </div>
 </section>
 @endsection

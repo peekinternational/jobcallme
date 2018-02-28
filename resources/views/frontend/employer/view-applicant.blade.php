@@ -18,6 +18,9 @@
                                 <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">$applicant->firstName Smith</h3>
                                 <p class="text-center hidden-md hidden-lg jp-profession-heading">Web Developer and Designer</p>
                                 <a href="#" class="btn btn-primary btn-block jp-contact-btn">CONTACT DETAILS</a>
+								<div class="" style="text-align:center">
+                                   <a href="{{ url('account/jobseeker/cv/'.$applicant->userId)}}" style="color:#737373" class=""><i class="fa fa-download"></i> @lang('home.DOWNLOAD')</a>
+                                  </div>
                             </div>
                             <div class="col-md-9 personal-info-right">
                                 <h3 class="hidden-sm hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}}</h3>
@@ -25,6 +28,7 @@
                                 <p><span class="pi-title">Experiance:</span>{{$applicant->experiance}}</p>
                                 <p><span class="pi-title">Industry:</span> {{ JobCallMe::categoryTitle($applicant->industry) }}</p>
                                 <p><span class="pi-title">Salary:</span> {{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',2).' '.$applicant->currency }}</p>
+								<p><span class="pi-title">@lang('home.location'):</span> {!! JobCallMe::cityName($applicant->city).' ,'.JobCallMe::countryName($applicant->country) !!}</p>
                                 <div class="professional-summary">
                                     <h4>Professional Summary</h4>
                                     <p>{{$applicant->about}}
@@ -79,22 +83,7 @@
                     <!--Academic Section End-->
 
                     <!--Academic Section Start-->
-                    <section class="resume-box" id="projects">
-                        <h4><i class="fa fa-edit r-icon bg-primary"></i>  Projects</h4>
-                        <ul class="resume-details">
-                            <li>
-                                <div class="col-md-12">
-                                    <p class="rd-title">Job Call Me</p>
-                                    <p class="rd-date">May,2017 - Currently Working</p>
-                                    <p class="rd-organization">Nexus Enterprises</p>
-                                    <p class="rd-location">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porta vitae mauris ac elementum.
-                                        Morbi ut semper odio. Proin velit odio, auctor ut pulvinar nec, porttitor sed ligula. Curabitur semper iaculis ullamcorper.
-                                        Vestibulum dignissim a mauris a pulvinar. Morbi placerat quis orci sit amet varius. Praesent suscipit pretium felis vel tempor.
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
-                    </section>
+                  
                     <!--Academic Section End-->
 
                     <!--Academic Section Start-->
@@ -118,7 +107,185 @@
                         </ul>
                     </section>
                     <!--Academic Section End-->
+					<!---Project -->
+					   <section class="resume-box" id="ski">
+                       
+                        <h4><i class="fa fa-edit r-icon bg-primary"></i> @lang('home.project')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['project']) > 0)
+                                @foreach($resume['project'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                           
+                                            <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
+											<p class="rd-location"> {!! $skills->startmonth !!} {!! $skills->startyear !!} - {{ $skills->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($skills->endDate)) }}</p>
+											<p class="rd-location"> As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+											
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					<!---Affilation -->
+					   <section class="resume-box" id="aff">
+                        
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Affiliation')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['affiliation']) > 0)
+                                @foreach($resume['affiliation'] as $resumeId => $afflls)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                       
+                                            <p class="rd-title">{!! $afflls->pos !!}</p>
+											<p class="rd-location"> {!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}</p>
+											<p class="rd-location">{!! $afflls->org .', '.JobCallMe::cityName($afflls->city).' ,'.JobCallMe::countryName($afflls->country) !!}
+											
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					
+					 <section class="resume-box" id="sk">
+                        
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.language')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['language']) > 0)
+                                @foreach($resume['language'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            
+                                            <p class="rd-title">{!! $skills->language !!}</p>
+											<p class="rd-location"> ({!! $skills->level !!})</p>
+											
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					
+					  <section class="resume-box" id="skill">
+                        
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.references')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['reference']) > 0)
+                                @foreach($resume['reference'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                           
+                                            <p class="rd-title">{!! $skills->name !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
+											<p class="rd-location"> Job Title: {!! $skills->jobtitle !!}</p>
+											<p class="rd-location">Organization: {!! $skills->organization .', '.JobCallMe::cityName($skills->city).', '.JobCallMe::countryName($skills->country)  !!}</p>
+                                           <p class="rd-location">Phone Number : {!! $skills->phone !!}</p>
+										   <p class="rd-location">Email : {!! $skills->email !!}</p>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					
+						<!---Publication -->
+					   <section class="resume-box" id="skil">
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.publication')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['publish']) > 0)
+                                @foreach($resume['publish'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                           
+                                            <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->pu_type !!})</span></p>
+											<p class="rd-location"> {!! $skills->month !!}-{!! $skills->year !!}</p>
+											<p class="rd-location"> Author: {!! $skills->author !!}</p>
+											<p class="rd-location">Publisher: {!! $skills->publisher.', '.JobCallMe::cityName($skills->city).' ,'.JobCallMe::countryName($skills->country)  !!}</p>
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					 <section class="resume-box" id="s">
+                      
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.award')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['award']) > 0)
+                                @foreach($resume['award'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            
+                                            <p class="rd-title">{!! $skills->title !!}</p>
+											<p class="rd-location"> {!! $skills->type !!},{!! $skills->startmonth !!} {!! $skills->startyear !!}</p>
+											<p class="rd-location"> {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+											
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+					
+					<!--Portfolio Section-->
+					<section class="resume-box" id="port">
+                        
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Portfolio')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['portfolio']) > 0)
+                                @foreach($resume['portfolio'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                           
+                                            <p class="rd-title">{!! $skills->title !!}<span class="rd-location">({!! $skills->type !!})</span></p>
+											<p class="rd-location">{!! $skills->startmonth !!} {!! $skills->startyear !!}</p>
+											<p class="rd-location">http://{!! $skills->website !!}</p>
+											<p class="rd-location"> {!! $skills->occupation !!}</p>
+											
+                                           <p class="rd-location">{!! $skills->detail !!}</p>
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
                 </div>
+				<div class="pnj-box">
+				<h4>@lang('home.similarpeople') {{JobCallMe::countryName(JobCallMe::getHomeCountry())}}</h4>
+				    <div class="row" style="margin-right: 0 !important;">
+					@foreach($Query as $appl)
+					
+					 <?php
+                        $pImage = url('profile-photos/profile-logo.jpg');
+                        if($appl->profilePhoto != '' && $appl->profilePhoto != NULL){
+                            $pImage = url('profile-photos/'.$appl->profilePhoto);
+                        }
+                        ?>
+                         <div class="col-md-12 sr-item">
+					      <div class="col-md-4">
+                            <img src="{{ $pImage }}" style="width: 70px;height:75px;">
+							</div>
+							<div class="col-md-8 sp-item">
+                            <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
+                            <p>{!! $appl->companyName !!}</p>
+                            <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
+                        </div>
+						</div>
+						 @endforeach
+
+                    </div>
+				
+				</div>
+				
             </div>
         </div>
     </div>

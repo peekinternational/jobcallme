@@ -177,10 +177,10 @@
                         }
                         ?>
                     <div class="col-md-12 sr-item">
-					 <div class="col-md-5">
+					 <div class="col-md-4">
                         <img src="{{ $pImage }}" style="width: 100%;height:90px;">
 						</div>
-						 <div class="col-md-12" style="padding-top:10px">
+						 <div class="col-md-8" style="padding-top:10px">
                         <div class="sr-details">
                             <p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
                             <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.'.$rec->name)</a> </p>

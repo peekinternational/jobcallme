@@ -215,14 +215,16 @@
                                     <img src="{{ $pImage }}">
                                     <div class="fp-item-details">
                                         <p>{!! $people->firstName.' '.$people->lastName !!}</p>
-                                        <p>{!! $people->designation !!}</p>
+                                        <p>{{ JobCallMe::categoryTitle($people->industry) }}</p>
                                         <p>{{ JobCallMe::cityName($people->city).', '.JobCallMe::countryName($people->country)}}</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     @endforeach
+					
                 </div>
+				<div style="text-align:center"><?php	echo $peoples->render(); ?></div>
                 <!--FP item Row End-->
             </div>
         </div>

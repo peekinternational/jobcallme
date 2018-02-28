@@ -102,7 +102,31 @@
         </div>
         <div class="col-md-3">
             <div class="ld-right">
+			<h5 style="text-align:center">You Might Be Interested In</h5>
+			<div class="row">
+				            @foreach($Qry as $rec)
+                   
+                      <div class="la-item">
+				      <div class="col-md-4 sp-item">
+                        @if($rec->upskillImage != '')
+                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 180px;height:80px;">
+                        @else
+                        <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 180px;height:80px;">
+                        @endif
+						</div>
+                        <div class="col-md-8" style="margin-top: 34px;">
+                            <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
+                            
+                            <span>@lang('home.'.$rec->type)</span>
+                            <p><i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</p>
+                            
+                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
+                            
+                       </div>
+                   </div>
                 
+            @endforeach
+                    </div>
             </div>
         </div>
     </div>
