@@ -13,7 +13,7 @@
     <li><a data-toggle="tab" href="#menu3"><i class="fa fa-calendar" aria-hidden="true"></i> @lang('home.interviews')</a></li>
   </ul>
         <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-9">
     <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
         
@@ -27,6 +27,9 @@
                                 <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">$applicant->firstName</h3>
                                 <p class="text-center hidden-md hidden-lg jp-profession-heading">Web Developer and Designer</p>
                                 <a href="#" class="btn btn-primary btn-block jp-contact-btn">@lang('home.contactdetail')</a>
+								<div class="" style="text-align:center">
+                                   <a href="{{ url('account/jobseeker/cv/'.$applicant->userId)}}" style="color:#737373" class=""><i class="fa fa-download"></i> @lang('home.DOWNLOAD')</a>
+                                  </div>
                             </div>
                             <div class="col-md-9 personal-info-right">
                                 <h3 class="hidden-sm hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}}</h3>
@@ -34,6 +37,7 @@
                                 <p><span class="pi-title">@lang('home.experiance'):</span>{{$applicant->experiance}}</p>
                                 <p><span class="pi-title">@lang('home.industry'):</span> {{ JobCallMe::categoryTitle($applicant->industry) }}</p>
                                 <p><span class="pi-title">@lang('home.salary'):</span> {{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',2).' '.$applicant->currency }}</p>
+								<p><span class="pi-title">@lang('home.location'):</span> {!! JobCallMe::cityName($applicant->city).' ,'.JobCallMe::countryName($applicant->country) !!}</p>
                                 <div class="professional-summary">
                                     <h4>@lang('home.p_summary')</h4>
                                     <p>{{$applicant->about}}
@@ -212,10 +216,35 @@
                             </form>
                         </div>
                     </div>
-    </div>
-  </div>
-           
+					</div>
+				  </div>
             </div>
+			 	<div class="pnj-box">
+				<h4>@lang('home.similarpeople') {{JobCallMe::countryName(JobCallMe::getHomeCountry())}}</h4>
+				    <div class="row" style="margin-right: 0 !important;">
+					@foreach($Query as $appl)
+					
+					 <?php
+                        $pImage = url('profile-photos/profile-logo.jpg');
+                        if($appl->profilePhoto != '' && $appl->profilePhoto != NULL){
+                            $pImage = url('profile-photos/'.$appl->profilePhoto);
+                        }
+                        ?>
+                         <div class="col-md-12 sr-item">
+					      <div class="col-md-4">
+                            <img src="{{ $pImage }}" style="width: 70px;height:75px;">
+							</div>
+							<div class="col-md-8 sp-item">
+                            <p><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
+                            <p>{!! $appl->companyName !!}</p>
+                            <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
+                        </div>
+						</div>
+						 @endforeach
+
+                    </div>
+				
+				</div>
         </div>
     </div>
 </section>

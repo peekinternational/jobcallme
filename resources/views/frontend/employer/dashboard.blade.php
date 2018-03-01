@@ -81,7 +81,7 @@
 									  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
 									  <div class="dropdown-content">
 										<a href="{{url('account/employer/job_update/'.$pjobs->jobId)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')</a>
-										<a href="{{url('jobs')}}"><i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')</a>
+										<a href="{{url('account/employer/setfilter/'.$pjobs->jobId)}}"><i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')</a>
 										<a href="{{url('account/employer/job/share/'.$pjobs->jobId)}}"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
 										<a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')</a>
 										<a href="#"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
@@ -89,6 +89,9 @@
 									  </div>
 									</div></div>
                             @endforeach
+							 <div class="col-md-12">
+                                <a href="{{ url('jobs')}}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                            </div>
 						<div style="text-align:center"><?php	echo $postedJobs->render(); ?></div>
                         </div>
                         <!--Recent Applicant Start-->
@@ -103,6 +106,10 @@
                                     </div>
                                 </div>
                             @endforeach
+							 <div class="col-md-12">
+                                <a href="{{ url('account/employer/application')}}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                            </div>
+							<div style="text-align:center"><?php	echo $postedJobs->render(); ?></div>
                         </div>
                         <!--Recent Applicant End-->
 
@@ -117,7 +124,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <a href="#" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                                <a href="{{ url('account/employer/application?show=interview')}}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                             </div>
                         </div>
                         <!--Upcoming Interviews End-->
@@ -228,7 +235,7 @@
 
                         <hr>
                         <div class="col-md-12">
-                            <a href="learn" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                            <a href="{{url('learn/search')}}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                         </div>
                     </div>
                 </div>

@@ -22,8 +22,8 @@ if($user->profilePhoto != ''){
             <a href="{{ url('account/employer/departments') }}" class="btn btn-block jaTabBtn">@lang('home.departments')</a>
             <a href="{{ url('account/employer/organization') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.editorganization')</a>
             <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.interviewvenues')</a>
-			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.users')</a>
-			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.evaluationforms')</a>
+			<a href="{{ url('account/employer/users/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.users')</a>
+			<a href="{{ url('account/employer/addevaluation/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.evaluationforms')</a>
 			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.questionnaires')</a>
             <!-- <a class="btn btn-block jaTabBtn">Users</a>
             <a class="btn btn-block jaTabBtn">Evaluation Form</a>
@@ -910,5 +910,6 @@ $('.privacy-form input[type="checkbox"]').click(function(){
         }
     })
 })
+
 </script>
 @endsection
