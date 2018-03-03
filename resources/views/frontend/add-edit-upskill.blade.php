@@ -589,8 +589,9 @@ $('form.upskill-form').submit(function(e){
                 toastr.error(response, '', {timeOut: 5000, positionClass: "toast-bottom-center"});
                 $('.upskill-form button[type="submit"]').prop('disabled',false);
             }else{
+				window.location.href = "{{ url('skillpayment') }}";
                 toastr.success('Upskill successfully saved', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
-                window.location.href = "{{ url('account/upskill') }}";
+                //window.location.href = "{{ url('account/upskill') }}";
                 $('.upskill-form button[type="submit"]').prop('disabled',false);
             }
         },

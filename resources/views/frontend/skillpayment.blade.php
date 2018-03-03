@@ -12,32 +12,17 @@
                 <br>
                 <br>
                 <div class="col-md-6" style="text-align:end">
-                    @if($jType)
-                        <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
-                            <input  type="hidden" name="amount" value="{!! $am!!}" class="ng-untouched ng-pristine ng-valid">
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                            <input name="p_Category" type="hidden" value="{!! $p_Category!!}"/>
-                            <input name="jType" type="hidden" value="{!! $jType!!}"/>
-                            <div>
-                                <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
-                            </div>
-                        </form>
-                    @else
+                
                         <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.skillpaypal') !!}" >
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
                         </form>
-                    @endif
+                   
                 </div>
                 <div class="col-md-6">
             
                     <form action="{{url('nicepay/payRequest_utf.php')}}" method="post" id='nicePayForm'> 
-                        <input type="hidden" value="{!! $am!!}" name="price" >
-                        <input type="hidden" value="1" name="goodscount" >
-                        <input type="hidden" value="jobcallme" name="goodsName" >
-                        <input type="hidden" value="{!! $app->email!!}" name="Email" >
-                        <input type="hidden" value="{!! $app->phoneNumber!!}" name="tel" >
-                        <input type="hidden" value="0" name="buyerName" id='buyerName' >
+                        
                         <a href='javascript:void(0)'  class="btn btn-primary btn-lg nicePay">NicePay</a>
                     </form>
                 

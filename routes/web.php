@@ -282,8 +282,8 @@ Route::get('messages', function () {
 });
 
 //upskill
-Route::post('skillpaypal', array('as' => 'addmoney.skillpaypal','uses' => 'frontend\ExtraSkills@postPaymentWithpaypal',));
-Route::get('skillpaypal', array('as' => 'payment.skillstatus','uses' => 'frontend\ExtraSkills@getPaymentStatus',));
+Route::post('skillpaypal', array('as' => 'addmoney.skillpaypal','uses' => 'frontend\ExtraSkills@postPayment',));
+Route::get('skillpaypal', array('as' => 'payment.skillstatus','uses' => 'frontend\ExtraSkills@getStatus',));
 
 
 Route::get('account/employer/job/share', array('as' => 'addmoney.account/employer/job/share','uses' => 'frontend\Employer@jobupdate',));
