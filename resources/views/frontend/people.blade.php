@@ -36,7 +36,14 @@
        <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-		  <h4 class="modal-title text-center">Search People in {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</h4>
+		  <h4 class="modal-title text-center">
+			
+			@if(app()->getLocale() == "kr")
+						    {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }} @lang('home.Find Peoples')
+						@else
+						    Search People in {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}
+						@endif
+			</h4>
           
         </div>
       <form role="form" action="{{ url('account/peoples') }}" method="post">
@@ -68,8 +75,8 @@
 				    <div class="col-md-6">
                        <div class="form-group">
                        
-                        <select class="form-control" name="category" >
-						 <option value="">@lang('home.selectindustry')</option>
+                        <select class="form-control job-category" name="category" onchange="getSubCategories(this.value)">
+						 <option value="">@lang('home.s_category')</option>
                            @foreach(JobCallMe::getCategories() as $cat)
                                 <option value="{!! $cat->categoryId !!}">{!! $cat->name !!}</option>
                              @endforeach
@@ -77,6 +84,25 @@
                              
                               </div>
 						        </div>
+
+								<div class="col-md-6">
+								   <div class="form-group">
+                                    <select class="form-control job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
+							<option value="">@lang('home.Subcategory')</option>
+									</select>
+                                </div>
+                            </div>
+
+								 <div class="col-md-6">
+								  <div class="form-group">
+                                   <div class=" pnj-form-field">
+                                   <select class="form-control job-sub-category2" name="subCategory2">
+							<option value="">@lang('home.Subcategory2')</option>
+									</select>
+                                 </div>
+                               </div>
+						    </div>
+
 								<div class="col-md-6">
 								   <div class="form-group">
                                     <select class="form-control" name="degreeLevel">
@@ -99,17 +125,48 @@
 							<div class="col-md-6">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                   <input type="text" class="form-control" name="minsalary" placeholder="@lang('home.minsalary')">
+                                   <input type="number" class="form-control" name="minsalary" placeholder="@lang('home.minsalary')">
                                  </div>
                                </div>
 						    </div>
 							<div class="col-md-6">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                   <input type="text" class="form-control" name="maxsalary" placeholder="@lang('home.maxsalary')">
+                                   <input type="number" class="form-control" name="maxsalary" placeholder="@lang('home.Maxsalary')">
                                  </div>
                                </div>
 						    </div>
+
+							<div class="col-md-6">
+								  <div class="form-group">
+                                   <div class=" pnj-form-field">
+                                   <input type="number" class="form-control" name="minexperience" placeholder="@lang('home.Minimum Experience')">
+                                 </div>
+                               </div>
+						    </div>
+							<div class="col-md-6">
+								  <div class="form-group">
+                                   <div class=" pnj-form-field">
+                                   <input type="number" class="form-control" name="maxexperience" placeholder="@lang('home.Maximum Experience')">
+                                 </div>
+                               </div>
+						    </div>
+
+							<div class="col-md-6">
+								  <div class="form-group">
+                                   <div class=" pnj-form-field">
+                                   <input type="number" class="form-control" name="minage" placeholder="@lang('home.Minimum Age')">
+                                 </div>
+                               </div>
+						    </div>
+							<div class="col-md-6">
+								  <div class="form-group">
+                                   <div class=" pnj-form-field">
+                                   <input type="number" class="form-control" name="maxage" placeholder="@lang('home.Maximum Age')">
+                                 </div>
+                               </div>
+						    </div>
+
 						<div class="col-md-6">
 							<div class="form-group">
                                     <select class="form-control" name="gender">
@@ -122,17 +179,25 @@
 							<div class="col-md-6">
 							 <div class="form-group">
                                     <select class="form-control" name="maritalStatus">
-									<option value="">@lang('home.selectmarital')</option>
-                                        <option value="Single" >@lang('home.single')</option>
-                                        <option value="Engaged" >@lang('home.engaged')</option>
-                                        <option value="Married">@lang('home.married')</option>
-                                        <option value="Widowed">@lang('home.widowed')</option>
-                                        <option value="Divorced">@lang('home.divorced')</option>
+									@if(app()->getLocale() == "kr")
+						    <option value="Single" {{ $meta->maritalStatus == 'Single' ? 'selected="selected"' : '' }}>@lang('home.single')</option>
+                                        
+                                        <option value="Married" {{ $meta->maritalStatus == 'Married' ? 'selected="selected"' : '' }}>@lang('home.married')</option>
+                                        
+						@else
+						    <option value="Single" {{ $meta->maritalStatus == 'Single' ? 'selected="selected"' : '' }}>@lang('home.single')</option>
+                                        <option value="Engaged" {{ $meta->maritalStatus == 'Engaged' ? 'selected="selected"' : '' }}>@lang('home.engaged')</option>
+                                        <option value="Married" {{ $meta->maritalStatus == 'Married' ? 'selected="selected"' : '' }}>@lang('home.married')</option>
+                                        <option value="Widowed" {{ $meta->maritalStatus == 'Widowed' ? 'selected="selected"' : '' }}>@lang('home.widowed')</option>
+                                        <option value="Divorced" {{ $meta->maritalStatus == 'Divorced' ? 'selected="selected"' : '' }}>@lang('home.divorced')</option>
+						@endif
                                     </select>
                                 </div>
                             </div>
 							
 							
+			
+
 			<div class="col-md-6">
                           <div class="form-group">
                                 <select class="form-control select2 job-country" name="country">
@@ -155,6 +220,14 @@
                                 </select>
                             </div>
                         </div>
+
+						<div class="col-md-6">
+								  <div class="form-group">
+                                   <div class=" pnj-form-field">
+                                   <input type="text" class="form-control" name="skill" placeholder="@lang('home.skill')">
+                                 </div>
+                               </div>
+						    </div>
                   
 							
 			</div>
@@ -168,24 +241,44 @@
   </div>
   
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9','#9e947b'); $i=0; ?>
+                <div class="col-md-12">
+                    <?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9','#9e947b','#5b5c5e','#7b767d','#a0b1b9','#6d846f'); $i=0; ?>
                     <div class="job-locations-box">
                         @foreach(JobCallMe::getCategories() as $cat)
-                            <a  href="{{ url('account/people?industry='.$cat->categoryId) }}" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /* width: 9.5%; */
+                            
+							@if($cat->name == "outsourcingok")
+								<a  href="https://www.outsourcingok.com" target="_blank" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 11%; 
     padding: 5px 5px;
     color: #ffffff;
     font-size: 12px;
     margin-bottom: 10px;
-    /* display: block; */
-    position: relative;
-    /* float: left; */
+    display: block; 
+	position: relative;
+    float: left;
     margin-right: 0.5%;
     overflow: hidden;
-    text-decoration: none;"><span class="text">@lang('home.'.$cat->name)</span></a>
+    text-decoration: none;">
+							@else
+								<a  href="{{ url('account/people?industry='.$cat->categoryId) }}" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 11%; 
+    padding: 5px 5px;
+    color: #ffffff;
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: block; 
+	position: relative;
+    float: left;
+    margin-right: 0.5%;
+    overflow: hidden;
+    text-decoration: none;">
+							@endif
+
+
+							<span class="text">@lang('home.'.$cat->name)</span></a>
                         @endforeach
                     </div>
+					<div class="clearfix"></div>
                     <div class="job-schedule-box">
                         @foreach(JobCallMe::getHomeCities() as $loca)
                             <a href="{{ url('account/people?city='.$loca->id) }}">{{ $loca->name }}</a>
@@ -281,5 +374,43 @@ function getCities(stateId){
         }
     })
 }
+
+
+getSubCategories($('.job-category option:selected:selected').val());
+
+ getSubCategories2($('.job-category option:selected:selected').val());
+
+
+function getSubCategories(categoryId){
+    $.ajax({
+        url: "{{ url('account/get-subCategory') }}/"+categoryId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $(".job-sub-category").html('').trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = false;
+                var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
+                $(".job-sub-category").append(newOption).trigger('change');
+            })
+        }
+    })
+}
+
+function getSubCategories2(categoryId2){
+    $.ajax({
+        url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $(".job-sub-category2").html('').trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = false;
+                var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
+                $(".job-sub-category2").append(newOption).trigger('change');
+            })
+        }
+    })
+}
+
+
 </script>
 @endsection

@@ -5,10 +5,10 @@
 @section('content')
 <section id="learn-section">
     <div class="container">
-        <div class="col-md-12 learn-search-box">
+        <div class="col-md-12 learn-search-box" style="margin-top:20px">
             <h2 class="text-center">@lang('home.read_heading')</h2>
             <div class="row">
-                <div class="col-md-offset-2 col-md-8">
+                <div class="col-md-offset-2 col-md-8" style="margin-top:20px">
                     <div class="ls-box">
                         <form role="form" action="{{ url('read') }}" method="post">
                             {{ csrf_field() }}
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-8 col-md-offset-2" style="margin-bottom:30px">
                     <div class="job-locations-box">
                         <?php 
                         $cArr = array('#0e8bcc','#94a5a5','#8d846e','#4e6c7c','#919090','#b0a48a','#8d7e8d','#a69b82','#6b91a7','#9b9b36');
@@ -64,7 +64,10 @@
 <!--Read Articles-->
 <section id="learn-articles">
     <div class="container">
-        <h1 style="margin-left: 15px">@lang('home.larticle')</h1>
+		<div class="follow-companies3" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
+                    <h3 style="margin-left: 15px">@lang('home.larticle')</h3>
+				</div>
+        
         <div class="grid">
             <div class="grid-sizer col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>
             <!--Article Item-->

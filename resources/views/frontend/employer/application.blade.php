@@ -11,8 +11,14 @@ if(Request::input('show') != ''){
     $inbox = '';
 }
 ?>
-<section id="jobs">
+<section id="jobs" style="margin-bottom:70px">
     <div class="container">
+
+	<div class="follow-companies4" style="background:#57768a;color:#fff;margin-top:70px;margin-bottom:20px;">
+                    <h3 style="margin-left: 15px">@lang('home.APPLICATION')</h3>
+				</div>
+
+
         <div class="col-md-12">
             <div class="col-md-2 ">
                 <div class="row">
@@ -31,45 +37,45 @@ if(Request::input('show') != ''){
             <div class="col-md-10">
                 <div class="ja-content">
                     <div class="ea-top-panel">
-                        <button type="button" class="ea-panel-btn hidden-sm hidden-xs" id="full-screen"><i class="fa fa-arrows-alt"></i>
+                        <button type="button" class="ea-panel-btn hidden-sm hidden-xs" id="full-screen"><i class="fa fa-arrows-alt" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.togglescreen')</div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="shortlist">
-                            <i class="fa fa-thumbs-up"></i>
+                            <i class="fa fa-thumbs-up" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.shortlistapplicant')</div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="reject">
-                            <i class="fa fa-thumbs-down"></i>
+                            <i class="fa fa-thumbs-down" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.rejectapplicant')</div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="screened">
-                            <i class="fa fa-mobile"></i>
+                            <i class="fa fa-mobile" style="font-size:20px"></i>
                             <div class="ea-toolkit"><p>@lang('home.markscreened') </p></div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="offer">
-                            <i class="fa fa-ticket"></i>
+                            <i class="fa fa-ticket" style="font-size:20px"></i>
                             <div class="ea-toolkit"><p>@lang('home.sendjoboffer') </p></div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="hire">
-                            <i class="fa fa-archive"></i>
+                            <i class="fa fa-archive" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.markhired')</div>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk">
-                            <i class="fa fa-ban"></i>
+                            <i class="fa fa-ban" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.markjunk')</div>
                         </button>
                         <button type="button" class="ea-panel-btn" id="ea-showFrom" style="display: none;">
-                            <i class="fa fa-envelope"></i>
+                            <i class="fa fa-envelope" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.sendmessageapplicant')</div>
                         </button>
                         <button type="button" class="ea-panel-btn" id="ea-scheduleInerview">
-                            <i class="fa fa-briefcase"></i>
+                            <i class="fa fa-briefcase" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.scheduleinterview')</div>
                         </button>
-                        <button type="button" class="ea-panel-btn"><i class="fa fa-download"></i>
+                        <button type="button" class="ea-panel-btn"><i class="fa fa-download" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.exportselected')</div>
                         </button>
-                        <select class="form-control pull-right select-jobs" style="width: 150px;height: 30px;" onchange="findApplication(this.value)">
+                        <select class="form-control pull-right select-jobs" style="width: 150px;height: 35px;" onchange="findApplication(this.value)">
                             <option value="0">@lang('home.alljobs')</option>
                             @foreach($jobs as $job)
                                 <option value="{!! $job->jobId !!}">{!! $job->title !!}</option>

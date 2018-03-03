@@ -74,6 +74,10 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/sub-category/save','admin\Cms@saveSubCategory');
 	Route::get('cms/sub-category/get/{id}','admin\Cms@getSubCategory');
 	Route::delete('cms/sub-category/delete','admin\Cms@deleteSubCategory');
+	Route::match(['get','post'],'cms/category/sub/{id}','admin\Cms@viewSubCategories2');
+	Route::post('cms/sub-category/save2','admin\Cms@saveSubCategory2');
+	Route::get('cms/sub-category/get/{id}/{id2}','admin\Cms@getSubCategory');
+	Route::delete('cms/sub-category/delete','admin\Cms@deleteSubCategory');
 
 	/* job shift */
 	Route::match(['get','post'],'cms/shift','admin\Cms@viewJobShift');
@@ -160,6 +164,7 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('get-state/{id}','frontend\Jobseeker@getState');
     Route::get('get-city/{id}','frontend\Jobseeker@getCity');
     Route::get('get-subCategory/{id}','frontend\Jobseeker@getSubCategory');
+	Route::get('get-subCategory2/{id}','frontend\Jobseeker@getSubCategory2');
     Route::post('jobseeker/resume/academic/save','frontend\Jobseeker@saveAcademic');
     Route::get('jobseeker/resume/get/{id}','frontend\Jobseeker@getResume');
     Route::get('jobseeker/resume/delete/{id}','frontend\Jobseeker@deleteResume');

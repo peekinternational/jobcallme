@@ -3,13 +3,13 @@
 @section('title','Interview Venues')
 
 @section('content')
-<section id="jobs">
+<section id="jobs" style="margin-bottom:70px">
     <div class="container">
-        <div class="col-md-12 view-venue">
+        <div class="col-md-12 view-venue" style="margin-top:70px">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @lang('home.interviewvenues')
-                    <button class="btn btn-primary pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="Add New Interview Venue" data-placement="bottom" onclick="addVeneu()">
+                    <button class="btn btn-primary pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="@lang('home.addinterviewvenue')" data-placement="bottom" onclick="addVeneu()">
                         <i class="fa fa-plus"></i>
                     </button>
                 </div>
@@ -43,11 +43,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 add-edit-venue" style="display: none">
+        <div class="col-md-12 add-edit-venue" style="display: none;margin-top:70px"">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="panel-title">@lang('home.addinterviewvenue')</span>
-                    <button class="btn btn-warning pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="Go Back" data-placement="bottom" onclick="goBack()">
+                    <button class="btn btn-warning pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="@lang('home.goback')" data-placement="bottom" onclick="goBack()">
                         <i class="fa fa-arrow-left"></i>
                     </button>
                 </div>
@@ -206,7 +206,7 @@ function getCities(stateId){
     })
 }
 function addVeneu(){
-    $('.add-edit-venue .panel-title').text('Add Interview Venue');
+    $('.add-edit-venue .panel-title').text('@lang("home.addinterviewvenue")');
     $('.venue-form input,.venue-form textarea').val('');
     $('.view-venue').hide();
     $('.add-edit-venue').fadeIn();

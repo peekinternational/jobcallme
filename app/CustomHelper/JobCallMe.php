@@ -207,7 +207,7 @@ class JobCallMe{
 	}
 
 	public function siteCurrency(){
-		$array = array('AFN','ALL','DZD','AOA','ARS','AMD','AWG','AUD','AZN','BSD','BHD','BDT','BBD','BYR','BZD','BMD','BTN','BOB','BAM','BWP','BRL','BND','BGN','BIF','KHR','CAD','CVE','KYD','CLP','CNY','COP','XOF','XAF','KMF','XPF','CDF','CRC','HRK','CUC','CUP','CZK','DKK','DJF','DOP','XCD','EGP','SVC','ERN','ETB','EUR','FKP','FJD','GMD','GEL','GHS','GIP','GTQ','GGP','GNF','GYD','HTG','HNL','HKD','HUF','ISK','INR','IDR','XDR','IRR','IQD','IMP','ILS','JMD','JPY','JEP','JOD','KZT','KES','KPW','KRW','KWD','KGS','LAK','LBP','LSL','LRD','LYD','LTL','MOP','MKD','MGA','MWK','MYR','MVR','MRO','MUR','MXN','MDL','MNT','MAD','MZN','MMK','NAD','NPR','ANG','NZD','NIO','NGN','NOK','OMR','PKR','PAB','PGK','PYG','PEN','PHP','PLN','QAR','RON','RUB','RWF','SHP','WST','SAR','SPL','RSD','SCR','SLL','SGD','SBD','SOS','ZAR','LKR','SDG','SRD','SZL','SEK','CHF','SYP','STD','TWD','TJS','TZS','THB','TOP','TTD','TND','TRY','TMT','TVD','UGX','UAH','AED','GBP','USD','UYU','UZS','VUV','VEF','VND','YER','ZMW','ZWD');
+		$array = array('KRW','AFN','ALL','DZD','AOA','ARS','AMD','AWG','AUD','AZN','BSD','BHD','BDT','BBD','BYR','BZD','BMD','BTN','BOB','BAM','BWP','BRL','BND','BGN','BIF','KHR','CAD','CVE','KYD','CLP','CNY','COP','XOF','XAF','KMF','XPF','CDF','CRC','HRK','CUC','CUP','CZK','DKK','DJF','DOP','XCD','EGP','SVC','ERN','ETB','EUR','FKP','FJD','GMD','GEL','GHS','GIP','GTQ','GGP','GNF','GYD','HTG','HNL','HKD','HUF','ISK','INR','IDR','XDR','IRR','IQD','IMP','ILS','JMD','JPY','JEP','JOD','KZT','KES','KPW','KWD','KGS','LAK','LBP','LSL','LRD','LYD','LTL','MOP','MKD','MGA','MWK','MYR','MVR','MRO','MUR','MXN','MDL','MNT','MAD','MZN','MMK','NAD','NPR','ANG','NZD','NIO','NGN','NOK','OMR','PKR','PAB','PGK','PYG','PEN','PHP','PLN','QAR','RON','RUB','RWF','SHP','WST','SAR','SPL','RSD','SCR','SLL','SGD','SBD','SOS','ZAR','LKR','SDG','SRD','SZL','SEK','CHF','SYP','STD','TWD','TJS','TZS','THB','TOP','TTD','TND','TRY','TMT','TVD','UGX','UAH','AED','GBP','USD','UYU','UZS','VUV','VEF','VND','YER','ZMW','ZWD');
 		return $array;
 	}
 
@@ -318,6 +318,11 @@ class JobCallMe{
 		return array('Accommodation', 'Gratuity', 'Health Insurance', 'Incentive Bonus', 'Leaves', 'Travelling');
 	}
 
+	//추가
+	public function jobProcess(){
+		return array('Document Screening', 'human nature test', 'Chat', 'Video & Chat', 'First Interview', 'Second Interview', 'Examination for Employment', 'Final Pass', 'Add');
+	}
+
 	public function getCategories(){
 		$categories = DB::table('jcm_categories')->get();
 		return $categories;
@@ -336,6 +341,10 @@ class JobCallMe{
 
 	public function getSubCategories($categoryId){
 		return DB::table('jcm_sub_categories')->where('categoryId','=',$categoryId)->get();
+	}
+
+	public function getSubCategories2($categoryId2){
+		return DB::table('jcm_sub_categories2')->where('categoryId','=',$categoryId2)->get();
 	}
 
 	public function getJobShifts(){

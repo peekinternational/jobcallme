@@ -3,7 +3,27 @@
 @section('title', 'Writings')
 
 @section('content')
-<section id="postNewJob">
+
+<section id="read-section">
+    <div class="container">
+        <div class="col-md-12 learn-search-box" style="padding-top:90px">
+
+            
+			<h2 class="text-center">
+						@if(app()->getLocale() == "kr")
+						    <div id="hp_text3"></div><!-- @lang('home.headerHeading') -->
+						@else
+						    <div id="hp_text4"></div><!-- @lang('home.headerHeading') -->
+						@endif
+			</h2>
+            
+            
+        </div>
+    </div>
+</section>
+
+
+<section id="postNewJob" style="margin-bottom:50px">
     <div class="container">
         @if(count($writing) > 0)
             <div class="col-md-12">
@@ -14,23 +34,27 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </h3>
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="margin-top:30px;margin-bottom:30px">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
                                 <thead>
-                                    <th>@lang('home.title')</th>
-                                    <th>@lang('home.category')</th>
-                                    <th>@lang('home.status')</th>
-                                    <th>@lang('home.createdon')</th>
-                                    <th>@lang('home.action')</th>
+                                    <th style="background:#96aaa8;color:#fff;">@lang('home.title')</th>
+                                    <th style="background:#96aaa8;color:#fff;">@lang('home.category')</th>
+                                    <th style="background:#96aaa8;color:#fff;">@lang('home.status')</th>
+                                    <th style="background:#96aaa8;color:#fff;">@lang('home.createdon')</th>
+                                    <th style="background:#96aaa8;color:#fff;">@lang('home.action')</th>
                                 </thead>
                                 <tbody>
                                     @foreach($writing as $write)
                                         <tr id="write-{{ $write->writingId }}">
                                             <td><a href="{{ url('read/article/'.$write->writingId ) }}">{!! $write->title !!}</a></td>
                                             <td>{!! $write->cat_names !!}</td>
-                                            <td>{!! $write->status !!}</td>
-                                            <td>{!! date('M d, Y',strtotime($write->createdTime)) !!}</td>
+                                            <td>@lang('home.'.$write->status)</td>
+                                            <td>@if(app()->getLocale() == "kr")
+						    {!! date('Y-m-d',strtotime($write->createdTime)) !!}
+						@else
+						    {!! date('M d, Y',strtotime($write->createdTime)) !!}
+						@endif</td>
                                             <td>
                                                 <a href="{{ url('account/writings/article/edit/'.$write->writingId) }}"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
                                                 <a href="javascript:;" onclick="deleteArticle('{{ $write->writingId }}')"><i class="fa fa-remove"></i></a>
@@ -44,12 +68,12 @@
                 </div>
             </div>
         @else
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="pnj-box">
-                    <h3>@lang('home.mywriting')</h3>
+                    <h3><span style="padding-left:15px;">@lang('home.mywriting')</span></h3>
                     <div class="upskill-box">
-                        <h2>@lang('home.creativewriting')</h2>
-                        <p>@lang('home.eagerlywaiting')</p>
+                        <p style="font-size:20px">@lang('home.creativewriting')</p>
+                        <p style="font-size:15px">@lang('home.eagerlywaiting')</p>
                         <a href="{{ url('account/writings/article/add') }}" class="btn btn-primary">@lang('home.WRITE YOUR FIRST ARTICLE')</a>
                     </div>
                 </div>

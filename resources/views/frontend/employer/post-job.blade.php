@@ -4,10 +4,13 @@
 
 @section('content')
 
-<section id="postNewJob">
-    <div class="container-fluid">
+<section id="postNewJob" style="margin-bottom:70px">
+    <div class="container">
+
+	  <div class="row">
+            <div class="col-md-12" style="margin-top:70px">
 	
-        <div class="col-md-9">
+        <div class="col-md-12">
 		
             <div class="pnj-box">
 			  <h3>@lang('home.postnewjob')</h3>
@@ -24,7 +27,7 @@
                         {{ csrf_field() }}
 						
                     
-					<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;">
+					<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-top:30px;">
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                 
  
@@ -42,14 +45,16 @@
                                 <div>
                                     <!----><label for="{!! $payment->id!!}">
                                         <ul class="list-unstyled desc" >
-                                            <li>{!! $payment->tag1!!}</li>
-                                             <li>{!! $payment->tag2!!}</li>
+											<li>@lang('home.'.$payment->tag1)</li>
+                                            <li>@lang('home.adcost')</li>
+                                            <!-- <li>{!! $payment->tag1!!}</li>
+                                             <li>{!! $payment->tag2!!}</li> -->
                                         </ul>
 										
                                         <div class="credits b">@if($payment->price ==0)
-										Free
+										@lang('home.Free')
 										@else
-										<span class="text-success">$ {!! $payment->price!!}</span>
+										<span class="text-success">@lang('home.'.$payment->price)</span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									@endif</div>
                                     </label>
@@ -90,10 +95,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.category')</label>
+                            <label class="control-label col-sm-3">@lang('home.s_category')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-category" name="category" onchange="getSubCategories(this.value)">
-                                    @foreach(JobCallMe::getCategories() as $cat)
+										<option value="">@lang('home.s_category')</option>
+									@foreach(JobCallMe::getCategories() as $cat)
                                         <option value="{!! $cat->categoryId !!}">@lang('home.'.$cat->name)</option>
                                     @endforeach
                                 </select>
@@ -102,7 +108,16 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.Subcategory')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-sub-category" name="subCategory">
+                                <select class="form-control select2 job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
+									<option value="">@lang('home.Subcategory')</option>
+								</select>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.Subcategory2')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control select2 job-sub-category2" name="subCategory2">
+									<option value="">@lang('home.Subcategory2')</option>
                                 </select>
                             </div>
                         </div>
@@ -159,7 +174,11 @@
 						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.adduration')</label>
                             <div class="col-sm-9 pnj-form-field">
-                             <input type="text" id="pas" class="form-control" name="duration">
+                             <select class="form-control" name="adduration">
+                                    <?for($i=2; $i<31; $i++){?>
+                                        <option value="{!! $i !!}">{!! $i !!}@lang('home.adday')</option>
+                                    <?}?>
+                               </select>
 								
                             </div>
                         </div>
@@ -187,6 +206,13 @@
                                </select>
                            </div>
                        </div>
+
+					   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.jobaddr')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <input type="text" class="form-control" name="jobaddr" id="jobaddr" placeholder="@lang('home.jobaddrtext')" required >
+                            </div>
+                        </div>
 
 					   <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.postcate1')</label>
@@ -221,6 +247,36 @@
 
                    </div>
 
+				   <h3>@lang('home.admissionsprocess')</h3>
+                    <div class="pnj-form-section">                        
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.admissionsprocess')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                    @foreach(JobCallMe::jobProcess() as $process)
+                                        <div class="col-md-4 benefits-checks">
+                                            <input id="{{ str_replace(' ','-',$process) }}"  type="checkbox" class="cbx-field" name="benefits[]" value="{{ $process }}">
+                                            <label class="cbx" for="{{ str_replace(' ','-',$process) }}"></label>
+                                            <label class="lbl" for="{{ str_replace(' ','-',$process) }}">@lang('home.'.$process)<!-- {{ $process }} --></label>
+                                        </div>
+                                    @endforeach
+
+									<div class="col-md-1 pnj-salary">
+                                        @lang('home.add')
+                                    </div>
+                                    <div class="col-md-10 pnj-salary">
+                                        <input type="text" class="form-control" name="benefitsadd">
+                                    </div>
+
+									
+                                </div>
+
+								
+
+                            </div>							
+                        </div>
+                    </div>	
+
                     <h3>@lang('home.compensationbenefits')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
@@ -228,10 +284,10 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="text" class="form-control" name="minSalary" placeholder="@lang('home.minsalary')" required>
+                                        <input type="text" class="form-control" name="minSalary" placeholder="@lang('home.minsalary') 20,000,000" required>
                                     </div>
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="text" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary')" required>
+                                        <input type="text" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary') 25,000,000" required>
                                     </div>
                                     <div class="col-md-4">
                                         <select class="form-control col-md-4 select2" name="currency">
@@ -254,6 +310,14 @@
                                             <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">{{ $benefit }}</label>
                                         </div>
                                     @endforeach
+
+									<div class="col-md-1 pnj-salary">
+                                        @lang('home.add')
+                                    </div>
+                                    <div class="col-md-10 pnj-salary">
+                                        <input type="text" class="form-control" name="benefitsadd">
+                                    </div> 
+
                                 </div>
                             </div>
                         </div>
@@ -304,7 +368,7 @@
                         </div>
                     </div>
 					<div class="col-md-offset-3 col-md-2  pnj-btns">
-                        <span style="font-size:17px;padding-right:50px;" id="total"></span>						
+                        <span style="font-size:17px;padding-right:50px;" id="total">Total Amount : US$</span>						
                     </div>
                     <div class="col-md-6  pnj-btns">                        
 						<button type="submit" class="btn btn-primary" name="save">@lang('home.postjob')</button>
@@ -314,6 +378,9 @@
             </div>
         </div>
     </div>
+	</div>
+	</div>
+
 </section>
 @endsection
 @section('page-footer')
@@ -329,6 +396,8 @@ $(document).ready(function(){
 
     getStates($('.job-country option:selected:selected').val());
     getSubCategories($('.job-category option:selected:selected').val());
+
+	getSubCategories2($('.job-category option:selected:selected').val());
 });
 	  $('#secondDate').on('change', function() {
 				  myfunc()
@@ -422,6 +491,22 @@ function getSubCategories(categoryId){
         }
     })
 }
+
+function getSubCategories2(categoryId2){
+    $.ajax({
+        url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $(".job-sub-category2").html('').trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = false;
+                var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
+                $(".job-sub-category2").append(newOption).trigger('change');
+            })
+        }
+    })
+}
+
 function firstCapital(myString){
     firstChar = myString.substring( 0, 1 );
     firstChar = firstChar.toUpperCase();

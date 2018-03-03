@@ -41,19 +41,22 @@
     <div class="container">
         <div class="row">
             <!--RTJ- Left start-->
-            <div class="col-md-6">
-                <div class="rtj-box">
-                    <ul class="nav nav-tabs ">
-                        <li class="active" style="width:33.3%">
-                            <a href="#rtj_tab_posted_jobs" data-toggle="tab"><i class="fa fa-bars" aria-hidden="true"></i> @lang('home.postedjobs')</a>
+            <div class="col-md-7">
+				<div class="follow-companies2" style="background:#57768a;color:#fff;">
+                    <!-- <ul class="nav nav-tabs"> -->
+					<ul class="nav nav-tabs">
+                       <li class="active" style="width:33.3%">
+                            <a href="#rtj_tab_posted_jobs" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-bars" aria-hidden="true"></i> @lang('home.postedjobs')</a>
                         </li>
                         <li style="width:33.3%">
-                            <a href="#rtj_tab_recent_application" data-toggle="tab"><i class="fa fa-address-book"></i> @lang('home.recentapplicant')</a>
+                            <a href="#rtj_tab_recent_application" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-address-book"></i> @lang('home.recentapplicant')</a>
                         </li>
                         <li style="width:33.3%">
-                            <a href="#rtj_tab_interview" data-toggle="tab"><i class="fa fa-calendar"></i> @lang('home.upcominginterviews') </a>
+                            <a href="#rtj_tab_interview" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-calendar"></i> @lang('home.upcominginterviews') </a>
                         </li>
-                    </ul>
+                   </ul>
+				</div>
+                <div class="rtj-box">                    
                     <div class="tab-content joblisting">
                         <div class="tab-pane active" id="rtj_tab_posted_jobs">
 						<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
@@ -134,11 +137,12 @@
             <!--RTJ- Left end-->
 
             <!--RTJ- Right start-->
-            <div class="col-md-3">
+            <div class="col-md-5" style="margin-bottom:50px">
                 <!--Follow Companies - Start -->
-                <div class="follow-companies">
+                <div class="follow-companies2" style="background:#57768a;color:#fff;">
                     <h4>@lang('home.suggestedpeople')</h4>
-                    <hr>
+				</div>
+				<div class="follow-companies">	
                     <div class="row">
 					@foreach($applicants as $appl)
 					 <?php
@@ -147,15 +151,17 @@
                             $pImage = url('profile-photos/'.$appl->profilePhoto);
                         }
                         ?>
-                        <div class="col-md-12 col-xs-12 sp-item" style="padding-top:10px">
-						<div class="col-md-4 col-xs-4 sp-item">
-                            <img src="{{ $pImage }}" style="width: 70px;height:75px;">
-							</div>
-							<div class="col-md-8 col-xs-8 sp-item">
-                            <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
-                            <p>{!! $appl->companyName !!}</p>
-                            <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
-                        </div>
+                        <div class="col-md-4 col-xs-6 sp-item" style="padding-top:10px">
+						
+								<img src="{{ $pImage }}" style="width: 70px;height:75px !important;">
+							
+						
+								<p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
+								<p>{!! $appl->companyName !!}</p>
+								<p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
+
+							
+						
 						</div>
 						 @endforeach
 
@@ -167,15 +173,14 @@
                         </div>
                     </div>
                 </div>
-				</div>
-                <!--Follow Companies - End -->
 
-                <!--Suggested Reading - Start -->
-				<div class="col-md-3">
-                <div class="suggested-reading">
-                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.write')</a>
+
+				 <div class="follow-companies2" style="background:#605e63;color:#fff;">
+                    <a href="{{ url('account/writings') }}" class="pull-right"><span  style="color:#fff;"><i class="fa fa-edit"></i> @lang('home.write')</span></a>
                     <h4>@lang('home.suggestedreading')</h4>
-                    <hr>
+				</div>
+				<div class="suggested-reading">
+                    
 					   @foreach($read_record as $rec)
 					   <?php
                         $pImage = url('profile-photos/profile-logo.jpg');
@@ -184,14 +189,14 @@
                         }
                         ?>
                     <div class="col-md-12 sr-item">
-					 <div class="col-md-4">
-                        <img src="{{ $pImage }}" style="width: 100%;height:90px;">
+						<div class="col-md-4 col-xs-12">
+							<img src="{{ $pImage }}" style="width: 100%;height:90px !important;">
 						</div>
-						 <div class="col-md-8" style="padding-top:10px">
-                        <div class="sr-details">
-                            <p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
-                            <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.'.$rec->name)</a> </p>
-                        </div>
+						<div class="col-md-8 col-xs-12" style="padding-top:10px">
+							<div class="sr-details">
+								<p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
+								<p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.'.$rec->name)</a> </p>
+							</div>
 						</div>
                     </div>
 					   @endforeach
@@ -201,24 +206,26 @@
                     </div>
                 </div>
 
-            </div>
-            <!--RTJ- Right end-->
-			<div class="col-md-6 col-xs-12 sp-item pull-right">
-			   <div class="follow-companies">
+
+				<div class="follow-companies2" style="background:#8a9fa0;color:#fff;">
+                    <a href="{{ url('account/writings') }}" class="pull-right"><span  style="color:#fff;"><i class="fa fa-edit"></i> @lang('home.ADVERTISE')</span></a>
+                    <h4>@lang('home.ImproveCompetitiveAdvantage')</h4>					
+				</div>
+				<div class="follow-companies">
                     <h4 class="pull-left">@lang('home.ImproveCompetitiveAdvantage')</h4><h5 class="pull-right">@lang('home.ADVERTISE')</h5>
                     <hr style="margin-top:44px !important">
                     <div class="row">
 				            @foreach($lear_record as $rec)
                    
-                      <div class="la-item">
-				      <div class="col-md-4 sp-item">
+                      <div class="col-md-12 sr-item">
+				      <div class="col-md-4 col-xs-12">
                         @if($rec->upskillImage != '')
-                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 180px;height:80px;">
+                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:80px;">
                         @else
-                        <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 180px;height:80px;">
+                        <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:80px !important;">
                         @endif
 						</div>
-                        <div class="col-md-8" style="margin-top: 34px;">
+                        <div class="col-md-8 col-xs-12" style="margin-top: 10px;">
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
                             
                             <span>@lang('home.'.$rec->type)</span>
@@ -239,7 +246,12 @@
                         </div>
                     </div>
                 </div>
-			</div>
+
+
+
+		</div>
+                
+			
         </div>
     </div>
 </section>
