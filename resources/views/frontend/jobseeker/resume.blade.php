@@ -170,7 +170,7 @@ if($user->profilePhoto != ''){
                                     <select class="form-control input-sm select2 job-city" name="city" data-city="{{ $user->city }}"></select>
                                 </div>
                             </div>
-                            <div class="form-group">
+                     <!--       <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.experiancelevel')</label>
                                 <div class="col-md-6">
 									<select class="form-control select2" name="careerLevel">
@@ -184,7 +184,7 @@ if($user->profilePhoto != ''){
                                             <option value="{{ $el }}" {{ $meta->experiance == $el ? 'selected="selected"' : '' }}>@lang('home.'.$el)</option>
                                         @endforeach
                                     </select> -->
-                                </div>
+                              <!--  </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.education')</label>
@@ -201,6 +201,22 @@ if($user->profilePhoto != ''){
 									</select>
 
                                     <!-- <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}"> -->
+                               <!-- </div>
+                            </div> -->
+                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.experiancelevel')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" name="experiance">
+                                        @foreach(JobCallMe::getExperienceLevel() as $el)
+                                            <option value="{{ $el }}" {{ $meta->experiance == $el ? 'selected="selected"' : '' }}>{{ $el }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.education')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}">
                                 </div>
                             </div>
                             <div class="form-group">
