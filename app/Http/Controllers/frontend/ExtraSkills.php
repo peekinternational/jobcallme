@@ -261,11 +261,13 @@ class ExtraSkills extends Controller{
 
             if($request->input('skillId') != '' && $request->input('skillId') != '0'){
                 DB::table('jcm_upskills')->where('skillId','=',$request->input('skillId'))->update($input);
+                exit(1);
             }else{
                
                 //DB::table('jcm_upskills')->insert($input);
+                return 1 ;
             }
-           return 1;
+          exit(1);
         }
         $segment = $request->segment(3);
         $upskill = (object) array();

@@ -29,8 +29,10 @@ if($upskill->country != 0){
                     <input type="hidden" name="prevIcon" value="{{ $upskill->upskillImage }}">
                     <h3>@lang('home.basicinformation')</h3>
 
-				
-					<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:30px;"">
+				@if($upskill->skillId)
+			
+@else
+		<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:30px;"">
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                 
  
@@ -71,6 +73,7 @@ if($upskill->country != 0){
                 </div>
             </div>
 
+@endif
 
                     <div class="pnj-form-section">
                         <div class="form-group">
@@ -124,16 +127,11 @@ if($upskill->country != 0){
                                     <div class="col-md-4">
                                         <select class="form-control col-md-4 select2" name="currency">
                                             @foreach(JobCallMe::siteCurrency() as $currency)
-                                                @if(app()->getLocale() == "kr")
-												@if($currency == "KRW")
-												<option value="{!! $currency !!}" {{ $currency == $upskill->currency ? 'selected="selected"' : '' }}>대한민국 원화결제</option>
-											@else
-												<option value="{!! $currency !!}" {{ $currency == $upskill->currency ? 'selected="selected"' : '' }}>{!! $currency !!}</option>
-											@endif 
-						@else						    
-						    <option value="{!! $currency !!}" {{ $currency == $upskill->currency ? 'selected="selected"' : '' }}>{!! $currency !!}</option>
-                                            @endforeach
+                                         	
+                                            <option value="{!! $currency !!}" {{ $currency == $upskill->currency ? 'selected="selected"' : '' }}>{!! $currency !!}</option>
+                                             @endforeach
                                         </select>
+                                        
                                     </div>
                                     <div class="col-md-4 pnj-salary">
                                         <div class=" benefits-checks">
@@ -593,7 +591,8 @@ $('form.upskill-form').submit(function(e){
         async: false,
         success: function(response) {
             if($.trim(response) != '1'){
-                toastr.error(response, '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+               toastr.success('Upskill successfully update', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+               window.location.href = "{{ url('account/upskill') }}";
                 $('.upskill-form button[type="submit"]').prop('disabled',false);
             }else{
 				window.location.href = "{{ url('skillpayment') }}";
