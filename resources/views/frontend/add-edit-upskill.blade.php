@@ -124,7 +124,14 @@ if($upskill->country != 0){
                                     <div class="col-md-4">
                                         <select class="form-control col-md-4 select2" name="currency">
                                             @foreach(JobCallMe::siteCurrency() as $currency)
-                                                <option value="{!! $currency !!}" {{ $currency == $upskill->currency ? 'selected="selected"' : '' }}>{!! $currency !!}</option>
+                                                @if(app()->getLocale() == "kr")
+												@if($currency == "KRW")
+												<option value="{!! $currency !!}" {{ $currency == $upskill->currency ? 'selected="selected"' : '' }}>대한민국 원화결제</option>
+											@else
+												<option value="{!! $currency !!}" {{ $currency == $upskill->currency ? 'selected="selected"' : '' }}>{!! $currency !!}</option>
+											@endif 
+						@else						    
+						    <option value="{!! $currency !!}" {{ $currency == $upskill->currency ? 'selected="selected"' : '' }}>{!! $currency !!}</option>
                                             @endforeach
                                         </select>
                                     </div>

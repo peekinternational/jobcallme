@@ -104,7 +104,7 @@ position:absolute;
 	width:200px;
 }
 .logo-img{
-    width: 120px;
+    width: 150px;
 }
 .top-navigation{
     margin-left: 30px;
@@ -511,14 +511,18 @@ a.job-location:hover span.shine {
     margin-bottom: 2px;
     font-weight: 600;
     color: #337ab7;
+	padding-top:-5px;
 }
 .pj-single-details  p:nth-child(2){
     margin-bottom: 2px;
+	font-size: 12px;
+	padding-top:-5px;
 }
 .pj-single-details  p:nth-child(3){
     margin-bottom: 2px;
-    font-size: 12px;
+    font-size: 10px;
     color: #999999;
+	padding-top:-5px;
 }
 .ih-item a:hover .job-status{
     display: block;
@@ -558,12 +562,14 @@ a.job-location:hover span.shine {
 }
 .lj-single-details p:nth-child(2){
     margin-bottom: 0;
-    font-size: 12px;
+    font-size: 11px;
+	padding-top:-5px;
 }
 .lj-single-details p:nth-child(3){
     margin-bottom: 2px;
     font-size: 10px;
     color: #999999;
+	padding-top:-5px;
 }
 
 .job-categories{
@@ -600,12 +606,12 @@ a.job-location:hover span.shine {
     width: 100% !important;
     background-color: #fff;
     border: none !important;
-   /* padding: 15px;*/
-    margin-bottom: 10px;
+    padding: 15px;
+    margin-bottom: 30px;
 
 }
 .tc-box{
-    text-align: center;
+    text-align: left;
 }
 /*Premium Job*/
 .ih-item.square.effect15{
@@ -837,6 +843,52 @@ a.job-location:hover span.shine {
     border: 1px solid #cccccc;
     margin-bottom: 20px;
     background: #ffffff;
+}
+.follow-companies2{
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #cccccc;   
+    background: #ffffff;
+}
+.follow-companies3{
+    padding: 0px 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #cccccc;   
+    background: #ffffff;	
+	margin-left:13px;
+	margin-right:13px;
+}
+.follow-companies4{
+    padding: 0px 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #cccccc;   
+    background: #ffffff;	
+	margin-left:13px;
+	margin-right:25px;
+}
+.follow-companies5{
+    padding: 0px 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #cccccc;   
+    background: #ffffff;	
+	margin-left:13px;
+	margin-right:0px;
+}
+.follow-companies6{
+    padding: 0px 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #cccccc;   
+    background: #ffffff;	
+	margin-left:0px;
+	margin-right:10px;
+}
+.follow-companies7{
+    padding: 0px 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #cccccc;   
+    background: #ffffff;	
+	margin-left:0px;
+	margin-right:0px;
 }
 .follow-companies h4{
     /*margin-top: 10px;
@@ -1284,13 +1336,17 @@ ul.jd-rewards li i{
     text-align: left;
     margin-left: -15px;
     margin-right: -15px;
-    width: 119%;
+    width: 115.2%;
     border-radius: 0;
+	padding-top:15px;
+	padding-bottom:15px;
  }
 .ja-tab-active{
     border-left: 4px solid #e6b706;
     background: #EEEEEE;
     color: #000000;
+	padding-top:15px;
+	padding-bottom:15px;
 }
 .ja-content{
     overflow: auto;
@@ -1301,6 +1357,8 @@ ul.jd-rewards li i{
     background: #ffffff;
 }
 .ja-content-item{
+	padding-left:10px;
+	padding-top:20px;
 
 }
 .ja-applyDate{
@@ -1355,6 +1413,8 @@ ul.jd-rewards li i{
 */
 .mtab-heading{
     font-weight: 600;
+	padding-top:15px;
+	padding-bottom:15px;
 }
 .mc-item h4{
     background-color: #EEEEEE;
@@ -1912,7 +1972,7 @@ ul.jd-rewards li i{
 }
 
 .hvr-bob .ih-item.square.effect8{
-    height: 150px;
+    height: 115px;
 }
 /*==================================
       Companies Page
@@ -2025,10 +2085,10 @@ ul.jd-rewards li i{
     margin-top: 65px;
 }
 .pnj-box h3{
-    background-color: #eeeeee;
+    background-color: #57768a;
     margin-top: 0;
-    padding: 7px 0 6px 8px;
-    color: #666;
+    padding: 10px 0 10px 8px;
+    color: #fff;
 }
 .pnj-box h4{
     background-color: #eeeeee;
@@ -2292,7 +2352,7 @@ ul.jd-rewards li i{
 }
 .ea-panel-btn{
     position: relative;
-    padding: 5px 15px;
+    padding: 15px 25px;
     border: none;
     background: transparent;
 }
@@ -2300,7 +2360,7 @@ ul.jd-rewards li i{
     min-width: 160px;
     z-index: 99999;
     position: absolute;
-    top: 43px;
+    top: 47px;
     background-color: rgba(0, 0, 0, 0.7);
     left: 0;
     color: #fff;
@@ -3717,7 +3777,7 @@ border-top-color: rgb(255, 255, 255) !important;
 position: absolute;
     background-color: white;
     left: 16px;
-    width: 95.5%;
+    width: 96.1%;
     top: 88px;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 16px 20px 0 rgba(0, 0, 0, 0.19);}
 	
@@ -3769,9 +3829,36 @@ position: absolute;
 width:100%;
 height:15%;
 overflow:hidden;
-margin-bottom:50px;
+margin-bottom:2px;
 }
 .img-inner{
 margin-bottom: 17px;
     height: 60% !important;
 }
+
+
+.select3-container{
+    width: 100% !important;
+}
+.select3-container:focus{
+    outline: none;
+}
+.select3-container--default .select3-selection--single{
+    border: 1px solid #ccc !important;
+    background: transparent !important;
+    border-radius:0 !important;
+    height: 33px !important;
+}
+.select3-container--default .select3-selection--single .select3-selection__rendered{
+    color: #cccccc !important;
+}
+
+#read-section{
+    min-height: 220px;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(../images/Banner.png);
+    background-color: #000;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;

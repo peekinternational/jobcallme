@@ -25,16 +25,16 @@
 
                                <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">Basic</span></div>
+                             <span class="b">@lang('home.Basic')</span></div>
                                 <div>
                                     <!----><label for="{!! $payment->id!!}">
                                         <ul class="list-unstyled desc" >
-                                            <li>Featured on homepage</li>
-                                            <li>Lowest Priority</li>
+                                            <li>@lang('home.Featuredonhomepage')</li>
+                                            <li>@lang('home.adcost')</li>
                                         </ul>
 										
                                         <div class="credits b">
-										<span class="text-success">Free</span>
+										<span class="text-success">@lang('home.Free')</span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									</div>
                                     </label>
@@ -48,18 +48,18 @@
                             <!----><li style="position:relative">
                                 <!---->
 
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Free till End of April
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@lang('home.FreetillEndofApril')
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">Read</span></div>
+                             <span class="b">@lang('home.special')</span></div>
                                 <div>
                                     <!----><label for="{!! $payment->id!!}">
                                         <ul class="list-unstyled desc" >
-                                            <li>Featured on homepage (3days)</li>
-                                            <li>Lowest Priority</li>
+                                            <li>@lang('home.Featuredonhomepage') ( 3 @lang('home.day') )</li>
+                                            <li>@lang('home.adcost')</li>
                                         </ul>
 										
                                         <div class="credits b">
-										<span class="text-success">$ 2.00</span>
+										<span class="text-success">@lang('home.costwon1')</span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									</div>
                                     </label>
@@ -140,7 +140,7 @@
                     </div>
 
 					<div class="col-md-offset-2 col-md-3  pnj-btns">
-                        <span style="font-size:17px;padding-right:50px;">Total Amount : US$ </span>						
+                        <span style="font-size:17px;padding-right:50px;">@lang('home.TotalAmount') : US$ </span>						
                     </div>
 
                     <div class="col-md-6  pnj-btns">

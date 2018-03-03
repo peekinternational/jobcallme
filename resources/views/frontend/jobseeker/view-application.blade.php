@@ -13,6 +13,11 @@ if(Request::input('show') != ''){
 ?>
 <section id="jobsApplications">
     <div class="container">
+
+	<div class="follow-companies6" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
+                    <h3 style="margin-left: 15px">@lang('home.APPLICATION')</h3>
+				</div>
+
         <div class="col-md-2 jobApp-tabs">
             <a id="delivered" class="btn btn-block jaTabBtn {{ $delivered }}">@lang('home.delivered')</a>
             <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}">@lang('home.shortlisted')</a>

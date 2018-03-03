@@ -7,26 +7,29 @@
 @endsection
 
 @section('content')
-<section id="relate-to-job">
+<section id="relate-to-job" style="margin-bottom:50px">
     <div class="container">
        <div class="row">
            <!--RTJ- Left start-->
            <div class="col-md-7">
-               <div class="rtj-box">
-                   <ul class="nav nav-tabs ">
-                       <li class="active" style="width:21%">
-                           <a href="#rtj_tab_suggested" data-toggle="tab"><i class="fa fa-info-circle"></i> @lang('home.suggested')</a>
+               <div class="follow-companies2" style="background:#57768a;color:#fff;">
+                    <!-- <ul class="nav nav-tabs"> -->
+					<ul class="nav">
+                       <li class="active col-md-3 col-xs-7">
+                           <a href="#rtj_tab_suggested" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-info-circle"></i> @lang('home.suggested') </a>
                        </li>
-                       <li style="width:29%">
-                            <a href="#rtj_tab_saved" data-toggle="tab"><i class="fa fa-heart"></i> @lang('home.savedjobs') </a>
+                       <li class="col-md-3 col-xs-5">
+                            <a href="#rtj_tab_saved" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-heart"></i> @lang('home.savedjobs') </a>
                        </li>
-                       <li style="width:25%">
-                           <a href="#rtj_tab_application" data-toggle="tab"><i class="fa fa-file-text"></i> @lang('home.APPLICATION') </a>
+                       <li class="col-md-3 col-xs-7">
+                           <a href="#rtj_tab_application" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-file-text"></i> @lang('home.APPLICATION') </a>
                        </li>
-                       <li style="width:25%">
-                           <a href="#rtj_tab_interview" data-toggle="tab"><i class="fa fa-calendar"></i> @lang('home.interviews')</a>
+                       <li class="col-md-3 col-xs-5">
+                           <a href="#rtj_tab_interview" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-calendar"></i> @lang('home.interviews') </a>
                        </li>
                    </ul>
+				</div>
+				<div class="rtj-box">
                    <div class="tab-content">
                        <div class="tab-pane active" id="rtj_tab_suggested">
                              @if(count($suggested) > 0)
@@ -148,10 +151,12 @@
 
 
 		   <div class="col-md-5">		
-                <div class="suggested-reading">
-                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.ADVERTISE')</a>
-                    <h4>@lang('home.ImproveCompetitiveAdvantage')</h4>
-                    <hr>
+                <div class="follow-companies2" style="background:#8a9fa0;color:#fff;">
+                    <a href="{{ url('account/writings') }}" class="pull-right"><span  style="color:#fff;"><i class="fa fa-edit"></i> @lang('home.ADVERTISE')</span></a>
+                    <h4>@lang('home.ImproveCompetitiveAdvantage')</h4>	
+				</div>
+				<div class="suggested-reading">
+                    
 					   @foreach($lear_record as $rec)
 					   <?php
                         $pImage = url('profile-photos/profile-logo.jpg');
@@ -160,17 +165,17 @@
                         }
                         ?>
                     <div class="col-md-12 sr-item">
-					 <div class="col-md-5">
-                        <img src="{{ $pImage }}" style="width: 170px;height:80px;">
+						<div class="col-md-5 col-xs-12">
+							<img src="{{ $pImage }}" style="width: 170px;height:80px !important">
 						</div>
-						 <div class="col-md-7">
-                        <div class="sr-details">
-                            <p class="sr-title"><a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}">{!! $rec->title !!} </a> </p>
-							<span>@lang('home.'.$rec->type)</span><br>
-                            <span style="font-size: 10px;"><i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}}<br> <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</span>
-                            <br>
-                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
-                        </div>
+						<div class="col-md-7 col-xs-12">
+							<div class="sr-details">
+								<p class="sr-title"><a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}">{!! $rec->title !!} </a> </p>
+								<span>@lang('home.'.$rec->type)</span><br>
+								<span style="font-size: 10px;"><i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}}<br> <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</span>
+								<br>
+								<span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
+							</div>
 						</div>
                     </div>
 					   @endforeach
@@ -179,16 +184,15 @@
                         <a href="{{ url('learn') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                     </div>
                 </div>
-    
 
 
 
-           <!--RTJ- Right start-->
-           <div class="col-md-5" pull-left>
-               <!--Follow Companies - Start -->
-               <div class="follow-companies">
-                   <h4 style="text-align:center">@lang('home.companiesfollow')</h4><a href="{{ url('account/upskill/add') }}"><h5 class="pull-right">@lang('home.ADVERTISE')</h5></a>
-                   <hr>
+				<div class="follow-companies2" style="background:#57768a;color:#fff;">
+                    <h4>@lang('home.companiesfollow')</h4>
+				</div>
+				<div class="follow-companies">
+					<!-- <a href="{{ url('account/upskill/add') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.ADVERTISE')</a> -->
+                    
                    <div class="row">
                         @foreach($companies as $comp)
                             <?php
@@ -198,11 +202,11 @@
                               $cLogo = url('compnay-logo/'.$comp->companyLogo);
                             }
                             ?>
-                           <div class="col-md-12 col-xs-12 sp-item">
+                           <div class="col-md-3 col-xs-6 sp-item">
 						
-                               <img src="{{ $cLogo }}">
+                               <img src="{{ $cLogo }}" style="height:60px;width:80px !important">
 						
-                               <p><a href="{{ url('companies/company/'.$comp->companyId) }}">{!! $comp->companyName !!}</a></p>
+                               <p style="height:42px"><a href="{{ url('companies/company/'.$comp->companyId) }}">{!! $comp->companyName !!}</a></p>
 							   
                                @if(in_array($comp->companyId,$followArr))
                                     <a href="javascript:;" onclick="followCompany({{ $comp->companyId }},this)" class="btn btn-success btn-xs">@lang('home.following')</a>
@@ -220,14 +224,15 @@
                        </div>
                    </div>
                </div>
-			       
-           </div>
-		    <!--Suggested Reading - Start -->
-				<div>
-                <div class="suggested-reading">
-                    <a href="{{ url('account/writings') }}" class="pull-right"><i class="fa fa-edit"></i> @lang('home.write')</a>
+
+
+
+			   <div class="follow-companies2" style="background:#605e63;color:#fff;">
+                    <a href="{{ url('account/writings') }}" class="pull-right"><span  style="color:#fff;"><i class="fa fa-edit"></i> @lang('home.write')</span></a>
                     <h4>@lang('home.suggestedreading')</h4>
-                    <hr>
+				</div>
+			   <div class="suggested-reading">
+                   
 					   @foreach($read_record as $rec)
 					   <?php
                         $pImage = url('profile-photos/profile-logo.jpg');
@@ -236,14 +241,14 @@
                         }
                         ?>
                     <div class="col-md-12 sr-item">
-					 <div class="col-md-5">
-                        <img src="{{ $pImage }}" style="height:49px">
+						<div class="col-md-5 col-xs-12">
+							<img src="{{ $pImage }}" style="width: 170px;height:80px !important">
 						</div>
-						 <div class="col-md-7">
-                        <div class="sr-details">
-                            <p class="sr-title"><a href="{{ url('read') }}" style="text-overflow: ellipsis;">{!! $rec->title !!} </a> </p>
-                            <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> {{ $rec->name }}</a> </p>
-                        </div>
+						<div class="col-md-7 col-xs-12">
+							<div class="sr-details">
+								<p class="sr-title"><a href="{{ url('read') }}" style="text-overflow: ellipsis;">{!! $rec->title !!} </a> </p>
+								<p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.'.$rec->name)</a> </p>
+							</div>
 						</div>
                     </div>
 					   @endforeach
@@ -252,9 +257,15 @@
                         <a href="{{ url('read') }}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                     </div>
                 </div>
-            </div>
-			
-           <!--RTJ- Right end-->
+
+
+    
+
+
+
+          
+           
+		    
 		   
        </div>
     </div>
