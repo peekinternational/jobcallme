@@ -174,11 +174,7 @@
 						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.adduration')</label>
                             <div class="col-sm-9 pnj-form-field">
-                             <select class="form-control" name="adduration">
-                                    <?for($i=2; $i<31; $i++){?>
-                                        <option value="{!! $i !!}">{!! $i !!}@lang('home.adday')</option>
-                                    <?}?>
-                               </select>
+                           <input type="text" class="form-control" id="pas" name="duration" >
 								
                             </div>
                         </div>
