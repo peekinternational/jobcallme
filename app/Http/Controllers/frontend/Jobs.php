@@ -66,7 +66,7 @@ class Jobs extends Controller{
 		if($experience != '') $jobs->where('jcm_jobs.experience','=',$experience);
 		if($minSalary != '') $jobs->where('jcm_jobs.minSalary','<=',$minSalary);
 		if($maxSalary != '') $jobs->where('jcm_jobs.maxSalary','>=',$maxSalary);
-		if($state != '0') $jobs->where('jcm_jobs.state','=',$city);
+		if($state != '0') $jobs->where('jcm_jobs.state','=',$state);
 		if($city != '0') $jobs->where('jcm_jobs.city','=',$city);
 		if($currency != '') $jobs->where('jcm_jobs.currency','=',$currency);
 

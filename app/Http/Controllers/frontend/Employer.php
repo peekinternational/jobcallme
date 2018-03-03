@@ -457,7 +457,7 @@ curl_close ($ch);
 						
     					->join('jcm_jobs','jcm_jobs.jobId','=','jcm_job_applied.jobId')
     					->orderBy('jcm_job_applied.applyId','desc')
-    					->get();
+    					->paginate(8);
 						
 						
 		$applicants = DB::table('jcm_companies')
@@ -854,7 +854,7 @@ curl_close ($ch);
 		$people->inRandomOrder();
 		$Query=$people->get();
 		//dd($applicant);
-		return view('frontend.employer.view-applicant',compact('applicant','resume','Query'));
+		return view('frontend.employer.appcandidate',compact('applicant','resume','Query'));
 	}
 public function userResume($userId){
 		$record = DB::table('jcm_resume')->where('userId','=',$userId)->orderBy('resumeId','asc')->get();
@@ -1584,6 +1584,11 @@ public function userResume($userId){
     	
     	return view('frontend.employer.orders',compact('data'));
     }
+	 public function setfilter(Request $request,$id){
+		 
+		 return view('frontend.employer.setfilter',compact('id'));
+		 
+		 }
 		
 
 }

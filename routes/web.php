@@ -220,9 +220,16 @@ Route::group(['prefix' => 'account'], function () {
 	Route::post('nicepay', 'frontend\Employer@getresponse');
 	Route::get('employer/delete/{id}','frontend\Employer@deletejob');
 	Route::match(['get','post'],'employer/orders','frontend\Employer@orders');
+	Route::get('employer/setfilter/{id}','frontend\Employer@setfilter');
 	
 	Route::get('employer/nice', function () {
     return view('frontend.employer.nice');
+});
+Route::get('employer/users', function () {
+    return view('frontend.employer.addusers');
+});
+Route::get('employer/addevaluation', function () {
+    return view('frontend.employer.addevaluation');
 });
 Route::get('employer/job_update/{id}','frontend\Employer@updatejob');
 Route::get('employer/advance_serach', function () {
