@@ -264,16 +264,16 @@ class Home extends Controller{
 			$regdata['phoneNumber'] = $request->input('phoneNumber');
 			session()->put('regdata',$regdata);
 			if(!preg_match('/[A-Z]/', $request->input('password'))){
-				session()->flash('password-error',"Use Atleast one Upper character");
+				session()->flash('password-error',"password must have atleast one upper Char Digit Special Char");
 				return redirect('account/register');
 			}
 			if(!preg_match('/[0-9]/', $request->input('password'))){
-			 session()->flash('password-error',"Use Digits");
+			 session()->flash('password-error',"password must have atleast one upper Char Digit Special Char");
 			 return redirect('account/register');
 			}
 			if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $request->input('password')))
 			{
-			    session()->flash('password-error',"Use Atleast one Special Character");
+			    session()->flash('password-error',"password must have atleast one upper Char Digit Special Char");
 			 	return redirect('account/register');
 			} 
 			$input['companyId'] = '0';
@@ -292,7 +292,7 @@ class Home extends Controller{
 			$input['about'] = '';
 			$input['createdTime'] = date('Y-m-d H:i:s');
 			$input['modifiedTime'] = date('Y-m-d H:i:s');
-			print_r($input);die;
+			
 			$userId = DB::table('jcm_users')->insertGetId($input);
 			setcookie('cc_data', $userId, time() + (86400 * 30), "/");
 			extract($request->all());
