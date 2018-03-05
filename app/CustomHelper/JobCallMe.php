@@ -320,7 +320,7 @@ class JobCallMe{
 
 	//추가
 	public function jobProcess(){
-		return array('Document Screening', 'human nature test', 'Chat', 'Video & Chat', 'First Interview', 'Second Interview', 'Examination for Employment', 'Final Pass', 'Add');
+		return array('Document Screening', 'human nature test', 'Chat', 'Video & Chat', 'First Interview', 'Second Interview', 'Examination for Employment', 'Final Pass');
 	}
 
 	public function getCategories(){
@@ -339,12 +339,12 @@ class JobCallMe{
 		return DB::table('jcm_read_category')->where('id','=',$categoryId)->first();
 	}
 
-	public function getSubCategories($categoryId){
-		return DB::table('jcm_sub_categories')->where('categoryId','=',$categoryId)->get();
+	public function getSubCategories($subCategoryId){
+		return DB::table('jcm_sub_categories')->where('subCategoryId','=',$subCategoryId)->get();
 	}
 
 	public function getSubCategories2($categoryId2){
-		return DB::table('jcm_sub_categories2')->where('categoryId','=',$categoryId2)->get();
+		return DB::table('jcm_sub_categories2')->where('categoryId1','=',$categoryId2)->get();
 	}
 
 	public function getJobShifts(){

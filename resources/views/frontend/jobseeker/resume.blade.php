@@ -170,21 +170,21 @@ if($user->profilePhoto != ''){
                                     <select class="form-control input-sm select2 job-city" name="city" data-city="{{ $user->city }}"></select>
                                 </div>
                             </div>
-                     <!--       <div class="form-group">
+                        <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.experiancelevel')</label>
                                 <div class="col-md-6">
-									<select class="form-control select2" name="careerLevel">
+									<select class="form-control select2" name="experiance">
 										@foreach(JobCallMe::getCareerLevel() as $career)
 											<option value="{!! $career !!}">@lang('home.'.$career)</option>
 										@endforeach
 									</select>
 
-                                    <!-- <select class="form-control input-sm select2" name="experiance">
+                              <!--    <select class="form-control input-sm select2" name="experiance">
                                         @foreach(JobCallMe::getExperienceLevel() as $el)
                                             <option value="{{ $el }}" {{ $meta->experiance == $el ? 'selected="selected"' : '' }}>@lang('home.'.$el)</option>
                                         @endforeach
                                     </select> -->
-                              <!--  </div>
+                               </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.education')</label>
@@ -200,10 +200,10 @@ if($user->profilePhoto != ''){
                                     
 									</select>
 
-                                    <!-- <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}"> -->
-                               <!-- </div>
-                            </div> -->
-                             <div class="form-group">
+                                  <!--   <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}"> -->
+                                </div>
+                            </div> 
+                            <!-- <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.experiancelevel')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="experiance">
@@ -212,13 +212,13 @@ if($user->profilePhoto != ''){
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-                             <div class="form-group">
+                            </div>-->
+                            <!-- <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.education')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.category')</label>
                                 <div class="col-md-6">
@@ -232,14 +232,17 @@ if($user->profilePhoto != ''){
 							<div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.Subcategory')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control select2 job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
+                                    <select class="form-control select2 job-sub-category" name="subCategoryId" data-state="{{ $meta->subCategoryId }}" onchange="getSubCategories2(this.value)">
+                                      @foreach(JobCallMe::getSubCategories($meta->subCategoryId) as $cat)
+                                            <option value="{{ $cat->subCategoryId }}" {{ $meta->subCategoryId == $cat->subCategoryId ? 'selected="selected"' : '' }}>@lang('home.'.$cat->subName)</option>
+                                        @endforeach
 									</select>
                                 </div>
                             </div>
 							<div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.Subcategory2')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control select2 job-sub-category2" name="subCategory2">
+                                    <select class="form-control select2 job-sub-category2" name="subCategoryId2">
 									</select>
                                 </div>
                             </div>

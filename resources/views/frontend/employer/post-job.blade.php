@@ -251,20 +251,26 @@
                                 <div class="row">
                                     @foreach(JobCallMe::jobProcess() as $process)
                                         <div class="col-md-4 benefits-checks">
-                                            <input id="{{ str_replace(' ','-',$process) }}"  type="checkbox" class="cbx-field" name="benefits[]" value="{{ $process }}">
+                                            <input id="{{ str_replace(' ','-',$process) }}"  type="checkbox" class="cbx-field" name="process[]" value="{{ $process }}">
                                             <label class="cbx" for="{{ str_replace(' ','-',$process) }}"></label>
                                             <label class="lbl" for="{{ str_replace(' ','-',$process) }}">@lang('home.'.$process)<!-- {{ $process }} --></label>
                                         </div>
                                     @endforeach
-
-									<div class="col-md-1 pnj-salary">
-                                        @lang('home.add')
-                                    </div>
-                                    <div class="col-md-10 pnj-salary">
-                                        <input type="text" class="form-control" name="benefitsadd">
-                                    </div>
-
-									
+                                     <div class="col-md-4 ">
+                                            <input id="addprocess"  type="checkbox" class="cbx-field" name="" value="yes">
+                                            <label class="cbx" for="addprocess"></label>
+                                            <label class="lbl" for="addprocess">@lang('home.add')<!-- {{ $process }} --></label>
+                                        </div>
+                                        <div class="optionBox" id="moreprocess" style="display:none">
+                                            <div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;">
+                                                <input type="text" class="form-control" name="process[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
+                                            </div>
+                                            
+                                            <div class="col-md-10 block">
+                                                <span class="add"><i class="fa fa-plus"></i></span>
+                                            </div>
+                                        </div>
+						
                                 </div>
 
 								
@@ -306,13 +312,21 @@
                                             <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">{{ $benefit }}</label>
                                         </div>
                                     @endforeach
+                                    <div class="col-md-2 ">
+                                            <input id="addbenefit"  type="checkbox" class="cbx-field" name="" value="yes">
+                                            <label class="cbx" for="addbenefit"></label>
+                                            <label class="lbl" for="addbenefit">@lang('home.add')<!-- {{ $process }} --></label>
+                                        </div>
+                                         <div class="optionBox" id="morebenefit" style="display:none">
+                                            <div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;">
+                                                <input type="text" class="form-control" name="benefits[]" /><!-- <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span> -->
+                                            </div>
+                                            
+                                          <!--  <div class="col-md-10 block">
+                                                <span class="add"><i class="fa fa-plus"></i></span>
+                                            </div> -->
+                                        </div>
 
-									<div class="col-md-1 pnj-salary">
-                                        @lang('home.add')
-                                    </div>
-                                    <div class="col-md-10 pnj-salary">
-                                        <input type="text" class="form-control" name="benefitsadd">
-                                    </div> 
 
                                 </div>
                             </div>
@@ -381,6 +395,7 @@
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+var process = "";
 var alrt="";
 $(document).ready(function(){
 	$('body').on('click','.pay_blog',function(e){
@@ -389,11 +404,48 @@ $(document).ready(function(){
 	 console.log(alrt);
 		
 	})
+    $('#addprocess').on('change', function() {
+   process= $('#addprocess').val();
+    if(this.checked)
+    {
+        //alert("hi nabeel");
+        $('#addlable').show();
+        $('#moreprocess').show();
+    }
+    else{
+        $('#addlable').hide();
+        $('#moreprocess').hide();
+    }
+});
+
+ $('#addbenefit').on('change', function() {
+  // process= $('#addprocess').val();
+    if(this.checked)
+    {
+        //alert("hi nabeel");
+       // $('#addlable').show();
+        $('#morebenefit').show();
+    }
+    else{
+      //  $('#addlable').hide();
+        $('#morebenefit').hide();
+    }
+})
+  
+  
 
     getStates($('.job-country option:selected:selected').val());
     getSubCategories($('.job-category option:selected:selected').val());
 
 	getSubCategories2($('.job-category option:selected:selected').val());
+});
+
+$('.add').click(function() {
+    $('.block:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+
+});
+$('.optionBox').on('click','.remove',function() {
+ 	$(this).parent().remove();
 });
 	  $('#secondDate').on('change', function() {
 				  myfunc()
@@ -496,7 +548,7 @@ function getSubCategories2(categoryId2){
             $(".job-sub-category2").html('').trigger('change');
             $.each(obj,function(i,k){
                 var vOption = false;
-                var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
+                var newOption = new Option(k.subName, k.subCategoryId2, true, vOption);
                 $(".job-sub-category2").append(newOption).trigger('change');
             })
         }

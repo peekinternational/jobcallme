@@ -95,7 +95,15 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.Subcategory')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-sub-category" name="subCategory">
+                                <select class="form-control select2 job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.Subcategory2')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control select2 job-sub-category2" name="subCategory2">
+									
                                 </select>
                             </div>
                         </div>
@@ -377,6 +385,22 @@ function getSubCategories(categoryId){
         }
     })
 }
+
+function getSubCategories2(categoryId2){
+    $.ajax({
+        url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $(".job-sub-category2").html('').trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = false;
+                var newOption = new Option(k.subName, k.subCategoryId2, true, vOption);
+                $(".job-sub-category2").append(newOption).trigger('change');
+            })
+        }
+    })
+}
+
 function firstCapital(myString){
     firstChar = myString.substring( 0, 1 );
     firstChar = firstChar.toUpperCase();
