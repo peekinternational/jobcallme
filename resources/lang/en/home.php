@@ -82,7 +82,8 @@ return [
 	's_city' => 'Select City',
 	'phonenumber' => 'Phone Number',
 	'jobalert' => 'Job alert',
-	'agree' => 'You agree to accept ',
+	'agree' => 'I agree with ',
+	'notagree' => 'No I am not agree ',
 	'term' => 'Terms of Services',
 	'tos' => '(TOS) and ',
 	'privacy' => 'Privacy Policy',
@@ -183,7 +184,7 @@ return [
 	'Exhibition' => 'Exhibition',
 	
 	//Manage User//
-	
+	'employerAccount' => 'Employer Account',
 	'setting' => 'Setting',
 	'account' => 'Account',
 	'changepassword' => 'Change Password',
@@ -316,7 +317,7 @@ return [
 	'WRITE YOUR FIRST ARTICLE' =>'WRITE YOUR FIRST ARTICLE',
 	
 	//Employer application//
-	
+	'term&conditionPageContent' => 'this is for english',
 	'inbox' => 'Inbox',
 	'junks' => 'Junks',
 	'shortlists' => 'Shortlists',

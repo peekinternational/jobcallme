@@ -29,7 +29,7 @@ if($user->profilePhoto != ''){
             <a class="btn btn-block jaTabBtn">Evaluation Form</a>
             <a class="btn btn-block jaTabBtn">Questionnaires</a> -->
 			<h5 class="mtab-heading">@lang('home.subscription')</h5>
-			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.credits')</a>
+			<a id="credit" class="btn btn-block jaTabBtn ">@lang('home.credits')</a>
 			<a href="{{ url('account/employer/orders') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.orders')</a>
 			
 			
@@ -69,7 +69,28 @@ if($user->profilePhoto != ''){
                         </div>
                     </form>
                 </div>
-
+                <!-- credits -->
+                <div id="credit-show" class="ja-content-item mc-item" style="display: none">
+                    <h4>@lang('home.employerAccount')</h4>
+                    <table class="table">
+                        <tr>
+                            <td> <i class="fa fa-remove color-red"></i> Premium Jobs</td>
+                            <td><button class="btn btn-info">Buy Now</button></td>
+                        </tr>
+                        <tr>
+                            <td> <i class="fa fa-remove color-red"></i> Hot Jobs</td>
+                            <td><button class="btn btn-info">Buy Now</button></td>
+                        </tr>
+                        <tr>
+                            <td> <i class="fa fa-remove color-red"></i> Gallery Jobs</td>
+                            <td><button class="btn btn-info">Buy Now</button></td>
+                        </tr>
+                        <tr>
+                            <td> <i class="fa fa-remove color-red"></i> Resume Downloads</td>
+                            <td><button class="btn btn-info">Buy Now</button></td>
+                        </tr>
+                    </table>
+                </div>
                 <!--Edit Profile-->
                 <div id="profile-show" class="ja-content-item mc-item" style="display: none">
                     <h4>@lang('home.editprofile')</h4>

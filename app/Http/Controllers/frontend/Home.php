@@ -246,7 +246,21 @@ class Home extends Controller{
 		if($request->session()->has('jcmUser')){
 			return redirect('account/jobseeker');
 		}
+		
 		if($request->isMethod('post')){
+			if(!preg_match('/[A-Z]/', $request->input('password'))){
+				session()->flash('password-error',"Use Atleast one Upper character");
+				return redirect('account/register');
+			}
+			if(!preg_match('/[0-9]/', $request->input('password'))){
+			 session()->flash('password-error',"Use Digits");
+			 return redirect('account/register');
+			}
+			if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $request->input('password')))
+			{
+			    session()->flash('password-error',"Use Atleast one Special Character");
+			 	return redirect('account/register');
+			}
 			$this->validate($request,[
 				'email' => 'required|email|unique:jcm_users,email',
 				'password' => 'required|min:6|max:16',
@@ -256,7 +270,7 @@ class Home extends Controller{
 				'state' => 'required',
 				'phoneNumber' => 'required|digits_between:10,12',
 			]);
-
+			
 			$input['companyId'] = '0';
 			$input['type'] = 'User';
 			$input['secretId'] = JobCallMe::randomString();

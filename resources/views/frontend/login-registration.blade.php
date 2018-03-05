@@ -102,6 +102,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" value="{{ old('password') }}" placeholder="Password">
+                    @if(session()->has('password-error')) <p style="color:red"> {{ session()->get('password-error') }}</p> @endif
                 </div>
                 <div class="form-group">
                     <div class="row">
@@ -136,7 +137,12 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                         </label>
                     </div>
                 </div>
-                <p class="terms-condition">@lang('home.agree')<a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.website')</p>
+                <div>
+                    <input type="checkbox" name="agree" value="agree" id="agree">
+                    <label for="agree">
+                        <p class="terms-condition">@lang('home.agree')<a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.website')</p>    
+                    </label>
+                </div>
                 <button type="submit" class="btn btn-primary btn-block" name="register">@lang('home.register')</button>
                 <p class="text-center show-loginBox">@lang('home.alreadyaccount') <a href="javascript:;" onclick="switchPage('login')">@lang('home.loginhere')</a></p>
             </form>
