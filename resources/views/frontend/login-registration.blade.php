@@ -1,3 +1,4 @@
+
 @extends('frontend.layouts.app')
 
 @if($pageType == 'register')
@@ -97,19 +98,21 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     </div>
                 @endif
                 {{ csrf_field() }}
+                
                 <div class="form-group">
-                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')">
+                    <input type="text" class="form-control" name="email" value=" @if(old('email')) {{ old('email') }} @else <?php echo session()->get('regdata')['email'];?> @endif" placeholder="@lang('home.email')">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password" value="{{ old('password') }}" placeholder="Password">
+                    <input type="password" class="form-control" name="password" value=" @if(old('password')){{ old('password') }} @else <?php echo session()->get('regdata')['password'];?> @endif" placeholder="Password">
+                    @if(session()->has('password-error')) <p style="color:red"> {{ session()->get('password-error') }}</p> @endif
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="firstName" value="{{ old('firstName') }}" placeholder="@lang('home.fname')">
+                            <input type="text" class="form-control" name="firstName" value="@if(old('firstName')){{ old('firstName') }} @else <?php echo session()->get('regdata')['firstName'];?> @endif" placeholder="@lang('home.fname')">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="lastName" value="{{ old('lastName') }}" placeholder="@lang('home.lname')">
+                            <input type="text" class="form-control" name="lastName" value="@if(old('lastName')){{ old('lastName') }} @else <?php echo session()->get('regdata')['lastName'];?> @endif" placeholder="@lang('home.lname')">
                         </div>
                     </div>
                 </div>
@@ -127,7 +130,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <select class="form-control select2 job-city" name="city"></select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber')">
+                    <input type="text" class="form-control" name="phoneNumber" value="@if(old('phoneNumber')){{ old('phoneNumber') }} @else <?php echo session()->get('regdata')['phoneNumber'];?> @endif" placeholder="@lang('home.phonenumber')">
                 </div>
                 <div class="input-group">
                     <div class="checkbox">
@@ -136,7 +139,12 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                         </label>
                     </div>
                 </div>
-                <p class="terms-condition">@lang('home.agree')<a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.website')</p>
+                <div>
+                    <input type="checkbox" name="agree" value="agree" id="agree">
+                    <label for="agree">
+                        <p class="terms-condition">@lang('home.agree')<a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.website')</p>    
+                    </label>
+                </div>
                 <button type="submit" class="btn btn-primary btn-block" name="register">@lang('home.register')</button>
                 <p class="text-center show-loginBox">@lang('home.alreadyaccount') <a href="javascript:;" onclick="switchPage('login')">@lang('home.loginhere')</a></p>
             </form>

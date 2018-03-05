@@ -7,6 +7,7 @@
     <div class="container">
         <div class="col-md-{{ $record->featuredImage != '' ? '8' : '12' }} company-box-left">
             {!! $record->pageData !!}
+           <!--  @lang('home.term&conditionPageContent') -->
         </div>
         @if($record->featuredImage != '')
             <div class="col-md-4 hidden-sm hidden-xs">

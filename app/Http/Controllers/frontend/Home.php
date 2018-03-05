@@ -246,6 +246,7 @@ class Home extends Controller{
 		if($request->session()->has('jcmUser')){
 			return redirect('account/jobseeker');
 		}
+		
 		if($request->isMethod('post')){
 			$this->validate($request,[
 				'email' => 'required|email|unique:jcm_users,email',
@@ -256,16 +257,34 @@ class Home extends Controller{
 				'state' => 'required',
 				'phoneNumber' => 'required|digits_between:10,12',
 			]);
-
+			$regdata['email'] = $request->input('email');
+			$regdata['password'] = $request->input('password');
+			$regdata['firstName'] = $request->input('firstName');
+			$regdata['lastName'] = $request->input('lastName');
+			$regdata['phoneNumber'] = $request->input('phoneNumber');
+			session()->put('regdata',$regdata);
+			if(!preg_match('/[A-Z]/', $request->input('password'))){
+				session()->flash('password-error',"password must have atleast one upper Char Digit Special Char");
+				return redirect('account/register');
+			}
+			if(!preg_match('/[0-9]/', $request->input('password'))){
+			 session()->flash('password-error',"password must have atleast one upper Char Digit Special Char");
+			 return redirect('account/register');
+			}
+			if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $request->input('password')))
+			{
+			    session()->flash('password-error',"password must have atleast one upper Char Digit Special Char");
+			 	return redirect('account/register');
+			} 
 			$input['companyId'] = '0';
 			$input['type'] = 'User';
 			$input['secretId'] = JobCallMe::randomString();
-			$input['firstName'] = $request->input('firstName');
-			$input['lastName'] = $request->input('lastName');
-			$input['email'] = $request->input('email');
+			$input['firstName'] = trim($request->input('firstName'));
+			$input['lastName'] = trim($request->input('lastName'));
+			$input['email'] = trim($request->input('email'));
 			$input['username'] = strtolower($request->input('firstName').$request->input('lastName').rand(00,99));
-			$input['password'] = md5($request->input('password'));
-			$input['phoneNumber'] = $request->input('phoneNumber');
+			$input['password'] = md5(trim($request->input('password')));
+			$input['phoneNumber'] = trim($request->input('phoneNumber'));
 			$input['country'] = $request->input('country');
 			$input['state'] = $request->input('state');
 			$input['city'] = $request->input('city');
@@ -273,7 +292,7 @@ class Home extends Controller{
 			$input['about'] = '';
 			$input['createdTime'] = date('Y-m-d H:i:s');
 			$input['modifiedTime'] = date('Y-m-d H:i:s');
-
+			
 			$userId = DB::table('jcm_users')->insertGetId($input);
 			setcookie('cc_data', $userId, time() + (86400 * 30), "/");
 			extract($request->all());

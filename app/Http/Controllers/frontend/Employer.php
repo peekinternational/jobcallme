@@ -861,7 +861,7 @@ curl_close ($ch);
 		$people->inRandomOrder();
 		$Query=$people->get();
 		//dd($applicant);
-		return view('frontend.employer.appcandidate',compact('applicant','resume','Query'));
+		return view('frontend.employer.appcandidate',compact('applicant','resume','Query','userId'));
 	}
 public function userResume($userId){
 		$record = DB::table('jcm_resume')->where('userId','=',$userId)->orderBy('resumeId','asc')->get();
