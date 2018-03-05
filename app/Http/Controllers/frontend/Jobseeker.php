@@ -153,6 +153,15 @@ class Jobseeker extends Controller{
 		echo @json_encode($result);
 	}
 
+	public function getSubCategory2(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$categoryId2 = $request->segment(3);
+		$result2 = JobCallMe::getSubCategories2($categoryId2);
+		echo @json_encode($result2);
+	}
+
 	public function savePersonalInfo(Request $request){
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');

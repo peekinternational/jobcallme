@@ -7,8 +7,44 @@ use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
 use Mapper;
+use PDF;
+use Validator;
+use URL;
+use Session;
+use Redirect;
+use Input;
+/** All Paypal Details class **/
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\PaymentExecution;
+use PayPal\Api\Transaction;
+use App\Jobs;
 
 class ExtraSkills extends Controller{
+	/*paypal*/
+	 private $_api_context;
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //parent::__construct();
+        
+        /** setup PayPal api context **/
+        $paypal_conf = \Config::get('paypal');
+        $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
+        $this->_api_context->setConfig($paypal_conf['settings']);
+    }
     
     public function writings(Request $request){
 
@@ -131,6 +167,11 @@ class ExtraSkills extends Controller{
     }
 
     public function addEditUpskill(Request $request){
+		 $rec = DB::table('jcm_upskillpayment')->where('id','=',$request->cat_id)->get();
+	   $amount=$rec[0]->price;
+	   //dd();
+	   $durations= $amount*$request->duration;
+	  // $request->session()->put('vacancy', $request->vacancy);
         $app = $request->session()->get('jcmUser');
         if($request->ajax()){
             $this->validate($request,[
@@ -184,7 +225,8 @@ class ExtraSkills extends Controller{
             foreach($opHours as $i => $k){
                 $timing[$i] = array('from' => $k[0], 'to' => $k[1]);
             }
-
+            $input['amount'] = $durations;
+			$input['cat_id'] = trim($request->input('cat_id'));
             $input['title'] = trim($request->input('title'));
             $input['type'] = trim($request->input('type'));
             $input['organiser'] = trim($request->input('organiser'));
@@ -207,6 +249,11 @@ class ExtraSkills extends Controller{
             $input['startDate'] = trim($request->input('startDate'));
             $input['endDate'] = trim($request->input('endDate'));
             $input['timing'] = @json_encode($timing);
+			$input['userId'] = $app->userId;
+            $input['createdTime'] = date('Y-m-d H:i:s');
+			$request->session()->put('input', $input);
+			$alldata = Session::get('input');
+			//dd($alldata['amount']);
 
             if($request->input('accommodation') == 'on'){
                 $input['cost'] = '0';
@@ -214,12 +261,13 @@ class ExtraSkills extends Controller{
 
             if($request->input('skillId') != '' && $request->input('skillId') != '0'){
                 DB::table('jcm_upskills')->where('skillId','=',$request->input('skillId'))->update($input);
+                exit(1);
             }else{
-                $input['userId'] = $app->userId;
-                $input['createdTime'] = date('Y-m-d H:i:s');
-                DB::table('jcm_upskills')->insert($input);
+               
+                //DB::table('jcm_upskills')->insert($input);
+                return 1 ;
             }
-            exit('1');
+          exit(1);
         }
         $segment = $request->segment(3);
         $upskill = (object) array();
@@ -238,6 +286,114 @@ class ExtraSkills extends Controller{
 		//dd($uppayment);
     	return view('frontend.add-edit-upskill',compact('upskill','uppayment'));
     }
+	
+	
+	
+		public function postPayment(Request $request)
+    {
+		$am = Session::get('input');
+			//dd($am['amount']);
+		
+		//dd(Session::get('amount'));
+		//exit();
+        $payer = new Payer();
+		//dd($payer);
+        $payer->setPaymentMethod('paypal');
+        $item_1 = new Item();
+        $item_1->setName('Item 1') /** item name **/
+            ->setCurrency('USD')
+            ->setQuantity(1)
+            ->setPrice($am['amount']); /** unit price **/
+        $item_list = new ItemList();
+        $item_list->setItems(array($item_1));
+        $amount = new Amount();
+        $amount->setCurrency('USD')
+            ->setTotal($am['amount']);
+        $transaction = new Transaction();
+        $transaction->setAmount($amount)
+            ->setItemList($item_list)
+            ->setDescription('Your transaction description');
+        $redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('payment.skillstatus')) /** Specify return URL **/
+            ->setCancelUrl(URL::route('payment.skillstatus'));
+        $payment = new Payment();
+        $payment->setIntent('Sale')
+            ->setPayer($payer)
+            ->setRedirectUrls($redirect_urls)
+            ->setTransactions(array($transaction));
+            /** dd($payment->create($this->_api_context));exit; **/
+        try {
+			//dd($this->_api_context);
+            $payment->create($this->_api_context);
+        } catch (\PayPal\Exception\PPConnectionException $ex) {
+            if (\Config::get('app.debug')) {
+                return 'Connection timeout';
+                return Redirect::route('add.frontend.employer.post-job');
+                /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
+                /** $err_data = json_decode($ex->getData(), true); **/
+                /** exit; **/
+            } else {
+                return 'Some error occur, sorry for inconvenient';
+                return Redirect::route('ey.frontend.employer.post-job');
+                /** die('Some error occur, sorry for inconvenient'); **/
+            }
+        }
+        foreach($payment->getLinks() as $link) {
+            if($link->getRel() == 'approval_url') {
+                $redirect_url = $link->getHref();
+                break;
+            }
+        }
+		 $pay_id=$payment->getId();
+         Session::put('paypal_payment_id', $payment->getId());
+        /** add payment ID to session **/
+		// $pay_id=$payment->getId();
+        if(isset($redirect_url)) {
+            /** redirect to paypal **/
+	
+            return Redirect::away($redirect_url);
+        }
+       return 'Unknown error occurred';
+        return Redirect::route('frontend.employer.post-job');
+    
+	}
+	
+    public function getStatus(Request $request)
+    {
+		$payment_id = Session::get('paypal_payment_id');
+		$input = Session::get('input');
+		//dd($input);
+	   DB::table('jcm_upskills')->insert($input);
+		echo $jobId;
+        /** Get the payment ID before session clear **/
+        
+        /** clear the session payment ID **/
+        Session::forget('paypal_payment_id');
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+            \Session::put('error','Payment failed');
+            return Redirect::route('addmoney.frontend.employer.post-job');
+        }
+        $payment = Payment::get($payment_id, $this->_api_context);
+        /** PaymentExecution object includes information necessary **/
+        /** to execute a PayPal account payment. **/
+        /** The payer_id is added to the request query parameters **/
+        /** when the user is redirected from paypal back to your site **/
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+        /**Execute the payment **/
+        $result = $payment->execute($execution, $this->_api_context);
+        /** dd($result);exit; /** DEBUG RESULT, remove it later **/
+        if ($result->getState() == 'approved') { 
+            
+            /** it's all right **/
+            /** Here Write your database logic like that insert record or value in database if you want **/
+            \Session::put('success','Payment success');
+            return Redirect::route('addmoney.account/employer/job/share');
+        }
+        \Session::put('error','Payment failed');
+        return Redirect::route('addmoney.frontend.employer.post-job');
+    }
+	
 
     public function deleteUpskill(Request $request,$skillId){
         if(!$request->ajax()){

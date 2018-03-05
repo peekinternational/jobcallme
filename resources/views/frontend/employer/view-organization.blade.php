@@ -108,6 +108,12 @@ if($company->companyLogo != ''){
                                            <input type="text" class="form-control companyName" name="companyName" id="companyName" placeholder="Company Title" value="{{ $company->companyName }}">
                                        </div>
                                    </div>
+								   <div class="form-group">
+                                       <label class="control-label col-sm-3">@lang('home.corporatenumber')</label>
+                                       <div class="col-sm-9 pnj-form-field">
+                                           <input type="text" class="form-control companyName" name="corporatenumber" id="companyName" placeholder="@lang('home.corporatenumbertext')" value="{{ $company->companyName }}">
+                                       </div>
+                                   </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.industry')</label>
                                        <div class="col-sm-9 pnj-form-field">
@@ -186,9 +192,37 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3">Total Employees</label>
+                                       <label class="control-label col-sm-3">@lang('home.noemployees')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <input type="text" class="form-control companyNoOfUsers" name="companyNoOfUsers" id="companyNoOfUsers" placeholder="Total Employees" value="{{ $company->companyNoOfUsers }}">
+                                       </div>
+                                   </div>
+
+								   <div class="form-group">
+                                       <label class="control-label col-sm-3">@lang('home.capital')</label>
+                                       <div class="col-sm-9 pnj-form-field">
+                                           <input type="text" class="form-control" name="capital" id="capital" placeholder="@lang('home.capitaltext')" value="{{ $company->capital }}">
+                                       </div>
+                                   </div>
+
+								   <div class="form-group">
+                                       <label class="control-label col-sm-3">@lang('home.sales')</label>
+                                       <div class="col-sm-9 pnj-form-field">
+                                           <input type="text" class="form-control companyNoOfUsers" name="sales" id="sales" placeholder="@lang('home.salestext')" value="{{ $company->sales }}">
+                                       </div>
+                                   </div>
+
+								   <div class="form-group">
+                                       <label class="control-label col-sm-3">@lang('home.formofbusiness')</label>
+                                       <div class="col-sm-9 pnj-form-field">
+                                           <select class="form-control input-sm select job-country" name="formofbusiness">
+												<option value="Small business" {{ $company->formofbusiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
+												<option value="Small and Medium-sized Businesses" {{ $company->formofbusiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
+												<option value="Major Company" {{ $company->formofbusiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
+												<option value="Listed Company" {{ $company->formofbusiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
+												<option value="Etc" {{ $company->formofbusiness == 'Etc' ? 'selected="selected"' : '' }}>@lang('home.Etc')</option>
+
+                                           </select>
                                        </div>
                                    </div>
                                    <div class="form-group">
@@ -393,6 +427,19 @@ if($company->companyLogo != ''){
                 </form>
             </div>
         </div>
+
+
+
+		<div class="eo-box eo-about">
+            
+            <h3 class="eo-about-heading">@lang('home.organizationmap')</h3>
+            <div class="eo-about-org">
+                <p></p>
+            </div>
+            
+        </div>
+
+
     </div>
 </section>
 @endsection

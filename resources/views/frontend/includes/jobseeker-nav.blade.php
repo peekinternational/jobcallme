@@ -47,7 +47,7 @@
                 </li>
                 <li>
                     <a href="{{url('account/manage?noti')}}">
-                        <img src="../frontend-assets/images/jobseek_icon9.png" style="padding-top:0px">
+                        <img src="../frontend-assets/images/employer_icon11.png" style="padding-top:0px">
                         <div class="udp-type">@lang('home.NOTIFICATION')</div>
                     </a>
                 </li>

@@ -9,7 +9,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @lang('home.departments')
-                    <button class="btn btn-primary pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="Add New Department" data-placement="bottom" onclick="addDepartment()">
+                    <button class="btn btn-primary pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="@lang('home.addDepartment')" data-placement="bottom" onclick="addDepartment()">
                         <i class="fa fa-plus"></i>
                     </button>
                 </div>
@@ -27,11 +27,11 @@
                                         <td>{!! $department->name !!}</td>
                                         <td>{!! JobCallMe::cityName($department->city).', '.JobCallMe::stateName($department->state).', '.JobCallMe::countryName($department->country) !!}</td>
                                         <td>
-                                            <a href="javascript:;" onclick="editDepartment({{ $department->departmentId }})"  data-toggle="tooltip" data-original-title="Edit">
+                                            <a href="javascript:;" onclick="editDepartment({{ $department->departmentId }})"  data-toggle="tooltip" data-original-title="@lang('home.Edit')">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
                                             &nbsp;&nbsp;&nbsp;
-                                            <a href="javascript:;" onclick="deleteDepartment({{ $department->departmentId }})"  data-toggle="tooltip" data-original-title="Delete">
+                                            <a href="javascript:;" onclick="deleteDepartment({{ $department->departmentId }})"  data-toggle="tooltip" data-original-title="@lang('home.Delete')">
                                                 <i class="fa fa-remove"></i>
                                             </a>
                                         </td>
@@ -47,7 +47,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="panel-title">@lang('home.addDepartment')</span>
-                    <button class="btn btn-warning pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="Go Back" data-placement="bottom" onclick="goBack()">
+                    <button class="btn btn-warning pull-right" style="margin-top: 10px;border-radius: 100%;" data-toggle="tooltip" data-original-title="@lang('home.goback')" data-placement="bottom" onclick="goBack()">
                         <i class="fa fa-arrow-left"></i>
                     </button>
                 </div>
@@ -56,9 +56,9 @@
                         <input type="hidden" name="_token" class="department-token">
                         <input type="hidden" name="departmentId" class="departmentId" value="0">
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">@lang('home.name')</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.departmentname')<!-- @lang('home.name') --></label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control input-sm" name="name" required="">
+                                <input type="text" class="form-control input-sm" placeholder="@lang('home.departmentname')" name="name" required="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -167,7 +167,7 @@ function getCities(stateId){
     })
 }
 function addDepartment(){
-    $('.add-edit-department .panel-title').text('Add Department');
+    $('.add-edit-department .panel-title').text('@lang("home.addDepartment")');
     $('.department-form input,.department-form textarea').val('');
     $('.view-department').hide();
     $('.add-edit-department').fadeIn();

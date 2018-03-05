@@ -28,6 +28,7 @@ $next = Request::route()->uri;
         <link href="{{ asset('frontend-assets/css/font-awesome.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/animate.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/select2.css') }}" rel="stylesheet">
+		<link href="{{ asset('frontend-assets/css/select3.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('frontend-assets/css/component.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/hover-min.css') }}" rel="stylesheet">
@@ -88,6 +89,7 @@ $next = Request::route()->uri;
          <script src="{{ asset('frontend-assets/js/rcrop.min.js') }}" ></script>
         <script src="{{ asset('frontend-assets/js/sajid.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/select2.js') }}"></script>
+		<script src="{{ asset('frontend-assets/js/select3.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/bootstrap-datetimepicker.js') }}"></script>
 		<!--For Text animation-->
          <script src="{{ asset('frontend-assets/js/TweenMax.min.js') }}"></script>
@@ -102,7 +104,7 @@ $next = Request::route()->uri;
        <!-- check if session is set then not include else include -->
         @if(!session()->has('jcmUser'))<script src="{{ asset('frontend-assets/js/feedBackBox.js') }}"></script>@endif
         <!-- pace -->
-        <script type="text/javascript" src="{{ asset('frontend-assets/pace/pace.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('frontend-assets/pace/pace.js') }}"></script>
         <script src="{{ asset('frontend-assets/tinymce/tinymce.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 		
@@ -151,7 +153,7 @@ $next = Request::route()->uri;
 
     <script type="text/javascript">
 
-        $(document).ready(function()
+         $(document).ready(function()
         {
 
             $("#hp_text").cooltext({
@@ -220,6 +222,132 @@ $next = Request::route()->uri;
         });
 
 
+
+		 $(document).ready(function()
+        {
+
+            $("#hp_text3").cooltext({
+                cycle:true,
+                sequence:[
+
+                    {action:"update", text:"전세계 잡콜미 회원들께서 회원님의 실시간 기사를 기다리고 있습니다!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600},					
+
+					{action:"update", text:"지금 등록해서 핫이슈를 전세계 회원들에게 알리십시오!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600}
+                ]
+            });
+
+        });
+
+
+
+        $(document).ready(function()
+        {
+
+            $("#hp_text4").cooltext({
+                cycle:true,
+                sequence:[
+                    {action:"update", text:"JCM Members around the world are waiting for your real-time article!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:2, animation:"cool266", stagger:600},
+					
+					{action:"update", text:"Register now and let your JCM world members know about hot issues!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:2, animation:"cool266", stagger:600}
+                ]
+            });
+
+        });
+
+
+		$(document).ready(function()
+        {
+
+            $("#hp_text5").cooltext({
+                cycle:true,
+                sequence:[
+
+                    {action:"update", text:"지식홍보는 사업주님의 성공 키워드입니다!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600},					
+
+					{action:"update", text:"지금 지식등록 홍보를 전세계에 알리십시오!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600}
+                ]
+            });
+
+        });
+
+
+
+        $(document).ready(function()
+        {
+
+            $("#hp_text6").cooltext({
+                cycle:true,
+                sequence:[
+                    {action:"update", text:"Knowledge PR is the keyword of success for your business!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:2, animation:"cool266", stagger:600},
+					
+					{action:"update", text:"Announce your knowledge registration promotion worldwide!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:2, animation:"cool266", stagger:600}
+                ]
+            });
+
+        });
+
+		$(document).ready(function()
+        {
+
+            $("#hp_text7").cooltext({
+                cycle:true,
+                sequence:[
+
+                    {action:"update", text:"채용정보!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600},					
+
+					{action:"update", text:"지금 지식등록 홍보를 전세계에 알리십시오!"},
+					{action:"animation", animation:"cool16", stagger:600},					
+					{action:"animation", delay:2, animation:"cool266", stagger:600}
+                ]
+            });
+
+        });
+
+
+
+        $(document).ready(function()
+        {
+
+            $("#hp_text8").cooltext({
+                cycle:true,
+                sequence:[
+                    {action:"update", text:"Knowledge PR is the keyword of success for your business!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:2, animation:"cool266", stagger:600},
+					
+					{action:"update", text:"Announce your knowledge registration promotion worldwide!"},
+					{action:"animation", animation:"cool16", stagger:600},
+					{action:"animation", animation:"cool103", stagger:600},
+					{action:"animation", delay:2, animation:"cool266", stagger:600}
+                ]
+            });
+
+        });
+
+
     </script>
 
         <!--Scroll to top Button-->
@@ -233,6 +361,7 @@ $next = Request::route()->uri;
         });
         $(document).ready(function() {
             $(".location,.select2").select2();
+			$(".select3").select3();
             @if(!session()->has('jcmUser'))$('#feedback-Form').feedBackBox();@endif
             var offset = 250;
             var duration = 300;
@@ -282,7 +411,7 @@ function getStates(countryId){
             var currentState = $('.job-state').attr('data-state');
             var obj = $.parseJSON(response);
             $(".job-state").html('');
-            var newOption = new Option('Select State', '0', true, false);
+            var newOption = new Option('@lang("home.s_state")', '0', true, false);
             $(".job-state").append(newOption).trigger('change');
             $.each(obj,function(i,k){
                 var vOption = k.id == currentState ? true : false;
@@ -300,7 +429,7 @@ $('.job-state').on('change',function(){
 function getCities(stateId){
     if(stateId == '0'){
         $(".job-city").html('').trigger('change');
-        var newOption = new Option('Select City', '0', true, false);
+        var newOption = new Option('@lang("home.s_city")', '0', true, false);
         $(".job-city").append(newOption).trigger('change');
         return false;
     }
@@ -310,7 +439,7 @@ function getCities(stateId){
             var currentCity = $('.job-city').attr('data-city');
             var obj = $.parseJSON(response);
             $(".job-city").html('').trigger('change');
-            var newOption = new Option('Select City', '0', true, false);
+            var newOption = new Option('@lang("home.s_city")', '0', true, false);
             $(".job-city").append(newOption).trigger('change');
             $.each(obj,function(i,k){
                 var vOption = k.id == currentCity ? true : false;
@@ -347,7 +476,7 @@ $('form.search-job').submit(function(e){
 
             $('.search-job select option[value=""]').prop('selected',true);
             $('.search-job input').val('');
-            $('.search-job .job-city').html('<option value="">Select City</option>');
+            $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
         }
     })
     isFirst = 1;
@@ -385,7 +514,7 @@ function saveJob(jobId,obj){
 @if(Session()->has('fNotice'))
 <div class="popup" data-popup="popup-1010">
     <div class="popup-inner">
-        <p>{!! Session()->get('fNotice') !!}</p>
+        <p>@lang('home.'.Session()->get('fNotice'))</p>
         <a class="popup-close" data-popup-close="popup-1010" href="#">&times;</a>
     </div>
 </div>

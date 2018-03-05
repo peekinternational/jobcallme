@@ -147,17 +147,17 @@ $lToken = csrf_token();
             <div class="col-md-8 col-md-offset-2">
                 <div class="col-md-6 login-type ">
                     <div class=" hi-icon-effect-8">
-                    <a href="{{ url('account/jobseeker') }}" class="hi-icon"> <img src="frontend-assets/images/jobseek_icon.png" style="padding-top:3px"></a>
+                    <a href="{{ url('account/jobseeker') }}" class="hi-icon"> <img src="frontend-assets/images/jobseek_icon.png"></a>
                     </div>
-                    <p style="font-size:17px"><b>@lang('home.ijobseeker')</b></p>
+                    <p style="font-size:17px;padding-top:5px;"><b>@lang('home.ijobseeker')</b></p>
                     <span>@lang('home.postresume')</span>
                 </div>
                 <div class="col-md-6 login-type ">
                     <div class="hi-icon-effect-8">
-                        <a href="{{ url('account/employer') }}" class="hi-icon"> <img src="frontend-assets/images/employer_icon.png" style="padding-top:3px"></a>
+                        <a href="{{ url('account/employer') }}" class="hi-icon"> <img src="frontend-assets/images/employer_icon.png"></a>
                     </div>
-                    <p style="font-size:17px"><b>@lang('home.iemployer')</b></p>
-                    <span>@lang('home.postjob')</span>
+                    <p style="font-size:17px;padding-top:5px;"><b>@lang('home.iemployer')</b></p>
+                    <span>@lang('home.postjob_main')</span>
                 </div>
             </div>
 			<?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9') ?>
@@ -209,7 +209,7 @@ $lToken = csrf_token();
                 <!--Premium Job Single item Start-->
 				@foreach($premium as $job)
                 <div class="col-sm-4">
-                    <div class="ih-item square effect15 left_to_right">
+                    <div class="ih-item square effect8 scale_up tc-box">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img pj-type-job">
                                 <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px;width:100% !important" alt="img">
@@ -258,13 +258,16 @@ $lToken = csrf_token();
                     <div class="ih-item square effect8 scale_up tc-box">
                         <a href="{{ url('companies/company/'.$comp->companyId) }}">
                             <div class="img-class">
-                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="" alt="img">
-<span>{!! $comp->title !!}</span>
+                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="" alt="img"><b class="pull-right">{!! $job->companyName !!}</b>
                             </div>
-							<span class="brand-jobs-link">View {!! $comp->count !!}jobs</span>
+							<span class="pj-single-details">
+								<p>{!! $job->title !!}</p>
+                                <p>ASK Development</p>
+                                <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</p>
+							</span>
                             <div class="info">
-                                <h3>{!! $comp->title !!}</h3>
-                                <p>{!! $comp->description !!}</p>
+                                <h3>{!! $comp->companyName !!}</h3>
+                                <p>{!! $comp->companyAbout !!}</p>
                               
                             </div>
 							  

@@ -9,9 +9,13 @@ if($user->profilePhoto != ''){
     $userImage = url('profile-photos/'.$user->profilePhoto);
 }
 ?>
-<section id="jobs">
+<section id="jobs" style="margin-bottom:70px">
     <div class="container">
-        <h3>@lang('home.setting')</h3>
+        <div class="follow-companies6" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
+                    <h3 style="margin-left: 15px">@lang('home.manage')</h3>
+				</div>
+
+		
         <div class="col-md-2 jobApp-tabs">
             <h5 class="mtab-heading">@lang('home.account')</h5>
             <a id="password" class="btn btn-block jaTabBtn ja-tab-active">@lang('home.changepassword')</a>
@@ -34,7 +38,7 @@ if($user->profilePhoto != ''){
 			
 			
             <h5 class="mtab-heading">@lang('home.deactivation')</h5>
-            <a class="btn btn-block" data-popup-open="popup-1">@lang('home.deactivateaccount')</a>
+            <a class="btn btn-block" data-popup-open="popup-1" style="margin-bottom:10px">@lang('home.deactivateaccount')</a>
         </div>
         <div class="col-md-10">
             <div class="ja-content">

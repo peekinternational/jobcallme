@@ -6,6 +6,7 @@
 /.idea
 /.vagrant
 /public/cometchat
+/public/upskill-images
 Homestead.json
 Homestead.yaml
 npm-debug.log

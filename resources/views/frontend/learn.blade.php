@@ -78,7 +78,7 @@
     text-decoration: none;">@lang('home.'.$skill->name)</a>
                         <?php $i++; } ?>
                     </div>
-                    <div class="promote-learning-box">
+                    <div class="promote-learning-box" style="margin-bottom:30px">
                         <a href="{{ url('account/upskill/add') }}" class="promote-learning-btn"><i class="fa fa-bullhorn"></i>&nbsp; @lang('home.promotesoluction')</a>
                     </div>
                 </div>
@@ -89,7 +89,12 @@
 <!--Learn Articles-->
 <section id="learn-articles">
     <div class="container">
-        <h1 style="margin-left: 15px">@lang('home.latestcourses')</h1>
+		
+		<div class="follow-companies3" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
+                    <h3 style="margin-left: 15px">@lang('home.latestcourses')</h3>
+				</div>
+
+        
         <div class="grid">
             <div class="grid-sizer col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>
             <!--Article Item-->
@@ -104,8 +109,12 @@
                         <div class="col-md-12">
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
                             <p>{{ $rec->organiser != '' ?  $rec->organiser : JobCallMe::userName($rec->userId) }}</p>
-                            <span>{{ $rec->type }}</span>
-                            <p><i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</p>
+                            <span>@lang('home.'.$rec->type)</span>
+                            <p><i class="fa fa-calendar"></i> @if(app()->getLocale() == "kr")
+						    {{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+						@else
+						    {{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+						@endif </p>
                             <div class="la-text">{{ substr(strip_tags($rec->description),0,200) }}</div>
                             <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
                             <div>

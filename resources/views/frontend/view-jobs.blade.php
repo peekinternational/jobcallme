@@ -3,8 +3,13 @@
 @section('title', 'Find Job')
 
 @section('content')
-<section id="jobs">
+<section id="jobs" style="margin-bottom:50px">
     <div class="container">
+
+		<div class="follow-companies4" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
+                    <h3 style="margin-left: 15px">@lang('home.jobs')</h3>
+				</div>
+
         <div class="col-md-12">
 		
             <div class="col-md-3 job-search-box">
@@ -16,18 +21,28 @@
                         <input type="text" class="form-control" name="keyword" value="{{ Request::input('keyword') }}" placeholder="@lang('home.key')">
                     </div>
                     <div class="form-group">
-                       <select class="form-control" name="categoryId">
+                       <select class="form-control job-category" name="categoryId" onchange="getSubCategories(this.value)">
                        		<option value="">@lang('home.s_category')</option>
                        		@foreach(JobCallMe::getCategories() as $cat)
-                                <option value="{!! $cat->categoryId !!}" {{ $cat->categoryId == Request::input('category') ? 'selected="selected"' : '' }}>@lang('home.'.$cat->name)</option>
+                                <option value="{!! $cat->categoryId !!}" {{ $cat->categoryId == Request::input('category') ? 'selected="selected"' : '' }}>@lang('home.'.$cat->name)<!-- {!! $cat->name !!} --></option>
                             @endforeach
                        </select>
+                    </div>
+					<div class="form-group">
+                       <select class="form-control job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
+									<option value="">@lang('home.Subcategory')</option>
+									</select>
+                    </div>
+					<div class="form-group">
+                       <select class="form-control job-sub-category2" name="subCategory2">
+								<option value="">@lang('home.Subcategory2')</option>
+									</select>
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="jobType">
                             <option value="">@lang('home.s_type')</option>
                             @foreach(JobCallMe::getJobType() as $jtype)
-                                <option value="{!! $jtype->name !!}" {{ $jtype->name == Request::input('type') ? 'selected="selected"' : '' }}>@lang('home.'.$jtype->name)</option>
+                                <option value="{!! $jtype->name !!}" {{ $jtype->name == Request::input('type') ? 'selected="selected"' : '' }}>{!! $jtype->name !!}</option>
                             @endforeach
                         </select>
                     </div>
@@ -35,7 +50,7 @@
                         <select class="form-control" name="jobShift">
                             <option value="">@lang('home.s_shift')</option>
                             @foreach(JobCallMe::getJobShifts() as $jshift)
-                                <option value="{!! $jshift->name !!}" {{ $jshift->name == Request::input('shift') ? 'selected="selected"' : '' }}>@lang('home.'.$jshift->name)</option>
+                                <option value="{!! $jshift->name !!}" {{ $jshift->name == Request::input('shift') ? 'selected="selected"' : '' }}>{!! $jshift->name !!}</option>
                             @endforeach
                         </select>
                     </div>
@@ -43,7 +58,7 @@
                         <select class="form-control" name="careerLevel">
                             <option value="">@lang('home.s_career')</option>
                             @foreach(JobCallMe::getCareerLevel() as $career)
-                                <option value="{!! $career !!}" {{ $career == Request::input('career') ? 'selected="selected"' : '' }}>@lang('home.'.$career)</option>
+                                <option value="{!! $career !!}" {{ $career == Request::input('career') ? 'selected="selected"' : '' }}>{!! $career !!}</option>
                             @endforeach
                         </select>
                     </div>
@@ -51,7 +66,7 @@
                         <select class="form-control" name="experience">
                             <option value="">@lang('home.s_experience')</option>
                             @foreach(JobCallMe::getExperienceLevel() as $experience)
-                                <option value="{!! $experience !!}" {{ $experience == Request::input('experience') ? 'selected="selected"' : '' }}>@lang('home.'.$experience)</option>
+                                <option value="{!! $experience !!}" {{ $experience == Request::input('experience') ? 'selected="selected"' : '' }}>{!! $experience !!}</option>
                             @endforeach
                         </select>
                     </div>
@@ -59,7 +74,7 @@
                         <input type="text" class="form-control" name="minSalary" value="" placeholder="@lang('home.minsalary') ">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="maxSalary" value="" placeholder="@lang('home.maxsalary')">
+                        <input type="text" class="form-control" name="maxSalary" value="" placeholder="@lang('home.Maxsalary')">
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="currency">
@@ -106,11 +121,9 @@
 .jobs-suggestions img {
     position: absolute;
     right: 24px;
-    top: 60%;
+    top: 64%;
     vertical-align: top;
 	width:11%;
-	
-    height: 57px;
 
 }
 </style>
@@ -197,7 +210,7 @@ $('form.search-job').submit(function(e){
 
             $('.search-job select option[value=""]').prop('selected',true);
             $('.search-job input').val('');
-            $('.search-job .job-city').html('<option value="">Select City</option>');
+            $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
 		}
 	})
 	isFirst = 1;
@@ -228,5 +241,45 @@ function saveJob(jobId,obj){
         }
     })
 }
+
+
+
+ getSubCategories($('.job-category option:selected:selected').val());
+
+ getSubCategories2($('.job-category option:selected:selected').val());
+
+
+function getSubCategories(categoryId){
+    $.ajax({
+        url: "{{ url('account/get-subCategory') }}/"+categoryId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $(".job-sub-category").html('').trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = false;
+                var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
+                $(".job-sub-category").append(newOption).trigger('change');
+            })
+        }
+    })
+}
+
+function getSubCategories2(categoryId2){
+    $.ajax({
+        url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $(".job-sub-category2").html('').trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = false;
+                var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
+                $(".job-sub-category2").append(newOption).trigger('change');
+            })
+        }
+    })
+}
+
+
+
 </script>
 @endsection
