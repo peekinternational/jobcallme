@@ -198,11 +198,10 @@ class Jobs extends Controller{
 		$jobs->where('jcm_jobs.status','=','1');
 		
 		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
-		if($keyword != '') $jobs->where('jcm_jobs.title','=',$keyword);
+		//if($keyword != '') $jobs->where('jcm_jobs.title','=',$keyword);
 		if($city != '') $jobs->where('jcm_cities.name','=',$city);
 
-		/*if($keyword != ''){
-			$jobs->where('jcm_jobs.title','=',$keyword);
+		if($keyword != ''){
 			$jobs->where(function ($query) use ($keyword) {
 				$expl = @explode(' ', $keyword);
 				foreach($expl as $kw){
@@ -210,7 +209,7 @@ class Jobs extends Controller{
 					$query->orWhere('jcm_jobs.skills','LIKE','%'.$kw.'%');
 				}
 			});
-		}*/
+		}
 
 		$result = $jobs->orderBy('jobId','desc')->paginate(3);
 		

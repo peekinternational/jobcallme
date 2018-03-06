@@ -615,7 +615,7 @@ if($user->profilePhoto != ''){
                                     <input type="text" class="form-control input-sm date-picker" name="startDate">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="enddate">
                                 <label class="control-label col-md-3 text-right">@lang('home.edate')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-picker" name="endDate">
@@ -847,7 +847,7 @@ if($user->profilePhoto != ''){
                                     </div>
                                 </div>
                             </div>
-							    <div class="form-group">
+							    <div class="form-group" id="projectendyear">
                                 <label class="control-label col-md-3 text-right">@lang('home.endyear')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="eyear" name="endyear">
@@ -856,7 +856,7 @@ if($user->profilePhoto != ''){
                                     </select>
                                 </div>
                             </div>
-							 <div class="form-group">
+							 <div class="form-group" id="projectendmonth">
                                 <label class="control-label col-md-3 text-right">@lang('home.endmonth')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="emonth" name="endmonth">
@@ -1785,6 +1785,35 @@ textarea.form-control{resize: vertical;}
 }
 </style>
 <script type="text/javascript">
+ $('#Currently').on('change', function() {
+  // process= $('#addprocess').val();
+    if(this.checked)
+    {
+        //alert("hi nabeel");
+       // $('#addlable').show();
+        $('#enddate').hide();
+    }
+    else{
+       // $('#addlable').hide();
+        $('#enddate').show();
+    }
+});
+
+ $('#currently').on('change', function() {
+  // process= $('#addprocess').val();
+    if(this.checked)
+    {
+        //alert("hi nabeel");
+       // $('#addlable').show();
+        $('#projectendmonth').hide();
+        $('#projectendyear').hide();
+    }
+    else{
+       // $('#addlable').hide();
+        $('#projectendmonth').show();
+         $('#projectendyear').show();
+    }
+});
 
  getSubCategories($('.job-category option:selected:selected').val());
 
