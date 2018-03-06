@@ -216,11 +216,11 @@ if($company->companyLogo != ''){
                                        <label class="control-label col-sm-3">@lang('home.formofbusiness')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <select class="form-control input-sm select job-country" name="formofbusiness">
-												<option value="Small business" {{ $company->formofbusiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
-												<option value="Small and Medium-sized Businesses" {{ $company->formofbusiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
-												<option value="Major Company" {{ $company->formofbusiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
-												<option value="Listed Company" {{ $company->formofbusiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
-												<option value="Etc" {{ $company->formofbusiness == 'Etc' ? 'selected="selected"' : '' }}>@lang('home.Etc')</option>
+												<option value="Small business" {{ $company->formofbussiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
+												<option value="Small and Medium-sized Businesses" {{ $company->formofbussiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
+												<option value="Major Company" {{ $company->formofbussiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
+												<option value="Listed Company" {{ $company->formofbussiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
+												<option value="Etc" {{ $company->formofbussiness == 'Etc' ? 'selected="selected"' : '' }}>@lang('home.Etc')</option>
 
                                            </select>
                                        </div>
