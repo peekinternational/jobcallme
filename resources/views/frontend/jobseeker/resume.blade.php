@@ -190,8 +190,6 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.education')</label>
                                 <div class="col-md-6">
                                     <select class="form-control" name="education">                                    
-                                        
-                                        <option value="">@lang('home.highschool')</option>
                                         <option value="highschool">@lang('home.highschool')</option>
                                         <option value="college">@lang('home.college')</option>
                                         <option value="university">@lang('home.university')</option>
@@ -461,7 +459,7 @@ if($user->profilePhoto != ''){
                     <!--Certification Section Start-->
                     <section class="resume-box" id="certification">
                         <a class="btn btn-primary r-add-btn" onclick="addCertification()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.certification')</h4>
+                        <h4><i class="fa fa-certificate r-icon bg-primary"></i>  @lang('home.certification')</h4>
                         <ul class="resume-details">
                             @if(count($resume['certification']) > 0)
                                 @foreach($resume['certification'] as $resumeId => $certification)
@@ -487,7 +485,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="certification-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addcertification')</c></h4>
+                        <h4><i class="fa fa-certificate r-icon bg-primary"></i>  <c>@lang('home.addcertification')</c></h4>
                         <form class="form-horizontal form-certification" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -564,7 +562,7 @@ if($user->profilePhoto != ''){
                     <!--Experience Section Start-->
                     <section class="resume-box" id="experience">
                         <a class="btn btn-primary r-add-btn" onclick="addExperience()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.experiences')</h4>
+                        <h4><i class="fa fa-briefcase r-icon bg-primary"></i>  @lang('home.experiences')</h4>
                         <ul class="resume-details">
                             @if(count($resume['experience']) > 0)
                                 @foreach($resume['experience'] as $resumeId => $experience)
@@ -589,7 +587,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="experience-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
+                        <h4><i class="fa fa-briefcase r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
                         <form class="form-horizontal form-experience" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -675,7 +673,7 @@ if($user->profilePhoto != ''){
                     <!--Skills Section Start-->
                     <section class="resume-box" id="skills">
                         <a class="btn btn-primary r-add-btn" onclick="addSkills()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.skills')</h4>
+                        <h4><i class="fa fa-graduation-cap r-icon bg-primary"></i> @lang('home.skills')</h4>
                         <ul class="resume-details">
                             @if(count($resume['skills']) > 0)
                                 @foreach($resume['skills'] as $resumeId => $skills)
@@ -698,7 +696,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="skills-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
+                        <h4><i class="fa fa-graduation-cap r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
                         <form class="form-horizontal form-skills" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -734,7 +732,7 @@ if($user->profilePhoto != ''){
 					<!---Project -->
 					   <section class="resume-box" id="ski">
                         <a class="btn btn-primary r-add-btn" onclick="addProject()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.project')</h4>
+                        <h4><i class="fa fa-tasks r-icon bg-primary"></i> @lang('home.project')</h4>
                         <ul class="resume-details">
                             @if(count($resume['project']) > 0)
                                 @foreach($resume['project'] as $resumeId => $skills)
@@ -761,7 +759,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="ski-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.project')</c></h4>
+                        <h4><i class="fa fa-tasks r-icon bg-primary"></i>  <c>@lang('home.project')</c></h4>
                         <form class="form-horizontal form-ski" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -896,7 +894,7 @@ if($user->profilePhoto != ''){
 					<!---Affilation -->
 					   <section class="resume-box" id="aff">
                         <a class="btn btn-primary r-add-btn" onclick="addAffi()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Affiliation')</h4>
+                        <h4><i class="fa fa-houzz r-icon bg-primary"></i> @lang('home.Affiliation')</h4>
                         <ul class="resume-details">
                             @if(count($resume['affiliation']) > 0)
                                 @foreach($resume['affiliation'] as $resumeId => $afflls)
@@ -922,7 +920,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="aff-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.Affiliation')</c></h4>
+                        <h4><i class="fa fa-houzz r-icon bg-primary"></i>  <c>@lang('home.Affiliation')</c></h4>
                         <form class="form-horizontal form-aff" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -1045,7 +1043,7 @@ if($user->profilePhoto != ''){
 					<!---Project -->
 					   <section class="resume-box" id="sk">
                         <a class="btn btn-primary r-add-btn" onclick="addLanguage()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.language')</h4>
+                        <h4><i class="fa fa-language r-icon bg-primary"></i> @lang('home.language')</h4>
                         <ul class="resume-details">
                             @if(count($resume['language']) > 0)
                                 @foreach($resume['language'] as $resumeId => $skills)
@@ -1070,7 +1068,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="sk-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.language')</c></h4>
+                        <h4><i class="fa fa-language r-icon bg-primary"></i>  <c>@lang('home.language')</c></h4>
                         <form class="form-horizontal form-sk" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -1187,7 +1185,7 @@ if($user->profilePhoto != ''){
                     </section>
 					       <section class="resume-box" id="skill">
                         <a class="btn btn-primary r-add-btn" onclick="addSkill()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.references')</h4>
+                        <h4><i class="fa fa-users r-icon bg-primary"></i> @lang('home.references')</h4>
                         <ul class="resume-details">
                             @if(count($resume['reference']) > 0)
                                 @foreach($resume['reference'] as $resumeId => $skills)
@@ -1213,7 +1211,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="skill-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
+                        <h4><i class="fa fa-users r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
                         <form class="form-horizontal form-skill" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -1302,7 +1300,7 @@ if($user->profilePhoto != ''){
 					<!---Publication -->
 					   <section class="resume-box" id="skil">
                         <a class="btn btn-primary r-add-btn" onclick="addSkil()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.publication')</h4>
+                        <h4><i class="fa fa-newspaper-o r-icon bg-primary"></i> @lang('home.publication')</h4>
                         <ul class="resume-details">
                             @if(count($resume['publish']) > 0)
                                 @foreach($resume['publish'] as $resumeId => $skills)
@@ -1329,7 +1327,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="skil-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.publication')</c></h4>
+                        <h4><i class="fa fa-newspaper-o r-icon bg-primary"></i>  <c>@lang('home.publication')</c></h4>
                         <form class="form-horizontal form-skil" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -1422,7 +1420,7 @@ if($user->profilePhoto != ''){
 					
 					 <section class="resume-box" id="s">
                         <a class="btn btn-primary r-add-btn" onclick="addAward()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.award')</h4>
+                        <h4><i class="fa fa-trophy r-icon bg-primary"></i> @lang('home.award')</h4>
                         <ul class="resume-details">
                             @if(count($resume['award']) > 0)
                                 @foreach($resume['award'] as $resumeId => $skills)
@@ -1449,7 +1447,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="s-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.award')</c></h4>
+                        <h4><i class="fa fa-trophy r-icon bg-primary"></i>  <c>@lang('home.award')</c></h4>
                         <form class="form-horizontal form-s" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
