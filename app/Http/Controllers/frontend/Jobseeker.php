@@ -113,8 +113,9 @@ class Jobseeker extends Controller{
 		$user = DB::table('jcm_users')->where('userId',$app->userId)->first();
 		$meta = DB::table('jcm_users_meta')->where('userId',$app->userId)->first();
 		$resume = $this->userResume($app->userId);
+		$privacy = JobCallMe::getprivacy($app->userId);
 		//dd($user);exit;
-		return view('frontend.jobseeker.resume',compact('user','meta','resume'));
+		return view('frontend.jobseeker.resume',compact('user','meta','resume','privacy'));
 	}
 
 	public function userResume($userId){

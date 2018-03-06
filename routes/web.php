@@ -190,6 +190,7 @@ Route::group(['prefix' => 'account'], function () {
 
     /* employer */
     Route::get('employer','frontend\Employer@home');
+    Route::get('getprivcy','frontend\Employer@getprivacyrecord');
     Route::match(['get','post'],'employer/job/new','frontend\Employer@jobPost');
     Route::post('employer/job/save','frontend\Employer@saveJob');
     Route::get('employer/job/share/{id}','frontend\Employer@shareJob');

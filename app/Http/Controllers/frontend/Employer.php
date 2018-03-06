@@ -1119,7 +1119,6 @@ public function userResume($userId){
 		if($skills == 'on') $dataArray['skills'] = 'Yes';
 		if($projectVisible == 'on') $dataArray['projectVisible'] = 'Yes';
 		if($publicationsVisible == 'on') $dataArray['publicationsVisible'] = 'Yes';
-
 		$isExist = DB::table('jcm_privacy_setting')->where('userId','=',$app->userId)->get();
 		if(count($isExist) == 0){
 			$dataArray['userId'] = $app->userId;
@@ -1596,6 +1595,7 @@ public function userResume($userId){
 		 return view('frontend.employer.setfilter',compact('id'));
 		 
 		 }
+	
 		
 
 }

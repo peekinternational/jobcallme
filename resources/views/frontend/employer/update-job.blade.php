@@ -239,9 +239,11 @@
                             <label class="control-label col-sm-3">@lang('home.benefits')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
+                                    <?php $benefitserver = explode(',', $result->benefits); ?>
+                                    
                                     @foreach(JobCallMe::jobBenefits() as $benefit)
                                         <div class="col-md-4 benefits-checks">
-                                            <input id="{{ str_replace(' ','-',$benefit) }}"  type="checkbox" class="cbx-field" name="benefits[]" value="{{ $benefit }}" {{ $benefit == $result->benefits ? 'checked=""' : '' }}>
+                                            <input id="{{ str_replace(' ','-',$benefit) }}"  type="checkbox" class="cbx-field" name="benefits[]" value="{{ $benefit }}" @foreach($benefitserver as $benefitser) @if($benefit == $benefitser) checked @endif @endforeach>
                                             <label class="cbx" for="{{ str_replace(' ','-',$benefit) }}"></label>
                                             <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">{{ $benefit }}</label>
                                         </div>

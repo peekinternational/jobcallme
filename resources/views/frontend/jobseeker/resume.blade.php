@@ -1720,6 +1720,7 @@ if($user->profilePhoto != ''){
                     <form class="form-horizontal privacy-form" method="post" action="">
                         <input type="hidden" name="_token" value="">
                         <h4>@lang('home.privacysettings')</h4>
+                        
                         <div class="col-md-12">
                             <p style="margin-top: 4px">
                                 <input type="checkbox" id="profile-visible" class="switch-field" name="profile" {{ $privacy->profile != 'No' ? 'checked=""' : '' }}>
@@ -1752,13 +1753,13 @@ if($user->profilePhoto != ''){
                         </div>
 						<div class="col-md-12">
                             <p style="margin-top: 4px">
-                                <input type="checkbox" id="project-visible" class="switch-field" name="project" {{ $privacy->project != 'No' ? 'checked=""' : '' }}>
+                                <input type="checkbox" id="project-visible" class="switch-field" name="projectVisible" {{ $privacy->projectVisible != 'No' ? 'checked=""' : '' }}>
                                 <label for="project-visible" class="switch-label"></label> <span>@lang('home.projectsvisible')</span>
                             </p>
                         </div>
 						<div class="col-md-12">
                             <p style="margin-top: 4px">
-                                <input type="checkbox" id="publication-visible" class="switch-field" name="publication" {{ $privacy->publication != 'No' ? 'checked=""' : '' }}>
+                                <input type="checkbox" id="publication-visible" class="switch-field" name="publicationsVisible" {{ $privacy->publicationsVisible != 'No' ? 'checked=""' : '' }}>
                                 <label for="publication-visible" class="switch-label"></label> <span>@lang('home.publicationsvisible')</span>
                             </p>
                         </div>
@@ -2697,7 +2698,7 @@ var op = "";
 for(var ye= en ; ye >=sta; ye--){
   option += "<option value="+ye+">"+ ye +"</option>";
 }
-document.getElementById("stayear").innerHTML = op;
+/*document.getElementById("stayear").innerHTML = op;*/
 
 
 
@@ -2717,7 +2718,7 @@ function getSubCategories(categoryId){
 }
 
 function getSubCategories2(categoryId2){
-    $.ajax({
+   /* $.ajax({
         url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
         success: function(response){
             var obj = $.parseJSON(response);
@@ -2728,7 +2729,7 @@ function getSubCategories2(categoryId2){
                 $(".job-sub-category2").append(newOption).trigger('change');
             })
         }
-    })
+    })*/
 }
 
 

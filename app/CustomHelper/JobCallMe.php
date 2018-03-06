@@ -580,6 +580,9 @@ class JobCallMe{
 		    return $key;
 		}
 	}
+	public function getprivacy($userid){
+		return DB::table("jcm_privacy_setting")->where('userId',$userid)->first();
+	}
 }
 
 ?>
