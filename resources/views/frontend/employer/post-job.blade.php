@@ -313,18 +313,15 @@
                                         </div>
                                     @endforeach
                                     <div class="col-md-2 ">
-                                            <input id="addbenefit"  type="checkbox" class="cbx-field" name="" value="yes">
+                                            <input id="addbenefit"  type="checkbox" class="cbx-field" name="">
                                             <label class="cbx" for="addbenefit"></label>
                                             <label class="lbl" for="addbenefit">@lang('home.add')<!-- {{ $process }} --></label>
                                         </div>
-                                         <div class="optionBox" id="morebenefit" style="display:none">
-                                            <div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;">
+                                         <div class="optionBoxs" id="morebenefit" style="display:none">
+                                            <div class="col-md-8 pnj-salary " style="display: flex;margin-bottom: 9px;">
                                                 <input type="text" class="form-control" name="benefits[]" /><!-- <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span> -->
                                             </div>
-                                            
-                                          <!--  <div class="col-md-10 block">
-                                                <span class="add"><i class="fa fa-plus"></i></span>
-                                            </div> -->
+                                        
                                         </div>
 
 
@@ -405,15 +402,15 @@ $(document).ready(function(){
 		
 	})
     $('#addprocess').on('change', function() {
-   process= $('#addprocess').val();
+  // process= $('#addprocess').val();
     if(this.checked)
     {
         //alert("hi nabeel");
-        $('#addlable').show();
+        //$('#addlable').show();
         $('#moreprocess').show();
     }
     else{
-        $('#addlable').hide();
+        //$('#addlable').hide();
         $('#moreprocess').hide();
     }
 });
