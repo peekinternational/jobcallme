@@ -23,7 +23,7 @@
                
                
                   <!--  <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypals') !!}" > -->
-                        {!! Form::open(['action'=>['frontend\Employer@postPaymentWithpaypals'],'method'=>'post','class'=>'form-horizontal','files'=>true,'enctype'=>'multipart/form-data']) !!}
+    <form action='{{ url("paypals") }}' method='post' class='form-horizontal' enctype='multipart/form-data'>
                         {{ csrf_field() }}
 						
                     
@@ -80,7 +80,7 @@
 						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="title" id="title" required >
+                                <input type="text" class="form-control" name="title" id="title"  >
                             </div>
                         </div>
                         <div class="form-group">
@@ -144,7 +144,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.vacancy')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="vacancy" placeholder="@lang('home.numbervacancy')" required>
+                                <input type="text" class="form-control" name="vacancy" placeholder="@lang('home.numbervacancy')" >
                             </div>
                         </div>
                         <div class="form-group">
@@ -162,7 +162,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.qualification')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="qualification" placeholder="@lang('home.qualification')" required>
+                                <input type="text" class="form-control" name="qualification" placeholder="@lang('home.qualification')" >
                             </div>
                         </div>
                         <div class="form-group">
@@ -206,7 +206,7 @@
 					   <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.jobaddr')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="jobaddr" id="jobaddr" placeholder="@lang('home.jobaddrtext')" required >
+                                <input type="text" class="form-control" name="jobaddr" id="jobaddr" placeholder="@lang('home.jobaddrtext')"  >
                             </div>
                         </div>
 
@@ -256,10 +256,10 @@
                                             <label class="lbl" for="{{ str_replace(' ','-',$process) }}">@lang('home.'.$process)<!-- {{ $process }} --></label>
                                         </div>
                                     @endforeach
-                                     <div class="col-md-4 ">
-                                            <input id="addprocess"  type="checkbox" class="cbx-field" name="" value="yes">
+                                        <div class="col-md-4 ">
+                                            <input id="addprocess"  type="checkbox" class="cbx-field" value="yes">
                                             <label class="cbx" for="addprocess"></label>
-                                            <label class="lbl" for="addprocess">@lang('home.add')<!-- {{ $process }} --></label>
+                                            <label class="lbl" for="addprocess">@lang('home.add')</label>
                                         </div>
                                         <div class="optionBox" id="moreprocess" style="display:none">
                                             <div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;">
@@ -286,10 +286,10 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="text" class="form-control" name="minSalary" placeholder="@lang('home.minsalary') 20,000,000" required>
+                                        <input type="text" class="form-control" name="minSalary" placeholder="@lang('home.minsalary') 20,000,000" >
                                     </div>
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="text" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary') 25,000,000" required>
+                                        <input type="text" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary') 25,000,000" >
                                     </div>
                                     <div class="col-md-4">
                                         <select class="form-control col-md-4 select2" name="currency">
@@ -438,7 +438,7 @@ $(document).ready(function(){
 });
 
 $('.add').click(function() {
-    $('.block:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+    $('.block:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="processadd[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
 
 });
 $('.optionBox').on('click','.remove',function() {

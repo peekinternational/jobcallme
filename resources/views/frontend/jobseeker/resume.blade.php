@@ -33,7 +33,8 @@ if($user->profilePhoto != ''){
                                             @lang('home.change') <i class="fa fa-camera"></i>
                                             <input type="file" class="upload profile-pic" name="image" />
                                         </div>
-                                        <!-- <span id="remove-re-image">Remove <i class="fa fa-remove"></i></span> -->
+                                        <span id="remove-re-image" style="margin-right: 42px;" onclick="removeResumePic()">Remove <i class="fa fa-remove"></i></span>
+                                        <p id="remove-re-image" style="margin-right: 71px;" onclick="editResumeProPic()">Edit <i class="fa fa-edit"><input type="hidden" value="{{ session()->get('jcmUser')->userId }}" id="userID" ></i></p>
                                     </div>
                                 </div>
                                 <h3 class="hidden-md hidden-lg" style="font-weight: 600">{{ $user->firstName.' '.$user->lastName }}</h3>
@@ -1768,6 +1769,34 @@ if($user->profilePhoto != ''){
         </div>
     </div>
 </section>
+<div id="editProResumeModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+       <div class="row">
+           <div class="col-md-9">
+                <div id="proEditImg">
+                    <img src="" class="img-responsive">
+                </div>
+           </div>
+           <div class="col-md-3">
+               <div id="custom-preview-wrapper"></div>
+           </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Crop</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 @endsection
 @section('page-footer')
 <style type="text/css">
@@ -2758,7 +2787,81 @@ function getSubCategories2(categoryId2){
         }
     })*/
 }
+//**dataURL to blob**
+    function dataURLtoBlob(dataurl) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type:mime});
+    }
 
+    //**blob to dataURL**
+    function blobToDataURL(blob, callback) {
+        var a = new FileReader();
+        a.onload = function(e) {callback(e.target.result);}
+        a.readAsDataURL(blob);
+    }
+    function editResumeProPic(){
+        var proImg = $('.img-circle').attr('src');
+       $('#editProResumeModel').modal('show');
+       $('#proEditImg img').attr('src',proImg);
+       $('#proEditImg img').rcrop({
+            minSize : [100,100],
+            preserveAspectRatio : true,
+            
+            preview : {
+                display: true,
+                size : [100,100],
+                wrapper : '#custom-preview-wrapper'
+            }
+        });
+      
+    }
+    $('#proEditImg img').on('rcrop-changed', function(){
+        var srcOriginal = $(this).rcrop('getDataURL');
+        var srcResized = $(this).rcrop('getDataURL', 50,50);
+        var userId = "{{ session()->get('jcmUser')->userId }}";
+        $('.img-circle').attr('src',srcOriginal);
+        //test:
+        var blob = dataURLtoBlob(srcOriginal);
+        var imagelink = $('#proEditImg img').attr('src');
+
+        /*blobToDataURL(blob, function(dataurl){
+            console.log(dataurl);
+        });*/
+        var fd = new FormData();
+        fd.append('profileImage', blob);
+        fd.append('_token', "{{ csrf_token() }}");
+        fd.append('userId', userId);
+        fd.append('imagelink', imagelink);
+        $.ajax({
+            type: 'POST',
+            url: '{{ url("cropProfileImage") }}',
+            data: fd,
+            processData: false,
+            contentType: false
+        }).done(function(data) {
+               console.log(data);
+        });
+        
+    });
+    function removeResumePic(){
+       var userId = $('#userID').val();
+       //alert(userId);
+       $.ajax({
+        url:'{{ url("account/manage/removeProPic") }}',
+        data:{userId:userId,_token:'{{ csrf_token() }}'},
+        type:'POST',
+        success:function(res){
+            if(res == 1){
+                toastr.success('Profile Pic Remove');
+                $('.img-circle').attr('src','{{ asset("profile-photos/profile-logo.jpg") }}');
+            }
+        }
+       });
+    }
 
 </script>
 @endsection

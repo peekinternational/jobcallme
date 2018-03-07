@@ -691,6 +691,27 @@ public function changepropic(Request $request){
 	/*DB::table('jcm_users')->where('userId',$userid)->update(['profileImage' => $profileImage,'profilePhoto'=>'']);*/
 
 }
+public function changecompanypropic(Request $request){
+	$userid = $request->input('userId');
+	$imagelink = $request->input('imagelink');
+	$oldImageName = pathinfo($imagelink);
+	$image = $_FILES['profileImage'];
+	$tmp = $image['tmp_name'];
+	$newfile = $oldImageName['basename'];
+	unlink('compnay-logo/'.$newfile);
+	move_uploaded_file($tmp,'compnay-logo/'.$newfile);
+	/*DB::table('jcm_users')->where('userId',$userid)->update(['profileImage' => $profileImage,'profilePhoto'=>'']);*/
+
+}
+public function removeCompanyProPic(Request $request){
+	 $comId = session()->get('jcmUser')->companyId;
+	 
+	if( DB::table('jcm_companies')->where('companyId',$comId)->update(['companyLogo'=>''])){
+		echo 1;
+	}else{
+		echo 2;
+	}
+}
 public function deactiveUser(Request $request){
 	$id = $request->input('id');
 	if(DB::table('jcm_users')->where('userId','=',$id)->update(['user_status'=>'N'])){
