@@ -176,7 +176,7 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6">
 									<select class="form-control select2" name="experiance">
 										@foreach(JobCallMe::getCareerLevel() as $career)
-											<option value="{!! $career !!}">@lang('home.'.$career)</option>
+											<option value="{!! $career !!}" {{ $meta->experiance == $career ? 'selected="selected"' : '' }}>@lang('home.'.$career)</option>
 										@endforeach
 									</select>
 
@@ -191,10 +191,10 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.education')</label>
                                 <div class="col-md-6">
                                     <select class="form-control" name="education">                                    
-                                        <option value="highschool">@lang('home.highschool')</option>
-                                        <option value="college">@lang('home.college')</option>
-                                        <option value="university">@lang('home.university')</option>
-                                        <option value="graduateschool">@lang('home.graduateschool')</option>
+                                        <option value="highschool" {{ $meta->education == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
+                                        <option value="college" {{ $meta->education == 'college' ? 'selected="selected"' : '' }}>@lang('home.college')</option>
+                                        <option value="university" {{ $meta->education == 'university' ? 'selected="selected"' : '' }}>@lang('home.university')</option>
+                                        <option value="graduateschool" {{ $meta->education == 'graduateschool' ? 'selected="selected"' : '' }}>@lang('home.graduateschool')</option>
                                         <option value="phd">@lang('home.phd')</option>
                                     
 									</select>
@@ -2774,18 +2774,18 @@ function getSubCategories(categoryId){
 }
 
 function getSubCategories2(categoryId2){
-   /* $.ajax({
+    $.ajax({
         url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
         success: function(response){
             var obj = $.parseJSON(response);
             $(".job-sub-category2").html('').trigger('change');
             $.each(obj,function(i,k){
                 var vOption = false;
-                var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
+                var newOption = new Option(k.subName, k.subCategoryId2, true, vOption);
                 $(".job-sub-category2").append(newOption).trigger('change');
             })
         }
-    })*/
+    })
 }
 //**dataURL to blob**
     function dataURLtoBlob(dataurl) {

@@ -167,8 +167,39 @@ class Jobs extends Controller{
                     if($rec->companyLogo != ''){
                     	$cLogo = url('compnay-logo/'.$rec->companyLogo);
                     }
-                    $vhtml .= '<p class="js-note">'.$rec->description.'<img src="'.$cLogo.'" width="100"></p>';
-                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.JobCallMe::cityName($rec->city).', '.JobCallMe::countryName($rec->country).'<span class="pull-right" style="color: #999999;">'.date('M d,Y',strtotime($rec->createdTime)).'</span></p>';
+					
+                     $string = strip_tags($rec->description);
+                        if (strlen($string) > 100) {
+
+                        // truncate string
+                            $stringCut = substr($string, 0, 600);
+                             $endPoint = strrpos($stringCut, ' ');
+
+                        //if the string doesn't contain any space then it will cut without word basis.
+                            $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+                            $string .= '<a href="'.$viewUrl.'">... ReadMore</a>';
+                        }
+                   
+
+                   
+                    $vhtml .= '<p class="js-note">'.$string.'<img style="padding-top: 17px;" src="'.$cLogo.'" width="100"></p>';
+                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.JobCallMe::cityName($rec->city).', '.JobCallMe::countryName($rec->country).'<span class="pull-right" style="color: #999999;margin-top: 28px;">'.date('M d,Y',strtotime($rec->createdTime)).'</span></p>';
+				
+				$job = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
+				$job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
+				$job->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
+				$job->where('jcm_jobs.status','=','1');
+				$job->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
+				$job->where('jcm_jobs.category','=',$rec->category);
+				$results = $job->limit(1)->inRandomOrder()->get();
+				//dd($results);
+				
+				foreach($results as $sim)
+				{
+					$comUrl = url('companies/company/'.$sim->companyId);
+					$cityUrl = url('jobs?city='.$sim->city);
+					$vhtml .= '<p style="color: #999999;text-transform: uppercase;"><a style="color: #999999;" href="'.$cityUrl.'">'.trans('home.similerjob').'  '.JobCallMe::cityName($sim->city).'</a><span style="padding-left: 85px;" ><a style="color: #999999;" href="'.$comUrl.'">'.trans('home.jobIn').' '.$sim->companyName.'</a></span></p>';
+				}
 				$vhtml .= '</div>';
 			}
 		}else{
@@ -276,7 +307,24 @@ class Jobs extends Controller{
                     	$cLogo = url('compnay-logo/'.$rec->companyLogo);
                     }
                     $vhtml .= '<p class="js-note">'.$rec->description.'<img src="'.$cLogo.'" width="100"></p>';
-                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.JobCallMe::cityName($rec->city).', '.JobCallMe::countryName($rec->country).'<span class="pull-right" style="color: #999999;">'.date('M d,Y',strtotime($rec->createdTime)).'</span></p>';
+                   $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.JobCallMe::cityName($rec->city).', '.JobCallMe::countryName($rec->country).'<span class="pull-right" style="color: #999999;margin-top: 15px;">'.date('M d,Y',strtotime($rec->createdTime)).'</span></p>';
+				
+				$job = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
+				$job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
+				$job->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
+				$job->where('jcm_jobs.status','=','1');
+				$job->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
+				$job->where('jcm_jobs.category','=',$rec->category);
+				$results = $job->limit(1)->inRandomOrder()->get();
+				//dd($results);
+				
+				foreach($results as $sim)
+				{
+					$comUrl = url('companies/company/'.$sim->companyId);
+					$cityUrl = url('jobs?city='.$sim->city);
+					$vhtml .= '<p style="color: #999999;text-transform: uppercase;"><a style="color: #999999;" href="'.$cityUrl.'">'.trans('home.similerjob').'  '.JobCallMe::cityName($sim->city).'</a><span style="padding-left: 85px;" ><a style="color: #999999;" href="'.$comUrl.'">'.trans('home.jobIn').' '.$sim->companyName.'</a></span></p>';
+				}
+				
 				$vhtml .= '</div>';
 			}
 		}else{
