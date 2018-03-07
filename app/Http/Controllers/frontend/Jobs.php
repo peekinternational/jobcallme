@@ -306,8 +306,23 @@ class Jobs extends Controller{
                     if($rec->companyLogo != ''){
                     	$cLogo = url('compnay-logo/'.$rec->companyLogo);
                     }
-                    $vhtml .= '<p class="js-note">'.$rec->description.'<img src="'.$cLogo.'" width="100"></p>';
-                   $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.JobCallMe::cityName($rec->city).', '.JobCallMe::countryName($rec->country).'<span class="pull-right" style="color: #999999;margin-top: 15px;">'.date('M d,Y',strtotime($rec->createdTime)).'</span></p>';
+                   	
+                     $string = strip_tags($rec->description);
+                        if (strlen($string) > 100) {
+
+                        // truncate string
+                            $stringCut = substr($string, 0, 600);
+                             $endPoint = strrpos($stringCut, ' ');
+
+                        //if the string doesn't contain any space then it will cut without word basis.
+                            $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+                            $string .= '<a href="'.$viewUrl.'">... ReadMore</a>';
+                        }
+                   
+
+                   
+                    $vhtml .= '<p class="js-note">'.$string.'<img style="padding-top: 28px;" src="'.$cLogo.'" width="100"></p>';
+                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.JobCallMe::cityName($rec->city).', '.JobCallMe::countryName($rec->country).'<span class="pull-right" style="color: #999999;margin-top: 28px;">'.date('M d,Y',strtotime($rec->createdTime)).'</span></p>';
 				
 				$job = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
 				$job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
