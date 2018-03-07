@@ -340,7 +340,7 @@ class JobCallMe{
 	}
 
 	public function getSubCategories($subCategoryId){
-		return DB::table('jcm_sub_categories')->where('subCategoryId','=',$subCategoryId)->get();
+		return DB::table('jcm_sub_categories')->where('categoryId','=',$subCategoryId)->get();
 	}
 
 	public function getSubCategories2($categoryId2){
