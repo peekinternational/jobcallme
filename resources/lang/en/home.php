@@ -55622,6 +55622,8 @@ return [
 "Cheongwon-gu, Cheongju-si"=>"Cheongwon-gu, Cheongju-si",
 "Heungdeok-gu, Cheongju-si"=>"Heungdeok-gu, Cheongju-si",
 "Chungju-si"=>"Chungju-si",
+'jobIn' => 'JOBS IN',
+'similerjob' => 'SIMILAR JOBS IN',
 
 
 
