@@ -583,6 +583,22 @@ class JobCallMe{
 	public function getprivacy($userid){
 		return DB::table("jcm_privacy_setting")->where('userId',$userid)->first();
 	}
+	public function registrationPassValidation($pass){
+
+		if(!preg_match('/[A-Z]/', $pass)){
+			return 1;
+			
+		}
+		if(!preg_match('/[0-9]/', $pass)){
+		 	return 1;
+		 
+		}
+		if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pass))
+		{
+		    return 1;
+		 	
+		} 
+	}
 	
 }
 

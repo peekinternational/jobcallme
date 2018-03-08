@@ -263,19 +263,6 @@ class Home extends Controller{
 			$regdata['lastName'] = $request->input('lastName');
 			$regdata['phoneNumber'] = $request->input('phoneNumber');
 			session()->put('regdata',$regdata);
-			if(!preg_match('/[A-Z]/', $request->input('password'))){
-				session()->flash('password-error',"password must have atleast one upper Char Digit Special Char");
-				return redirect('account/register');
-			}
-			if(!preg_match('/[0-9]/', $request->input('password'))){
-			 session()->flash('password-error',"password must have atleast one upper Char Digit Special Char");
-			 return redirect('account/register');
-			}
-			if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $request->input('password')))
-			{
-			    session()->flash('password-error',"password must have atleast one upper Char Digit Special Char");
-			 	return redirect('account/register');
-			} 
 			$input['companyId'] = '0';
 			$input['type'] = 'User';
 			$input['secretId'] = JobCallMe::randomString();
@@ -721,6 +708,9 @@ public function deactiveUser(Request $request){
 	}else{
 		echo 'error in home controller line number 598';
 	}
+}
+public function regvalpass(Request $request){
+	echo JobCallMe::registrationPassValidation($request->input('password'));
 }
 }
 ?>

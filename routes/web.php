@@ -33,6 +33,7 @@ Route::post('RemCompProImage','frontend\Home@removeCompanyProPic');
 Route::post('cropProfileImage','frontend\Home@changepropic');
 Route::post('cropCompanyProfileImage','frontend\Home@changecompanypropic');
 Route::post('deactiveUser','frontend\Home@deactiveUser');
+Route::post('passwordValidate','frontend\Home@regvalpass');
 
 Route::group(['prefix' => 'admin'], function () {
 	Auth::routes();
