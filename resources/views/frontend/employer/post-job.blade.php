@@ -257,7 +257,7 @@
                                             <label class="lbl" for="addprocess">@lang('home.add')</label>
                                         </div>
                                         <div class="optionBox" id="moreprocess" style="display:none">
-                                            <div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;">
+                                            <div class="col-md-8 pnj-salary block processblock" style="display: flex;margin-bottom: 9px;">
                                                 <input type="text" class="form-control" name="process[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
                                             </div>
                                             <div class="col-md-10 block">
@@ -312,7 +312,7 @@
                                             <label class="lbl" for="addbenefit">@lang('home.add')</label>
                                         </div>
                                         <div class="optionBox" id="morebenefit" style="display:none">
-                                            <div class="col-md-8 pnj-salary block2" style="display: flex;margin-bottom: 9px;">
+                                            <div class="col-md-8 pnj-salary block benefitblock" style="display: flex;margin-bottom: 9px;">
                                                 <input type="text" class="form-control" name="benefits[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
                                             </div>
                                             <div class="col-md-10 block">
@@ -434,11 +434,11 @@ $(document).ready(function(){
 });
 
 $('.add').click(function() {
-    $('.block:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+    $('.processblock:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
 
 });
 $('.add2').click(function() {
-    $('.block2:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+    $('.benefitblock:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
 
 });
 $('.optionBox').on('click','.remove',function() {
