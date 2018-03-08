@@ -52,7 +52,7 @@
                                         </ul>
 										
                                         <div class="credits b">@if($payment->price ==0)
-										@lang('home.Free')
+									<span class="free">	@lang('home.Free')</span>
 										@else
 										<span class="text-success">@lang('home.'.$payment->price)</span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
@@ -171,7 +171,7 @@
                                 <input type="text" class="form-control date-picker" id="secondDate" name="expiryDate" onkeypress="return false">
                             </div>
                         </div>
-						<div class="form-group">
+						<div class="form-group" id="durationdiv">
                             <label class="control-label col-sm-3">@lang('home.adduration')</label>
                             <div class="col-sm-9 pnj-form-field">
                            <input type="text" class="form-control" id="pas" name="duration" >
@@ -399,6 +399,16 @@ $(document).ready(function(){
 		console.log($(e.target).val());
 	 alrt=$(e.target).siblings('input').val();
 	 console.log(alrt);
+     if(alrt==0)
+     {
+         $('#durationdiv').hide();
+         $('#total').hide();
+        // alert("nabeel");
+     }
+     else{
+          $('#durationdiv').show();
+         $('#total').show();
+     }
 		
 	})
     $('#addprocess').on('change', function() {
@@ -428,7 +438,7 @@ $(document).ready(function(){
         $('#morebenefit').hide();
     }
 })
-  
+ 
   
 
     getStates($('.job-country option:selected:selected').val());

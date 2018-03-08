@@ -827,8 +827,10 @@ class Jobseeker extends Controller{
 		//dd($resume);
 		
 	//return view('frontend.jobseeker.resume');
-    	  $pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
-          return $pdf->download($name.'_cv.pdf');
+    	 $pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+		 // $pdf->SetFont('Courier', 'B', 18);
+        return $pdf->download($name.'_cv.pdf');
+		   //return view('frontend.cv',compact('user','meta','resume'));
 	}
 	
 		public function convertpdffile(Request $request, $id){

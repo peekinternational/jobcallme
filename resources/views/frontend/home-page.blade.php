@@ -202,7 +202,7 @@ $lToken = csrf_token();
     <section class="job-types-section" style="background:#fff;margin-top:-12px;">
         <div class="container">
 		<div>
-            <p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.prjob')</span><span style="float:right"><a style="font-size: 12px;color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+            <p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.prjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
 			</div>
             <!-- Left to right-->
             <div class="row">
@@ -247,7 +247,7 @@ $lToken = csrf_token();
     <!--Top Companies Section Start-->
     <section class="feature-companies">
         <div class="container">
-		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.topcompanies')</span><span style="float:right"><a style="font-size: 12px;color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.topcompanies')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
             
             <!--<p class="text-center" id="feature-companies-caption">Sigh ever way now many. Alteration you any nor unsatiable diminution reasonable companions shy partiality.</p>-->
             <!-- Scale up-->
@@ -286,7 +286,7 @@ $lToken = csrf_token();
     <!--Hot Jobs Section Start-->
     <section class="job-types-section" id="latest-jobs">
         <div class="container">
-			<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.hotjob')</span><span style="float:right"><a style="font-size: 12px;color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+			<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.hotjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
           
             <div class="row">
                 <!--Hot Job Single item Start-->
@@ -329,7 +329,7 @@ $lToken = csrf_token();
     <!--Latest Jobs Section Start-->
     <section class="job-types-section">
         <div class="container">
-		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.latestjob')</span><span style="float:right"><a style="font-size: 12px;color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.latestjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
           
             <div class="row">
                 <!--Latest Job Single item Start-->
@@ -373,7 +373,7 @@ $lToken = csrf_token();
     <!--Special Jobs Section Start-->
     <section class="job-types-section" id="latest-jobs">
         <div class="container">
-		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.specialjob')</span><span style="float:right"><a style="font-size: 12px;color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.specialjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
 
             <div class="row">
 			@foreach($special as $job)
@@ -418,7 +418,7 @@ $lToken = csrf_token();
     <!--Golden Jobs Section Start-->
     <section class="job-types-section">
         <div class="container">
-		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.goldjob')</span><span style="float:right"><a style="font-size: 12px;color:#333" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
+		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.goldjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
 
             <div class="row">
                 <div id="check"></div>

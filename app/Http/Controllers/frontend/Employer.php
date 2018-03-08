@@ -560,6 +560,12 @@ curl_close ($ch);
     	if(JobCallMe::hasCompany($request->session()->get('jcmUser')->userId) == false){
     		return redirect('account/employer/organization');
     	}
+	$departs = DB::table('jcm_departments')->select('departmentId','name')->where('userId','=',$request->session()->get('jcmUser')->userId)->get();
+		if(sizeof($departs)== "")
+		{
+			return redirect('account/employer/departments');
+		}
+		
     	$rec = DB::table('jcm_payments')->get();
 		//dd($rec);
 		return view('frontend.employer.post-job',compact('rec'));
