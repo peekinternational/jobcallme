@@ -5,6 +5,8 @@
 @section('content')
 
 <section id="postNewJob" style="margin-bottom:70px">
+ <form action='{{ url("paypals") }}' method='post' class='form-horizontal' enctype='multipart/form-data'>
+                        {{ csrf_field() }}
     <div class="container">
 
 	  <div class="row">
@@ -23,10 +25,6 @@
                
                
                   <!--  <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypals') !!}" > -->
-    <form action='{{ url("paypals") }}' method='post' class='form-horizontal' enctype='multipart/form-data'>
-                        {{ csrf_field() }}
-						
-                    
 					<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-top:30px;">
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                 
@@ -214,14 +212,11 @@
                             <label class="control-label col-sm-3">@lang('home.postcate1')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
-                                
-                                        <div class="col-md-4 benefits-checks">
-                                            <input id="head" type="checkbox" class="cbx-field" name="head" value="yes">								
-											<label class="cbx" for="head"></label>
-                                            <label class="lbl" for="head">@lang('home.abouthead')</label>
-                                            
-                                        </div>
-                              
+                                    <div class="col-md-4 benefits-checks">
+                                        <input id="head" type="checkbox" class="cbx-field" name="head" value="yes">								
+										<label class="cbx" for="head"></label>
+                                        <label class="lbl" for="head">@lang('home.abouthead')</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -265,7 +260,6 @@
                                             <div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;">
                                                 <input type="text" class="form-control" name="process[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
                                             </div>
-                                            
                                             <div class="col-md-10 block">
                                                 <span class="add"><i class="fa fa-plus"></i></span>
                                             </div>
@@ -312,16 +306,18 @@
                                             <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">{{ $benefit }}</label>
                                         </div>
                                     @endforeach
-                                    <div class="col-md-2 ">
-                                            <input id="addbenefit"  type="checkbox" class="cbx-field" name="">
+                                        <div class="col-md-4 ">
+                                            <input id="addbenefit"  type="checkbox" class="cbx-field" value="yes">
                                             <label class="cbx" for="addbenefit"></label>
-                                            <label class="lbl" for="addbenefit">@lang('home.add')<!-- {{ $process }} --></label>
+                                            <label class="lbl" for="addbenefit">@lang('home.add')</label>
                                         </div>
-                                         <div class="optionBoxs" id="morebenefit" style="display:none">
-                                            <div class="col-md-8 pnj-salary " style="display: flex;margin-bottom: 9px;">
-                                                <input type="text" class="form-control" name="benefits[]" /><!-- <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span> -->
+                                        <div class="optionBox" id="morebenefit" style="display:none">
+                                            <div class="col-md-8 pnj-salary block2" style="display: flex;margin-bottom: 9px;">
+                                                <input type="text" class="form-control" name="benefits[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
                                             </div>
-                                        
+                                            <div class="col-md-10 block">
+                                                <span class="add2"><i class="fa fa-plus"></i></span>
+                                            </div>
                                         </div>
 
 
@@ -381,13 +377,13 @@
 						<button type="submit" class="btn btn-primary" name="save">@lang('home.postjob')</button>
                         <a href="{{ url('account/employer') }}" class="btn btn-default">@lang('home.CANCEL')</a>
                     </div>
-                </form>
+                
             </div>
         </div>
     </div>
 	</div>
 	</div>
-
+</form>
 </section>
 @endsection
 @section('page-footer')
@@ -448,15 +444,19 @@ $(document).ready(function(){
 });
 
 $('.add').click(function() {
-    $('.block:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="processadd[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+    $('.block:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+
+});
+$('.add2').click(function() {
+    $('.block2:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
 
 });
 $('.optionBox').on('click','.remove',function() {
  	$(this).parent().remove();
 });
-	  $('#secondDate').on('change', function() {
-				  myfunc()
-			  });
+$('#secondDate').on('change', function() {
+		  myfunc()
+});
       
        function myfunc(){
        var start = new Date();
