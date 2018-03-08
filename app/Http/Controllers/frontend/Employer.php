@@ -887,15 +887,17 @@ public function userResume($userId){
 	}
 
 	public function savdOrganization(Request $request){
+		
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}
+
 		$app = $request->session()->get('jcmUser');
 		$companyId = JobCallMe::getUser($app->userId)->companyId;
 
 		extract($request->all());
 
-		$this->validate($request,[
+		/*$this->validate($request,[
 				'industry' => 'required',
 				'companyName' => 'required',
 				'companyAddress' => 'required',
@@ -910,18 +912,21 @@ public function userResume($userId){
 				'companyTwitter' => 'nullable|url',
 				'companyNoOfUsers' => 'required|numeric',
 				'companyEstablishDate' => 'required|date',
-			]);
+			]);*/
+
 		$opHours = $request->input('opHours');
 		foreach($opHours as $i => $k){
 			$opHoursArr[$i] = array('from' => $k[0], 'to' => $k[1]);
 		}
-
 		$inputOr = array('category' => $industry,'Capital' =>$capital,'sales' => $sales,'formofbussiness' => $formofbusiness,'companyName' => $companyName, 'companyAddress' => $companyAddress, 'companyEmail' => $companyEmail, 'companyPhoneNumber' => $companyPhoneNumber, 'companyState' => $companyState, 'companyCity' => $companyCity, 'companyCountry' => $companyCountry, 'companyWebsite' => $companyWebsite, 'companyFb' => $companyFb, 'companyLinkedin' => $companyLinkedin, 'companyTwitter' => $companyTwitter, 'companyNoOfUsers' => $companyNoOfUsers, 'companyEstablishDate' => $companyEstablishDate, 'companyOperationalHour' => @json_encode($opHoursArr), 'companyModifiedTime' => date('Y-m-d H:i:s'));
 		
 		if($companyId != '0'){
+			
 			DB::table('jcm_companies')->where('companyId','=',$companyId)->update($inputOr);
 		}else{
+			
 			$inputOr['companyCreatedTime'] = date('Y-m-d H:i:s');
+			
 			$companyId = DB::table('jcm_companies')->insertGetId($inputOr);
 		}
 		exit('1');

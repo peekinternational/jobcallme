@@ -78,13 +78,13 @@
 						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="title" id="title"  >
+                                <input type="text" class="form-control" name="title" id="title"  required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_department')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2" name="department">
+                                <select class="form-control select2" name="department" required>
                                     <option value="">@lang('home.s_department')</option>
                                     @foreach(JobCallMe::getDepartments() as $depart)
                                         <option value="{!! $depart->departmentId !!}">{!! $depart->name !!}</option>
@@ -95,7 +95,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_category')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-category" name="category" onchange="getSubCategories(this.value)">
+                                <select class="form-control select2 job-category" name="category" onchange="getSubCategories(this.value)" required>
 										<option value="">@lang('home.s_category')</option>
 									@foreach(JobCallMe::getCategories() as $cat)
                                         <option value="{!! $cat->categoryId !!}">@lang('home.'.$cat->name)</option>
@@ -106,7 +106,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.Subcategory')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
+                                <select class="form-control select2 job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)" required>
 									<option value="">@lang('home.Subcategory')</option>
 								</select>
                             </div>
@@ -114,7 +114,7 @@
 						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.Subcategory2')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-sub-category2" name="subCategory2">
+                                <select class="form-control select2 job-sub-category2" name="subCategory2" required>
 									<option value="">@lang('home.Subcategory2')</option>
                                 </select>
                             </div>
@@ -122,7 +122,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.careerlevel')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2" name="careerLevel">
+                                <select class="form-control select2" name="careerLevel" required>
                                     @foreach(JobCallMe::getCareerLevel() as $career)
                                         <option value="{!! $career !!}">@lang('home.'.$career)</option>
                                     @endforeach
@@ -132,7 +132,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.experiencelevel')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2" name="experience">
+                                <select class="form-control select2" name="experience" required>
                                     @foreach(JobCallMe::getExperienceLevel() as $experience)
                                         <option value="{!! $experience !!}">@lang('home.'.$experience)</option>
                                     @endforeach
@@ -142,7 +142,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.vacancy')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="vacancy" placeholder="@lang('home.numbervacancy')" >
+                                <input type="text" class="form-control" name="vacancy" placeholder="@lang('home.numbervacancy')" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -160,13 +160,13 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.qualification')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="qualification" placeholder="@lang('home.qualification')" >
+                                <input type="text" class="form-control" name="qualification" placeholder="@lang('home.qualification')" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" id="secondDate" name="expiryDate" onkeypress="return false">
+                                <input type="text" class="form-control date-picker" id="secondDate" name="expiryDate" onkeypress="return false" required>
                             </div>
                         </div>
 						<div class="form-group">
@@ -183,7 +183,7 @@
                        <div class="form-group">
                            <label class="control-label col-sm-3">@lang('home.type')</label>
                            <div class="col-sm-9 pnj-form-field">
-                               <select class="form-control select2" name="type">
+                               <select class="form-control select2" name="type" >
                                     @foreach(JobCallMe::getJobType() as $jtype)
                                         <option value="{!! $jtype->name !!}">@lang('home.'.$jtype->name)</option>
                                     @endforeach
@@ -204,7 +204,7 @@
 					   <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.jobaddr')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="jobaddr" id="jobaddr" placeholder="@lang('home.jobaddrtext')"  >
+                                <input type="text" class="form-control" name="jobaddr" id="jobaddr" placeholder="@lang('home.jobaddrtext')"  required>
                             </div>
                         </div>
 
@@ -280,13 +280,13 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="text" class="form-control" name="minSalary" placeholder="@lang('home.minsalary') 20,000,000" >
+                                        <input type="text" class="form-control" name="minSalary" placeholder="@lang('home.minsalary') 20,000,000" required>
                                     </div>
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="text" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary') 25,000,000" >
+                                        <input type="text" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary') 25,000,000" required>
                                     </div>
                                     <div class="col-md-4">
-                                        <select class="form-control col-md-4 select2" name="currency">
+                                        <select class="form-control col-md-4 select2" name="currency" required>
                                             @foreach(JobCallMe::siteCurrency() as $currency)
                                                 <option value="{!! $currency !!}">{!! $currency !!}</option>
                                             @endforeach
@@ -341,14 +341,14 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.state')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-state" name="state">
+                                <select class="form-control select2 job-state" name="state" required>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.city')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-city" name="city">
+                                <select class="form-control select2 job-city" name="city" required>
                                 </select>
                             </div>
                         </div>
@@ -391,6 +391,7 @@
 var process = "";
 var alrt="";
 $(document).ready(function(){
+
 	$('body').on('click','.pay_blog',function(e){
 		console.log($(e.target).val());
 	 alrt=$(e.target).siblings('input').val();
