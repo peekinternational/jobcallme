@@ -557,10 +557,11 @@ curl_close ($ch);
 		if(!$request->session()->has('jcmUser')){
     		return redirect('account/login?next='.$request->route()->uri);
     	}
+		$rec = JobCallMe::getUser($request->session()->get('jcmUser')->userId);
+		if($rec->companyId == '' && $rec->companyId == '0' && $rec->companyId == NULL){
+			return redirect('account/employer/organization');
+		}
 
-    	if(JobCallMe::hasCompany($request->session()->get('jcmUser')->userId) == false){
-    		return redirect('account/employer/organization');
-    	}
 	$departs = DB::table('jcm_departments')->select('departmentId','name')->where('userId','=',$request->session()->get('jcmUser')->userId)->get();
 		if(sizeof($departs)== "")
 		{
