@@ -484,7 +484,7 @@ function getSubCategories(categoryId){
 }
 
 function getSubCategories2(categoryId2){
-   /* $.ajax({
+    $.ajax({
         url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
         success: function(response){
             var obj = $.parseJSON(response);
@@ -495,7 +495,7 @@ function getSubCategories2(categoryId2){
                 $(".job-sub-category2").append(newOption).trigger('change');
             })
         }
-    })*/
+    })
 }
 
 function firstCapital(myString){

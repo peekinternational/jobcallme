@@ -222,11 +222,15 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/department/delete/{id}','frontend\Employer@deleteDepartment');
 	Route::post('post','frontend\Employer@post');
 	Route::post('nicepay', 'frontend\Employer@getresponse');
+	Route::post('cashpayment', 'frontend\Employer@cashpayment');
 	Route::get('employer/delete/{id}','frontend\Employer@deletejob');
 	Route::match(['get','post'],'employer/orders','frontend\Employer@orders');
 	Route::get('employer/setfilter/{id}','frontend\Employer@setfilter');
 	
-	Route::get('employer/nice', function () {
+	Route::get('employer/cashpayment', function () {
+    return view('frontend.employer.cashpayment_detail');
+});
+Route::get('employer/nice', function () {
     return view('frontend.employer.nice');
 });
 Route::get('employer/users', function () {
