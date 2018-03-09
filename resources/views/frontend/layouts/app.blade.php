@@ -512,7 +512,7 @@ function saveJob(jobId,obj){
 </script>
 
 @if(Session()->has('fNotice'))
-<div class="popup" data-popup="popup-1010">
+<div class="popup" data-popup="popup-1010" style="z-index: 99;">
     <div class="popup-inner">
         <p>@lang('home.'.Session()->get('fNotice'))</p>
         <a class="popup-close" data-popup-close="popup-1010" href="#">&times;</a>
