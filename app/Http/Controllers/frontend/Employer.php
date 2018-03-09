@@ -561,6 +561,11 @@ curl_close ($ch);
 		if($rec->companyId == '' && $rec->companyId == '0' && $rec->companyId == NULL){
 			return redirect('account/employer/organization');
 		}
+		$company = DB::table('jcm_companies')->select('*')->where('companyId','=',$request->session()->get('jcmUser')->userId)->get();
+		if($company[0]->category== "0")
+		{
+			return redirect('account/employer/organization');
+		}
 
 	$departs = DB::table('jcm_departments')->select('departmentId','name')->where('userId','=',$request->session()->get('jcmUser')->userId)->get();
 		if(sizeof($departs)== "")
