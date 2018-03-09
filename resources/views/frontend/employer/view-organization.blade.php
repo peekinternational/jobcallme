@@ -110,19 +110,20 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.company')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyName" name="companyName" id="companyName" placeholder="Company Title" value="{{ $company->companyName }}">
+                                           <input type="text" class="form-control companyName" name="companyName" id="companyName" placeholder="Company Title" value="{{ $company->companyName }}" required>
                                        </div>
                                    </div>
 								   <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.corporatenumber')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyName" name="corporatenumber" id="companyName" placeholder="@lang('home.corporatenumbertext')" value="{{ $company->companyName }}">
+                                           <input type="text" class="form-control corporatenumber" name="corporatenumber" id="corporatenumber" placeholder="@lang('home.corporatenumbertext')" value="{{ $company->corporatenumber }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.industry')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <select class="form-control select2" name="industry">
+                                           <select class="form-control select2" name="industry" required>
+                                           <option value=""> select industry</option>
                                                <option value="">@lang('home.selectindustry')</option>
                                                @foreach(JobCallMe::getCategories() as $cat)
                                                 <option value="{{ $cat->categoryId }}" {{ $cat->categoryId == $company->category ? 'selected="selected"' : '' }}>{{ $cat->name }}</option>
@@ -133,13 +134,13 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.address')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <textarea class="form-control companyAddress" placeholder="Address" name="companyAddress" style="resize: vertical">{{ $company->companyAddress }}</textarea>
+                                           <textarea required class="form-control companyAddress" placeholder="Address" name="companyAddress" style="resize: vertical">{{ $company->companyAddress }}</textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.country')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                            <select class="form-control input-sm select2 job-country companyCountry" name="companyCountry">
+                                            <select class="form-control input-sm select2 job-country companyCountry" name="companyCountry" required>
                                                 @foreach(JobCallMe::getJobCountries() as $cntry)
                                                     <option value="{{ $cntry->id }}" {{ $company->companyCountry == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
                                                 @endforeach
@@ -149,57 +150,57 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.state')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                            <select class="form-control input-sm select2 job-state companyState" name="companyState" data-state="{{ $company->companyState }}"></select>
+                                            <select class="form-control input-sm select2 job-state companyState" name="companyState" data-state="{{ $company->companyState }}" required></select>
                                            </select>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.city')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                            <select class="form-control input-sm select2 job-city companyCity" name="companyCity" data-city="{{ $company->companyCity }}"></select>
+                                            <select class="form-control input-sm select2 job-city companyCity" name="companyCity" data-city="{{ $company->companyCity }}" required></select>
                                            </select>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.phone')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyPhoneNumber" name="companyPhoneNumber" id="companyPhoneNumber" placeholder="Phone" value="{{ $company->companyPhoneNumber }}">
+                                           <input type="text" class="form-control companyPhoneNumber" name="companyPhoneNumber" id="companyPhoneNumber" placeholder="Phone" value="{{ $company->companyPhoneNumber }}" required>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.email')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}">
+                                           <input type="email" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}" required>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.website')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyWebsite" name="companyWebsite" id="companyWebsite" placeholder="https://www.example.com" value="{{ $company->companyWebsite }}">
+                                           <input type="url" class="form-control companyWebsite" name="companyWebsite" id="companyWebsite" placeholder="https://www.example.com" value="{{ $company->companyWebsite }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">Facebook</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyFb" name="companyFb" id="companyFb" placeholder="Facebook" value="{{ $company->companyFb }}">
+                                           <input type="url" class="form-control companyFb" name="companyFb" id="companyFb" placeholder="Facebook" value="{{ $company->companyFb }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">Linkedin</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyLinkedin" name="companyLinkedin" id="companyLinkedin" placeholder="Linkedin" value="{{ $company->companyLinkedin }}">
+                                           <input type="url" class="form-control companyLinkedin" name="companyLinkedin" id="companyLinkedin" placeholder="Linkedin" value="{{ $company->companyLinkedin }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">Twitter</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyTwitter" name="companyTwitter" id="twitter" placeholder="Twitter" value="{{ $company->companyTwitter }}">
+                                           <input type="url" class="form-control companyTwitter" name="companyTwitter" id="twitter" placeholder="Twitter" value="{{ $company->companyTwitter }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.noemployees')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyNoOfUsers" name="companyNoOfUsers" id="companyNoOfUsers" placeholder="Total Employees" value="{{ $company->companyNoOfUsers }}">
+                                           <input type="number" class="form-control companyNoOfUsers" name="companyNoOfUsers" id="companyNoOfUsers" placeholder="Total Employees" value="{{ $company->companyNoOfUsers }}" required>
                                        </div>
                                    </div>
 
@@ -233,7 +234,7 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">@lang('home.establishin')</label>
                                         <div class="col-sm-9 pnj-form-field">
-                                            <input class="form-control date-picker companyEstablishDate" type="text" name="companyEstablishDate" value="{{ $company->companyEstablishDate }}">
+                                            <input class="form-control date-picker companyEstablishDate" type="text" name="companyEstablishDate" value="{{ $company->companyEstablishDate }}" required>
                                         </div>
                                    </div>
 
