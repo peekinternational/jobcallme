@@ -9,8 +9,8 @@ use DB;
 use Illuminate\Support\Facades\Lang;
 
 class Jobs extends Controller{
-    public function home(){
-		//dd(trans('home.welcome'));
+    public function home(Request $request){
+		//dd($request->all());
 		return view('frontend.view-jobs');
 		
 	}
