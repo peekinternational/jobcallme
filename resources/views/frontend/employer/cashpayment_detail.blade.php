@@ -15,43 +15,9 @@
                 </div>
                 <div class="col-md-6" style="display:-webkit-box">
                 <div style="padding-left: 22px;padding-right: 13px;">
-                    @if($jType)
-                        <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
-                            <input  type="hidden" name="amount" value="{!! $am!!}" class="ng-untouched ng-pristine ng-valid">
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                            <input name="p_Category" type="hidden" value="{!! $p_Category!!}"/>
-                            <input name="jType" type="hidden" value="{!! $jType!!}"/>
-                            <div>
-                                <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
-                            </div>
-                        </form>
-                    @else
-                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypal') !!}" >
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
-                        </form>
-                    @endif
-                </div>
-                  <div class="" style="padding-left: 22px;padding-right: 13px;" >
-                   
-                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{{ action('frontend\Employer@cashpayment') }}" >
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-warning btn-lg" name="save">Cash Payment</button> 
-                        </form>
-                   
-                </div>
-                <div class="" style="padding-left: 22px;padding-right: 13px;">
-            
-                    <form action="{{url('nicepay/payRequest_utf.php')}}" method="post" id='nicePayForm'> 
-                        <input type="hidden" value="{!! $am!!}" name="price" >
-                        <input type="hidden" value="1" name="goodscount" >
-                        <input type="hidden" value="jobcallme" name="goodsName" >
-                        <input type="hidden" value="{!! $app->email!!}" name="Email" >
-                        <input type="hidden" value="{!! $app->phoneNumber!!}" name="tel" >
-                        <input type="hidden" value="0" name="buyerName" id='buyerName' >
-                        <a href='javascript:void(0)'  class="btn btn-info btn-lg nicePay">NicePay</a>
-                    </form>
-                </div>
+                    <span>Bank Detail</span>
+                    <span>{{$amount}}</span>
+                    <span>{{$amounts}}</span>
                 </div>
             </div>
         </div>

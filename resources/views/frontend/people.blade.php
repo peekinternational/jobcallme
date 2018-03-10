@@ -248,7 +248,7 @@
                             
 							@if($cat->name == "outsourcingok")
 								<a  href="https://www.outsourcingok.com" target="_blank" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 11%; 
+    width: auto; 
     padding: 5px 5px;
     color: #ffffff;
     font-size: 12px;
@@ -261,7 +261,7 @@
     text-decoration: none;">
 							@else
 								<a  href="{{ url('account/people?industry='.$cat->categoryId) }}" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 11%; 
+    width: auto; 
     padding: 5px 5px;
     color: #ffffff;
     font-size: 12px;

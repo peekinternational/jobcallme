@@ -246,6 +246,7 @@ class Home extends Controller{
 		if($request->session()->has('jcmUser')){
 			return redirect('account/jobseeker');
 		}
+		
 		if($request->isMethod('post')){
 			$this->validate($request,[
 				'email' => 'required|email|unique:jcm_users,email',
@@ -256,16 +257,21 @@ class Home extends Controller{
 				'state' => 'required',
 				'phoneNumber' => 'required|digits_between:10,12',
 			]);
-
+			$regdata['email'] = $request->input('email');
+			$regdata['password'] = $request->input('password');
+			$regdata['firstName'] = $request->input('firstName');
+			$regdata['lastName'] = $request->input('lastName');
+			$regdata['phoneNumber'] = $request->input('phoneNumber');
+			session()->put('regdata',$regdata);
 			$input['companyId'] = '0';
 			$input['type'] = 'User';
 			$input['secretId'] = JobCallMe::randomString();
-			$input['firstName'] = $request->input('firstName');
-			$input['lastName'] = $request->input('lastName');
-			$input['email'] = $request->input('email');
+			$input['firstName'] = trim($request->input('firstName'));
+			$input['lastName'] = trim($request->input('lastName'));
+			$input['email'] = trim($request->input('email'));
 			$input['username'] = strtolower($request->input('firstName').$request->input('lastName').rand(00,99));
-			$input['password'] = md5($request->input('password'));
-			$input['phoneNumber'] = $request->input('phoneNumber');
+			$input['password'] = md5(trim($request->input('password')));
+			$input['phoneNumber'] = trim($request->input('phoneNumber'));
 			$input['country'] = $request->input('country');
 			$input['state'] = $request->input('state');
 			$input['city'] = $request->input('city');
@@ -273,7 +279,7 @@ class Home extends Controller{
 			$input['about'] = '';
 			$input['createdTime'] = date('Y-m-d H:i:s');
 			$input['modifiedTime'] = date('Y-m-d H:i:s');
-
+			
 			$userId = DB::table('jcm_users')->insertGetId($input);
 			setcookie('cc_data', $userId, time() + (86400 * 30), "/");
 			extract($request->all());
@@ -411,7 +417,7 @@ class Home extends Controller{
     	$people->limit(12);
     	$people->orderBy('jcm_users.userId','desc');
          $people->distinct('jcm_users.firstName');
-    	$peoples = $people->get();
+    	$peoples = $people->paginate(18);
         // dd($peoples);
 
     	return view('frontend.people',compact('peoples'));
@@ -672,6 +678,27 @@ public function changepropic(Request $request){
 	/*DB::table('jcm_users')->where('userId',$userid)->update(['profileImage' => $profileImage,'profilePhoto'=>'']);*/
 
 }
+public function changecompanypropic(Request $request){
+	$userid = $request->input('userId');
+	$imagelink = $request->input('imagelink');
+	$oldImageName = pathinfo($imagelink);
+	$image = $_FILES['profileImage'];
+	$tmp = $image['tmp_name'];
+	$newfile = $oldImageName['basename'];
+	unlink('compnay-logo/'.$newfile);
+	move_uploaded_file($tmp,'compnay-logo/'.$newfile);
+	/*DB::table('jcm_users')->where('userId',$userid)->update(['profileImage' => $profileImage,'profilePhoto'=>'']);*/
+
+}
+public function removeCompanyProPic(Request $request){
+	 $comId = session()->get('jcmUser')->companyId;
+	 
+	if( DB::table('jcm_companies')->where('companyId',$comId)->update(['companyLogo'=>''])){
+		echo 1;
+	}else{
+		echo 2;
+	}
+}
 public function deactiveUser(Request $request){
 	$id = $request->input('id');
 	if(DB::table('jcm_users')->where('userId','=',$id)->update(['user_status'=>'N'])){
@@ -681,6 +708,9 @@ public function deactiveUser(Request $request){
 	}else{
 		echo 'error in home controller line number 598';
 	}
+}
+public function regvalpass(Request $request){
+	echo JobCallMe::registrationPassValidation($request->input('password'));
 }
 }
 ?>

@@ -33,7 +33,8 @@ if($user->profilePhoto != ''){
                                             @lang('home.change') <i class="fa fa-camera"></i>
                                             <input type="file" class="upload profile-pic" name="image" />
                                         </div>
-                                        <!-- <span id="remove-re-image">Remove <i class="fa fa-remove"></i></span> -->
+                                        <span id="remove-re-image" style="margin-right: 42px;" onclick="removeResumePic()">Remove <i class="fa fa-remove"></i></span>
+                                        <p id="remove-re-image" style="margin-right: 71px;" onclick="editResumeProPic()">Edit <i class="fa fa-edit"><input type="hidden" value="{{ session()->get('jcmUser')->userId }}" id="userID" ></i></p>
                                     </div>
                                 </div>
                                 <h3 class="hidden-md hidden-lg" style="font-weight: 600">{{ $user->firstName.' '.$user->lastName }}</h3>
@@ -170,40 +171,38 @@ if($user->profilePhoto != ''){
                                     <select class="form-control input-sm select2 job-city" name="city" data-city="{{ $user->city }}"></select>
                                 </div>
                             </div>
-                     <!--       <div class="form-group">
+                        <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.experiancelevel')</label>
                                 <div class="col-md-6">
-									<select class="form-control select2" name="careerLevel">
+									<select class="form-control select2" name="experiance">
 										@foreach(JobCallMe::getCareerLevel() as $career)
-											<option value="{!! $career !!}">@lang('home.'.$career)</option>
+											<option value="{!! $career !!}" {{ $meta->experiance == $career ? 'selected="selected"' : '' }}>@lang('home.'.$career)</option>
 										@endforeach
 									</select>
 
-                                    <!-- <select class="form-control input-sm select2" name="experiance">
+                              <!--    <select class="form-control input-sm select2" name="experiance">
                                         @foreach(JobCallMe::getExperienceLevel() as $el)
                                             <option value="{{ $el }}" {{ $meta->experiance == $el ? 'selected="selected"' : '' }}>@lang('home.'.$el)</option>
                                         @endforeach
                                     </select> -->
-                              <!--  </div>
+                               </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.education')</label>
                                 <div class="col-md-6">
                                     <select class="form-control" name="education">                                    
-                                        
-                                        <option value="">@lang('home.highschool')</option>
-                                        <option value="highschool">@lang('home.highschool')</option>
-                                        <option value="college">@lang('home.college')</option>
-                                        <option value="university">@lang('home.university')</option>
-                                        <option value="graduateschool">@lang('home.graduateschool')</option>
+                                        <option value="highschool" {{ $meta->education == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
+                                        <option value="college" {{ $meta->education == 'college' ? 'selected="selected"' : '' }}>@lang('home.college')</option>
+                                        <option value="university" {{ $meta->education == 'university' ? 'selected="selected"' : '' }}>@lang('home.university')</option>
+                                        <option value="graduateschool" {{ $meta->education == 'graduateschool' ? 'selected="selected"' : '' }}>@lang('home.graduateschool')</option>
                                         <option value="phd">@lang('home.phd')</option>
                                     
 									</select>
 
-                                    <!-- <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}"> -->
-                               <!-- </div>
-                            </div> -->
-                             <div class="form-group">
+                                  <!--   <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}"> -->
+                                </div>
+                            </div> 
+                            <!-- <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.experiancelevel')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="experiance">
@@ -212,13 +211,13 @@ if($user->profilePhoto != ''){
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-                             <div class="form-group">
+                            </div>-->
+                            <!-- <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.education')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.category')</label>
                                 <div class="col-md-6">
@@ -232,14 +231,17 @@ if($user->profilePhoto != ''){
 							<div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.Subcategory')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control select2 job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
+                                    <select class="form-control select2 job-sub-category" name="subCategoryId" data-state="{{ $meta->subCategoryId }}" onchange="getSubCategories2(this.value)">
+                                      @foreach(JobCallMe::getSubCategories($meta->subCategoryId) as $cat)
+                                            <option value="{{ $cat->subCategoryId }}" {{ $meta->subCategoryId == $cat->subCategoryId ? 'selected="selected"' : '' }}>@lang('home.'.$cat->subName)</option>
+                                        @endforeach
 									</select>
                                 </div>
                             </div>
 							<div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.Subcategory2')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control select2 job-sub-category2" name="subCategory2">
+                                    <select class="form-control select2 job-sub-category2" name="subCategoryId2">
 									</select>
                                 </div>
                             </div>
@@ -458,7 +460,7 @@ if($user->profilePhoto != ''){
                     <!--Certification Section Start-->
                     <section class="resume-box" id="certification">
                         <a class="btn btn-primary r-add-btn" onclick="addCertification()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.certification')</h4>
+                        <h4><i class="fa fa-certificate r-icon bg-primary"></i>  @lang('home.certification')</h4>
                         <ul class="resume-details">
                             @if(count($resume['certification']) > 0)
                                 @foreach($resume['certification'] as $resumeId => $certification)
@@ -484,7 +486,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="certification-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addcertification')</c></h4>
+                        <h4><i class="fa fa-certificate r-icon bg-primary"></i>  <c>@lang('home.addcertification')</c></h4>
                         <form class="form-horizontal form-certification" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -561,7 +563,7 @@ if($user->profilePhoto != ''){
                     <!--Experience Section Start-->
                     <section class="resume-box" id="experience">
                         <a class="btn btn-primary r-add-btn" onclick="addExperience()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.experiences')</h4>
+                        <h4><i class="fa fa-briefcase r-icon bg-primary"></i>  @lang('home.experiences')</h4>
                         <ul class="resume-details">
                             @if(count($resume['experience']) > 0)
                                 @foreach($resume['experience'] as $resumeId => $experience)
@@ -586,7 +588,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="experience-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
+                        <h4><i class="fa fa-briefcase r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
                         <form class="form-horizontal form-experience" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -612,7 +614,7 @@ if($user->profilePhoto != ''){
                                     <input type="text" class="form-control input-sm date-picker" name="startDate">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="enddate">
                                 <label class="control-label col-md-3 text-right">@lang('home.edate')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-picker" name="endDate">
@@ -672,7 +674,7 @@ if($user->profilePhoto != ''){
                     <!--Skills Section Start-->
                     <section class="resume-box" id="skills">
                         <a class="btn btn-primary r-add-btn" onclick="addSkills()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.skills')</h4>
+                        <h4><i class="fa fa-graduation-cap r-icon bg-primary"></i> @lang('home.skills')</h4>
                         <ul class="resume-details">
                             @if(count($resume['skills']) > 0)
                                 @foreach($resume['skills'] as $resumeId => $skills)
@@ -695,7 +697,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="skills-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
+                        <h4><i class="fa fa-graduation-cap r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
                         <form class="form-horizontal form-skills" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -731,7 +733,7 @@ if($user->profilePhoto != ''){
 					<!---Project -->
 					   <section class="resume-box" id="ski">
                         <a class="btn btn-primary r-add-btn" onclick="addProject()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.project')</h4>
+                        <h4><i class="fa fa-tasks r-icon bg-primary"></i> @lang('home.project')</h4>
                         <ul class="resume-details">
                             @if(count($resume['project']) > 0)
                                 @foreach($resume['project'] as $resumeId => $skills)
@@ -758,7 +760,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="ski-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.project')</c></h4>
+                        <h4><i class="fa fa-tasks r-icon bg-primary"></i>  <c>@lang('home.project')</c></h4>
                         <form class="form-horizontal form-ski" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -844,7 +846,7 @@ if($user->profilePhoto != ''){
                                     </div>
                                 </div>
                             </div>
-							    <div class="form-group">
+							    <div class="form-group" id="projectendyear">
                                 <label class="control-label col-md-3 text-right">@lang('home.endyear')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="eyear" name="endyear">
@@ -853,7 +855,7 @@ if($user->profilePhoto != ''){
                                     </select>
                                 </div>
                             </div>
-							 <div class="form-group">
+							 <div class="form-group" id="projectendmonth">
                                 <label class="control-label col-md-3 text-right">@lang('home.endmonth')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="emonth" name="endmonth">
@@ -893,7 +895,7 @@ if($user->profilePhoto != ''){
 					<!---Affilation -->
 					   <section class="resume-box" id="aff">
                         <a class="btn btn-primary r-add-btn" onclick="addAffi()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Affiliation')</h4>
+                        <h4><i class="fa fa-houzz r-icon bg-primary"></i> @lang('home.Affiliation')</h4>
                         <ul class="resume-details">
                             @if(count($resume['affiliation']) > 0)
                                 @foreach($resume['affiliation'] as $resumeId => $afflls)
@@ -919,7 +921,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="aff-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.Affiliation')</c></h4>
+                        <h4><i class="fa fa-houzz r-icon bg-primary"></i>  <c>@lang('home.Affiliation')</c></h4>
                         <form class="form-horizontal form-aff" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -1042,7 +1044,7 @@ if($user->profilePhoto != ''){
 					<!---Project -->
 					   <section class="resume-box" id="sk">
                         <a class="btn btn-primary r-add-btn" onclick="addLanguage()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.language')</h4>
+                        <h4><i class="fa fa-language r-icon bg-primary"></i> @lang('home.language')</h4>
                         <ul class="resume-details">
                             @if(count($resume['language']) > 0)
                                 @foreach($resume['language'] as $resumeId => $skills)
@@ -1067,7 +1069,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="sk-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.language')</c></h4>
+                        <h4><i class="fa fa-language r-icon bg-primary"></i>  <c>@lang('home.language')</c></h4>
                         <form class="form-horizontal form-sk" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -1184,7 +1186,7 @@ if($user->profilePhoto != ''){
                     </section>
 					       <section class="resume-box" id="skill">
                         <a class="btn btn-primary r-add-btn" onclick="addSkill()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.references')</h4>
+                        <h4><i class="fa fa-users r-icon bg-primary"></i> @lang('home.references')</h4>
                         <ul class="resume-details">
                             @if(count($resume['reference']) > 0)
                                 @foreach($resume['reference'] as $resumeId => $skills)
@@ -1210,7 +1212,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="skill-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
+                        <h4><i class="fa fa-users r-icon bg-primary"></i>  <c>@lang('home.addexperience')</c></h4>
                         <form class="form-horizontal form-skill" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -1299,7 +1301,7 @@ if($user->profilePhoto != ''){
 					<!---Publication -->
 					   <section class="resume-box" id="skil">
                         <a class="btn btn-primary r-add-btn" onclick="addSkil()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.publication')</h4>
+                        <h4><i class="fa fa-newspaper-o r-icon bg-primary"></i> @lang('home.publication')</h4>
                         <ul class="resume-details">
                             @if(count($resume['publish']) > 0)
                                 @foreach($resume['publish'] as $resumeId => $skills)
@@ -1326,7 +1328,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="skil-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.publication')</c></h4>
+                        <h4><i class="fa fa-newspaper-o r-icon bg-primary"></i>  <c>@lang('home.publication')</c></h4>
                         <form class="form-horizontal form-skil" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -1419,7 +1421,7 @@ if($user->profilePhoto != ''){
 					
 					 <section class="resume-box" id="s">
                         <a class="btn btn-primary r-add-btn" onclick="addAward()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.award')</h4>
+                        <h4><i class="fa fa-trophy r-icon bg-primary"></i> @lang('home.award')</h4>
                         <ul class="resume-details">
                             @if(count($resume['award']) > 0)
                                 @foreach($resume['award'] as $resumeId => $skills)
@@ -1446,7 +1448,7 @@ if($user->profilePhoto != ''){
                         </ul>
                     </section>
                     <section class="resume-box" id="s-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.award')</c></h4>
+                        <h4><i class="fa fa-trophy r-icon bg-primary"></i>  <c>@lang('home.award')</c></h4>
                         <form class="form-horizontal form-s" method="post" action="">
                             <input type="hidden" name="_token" value="">
                             <input type="hidden" name="resumeId" value="">
@@ -1717,6 +1719,7 @@ if($user->profilePhoto != ''){
                     <form class="form-horizontal privacy-form" method="post" action="">
                         <input type="hidden" name="_token" value="">
                         <h4>@lang('home.privacysettings')</h4>
+                        
                         <div class="col-md-12">
                             <p style="margin-top: 4px">
                                 <input type="checkbox" id="profile-visible" class="switch-field" name="profile" {{ $privacy->profile != 'No' ? 'checked=""' : '' }}>
@@ -1749,13 +1752,13 @@ if($user->profilePhoto != ''){
                         </div>
 						<div class="col-md-12">
                             <p style="margin-top: 4px">
-                                <input type="checkbox" id="project-visible" class="switch-field" name="project" {{ $privacy->project != 'No' ? 'checked=""' : '' }}>
+                                <input type="checkbox" id="project-visible" class="switch-field" name="projectVisible" {{ $privacy->projectVisible != 'No' ? 'checked=""' : '' }}>
                                 <label for="project-visible" class="switch-label"></label> <span>@lang('home.projectsvisible')</span>
                             </p>
                         </div>
 						<div class="col-md-12">
                             <p style="margin-top: 4px">
-                                <input type="checkbox" id="publication-visible" class="switch-field" name="publication" {{ $privacy->publication != 'No' ? 'checked=""' : '' }}>
+                                <input type="checkbox" id="publication-visible" class="switch-field" name="publicationsVisible" {{ $privacy->publicationsVisible != 'No' ? 'checked=""' : '' }}>
                                 <label for="publication-visible" class="switch-label"></label> <span>@lang('home.publicationsvisible')</span>
                             </p>
                         </div>
@@ -1766,6 +1769,34 @@ if($user->profilePhoto != ''){
         </div>
     </div>
 </section>
+<div id="editProResumeModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+       <div class="row">
+           <div class="col-md-9">
+                <div id="proEditImg">
+                    <img src="" class="img-responsive">
+                </div>
+           </div>
+           <div class="col-md-3">
+               <div id="custom-preview-wrapper"></div>
+           </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Crop</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 @endsection
 @section('page-footer')
 <style type="text/css">
@@ -1781,6 +1812,35 @@ textarea.form-control{resize: vertical;}
 }
 </style>
 <script type="text/javascript">
+ $('#Currently').on('change', function() {
+  // process= $('#addprocess').val();
+    if(this.checked)
+    {
+        //alert("hi nabeel");
+       // $('#addlable').show();
+        $('#enddate').hide();
+    }
+    else{
+       // $('#addlable').hide();
+        $('#enddate').show();
+    }
+});
+
+ $('#currently').on('change', function() {
+  // process= $('#addprocess').val();
+    if(this.checked)
+    {
+        //alert("hi nabeel");
+       // $('#addlable').show();
+        $('#projectendmonth').hide();
+        $('#projectendyear').hide();
+    }
+    else{
+       // $('#addlable').hide();
+        $('#projectendmonth').show();
+         $('#projectendyear').show();
+    }
+});
 
  getSubCategories($('.job-category option:selected:selected').val());
 
@@ -2694,7 +2754,7 @@ var op = "";
 for(var ye= en ; ye >=sta; ye--){
   option += "<option value="+ye+">"+ ye +"</option>";
 }
-document.getElementById("stayear").innerHTML = op;
+/*document.getElementById("stayear").innerHTML = op;*/
 
 
 
@@ -2721,13 +2781,87 @@ function getSubCategories2(categoryId2){
             $(".job-sub-category2").html('').trigger('change');
             $.each(obj,function(i,k){
                 var vOption = false;
-                var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
+                var newOption = new Option(k.subName, k.subCategoryId2, true, vOption);
                 $(".job-sub-category2").append(newOption).trigger('change');
             })
         }
     })
 }
+//**dataURL to blob**
+    function dataURLtoBlob(dataurl) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type:mime});
+    }
 
+    //**blob to dataURL**
+    function blobToDataURL(blob, callback) {
+        var a = new FileReader();
+        a.onload = function(e) {callback(e.target.result);}
+        a.readAsDataURL(blob);
+    }
+    function editResumeProPic(){
+        var proImg = $('.img-circle').attr('src');
+       $('#editProResumeModel').modal('show');
+       $('#proEditImg img').attr('src',proImg);
+       $('#proEditImg img').rcrop({
+            minSize : [100,100],
+            preserveAspectRatio : true,
+            
+            preview : {
+                display: true,
+                size : [100,100],
+                wrapper : '#custom-preview-wrapper'
+            }
+        });
+      
+    }
+    $('#proEditImg img').on('rcrop-changed', function(){
+        var srcOriginal = $(this).rcrop('getDataURL');
+        var srcResized = $(this).rcrop('getDataURL', 50,50);
+        var userId = "{{ session()->get('jcmUser')->userId }}";
+        $('.img-circle').attr('src',srcOriginal);
+        //test:
+        var blob = dataURLtoBlob(srcOriginal);
+        var imagelink = $('#proEditImg img').attr('src');
+
+        /*blobToDataURL(blob, function(dataurl){
+            console.log(dataurl);
+        });*/
+        var fd = new FormData();
+        fd.append('profileImage', blob);
+        fd.append('_token', "{{ csrf_token() }}");
+        fd.append('userId', userId);
+        fd.append('imagelink', imagelink);
+        $.ajax({
+            type: 'POST',
+            url: '{{ url("cropProfileImage") }}',
+            data: fd,
+            processData: false,
+            contentType: false
+        }).done(function(data) {
+               console.log(data);
+        });
+        
+    });
+    function removeResumePic(){
+       var userId = $('#userID').val();
+       //alert(userId);
+       $.ajax({
+        url:'{{ url("account/manage/removeProPic") }}',
+        data:{userId:userId,_token:'{{ csrf_token() }}'},
+        type:'POST',
+        success:function(res){
+            if(res == 1){
+                toastr.success('Profile Pic Remove');
+                $('.img-circle').attr('src','{{ asset("profile-photos/profile-logo.jpg") }}');
+            }
+        }
+       });
+    }
 
 </script>
 @endsection

@@ -29,8 +29,11 @@ Route::get('getfeedback','frontend\Home@getfeedback');
 Route::post('feedback','frontend\Home@feedback');
 Route::post('editfeedback','frontend\Home@editfeedback');
 Route::post('deletefeedback','frontend\Home@deletefeedback');
+Route::post('RemCompProImage','frontend\Home@removeCompanyProPic');
 Route::post('cropProfileImage','frontend\Home@changepropic');
+Route::post('cropCompanyProfileImage','frontend\Home@changecompanypropic');
 Route::post('deactiveUser','frontend\Home@deactiveUser');
+Route::post('passwordValidate','frontend\Home@regvalpass');
 
 Route::group(['prefix' => 'admin'], function () {
 	Auth::routes();
@@ -190,6 +193,7 @@ Route::group(['prefix' => 'account'], function () {
 
     /* employer */
     Route::get('employer','frontend\Employer@home');
+    Route::get('getprivcy','frontend\Employer@getprivacyrecord');
     Route::match(['get','post'],'employer/job/new','frontend\Employer@jobPost');
     Route::post('employer/job/save','frontend\Employer@saveJob');
     Route::get('employer/job/share/{id}','frontend\Employer@shareJob');
@@ -218,11 +222,15 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/department/delete/{id}','frontend\Employer@deleteDepartment');
 	Route::post('post','frontend\Employer@post');
 	Route::post('nicepay', 'frontend\Employer@getresponse');
+	Route::post('cashpayment', 'frontend\Employer@cashpayment');
 	Route::get('employer/delete/{id}','frontend\Employer@deletejob');
 	Route::match(['get','post'],'employer/orders','frontend\Employer@orders');
 	Route::get('employer/setfilter/{id}','frontend\Employer@setfilter');
 	
-	Route::get('employer/nice', function () {
+	Route::get('employer/cashpayment', function () {
+    return view('frontend.employer.cashpayment_detail');
+});
+Route::get('employer/nice', function () {
     return view('frontend.employer.nice');
 });
 Route::get('employer/users', function () {
@@ -255,6 +263,7 @@ Route::get('jobs','frontend\Jobs@home');
 Route::post('jobs/search','frontend\Jobs@searchJobs');
 Route::match(['get','post'],'jobs/homeJobSearch','frontend\Jobs@homePageJobSerach');
 Route::match(['get','post'],'jobs/{id}','frontend\Jobs@viewJob');
+
 Route::match(['get','post'],'jobs/apply/{id}','frontend\Jobs@jobApply');
 
 Route::get('/not-found','Home@notFound');

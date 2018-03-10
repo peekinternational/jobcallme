@@ -5,9 +5,12 @@
 @section('content')
 
 <section id="postNewJob">
-    <div class="container-fluid">
+    <!--  <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypals') !!}" > -->
+    {!! Form::open(['action'=>['frontend\Employer@updatepostPaymentWithpaypals'],'method'=>'post','class'=>'form-horizontal','files'=>true,'enctype'=>'multipart/form-data']) !!}
+    {{ csrf_field() }}
+    <div class="container">
 	
-        <div class="col-md-9">
+        <div class="col-md-12">
 		
             <div class="pnj-box">
 			  <h3>@lang('home.jobupdate')</h3>
@@ -19,9 +22,7 @@
               
                
                
-                  <!--  <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypals') !!}" > -->
-                        {!! Form::open(['action'=>['frontend\Employer@updatepostPaymentWithpaypals'],'method'=>'post','class'=>'form-horizontal','files'=>true,'enctype'=>'multipart/form-data']) !!}
-                        {{ csrf_field() }}
+                 
 						
                     
 				<!--  	<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;">
@@ -95,7 +96,15 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.Subcategory')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-sub-category" name="subCategory">
+                                <select class="form-control select2 job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.Subcategory2')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control select2 job-sub-category2" name="subCategory2">
+									
                                 </select>
                             </div>
                         </div>
@@ -204,7 +213,45 @@
                             </div>
                         </div>
                    </div>
+                   
+                   <h3>@lang('home.admissionsprocess')</h3>
+                    <div class="pnj-form-section">                        
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.admissionsprocess')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                    <?php $addmissionprocess = explode(',', $result->process); ?>
+                                    <?php 
+                                        $array = array_unique (array_merge (JobCallMe::jobProcess(),$addmissionprocess)); 
+                                    ?>
+                                    @foreach($array as $process)
+                                        <div class="col-md-4 benefits-checks">
+                                            <input id="{{ str_replace(' ','-',$process) }}"  type="checkbox" class="cbx-field" name="process[]" value="{{ $process }}" @foreach($addmissionprocess as $addmission) @if($process == $addmission) checked @endif @endforeach>
+                                            <label class="cbx" for="{{ str_replace(' ','-',$process) }}"></label>
+                                            <label class="lbl" for="{{ str_replace(' ','-',$process) }}">@if(Lang::has('home.'.$process, 'en') || Lang::has('home.'.$process, 'kr')) @lang('home.'.$process) @else {{ $process}} @endif<!-- {{ $process }} --></label>
+                                        </div>
+                                    @endforeach
+                                        <div class="col-md-4 ">
+                                            <input id="addprocess"  type="checkbox" class="cbx-field" value="yes">
+                                            <label class="cbx" for="addprocess"></label>
+                                            <label class="lbl" for="addprocess">@lang('home.add')</label>
+                                        </div>
+                                        <div class="optionBox" id="moreprocess" style="display:none">
+                                            <div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;">
+                                                <input type="text" class="form-control" name="process[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
+                                            </div>
+                                            <div class="col-md-10 block">
+                                                <span class="add"><i class="fa fa-plus"></i></span>
+                                            </div>
+                                        </div>
+                        
+                                </div>
 
+                                
+
+                            </div>                          
+                        </div>
+                    </div>  
                     <h3>@lang('home.compensationbenefits')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
@@ -219,6 +266,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <select class="form-control col-md-4 select2" name="currency">
+                                        
                                             @foreach(JobCallMe::siteCurrency() as $currency)
                                                 <option value="{!! $currency !!}" {{ $result->currency == $currency ? 'selected="selected"' : '' }}>{!! $currency !!}</option>
                                             @endforeach
@@ -231,13 +279,31 @@
                             <label class="control-label col-sm-3">@lang('home.benefits')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
-                                    @foreach(JobCallMe::jobBenefits() as $benefit)
+                                    
+                                    <?php $compensationbenefit = explode(',', $result->benefits); ?>
+                                    <?php 
+                                        $array2 = array_unique (array_merge (JobCallMe::jobBenefits(),$compensationbenefit));
+                                    ?> 
+                                    @foreach($array2 as $benefit)
                                         <div class="col-md-4 benefits-checks">
-                                            <input id="{{ str_replace(' ','-',$benefit) }}"  type="checkbox" class="cbx-field" name="benefits[]" value="{{ $benefit }}" {{ $benefit == $result->benefits ? 'checked=""' : '' }}>
+                                            <input id="{{ str_replace(' ','-',$benefit) }}"  type="checkbox" class="cbx-field" name="benefits[]" value="{{ $benefit }}" @foreach($compensationbenefit as $benefitser) @if($benefit == $benefitser) checked @endif @endforeach>
                                             <label class="cbx" for="{{ str_replace(' ','-',$benefit) }}"></label>
-                                            <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">{{ $benefit }}</label>
+                                            <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">@if(Lang::has('home.'.$benefit, 'en') || Lang::has('home.'.$benefit, 'kr')) @lang('home.'.$benefit) @else {{ $benefit}} @endif</label>
                                         </div>
                                     @endforeach
+                                    <div class="col-md-4 ">
+                                            <input id="addbenefit"  type="checkbox" class="cbx-field" value="yes">
+                                            <label class="cbx" for="addbenefit"></label>
+                                            <label class="lbl" for="addbenefit">@lang('home.add')</label>
+                                        </div>
+                                        <div class="optionBox" id="morebenefit" style="display:none">
+                                            <div class="col-md-8 pnj-salary block2" style="display: flex;margin-bottom: 9px;">
+                                                <input type="text" class="form-control" name="benefits[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
+                                            </div>
+                                            <div class="col-md-10 block2">
+                                                <span class="add2"><i class="fa fa-plus"></i></span>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -291,15 +357,54 @@
                         <button type="submit" class="btn btn-primary" name="save">@lang('home.updatejob')</button>
                         <a href="{{ url('account/employer') }}" class="btn btn-default">@lang('home.CANCEL')</a>
                     </div>
-                </form>
+                
             </div>
         </div>
     </div>
+    </form>
 </section>
 @endsection
 @section('page-footer')
 <script type="text/javascript">
 $(document).ready(function(){
+        $('#addprocess').on('change', function() {
+      // process= $('#addprocess').val();
+        if(this.checked)
+        {
+            //alert("hi nabeel");
+            //$('#addlable').show();
+            $('#moreprocess').show();
+        }
+        else{
+            //$('#addlable').hide();
+            $('#moreprocess').hide();
+        }
+    });
+
+     $('#addbenefit').on('change', function() {
+      // process= $('#addprocess').val();
+        if(this.checked)
+        {
+            //alert("hi nabeel");
+           // $('#addlable').show();
+            $('#morebenefit').show();
+        }
+        else{
+          //  $('#addlable').hide();
+            $('#morebenefit').hide();
+        }
+    })
+    $('.add').click(function() {
+    $('.block:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+
+    });
+    $('.add2').click(function() {
+    $('.block2:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+
+    });
+    $('.optionBox').on('click','.remove',function() {
+    $(this).parent().remove();
+});
     getStates($('.job-country option:selected:selected').val());
     getSubCategories($('.job-category option:selected:selected').val());
 });
@@ -377,6 +482,22 @@ function getSubCategories(categoryId){
         }
     })
 }
+
+function getSubCategories2(categoryId2){
+    $.ajax({
+        url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $(".job-sub-category2").html('').trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = false;
+                var newOption = new Option(k.subName, k.subCategoryId2, true, vOption);
+                $(".job-sub-category2").append(newOption).trigger('change');
+            })
+        }
+    })
+}
+
 function firstCapital(myString){
     firstChar = myString.substring( 0, 1 );
     firstChar = firstChar.toUpperCase();

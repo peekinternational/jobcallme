@@ -29,8 +29,13 @@ if($company->companyLogo != ''){
                        <img src="{{ $cLogo }}" class="eo-dp eo-c-logo">
                        <div class="eo-dp-toolkit">
                            <input type="file" id="eo-dp" class="compnay-logo">
-                           <label for="eo-dp"><i class="fa fa-camera"></i> @lang('home.change')</label>
+                           <label for="eo-dp"><i class="fa fa-camera"></i> @lang('home.change')</label><br>
+                           <label  style="margin-left:-23px" onclick="editcompanypic()"><i class="fa fa-edit"></i> Edit</label><br>
+                           <label onclick="removecompanypic()"><i class="fa fa-remove">
+                             <input type="hidden" value="{{ session()->get('jcmUser')->userId }}" id="userID">
+                           </i> Remove</label>
                        </div>
+
                    </div>
                    <div class="col-md-10 eo-timeline-details">
                        <h1><a href="">{{ $company->companyName }}</a></h1>
@@ -105,19 +110,20 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.company')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyName" name="companyName" id="companyName" placeholder="Company Title" value="{{ $company->companyName }}">
+                                           <input type="text" class="form-control companyName" name="companyName" id="companyName" placeholder="Company Title" value="{{ $company->companyName }}" required>
                                        </div>
                                    </div>
 								   <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.corporatenumber')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyName" name="corporatenumber" id="companyName" placeholder="@lang('home.corporatenumbertext')" value="{{ $company->companyName }}">
+                                           <input type="text" class="form-control corporatenumber" name="corporatenumber" id="corporatenumber" placeholder="@lang('home.corporatenumbertext')" value="{{ $company->corporatenumber }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.industry')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <select class="form-control select2" name="industry">
+                                           <select class="form-control select2" name="industry" required>
+                                           <option value=""> select industry</option>
                                                <option value="">@lang('home.selectindustry')</option>
                                                @foreach(JobCallMe::getCategories() as $cat)
                                                 <option value="{{ $cat->categoryId }}" {{ $cat->categoryId == $company->category ? 'selected="selected"' : '' }}>{{ $cat->name }}</option>
@@ -128,13 +134,13 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.address')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <textarea class="form-control companyAddress" placeholder="Address" name="companyAddress" style="resize: vertical">{{ $company->companyAddress }}</textarea>
+                                           <textarea required class="form-control companyAddress" placeholder="Address" name="companyAddress" style="resize: vertical">{{ $company->companyAddress }}</textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.country')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                            <select class="form-control input-sm select2 job-country companyCountry" name="companyCountry">
+                                            <select class="form-control input-sm select2 job-country companyCountry" name="companyCountry" required>
                                                 @foreach(JobCallMe::getJobCountries() as $cntry)
                                                     <option value="{{ $cntry->id }}" {{ $company->companyCountry == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
                                                 @endforeach
@@ -144,57 +150,57 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.state')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                            <select class="form-control input-sm select2 job-state companyState" name="companyState" data-state="{{ $company->companyState }}"></select>
+                                            <select class="form-control input-sm select2 job-state companyState" name="companyState" data-state="{{ $company->companyState }}" required></select>
                                            </select>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.city')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                            <select class="form-control input-sm select2 job-city companyCity" name="companyCity" data-city="{{ $company->companyCity }}"></select>
+                                            <select class="form-control input-sm select2 job-city companyCity" name="companyCity" data-city="{{ $company->companyCity }}" required></select>
                                            </select>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.phone')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyPhoneNumber" name="companyPhoneNumber" id="companyPhoneNumber" placeholder="Phone" value="{{ $company->companyPhoneNumber }}">
+                                           <input type="text" class="form-control companyPhoneNumber" name="companyPhoneNumber" id="companyPhoneNumber" placeholder="Phone" value="{{ $company->companyPhoneNumber }}" required>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.email')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}">
+                                           <input type="email" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}" required>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.website')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyWebsite" name="companyWebsite" id="companyWebsite" placeholder="https://www.example.com" value="{{ $company->companyWebsite }}">
+                                           <input type="url" class="form-control companyWebsite" name="companyWebsite" id="companyWebsite" placeholder="https://www.example.com" value="{{ $company->companyWebsite }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">Facebook</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyFb" name="companyFb" id="companyFb" placeholder="Facebook" value="{{ $company->companyFb }}">
+                                           <input type="url" class="form-control companyFb" name="companyFb" id="companyFb" placeholder="Facebook" value="{{ $company->companyFb }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">Linkedin</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyLinkedin" name="companyLinkedin" id="companyLinkedin" placeholder="Linkedin" value="{{ $company->companyLinkedin }}">
+                                           <input type="url" class="form-control companyLinkedin" name="companyLinkedin" id="companyLinkedin" placeholder="Linkedin" value="{{ $company->companyLinkedin }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">Twitter</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyTwitter" name="companyTwitter" id="twitter" placeholder="Twitter" value="{{ $company->companyTwitter }}">
+                                           <input type="url" class="form-control companyTwitter" name="companyTwitter" id="twitter" placeholder="Twitter" value="{{ $company->companyTwitter }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.noemployees')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyNoOfUsers" name="companyNoOfUsers" id="companyNoOfUsers" placeholder="Total Employees" value="{{ $company->companyNoOfUsers }}">
+                                           <input type="number" class="form-control companyNoOfUsers" name="companyNoOfUsers" id="companyNoOfUsers" placeholder="Total Employees" value="{{ $company->companyNoOfUsers }}" required>
                                        </div>
                                    </div>
 
@@ -216,11 +222,11 @@ if($company->companyLogo != ''){
                                        <label class="control-label col-sm-3">@lang('home.formofbusiness')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <select class="form-control input-sm select job-country" name="formofbusiness">
-												<option value="Small business" {{ $company->formofbusiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
-												<option value="Small and Medium-sized Businesses" {{ $company->formofbusiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
-												<option value="Major Company" {{ $company->formofbusiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
-												<option value="Listed Company" {{ $company->formofbusiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
-												<option value="Etc" {{ $company->formofbusiness == 'Etc' ? 'selected="selected"' : '' }}>@lang('home.Etc')</option>
+												<option value="Small business" {{ $company->formofbussiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
+												<option value="Small and Medium-sized Businesses" {{ $company->formofbussiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
+												<option value="Major Company" {{ $company->formofbussiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
+												<option value="Listed Company" {{ $company->formofbussiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
+												<option value="Etc" {{ $company->formofbussiness == 'Etc' ? 'selected="selected"' : '' }}>@lang('home.Etc')</option>
 
                                            </select>
                                        </div>
@@ -228,7 +234,7 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                         <label class="col-sm-3 control-label">@lang('home.establishin')</label>
                                         <div class="col-sm-9 pnj-form-field">
-                                            <input class="form-control date-picker companyEstablishDate" type="text" name="companyEstablishDate" value="{{ $company->companyEstablishDate }}">
+                                            <input class="form-control date-picker companyEstablishDate" type="text" name="companyEstablishDate" value="{{ $company->companyEstablishDate }}" required>
                                         </div>
                                    </div>
 
@@ -442,6 +448,34 @@ if($company->companyLogo != ''){
 
     </div>
 </section>
+<div id="editProCompanyModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+       <div class="row">
+           <div class="col-md-9">
+                <div id="proEditImg">
+                    <img src="" class="img-responsive">
+                </div>
+           </div>
+           <div class="col-md-3">
+               <div id="custom-preview-wrapper"></div>
+           </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Crop</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 @endsection
 @section('page-footer')
 <style type="text/css">
@@ -620,5 +654,79 @@ $('.compnay-cover').on('change',function(){
         }
     });
 })
+  //**dataURL to blob**
+    function dataURLtoBlob(dataurl) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type:mime});
+    }
+
+    //**blob to dataURL**
+    function blobToDataURL(blob, callback) {
+        var a = new FileReader();
+        a.onload = function(e) {callback(e.target.result);}
+        a.readAsDataURL(blob);
+    }
+    function editcompanypic(){
+        var proImg = $('.eo-dp').attr('src');
+       $('#editProCompanyModel').modal('show');
+       $('#proEditImg img').attr('src',proImg);
+       $('#proEditImg img').rcrop({
+            minSize : [100,100],
+            preserveAspectRatio : true,
+            
+            preview : {
+                display: true,
+                size : [100,100],
+                wrapper : '#custom-preview-wrapper'
+            }
+        });
+      
+    }
+    $('#proEditImg img').on('rcrop-changed', function(){
+        var srcOriginal = $(this).rcrop('getDataURL');
+        var srcResized = $(this).rcrop('getDataURL', 50,50);
+        var userId = "{{ session()->get('jcmUser')->userId }}";
+        $('.eo-dp').attr('src',srcOriginal);
+        //test:
+        var blob = dataURLtoBlob(srcOriginal);
+        var imagelink = $('#proEditImg img').attr('src');
+
+        /*blobToDataURL(blob, function(dataurl){
+            console.log(dataurl);
+        });*/
+        var fd = new FormData();
+        fd.append('profileImage', blob);
+        fd.append('_token', "{{ csrf_token() }}");
+        fd.append('userId', userId);
+        fd.append('imagelink', imagelink);
+        $.ajax({
+            type: 'POST',
+            url: '{{ url("cropCompanyProfileImage") }}',
+            data: fd,
+            processData: false,
+            contentType: false
+        }).done(function(data) {
+               console.log(data);
+        });
+        
+    });
+    function removecompanypic(){
+       var userId = $('#userID').val();
+       $.ajax({
+        url:'{{ url("RemCompProImage") }}',
+        data:{userId:userId,_token:'{{ csrf_token() }}'},
+        type:'POST',
+        success:function(res){
+            if(res == 1){
+                toastr.success('Profile Pic Remove');
+                $('.eo-dp').attr('src','{{ asset("compnay-logo/default-logo.jpg") }}');
+            }
+        }
+       });
+    }
 </script>
 @endsection

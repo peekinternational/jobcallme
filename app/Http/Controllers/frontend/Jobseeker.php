@@ -113,8 +113,9 @@ class Jobseeker extends Controller{
 		$user = DB::table('jcm_users')->where('userId',$app->userId)->first();
 		$meta = DB::table('jcm_users_meta')->where('userId',$app->userId)->first();
 		$resume = $this->userResume($app->userId);
+		$privacy = JobCallMe::getprivacy($app->userId);
 		//dd($user);exit;
-		return view('frontend.jobseeker.resume',compact('user','meta','resume'));
+		return view('frontend.jobseeker.resume',compact('user','meta','resume','privacy'));
 	}
 
 	public function userResume($userId){
@@ -826,8 +827,10 @@ class Jobseeker extends Controller{
 		//dd($resume);
 		
 	//return view('frontend.jobseeker.resume');
-    	  $pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
-          return $pdf->download($name.'_cv.pdf');
+    	 $pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+		 // $pdf->SetFont('Courier', 'B', 18);
+        return $pdf->download($name.'_cv.pdf');
+		   //return view('frontend.cv',compact('user','meta','resume'));
 	}
 	
 		public function convertpdffile(Request $request, $id){

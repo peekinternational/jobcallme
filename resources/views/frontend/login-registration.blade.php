@@ -1,3 +1,4 @@
+
 @extends('frontend.layouts.app')
 
 @if($pageType == 'register')
@@ -97,11 +98,13 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     </div>
                 @endif
                 {{ csrf_field() }}
+                
                 <div class="form-group">
                     <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password" value="{{ old('password') }}" placeholder="Password">
+                    <input type="password" class="form-control" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="Password">
+                    <p style="color:red" id="errorpass"></p>
                 </div>
                 <div class="form-group">
                     <div class="row">
@@ -136,8 +139,13 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                         </label>
                     </div>
                 </div>
-                <p class="terms-condition">@lang('home.agree')<a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.website')</p>
-                <button type="submit" class="btn btn-primary btn-block" name="register">@lang('home.register')</button>
+                <div>
+                    <input type="checkbox" name="agree" value="agree" id="agree">
+                    <label for="agree">
+                        <p class="terms-condition">@lang('home.agree')<a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.website')</p>    
+                    </label>
+                </div>
+                <button id="regbtn" type="submit" class="btn btn-primary btn-block" name="register">@lang('home.register')</button>
                 <p class="text-center show-loginBox">@lang('home.alreadyaccount') <a href="javascript:;" onclick="switchPage('login')">@lang('home.loginhere')</a></p>
             </form>
         </div>
@@ -210,6 +218,23 @@ function switchPage(page){
         var href = "{{ url('account/register') }}";
     }
     window.parent.history.pushState({path:href},'',href);
+}
+function sendpassword(pass){
+ $.ajax({
+    url:"{{ url('passwordValidate') }}",
+    data:{password:pass,_token:"{{ csrf_token() }}"},
+    type:"post",
+    success:function(res){
+        if(res == 1){
+            $('#errorpass').text("Password must have atleast one upper char,digit,special char");
+            $('#regbtn').attr('disabled','disabled');
+        }else{
+            $('#errorpass').text(" ");
+            $('#regbtn').removeAttr('disabled');
+        }
+       
+    }
+ });
 }
 </script>
 @endsection
