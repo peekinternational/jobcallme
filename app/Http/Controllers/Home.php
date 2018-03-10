@@ -7,11 +7,65 @@ use Illuminate\Http\Request;
 use Mail;
 use Storage;
 use App\Jobs;
+use App\CometChat;
+use App\JobsApplied;
+use App\User; 
 class Home extends Controller{
     
     public function notFound(){
     	echo 'here';
     }
+
+	public function testCron(){
+		/*get non communicating users*/
+		$comet=CometChat::whereNull('custom_data')->get()->toArray();
+		$emailSent=[];
+		if(count($comet)>0):
+			echo "Comet count: ".count($comet).' ////<br/>';
+			foreach($comet as $items): 
+				if(!in_array("{$items['from']}-{$items['to']}",$emailSent)):
+					$where=['from'=>$items['to'],'to'=>$items['from']]; //check if 'to' has replied back?
+					$foundTo=CometChat::where($where)->count();
+					if($foundTo>0): //if yes (update both two user as communicating)
+						$orWhere=['to'=>$items['to'],'from'=>$items['from']];
+						CometChat::where($where)->orWhere($orWhere)->update(['custom_data' => 1]); 
+						echo "Found: {$items['from']} -- {$items['to']} <br/>";
+					else:
+						echo "Not Found: {$items['from']} -- {$items['to']} <br/>";
+						//Employer check (email should always sent from employer to applicant)
+						$cJobs=Jobs::where('userId',$items['from'])->get();
+						if(count($cJobs)>0):
+							foreach($cJobs as $jobs): 
+								$jobWhere=['userId'=>$items['to'],'jobId'=>$jobs->jobId];
+								$jApplied=JobsApplied::where($jobWhere)->count();
+								if($jApplied>0): //to has applied on from job
+									//send email 
+									$employer=User::where('userId',$items['from'])->first();
+									$empName="{$employer->firstName} {$employer->lastName}";
+									$applicant=User::where('userId',$items['to'])->first();
+									$appName="{$applicant->firstName} {$applicant->lastName}";
+									$myContent="
+									Dear {$appName}, <br/>
+									Employer ({$empName}) has sent you message, reply him back by logging at https://www.jobcallme.com
+									<br/><br/>
+									Regards.";
+									echo "{$myContent} <br/>";
+									$subject="Employer Message: JobCallMe";
+									$email=$applicant->email;
+									Mail::send([],[], function ($message) use($email,$myContent,$subject){  
+										$message->to($email, $email)->subject($subject)->setBody($myContent,'text/html');
+									}); 
+									array_push($emailSent,"{$items['from']}-{$items['to']}");
+								endif;
+							endforeach;	 
+							$orWhere=['to'=>$items['to'],'from'=>$items['from']];
+							CometChat::where($where)->orWhere($orWhere)->update(['custom_data' => 1]);
+						endif; 
+					endif;
+				endif;
+			endforeach;
+		endif; 
+	}
 
     public function sendEmail(Request $request){
     	$message = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
