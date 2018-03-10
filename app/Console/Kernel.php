@@ -38,12 +38,12 @@ class Kernel extends ConsoleKernel
                 foreach($comet as $items): 
                     if(!in_array("{$items['from']}-{$items['to']}",$emailSent)):
                         $where=['from'=>$items['to'],'to'=>$items['from']]; //check if 'to' has replied back?
-                        $foundTo=CometChat::where($where)->count();
+                        /*$foundTo=CometChat::where($where)->count();
                         if($foundTo>0): //if yes (update both two user as communicating)
                             $orWhere=['to'=>$items['to'],'from'=>$items['from']];
                             CometChat::where($where)->orWhere($orWhere)->update(['custom_data' => 1]); 
                             //echo "Found: {$items['from']} -- {$items['to']} <br/>";
-                        else:
+                        else:*/
                             //echo "Not Found: {$items['from']} -- {$items['to']} <br/>";
                             //Employer check (email should always sent from employer to applicant)
                             $cJobs=Jobs::where('userId',$items['from'])->get();
@@ -78,7 +78,7 @@ class Kernel extends ConsoleKernel
                                 $orWhere=['to'=>$items['to'],'from'=>$items['from']];
                                 CometChat::where($where)->orWhere($orWhere)->update(['custom_data' => 1]);
                             endif; 
-                        endif;
+                        /*endif;*/
                     endif;
                 endforeach;
             endif; 
