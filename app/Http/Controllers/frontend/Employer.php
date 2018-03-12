@@ -569,6 +569,7 @@ curl_close ($ch);
 	$departs = DB::table('jcm_departments')->select('departmentId','name')->where('userId','=',$request->session()->get('jcmUser')->userId)->get();
 		if(sizeof($departs)== "")
 		{
+			$request->session()->flash('depAlert', 'Please first add your company department then post your job');
 			return redirect('account/employer/departments');
 		}
 		
