@@ -263,6 +263,7 @@ Route::get('jobs','frontend\Jobs@home');
 Route::post('jobs/search','frontend\Jobs@searchJobs');
 Route::match(['get','post'],'jobs/homeJobSearch','frontend\Jobs@homePageJobSerach');
 Route::match(['get','post'],'jobs/{id}','frontend\Jobs@viewJob');
+
 Route::match(['get','post'],'jobs/apply/{id}','frontend\Jobs@jobApply');
 
 Route::get('/not-found','Home@notFound');
@@ -326,6 +327,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('jobCallMePayResult','Home@jobCallMePayResult');
 Route::get('/paymentCompleted', 'Home@paymentCompleted');
 
+Route::get('/testCron', 'Home@testCron'); 
 Route::get('nice', function () {
     return view('frontend.nice');
 });

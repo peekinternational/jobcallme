@@ -9,14 +9,12 @@ use DB;
 use Illuminate\Support\Facades\Lang;
 
 class Jobs extends Controller{
-    public function home(Request $request){
-		//dd($request->all());
+    public function home(){
 		return view('frontend.view-jobs');
-		
 	}
 
 	public function searchJobs(Request $request){
-
+		
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}
@@ -35,8 +33,6 @@ class Jobs extends Controller{
 		$city = trim($request->input('city'));
 		$currency = trim($request->input('currency'));
 		$userinfo=$request->session()->get('jcmUser')->userId;
-		//dd($request->all());
-		
 		$savedJobArr = array();
 		if($request->session()->has('jcmUser')){
 			$meta = JobCallMe::getUserMeta($request->session()->get('jcmUser')->userId);
@@ -375,7 +371,9 @@ class Jobs extends Controller{
 
 
 	public function viewJob(Request $request){
+		echo "hello";die;
 		$jobId = $request->segment(2);
+
 		$jobrs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.*');
 		$jobrs->join('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId');
 		$jobrs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');

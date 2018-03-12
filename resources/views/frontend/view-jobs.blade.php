@@ -11,7 +11,6 @@
 				</div>
 
         <div class="col-md-12">
-		
             <div class="col-md-3 job-search-box">
 			<span>@lang('home.refinesearch')</span>
 			<br>
@@ -108,6 +107,7 @@
                 </form>
             </div>
             <div class="col-md-9 show-jobs">
+                
                 <p style="text-align:center;">Loading ....</p>
 				
             </div>
@@ -132,7 +132,35 @@
 var isFirst = 0;
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
-	$('.search-job').submit();
+    var getcountry = "<?php echo $_GET['country'];?>";
+    var getsate = "<?php echo $_GET['state'];?>";
+    
+    if(getcountry == '' && getsate == ''){
+        $('.search-job').submit();
+    }else{
+        $.ajax({
+        type: 'post',
+        data: {country:getcountry,state:getsate,_token:"{{ csrf_token() }}"},
+        url: "{{ url('jobs/search') }}?_find="+isFirst,
+        success: function(response){
+            $('.show-jobs').html(response);
+            $('.search-job button[name="save"]').prop('disabled',false);
+
+            $('.jobs-suggestions').hover(function () {
+                $(this).children(".js-action").fadeIn('slow');
+
+            });
+            $('.jobs-suggestions').mouseleave(function () {
+                $(this).children(".js-action").fadeOut('fast');
+            });
+
+            $('.search-job select option[value=""]').prop('selected',true);
+            $('.search-job input').val('');
+            $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
+        }
+    })
+    }
+	
     getStates($('.job-country option:selected:selected').val());
 })
 $('.job-country').on('change',function(){
