@@ -34,8 +34,15 @@
                        <div class="tab-pane active" id="rtj_tab_suggested">
                              @if(count($suggested) > 0)
                                 @foreach($suggested as $sgJob)
+                                 <?php
+                            //print_r($company);exit;
+                            $cLogo = url('compnay-logo/default-logo.jpg');
+                            if($sgJob->companyLogo != ''){
+                              $cLogo = url('compnay-logo/'.$sgJob->companyLogo);
+                            }
+                            ?>
                                     <div class="col-md-12 rtj-item" id="suggested-{{ $sgJob->jobId }}">
-                                        <img src="{{ url('compnay-logo/'.$sgJob->companyLogo) }}" style="width: 55px;height:60px;">
+                                        <img src="{{ $cLogo }}" style="width: 55px;">
                                         <div class="rtj-details">
                                             <p><strong><a href="{{ url('jobs/'.$sgJob->jobId) }}">{!! $sgJob->title !!}</a></strong></p>
                                             <p>{!! $sgJob->companyName !!}</p>
@@ -166,7 +173,9 @@
                         ?>
                     <div class="col-md-12 sr-item">
 						<div class="col-md-5 col-xs-12">
-							<img src="{{ $pImage }}" style="width: 170px;height:80px !important">
+                        <div style="height:100px">
+							<img src="{{ $pImage }}" style="width: 170px !important">
+                            </div>
 						</div>
 						<div class="col-md-7 col-xs-12">
 							<div class="sr-details">
@@ -204,7 +213,7 @@
                             ?>
                            <div class="col-md-3 col-xs-6 sp-item">
 						
-                               <img src="{{ $cLogo }}" style="height:60px;width:80px !important">
+                               <img src="{{ $cLogo }}" style="width:80px !important">
 						
                                <p style="height:42px"><a href="{{ url('companies/company/'.$comp->companyId) }}">{!! $comp->companyName !!}</a></p>
 							   
@@ -242,7 +251,7 @@
                         ?>
                     <div class="col-md-12 sr-item">
 						<div class="col-md-5 col-xs-12">
-							<img src="{{ $pImage }}" style="width: 170px;height:80px !important">
+							<img src="{{ $pImage }}" style="width: 170px !important">
 						</div>
 						<div class="col-md-7 col-xs-12">
 							<div class="sr-details">
