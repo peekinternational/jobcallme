@@ -13,6 +13,7 @@ use URL;
 use Session;
 use Redirect;
 use Input;
+use Mapper;
 /** All Paypal Details class **/
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
@@ -896,7 +897,7 @@ public function userResume($userId){
 		$app = $request->session()->get('jcmUser');
 
 		$company = JobCallMe::getCompany($app->companyId);
-
+		 Mapper::map(33.6844,  73.0479);
 		return view('frontend.employer.view-organization',compact('company'));
 	}
 
