@@ -35,7 +35,7 @@
                 <div class="rd-author">
                     <img src="{{ url('profile-photos/'.$record->profilePhoto) }}" class="img-circle" alt="{{ $record->firstName }}">
                     <div class="rd-author-details">
-                        <h5><a href="{{ url('people/profile/'.$record->userId) }}">{{ $record->firstName.' '.$record->lastName }}</a><h5>
+                        <h5><a href="{{ url('account/employer/application/applicant/'.$record->userId) }}">{{ $record->firstName.' '.$record->lastName }}</a><h5>
                         <span>{{ date('M d, Y',strtotime($record->createdTime))}}</span>
                     </div>
                 </div>
