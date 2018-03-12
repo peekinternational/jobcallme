@@ -660,7 +660,7 @@ public function verifyUser(Request $request){
 	if($data > 0){
 		
 		DB::table('jcm_users')->where('secretId',$secretId)->update(['user_status' => 'Y']);
-		$request->session()->flash('loginAlert', 'Your account is Verified Please Login');
+		$request->session()->flash('emailAlert', 'Your account is Verified Please Login');
 		return redirect('account/login');
 	}else{
 		echo "There is a issue in your secret code kindly contact with administration thanks";

@@ -558,19 +558,19 @@ curl_close ($ch);
 		if(!$request->session()->has('jcmUser')){
     		return redirect('account/login?next='.$request->route()->uri);
     	}
-		$rec = JobCallMe::getUser($request->session()->get('jcmUser')->userId);
-		if($rec->companyId == '' && $rec->companyId == '0' && $rec->companyId == NULL){
-			return redirect('account/employer/organization');
-		}
+		
 		$company = DB::table('jcm_companies')->select('*')->where('companyId','=',$request->session()->get('jcmUser')->userId)->get();
+		//dd($company[0]->category);
 		if($company[0]->category== "0")
 		{
+			$request->session()->flash('companyAlert', 'Please first Complate you company profile then post your job');
 			return redirect('account/employer/organization');
 		}
 
 	$departs = DB::table('jcm_departments')->select('departmentId','name')->where('userId','=',$request->session()->get('jcmUser')->userId)->get();
 		if(sizeof($departs)== "")
 		{
+			$request->session()->flash('depAlert', 'Please first add your company department then post your job');
 			return redirect('account/employer/departments');
 		}
 		

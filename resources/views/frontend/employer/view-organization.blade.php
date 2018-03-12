@@ -13,8 +13,17 @@ if($company->companyLogo != ''){
   $cLogo = url('compnay-logo/'.$company->companyLogo);
 }
 ?>
+ 
 <section id="edit-organization">
     <div class="container">
+     @if(Session::has('companyAlert'))
+                    <div class="alert alert-danger">
+                        {{Session::get('companyAlert')}} 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
         <div class="eo-box">
             <div class="eo-timeline">
                 <img src="{{ $cCover }}" class="eo-timeline-cover">
@@ -37,6 +46,7 @@ if($company->companyLogo != ''){
                        </div>
 
                    </div>
+
                    <div class="col-md-10 eo-timeline-details">
                        <h1><a href="">{{ $company->companyName }}</a></h1>
                        <div class="col-md-6 eo-section">

@@ -372,7 +372,11 @@ class Jobs extends Controller{
 
 
 	public function viewJob(Request $request){
+<<<<<<< HEAD
 		
+=======
+	//	echo "hello";die;
+>>>>>>> 6f02301e18cc7aa482497cf1ccf611eb28a53666
 		$jobId = $request->segment(2);
 
 		$jobrs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.*');

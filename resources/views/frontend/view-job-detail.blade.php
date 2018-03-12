@@ -3,14 +3,17 @@
 @section('title', "$job->title")
 
 @section('content')
+ <?php 
+     $cLogo = url('compnay-logo/default-logo.jpg');
+       if($job->companyLogo != ''){
+          $cLogo = url('compnay-logo/'.$job->companyLogo);
+             }
+              ?>
 <?php
 $head='';
 $travelFound=false;			
 $dispatch='';
-$userImage = url('compnay-logo/profile-logo.jpg');
-if($job->companyLogo != ''){
-    $userImage = url('compnay-logo/'.$job->companyLogo);
-}
+
   if($job->head == "yes")		
 					{		
 				$head='<span class="label" style="background-color:green">Headhunting</span>';		
@@ -31,7 +34,7 @@ if($job->companyLogo != ''){
 		
             <div class="jobs-suggestions">
 			<div style="display: -webkit-box;">
-			 <img src="{{$userImage}}"  style="width:118px;margin-top:32px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
+			 <img src="{{ $cLogo }}"  style="width:118px;margin-top:32px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
 			<div style="padding-left: 42px;">
 			<span style="text-transform: uppercase;font-size: 26px;">{{$job->companyName}}</span>
                 <p style="font-size: 18px;margin-top: 24px; margin-left: 6px;">{{ $job->title }},  &nbsp;<span style="font-size: 13px; padding-top: 9px;">{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }} </span> &nbsp;<span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">
@@ -341,14 +344,15 @@ if($job->companyLogo != ''){
                     <div class="row">
 					@foreach($suggest as $appl)
 					 <?php
-                        $userImage = url('compnay-logo/profile-logo.jpg');
-                         if($appl->companyLogo != ''){
-                          $userImage = url('compnay-logo/'.$appl->companyLogo);
-                               }
-?>
+                       
+                            $cLogo = url('compnay-logo/default-logo.jpg');
+                            if($appl->companyLogo != ''){
+                                $cLogo = url('compnay-logo/'.$appl->companyLogo);
+                                    }
+                                    ?>
                         <div class="col-md-12 col-xs-12 sp-item">
 						<div class="col-md-4 col-xs-4 sp-item">
-                            <img src="{{ $userImage }}" style="">
+                            <img src="{{ $cLogo }}" style="">
 							</div>
 							<div class="col-md-8 col-xs-8 sp-item" style="text-align:left !important">
                             <p><a href="{{ url('jobs/'.$appl->jobId) }}">{!! $appl->title!!}</a></p>
