@@ -372,19 +372,7 @@ class Jobs extends Controller{
 
 
 	public function viewJob(Request $request){
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
 		
-=======
-	//	echo "hello";die;
->>>>>>> 6f02301e18cc7aa482497cf1ccf611eb28a53666
->>>>>>> d0d780ce4df185a95234b02d9e42891cdb62094f
-=======
-
->>>>>>> 0e5a52d4cf9de14d89b72bfd94d1284b846a09ea
 		$jobId = $request->segment(2);
 
 		$jobrs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.*');
@@ -400,6 +388,7 @@ class Jobs extends Controller{
 		if(count($job) == 0){
 			return redirect('jobs');
 		}
+		
 
 		$savedJobArr = array();
 		$followArr = array();
