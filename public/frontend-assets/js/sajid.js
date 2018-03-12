@@ -2,9 +2,13 @@
 * Author : Muhammad sajid
 * Created Date : 10/2/2018
 */
-$('#head').on('change',function(){
-	alert();
-});
+$('#head').on('click',function(){
+	$('#dispatch').prop('checked', false); // Unchecks it
+})
+$('#dispatch').on('click',function(){
+	$('#head').prop('checked', false); // Unchecks it
+})
+
 function deactive(id){
 	var postURL = url()+'/deactiveUser';
 	var usertoken = getToken();
