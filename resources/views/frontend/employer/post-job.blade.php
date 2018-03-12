@@ -36,7 +36,7 @@
                                 <!---->
 								<span class="pay_blog">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
-									<input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
+									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
 								</span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
                              <span class="b">@lang('home.'.$payment->title)</span></div>
@@ -169,7 +169,7 @@
                                 <input type="text" class="form-control date-picker"  name="expiryDate" onkeypress="return false" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="expirediv">
                             <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control date-picker" id="secondDate" name="expiryAd" onkeypress="return false" required>
@@ -406,11 +406,15 @@ $(document).ready(function(){
      {
          $('#durationdiv').hide();
          $('#total').hide();
+         $('#expirediv').hide();
+         
         // alert("nabeel");
      }
      else{
           $('#durationdiv').show();
          $('#total').show();
+          $('#expirediv').show();
+        
      }
 		
 	})
