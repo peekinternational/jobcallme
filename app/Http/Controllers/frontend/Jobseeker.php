@@ -240,7 +240,7 @@ class Jobseeker extends Controller{
 
 		extract(array_map('trim', $request->all()));
 
-		$academicQry = array('degreeLevel' => $degreeLevel, 'degree' => $degree, 'completionDate' => $completionDate, 'grade' => $grade, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
+		$academicQry = array('degreeLevel' => $degreeLevel, 'degree' => $degree, 'enterDate' => $enterDate,'completionDate' => $completionDate, 'grade' => $grade, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
 
 		$input = array('type' => 'academic', 'resumeData' => @json_encode($academicQry));
 

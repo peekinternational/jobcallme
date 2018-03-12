@@ -450,7 +450,9 @@ if($company->companyLogo != ''){
             
             <h3 class="eo-about-heading">@lang('home.organizationmap')</h3>
             <div class="eo-about-org">
-                <p></p>
+                <div style="width: 100%; height: 500px;">
+                  {!! Mapper::render() !!}
+                </div>
             </div>
             
         </div>

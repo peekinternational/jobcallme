@@ -357,7 +357,7 @@ if($user->profilePhoto != ''){
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
-                                            <p class="rd-date">{!! date('M, Y',strtotime($academic->completionDate)) !!}</p>
+                                            <p class="rd-date">{!! date('M, Y',strtotime($academic->enterDate)) !!},  {!!  date('M, Y',strtotime($academic->completionDate)) !!}</p>
                                             <p class="rd-title">{!! $academic->degree !!}</p>
                                             <p class="rd-organization">{!! $academic->institution !!}</p>
                                             <p class="rd-location">{!! JobCallMe::cityName($academic->city).' ,'.JobCallMe::countryName($academic->country)!!}</p>
@@ -2014,6 +2014,7 @@ function getAcademic(resumeId){
             $('.form-academic input[name="resumeId"]').val(resumeId);
             $('.form-academic select[name="degreeLevel"]').val(obj.degreeLevel).trigger('change');
             $('.form-academic input[name="degree"]').val(obj.degree);
+            $('.form-academic input[name="enterDate"]').val(obj.enterDate);
             $('.form-academic input[name="completionDate"]').val(obj.completionDate);
             $('.form-academic input[name="grade"]').val(obj.grade);
             $('.form-academic input[name="institution"]').val(obj.institution);

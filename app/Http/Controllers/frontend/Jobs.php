@@ -54,6 +54,7 @@ class Jobs extends Controller{
 				}
 			}
 		}*/
+		
 		if($country != '0') $jobs->where('jcm_jobs.country','=',$country);
 		if($categoryId != '') $jobs->where('jcm_jobs.category','=',$categoryId);
 		if($jobType != '') $jobs->where('jcm_jobs.jobType','=',$jobType);
@@ -63,7 +64,7 @@ class Jobs extends Controller{
 		if($minSalary != '') $jobs->where('jcm_jobs.minSalary','<=',$minSalary);
 		if($maxSalary != '') $jobs->where('jcm_jobs.maxSalary','>=',$maxSalary);
 		if($state != '0') $jobs->where('jcm_jobs.state','=',$state);
-		if($city != '0') $jobs->where('jcm_jobs.city','=',$city);
+		/*if($city != '0') $jobs->where('jcm_jobs.city','=',$city);*/
 		if($currency != '') $jobs->where('jcm_jobs.currency','=',$currency);
 
 		if($keyword != ''){
@@ -371,7 +372,15 @@ class Jobs extends Controller{
 
 
 	public function viewJob(Request $request){
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+		
+=======
+	//	echo "hello";die;
+>>>>>>> 6f02301e18cc7aa482497cf1ccf611eb28a53666
+>>>>>>> d0d780ce4df185a95234b02d9e42891cdb62094f
 		$jobId = $request->segment(2);
 
 		$jobrs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.*');

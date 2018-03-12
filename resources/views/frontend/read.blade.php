@@ -82,8 +82,11 @@
                             <div class="ra-author-box">
                                 <img src="{{ url('profile-photos/'.$rec->profilePhoto) }}" class="img-circle" alt="{{ $rec->firstName }}">
                                 <div class="ra-author">
-                                    <a href="{{ url('people/profile/'.$rec->userId) }}">{{ $rec->firstName.' '.$rec->lastName }}</a><br>
+                                    <a href="{{ url('account/employer/application/applicant/'.$rec->userId) }}">{{ $rec->firstName.' '.$rec->lastName }}</a><br>
                                     <span>{{ date('M d, Y',strtotime($rec->createdTime))}}</span>
+
+
+                                    
                                 </div>
                             </div>
                         </div>
