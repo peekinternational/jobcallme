@@ -43,17 +43,17 @@ if($user->profilePhoto != ''){
                                     <a href="{{ $meta->linkedin }}"><i class="fa fa-linkedin-square"></i></a>
                                     <a href="{{ $meta->facebook }}"><i class="fa fa-facebook-square"></i></a>
                                 </p>
-                                <p><span class="pi-title">@lang('home.email'):</span> {{ $user->email }}</p>
-                                <p><span class="pi-title">@lang('home.mobile'):</span> {{ $user->phoneNumber }}</p>
-                                <p><span class="pi-title">@lang('home.cnic'):</span> {{ $meta->cnicNumber }}</p>
-                                <p><span class="pi-title">@lang('home.address'):</span> {!! $meta->address.' ,'.JobCallMe::cityName($user->city).' ,'.JobCallMe::countryName($user->country) !!}</p>
+                                <p><span class="pi-title">@lang('home.email'):</span>  {{ $user->email }}</p>
+                                <p><span class="pi-title">@lang('home.mobile'):</span>  {{ $user->phoneNumber }}</p>
+                                <p><span class="pi-title">@lang('home.cnic'):</span>  {{ $meta->cnicNumber }}</p>
+                                <p><span class="pi-title">@lang('home.address'):</span>  {!! $meta->address.' ,'.JobCallMe::cityName($user->city).' ,'.JobCallMe::countryName($user->country) !!}</p>
                              </div>
                             <div class="col-md-9 personal-info-right">
                                 <h3 class="hidden-sm hidden-xs">{{ $user->firstName.' '.$user->lastName }}</h3>
-                                <p><span class="pi-title">@lang('home.fathername'):</span> {{ $meta->fatherName }}</p>
-                                <p><span class="pi-title">@lang('home.age'):</span> {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title">@lang('home.gender'):</span>@lang('home.'.$meta->gender),<span class="pi-title">@lang('home.maritalstatus'):</span>@lang('home.'.$meta->maritalStatus)</p>
-                                <p><span class="pi-title">@lang('home.education'):</span> {{ $meta->education }}</p>
-                                <p><span class="pi-title">@lang('home.experiance'):</span> {{ $meta->experiance }}</p>
+                                <p><span class="pi-title">@lang('home.fathername'):</span>  {{ $meta->fatherName }}</p>
+                                <p><span class="pi-title">@lang('home.age'):</span>  {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title"> @lang('home.gender'):</span> @lang('home.'.$meta->gender),<span class="pi-title"> @lang('home.maritalstatus'):</span> @lang('home.'.$meta->maritalStatus)</p>
+                                <p><span class="pi-title">@lang('home.education'):</span>  {{ $meta->education }}</p>
+                                <p><span class="pi-title">@lang('home.experiance'):</span>  {{ $meta->experiance }}</p>
                                 <p><span class="pi-title">@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryTitle($meta->industry))</p>
                                 <p><span class="pi-title">@lang('home.currentsalary'):</span> @if($meta->currency == 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',0).' '.$meta->currency }}@endif @if($meta->currency != 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}@endif</p>
 								<p><span class="pi-title">@lang('home.expectedsalary'):</span>  @if($meta->currency == 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->expectedSalary : '0',0).' '.$meta->currency }}@endif @if($meta->currency != 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->expectedSalary : '0',2).' '.$meta->currency }}@endif </p>
@@ -415,6 +415,12 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.degree')</label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="degree" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.enterdate')</label>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control input-sm date-picker" name="enterDate" required>
                                 </div>
                             </div>
                             <div class="form-group">
