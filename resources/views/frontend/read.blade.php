@@ -84,6 +84,9 @@
                                 <div class="ra-author">
                                     <a href="{{ url('account/employer/application/applicant/'.$rec->userId) }}">{{ $rec->firstName.' '.$rec->lastName }}</a><br>
                                     <span>{{ date('M d, Y',strtotime($rec->createdTime))}}</span>
+
+
+                                    
                                 </div>
                             </div>
                         </div>
