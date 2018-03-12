@@ -206,7 +206,7 @@ class Jobseeker extends Controller{
 		$userQry = array('firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'phoneNumber' => $phoneNumber, 'country' => $country, 'state' => $state, 'city' => $city, 'about' => $about);
 		DB::table('jcm_users')->where('userId',$app->userId)->update($userQry);
 
-		$metaQry = array('fatherName' => $fatherName, 'dateOfBirth' => $dateOfBirth, 'gender' => $gender, 'maritalStatus' => $maritalStatus, 'experiance' => $experiance, 'education' => $education, 'industry' => $industry, 'currency' => $currency, 'currentSalary' => $currentSalary, 'expectedSalary' => $expectedSalary, 'cnicNumber' => $cnicNumber, 'address' => $address, 'expertise' => $expertise, 'facebook' => '', 'linkedin' => '', 'twitter' => '', 'website' => '');
+		$metaQry = array('fatherName' => $fatherName, 'dateOfBirth' => $dateOfBirth, 'gender' => $gender, 'maritalStatus' => $maritalStatus, 'experiance' => $experiance, 'education' => $education, 'industry' => $industry, 'subCategoryId' => $subCategoryId, 'subCategoryId2' => $subCategoryId2, 'shift' => $shift, 'currency' => $currency, 'currentSalary' => $currentSalary, 'expectedSalary' => $expectedSalary, 'cnicNumber' => $cnicNumber, 'address' => $address, 'expertise' => $expertise, 'facebook' => '', 'linkedin' => '', 'twitter' => '', 'website' => '');
 		if($facebook != '') $metaQry['facebook'] = $facebook;
 		if($linkedin != '') $metaQry['linkedin'] = $linkedin;
 		if($twitter != '') $metaQry['twitter'] = $twitter;
