@@ -1685,6 +1685,12 @@ if($user->profilePhoto != ''){
                     <div class="resume-listing-section hidden-sm hidden-xs">
                         <h4>@lang('home.resumesections')</h4>
                         <hr>
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                          aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                            70%
+                          </div>
+                        </div>
                         <ul class="rls" style="padding-left: 0;">
                             <li>
                                 <a id="#" onclick="$('#personal-information').fadeIn();$('#personal-information-edit').hide();">@lang('home.personalinformation')</a> 
