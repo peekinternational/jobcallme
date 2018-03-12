@@ -172,7 +172,7 @@
                         <div class="form-group" id="expirediv">
                             <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" id="secondDate" name="expiryAd" onkeypress="return false" required>
+                                <input type="text" class="form-control date-picker" id="secondDate" name="expiryAd" onkeypress="return false">
                             </div>
                         </div>
 						<div class="form-group" id="durationdiv">
