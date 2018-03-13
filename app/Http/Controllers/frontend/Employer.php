@@ -1650,5 +1650,28 @@ public function userResume($userId){
 			return view('frontend.employer.cashpayment_detail',compact('amountss','titless'));
 	
 		 }
+		 public function addUser(Request $request){
+		 	$id = session()->get('jcmUser')->userId;
+		 	$data = DB::table('jcm_users')->where('addby','=',$id)->get();
+		 	return view('frontend.employer.addusers',compact('data'));
+		 }
+		 public function useradd(Request $request){
+		 	$email = $request->input('degree');
+		 	$data = DB::table('jcm_users')->where('email','=',$email)->get();
+		 	if(sizeof($data) > 0){
+		 		$id = session()->get('jcmUser')->userId;
+		 		DB::table('jcm_users')->where('email','=',$email)->update(['addby'=>$id]);
+		 	}else{
+		 			echo 'error';
+		 	}
+		 }
+		public function userdel(Request $request){
+			$id = $request->input('userId');
+			if(DB::table('jcm_users')->where('userId','=',$id)->update(['addby'=>'NULL'])){
+				echo 1;
+			}else{
+				echo 2;
+			}
+		}
 
 }

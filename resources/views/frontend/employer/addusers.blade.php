@@ -11,34 +11,42 @@
                         <a class="btn btn-primary r-add-btn" onclick="addAcademic()"><i class="fa fa-plus"></i> </a>
                         <h4> @lang('home.users')</h4>
                         <?php //print_r($resume); ?>
-                        <ul class="resume-details">
-                            @if(count($resume['academic']) > 0)
-                                @foreach($resume['academic'] as $resumeId => $academic)
-                                    <li id="resume-{{ $resumeId }}">
-                                        <div class="col-md-12">
-                                            <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getAcademic('{{ $resumeId }}')">
-                                                    <i class="fa fa-pencil"></i>
-                                                </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>&nbsp;
-                                            </span>
-                                            <p class="rd-date">{!! date('M, Y',strtotime($academic->completionDate)) !!}</p>
-                                            <p class="rd-title">{!! $academic->degree !!}</p>
-                                            <p class="rd-organization">{!! $academic->institution !!}</p>
-                                            <p class="rd-location">{!! JobCallMe::cityName($academic->city).' ,'.JobCallMe::countryName($academic->country)!!}</p>
-                                            <p class="rd-grade">Grade/GPA : {!! $academic->grade !!}</p>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            @endif
-                        </ul>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Created Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($data as $user)
+                                <tr>
+                                    <td>{{$user->username}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->createdTime}}</td>
+                                    <td>
+                                        <span>
+                                            <a href="#" title="Edit" onclick="edituser('{{$user->email}}')">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>&nbsp;
+                                            <a href="javascript:;" title="Delete" onclick="deleteuser('{{$user->userId}}')">
+                                                <i class="fa fa-trash"></i>
+                                            </a>&nbsp;
+                                        </span>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        
+                       
                     </section>
                     <section class="resume-box" id="academic-edit" style="display: none;">
                         <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.users')</c></h4>
                         <form class="form-horizontal form-academic" method="post" action="">
-                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <input type="hidden" name="resumeId" value="">
                             <div class="form-group error-group" style="display: none;">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
@@ -48,23 +56,24 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.email')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="degree">
+                                    <input type="text" id="email" class="form-control input-sm" name="degree">
                                 </div>
                             </div>
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
-								<p style="font-size: 11px;color: #7f7d77;">
-								<span>The user you are trying to add must have a JobCallMe id.</span><br>
-								<span>Logout and create a new id.</span></p>
+    								<p style="font-size: 11px;color: red;display:none;" id="msg">
+        								<span> The user you are trying to add must have a JobCallMe id. Logout and create a new id.  </span><br>
+        								<span>Logout and create a new id.</span>
+                                    </p>
 								</div>
-								</div>
+							</div>
 								
                             
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-primary" id="sub" type="button" name="save">@lang('home.save')</button>
                                     <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">Cancel</button>
                                 </div>
                             </div>
@@ -80,15 +89,51 @@
 		</section>
 		@endsection
 		@section('page-footer')
-		<script type="text/javascript">
-		
+<script type="text/javascript">
+function edituser(email){
+    
+    $('#email').val(email);
+    $('#academic').hide();
+    $('#academic-edit').fadeIn();
+}
+function deleteuser(id){
+   $.ajax({
+        url:"{{ url('account/employer/userdel')}}",
+        data:{userId:id,_token:token},
+        type:"post",
+        success:function(res){
+            if(res == 1){
+                window.location.href="{{url('account/employer/users')}}";
+            }else{
+                console.log(res);
+            }
+        }
+    });
+}
 function addAcademic(){
-    $('.form-academic input').val('');
+    $('.form-academic input:not(input[name="_token"])').val('');
     $('#academic-edit h4 c').text('@lang('home.users')');
     $('#academic').hide();
     $('#academic-edit').fadeIn();
 }
-$('form.form-academic').submit(function(e){
+$('#sub').on('click',function(){
+    var email = $('#email').val();
+    var token = $("input[name='_token']").val();
+    $.ajax({
+        url:"{{ url('account/employer/useradd')}}",
+        data:{degree:email,_token:token},
+        type:"post",
+        success:function(res){
+            if(res == 'error'){
+                $('#msg').css('display','block');
+            }else{
+                $('#msg').css('display','none');
+                window.location.href="{{url('account/employer/users')}}";
+            }
+        }
+    });
+})
+/*$('form.form-academic').submit(function(e){
     $('.form-academic input[name="_token"]').val(pageToken);
     $('.form-academic button[name="save"]').prop('disabled',true);
     $('.form-academic .error-group').hide();
@@ -152,6 +197,6 @@ function deleteElement(resumeId){
             }
         })
     }
-}
+}*/
 		</script>
 		@endsection

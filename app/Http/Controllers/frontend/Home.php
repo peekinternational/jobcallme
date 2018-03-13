@@ -724,5 +724,14 @@ public function deactiveUser(Request $request){
 public function regvalpass(Request $request){
 	echo JobCallMe::registrationPassValidation($request->input('password'));
 }
+public function savecompic(Request $request){
+	$data = $request->input('comppics');
+	$comId = session()->get('jcmUser')->companyId;
+	if( DB::table('jcm_companies')->where('companyId',$comId)->update(['companypics'=> $data])){
+		echo 1;
+	}else{
+		echo 2;
+	}
+}
 }
 ?>
