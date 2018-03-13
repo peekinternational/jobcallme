@@ -361,9 +361,12 @@ class ExtraSkills extends Controller{
     public function getStatus(Request $request)
     {
 		$payment_id = Session::get('paypal_payment_id');
+       // $input['payment_id']=$payment_id;
 		$input = Session::get('input');
+       
 		//dd($input);
 	   DB::table('jcm_upskills')->insert($input);
+
 		echo $jobId;
         /** Get the payment ID before session clear **/
         

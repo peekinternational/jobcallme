@@ -86,22 +86,22 @@
                             <div class="col-md-8 pnj-form-field">
                                 <select class="form-control select2" name="department" required>
                                     <option value="">@lang('home.s_department')</option>
-                                    <option value="@lang('home.Accounting')">@lang('home.Accounting')</option>
-                                    <option value="@lang('home.Administration')">@lang('home.Administration')</option>
-                                    <option value="@lang('home.Customer Services')">@lang('home.Customer Services')</option>
-                                    <option value="@lang('home.Finance')">@lang('home.Finance')</option>
-                                    <option value="@lang('home.Human Resources')">@lang('home.Human Resources')</option>
-                                    <option value="@lang('home.Information Technology')">@lang('home.Information Technology')</option>
-                                    <option value="@lang('home.Marketing')">@lang('home.Marketing')</option>
-                                    <option value="@lang('home.Procurement')">@lang('home.Procurement')</option>
-                                    <option value="@lang('home.Production')">@lang('home.Production')</option>
-                                    <option value="@lang('home.Quality Control')">@lang('home.Quality Control')</option>
-                                     <option value="@lang('home.Research & Development')">@lang('home.Research & Development')</option>
-                                      <option value="@lang('home.Sales')">@lang('home.Sales')</option>
+                                    <option value="Accounting">@lang('home.Accounting')</option>
+                                    <option value="Administration">@lang('home.Administration')</option>
+                                    <option value="Customer Services">@lang('home.Customer Services')</option>
+                                    <option value="Finance">@lang('home.Finance')</option>
+                                    <option value="Human Resources">@lang('home.Human Resources')</option>
+                                    <option value="Information Technology">@lang('home.Information Technology')</option>
+                                    <option value="Marketing">@lang('home.Marketing')</option>
+                                    <option value="Procurement">@lang('home.Procurement')</option>
+                                    <option value="Production">@lang('home.Production')</option>
+                                    <option value="Quality Control">@lang('home.Quality Control')</option>
+                                     <option value="Research & Development">@lang('home.Research & Development')</option>
+                                      <option value="Sales">@lang('home.Sales')</option>
                                     
 
                                     @foreach(JobCallMe::getDepartments() as $depart)
-                                        <option value="{!! $depart->departmentId !!}">{!! $depart->name !!}</option>
+                                        <option value="{!! $depart->name !!}">{!! $depart->name !!}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -466,11 +466,11 @@ $(document).ready(function(){
 });
 
 $('.add').click(function() {
-    $('#moreprocess').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" /><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
+    $('#moreprocess').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" required/><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
 
 });
 $('.add2').click(function() {
-    $('#morebenefit').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" /><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
+    $('#morebenefit').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" required/><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
 
 });
 $('.optionBox').on('click','.remove',function() {
