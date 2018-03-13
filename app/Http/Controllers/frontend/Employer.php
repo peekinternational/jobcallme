@@ -562,7 +562,7 @@ curl_close ($ch);
     		return redirect('account/login?next='.$request->route()->uri);
     	}
 		
-		$company = DB::table('jcm_companies')->select('*')->where('companyId','=',$request->session()->get('jcmUser')->userId)->get();
+		$company = DB::table('jcm_companies')->select('*')->where('companyId','=',$request->session()->get('jcmUser')->companyId)->get();
 		//dd($company[0]->category);
 		if($company[0]->category== "0")
 		{
@@ -570,12 +570,12 @@ curl_close ($ch);
 			return redirect('account/employer/organization');
 		}
 
-	$departs = DB::table('jcm_departments')->select('departmentId','name')->where('userId','=',$request->session()->get('jcmUser')->userId)->get();
-		if(sizeof($departs)== "")
-		{
-			$request->session()->flash('depAlert', 'Please first add your company department then post your job');
-			return redirect('account/employer/departments');
-		}
+	//$departs = DB::table('jcm_departments')->select('departmentId','name')->where('userId','=',$request->session()->get('jcmUser')->userId)->get();
+	//	if(sizeof($departs)== "")
+	//	{
+	//		$request->session()->flash('depAlert', 'Please first add your company department then post your job');
+	//		return redirect('account/employer/departments');
+	//	}
 		
     	$rec = DB::table('jcm_payments')->get();
 		//dd($rec);
@@ -905,6 +905,7 @@ public function userResume($userId){
 	}
 
 	public function savdOrganization(Request $request){
+		//dd($request->all());
 		
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
@@ -918,7 +919,7 @@ public function userResume($userId){
 		foreach($opHours as $i => $k){
 			$opHoursArr[$i] = array('from' => $k[0], 'to' => $k[1]);
 		}
-		$inputOr = array('category' => $industry,'Capital' =>$capital,'sales' => $sales,'formofbussiness' => $formofbusiness,'corporatenumber'=> $corporatenumber,'companyName' => $companyName, 'companyAddress' => $companyAddress, 'companyEmail' => $companyEmail, 'companyPhoneNumber' => $companyPhoneNumber, 'companyState' => $companyState, 'companyCity' => $companyCity, 'companyCountry' => $companyCountry, 'companyWebsite' => $companyWebsite, 'companyFb' => $companyFb, 'companyLinkedin' => $companyLinkedin, 'companyTwitter' => $companyTwitter, 'companyNoOfUsers' => $companyNoOfUsers, 'companyEstablishDate' => $companyEstablishDate, 'companyOperationalHour' => @json_encode($opHoursArr), 'companyModifiedTime' => date('Y-m-d H:i:s'));
+		$inputOr = array('businessType' => $businessType,'category' => $industry,'Capital' =>$capital,'sales' => $sales,'formofbussiness' => $formofbusiness,'corporatenumber'=> $corporatenumber,'companyName' => $companyName, 'companyAddress' => $companyAddress, 'companyEmail' => $companyEmail, 'companyPhoneNumber' => $companyPhoneNumber, 'companyState' => $companyState, 'companyCity' => $companyCity, 'companyCountry' => $companyCountry, 'companyWebsite' => $companyWebsite, 'companyFb' => $companyFb, 'companyLinkedin' => $companyLinkedin, 'companyTwitter' => $companyTwitter, 'companyNoOfUsers' => $companyNoOfUsers, 'companyEstablishDate' => $companyEstablishDate, 'companyOperationalHour' => @json_encode($opHoursArr), 'companyModifiedTime' => date('Y-m-d H:i:s'));
 		
 		if($companyId != '0'){
 			

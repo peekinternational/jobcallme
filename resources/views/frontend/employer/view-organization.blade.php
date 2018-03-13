@@ -55,6 +55,9 @@ if($company->companyLogo != ''){
                                <span>@lang('home.designation'):</span> HR
                            </div>
                            <div class="eo-details">
+                               <span>@lang('home.businesstype'):</span> {{ $company->businessType }}
+                           </div>
+                           <div class="eo-details">
                                <span>@lang('home.industry'):</span> {{ JobCallMe::categoryName($company->category) }}
                            </div>
                            <div class="eo-details">
@@ -129,12 +132,30 @@ if($company->companyLogo != ''){
                                            <input type="text" class="form-control corporatenumber" name="corporatenumber" id="corporatenumber" placeholder="@lang('home.corporatenumbertext')" value="{{ $company->corporatenumber }}">
                                        </div>
                                    </div>
+                                     <div class="form-group">
+                                       <label class="control-label col-sm-3">@lang('home.businesstype')</label>
+                                       <div class="col-sm-9 pnj-form-field">
+                                           <select class="form-control select2" name="businessType" required>
+                                                <option value="@lang('home.Sole Proprietorship')">@lang('home.Sole Proprietorship')</option>
+                                                <option value="@lang('home.Partnership')">@lang('home.Partnership')</option>
+                                                <option value="@lang('home.SME Pvt. Ltd')">@lang('home.SME Pvt Ltd')</option>
+                                                <option value="@lang('home.Private Limited Company Pvt Ltd')">@lang('home.Private Limited Company Pvt Ltd')</option>
+                                                <option value="@lang('home.Human Public Limited Company Listed')">@lang('home.Public Limited Company Listed')</option>
+                                                <option value="@lang('home.Public Limited Company Unlisted')">@lang('home.Public Limited Company Unlisted')</option>
+                                                <option value="@lang('home.Nonprofits')">@lang('home.Nonprofits')</option>
+                                                <option value="@lang('home.Joint Venture')">@lang('home.Joint Venture')</option>
+                                                <option value="@lang('home.Inc Incorporated')">@lang('home.Inc Incorporated')</option>
+                                                <option value="@lang('home.Inc Incorporated')">@lang('home.Inc Incorporated')</option>
+                                                <option value="@lang('home.LLC Limited Liability Company')">@lang('home.LLC Limited Liability Company')</option>
+                                                 
+                                           </select>
+                                       </div>
+                                   </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.industry')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <select class="form-control select2" name="industry" required>
-                                           <option value=""> select industry</option>
-                                               <option value="">@lang('home.selectindustry')</option>
+                                              
                                                @foreach(JobCallMe::getCategories() as $cat)
                                                 <option value="{{ $cat->categoryId }}" {{ $cat->categoryId == $company->category ? 'selected="selected"' : '' }}>{{ $cat->name }}</option>
                                                @endforeach
