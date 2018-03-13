@@ -465,8 +465,14 @@ if($company->companyLogo != ''){
             </div>
         </div>
 
-
-
+        <div class="eo-box eo-about">
+            <h3 class="eo-about-heading">@if(Lang::has(home.companypics))@lang('home.companypics') @else Edit Company Pictures @endif</h3>
+            <div class="eo-about-org">
+                <textarea id="editor1" name="companypics">{!! $company->companypics !!}</textarea>
+                <button class="btn btn-success" id="save-company"> Save</button>
+            </div>
+             
+        </div>
 		<div class="eo-box eo-about">
             
             <h3 class="eo-about-heading">@lang('home.organizationmap')</h3>
@@ -515,10 +521,34 @@ if($company->companyLogo != ''){
 .input-error{color: red;}
 </style>
 <script type="text/javascript">
+ CKEDITOR.replace( 'editor1',{
+  filebrowserBrowseUrl : '../../frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files',
+   filebrowserImageBrowseUrl : '../../frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images',
+   filebrowserFlashBrowseUrl : '../../frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash',
+   filebrowserUploadUrl : '../../frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files',
+   filebrowserImageUploadUrl : '../../frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images',
+   filebrowserFlashUploadUrl : '../../frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash',
+   height: '500px',
+ });
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
+
     $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
     getStates($('.job-country option:selected:selected').val());
+    /*get ckeditor data and save it to database*/
+    $('#save-company').on('click',function(){
+      var value = CKEDITOR.instances.editor1.getData();
+      $.ajax({
+        url:"{{ url('account/employer/savecompic') }}",
+        type:"post",
+        data:{comppics:value,_token:"{{ csrf_token() }}"},
+        success:function(res){
+          if(res == 1){
+            toastr.success('company pics update successfully');
+          }
+        }
+      });
+    })
 })
 $('.job-country').on('change',function(){
     var countryId = $(this).val();

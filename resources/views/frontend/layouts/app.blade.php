@@ -88,6 +88,7 @@ $next = Request::route()->uri;
         <script src="{{ asset('frontend-assets/js/bootstrap.min.js') }}"></script>
          <script src="{{ asset('frontend-assets/js/rcrop.min.js') }}" ></script>
         <script src="{{ asset('frontend-assets/js/sajid.js') }}"></script>
+        <script src="{{ asset('frontend-assets/js/ckeditor/ckeditor.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/select2.js') }}"></script>
 		<script src="{{ asset('frontend-assets/js/select3.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/bootstrap-datetimepicker.js') }}"></script>
