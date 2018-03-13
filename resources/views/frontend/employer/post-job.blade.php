@@ -83,14 +83,29 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_department')</label>
-                            <div class="col-sm-9 pnj-form-field">
+                            <div class="col-md-8 pnj-form-field">
                                 <select class="form-control select2" name="department" required>
                                     <option value="">@lang('home.s_department')</option>
+                                    <option value="@lang('home.Accounting')">@lang('home.Accounting')</option>
+                                    <option value="@lang('home.Administration')">@lang('home.Administration')</option>
+                                    <option value="@lang('home.Customer Services')">@lang('home.Customer Services')</option>
+                                    <option value="@lang('home.Finance')">@lang('home.Finance')</option>
+                                    <option value="@lang('home.Human Resources')">@lang('home.Human Resources')</option>
+                                    <option value="@lang('home.Information Technology')">@lang('home.Information Technology')</option>
+                                    <option value="@lang('home.Marketing')">@lang('home.Marketing')</option>
+                                    <option value="@lang('home.Procurement')">@lang('home.Procurement')</option>
+                                    <option value="@lang('home.Production')">@lang('home.Production')</option>
+                                    <option value="@lang('home.Quality Control')">@lang('home.Quality Control')</option>
+                                     <option value="@lang('home.Research & Development')">@lang('home.Research & Development')</option>
+                                      <option value="@lang('home.Sales')">@lang('home.Sales')</option>
+                                    
+
                                     @foreach(JobCallMe::getDepartments() as $depart)
                                         <option value="{!! $depart->departmentId !!}">{!! $depart->name !!}</option>
                                     @endforeach
                                 </select>
                             </div>
+                           <div class="col-md-1 pnj-form-field"> <span><a href="{{ url('account/employer/departments') }}">@lang('home.addDepartment')</a></span></div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_category')</label>

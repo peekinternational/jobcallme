@@ -199,7 +199,7 @@ class Jobseeker extends Controller{
 		extract(array_map('trim', $request->all()));
 
 		$isUser = DB::table('jcm_users')->where('userId','=',$app->userId)->where('email','=',$email)->first();
-		if(count($isUser) > 0){
+		if(count($isUser) > 1){
 			exit('User with give email already exist');
 		}
 
