@@ -7,13 +7,13 @@
     "require": {
         "php": ">=5.6.4",
         "barryvdh/laravel-dompdf": "^0.8.1",
+        "cornford/googlmapper": "2.*",
         "laravel/framework": "5.4.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
-        "paypal/rest-api-sdk-php": "^1.12",
         "laravelcollective/html": "~5.0",
-        "stevebauman/location": "^2.0",
-        "cornford/googlmapper": "2.*"
+        "paypal/rest-api-sdk-php": "^1.12",
+        "stevebauman/location": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
