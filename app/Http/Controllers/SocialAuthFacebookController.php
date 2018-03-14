@@ -57,7 +57,7 @@ class SocialAuthFacebookController extends Controller
             $userDetails=$this->createUser($userDet);
         }
  
-        $this->loginAndRed($userDetails);
+        $this->loginAndRed($userDetails,$request);
         
     }
 
@@ -82,10 +82,11 @@ class SocialAuthFacebookController extends Controller
             $userDetails=$this->createUser($userDet);
         }
 
-        $this->loginAndRed($userDetails);
+        $this->loginAndRed($userDetails,$request);
     }
 
-    public function loginAndRed(){
+    public function loginAndRed($userDetails,$request){
+        
         if(JobCallMe::isResumeBuild($userDetails->userId) == false):
             $fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume';
             $request->session()->put('fNotice',$fNotice);
