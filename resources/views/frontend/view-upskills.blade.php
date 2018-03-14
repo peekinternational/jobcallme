@@ -6,6 +6,13 @@
 
 <section id="read-section">
     <div class="container">
+     @if ($message = Session::get('successs'))
+                <div class="custom-alerts alert alert-success fade in">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    {!! $message !!}
+                </div>
+                <?php Session::forget('successs');?>
+                @endif
         <div class="col-md-12 learn-search-box" style="padding-top:90px">
 
             

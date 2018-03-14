@@ -65,9 +65,9 @@
         						@foreach($data as $order)
         						<tr>
         							<td>{{$order->order_id}}</td>
-        							<td>{{$order->company}}</td>
+        							<td>{{$order->orderBy}}</td>
         							<td>{{$order->payment_mode}}</td>
-        							<td>{{$order->amount}}</td>
+        							<td>{{$order->amount}}$</td>
         							<td>{{$order->status}}</td>
         							<td>{{$order->order_date}}</td>
         						</tr>

@@ -271,6 +271,7 @@ return [
    'operationhours' => 'Operation Hours',
    'companiesin' => 'Companies in',
    'companiesindustry' => 'Companies by Industry',
+   'companyGallery' => 'Company gallery',
    
    //View Course//
    
@@ -55624,6 +55625,42 @@ return [
 "Chungju-si"=>"Chungju-si",
 'jobIn' => 'JOBS IN',
 'similerjob' => 'SIMILAR JOBS IN',
+
+'Following Company Regulation'=> 'Following Company Regulation',
+"Outsourcingok"=> "Outsourcingok",
+"expectedwork"=>"Type of Work",
+"enterdate"=>"Starting Date",
+"phd"=>"PHD",
+"beginner"=>"Beginner",
+"intermediate"=>"Intermediate",
+"expert"=>"Expert",
+"administration"=>"Administration",
+"Customer Services"=>"Customer Services",
+"Human Resources"=>"Human Resources",
+"Information Technology"=>"Information Technology",
+"Procurement"=>"Procurement",
+"Research & Development"=>"Research & Development",
+"Quality Control"=>"Quality Control",
+"expiryhiringdate"=>"Expiry Hiring Date",
+"organizer"=>"Organizer",
+"Cost of Description"=>"Cost of Description",
+"type"=>"Type",
+"travelling"=>"Travelling",
+"businesstype"=>"Business Type",
+"Sole Proprietorship"=>"Sole Proprietorship",
+"Partnership"=>"Partnership",
+"SME Pvt Ltd"=>" SME Pvt Ltd",
+"Private Limited Company Pvt Ltd"=>"Private Limited Company Pvt Ltd",
+"Public Limited Company Listed"=>"Public Limited Company Listed",
+"Public Limited Company Unlisted"=>"Public Limited Company Unlisted",
+"Nonprofit"=>"Non Profit",
+"Joint Venture"=>"Joint Venture",
+"Inc Incorporated"=>"Inc Incorporated (2 time written in business type dropbox)",
+"LLC Limited Liability Company"=>"LLC Limited Liability Company",
+"Please"=>"Please",
+'Administration' => 'Administration',
+'Nonprofits'=>'Nonprofits',
+
 
 
 
