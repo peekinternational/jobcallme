@@ -180,8 +180,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        /* custom service provider s*/
-        //App\Services\SocialFacebookAccountService,
+        /* custom service provider s*/ 
         App\Providers\JobCallMeServiceProvider::class,
 		/*generate pdf*/
 		Barryvdh\DomPDF\ServiceProvider::class,
