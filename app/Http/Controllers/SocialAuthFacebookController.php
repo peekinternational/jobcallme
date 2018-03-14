@@ -81,7 +81,7 @@ class SocialAuthFacebookController extends Controller
         $objModel->subscribe='N';
         $userId=$objModel->save();
 
-        extract($providerUser->all());
+        // extract($providerUser->all());
         $cInput = array('companyName' => $firstName.' '.$lastName, 'companyEmail' => $email, 'companyPhoneNumber' => '', 'companyCountry' =>'', 'companyState' => '', 'companyCity' => '', 'category' => '0', 'companyCreatedTime' => date('Y-m-d H:i:s'), 'companyModifiedTime' => date('Y-m-d H:i:s'));
         $companyId = DB::table('jcm_companies')->insertGetId($cInput);
         DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
