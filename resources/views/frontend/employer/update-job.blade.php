@@ -349,7 +349,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.address')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input id="pac-input" name="Address" class="form-control" type="text" placeholder="Enter a location">
+                                <input id="pac-input" name="Address" class="form-control" type="text" placeholder="Enter a location" value="{!! $result->Address !!}">
                                 <div class="pac-card" id="pac-card">
                                   <div>
                                     <div id="type-selector" class="pac-controls">
