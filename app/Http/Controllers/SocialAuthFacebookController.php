@@ -59,6 +59,7 @@ class SocialAuthFacebookController extends Controller
  
         $this->loginAndRed($userDetails,$request);
         
+        return redirect('account/jobseeker');
     }
 
     public function gCallback(Request $request){
@@ -83,6 +84,8 @@ class SocialAuthFacebookController extends Controller
         }
 
         $this->loginAndRed($userDetails,$request);
+
+        return redirect('account/jobseeker');
     }
 
     public function loginAndRed($userDetails,$request){
@@ -97,9 +100,7 @@ class SocialAuthFacebookController extends Controller
             Session()->put('bell_color','#2e6da4'); 
         else:
             session()->put('bell_color','#45c536'); 
-        endif;
-        
-        return redirect('account/jobseeker');
+        endif; 
     }
 
     public function createUser($providerUser){
