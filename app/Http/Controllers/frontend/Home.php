@@ -216,21 +216,18 @@ class Home extends Controller{
 				}else{
 					return redirect('account/login');
 				}
-			}else{
+			}
+			else{
 				if(JobCallMe::isResumeBuild($user->userId) == false){
 					$fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume';
 					$request->session()->put('fNotice',$fNotice);
 				}
 				$request->session()->put('jcmUser', $user);
 				setcookie('cc_data', $user->userId, time() + (86400 * 30), "/");
-				if($user->subscribe == 'N'){
-					
-					Session()->put('bell_color','#2e6da4');
-					//echo session('bell_color');die;
-				}else{
-					
-					session()->put('bell_color','#45c536');
-					//echo session('bell_color');die;
+				if($user->subscribe == 'N'){ 
+					Session()->put('bell_color','#2e6da4'); 
+				}else{ 
+					session()->put('bell_color','#45c536'); 
 				}
 				if($next != ''){
 					return redirect($next);

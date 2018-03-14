@@ -24,16 +24,13 @@ class SocialAuthFacebookController extends Controller
      *
      * @return callback URL from facebook
     */
-    public function callback($provider=null)
+    public function callback(Request $request)
     { 
         $user=Socialite::driver('facebook')->user();
-        /*$user = $service->createOrGetUser(Socialite::driver('facebook')->user());
-        echo '<pre>';
-        print_r($user);
-        die();*/ 
-        if($user->user['verified']!=1){
+     
+        if($user->user['verified']!=1):
             die("Facebook account is not verified");
-        }
+        endif;
         $email=$user->user['email'];
         $fbId=$user->id;
         $userDetails=User::where('email',$email)->first();
@@ -51,9 +48,21 @@ class SocialAuthFacebookController extends Controller
         else{
             $userDetails=$this->createUser($user);
         }
+ 
 
-        auth()->login($userDetails);
-        return redirect()->to('/home');
+        if(JobCallMe::isResumeBuild($userDetails->userId) == false):
+            $fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume';
+            $request->session()->put('fNotice',$fNotice);
+        endif;
+        $request->session()->put('jcmUser', $userDetails);
+        setcookie('cc_data', $userDetails->userId, time() + (86400 * 30), "/");
+        if($userDetails->subscribe == 'N'): 
+            Session()->put('bell_color','#2e6da4'); 
+        else:
+            session()->put('bell_color','#45c536'); 
+        endif;
+        
+        return redirect('account/jobseeker');
     }
 
     public function createUser($providerUser){
@@ -63,6 +72,7 @@ class SocialAuthFacebookController extends Controller
         $lastName= (isset($name[1]))?$name[1]:'';
         $email=$providerUser->email;
 
+        $objModel->fbId = $providerUser->id;
         $objModel->companyId = 0;
         $objModel->type = 'User';
         $objModel->secretId = JobCallMe::randomString();
@@ -79,9 +89,8 @@ class SocialAuthFacebookController extends Controller
         $objModel->about = ''; 
         $objModel->user_status='Y';
         $objModel->subscribe='N';
-        $userId=$objModel->save();
-
-        // extract($providerUser->all());
+        $objModel->save();
+        $userId=$objModel->userId;
         $cInput = array('companyName' => $firstName.' '.$lastName, 'companyEmail' => $email, 'companyPhoneNumber' => '', 'companyCountry' =>'', 'companyState' => '', 'companyCity' => '', 'category' => '0', 'companyCreatedTime' => date('Y-m-d H:i:s'), 'companyModifiedTime' => date('Y-m-d H:i:s'));
         $companyId = DB::table('jcm_companies')->insertGetId($cInput);
         DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
