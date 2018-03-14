@@ -236,6 +236,7 @@ class Home extends Controller{
 				}
 			}
 		}
+		
 		$pageType = \Request::segment('2');
 		return view('frontend.login-registration',compact('pageType'));
 	}
