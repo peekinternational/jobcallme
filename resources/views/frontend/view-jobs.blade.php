@@ -138,7 +138,7 @@ $(document).ready(function(){
     var getcity = "<?php echo $_GET['city'];?>";
     console.log(getkeyword);
     console.log(getcity);
-    if(getcountry != '' && getsate != ''){
+    if(getcountry != '' || getsate != ''){
         $.ajax({
                type: 'post',
                data: {country:getcountry,state:getsate,_token:"{{ csrf_token() }}"},
@@ -160,7 +160,7 @@ $(document).ready(function(){
                    $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
                }
            })
-    }else if(getkeyword != '' && getcity != ''){
+    }else if(getkeyword != '' || getcity != ''){
        $.ajax({
         type: 'post',
         data: {keyword:getkeyword,city:getcity,_token:"{{ csrf_token() }}"},
@@ -182,7 +182,7 @@ $(document).ready(function(){
             $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
         }
     })
-    }else{
+    }else if(getkeyword == '' && getcity == '' || getcountry == '' && getsate == ''){
         $('.search-job').submit();
     }
 	
@@ -304,7 +304,7 @@ function saveJob(jobId,obj){
 
 
 function getSubCategories(categoryId){
-    $.ajax({
+  /*  $.ajax({
         url: "{{ url('account/get-subCategory') }}/"+categoryId,
         success: function(response){
             var obj = $.parseJSON(response);
@@ -315,11 +315,11 @@ function getSubCategories(categoryId){
                 $(".job-sub-category").append(newOption).trigger('change');
             })
         }
-    })
+    })*/
 }
 
 function getSubCategories2(categoryId2){
-    $.ajax({
+   /* $.ajax({
         url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
         success: function(response){
             var obj = $.parseJSON(response);
@@ -330,7 +330,7 @@ function getSubCategories2(categoryId2){
                 $(".job-sub-category2").append(newOption).trigger('change');
             })
         }
-    })
+    })*/
 }
 
 
