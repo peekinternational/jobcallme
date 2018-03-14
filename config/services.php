@@ -36,8 +36,8 @@ return [
     ],
 
     'facebook' => [
-    'client_id' => '131993230779806',
-    'client_secret' => '37214c64eb6ab601d3cd4b473966578b',
+    'client_id' => '377749349357447',
+    'client_secret' => 'dd4c2236c3c3c64a397efbb3b40f5832',
     'redirect' => url('fbCallback'),
 ],
 
