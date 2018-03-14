@@ -27,20 +27,24 @@ class SocialAuthFacebookController extends Controller
     public function callback($provider=null)
     { 
         $user=Socialite::driver('facebook')->user();
-       // $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
+        /*$user = $service->createOrGetUser(Socialite::driver('facebook')->user());
         echo '<pre>';
         print_r($user);
-        die();
-        $email=$user->getEmail();
+        die();*/ 
+        if($user->user['verified']!=1){
+            die("Facebook account is not verified");
+        }
+        $email=$user->user['email'];
+        $fbId=$user->id;
         $userDetails=User::where('email',$email)->first();
         if($userDetails){
             if($userDetails->user_status=='N'){
                 $userDetails->user_status='Y';
-                $userDetails->fbId=$user->getId();
+                $userDetails->fbId=$fbId;
                 $userDetails->save();
             }
             elseif(!$userDetails->fbId){
-                $userDetails->fbId=$user->getId();
+                $userDetails->fbId=$fbId;
                 $userDetails->save(); 
             }
         }
@@ -53,10 +57,11 @@ class SocialAuthFacebookController extends Controller
     }
 
     public function createUser($providerUser){
-        $objModel = new User();
-        $firstName= $providerUser->getFirstName();
-        $lastName= $providerUser->getLastName();
-        $email=$providerUser->getEmail();
+        $objModel = new User(); 
+        $name= explode(' ',$providerUser->user['name']);
+        $firstName=$name[0];
+        $lastName= (isset($name[1]))?$name[1]:'';
+        $email=$providerUser->email;
 
         $objModel->companyId = 0;
         $objModel->type = 'User';
@@ -64,16 +69,16 @@ class SocialAuthFacebookController extends Controller
         $objModel->firstName =$firstName;
         $objModel->lastName = $lastName;
         $objModel->email = $email;
-        $objModel->username = strtolower($providerUser->getName().$providerUser->getName().rand(00,99));
+        $objModel->username = strtolower($firstName.rand(00,99));
         $objModel->password = md5(rand(1,10000));
         $objModel->phoneNumber = '';
         $objModel->country = '';
         $objModel->state = '';
         $objModel->city = '';
-        $objModel->profilePhoto = $providerUser->getAvatar();
+        $objModel->profilePhoto = $providerUser->avatar_original;
         $objModel->about = ''; 
         $objModel->user_status='Y';
-        $objModel->subscribe='Y';
+        $objModel->subscribe='N';
         $userId=$objModel->save();
 
         extract($providerUser->all());
