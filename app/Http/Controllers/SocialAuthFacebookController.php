@@ -53,7 +53,8 @@ class SocialAuthFacebookController extends Controller
             }
         }
         else{
-            $userDetails=$this->createUser($user);
+            $userDet=['id'=>$fbId,'name'=>$user->user['name'],'email'=>$email,'avatar'=>$user->avatar_original]; 
+            $userDetails=$this->createUser($userDet);
         }
  
         $this->loginAndRed($userDetails);
@@ -62,9 +63,26 @@ class SocialAuthFacebookController extends Controller
 
     public function gCallback(Request $request){
         $user=Socialite::driver('google')->user();
-        echo '<pre>';
-        print_r($user);
-        die();
+        $email=$user->email;
+        $glId=$user->id;
+        $userDetails=User::where('email',$email)->first();
+        if($userDetails){
+            if($userDetails->user_status=='N'){
+                $userDetails->user_status='Y';
+                $userDetails->glId=$glId;
+                $userDetails->save();
+            }
+            elseif(!$userDetails->glId){
+                $userDetails->glId=$glId;
+                $userDetails->save(); 
+            }
+        }
+        else{
+            $userDet=['id'=>$glId,'name'=>$user->name,'email'=>$email,'avatar'=>$user->avatar_original]; 
+            $userDetails=$this->createUser($userDet);
+        }
+
+        $this->loginAndRed($userDetails);
     }
 
     public function loginAndRed(){
@@ -82,10 +100,10 @@ class SocialAuthFacebookController extends Controller
         
         return redirect('account/jobseeker');
     }
-    
+
     public function createUser($providerUser){
         $objModel = new User(); 
-        $name= explode(' ',$providerUser->user['name']);
+        $name= explode(' ',$providerUser->name);
         $firstName=$name[0];
         $lastName= (isset($name[1]))?$name[1]:'';
         $email=$providerUser->email;
