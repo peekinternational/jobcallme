@@ -271,6 +271,7 @@ return [
    'operationhours' => 'Operation Hours',
    'companiesin' => 'Companies in',
    'companiesindustry' => 'Companies by Industry',
+   'companyGallery' => 'Company gallery',
    
    //View Course//
    

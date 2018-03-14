@@ -68,6 +68,9 @@ $opHour = json_decode($company->companyOperationalHour,true);
                     <a href="#rtj_tab_about" data-toggle="tab"><i class="fa fa-list"></i> @lang('home.about')</a>
                 </li>
                 <li>
+                    <a href="#rtj_tab_compics" data-toggle="tab"><i class="fa fa-image"></i> @lang('home.companyGallery')</a>
+                </li>
+                <li>
                     <a href="#rtj_tab_jobs" data-toggle="tab"><i class="fa fa-briefcase"></i> @lang('home.jobs') </a>
                 </li>
                 <li>
@@ -80,6 +83,12 @@ $opHour = json_decode($company->companyOperationalHour,true);
                     <div class="col-md-12">
                         <h4>@lang('home.aboutus')</h4>
                         <p>{!! $company->companyAbout !!}</p>
+                    </div>
+                </div>
+                <!-- company gallery -->
+                <div class="tab-pane" id="rtj_tab_compics">
+                    <div class="col-md-12">
+                        <p>{!! $company->companypics !!}</p>
                     </div>
                 </div>
 
