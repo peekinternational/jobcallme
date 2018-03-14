@@ -54,8 +54,12 @@ class Jobs extends Controller{
 				}
 			}
 		}*/
-		
-		if($country != '0') $jobs->where('jcm_jobs.country','=',$country);
+		/* write below code for resolve an issue when city is empty cityId function return 1 which mean record exsist*/
+		if($city == ''){
+			$city = 0;
+		}
+		$city = JobCallMe::cityId($city);
+		if($country != '0' && $country != "") $jobs->where('jcm_jobs.country','=',$country);
 		if($categoryId != '') $jobs->where('jcm_jobs.category','=',$categoryId);
 		if($jobType != '') $jobs->where('jcm_jobs.jobType','=',$jobType);
 		if($jobShift != '') $jobs->where('jcm_jobs.jobShift','=',$jobShift);
@@ -63,8 +67,8 @@ class Jobs extends Controller{
 		if($experience != '') $jobs->where('jcm_jobs.experience','=',$experience);
 		if($minSalary != '') $jobs->where('jcm_jobs.minSalary','<=',$minSalary);
 		if($maxSalary != '') $jobs->where('jcm_jobs.maxSalary','>=',$maxSalary);
-		if($state != '0') $jobs->where('jcm_jobs.state','=',$state);
-		/*if($city != '0') $jobs->where('jcm_jobs.city','=',$city);*/
+		if($state != '0' && $state != "") $jobs->where('jcm_jobs.state','=',$state);
+		if($city != '0') $jobs->where('jcm_jobs.city','=',$city);
 		if($currency != '') $jobs->where('jcm_jobs.currency','=',$currency);
 
 		if($keyword != ''){

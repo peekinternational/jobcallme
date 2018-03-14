@@ -250,6 +250,7 @@ class ExtraSkills extends Controller{
             $input['endDate'] = trim($request->input('endDate'));
             $input['timing'] = @json_encode($timing);
 			$input['userId'] = $app->userId;
+            $input['paymentMode'] = 'Paypal';
             $input['createdTime'] = date('Y-m-d H:i:s');
 			$request->session()->put('input', $input);
 			$alldata = Session::get('input');
@@ -361,13 +362,9 @@ class ExtraSkills extends Controller{
     public function getStatus(Request $request)
     {
 		$payment_id = Session::get('paypal_payment_id');
-       // $input['payment_id']=$payment_id;
-		$input = Session::get('input');
-       
-		//dd($input);
-	   DB::table('jcm_upskills')->insert($input);
-
-		echo $jobId;
+        
+       // $request->session()->put('input', $input);
+		
         /** Get the payment ID before session clear **/
         
         /** clear the session payment ID **/
@@ -387,11 +384,31 @@ class ExtraSkills extends Controller{
         $result = $payment->execute($execution, $this->_api_context);
         /** dd($result);exit; /** DEBUG RESULT, remove it later **/
         if ($result->getState() == 'approved') { 
-            
+            $apps = $request->session()->get('jcmUser');
+           // dd($apps);
+            $input = Session::get('input');
+            $input['payment_id']=$payment_id;
+        // $inputs = Session::get('input');
+		//dd($input['paymentMode']);
+        
+	   DB::table('jcm_upskills')->insert($input);
+    
+
+       $order['user_id']=$apps->userId;
+       $order['payment_mode']=$input['paymentMode'];
+       $order['orderBy']=$input['title'];
+       $order['amount']=$input['amount'];
+       $order['status']='Approved';
+       $order['date']= date('Y-m-d');
+
+       DB::table('jcm_orders')->insert($order);
+
+		//echo $jobId;
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
-            \Session::put('success','Payment success');
-            return Redirect::route('addmoney.account/employer/job/share');
+            \Session::put('successs','Upskill add success');
+            //return Redirect::route('account/upskill');
+            return redirect('account/upskill');
         }
         \Session::put('error','Payment failed');
         return Redirect::route('addmoney.frontend.employer.post-job');
