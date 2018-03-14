@@ -24,10 +24,12 @@ class SocialAuthFacebookController extends Controller
      *
      * @return callback URL from facebook
     */
-    public function callback()
+    public function callback($user)
     {
         //die('hmmm');
 		//ProviderUser
+        echo '<pre>';
+        print_r($user);
         $user=Socialite::driver('facebook')->user();
        // $user = $service->createOrGetUser(Socialite::driver('facebook')->user());
         echo '<pre>';
