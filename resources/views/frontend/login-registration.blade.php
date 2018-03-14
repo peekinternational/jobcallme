@@ -77,7 +77,9 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <button class="google-btn">
                     <a style="color:white" href="{{url('/googleApi')}}">GOOGLE</a>
                 </button>
-                <button class="in-btn">LINKEDIN</button>
+                <button class="in-btn">
+                    <a style="color:white" href="{{url('/lnApi')}}">LINKEDIN</a>
+                </button>
             </div>
         </div> 
         <div id="signupBox" class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
@@ -167,7 +169,9 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <button class="google-btn">
                         <a style="color:white" href="{{url('/googleApi')}}">GOOGLE</a>
                     </button>
-                    <button class="in-btn">LINKEDIN</button>
+                    <button class="in-btn">
+                        <a style="color:white" href="{{url('/lnApi')}}">LINKEDIN</a>
+                    </button>
                 </div>
             </form>
         </div>
