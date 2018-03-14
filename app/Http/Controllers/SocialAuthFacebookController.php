@@ -25,7 +25,10 @@ class SocialAuthFacebookController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    
+    public function lnApi()
+    {
+        return Socialite::driver('linkedin')->redirect();
+    }
     /**
      * Return a callback method from facebook api.
      *
@@ -86,6 +89,13 @@ class SocialAuthFacebookController extends Controller
         $this->loginAndRed($userDetails,$request);
 
         return redirect('account/jobseeker');
+    }
+
+    public function lnCallback(Request $request){
+        $user=Socialite::driver('linkedin')->user();
+        echo '<pre>';
+        print_r($user);    
+        die();
     }
 
     public function loginAndRed($userDetails,$request){

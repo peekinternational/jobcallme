@@ -323,6 +323,8 @@ Route::get('/fbCallback/{provider?}', 'SocialAuthFacebookController@callback');
 Route::get('/googleApi', 'SocialAuthFacebookController@googleApi');
 Route::get('/googleCallback/{provider?}', 'SocialAuthFacebookController@gCallback');
 
+Route::get('/lnApi', 'SocialAuthFacebookController@lnApi');
+Route::get('/lnCallback/{provider?}', 'SocialAuthFacebookController@lnCallback');
 Auth::routes();
 
 
