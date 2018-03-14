@@ -65,10 +65,18 @@
                         <td class="active">@lang('home.social')</td>
                         <td>
                             <div class="jd-share-btn">
-                                <a href="{{ $record->facebook }}"><i class="fa fa-facebook" style="background: #2e6da4;"></i> </a>
-                                <a href="{{ $record->linkedin }}"><i class="fa fa-linkedin" style=" background: #007BB6;"></i> </a>
-                                <a href="{{ $record->twitter }}"><i class="fa fa-twitter" style="background: #15B4FD;"></i> </a>
-                                <a href="{{ $record->google }}"><i class="fa fa-google-plus" style="background: #F63E28;"></i> </a>
+                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('learn/'.strtolower($record->type).'/'.$record->skillId) }}">
+                        <i class="fa fa-facebook" style="background: #2e6da4;"></i> 
+                    </a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url('learn/'.strtolower($record->type).'/'.$record->skillId) }}&title=&summary=&source=">
+                        <i class="fa fa-linkedin" style=" background: #007BB6;"></i> 
+                    </a>
+                    <a href="https://twitter.com/home?status={{ url('learn/'.strtolower($record->type).'/'.$record->skillId) }}">
+                        <i class="fa fa-twitter" style="background: #15B4FD;"></i> 
+                    </a>
+                    <a href="https://plus.google.com/share?url={{ url('learn/'.strtolower($record->type).'/'.$record->skillId) }}">
+                        <i class="fa fa-google-plus" style="background: #F63E28;"></i> 
+                    </a>
                             </div>
                         </td>
                     </tr>

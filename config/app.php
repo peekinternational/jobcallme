@@ -181,6 +181,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /* custom service provider s*/
+        //App\Services\SocialFacebookAccountService,
         App\Providers\JobCallMeServiceProvider::class,
 		/*generate pdf*/
 		Barryvdh\DomPDF\ServiceProvider::class,

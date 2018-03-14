@@ -265,34 +265,7 @@ curl_close ($ch);
          Session::put('paypal_payment_id', $payment->getId());
         /** add payment ID to session **/
 		// $pay_id=$payment->getId();
-        // Session::put('paypal_payment_id', $payment->getId());
-		// $request->session()->put('amount', $request->amount);
-		// $request->session()->put('p_Category', $request->p_Category);
-		// $request->session()->put('title', $request->title);
-		// $request->session()->put('jType', 'Paid');
-		// $request->session()->put('department', $request->department);
-		// $request->session()->put('category', $request->category);
-		// $request->session()->put('subCategory', $request->subCategory);
-		// $request->session()->put('careerLevel', $request->careerLevel);
-		// $request->session()->put('experience', $request->experience);
-		// $request->session()->put('vacancy', $request->vacancy);
-		// $request->session()->put('description', $request->description);
-		// $request->session()->put('skills', $request->skills);
-		// $request->session()->put('qualification', $request->qualification);
-		// $request->session()->put('expiryDate', $request->expiryDate);
-		// $request->session()->put('minSalary', $request->minSalary);
-		// $request->session()->put('maxSalary', $request->maxSalary);
-		// $request->session()->put('description', $request->description);
-		// $request->session()->put('type', $request->type);
-		// $request->session()->put('currency', $request->currency);
-		// $request->session()->put('benefits', $request->benefits);
-		// $request->session()->put('state', $request->state);
-		// $request->session()->put('city', $request->city);
-		// $request->session()->put('country', $request->country);
-		// $request->session()->put('shift', $request->shift);
-		// $request->session()->put('expiryDate', $request->expiryDate);
-		
-	
+     
         if(isset($redirect_url)) {
             /** redirect to paypal **/
 	
@@ -305,6 +278,28 @@ curl_close ($ch);
     public function getPaymentStatus(Request $request)
     {
 		$payment_id = Session::get('paypal_payment_id');
+		
+        /** Get the payment ID before session clear **/
+        
+        /** clear the session payment ID **/
+        Session::forget('paypal_payment_id');
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+            \Session::put('error','Payment failed');
+            return Redirect::route('addmoney.frontend.employer.post-job');
+        }
+        $payment = Payment::get($payment_id, $this->_api_context);
+        /** PaymentExecution object includes information necessary **/
+        /** to execute a PayPal account payment. **/
+        /** The payer_id is added to the request query parameters **/
+        /** when the user is redirected from paypal back to your site **/
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+        /**Execute the payment **/
+        $result = $payment->execute($execution, $this->_api_context);
+        /** dd($result);exit; /** DEBUG RESULT, remove it later **/
+        if ($result->getState() == 'approved') { 
+			
+        $payment_id = Session::get('paypal_payment_id');
 		$app = $request->session()->get('jcmUser');
 		$amount = Session::get('amount');
 		$jType = Session::get('jType');
@@ -349,25 +344,6 @@ curl_close ($ch);
 		}
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
 		echo $jobId;
-        /** Get the payment ID before session clear **/
-        
-        /** clear the session payment ID **/
-        Session::forget('paypal_payment_id');
-        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-            \Session::put('error','Payment failed');
-            return Redirect::route('addmoney.frontend.employer.post-job');
-        }
-        $payment = Payment::get($payment_id, $this->_api_context);
-        /** PaymentExecution object includes information necessary **/
-        /** to execute a PayPal account payment. **/
-        /** The payer_id is added to the request query parameters **/
-        /** when the user is redirected from paypal back to your site **/
-        $execution = new PaymentExecution();
-        $execution->setPayerId(Input::get('PayerID'));
-        /**Execute the payment **/
-        $result = $payment->execute($execution, $this->_api_context);
-        /** dd($result);exit; /** DEBUG RESULT, remove it later **/
-        if ($result->getState() == 'approved') { 
             
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
@@ -1266,20 +1242,6 @@ public function userResume($userId){
  public function updateStatus(Request $request)
     {
 		$payment_id = Session::get('payment_id');
-		$amount = Session::get('amount');
-		$jType = Session::get('jType');
-		$p_Category = Session::get('p_Category');
-	
-      extract($request->all());
-	
-			$jobId=Session::get('id');
-
-		$input = array('status' =>'1','paymentType' => '1' ,'pay_id' => $payment_id,'amount' => $amount,'p_Category' => $p_Category, 'jType' => $jType);
-		//return $input;
-		
-		$set = DB::table('jcm_jobs')->where('jobId','=',$jobId)->update($input);
-			
-		echo $set;
         /** Get the payment ID before session clear **/
         
         /** clear the session payment ID **/
@@ -1299,6 +1261,21 @@ public function userResume($userId){
         $result = $payment->execute($execution, $this->_api_context);
         /** dd($result);exit; /** DEBUG RESULT, remove it later **/
         if ($result->getState() == 'approved') { 
+			$payment_id = Session::get('payment_id');
+		$amount = Session::get('amount');
+		$jType = Session::get('jType');
+		$p_Category = Session::get('p_Category');
+	
+      extract($request->all());
+	
+			$jobId=Session::get('id');
+
+		$input = array('status' =>'1','paymentType' => '1' ,'pay_id' => $payment_id,'amount' => $amount,'p_Category' => $p_Category, 'jType' => $jType);
+		//return $input;
+		
+		$set = DB::table('jcm_jobs')->where('jobId','=',$jobId)->update($input);
+			
+		echo $set;
             
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/

@@ -76,7 +76,7 @@
                             <label class="control-label col-sm-3">@lang('home.s_department')</label>
                             <div class="col-sm-8 pnj-form-field">
                                 <select class="form-control select2" name="department">
-                                    <option value="">@lang('home.s_epartment')</option>
+                                    
                                         <option value="Accounting" {{ $result->department == 'Accounting' ? 'selected="selected"' : '' }}>@lang('home.Accounting')</option>
                                     <option value="Administration" {{ $result->department == 'Administration' ? 'selected="selected"' : '' }}>@lang('home.Administration')</option>
                                     <option value="Customer Services" {{ $result->department == 'Customer Services' ? 'selected="selected"' : '' }}>@lang('home.Customer Services')</option>
