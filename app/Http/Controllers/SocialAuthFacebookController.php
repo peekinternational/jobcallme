@@ -93,9 +93,28 @@ class SocialAuthFacebookController extends Controller
 
     public function lnCallback(Request $request){
         $user=Socialite::driver('linkedin')->user();
-        echo '<pre>';
-        print_r($user);    
-        die();
+        $email=$user->email;
+        $lnId=$user->id;
+        $userDetails=User::where('email',$email)->first();
+        if($userDetails){
+            if($userDetails->user_status=='N'){
+                $userDetails->user_status='Y';
+                $userDetails->lnId=$lnId;
+                $userDetails->save();
+            }
+            elseif(!$userDetails->lnId){
+                $userDetails->lnId=$lnId;
+                $userDetails->save(); 
+            }
+        }
+        else{
+            $userDet=['id'=>$lnId,'name'=>$user->name,'email'=>$email,'avatar'=>$user->avatar]; 
+            $userDetails=$this->createUser($userDet);
+        }
+
+        $this->loginAndRed($userDetails,$request);
+
+        return redirect('account/jobseeker');
     }
 
     public function loginAndRed($userDetails,$request){
