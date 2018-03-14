@@ -36,9 +36,14 @@ return [
     ],
 
     'facebook' => [
-    'client_id' => '377749349357447',
-    'client_secret' => 'dd4c2236c3c3c64a397efbb3b40f5832',
-    'redirect' => url('fbCallback'),
-],
+        'client_id' => '377749349357447',
+        'client_secret' => 'dd4c2236c3c3c64a397efbb3b40f5832',
+        'redirect' => url('fbCallback'),
+    ],
 
+    'google' => [
+        'client_id' => '821126400778-i3ca74in5m8i2m8n0dcvccnktpidae08.apps.googleusercontent.com',
+        'client_secret' => 'smr0ucFyrp9aZcKfwnbkkorf',
+        'redirect' => url('googleCallback'),
+    ],
 ];

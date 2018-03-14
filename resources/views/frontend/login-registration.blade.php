@@ -74,7 +74,9 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <button class="fb-btn">
                     <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
                 </button> 
-                <button class="google-btn">GOOGLE</button>
+                <button class="google-btn">
+                    <a style="color:white" href="{{url('/googleApi')}}">GOOGLE</a>
+                </button>
                 <button class="in-btn">LINKEDIN</button>
             </div>
         </div> 
@@ -162,7 +164,9 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <button class="fb-btn">
                         <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
                     </button> 
-                    <button class="google-btn">GOOGLE</button>
+                    <button class="google-btn">
+                        <a style="color:white" href="{{url('/googleApi')}}">GOOGLE</a>
+                    </button>
                     <button class="in-btn">LINKEDIN</button>
                 </div>
             </form>

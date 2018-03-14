@@ -19,6 +19,13 @@ class SocialAuthFacebookController extends Controller
     {
         return Socialite::driver('facebook')->redirect();
     }
+
+    public function googleApi()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    
     /**
      * Return a callback method from facebook api.
      *
@@ -49,7 +56,18 @@ class SocialAuthFacebookController extends Controller
             $userDetails=$this->createUser($user);
         }
  
+        $this->loginAndRed($userDetails);
+        
+    }
 
+    public function gCallback(Request $request){
+        $user=Socialite::driver('google')->user();
+        echo '<pre>';
+        print_r($user);
+        die();
+    }
+
+    public function loginAndRed(){
         if(JobCallMe::isResumeBuild($userDetails->userId) == false):
             $fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume';
             $request->session()->put('fNotice',$fNotice);
@@ -64,7 +82,7 @@ class SocialAuthFacebookController extends Controller
         
         return redirect('account/jobseeker');
     }
-
+    
     public function createUser($providerUser){
         $objModel = new User(); 
         $name= explode(' ',$providerUser->user['name']);
