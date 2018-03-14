@@ -13,8 +13,17 @@ if($company->companyLogo != ''){
   $cLogo = url('compnay-logo/'.$company->companyLogo);
 }
 ?>
+ 
 <section id="edit-organization">
     <div class="container">
+     @if(Session::has('companyAlert'))
+                    <div class="alert alert-danger">
+                        {{Session::get('companyAlert')}} 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
         <div class="eo-box">
             <div class="eo-timeline">
                 <img src="{{ $cCover }}" class="eo-timeline-cover">
@@ -37,12 +46,16 @@ if($company->companyLogo != ''){
                        </div>
 
                    </div>
+
                    <div class="col-md-10 eo-timeline-details">
                        <h1><a href="">{{ $company->companyName }}</a></h1>
                        <div class="col-md-6 eo-section">
                            <h4>@lang('home.basicinformation')</h4>
                            <div class="eo-details">
                                <span>@lang('home.designation'):</span> HR
+                           </div>
+                           <div class="eo-details">
+                               <span>@lang('home.businesstype'):</span> {{ $company->businessType }}
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.industry'):</span> {{ JobCallMe::categoryName($company->category) }}
@@ -119,12 +132,30 @@ if($company->companyLogo != ''){
                                            <input type="text" class="form-control corporatenumber" name="corporatenumber" id="corporatenumber" placeholder="@lang('home.corporatenumbertext')" value="{{ $company->corporatenumber }}">
                                        </div>
                                    </div>
+                                     <div class="form-group">
+                                       <label class="control-label col-sm-3">@lang('home.businesstype')</label>
+                                       <div class="col-sm-9 pnj-form-field">
+                                           <select class="form-control select2" name="businessType" required>
+                                                <option value="@lang('home.Sole Proprietorship')">@lang('home.Sole Proprietorship')</option>
+                                                <option value="@lang('home.Partnership')">@lang('home.Partnership')</option>
+                                                <option value="@lang('home.SME Pvt. Ltd')">@lang('home.SME Pvt Ltd')</option>
+                                                <option value="@lang('home.Private Limited Company Pvt Ltd')">@lang('home.Private Limited Company Pvt Ltd')</option>
+                                                <option value="@lang('home.Human Public Limited Company Listed')">@lang('home.Public Limited Company Listed')</option>
+                                                <option value="@lang('home.Public Limited Company Unlisted')">@lang('home.Public Limited Company Unlisted')</option>
+                                                <option value="@lang('home.Nonprofits')">@lang('home.Nonprofits')</option>
+                                                <option value="@lang('home.Joint Venture')">@lang('home.Joint Venture')</option>
+                                                <option value="@lang('home.Inc Incorporated')">@lang('home.Inc Incorporated')</option>
+                                                <option value="@lang('home.Inc Incorporated')">@lang('home.Inc Incorporated')</option>
+                                                <option value="@lang('home.LLC Limited Liability Company')">@lang('home.LLC Limited Liability Company')</option>
+                                                 
+                                           </select>
+                                       </div>
+                                   </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3">@lang('home.industry')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <select class="form-control select2" name="industry" required>
-                                           <option value=""> select industry</option>
-                                               <option value="">@lang('home.selectindustry')</option>
+                                              
                                                @foreach(JobCallMe::getCategories() as $cat)
                                                 <option value="{{ $cat->categoryId }}" {{ $cat->categoryId == $company->category ? 'selected="selected"' : '' }}>{{ $cat->name }}</option>
                                                @endforeach
@@ -434,13 +465,21 @@ if($company->companyLogo != ''){
             </div>
         </div>
 
-
-
+        <div class="eo-box eo-about">
+            <h3 class="eo-about-heading">@if(Lang::has(home.companypics))@lang('home.companypics') @else Edit Company Pictures @endif</h3>
+            <div class="eo-about-org">
+                <textarea id="editor1" name="companypics">{!! $company->companypics !!}</textarea>
+                <button class="btn btn-success" id="save-company"> Save</button>
+            </div>
+             
+        </div>
 		<div class="eo-box eo-about">
             
             <h3 class="eo-about-heading">@lang('home.organizationmap')</h3>
             <div class="eo-about-org">
-                <p></p>
+                <div style="width: 100%; height: 500px;">
+                  {!! Mapper::render() !!}
+                </div>
             </div>
             
         </div>
@@ -482,10 +521,34 @@ if($company->companyLogo != ''){
 .input-error{color: red;}
 </style>
 <script type="text/javascript">
+ CKEDITOR.replace( 'editor1',{
+  filebrowserBrowseUrl : '../../frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files',
+   filebrowserImageBrowseUrl : '../../frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images',
+   filebrowserFlashBrowseUrl : '../../frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash',
+   filebrowserUploadUrl : '../../frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files',
+   filebrowserImageUploadUrl : '../../frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images',
+   filebrowserFlashUploadUrl : '../../frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash',
+   height: '500px',
+ });
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
+
     $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
     getStates($('.job-country option:selected:selected').val());
+    /*get ckeditor data and save it to database*/
+    $('#save-company').on('click',function(){
+      var value = CKEDITOR.instances.editor1.getData();
+      $.ajax({
+        url:"{{ url('account/employer/savecompic') }}",
+        type:"post",
+        data:{comppics:value,_token:"{{ csrf_token() }}"},
+        success:function(res){
+          if(res == 1){
+            toastr.success('company pics update successfully');
+          }
+        }
+      });
+    })
 })
 $('.job-country').on('change',function(){
     var countryId = $(this).val();

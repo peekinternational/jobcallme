@@ -24,6 +24,14 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                         </button>
                     </div>
                 @endif
+                 @if(Session::has('emailAlert'))
+                    <div class="alert alert-success">
+                        {{Session::get('emailAlert')}} 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 @if(Session::has('subscribeAlert'))
                     <div class="alert alert-danger">
                         {{Session::get('subscribeAlert')}} 
@@ -141,7 +149,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     </div>
                 </div>
                 <div>
-                    <input type="checkbox" name="agree" value="agree" id="agree">
+                    <input type="checkbox" name="agree" value="agree" id="agree" required>
                     <label for="agree">
                         <p class="terms-condition">@lang('home.agree')<a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.website')</p>    
                     </label>

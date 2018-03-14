@@ -198,15 +198,15 @@ class Jobseeker extends Controller{
 
 		extract(array_map('trim', $request->all()));
 
-		$isUser = DB::table('jcm_users')->where('userId','<>',$app->userId)->where('email','=',$email)->first();
-		if(count($isUser) > 0){
+		$isUser = DB::table('jcm_users')->where('userId','=',$app->userId)->where('email','=',$email)->first();
+		if(count($isUser) > 1){
 			exit('User with give email already exist');
 		}
 
 		$userQry = array('firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'phoneNumber' => $phoneNumber, 'country' => $country, 'state' => $state, 'city' => $city, 'about' => $about);
 		DB::table('jcm_users')->where('userId',$app->userId)->update($userQry);
 
-		$metaQry = array('fatherName' => $fatherName, 'dateOfBirth' => $dateOfBirth, 'gender' => $gender, 'maritalStatus' => $maritalStatus, 'experiance' => $experiance, 'education' => $education, 'industry' => $industry, 'currency' => $currency, 'currentSalary' => $currentSalary, 'expectedSalary' => $expectedSalary, 'cnicNumber' => $cnicNumber, 'address' => $address, 'expertise' => $expertise, 'facebook' => '', 'linkedin' => '', 'twitter' => '', 'website' => '');
+		$metaQry = array('fatherName' => $fatherName, 'dateOfBirth' => $dateOfBirth, 'gender' => $gender, 'maritalStatus' => $maritalStatus, 'experiance' => $experiance, 'education' => $education, 'industry' => $industry, 'subCategoryId' => $subCategoryId, 'subCategoryId2' => $subCategoryId2, 'shift' => $shift, 'currency' => $currency, 'currentSalary' => $currentSalary, 'expectedSalary' => $expectedSalary, 'cnicNumber' => $cnicNumber, 'address' => $address, 'expertise' => $expertise, 'facebook' => '', 'linkedin' => '', 'twitter' => '', 'website' => '');
 		if($facebook != '') $metaQry['facebook'] = $facebook;
 		if($linkedin != '') $metaQry['linkedin'] = $linkedin;
 		if($twitter != '') $metaQry['twitter'] = $twitter;
@@ -240,7 +240,7 @@ class Jobseeker extends Controller{
 
 		extract(array_map('trim', $request->all()));
 
-		$academicQry = array('degreeLevel' => $degreeLevel, 'degree' => $degree, 'completionDate' => $completionDate, 'grade' => $grade, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
+		$academicQry = array('degreeLevel' => $degreeLevel, 'degree' => $degree, 'enterDate' => $enterDate,'completionDate' => $completionDate, 'grade' => $grade, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
 
 		$input = array('type' => 'academic', 'resumeData' => @json_encode($academicQry));
 

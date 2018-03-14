@@ -45,12 +45,12 @@ $lToken = csrf_token();
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="search_tab_1">
-                                        <form method="post" action="{{ url('jobs/homeJobSearch') }}">
+                                        <form method="get" action="{{ url('jobs') }}">
                                             <div class="input-fields">
                                                 <div class="search-field-box search-item">
                                                     <input type="search" placeholder="@lang('home.lookingjob')" name="keyword">
                                                 </div>
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                               
                                                 <div class="search-field-box search-item">
                                                     <input type="search" placeholder="@lang('home.Cities')" name="city" style="width:100%">
                                                 </div>

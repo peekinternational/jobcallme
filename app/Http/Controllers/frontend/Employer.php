@@ -13,6 +13,7 @@ use URL;
 use Session;
 use Redirect;
 use Input;
+use Mapper;
 /** All Paypal Details class **/
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
@@ -160,6 +161,7 @@ curl_close ($ch);
 		$request->session()->put('shift', $request->shift);
 		$request->session()->put('duration', $request->duration);
 		$request->session()->put('expiryDate', $request->expiryDate);
+		$request->session()->put('expiryAd', $request->expiryAd);
 		
 		 $goodsname = Session::get('p_Category');
 		if($amount!='0')
@@ -190,7 +192,7 @@ curl_close ($ch);
    
 		extract($request->all());
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
 		
 		if($subCategory == ''){
 			$input['subCategory'] = '';
@@ -334,13 +336,14 @@ curl_close ($ch);
 		$dispatch = Session::get('dispatch');
 		$duration = Session::get('duration');
 		$expiryDate = Session::get('expiryDate');
+		$expiryAd = Session::get('expiryAd');
 		$state = Session::get('state');
 
 		
 
 		extract($request->all());
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' =>'1', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'dispatch' => $dispatch, 'head' => $head, 'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits),'process' => @implode(',', $process), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' =>'1', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'dispatch' => $dispatch, 'head' => $head, 'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits),'process' => @implode(',', $process), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate,'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
@@ -422,11 +425,12 @@ curl_close ($ch);
 			$shifts = Session::get('shift');
 			$citys = Session::get('city');
 			$expiryDates = Session::get('expiryDate');
+			$expiryAds = Session::get('expiryAd');
 			$states = Session::get('state');
 	
 			extract($request->all());
 
-			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process),'country' => $countrys, 'state' => $states, 'city' => $citys, 'expiryDate' => $expiryDates,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
+			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process),'country' => $countrys, 'state' => $states, 'city' => $citys, 'expiryDate' => $expiryDates, 'expiryAd' => $expiryAds,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
 			if($subCategorys == ''){
 				$inputs['subCategory'] = '';
 			}
@@ -557,21 +561,21 @@ curl_close ($ch);
 		if(!$request->session()->has('jcmUser')){
     		return redirect('account/login?next='.$request->route()->uri);
     	}
-		$rec = JobCallMe::getUser($request->session()->get('jcmUser')->userId);
-		if($rec->companyId == '' && $rec->companyId == '0' && $rec->companyId == NULL){
-			return redirect('account/employer/organization');
-		}
-		$company = DB::table('jcm_companies')->select('*')->where('companyId','=',$request->session()->get('jcmUser')->userId)->get();
+		
+		$company = DB::table('jcm_companies')->select('*')->where('companyId','=',$request->session()->get('jcmUser')->companyId)->get();
+		//dd($company[0]->category);
 		if($company[0]->category== "0")
 		{
+			$request->session()->flash('companyAlert', 'Please first Complate you company profile then post your job');
 			return redirect('account/employer/organization');
 		}
 
-	$departs = DB::table('jcm_departments')->select('departmentId','name')->where('userId','=',$request->session()->get('jcmUser')->userId)->get();
-		if(sizeof($departs)== "")
-		{
-			return redirect('account/employer/departments');
-		}
+	//$departs = DB::table('jcm_departments')->select('departmentId','name')->where('userId','=',$request->session()->get('jcmUser')->userId)->get();
+	//	if(sizeof($departs)== "")
+	//	{
+	//		$request->session()->flash('depAlert', 'Please first add your company department then post your job');
+	//		return redirect('account/employer/departments');
+	//	}
 		
     	$rec = DB::table('jcm_payments')->get();
 		//dd($rec);
@@ -896,11 +900,12 @@ public function userResume($userId){
 		$app = $request->session()->get('jcmUser');
 
 		$company = JobCallMe::getCompany($app->companyId);
-
+		 Mapper::map(33.6844,  73.0479);
 		return view('frontend.employer.view-organization',compact('company'));
 	}
 
 	public function savdOrganization(Request $request){
+		//dd($request->all());
 		
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
@@ -914,7 +919,7 @@ public function userResume($userId){
 		foreach($opHours as $i => $k){
 			$opHoursArr[$i] = array('from' => $k[0], 'to' => $k[1]);
 		}
-		$inputOr = array('category' => $industry,'Capital' =>$capital,'sales' => $sales,'formofbussiness' => $formofbusiness,'corporatenumber'=> $corporatenumber,'companyName' => $companyName, 'companyAddress' => $companyAddress, 'companyEmail' => $companyEmail, 'companyPhoneNumber' => $companyPhoneNumber, 'companyState' => $companyState, 'companyCity' => $companyCity, 'companyCountry' => $companyCountry, 'companyWebsite' => $companyWebsite, 'companyFb' => $companyFb, 'companyLinkedin' => $companyLinkedin, 'companyTwitter' => $companyTwitter, 'companyNoOfUsers' => $companyNoOfUsers, 'companyEstablishDate' => $companyEstablishDate, 'companyOperationalHour' => @json_encode($opHoursArr), 'companyModifiedTime' => date('Y-m-d H:i:s'));
+		$inputOr = array('businessType' => $businessType,'category' => $industry,'Capital' =>$capital,'sales' => $sales,'formofbussiness' => $formofbusiness,'corporatenumber'=> $corporatenumber,'companyName' => $companyName, 'companyAddress' => $companyAddress, 'companyEmail' => $companyEmail, 'companyPhoneNumber' => $companyPhoneNumber, 'companyState' => $companyState, 'companyCity' => $companyCity, 'companyCountry' => $companyCountry, 'companyWebsite' => $companyWebsite, 'companyFb' => $companyFb, 'companyLinkedin' => $companyLinkedin, 'companyTwitter' => $companyTwitter, 'companyNoOfUsers' => $companyNoOfUsers, 'companyEstablishDate' => $companyEstablishDate, 'companyOperationalHour' => @json_encode($opHoursArr), 'companyModifiedTime' => date('Y-m-d H:i:s'));
 		
 		if($companyId != '0'){
 			
@@ -1646,5 +1651,28 @@ public function userResume($userId){
 			return view('frontend.employer.cashpayment_detail',compact('amountss','titless'));
 	
 		 }
+		 public function addUser(Request $request){
+		 	$id = session()->get('jcmUser')->userId;
+		 	$data = DB::table('jcm_users')->where('addby','=',$id)->get();
+		 	return view('frontend.employer.addusers',compact('data'));
+		 }
+		 public function useradd(Request $request){
+		 	$email = $request->input('degree');
+		 	$data = DB::table('jcm_users')->where('email','=',$email)->get();
+		 	if(sizeof($data) > 0){
+		 		$id = session()->get('jcmUser')->userId;
+		 		DB::table('jcm_users')->where('email','=',$email)->update(['addby'=>$id]);
+		 	}else{
+		 			echo 'error';
+		 	}
+		 }
+		public function userdel(Request $request){
+			$id = $request->input('userId');
+			if(DB::table('jcm_users')->where('userId','=',$id)->update(['addby'=>'NULL'])){
+				echo 1;
+			}else{
+				echo 2;
+			}
+		}
 
 }

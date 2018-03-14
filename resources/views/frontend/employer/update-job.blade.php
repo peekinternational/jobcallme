@@ -74,14 +74,29 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_department')</label>
-                            <div class="col-sm-9 pnj-form-field">
+                            <div class="col-sm-8 pnj-form-field">
                                 <select class="form-control select2" name="department">
                                     <option value="">@lang('home.s_epartment')</option>
+                                        <option value="Accounting" {{ $result->department == 'Accounting' ? 'selected="selected"' : '' }}>@lang('home.Accounting')</option>
+                                    <option value="Administration" {{ $result->department == 'Administration' ? 'selected="selected"' : '' }}>@lang('home.Administration')</option>
+                                    <option value="Customer Services" {{ $result->department == 'Customer Services' ? 'selected="selected"' : '' }}>@lang('home.Customer Services')</option>
+                                    <option value="Finance" {{ $result->department == 'Finance' ? 'selected="selected"' : '' }}>@lang('home.Finance')</option>
+                                    <option value="Human Resources" {{ $result->department == 'Human Resources' ? 'selected="selected"' : '' }}>@lang('home.Human Resources')</option>
+                                    <option value="Information Technology" {{ $result->department == 'Information Technology' ? 'selected="selected"' : '' }}>@lang('home.Information Technology')</option>
+                                    <option value="Marketing" {{ $result->department == 'Marketing' ? 'selected="selected"' : '' }}>@lang('home.Marketing')</option>
+                                    <option value="Procurement" {{ $result->department == 'Procurement' ? 'selected="selected"' : '' }}>@lang('home.Procurement')</option>
+                                    <option value="Production" {{ $result->department == 'Production' ? 'selected="selected"' : '' }}>@lang('home.Production')</option>
+                                    <option value="Quality Control" {{ $result->department == 'Quality Control' ? 'selected="selected"' : '' }}>@lang('home.Quality Control')</option>
+                                     <option value="Research & Development" {{ $result->department == 'Research & Development' ? 'selected="selected"' : '' }}>@lang('home.Research & Development')</option>
+                                      <option value="Sales" {{ $result->department == 'Sales' ? 'selected="selected"' : '' }}>@lang('home.Sales')</option>
+
                                     @foreach(JobCallMe::getDepartments() as $depart)
-                                        <option value="{!! $depart->departmentId !!}" {{ $result->department == $depart->departmentId ? 'selected="selected"' : '' }}>{!! $depart->name !!}</option>
+                                        <option value="{!! $depart->name !!}" {{ $result->department == $depart->name ? 'selected="selected"' : '' }}>{!! $depart->name !!}</option>
                                     @endforeach
+
                                 </select>
                             </div>
+                             <div class="col-md-1 pnj-form-field"> <span><a href="{{ url('account/employer/departments') }}">@lang('home.addDepartment')</a></span></div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.category')</label>
@@ -237,11 +252,9 @@
                                             <label class="lbl" for="addprocess">@lang('home.add')</label>
                                         </div>
                                         <div class="optionBox" id="moreprocess" style="display:none">
-                                            <div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;">
-                                                <input type="text" class="form-control" name="process[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
-                                            </div>
+                                            
                                             <div class="col-md-10 block">
-                                                <span class="add"><i class="fa fa-plus"></i></span>
+                                                <button type="button" class="add btn btn-success"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
                         
@@ -297,11 +310,9 @@
                                             <label class="lbl" for="addbenefit">@lang('home.add')</label>
                                         </div>
                                         <div class="optionBox" id="morebenefit" style="display:none">
-                                            <div class="col-md-8 pnj-salary block2" style="display: flex;margin-bottom: 9px;">
-                                                <input type="text" class="form-control" name="benefits[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
-                                            </div>
+                                            
                                             <div class="col-md-10 block2">
-                                                <span class="add2"><i class="fa fa-plus"></i></span>
+                                                <button type="button" class="add2 btn btn-success"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
                                 </div>
@@ -395,11 +406,11 @@ $(document).ready(function(){
         }
     })
     $('.add').click(function() {
-    $('.block:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+     $('#moreprocess').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" required /><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
 
     });
     $('.add2').click(function() {
-    $('.block2:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+     $('#morebenefit').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" required /><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
 
     });
     $('.optionBox').on('click','.remove',function() {

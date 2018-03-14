@@ -25,6 +25,7 @@ class Home extends Controller{
 		->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
 		->where('jcm_jobs.p_Category','=','7')
 		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
@@ -34,6 +35,7 @@ class Home extends Controller{
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 		->where('jcm_jobs.p_Category','=','7')
 		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
@@ -45,6 +47,7 @@ class Home extends Controller{
 		->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
 		->where('jcm_jobs.p_Category','=','6')
 		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
@@ -54,6 +57,7 @@ class Home extends Controller{
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 		->where('jcm_jobs.p_Category','=','6')
 		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
@@ -65,6 +69,7 @@ class Home extends Controller{
 		->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
 		->where('jcm_jobs.p_Category','=','5')
 		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
@@ -74,6 +79,7 @@ class Home extends Controller{
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 		->where('jcm_jobs.p_Category','=','5')
 		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
@@ -84,6 +90,7 @@ class Home extends Controller{
 			->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
 			->where('jcm_jobs.p_Category','=','4')
 			->where('jcm_jobs.status','=','1')
+			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 			->where('jcm_countries.sortname','=',$position->countryCode)
 			->orderBy('jcm_jobs.jobId','desc')
@@ -93,6 +100,7 @@ class Home extends Controller{
 			$latest = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 			->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 			->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
+			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 			->where('jcm_jobs.p_Category','=','4')
 			->where('jcm_jobs.status','=','1')
@@ -105,6 +113,7 @@ class Home extends Controller{
 			->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
 			->where('jcm_jobs.p_Category','=','3')
 			->where('jcm_jobs.status','=','1')
+			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 			->where('jcm_countries.sortname','=',$position->countryCode)
 			->orderBy('jcm_jobs.jobId','desc')
@@ -115,6 +124,7 @@ class Home extends Controller{
 			->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 			->where('jcm_jobs.p_Category','=','3')
 			->where('jcm_jobs.status','=','1')
+			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 			->orderBy('jcm_jobs.jobId','desc')
 			->limit(12)
@@ -126,6 +136,7 @@ class Home extends Controller{
 		->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
 		->where('jcm_jobs.p_Category','=','2')
 		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
@@ -135,6 +146,7 @@ class Home extends Controller{
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 		->where('jcm_jobs.p_Category','=','2')
 		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
@@ -660,7 +672,7 @@ public function verifyUser(Request $request){
 	if($data > 0){
 		
 		DB::table('jcm_users')->where('secretId',$secretId)->update(['user_status' => 'Y']);
-		$request->session()->flash('loginAlert', 'Your account is Verified Please Login');
+		$request->session()->flash('emailAlert', 'Your account is Verified Please Login');
 		return redirect('account/login');
 	}else{
 		echo "There is a issue in your secret code kindly contact with administration thanks";
@@ -711,6 +723,15 @@ public function deactiveUser(Request $request){
 }
 public function regvalpass(Request $request){
 	echo JobCallMe::registrationPassValidation($request->input('password'));
+}
+public function savecompic(Request $request){
+	$data = $request->input('comppics');
+	$comId = session()->get('jcmUser')->companyId;
+	if( DB::table('jcm_companies')->where('companyId',$comId)->update(['companypics'=> $data])){
+		echo 1;
+	}else{
+		echo 2;
+	}
 }
 }
 ?>

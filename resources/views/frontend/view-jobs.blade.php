@@ -134,13 +134,36 @@ var token = "{{ csrf_token() }}";
 $(document).ready(function(){
     var getcountry = "<?php echo $_GET['country'];?>";
     var getsate = "<?php echo $_GET['state'];?>";
-    
-    if(getcountry == '' && getsate == ''){
-        $('.search-job').submit();
-    }else{
+    var getkeyword = "<?php echo $_GET['keyword'];?>";
+    var getcity = "<?php echo $_GET['city'];?>";
+    console.log(getkeyword);
+    console.log(getcity);
+    if(getcountry != '' && getsate != ''){
         $.ajax({
+               type: 'post',
+               data: {country:getcountry,state:getsate,_token:"{{ csrf_token() }}"},
+               url: "{{ url('jobs/search') }}?_find="+isFirst,
+               success: function(response){
+                   $('.show-jobs').html(response);
+                   $('.search-job button[name="save"]').prop('disabled',false);
+
+                   $('.jobs-suggestions').hover(function () {
+                       $(this).children(".js-action").fadeIn('slow');
+
+                   });
+                   $('.jobs-suggestions').mouseleave(function () {
+                       $(this).children(".js-action").fadeOut('fast');
+                   });
+
+                   $('.search-job select option[value=""]').prop('selected',true);
+                   $('.search-job input').val('');
+                   $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
+               }
+           })
+    }else if(getkeyword != '' && getcity != ''){
+       $.ajax({
         type: 'post',
-        data: {country:getcountry,state:getsate,_token:"{{ csrf_token() }}"},
+        data: {keyword:getkeyword,city:getcity,_token:"{{ csrf_token() }}"},
         url: "{{ url('jobs/search') }}?_find="+isFirst,
         success: function(response){
             $('.show-jobs').html(response);
@@ -159,6 +182,8 @@ $(document).ready(function(){
             $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
         }
     })
+    }else{
+        $('.search-job').submit();
     }
 	
     getStates($('.job-country option:selected:selected').val());

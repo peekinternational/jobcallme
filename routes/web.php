@@ -150,6 +150,7 @@ Route::get('companies/company/{id}','frontend\Home@viewCompany');
 Route::group(['prefix' => 'account'], function () {
 	/* generals */
 	Route::post('feedback','frontend\Home@feedback');
+	Route::post('employer/savecompic','frontend\Home@savecompic');
 	Route::get('writings','frontend\ExtraSkills@writings');
 	Route::match(['get','post'],'writings/article/add','frontend\ExtraSkills@addEditArticle');
 	Route::match(['get','post'],'writings/article/edit/{id}','frontend\ExtraSkills@addEditArticle');
@@ -233,9 +234,9 @@ Route::group(['prefix' => 'account'], function () {
 Route::get('employer/nice', function () {
     return view('frontend.employer.nice');
 });
-Route::get('employer/users', function () {
-    return view('frontend.employer.addusers');
-});
+Route::get('employer/users','frontend\Employer@addUser');
+Route::post('employer/useradd','frontend\Employer@useradd');
+Route::post('employer/userdel','frontend\Employer@userdel');
 Route::get('employer/addevaluation', function () {
     return view('frontend.employer.addevaluation');
 });

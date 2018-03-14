@@ -36,7 +36,7 @@
                                 <!---->
 								<span class="pay_blog">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
-									<input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
+									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
 								</span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
                              <span class="b">@lang('home.'.$payment->title)</span></div>
@@ -83,14 +83,29 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_department')</label>
-                            <div class="col-sm-9 pnj-form-field">
+                            <div class="col-md-8 pnj-form-field">
                                 <select class="form-control select2" name="department" required>
                                     <option value="">@lang('home.s_department')</option>
+                                    <option value="Accounting">@lang('home.Accounting')</option>
+                                    <option value="Administration">@lang('home.Administration')</option>
+                                    <option value="Customer Services">@lang('home.Customer Services')</option>
+                                    <option value="Finance">@lang('home.Finance')</option>
+                                    <option value="Human Resources">@lang('home.Human Resources')</option>
+                                    <option value="Information Technology">@lang('home.Information Technology')</option>
+                                    <option value="Marketing">@lang('home.Marketing')</option>
+                                    <option value="Procurement">@lang('home.Procurement')</option>
+                                    <option value="Production">@lang('home.Production')</option>
+                                    <option value="Quality Control">@lang('home.Quality Control')</option>
+                                     <option value="Research & Development">@lang('home.Research & Development')</option>
+                                      <option value="Sales">@lang('home.Sales')</option>
+                                    
+
                                     @foreach(JobCallMe::getDepartments() as $depart)
-                                        <option value="{!! $depart->departmentId !!}">{!! $depart->name !!}</option>
+                                        <option value="{!! $depart->name !!}">{!! $depart->name !!}</option>
                                     @endforeach
                                 </select>
                             </div>
+                           <div class="col-md-1 pnj-form-field"> <span><a href="{{ url('account/employer/departments') }}">@lang('home.addDepartment')</a></span></div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_category')</label>
@@ -164,9 +179,15 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.expiryhiringdate')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <input type="text" class="form-control date-picker"  name="expiryDate" onkeypress="return false" required>
+                            </div>
+                        </div>
+                        <div class="form-group" id="expirediv">
                             <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" id="secondDate" name="expiryDate" onkeypress="return false" required>
+                                <input type="text" class="form-control date-picker" id="secondDate" name="expiryAd" onkeypress="return false">
                             </div>
                         </div>
 						<div class="form-group" id="durationdiv">
@@ -257,11 +278,9 @@
                                             <label class="lbl" for="addprocess">@lang('home.add')</label>
                                         </div>
                                         <div class="optionBox" id="moreprocess" style="display:none">
-                                            <div class="col-md-8 pnj-salary block processblock" style="display: flex;margin-bottom: 9px;">
-                                                <input type="text" class="form-control" name="process[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
-                                            </div>
+                                            
                                             <div class="col-md-10 block">
-                                                <span class="add"><i class="fa fa-plus"></i></span>
+                                                <button type="button" class="add btn btn-success"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
 						
@@ -312,11 +331,9 @@
                                             <label class="lbl" for="addbenefit">@lang('home.add')</label>
                                         </div>
                                         <div class="optionBox" id="morebenefit" style="display:none">
-                                            <div class="col-md-8 pnj-salary block benefitblock" style="display: flex;margin-bottom: 9px;">
-                                                <input type="text" class="form-control" name="benefits[]" /> <span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span>
-                                            </div>
+                                            
                                             <div class="col-md-10 block">
-                                                <span class="add2"><i class="fa fa-plus"></i></span>
+                                                <button type="button" class="add2 btn btn-success"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
 
@@ -400,11 +417,15 @@ $(document).ready(function(){
      {
          $('#durationdiv').hide();
          $('#total').hide();
+         $('#expirediv').hide();
+         
         // alert("nabeel");
      }
      else{
           $('#durationdiv').show();
          $('#total').show();
+          $('#expirediv').show();
+        
      }
 		
 	})
@@ -445,11 +466,11 @@ $(document).ready(function(){
 });
 
 $('.add').click(function() {
-    $('.processblock:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+    $('#moreprocess').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" required/><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
 
 });
 $('.add2').click(function() {
-    $('.benefitblock:last').before('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" /><span class="remove" style="padding-left: 14px;"><i class="fa fa-minus"></i></span></div>');
+    $('#morebenefit').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" required/><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
 
 });
 $('.optionBox').on('click','.remove',function() {

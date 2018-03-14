@@ -3,8 +3,17 @@
 @section('title','Departments')
 
 @section('content')
+
 <section id="jobs">
     <div class="container">
+     @if(Session::has('depAlert'))
+                    <div class="alert alert-danger">
+                        {{Session::get('depAlert')}} 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
         <div class="col-md-12 view-department">
             <div class="panel panel-default">
                 <div class="panel-heading">

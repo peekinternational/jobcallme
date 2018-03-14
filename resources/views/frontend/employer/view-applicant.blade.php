@@ -3,6 +3,12 @@
 @section('title','Applicant')
 
 @section('content')
+<?php
+$userImage = url('profile-photos/profile-logo.jpg');
+if($applicant->profilePhoto != ''){
+    $userImage = url('profile-photos/'.$applicant->profilePhoto);
+}
+?>
 <section id="myResume">
     <div class="container">
         <div class="row">
@@ -13,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div>
-                                    <img src="{{ url('profile-photos/'.$applicant->profilePhoto) }}" class="img-circle" style="width: 100%">
+                                    <img src="{{ $userImage}}" class="img-circle" style="width: 100%">
                                 </div>
                                 <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">$applicant->firstName Smith</h3>
                                 <p class="text-center hidden-md hidden-lg jp-profession-heading">Web Developer and Designer</p>

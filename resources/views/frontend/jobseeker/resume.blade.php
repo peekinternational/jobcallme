@@ -43,17 +43,17 @@ if($user->profilePhoto != ''){
                                     <a href="{{ $meta->linkedin }}"><i class="fa fa-linkedin-square"></i></a>
                                     <a href="{{ $meta->facebook }}"><i class="fa fa-facebook-square"></i></a>
                                 </p>
-                                <p><span class="pi-title">@lang('home.email'):</span> {{ $user->email }}</p>
-                                <p><span class="pi-title">@lang('home.mobile'):</span> {{ $user->phoneNumber }}</p>
-                                <p><span class="pi-title">@lang('home.cnic'):</span> {{ $meta->cnicNumber }}</p>
-                                <p><span class="pi-title">@lang('home.address'):</span> {!! $meta->address.' ,'.JobCallMe::cityName($user->city).' ,'.JobCallMe::countryName($user->country) !!}</p>
+                                <p><span class="pi-title">@lang('home.email'):</span>  {{ $user->email }}</p>
+                                <p><span class="pi-title">@lang('home.mobile'):</span>  {{ $user->phoneNumber }}</p>
+                                <p><span class="pi-title">@lang('home.cnic'):</span>  {{ $meta->cnicNumber }}</p>
+                                <p><span class="pi-title">@lang('home.address'):</span>  {!! $meta->address.' ,'.JobCallMe::cityName($user->city).' ,'.JobCallMe::countryName($user->country) !!}</p>
                              </div>
                             <div class="col-md-9 personal-info-right">
                                 <h3 class="hidden-sm hidden-xs">{{ $user->firstName.' '.$user->lastName }}</h3>
-                                <p><span class="pi-title">@lang('home.fathername'):</span> {{ $meta->fatherName }}</p>
-                                <p><span class="pi-title">@lang('home.age'):</span> {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title">@lang('home.gender'):</span>@lang('home.'.$meta->gender),<span class="pi-title">@lang('home.maritalstatus'):</span>@lang('home.'.$meta->maritalStatus)</p>
-                                <p><span class="pi-title">@lang('home.education'):</span> {{ $meta->education }}</p>
-                                <p><span class="pi-title">@lang('home.experiance'):</span> {{ $meta->experiance }}</p>
+                                <p><span class="pi-title">@lang('home.fathername'):</span>  {{ $meta->fatherName }}</p>
+                                <p><span class="pi-title">@lang('home.age'):</span>  {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title"> @lang('home.gender'):</span> @lang('home.'.$meta->gender),<span class="pi-title"> @lang('home.maritalstatus'):</span> @lang('home.'.$meta->maritalStatus)</p>
+                                <p><span class="pi-title">@lang('home.education'):</span>  {{ $meta->education }}</p>
+                                <p><span class="pi-title">@lang('home.experiance'):</span>  {{ $meta->experiance }}</p>
                                 <p><span class="pi-title">@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryTitle($meta->industry))</p>
                                 <p><span class="pi-title">@lang('home.currentsalary'):</span> @if($meta->currency == 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',0).' '.$meta->currency }}@endif @if($meta->currency != 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}@endif</p>
 								<p><span class="pi-title">@lang('home.expectedsalary'):</span>  @if($meta->currency == 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->expectedSalary : '0',0).' '.$meta->currency }}@endif @if($meta->currency != 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->expectedSalary : '0',2).' '.$meta->currency }}@endif </p>
@@ -149,28 +149,30 @@ if($user->profilePhoto != ''){
                                     <textarea class="form-control input-sm" name="address">{{ $meta->address }}</textarea>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm select2 job-country" name="country">
-                                        @foreach(JobCallMe::getJobCountries() as $cntry)
-                                            <option value="{{ $cntry->id }}" {{ $user->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                           <div class="form-group">
+                            <label class="control-label col-sm-3 text-right">@lang('home.country')</label>
+                            <div class="col-md-6">
+                                <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ $user->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.state')</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm select2 job-state" name="state" data-state="{{ $user->state }}"></select>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3 text-right">@lang('home.state')</label>
+                            <div class="col-md-6">
+                                <select class="form-control select2 job-state" name="state" data-state="{{ $user->state }}">
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.city')</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm select2 job-city" name="city" data-city="{{ $user->city }}"></select>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3 text-right">@lang('home.city')</label>
+                            <div class="col-md-6">
+                                <select class="form-control select2 job-city" name="city" data-city="{{ $user->city }}">
+                                </select>
                             </div>
+                        </div>
                         <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.experiancelevel')</label>
                                 <div class="col-md-6">
@@ -218,33 +220,50 @@ if($user->profilePhoto != ''){
                                     <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}">
                                 </div>
                             </div> -->
-                            <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.category')</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm select2" name="industry" onchange="getSubCategories(this.value)">
-                                        @foreach(JobCallMe::getCategories() as $cat)
-                                            <option value="{{ $cat->categoryId }}" {{ $meta->industry == $cat->categoryId ? 'selected="selected"' : '' }}>@lang('home.'.$cat->name)</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                               <div class="form-group">
+                            <label class="control-label col-md-3 text-right">@lang('home.category')</label>
+                            <div class="col-md-6">
+                                <select class="form-control select2 job-category" name="industry" onchange="getSubCategories(this.value)">
+                                    @foreach(JobCallMe::getCategories() as $cat)
+                                        <option value="{!! $cat->categoryId !!}" {{ $meta->industry == $cat->categoryId ? 'selected="selected"' : '' }}>{!! $cat->name !!}</option>
+                                    @endforeach
+                                </select>
                             </div>
-							<div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.Subcategory')</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 text-right">@lang('home.Subcategory')</label>
+                            <div class="col-md-6">
+                                <select class="form-control select2 job-sub-category" name="subCategoryId" onchange="getSubCategories2(this.value)">
+                               
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 text-right">@lang('home.Subcategory2')</label>
+                            <div class="col-md-6">
+                                <select class="form-control select2 job-sub-category2" name="subCategoryId2">
+									
+                                </select>
+                            </div>
+                        </div>
+                          <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.expectedwork')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control select2 job-sub-category" name="subCategoryId" data-state="{{ $meta->subCategoryId }}" onchange="getSubCategories2(this.value)">
-                                      @foreach(JobCallMe::getSubCategories($meta->subCategoryId) as $cat)
-                                            <option value="{{ $cat->subCategoryId }}" {{ $meta->subCategoryId == $cat->subCategoryId ? 'selected="selected"' : '' }}>@lang('home.'.$cat->subName)</option>
-                                        @endforeach
+									<select class="form-control select2" name="shift">
+                                    <option value="">Type Of Work</option>
+										@foreach(JobCallMe::getJobType() as $shift)
+											<option value="{!! $shift->name !!}" {{ $meta->shift == $shift->name ? 'selected="selected"' : '' }}>@lang('home.'.$shift->name)</option>
+										@endforeach
 									</select>
-                                </div>
+
+                              <!--    <select class="form-control input-sm select2" name="experiance">
+                                        @foreach(JobCallMe::getExperienceLevel() as $el)
+                                            <option value="{{ $el }}" {{ $meta->experiance == $el ? 'selected="selected"' : '' }}>@lang('home.'.$el)</option>
+                                        @endforeach
+                                    </select> -->
+                               </div>
                             </div>
-							<div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.Subcategory2')</label>
-                                <div class="col-md-6">
-                                    <select class="form-control select2 job-sub-category2" name="subCategoryId2">
-									</select>
-                                </div>
-                            </div>
+                           
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.currentsalary')</label>
                                 <div class="col-md-6">
@@ -338,7 +357,7 @@ if($user->profilePhoto != ''){
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
-                                            <p class="rd-date">{!! date('M, Y',strtotime($academic->completionDate)) !!}</p>
+                                            <p class="rd-date">{!! date('M, Y',strtotime($academic->enterDate)) !!},  {!!  date('M, Y',strtotime($academic->completionDate)) !!}</p>
                                             <p class="rd-title">{!! $academic->degree !!}</p>
                                             <p class="rd-organization">{!! $academic->institution !!}</p>
                                             <p class="rd-location">{!! JobCallMe::cityName($academic->city).' ,'.JobCallMe::countryName($academic->country)!!}</p>
@@ -395,25 +414,31 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.degree')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="degree">
+                                    <input type="text" class="form-control input-sm" name="degree" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.enterdate')</label>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control input-sm date-picker" name="enterDate" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.completiondate')</label>
                                 <div class="col-md-6">
-                                    <input type="date" class="form-control input-sm date-picker" name="completionDate">
+                                    <input type="date" class="form-control input-sm date-picker" name="completionDate" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">Grade/GPA</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="grade">
+                                    <input type="text" class="form-control input-sm" name="grade" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.institution')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="institution">
+                                    <input type="text" class="form-control input-sm" name="institution" required>
                                 </div>
                             </div>
                            <div class="form-group">
@@ -497,25 +522,25 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.certification')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="certificate">
+                                    <input type="text" class="form-control input-sm" name="certificate" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.completiondate')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm date-picker" name="completionDate">
+                                    <input type="text" class="form-control input-sm date-picker" name="completionDate" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.score')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="score">
+                                    <input type="text" class="form-control input-sm" name="score" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.institution')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="institution">
+                                    <input type="text" class="form-control input-sm" name="institution" required>
                                 </div>
                             </div>
                              <div class="form-group">
@@ -599,19 +624,19 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.jobtitle')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="jobTitle">
+                                    <input type="text" class="form-control input-sm" name="jobTitle" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="organization">
+                                    <input type="text" class="form-control input-sm" name="organization" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.sdate')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm date-picker" name="startDate">
+                                    <input type="text" class="form-control input-sm date-picker" name="startDate" required>
                                 </div>
                             </div>
                             <div class="form-group" id="enddate">
@@ -708,7 +733,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.skill')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="skill">
+                                    <input type="text" class="form-control input-sm" name="skill" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -771,13 +796,13 @@ if($user->profilePhoto != ''){
 							<div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.title')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="title">
+                                    <input type="text" class="form-control input-sm" name="title" required>
                                 </div>
                             </div>
 							<div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.position')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="position">
+                                    <input type="text" class="form-control input-sm" name="position" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -796,19 +821,19 @@ if($user->profilePhoto != ''){
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.occupation')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="occupation">
+                                    <input type="text" class="form-control input-sm" name="occupation" required>
                                 </div>
                             </div>
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="organization">
+                                    <input type="text" class="form-control input-sm" name="organization" required>
                                 </div>
                             </div>
 							  <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.startyear')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control input-sm select2" id="syear" name="startyear">
+                                    <select class="form-control input-sm select2" id="syear" name="startyear" required>
                                        
 										
                                     </select>
@@ -817,7 +842,7 @@ if($user->profilePhoto != ''){
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.startmonth')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control input-sm select2" id="smonth" name="startmonth">
+                                    <select class="form-control input-sm select2" id="smonth" name="startmonth" required>
 									<option value=''>Select Month</option>
 										<option value='Jan'>Jan</option>
 										<option value='Feb'>Feb</option>
@@ -933,13 +958,13 @@ if($user->profilePhoto != ''){
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.organization_resume')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="org">
+                                    <input type="text" class="form-control input-sm" name="org" required>
                                 </div>
                             </div>
 							<div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.position')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="pos">
+                                    <input type="text" class="form-control input-sm" name="pos" required>
                                 </div>
                             </div>
                             
@@ -947,7 +972,7 @@ if($user->profilePhoto != ''){
 							  <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.startyear')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control input-sm select2" id="ssyear" name="stayear">
+                                    <select class="form-control input-sm select2" id="ssyear" name="stayear" required>
                                        
 										
                                     </select>
@@ -956,7 +981,7 @@ if($user->profilePhoto != ''){
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.startmonth')</label>
                                 <div class="col-md-6">
-                                    <select class="form-control input-sm select2" id="startmonth" name="stamonth">
+                                    <select class="form-control input-sm select2" id="startmonth" name="stamonth" required>
 									<option value=''>Select Month</option>
 										<option value='Jan'>Jan</option>
 										<option value='Feb'>Feb</option>
@@ -1223,31 +1248,31 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.name')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="name">
+                                    <input type="text" class="form-control input-sm" name="name" required>
                                 </div>
                             </div>
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.jobtitle')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="jobtitle">
+                                    <input type="text" class="form-control input-sm" name="jobtitle" required>
                                 </div>
                             </div>
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="organization">
+                                    <input type="text" class="form-control input-sm" name="organization" required>
                                 </div>
                             </div>
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.phone')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="phone">
+                                    <input type="number" class="form-control input-sm" name="phone" required>
                                 </div>
                             </div>
 							  <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.email')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="email">
+                                    <input type="email" class="form-control input-sm" name="email" required>
                                 </div>
                             </div>
 							    <div class="form-group">
@@ -1352,19 +1377,19 @@ if($user->profilePhoto != ''){
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.title')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="title">
+                                    <input type="text" class="form-control input-sm" name="title" required>
                                 </div>
                             </div>
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.Author')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="author">
+                                    <input type="text" class="form-control input-sm" name="author" required>
                                 </div>
                             </div>
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.publisher')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="publisher">
+                                    <input type="text" class="form-control input-sm" name="publisher" required>
                                 </div>
                             </div>
 							 <div class="form-group">
@@ -1394,13 +1419,13 @@ if($user->profilePhoto != ''){
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.year')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="year">
+                                    <input type="text" class="form-control input-sm" name="year" required>
                                 </div>
                             </div>
 							  <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.month')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="month">
+                                    <input type="text" class="form-control input-sm" name="month" required>
                                 </div>
                             </div>
 							<div class="form-group">
@@ -1459,7 +1484,7 @@ if($user->profilePhoto != ''){
 							<div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.title')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="title">
+                                    <input type="text" class="form-control input-sm" name="title" required>
                                 </div>
                             </div>
 							
@@ -1478,13 +1503,13 @@ if($user->profilePhoto != ''){
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.occupation')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="occupation">
+                                    <input type="text" class="form-control input-sm" name="occupation" required>
                                 </div>
                             </div>
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="organization">
+                                    <input type="text" class="form-control input-sm" name="organization" required>
                                 </div>
                             </div>
 							  <div class="form-group">
@@ -1578,7 +1603,7 @@ if($user->profilePhoto != ''){
 							<div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.title')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="title">
+                                    <input type="text" class="form-control input-sm" name="title" required>
                                 </div>
                             </div>
 							
@@ -1597,7 +1622,7 @@ if($user->profilePhoto != ''){
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.occupation')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="occupation">
+                                    <input type="text" class="form-control input-sm" name="occupation" required>
                                 </div>
                             </div>
 							 
@@ -1635,7 +1660,7 @@ if($user->profilePhoto != ''){
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.website')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="website">
+                                    <input type="text" class="form-control input-sm" name="website" required>
                                 </div>
                             </div>
 							<div class="form-group">
@@ -1660,6 +1685,12 @@ if($user->profilePhoto != ''){
                     <div class="resume-listing-section hidden-sm hidden-xs">
                         <h4>@lang('home.resumesections')</h4>
                         <hr>
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                          aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                            70%
+                          </div>
+                        </div>
                         <ul class="rls" style="padding-left: 0;">
                             <li>
                                 <a id="#" onclick="$('#personal-information').fadeIn();$('#personal-information-edit').hide();">@lang('home.personalinformation')</a> 
@@ -1812,6 +1843,56 @@ textarea.form-control{resize: vertical;}
 }
 </style>
 <script type="text/javascript">
+ getStates($('.job-country option:selected:selected').val());
+var pageToken = '{{ csrf_token() }}';
+$(document).ready(function(){
+   
+    //$('.date-picker').datepicker({format:'yyyy-mm-dd'});
+});
+$('.job-country').on('change',function(){
+    var countryId = $(this).val();
+    getStates(countryId)
+})
+function getStates(countryId){
+    $.ajax({
+        url: "{{ url('account/get-state') }}/"+countryId,
+        success: function(response){
+            var currentState = $('.job-state').attr('data-state');
+            var obj = $.parseJSON(response);
+            $(".job-state").html('');
+            var newOption = new Option('Select State', '0', true, false);
+            $(".job-state").append(newOption).trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = k.id == currentState ? true : false;
+                var newOption = new Option(k.name, k.id, true, vOption);
+                $(".job-state").append(newOption);
+            })
+            $(".job-state").trigger('change');
+        }
+    })
+}
+$('.job-state').on('change',function(){
+    var stateId = $(this).val();
+    getCities(stateId)
+})
+function getCities(stateId){
+    $.ajax({
+        url: "{{ url('account/get-city') }}/"+stateId,
+        success: function(response){
+            var currentCity = $('.job-city').attr('data-city');
+            var obj = $.parseJSON(response);
+            $(".job-city").html('').trigger('change');
+            var newOption = new Option('Select City', '0', true, false);
+            $(".job-city").append(newOption).trigger('change');
+            $.each(obj,function(i,k){
+                var vOption = k.id == currentCity ? true : false;
+                var newOption = new Option(k.name, k.id, true, vOption);
+                $(".job-city").append(newOption).trigger('change');
+            })
+        }
+    })
+}
+
  $('#Currently').on('change', function() {
   // process= $('#addprocess').val();
     if(this.checked)
@@ -1845,71 +1926,12 @@ textarea.form-control{resize: vertical;}
  getSubCategories($('.job-category option:selected:selected').val());
 
  getSubCategories2($('.job-category option:selected:selected').val());
-
-
-var pageToken = '{{ csrf_token() }}';
-$(document).ready(function(){
-    getStates($('.job-country option:selected:selected').val());
-    //$('.date-picker').datepicker({format:'yyyy-mm-dd'});
-})
 function cancelProfile(){
     $('#personal-information').fadeIn();
     $('#personal-information-edit').hide();
     $('html, body').animate({scrollTop:$('#personal-information').position().top}, 700);
 }
-$('.job-country').on('change',function(){
-    var countryId = $(this).val();
-    getStates(countryId)
-})
-function getStates(countryId){
-    if(countryId == 0){
-        var newOption = new Option('Select State', '0', true, false);
-        $(".job-state").append(newOption).trigger('change');
-        return false;
-    }
-    $.ajax({
-        url: "{{ url('account/get-state') }}/"+countryId,
-        success: function(response){
-            var currentState = $('.job-state').attr('data-state');
-            var obj = $.parseJSON(response);
-            $(".job-state").html('');
-            var newOption = new Option('Select State', '0', true, false);
-            $(".job-state").append(newOption);
-            $.each(obj,function(i,k){
-                var vOption = k.id == currentState ? true : false;
-                var newOption = new Option(k.name, k.id, true, vOption);
-                $(".job-state").append(newOption);
-            })
-            $(".job-state").trigger('change');
-        }
-    })
-}
-$('.job-state').on('change',function(){
-    var stateId = $(this).val();
-    getCities(stateId)
-})
-function getCities(stateId){
-    if(stateId == 0){
-        var newOption = new Option('Select City', '0', true, false);
-        $(".job-city").append(newOption).trigger('change');
-        return false;
-    }
-    $.ajax({
-        url: "{{ url('account/get-city') }}/"+stateId,
-        success: function(response){
-            var currentCity = $('.job-city').attr('data-city');
-            var obj = $.parseJSON(response);
-            $(".job-city").html('').trigger('change');
-            var newOption = new Option('Select City', '0', true, false);
-            $(".job-city").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
-                var vOption = k.id == currentCity ? true : false;
-                var newOption = new Option(k.name, k.id, true, vOption);
-                $(".job-city").append(newOption).trigger('change');
-            })
-        }
-    })
-}
+
 $('form.form-personal-info').submit(function(e){
     $('.form-personal-info input[name="_token"]').val(pageToken);
     $('.form-personal-info button[name="save"]').prop('disabled',true);
@@ -1998,6 +2020,7 @@ function getAcademic(resumeId){
             $('.form-academic input[name="resumeId"]').val(resumeId);
             $('.form-academic select[name="degreeLevel"]').val(obj.degreeLevel).trigger('change');
             $('.form-academic input[name="degree"]').val(obj.degree);
+            $('.form-academic input[name="enterDate"]').val(obj.enterDate);
             $('.form-academic input[name="completionDate"]').val(obj.completionDate);
             $('.form-academic input[name="grade"]').val(obj.grade);
             $('.form-academic input[name="institution"]').val(obj.institution);
