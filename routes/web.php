@@ -316,8 +316,8 @@ Route::post('updatepaypal', array('as' => 'addmoney.update','uses' => 'frontend\
 Route::get('updatepaypal', array('as' => 'payment.updatestatus','uses' => 'frontend\Employer@updategetPaymentStatus',));
 
 
-Route::get('/redirect', 'SocialAuthFacebookController@redirect');
-Route::get('/callback', 'SocialAuthFacebookController@callback');
+Route::get('/fbApi', 'SocialAuthFacebookController@fbApi');
+Route::get('/fbCallback', 'SocialAuthFacebookController@callback');
 
 
 Auth::routes();

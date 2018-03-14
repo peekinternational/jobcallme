@@ -61,13 +61,14 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 </div>
                
             </form>
-			 <div class="col-md-12 sns-box">
-                    <p>Login using</p>
-                    <button class="fb-btn"><a style="color:white" href="{{url('/redirect')}}">FACEBOOK</a></button>
-					
-                    <button class="google-btn">GOOGLE</button>
-                    <button class="in-btn">LINKEDIN</button>
-                </div>
+            <div class="col-md-12 sns-box">
+                <p>Login using</p>
+                <button class="fb-btn">
+                    <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
+                </button> 
+                <button class="google-btn">GOOGLE</button>
+                <button class="in-btn">LINKEDIN</button>
+            </div>
         </div> 
         <div id="signupBox" class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
             <h3>@lang('home.createaccount')</h3>

@@ -244,7 +244,7 @@ return [
 		'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
 		'Location' => Stevebauman\Location\Facades\Location::class,
-        'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class
+        'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class, 
     ],
 
 ];
