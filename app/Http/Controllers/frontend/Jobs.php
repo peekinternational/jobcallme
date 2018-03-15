@@ -109,13 +109,13 @@ class Jobs extends Controller{
 				else{
 					$vhtml .= '<div class="js-action">';
 					if($jobApplied == true){
-                        $vhtml .= '<a href="'.$applyUrl.'" class="btn btn-success btn-xs">'.trans('home.applied').'</a>';
+                        $vhtml .= '<a href="'.$applyUrl.'" class="btn btn-success btn-xs" disable>'.trans('home.applied').'</a>';
 					}
 					else{
 						$vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">'.trans('home.apply').'</a>';
 					}
                         if(in_array($rec->jobId, $savedJobArr)){
-	                        $vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-success btn-xs" style="margin-left: 10px;">'.trans('home.saved').'</a>';
+	                        $vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-success btn-xs" disable style="margin-left: 10px;">'.trans('home.saved').'</a>';
 	                    }else{
 	                    	$vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-default btn-xs" style="margin-left: 10px;">'.trans('home.save').'</a>';
 	                    }
