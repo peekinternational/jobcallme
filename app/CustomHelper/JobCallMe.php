@@ -508,7 +508,7 @@ class JobCallMe{
 	}
 
 	public function getJobInterview($jobId,$userId){
-		return DB::table('jcm_job_interviews')->where('userId','=',$userId)->where('jobId','=',$jobId)->first();
+		return DB::table('jcm_job_interviews')->where('jobseekerId','=',$userId)->where('jobId','=',$jobId)->first();
 	}
 
 	public function getHomeCountry(){
