@@ -117,19 +117,22 @@
                         <!--Recent Applicant End-->
 
                         <!--Upcoming Interviews Start-->
+                        
+                        @foreach( $upcommingInterviews as $interview)
                         <div class="tab-pane" id="rtj_tab_interview">
                             <div class="col-md-12 rtj-item">
-                                <img src="images/jobseekers/user-10.jpg" style="width: 50px">
+                                <img src="{{ url('profile-photos/'.$interview->profilePhoto)}}" style="width: 50px">
                                 <div class="rtj-details">
-                                    <p><strong><a href="#">Ayesha Khan</a></strong></p>
-                                    <p>Graphic Designing</p>
-                                    <p><i class="fa fa-clock-o"></i>  June 10 - 3:00PM    <i class="fa fa-map-marker"></i>  Job Call Me, Rawalpindi</p>
+                                    <p><strong><a href="{{ url('account/employer/application/applicant/'.$interview->jobseekerId) }}">{{ $interview->firstName." ".$interview->lastName}}</a></strong></p>
+                                    <p><a href="{{ url('jobs/'.$interview->jobId) }}">{{ $interview->title }}</a> <span class="label" style="background-color:{{ $colorArr[array_rand($colorArr)] }}"><a style="color:#fff" href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">interview Details</a></span></p>
+                                    <p><i class="fa fa-clock-o"></i>  {{ $interview->fromDate }} to {{ $interview->toDate }}   <i class="fa fa-map-marker"></i> {{ $interview->country }}, {{ $interview->state }}, {{ $interview->city }}</p>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <a href="{{ url('account/employer/application?show=interview')}}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                             </div>
                         </div>
+                        @endforeach
                         <!--Upcoming Interviews End-->
                     </div>
                 </div>

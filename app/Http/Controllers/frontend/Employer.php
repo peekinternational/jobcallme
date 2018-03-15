@@ -449,9 +449,9 @@ curl_close ($ch);
     	$applicant = DB::table('jcm_job_applied')
     					->select('jcm_job_applied.applyTime','jcm_jobs.jobId','jcm_users.city','jcm_users.country','jcm_jobs.title','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto')
     					->join('jcm_users','jcm_users.userId','=','jcm_job_applied.userId')
-						
     					->join('jcm_jobs','jcm_jobs.jobId','=','jcm_job_applied.jobId')
     					->orderBy('jcm_job_applied.applyId','desc')
+    					->where('jcm_jobs.userId','=',$app->userId)
     					->paginate(8);
 						
 						
@@ -487,8 +487,18 @@ curl_close ($ch);
 		//dd($postedJobs);
 		
 		$lear_record = DB::table('jcm_upskills')->orderBy('skillId','desc')->limit(8)->get();
+		/* ucomming interview data*/
+		$upcommingInterviews = DB::table('jcm_job_interviews')
+				->select('jcm_job_interviews.*','jcm_users.firstName','jcm_users.profilePhoto','jcm_users.lastName','jcm_jobs.title','con.name as country','stat.name as state','cit.name as city')
+				->leftJoin('jcm_users','jcm_users.userId','=','jcm_job_interviews.jobseekerId')
+				->leftJoin('jcm_jobs','jcm_jobs.jobId','=','jcm_job_interviews.jobId')
+				->leftJoin('jcm_countries as con','con.id','=','jcm_users.country')
+				->leftJoin('jcm_states as stat','stat.id','=','jcm_users.state')
+				->leftJoin('jcm_cities as cit','cit.id','=','jcm_users.city')
+				->where('jcm_job_interviews.userId',$app->userId)->orderBy('interviewId','desc')
+				->limit(8)->get();
 
-		return view('frontend.employer.dashboard',compact('postedJobs','applicant','applicants','response','experience','recruit','read_record','lear_record'));
+		return view('frontend.employer.dashboard',compact('upcommingInterviews','postedJobs','applicant','applicants','response','experience','recruit','read_record','lear_record'));
 	}
 
 	public function getJobResponse($app){
