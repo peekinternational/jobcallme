@@ -267,13 +267,13 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.currentsalary')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="currentSalary" value="{{ $meta->currentSalary }}" required>
+                                    <input type="number" class="form-control input-sm" name="currentSalary" value="{{ $meta->currentSalary }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.expectedsalary')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="expectedSalary" value="{{ $meta->expectedSalary }}" required>
+                                    <input type="number" class="form-control input-sm" name="expectedSalary" value="{{ $meta->expectedSalary }}" required>
                                 </div>
                             </div>
                             <div class="form-group">

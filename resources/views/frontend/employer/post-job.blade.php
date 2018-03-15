@@ -299,10 +299,10 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="text" class="form-control" name="minSalary" placeholder="@lang('home.minsalary') 20,000,000" required>
+                                        <input type="number" class="form-control" name="minSalary" placeholder="@lang('home.minsalary') 20,000,000" required>
                                     </div>
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="text" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary') 25,000,000" required>
+                                        <input type="number" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary') 25,000,000" required>
                                     </div>
                                     <div class="col-md-4">
                                         <select class="form-control col-md-4 select2" name="currency" required>

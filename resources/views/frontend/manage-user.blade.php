@@ -935,6 +935,24 @@ $('.privacy-form input[type="checkbox"]').click(function(){
         }
     })
 })
+function deactive(id){
+    var postURL = "{{ url('deactiveUser')}}";
+    var usertoken = "{{ csrf_token() }}";
+    $.ajax({
+        url:postURL,
+        data:{id:id,_token:usertoken},
+        type:"POST",
+        success:function(res){
+            if(res ==1){
+                window.location.href ='login';
+            }
+            else{
+                alert(res);
+            }
+        }
 
+    });
+    
+}
 </script>
 @endsection
