@@ -413,7 +413,7 @@ class JobCallMe{
 			return 'x days ago';exit;
 		}
 		$etime = time() - strtotime($ptime);
-		if ($etime < 1) { return '1 Year'; } 
+		if ($etime < 1) { return '0 Year'; } 
 		$interval = array( 12 * 30 * 24 * 60 * 60 =>  $yr,
 				30 * 24 * 60 * 60       =>  $month,
 				24 * 60 * 60            =>  $day,
@@ -427,8 +427,13 @@ class JobCallMe{
 			if ($d >= 1) {
 				$r = round($d);
 				if($str == 'seconds' || $r == '0'){
-					return  '1 Year';
-				}else{
+					return  '0 Year';
+				}
+				elseif($r == 49)
+				{
+					return ' ';
+				}
+				else{
 					return $r . ' ' . $str;
 				}
 			}
