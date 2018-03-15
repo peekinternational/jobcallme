@@ -133,6 +133,9 @@ class SocialAuthFacebookController extends Controller
     }
 
     public function createUser($providerUser){
+        echo '<pre>';
+        print_r($providerUser);
+        die();
         $objModel = new User(); 
         $name= explode(' ',$providerUser->name);
         $firstName=$name[0];
