@@ -85,23 +85,23 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.name')</label>
                                 <div class="col-md-6">
                                     <div class="col-md-6 f-name" style="margin-bottom: 5px;padding-left: 0;">
-                                        <input type="text" class="form-control input-sm" name="firstName" value="{{ $user->firstName }}">
+                                        <input type="text" class="form-control input-sm" name="firstName" value="{{ $user->firstName }}" required>
                                     </div>
                                     <div class="col-md-6 l-name" style="margin-bottom: 5px;padding-right: 0;">
-                                        <input type="text" class="form-control input-sm" name="lastName" value="{{ $user->lastName }}">
+                                        <input type="text" class="form-control input-sm" name="lastName" value="{{ $user->lastName }}" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.fathername')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="fatherName" value="{{ $meta->fatherName }}">
+                                    <input type="text" class="form-control input-sm" name="fatherName" value="{{ $meta->fatherName }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.cnic')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" placeholder="@lang('home.cnicNumber')" name="cnicNumber" value="{{ $meta->cnicNumber }}">
+                                    <input type="text" class="form-control input-sm" placeholder="@lang('home.cnicNumber')" name="cnicNumber" value="{{ $meta->cnicNumber }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -128,25 +128,25 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.datebirth')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm date-picker" name="dateOfBirth" value="{{ $meta->dateOfBirth }}" onkeypress="return false">
+                                    <input type="text" class="form-control input-sm date-picker" name="dateOfBirth" value="{{ $meta->dateOfBirth }}" onkeypress="return false" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.email')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="email" value="{{ $user->email }}">
+                                    <input type="text" class="form-control input-sm" name="email" value="{{ $user->email }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.phonenumber')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="phoneNumber" value="{{ $user->phoneNumber }}">
+                                    <input type="text" class="form-control input-sm" name="phoneNumber" value="{{ $user->phoneNumber }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.address')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm" name="address">{{ $meta->address }}</textarea>
+                                    <textarea class="form-control input-sm" name="address" required>{{ $meta->address }} </textarea>
                                 </div>
                             </div>
                            <div class="form-group">
@@ -162,14 +162,14 @@ if($user->profilePhoto != ''){
                         <div class="form-group">
                             <label class="control-label col-sm-3 text-right">@lang('home.state')</label>
                             <div class="col-md-6">
-                                <select class="form-control select2 job-state" name="state" data-state="{{ $user->state }}">
+                                <select class="form-control select2 job-state" name="state" data-state="{{ $user->state }}" required>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3 text-right">@lang('home.city')</label>
                             <div class="col-md-6">
-                                <select class="form-control select2 job-city" name="city" data-city="{{ $user->city }}">
+                                <select class="form-control select2 job-city" name="city" data-city="{{ $user->city }}" required>
                                 </select>
                             </div>
                         </div>
@@ -249,7 +249,7 @@ if($user->profilePhoto != ''){
                           <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.expectedwork')</label>
                                 <div class="col-md-6">
-									<select class="form-control select2" name="shift">
+									<select class="form-control select2" name="shift" required>
                                     <option value="">Type Of Work</option>
 										@foreach(JobCallMe::getJobType() as $shift)
 											<option value="{!! $shift->name !!}" {{ $meta->shift == $shift->name ? 'selected="selected"' : '' }}>@lang('home.'.$shift->name)</option>
@@ -267,13 +267,13 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.currentsalary')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="currentSalary" value="{{ $meta->currentSalary }}">
+                                    <input type="text" class="form-control input-sm" name="currentSalary" value="{{ $meta->currentSalary }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.expectedsalary')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="expectedSalary" value="{{ $meta->expectedSalary }}">
+                                    <input type="text" class="form-control input-sm" name="expectedSalary" value="{{ $meta->expectedSalary }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -289,14 +289,14 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.expertise')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="expertise" value="{{ $meta->expertise }}">
+                                    <input type="text" class="form-control input-sm" name="expertise" value="{{ $meta->expertise }}" required>
                                     <p class="help-block">@lang('home.commaexpertise')</p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.p_summary')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm" name="about">{{ $user->about }}</textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="about">{{ $user->about }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -468,7 +468,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details" required></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -571,7 +571,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details" required></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -642,7 +642,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group" id="enddate">
                                 <label class="control-label col-md-3 text-right">@lang('home.edate')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm date-picker" name="endDate">
+                                    <input type="text" class="form-control input-sm date-picker" name="endDate" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -682,7 +682,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details" required></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -903,7 +903,7 @@ if($user->profilePhoto != ''){
 							<div class="form-group">
                             <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
                             <div class="col-md-6">
-                                <textarea name="detail" class="form-control tex-editor"></textarea>
+                                <textarea name="detail" class="form-control tex-editor" required></textarea>
                             </div>
                         </div>
                             <div class="form-group">

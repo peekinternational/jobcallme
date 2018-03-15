@@ -14,67 +14,7 @@
                     <h3>@lang('home.warticle')</h3>
                     
 
-					<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:50px;">
-                <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
-                
- 
-                        <ul id="post-job-ad-types">
-						
-							<li style="position:relative">
-                                <!---->
-
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
-							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.Basic')</span></div>
-                                <div>
-                                    <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
-                                            <li>@lang('home.Featuredonhomepage')</li>
-                                            <li>@lang('home.adcost')</li>
-                                        </ul>
-										
-                                        <div class="credits b">
-										<span class="text-success">@lang('home.Free')</span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
-									</div>
-                                    </label>
-                                    <!---->
-                                    <!---->
-                                    <!---->
-                                </div>
-                            </li>
-
-
-                            <!----><li style="position:relative">
-                                <!---->
-
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@lang('home.FreetillEndofApril')
-							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.special')</span></div>
-                                <div>
-                                    <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
-                                            <li>@lang('home.Featuredonhomepage') ( 3 @lang('home.day') )</li>
-                                            <li>@lang('home.adcost')</li>
-                                        </ul>
-										
-                                        <div class="credits b">
-										<span class="text-success">@lang('home.costwon1')</span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
-									</div>
-                                    </label>
-                                    <!---->
-                                    <!---->
-                                    <!---->
-                                </div>
-                            </li>
-							
-                        </ul>
-                 
-
-                    
-                </div>
-            </div>
+					
 
 
 					<div class="pnj-form-section">
