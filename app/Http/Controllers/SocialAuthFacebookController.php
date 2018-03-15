@@ -5,8 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
-use Socialite;  
-use Laravel\Socialite\Contracts\User as ProviderUser;
+use Socialite;   
 use App\User;
 class SocialAuthFacebookController extends Controller
 {
@@ -133,16 +132,13 @@ class SocialAuthFacebookController extends Controller
     }
 
     public function createUser($providerUser){
-        echo '<pre>';
-        print_r($providerUser);
-        die();
         $objModel = new User(); 
-        $name= explode(' ',$providerUser->name);
+        $name= explode(' ',$providerUser['name']);
         $firstName=$name[0];
         $lastName= (isset($name[1]))?$name[1]:'';
-        $email=$providerUser->email;
+        $email=$providerUser['email'];
 
-        $objModel->fbId = $providerUser->id;
+        $objModel->fbId = $providerUser['id'];
         $objModel->companyId = 0;
         $objModel->type = 'User';
         $objModel->secretId = JobCallMe::randomString();
@@ -155,7 +151,7 @@ class SocialAuthFacebookController extends Controller
         $objModel->country = '';
         $objModel->state = '';
         $objModel->city = '';
-        $objModel->profilePhoto = $providerUser->avatar_original;
+        $objModel->profilePhoto = $providerUser['avatar'];
         $objModel->about = ''; 
         $objModel->user_status='Y';
         $objModel->subscribe='N';
