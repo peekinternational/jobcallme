@@ -10,8 +10,7 @@ if($user->profilePhoto != ''){
   
     if($pos == 1)
     {
-    if($pos === true)
-    {
+    
         $userImage = url($user->profilePhoto);
      } else{
     $userImage = url('profile-photos/'.$user->profilePhoto);
