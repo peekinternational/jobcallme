@@ -299,7 +299,15 @@
                         <?php
                         $pImage = url('profile-photos/profile-logo.jpg');
                         if($people->profilePhoto != '' && $people->profilePhoto != NULL){
-                            $pImage = url('profile-photos/'.$people->profilePhoto);
+                             $pos = strpos($people->profilePhoto,"ttp");
+                            if($pos == 1)
+                            {
+                                $pImage = url($people->profilePhoto);
+                            } 
+                            else{
+                                $pImage = url('profile-photos/'.$people->profilePhoto);
+                                }
+                           
                         }
                         ?>
                         <div class="col-md-2 col-sm-4 col-xs-6">

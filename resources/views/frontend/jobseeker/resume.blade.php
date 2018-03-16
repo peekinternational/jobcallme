@@ -6,16 +6,16 @@
 <?php
 $userImage = url('profile-photos/profile-logo.jpg');
 if($user->profilePhoto != ''){
+
     $pos = strpos($user->profilePhoto,"ttp");
-  
     if($pos == 1)
     {
-    
         $userImage = url($user->profilePhoto);
-     } else{
-    $userImage = url('profile-photos/'.$user->profilePhoto);
-   }
-}
+     } 
+     else{
+        $userImage = url('profile-photos/'.$user->profilePhoto);
+        }
+    }
 ?>
 <section id="myResume" style="margin-bottom:70px">
     <div class="container">
