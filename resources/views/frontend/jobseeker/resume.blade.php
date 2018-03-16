@@ -6,7 +6,15 @@
 <?php
 $userImage = url('profile-photos/profile-logo.jpg');
 if($user->profilePhoto != ''){
+    $mystring = $user->profilePhoto;
+    $findme   = 'https';
+    $pos = strpos($mystring, $findme);
+    if($pos)
+    {
+        $userImage = url($user->profilePhoto);
+     } else{
     $userImage = url('profile-photos/'.$user->profilePhoto);
+   }
 }
 ?>
 <section id="myResume" style="margin-bottom:70px">
