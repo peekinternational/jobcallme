@@ -6,12 +6,11 @@
 <?php
 $userImage = url('profile-photos/profile-logo.jpg');
 if($user->profilePhoto != ''){
-    $mystring = $user->profilePhoto;
-    $findme   = 'https';
-    $pos = strpos($mystring, $findme);
-    echo $pos;
-    die;
-    if($pos)
+    $pos = strpos($user->profilePhoto,"ttp");
+  
+    if($pos == 1)
+    {
+    if($pos === true)
     {
         $userImage = url($user->profilePhoto);
      } else{
