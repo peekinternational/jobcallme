@@ -11,15 +11,17 @@ if($applicant->profilePhoto != ''){
 ?>
 <section id="myResume">
     <div class="container">
+    
         <div class="row">
             <div class="col-md-12">
+            @if($privacy->profile == 'Yes')
                 <div class="col-md-9">
                     <!--Personal Info Start-->
                     <section class="personal-info-section" id="personal-information">
                         <div class="row">
                             <div class="col-md-3">
                                 <div>
-                                    <img src="{{ $userImage}}" class="img-circle" style="width: 100%">
+                                    <img src="@if($privacy->profileImage == 'Yes') {{ $userImage}} @else {{url('profile-photos/profile-logo.jpg')}} @endif" class="img-circle" style="width: 100%">
                                 </div>
                                 <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">$applicant->firstName Smith</h3>
                                 <p class="text-center hidden-md hidden-lg jp-profession-heading">Web Developer and Designer</p>
@@ -46,6 +48,7 @@ if($applicant->profilePhoto != ''){
                     <!--Personal Info End-->
 
                     <!--Academic Section Start-->
+                    @if($privacy->academic == 'Yes')
                     <section class="resume-box" id="academic">
                         <h4><i class="fa fa-book r-icon bg-primary"></i>  Academic</h4>
                         <ul class="resume-details">
@@ -65,9 +68,11 @@ if($applicant->profilePhoto != ''){
                             @endif
                         </ul>
                     </section>
+                    @endif
                     <!--Academic Section End-->
 
-                    <!--Academic Section Start-->
+                    <!--experience Section Start-->
+                    @if($privacy->experience == 'Yes')
                     <section class="resume-box" id="experience">
                         <h4><i class="fa fa-star r-icon bg-primary"></i>  Experience</h4>
                         <ul class="resume-details">
@@ -86,12 +91,26 @@ if($applicant->profilePhoto != ''){
                             @endif
                         </ul>
                     </section>
-                    <!--Academic Section End-->
-
-                    <!--Academic Section Start-->
-                  
-                    <!--Academic Section End-->
-
+                    @endif
+                    
+                   <!--Skills Section Start-->
+                   @if($privacy->skills == 'Yes')
+                    <section class="resume-box" id="skills">
+                        <h4><i class="fa fa-graduation-cap r-icon bg-primary"></i> @lang('home.skills')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['skills']) > 0)
+                                @foreach($resume['skills'] as $resumeId => $skills)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <p class="rd-title">{!! $skills->skill !!}</p>
+                                            <p class="rd-location">{!! $skills->level !!}</p>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    @endif
                     <!--Academic Section Start-->
                     <section class="resume-box" id="certification">
                         <h4><i class="fa fa-certificate r-icon bg-primary"></i>  Certification</h4>
@@ -114,8 +133,8 @@ if($applicant->profilePhoto != ''){
                     </section>
                     <!--Academic Section End-->
 					<!---Project -->
-					   <section class="resume-box" id="ski">
-                       
+                    @if($privacy->projectVisible == 'Yes')
+					<section class="resume-box" id="ski">
                         <h4><i class="fa fa-edit r-icon bg-primary"></i> @lang('home.project')</h4>
                         <ul class="resume-details">
                             @if(count($resume['project']) > 0)
@@ -135,6 +154,7 @@ if($applicant->profilePhoto != ''){
                             @endif
                         </ul>
                     </section>
+                    @endif
 					<!---Affilation -->
 					   <section class="resume-box" id="aff">
                         
@@ -157,7 +177,7 @@ if($applicant->profilePhoto != ''){
                         </ul>
                     </section>
 					
-					 <section class="resume-box" id="sk">
+					<section class="resume-box" id="sk">
                         
                         <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.language')</h4>
                         <ul class="resume-details">
@@ -177,7 +197,7 @@ if($applicant->profilePhoto != ''){
                         </ul>
                     </section>
 					
-					  <section class="resume-box" id="skill">
+					<section class="resume-box" id="skill">
                         
                         <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.references')</h4>
                         <ul class="resume-details">
@@ -199,7 +219,8 @@ if($applicant->profilePhoto != ''){
                     </section>
 					
 						<!---Publication -->
-					   <section class="resume-box" id="skil">
+                    @if($privacy->publicationsVisible == 'Yes')
+					<section class="resume-box" id="skil">
                         <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.publication')</h4>
                         <ul class="resume-details">
                             @if(count($resume['publish']) > 0)
@@ -219,7 +240,8 @@ if($applicant->profilePhoto != ''){
                             @endif
                         </ul>
                     </section>
-					 <section class="resume-box" id="s">
+                    @endif
+					<section class="resume-box" id="s">
                       
                         <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.award')</h4>
                         <ul class="resume-details">
@@ -265,6 +287,11 @@ if($applicant->profilePhoto != ''){
                         </ul>
                     </section>
                 </div>
+            @else 
+                <div class="col-md-9">
+                <div class="alert alert-danger"> this profile is restricted</div>
+                </div>
+            @endif
 				<div class="pnj-box">
 				<h4>@lang('home.similarpeople') {{JobCallMe::countryName(JobCallMe::getHomeCountry())}}</h4>
 				    <div class="row" style="margin-right: 0 !important;">
