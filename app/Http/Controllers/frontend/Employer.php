@@ -555,7 +555,7 @@ curl_close ($ch);
 		//dd($company[0]->category);
 		if($company[0]->category== "0")
 		{
-			$request->session()->flash('companyAlert', 'Please first Complate you company profile then post your job');
+			$request->session()->flash('companyAlert', 'Please first Complate you company profile to a post job');
 			return redirect('account/employer/organization');
 		}
 
