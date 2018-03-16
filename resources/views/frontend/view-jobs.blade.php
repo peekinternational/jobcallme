@@ -304,7 +304,7 @@ function saveJob(jobId,obj){
 
 
 function getSubCategories(categoryId){
-  /*  $.ajax({
+    $.ajax({
         url: "{{ url('account/get-subCategory') }}/"+categoryId,
         success: function(response){
             var obj = $.parseJSON(response);
@@ -315,11 +315,11 @@ function getSubCategories(categoryId){
                 $(".job-sub-category").append(newOption).trigger('change');
             })
         }
-    })*/
+    })
 }
 
 function getSubCategories2(categoryId2){
-   /* $.ajax({
+    $.ajax({
         url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
         success: function(response){
             var obj = $.parseJSON(response);
@@ -330,7 +330,7 @@ function getSubCategories2(categoryId2){
                 $(".job-sub-category2").append(newOption).trigger('change');
             })
         }
-    })*/
+    })
 }
 
 
