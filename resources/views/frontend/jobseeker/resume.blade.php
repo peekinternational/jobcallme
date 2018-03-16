@@ -445,7 +445,6 @@ if($user->profilePhoto != ''){
                             <label class="control-label col-sm-3">@lang('home.country')</label>
                             <div class="col-sm-6 ">
                                 <select class="form-control select2 job-country" name="country">
-                                   <option value="">Select Country</option>
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
                                         <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
                                     @endforeach
@@ -456,7 +455,6 @@ if($user->profilePhoto != ''){
                             <label class="control-label col-sm-3">@lang('home.state')</label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-state" name="state">
-                                <option value="">Select State</option>
                                 </select>
                             </div>
                         </div>
@@ -464,7 +462,6 @@ if($user->profilePhoto != ''){
                             <label class="control-label col-sm-3">@lang('home.city')</label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-city" name="city">
-                                <option value="">Select City</option>
                                 </select>
                             </div>
                         </div>

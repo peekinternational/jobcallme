@@ -206,6 +206,18 @@ $dispatch='';
                 <p>{!! $job->description !!}</p>
                 <h4>@lang('home.skills')</h4>
                 <p>{!! $job->skills !!}</p>
+                <br>
+                  <h4>@lang('home.admissionsprocess')</h4>
+                @if($process != '')
+	                <ul class="jd-rewards">
+	                	@foreach( $process as $pro)
+						
+	                		<li><i class="fa fa-check-circle"></i> {{ $pro }}</li>
+	                	@endforeach
+	                </ul>
+                @endif
+                <br>
+                <br>
                 <h4>@lang('home.rewardsbenefits')</h4>
                 @if($benefits != '')
 	                <ul class="jd-rewards">
@@ -215,6 +227,8 @@ $dispatch='';
 	                	@endforeach
 	                </ul>
                 @endif
+                <br>
+              
             </div>
 
             <!--ABOUT Organization-->
