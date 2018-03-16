@@ -820,7 +820,7 @@ curl_close ($ch);
     	
 
 		$userId = $request->segment(5);
-
+		$privacy = DB::table('jcm_privacy_setting')->where('userId',$userId)->first();
 		$applicant = DB::table('jcm_users')
 						->select('jcm_users.*','jcm_users_meta.*')
 						->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId')
@@ -840,7 +840,7 @@ curl_close ($ch);
 		$people->inRandomOrder();
 		$Query=$people->get();
 		//dd($applicant);
-		return view('frontend.employer.view-applicant',compact('applicant','resume','Query'));
+		return view('frontend.employer.view-applicant',compact('applicant','resume','Query','privacy'));
 		//return view('frontend.employer.view-applicant',compact('applicant','resume'));
 	}
 		public function viewApplicants(Request $request){
