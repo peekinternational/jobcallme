@@ -9,6 +9,8 @@ if($user->profilePhoto != ''){
     $mystring = $user->profilePhoto;
     $findme   = 'https';
     $pos = strpos($mystring, $findme);
+    echo $pos;
+    die;
     if($pos)
     {
         $userImage = url($user->profilePhoto);
