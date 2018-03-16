@@ -296,7 +296,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.p_summary')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="about">{{ $user->about }}</textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="about" required>{{ $user->about }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
