@@ -311,10 +311,10 @@
                         }
                         ?>
                         <div class="col-md-2 col-sm-4 col-xs-6">
-                            <div class="fp-item">
+                            <div class="fp-item" style="height: 304px;">
                                 <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                                     <img src="{{ $pImage }}">
-                                    <div class="fp-item-details">
+                                    <div class="fp-item-details" style="height: 121px;">
                                         <p>{!! $people->firstName.' '.$people->lastName !!}</p>
                                         <p>{{ JobCallMe::categoryTitle($people->industry) }}</p>
                                         <p>{{ JobCallMe::cityName($people->city).', '.JobCallMe::countryName($people->country)}}</p>
