@@ -98,7 +98,7 @@ if($company->companyLogo != ''){
                                        <td>{!! $opHour['wed']['from'] !!} - {!! $opHour['wed']['to'] !!}</td>
                                    </tr>
                                    <tr>
-                                       <td>@lang('home.thuresday')</td>
+                                       <td>@lang('home.thursday')</td>
                                        <td>{!! $opHour['thu']['from'] !!} - {!! $opHour['thu']['to'] !!}</td>
                                    </tr>
                                    <tr>
@@ -522,12 +522,12 @@ if($company->companyLogo != ''){
 </style>
 <script type="text/javascript">
  CKEDITOR.replace( 'editor1',{
-  filebrowserBrowseUrl : '../../frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files',
-   filebrowserImageBrowseUrl : '../../frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images',
-   filebrowserFlashBrowseUrl : '../../frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash',
-   filebrowserUploadUrl : '../../frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files',
-   filebrowserImageUploadUrl : '../../frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images',
-   filebrowserFlashUploadUrl : '../../frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash',
+  filebrowserBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files')}}",
+   filebrowserImageBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images')}}",
+   filebrowserFlashBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash')}}",
+   filebrowserUploadUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files')}}",
+   filebrowserImageUploadUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images')}}",
+   filebrowserFlashUploadUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash')}}",
    height: '500px',
  });
 var token = "{{ csrf_token() }}";
