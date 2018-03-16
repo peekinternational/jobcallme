@@ -530,8 +530,9 @@ if($company->companyLogo != ''){
                 todayHighlight: 1,
                 startView: 2,
                 minView: 2,
-                forceParse: 0});
-});
+                forceParse: 0
+                });
+
  CKEDITOR.replace( 'editor1',{
   filebrowserBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files')}}",
    filebrowserImageBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images')}}",
