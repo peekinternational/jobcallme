@@ -263,9 +263,9 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">@lang('home.establishin')</label>
+                                        <label class="col-sm-3 control-label">@lang('home.established')</label>
                                         <div class="col-sm-9 pnj-form-field">
-                                            <input class="form-control date-picker companyEstablishDate" type="text" name="companyEstablishDate" value="{{ $company->companyEstablishDate }}" required>
+                                            <input class="form-control date-pickers companyEstablishDate" type="text" name="companyEstablishDate" value="{{ $company->companyEstablishDate }}" required>
                                         </div>
                                    </div>
 
@@ -521,6 +521,7 @@ if($company->companyLogo != ''){
 .input-error{color: red;}
 </style>
 <script type="text/javascript">
+ $('.date-pickers').datetimepicker({format:'yyyy-mm-dd',endDate: '+0d',autoclose: true});
  CKEDITOR.replace( 'editor1',{
   filebrowserBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files')}}",
    filebrowserImageBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images')}}",
