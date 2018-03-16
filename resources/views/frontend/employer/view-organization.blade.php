@@ -521,7 +521,17 @@ if($company->companyLogo != ''){
 .input-error{color: red;}
 </style>
 <script type="text/javascript">
- $('.date-pickers').datetimepicker({format:'yyyy-mm-dd',endDate: '+0d',autoclose: true});
+    $('.date-pickers').datetimepicker({
+                format:'yyyy-mm-dd',
+                endDate: '+0d',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0});
+});
  CKEDITOR.replace( 'editor1',{
   filebrowserBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files')}}",
    filebrowserImageBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images')}}",

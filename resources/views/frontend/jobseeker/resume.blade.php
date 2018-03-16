@@ -1855,7 +1855,16 @@ textarea.form-control{resize: vertical;}
 var pageToken = '{{ csrf_token() }}';
 $(document).ready(function(){
    
-   $('.date-pickers').datetimepicker({format:'yyyy-mm-dd',endDate: '+0d',autoclose: true});
+   $('.date-pickers').datetimepicker({
+                format:'yyyy-mm-dd',
+                endDate: '+0d',
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                forceParse: 0});
 });
 $('.job-country').on('change',function(){
     var countryId = $(this).val();
