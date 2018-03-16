@@ -128,7 +128,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.datebirth')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm date-picker" name="dateOfBirth" value="{{ $meta->dateOfBirth }}" onkeypress="return false" required>
+                                    <input type="text" class="form-control input-sm date-pickers" name="dateOfBirth" value="{{ $meta->dateOfBirth }}" onkeypress="return false" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -445,6 +445,7 @@ if($user->profilePhoto != ''){
                             <label class="control-label col-sm-3">@lang('home.country')</label>
                             <div class="col-sm-6 ">
                                 <select class="form-control select2 job-country" name="country">
+                                   <option value="">Select Country</option>
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
                                         <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
                                     @endforeach
@@ -455,6 +456,7 @@ if($user->profilePhoto != ''){
                             <label class="control-label col-sm-3">@lang('home.state')</label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-state" name="state">
+                                <option value="">Select State</option>
                                 </select>
                             </div>
                         </div>
@@ -462,6 +464,7 @@ if($user->profilePhoto != ''){
                             <label class="control-label col-sm-3">@lang('home.city')</label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-city" name="city">
+                                <option value="">Select City</option>
                                 </select>
                             </div>
                         </div>
@@ -1847,7 +1850,7 @@ textarea.form-control{resize: vertical;}
 var pageToken = '{{ csrf_token() }}';
 $(document).ready(function(){
    
-    //$('.date-picker').datepicker({format:'yyyy-mm-dd'});
+   $('.date-pickers').datetimepicker({format:'yyyy-mm-dd',endDate: '+0d',autoclose: true});
 });
 $('.job-country').on('change',function(){
     var countryId = $(this).val();

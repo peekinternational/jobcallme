@@ -511,8 +511,15 @@
 var process = "";
 var alrt="";
 $(document).ready(function(){
-
-	$('body').on('click','.pay_blog',function(e){
+    $('#post-job-ad-types li').first().find('span .mat-radio-input').bind('click',function(e){
+        $('#durationdiv').hide();
+        $('#total').hide();
+        $('#expirediv').hide();
+    })
+    
+    $('#post-job-ad-types li').first().find('span .mat-radio-input').trigger('click');
+	
+    $('body').on('click','.mat-radio-input',function(e){
 		console.log($(e.target).val());
 	 alrt=$(e.target).siblings('input').val();
 	 console.log(alrt);
@@ -597,7 +604,7 @@ $('#secondDate').on('change', function() {
        
        }
   
-$(".cdk-visually-hidden").trigger('click');
+
 $('.job-country').on('change',function(){
     var countryId = $(this).val();
     getStates(countryId)
