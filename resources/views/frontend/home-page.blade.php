@@ -260,12 +260,12 @@ $lToken = csrf_token();
                     <div class="ih-item square effect8 scale_up tc-box">
                         <a href="{{ url('jobs/'.$comp->jobId) }}">
                             <div class="" style="height: 70px; width:100%">
-                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;"  alt="img"><b class="pull-right">{!! $job->companyName !!}</b>
+                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;"  alt="img"><b class="pull-right">{!! $comp->companyName !!}</b>
                             </div>
 							<span class="pj-single-details">
 								<p>{!! $comp->title !!}</p>
                                 <p>ASK Development</p>
-                                <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</p>
+                                <p>{{ JobCallMe::cityName($comp->city) }}, {{ JobCallMe::countryName($comp->country) }}</p>
 							</span>
                             <div class="info">
                                 <h3>{!! $comp->companyName !!}</h3>
