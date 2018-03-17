@@ -258,12 +258,12 @@ $lToken = csrf_token();
                 <div class="col-md-5ths">
                     <!-- colored -->
                     <div class="ih-item square effect8 scale_up tc-box">
-                        <a href="{{ url('companies/company/'.$comp->companyId) }}">
+                        <a href="{{ url('jobs/'.$comp->jobId) }}">
                             <div class="" style="height: 70px; width:100%">
                                 <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;"  alt="img"><b class="pull-right">{!! $job->companyName !!}</b>
                             </div>
 							<span class="pj-single-details">
-								<p>{!! $job->title !!}</p>
+								<p>{!! $comp->title !!}</p>
                                 <p>ASK Development</p>
                                 <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</p>
 							</span>
@@ -294,7 +294,7 @@ $lToken = csrf_token();
                 <!--Hot Job Single item Start-->
 				 @foreach($hot as $job)
                 <div class="col-sm-4">
-                    <div class="ih-item square effect8 scale_up tc-box" style="height:150px">
+                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img hj-type-job">
                             <div class="" style="height: 80px; width:100%">
