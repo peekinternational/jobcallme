@@ -261,6 +261,8 @@ return [
    
    //Search Courses//
    'searchcourses' => 'Search Courses',
+   'Accommodation' => 'Accommodation',
+   'Document Screening' => 'Document Screening',
    
    //Show Companies//
    'established' => 'Established In',
