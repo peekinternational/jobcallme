@@ -212,7 +212,7 @@ $dispatch='';
 	                <ul class="jd-rewards" style="margin-bottom: 32px;">
 	                	@foreach( $process as $pro)
 						
-	                		<li><i class="fa fa-check-circle"></i>@lang('home.'.$pro)</li>
+	                		<li><i class="fa fa-check-circle"></i> {{ $pro }}</li>
 	                	@endforeach
 	                </ul>
                 @endif
@@ -224,7 +224,7 @@ $dispatch='';
 	                <ul class="jd-rewards">
 	                	@foreach( $benefits as $benefit)
 						
-	                		<li><i class="fa fa-check-circle"></i> @lang('home.'.$benefit)</li>
+	                		<li><i class="fa fa-check-circle"></i> {{ $benefit }}</li>
 	                	@endforeach
 	                </ul>
                 @endif
