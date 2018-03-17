@@ -218,6 +218,7 @@ $dispatch='';
                 @endif
                 <br>
                 <br>
+                <div>
                 <h4>@lang('home.rewardsbenefits')</h4>
                 @if($benefits != '')
 	                <ul class="jd-rewards">
@@ -227,6 +228,7 @@ $dispatch='';
 	                	@endforeach
 	                </ul>
                 @endif
+                </div>
                 <br>
               
             </div>
