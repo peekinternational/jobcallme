@@ -341,7 +341,7 @@ class Home extends Controller{
     	$people = DB::table('jcm_users');
     	$people->select('*');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
-		$people->leftJoin('jcm_resume','jcm_resume.userId','=','jcm_users.userId');
+		//$people->leftJoin('jcm_resume','jcm_resume.userId','=','jcm_users.userId');
 
     	if($request->isMethod('post')){
     		if($request->input('keyword') != ''){
@@ -362,7 +362,7 @@ class Home extends Controller{
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
 	    	}
 	    }
-		$people->where('jcm_resume.type','!=','');
+		//$people->where('jcm_resume.type','!=','');
     	$people->limit(30);
     	$people->orderBy('jcm_users.userId','desc');
     	$peoples = $people->paginate(18);
