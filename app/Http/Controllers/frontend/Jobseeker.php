@@ -70,6 +70,8 @@ class Jobseeker extends Controller{
 		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyName','jcm_companies.companyLogo');
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
 		$jobs->where('jcm_jobs.country','=',$country);
+		$jobs->where('jcm_jobs.amount','>=','1');
+		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
 		if(count($meta) > 0){
 			$jobs->where('jcm_jobs.category','=',$meta->industry);
 		}
