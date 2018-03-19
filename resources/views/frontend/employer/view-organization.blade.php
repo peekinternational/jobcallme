@@ -107,11 +107,11 @@ if($company->companyLogo != ''){
                                    </tr>
                                    <tr>
                                        <td>@lang('home.saturday')</td>
-                                       <td>@if($opHour['sat']['from'] == '9:00 AM') Closed @else {!! $opHour['sat']['from'] !!} - {!! $opHour['sat']['to'] !!} @endif</td>
+                                       <td>@if($opHour['sat']['from'] == '09:00 AM') Closed @else {!! $opHour['sat']['from'] !!} - {!! $opHour['sat']['to'] !!} @endif</td>
                                    </tr>
                                    <tr>
                                        <td>@lang('home.sunday')</td>
-                                       <td>@if($opHour['sun']['from'] == '9:00 AM') Closed @else {!! $opHour['sun']['from'] !!} - {!! $opHour['sun']['to'] !!} @endif</td>
+                                       <td>@if($opHour['sun']['from'] == '09:00 AM') Closed @else {!! $opHour['sun']['from'] !!} - {!! $opHour['sun']['to'] !!} @endif</td>
                                    </tr>
                                </tbody>
                            </table>
