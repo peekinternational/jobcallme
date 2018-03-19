@@ -437,9 +437,7 @@ curl_close ($ch);
     		return redirect('account/login?next='.$request->route()->uri);
     	}
     	
-    	
-		$app = $request->session()->get('jcmUser');
-		$country= $app->country;
+    	$app = $request->session()->get('jcmUser');
 
     	/* posted jobs*/
     	//$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_job_applied.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
@@ -458,17 +456,7 @@ curl_close ($ch);
 						
 						
 		$applicants = DB::table('jcm_companies')
-<<<<<<< HEAD
     					->select('jcm_users.city','privacy.profileImage as privacyImage','jcm_users.country','jcm_companies.companyName','jcm_companies.companyId','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto')
-=======
-    					->select('jcm_users.city','jcm_users.country','jcm_companies.companyName','jcm_companies.companyId','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto')
-    					
-						->join('jcm_users','jcm_users.companyId','=','jcm_companies.companyId')
-						->Join('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId')
-						->where('jcm_users_meta.userId','!=','')
-						->where('jcm_users.country','=',$country)
-						->limit(6)
->>>>>>> 1e6f5e5684fe5f8cde58f33ce5c6e0aab9934f10
     					
 						->join('jcm_users','jcm_users.companyId','=','jcm_companies.companyId')
 						->join('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId')
@@ -569,7 +557,7 @@ curl_close ($ch);
 		//dd($company[0]->category);
 		if($company[0]->category== "0")
 		{
-			$request->session()->flash('companyAlert', 'Please Complate you company profile to a post job');
+			$request->session()->flash('companyAlert', 'Please first Complate you company profile then post your job');
 			return redirect('account/employer/organization');
 		}
 
@@ -845,19 +833,13 @@ curl_close ($ch);
 			return redirect('account/employer/application');
 		}
 		$app = $request->session()->get('jcmUser');
-		$country= $app->country;
 		$resume = $this->userResume($userId);
 		//print_r($resume);exit;
 		$people = DB::table('jcm_users');
     	$people->select('jcm_users.*','privacy.profileImage as privacyImage');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
-<<<<<<< HEAD
     	$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
     	$people->where('privacy.profile','=','Yes');
-=======
-		$people->where('jcm_users_meta.userId','!=','');
-		$people->where('jcm_users.country','=',$country);
->>>>>>> 1e6f5e5684fe5f8cde58f33ce5c6e0aab9934f10
 		$people->limit(4);
 		$people->inRandomOrder();
 		$Query=$people->get();
