@@ -55876,6 +55876,10 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Heungdeok-gu, Cheongju-si"=>"청주 흥덕구",
 "Chungju-si"=>"충주시",
 'Web Development' => '충주시',
-
+/*testing purpose*/
+'Computer_Software' => '컴퓨터 소프트웨어',
+"selectCountry" => '국가 선택',
+"web_development" => "웹 개발",
+"Web_Development" => "웹 개발"
 
 ];

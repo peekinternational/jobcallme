@@ -113,7 +113,7 @@
                                 <select class="form-control select2 job-category" name="category" onchange="getSubCategories(this.value)" required>
 										<option value="">@lang('home.s_category')</option>
 									@foreach(JobCallMe::getCategories() as $cat)
-                                        <option value="{!! $cat->categoryId !!}">@lang('home.'.$cat->name)</option>
+                                        <option value="{!! $cat->categoryId !!}">@lang('home.'.str_replace(" ","_",$cat->name))</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -668,28 +668,33 @@ function getSubCategories(categoryId){
     $.ajax({
         url: "{{ url('account/get-subCategory') }}/"+categoryId,
         success: function(response){
-            var obj = $.parseJSON(response);
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
             $(".job-sub-category").html('').trigger('change');
-            $.each(obj,function(i,k){
+            $(".job-sub-category").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = false;
                 var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
                 $(".job-sub-category").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }
 
 function getSubCategories2(categoryId2){
+
     $.ajax({
         url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
         success: function(response){
-            var obj = $.parseJSON(response);
+
+            /*var obj = $.parseJSON(response);*/
             $(".job-sub-category2").html('').trigger('change');
-            $.each(obj,function(i,k){
+            $(".job-sub-category2").html(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = false;
                 var newOption = new Option(k.subName, k.subCategoryId2, true, vOption);
                 $(".job-sub-category2").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }
