@@ -389,7 +389,7 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.degreelevel')</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="degreeLevel">
-                                        <option value="">@lang('home.highschool')</option>
+                                       
                                         <option value="highschool">@lang('home.highschool')</option>
                                         <option value="college">@lang('home.college')</option>
                                         <option value="university">@lang('home.university')</option>
