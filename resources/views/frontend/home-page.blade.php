@@ -212,7 +212,9 @@ $lToken = csrf_token();
                     <div class="ih-item square effect8 scale_up tc-box">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img pj-type-job">
-                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px;width:100% !important" alt="img">
+                            <div class="" style="height: 100px; width:100%"> 
+                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:100px;margin: 0 auto;width: auto !important;" alt="img">
+                               </div>
                                 <b class="pull-right">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
                                 <!-- <hr> -->
@@ -256,14 +258,14 @@ $lToken = csrf_token();
                 <div class="col-md-5ths">
                     <!-- colored -->
                     <div class="ih-item square effect8 scale_up tc-box">
-                        <a href="{{ url('companies/company/'.$comp->companyId) }}">
-                            <div class="img-class">
-                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="" alt="img"><b class="pull-right">{!! $job->companyName !!}</b>
+                        <a href="{{ url('jobs/'.$comp->jobId) }}">
+                            <div class="" style="height: 70px; width:100%">
+                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;"  alt="img"><b class="pull-right">{!! $comp->companyName !!}</b>
                             </div>
 							<span class="pj-single-details">
-								<p>{!! $job->title !!}</p>
+								<p>{!! $comp->title !!}</p>
                                 <p>ASK Development</p>
-                                <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</p>
+                                <p>{{ JobCallMe::cityName($comp->city) }}, {{ JobCallMe::countryName($comp->country) }}</p>
 							</span>
                             <div class="info">
                                 <h3>{!! $comp->companyName !!}</h3>
@@ -292,13 +294,14 @@ $lToken = csrf_token();
                 <!--Hot Job Single item Start-->
 				 @foreach($hot as $job)
                 <div class="col-sm-4">
-                    <div class="ih-item square effect8 scale_up tc-box" style="height:150px">
+                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img hj-type-job">
-                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:50px;width:90% !important" alt="img">
+                            <div class="" style="height: 80px; width:100%">
+                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:80px !important;margin: 0 auto;width: auto !important;" alt="img">
+                                </div>
                                 <b class="pull-right">{!! $job->companyName !!}</b>
-                                <div class="clearfix"></div>
-                                <hr>
+                                
                                 <div class="pj-single-details">
                                     <p>{!! $job->title !!}</p>
                                     <p>ASK Development</p>

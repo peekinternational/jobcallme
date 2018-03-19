@@ -209,7 +209,7 @@ $dispatch='';
                 <br>
                   <h4>@lang('home.admissionsprocess')</h4>
                 @if($process != '')
-	                <ul class="jd-rewards">
+	                <ul class="jd-rewards" style="margin-bottom: 32px;">
 	                	@foreach( $process as $pro)
 						
 	                		<li><i class="fa fa-check-circle"></i> {{ $pro }}</li>
@@ -218,6 +218,7 @@ $dispatch='';
                 @endif
                 <br>
                 <br>
+                <div>
                 <h4>@lang('home.rewardsbenefits')</h4>
                 @if($benefits != '')
 	                <ul class="jd-rewards">
@@ -227,6 +228,7 @@ $dispatch='';
 	                	@endforeach
 	                </ul>
                 @endif
+                </div>
                 <br>
               
             </div>
