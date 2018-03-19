@@ -363,13 +363,13 @@ class Home extends Controller{
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
 	    	}
 	    }
-<<<<<<< HEAD
+
     	$people->where('privacy.profile','=','Yes');
     	$people->limit(30);
-=======
+
 		$people->where('jcm_users_meta.userId','!=','');
     //	$people->limit(30);
->>>>>>> 1e6f5e5684fe5f8cde58f33ce5c6e0aab9934f10
+
     	$people->orderBy('jcm_users.userId','desc');
     	$peoples = $people->paginate(18);
       // dd($peoples);
