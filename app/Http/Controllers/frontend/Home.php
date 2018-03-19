@@ -362,7 +362,7 @@ class Home extends Controller{
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
 	    	}
 	    }
-		//$people->where('jcm_resume.type','!=','');
+		$people->where('jcm_users_meta.userId','!=','');
     	$people->limit(30);
     	$people->orderBy('jcm_users.userId','desc');
     	$peoples = $people->paginate(18);
