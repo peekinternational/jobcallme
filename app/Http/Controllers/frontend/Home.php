@@ -430,7 +430,7 @@ class Home extends Controller{
     	//$people->limit(12);
     	$people->orderBy('jcm_users.userId','desc');
 		$people->distinct('jcm_users.userId');
-         $people->distinct('jcm_users.firstName');
+        // $people->distinct('jcm_users.firstName');
     	$peoples = $people->paginate(18);
         // dd($peoples);
 
