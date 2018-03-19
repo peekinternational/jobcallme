@@ -292,6 +292,9 @@ Route::get('test', function () {
 Route::get('skillpayment', function () {
     return view('frontend.skillpayment');
 });
+Route::get('writingpayment', function () {
+    return view('frontend.writingpayment');
+});
 Route::get('messages', function () {
     return view('frontend.employer.employerMessenger');
 });

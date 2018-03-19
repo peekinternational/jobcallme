@@ -376,7 +376,7 @@
                                     ?>
                         <div class="col-md-12 sr-item">
 					        <div class="col-md-4">
-                                <img src="{{ $pImage }}" style="width: 70px;height:75px;">
+                                <img src="@if($appl->privacyImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg') }} @endif" style="width: 70px;height:75px;">
 							</div>
 							<div class="col-md-8 sp-item">
                                 <p><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
