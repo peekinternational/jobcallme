@@ -12,10 +12,62 @@
                     <input type="hidden" name="prevIcon" value="{{ $article->wIcon }}">
                     <input type="hidden" name="writingId" value="{{ $article->writingId }}">
                     <h3>@lang('home.warticle')</h3>
+                    <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:50px;">
+                     <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
+                        <ul id="post-job-ad-types" class="please">
+							<li style="position:relative">
+                             <input class="mat-radio-input cdk-visually-hidden" type="radio" id="basicplan" name="cat_id" value="0" >
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                               <span class="b">@lang('home.Basic')</span></div>
+                                <div>
+                                    <!----><label for="basicplan">
+                                            <ul class="list-unstyled desc" >
+                                                <li>@lang('home.Featuredonhomepage')</li>
+                                                <li>@lang('home.adcost')</li>
+                                            </ul>
+										
+                                        <div class="credits b">
+										<span class="text-success">@lang('home.Free')</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									</div>
+                                    </label>
+                                </div>
+                            </li>
+
+                         @foreach($wrpayment as $payment)
+                         
+
+                            <!----><li style="position:relative">
+                            <span class="wr">
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="cat_id" value="{!! $payment->id!!}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@lang('home.'.$payment->title)
+							   <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}"></span>
+                               <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                             <span class="b">@lang('home.'.$payment->tag1)</span></div>
+                                <div>
+                                    <!----><label for="{!! $payment->id!!}">
+                                        <ul class="list-unstyled desc" >
+                                            <li>@lang('home.'.$payment->tag2) ( {!! $payment->days!!}  @lang('home.day') )</li>
+                                            <li>@lang('home.'.$payment->tag3)</li>
+                                        </ul>
+										
+                                        <div class="credits b">
+										<span class="text-success">US$ {!! $payment->price !!}.00</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </li>
+                           
+							@endforeach
+                        </ul>
+                 
+
                     
-
-					
-
+                </div>
+            </div>
 
 					<div class="pnj-form-section">
                         <div class="form-group">
@@ -64,15 +116,16 @@
                             </div>
                         </div>
                         @endif
-
-						<div class="form-group">
+                          <div class="form-group" id="palndate">
+                            <label class="control-label col-sm-3">@lang('home.edate')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <input type="text" class="form-control date-picker" id="wrDate" name="endDate" onkeypress="return false;" value="{{ $upskill->endDate }}">
+                            </div>
+                        </div>
+						<div class="form-group" id="wrplan">
                             <label class="control-label col-sm-3">@lang('home.adduration')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control" name="adduration">
-                                    <?for($i=3; $i<31; $i++){?>
-                                        <option value="{!! $i !!}">{!! $i !!}@lang('home.adday')</option>
-                                    <?}?>
-                               </select>
+                               <input type="text" class="form-control" id="wrpas" name="duration" disabled >
 								
                             </div>
                         </div>
@@ -103,9 +156,45 @@ input[type="file"] {
 .text-danger{color: #ff0000 !important;}
 </style>
 <script type="text/javascript">
+var alrt ='';
 $(document).ready(function(){
+      $('.please li').first().find('.mat-radio-input').bind('click',function(e){
+       $('#wrplan').hide();
+        $('#palndate').hide();
+       // $('#expirediv').hide();
+    })
+
+     $('.please li').first().find('.mat-radio-input').trigger('click');
+ 
     $('#readcat').select2();
+    
+    $('body').on('click','.wr',function(e){
+		console.log($(e.target).val());
+	 alrt=$(e.target).siblings('input').val();
+	 console.log(alrt);
+     $('#wrplan').show();
+     $('#palndate').show();
+		
+	})
+  
 });
+    $('#wrDate').on('change', function() {
+		  myfunc()
+});
+      
+       function myfunc(){
+       var start = new Date();
+      // var start= $("#firstDate").datepicker("getDate");
+    	var end= $("#wrDate").datetimepicker("getDate");
+   		days = (end- start) / (1000 * 60 * 60 * 24);
+      var to= Math.round(days);
+      var total= to * alrt;
+      $('#wrpas').val(to);
+	  $('#total').html("Total Amount : "+total+" $" );
+      
+      // alert(total);
+       
+       }
 tinymce.init({
     selector: '.tex-editor',
     setup: function (editor) {
@@ -147,9 +236,19 @@ $('form.writing-form').submit(function(e){
         success: function(response) {
             console.log(response);
             isARunning = false;
-            toastr.success('Article successfully saved', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
-            window.location.href = "{{ url('account/writings') }}";
+           if($.trim(response) != '1'){
+              toastr.success('Article successfully saved', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+           window.location.href = "{{ url('account/writings') }}";
+           // window.location.href = "{{ url('writingpayment') }}";
             $('.writing-form button[type="submit"]').prop('disabled',false);
+           }
+           else{
+          toastr.success('Article successfully saved', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+           // window.location.href = "{{ url('account/writings') }}";
+            window.location.href = "{{ url('writingpayment') }}";
+            $('.writing-form button[type="submit"]').prop('disabled',false);
+           }
+           
         },
         error: function(data){
             isARunning = false;

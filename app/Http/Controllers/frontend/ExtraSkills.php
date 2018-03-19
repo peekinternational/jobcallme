@@ -62,6 +62,11 @@ class ExtraSkills extends Controller{
     }
 
     public function addEditArticle(Request $request){
+      //  dd($request->all());
+       $rec = DB::table('jcm_writingpayment')->where('id','=',$request->cat_id)->get();
+	   $amount=$rec[0]->price;
+	  // dd($amount);
+	   $durations= $amount*$request->duration;
 
     	$app = $request->session()->get('jcmUser');
     	if($request->ajax()){
@@ -90,12 +95,19 @@ class ExtraSkills extends Controller{
             }else{
                 $input['wIcon'] = $request->input('prevIcon');
             }
-
+            $input['amount'] = $durations;
             $input['title'] = $request->input('title');
             $input['category'] = $request->input('category');
             $input['description'] = $request->input('description');
             $input['citation'] = $request->input('citation');
             $input['status'] = $request->input('option');
+            $input['userId'] = $app->userId;
+            $input['createdTime'] = date('Y-m-d H:i:s');
+            $input['cat_names'] = $catnames; 
+            $request->session()->put('inputs', $input);
+			$alldata = Session::get('inputs');
+            dd($alldata);
+
            // $input['title'] = $request->input('title');
            //print_r($input['category']);die;
             if($request->input('writingId') != '' && $request->input('writingId') != '0'){
@@ -105,10 +117,14 @@ class ExtraSkills extends Controller{
                 }
                 $input['cat_names'] = $catnames;    
             	DB::table('jcm_writings')->where('writingId','=',$request->input('writingId'))->update($input);
-            }else{
-                $catnames = "";
+                return redirect('account/writings');
+               exit('1');
+              }else{
+                if($amount == 0)
+                {
+                   $catnames = "";
                 foreach ($input['category'] as $value) {
-                    $catnames .= DB::table('jcm_read_category')->where('id',$value)->first()->name.",";
+                  $catnames .= DB::table('jcm_read_category')->where('id',$value)->first()->name.",";
                 }
                 $input['userId'] = $app->userId;
                 $input['createdTime'] = date('Y-m-d H:i:s');
@@ -120,7 +136,29 @@ class ExtraSkills extends Controller{
                     $input['category'] = $value;
                     
                 }*/
-            	DB::table('jcm_writings')->insert($input);
+            	 DB::table('jcm_writings')->insert($input);
+                 return redirect('account/writings');
+                 exit('1');
+                }
+                else{
+                   return 1 ;
+                }
+              //  $catnames = "";
+                //foreach ($input['category'] as $value) {
+                //    $catnames .= DB::table('jcm_read_category')->where('id',$value)->first()->name.",";
+                //}
+                //$input['userId'] = $app->userId;
+                //$input['createdTime'] = date('Y-m-d H:i:s');
+                //$input['cat_names'] = $catnames;    
+                /*foreach ($input['category'] as $key => $value) {
+                    $input['userId'] = $app->userId;
+                    $input['cat_names'] = $catnames;
+                    $input['createdTime'] = date('Y-m-d H:i:s');
+                    $input['category'] = $value;
+                    
+                }*/
+            	//DB::table('jcm_writings')->insert($input);
+               
             }
             exit('1');
     	}
@@ -138,8 +176,127 @@ class ExtraSkills extends Controller{
 	    		return redirect('account/writings');
 	    	}
     	}
-    	return view('frontend.add-edit-writing',compact('article'));
+        $wrpayment = DB::table('jcm_writingpayment')->get();
+        //dd($wrpayment);
+    	return view('frontend.add-edit-writing',compact('article','wrpayment'));
     }
+
+		public function writePayment(Request $request)
+    {
+		$am = Session::get('input');
+			//dd($am['amount']);
+		
+		//dd(Session::get('amount'));
+		//exit();
+        $payer = new Payer();
+		//dd($payer);
+        $payer->setPaymentMethod('paypal');
+        $item_1 = new Item();
+        $item_1->setName('Item 1') /** item name **/
+            ->setCurrency('USD')
+            ->setQuantity(1)
+            ->setPrice($am['amount']); /** unit price **/
+        $item_list = new ItemList();
+        $item_list->setItems(array($item_1));
+        $amount = new Amount();
+        $amount->setCurrency('USD')
+            ->setTotal($am['amount']);
+        $transaction = new Transaction();
+        $transaction->setAmount($amount)
+            ->setItemList($item_list)
+            ->setDescription('Your transaction description');
+        $redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('payment.skillstatus')) /** Specify return URL **/
+            ->setCancelUrl(URL::route('payment.skillstatus'));
+        $payment = new Payment();
+        $payment->setIntent('Sale')
+            ->setPayer($payer)
+            ->setRedirectUrls($redirect_urls)
+            ->setTransactions(array($transaction));
+            /** dd($payment->create($this->_api_context));exit; **/
+        try {
+			//dd($this->_api_context);
+            $payment->create($this->_api_context);
+        } catch (\PayPal\Exception\PPConnectionException $ex) {
+            if (\Config::get('app.debug')) {
+                return 'Connection timeout';
+                return Redirect::route('add.frontend.employer.post-job');
+                /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
+                /** $err_data = json_decode($ex->getData(), true); **/
+                /** exit; **/
+            } else {
+                return 'Some error occur, sorry for inconvenient';
+                return Redirect::route('ey.frontend.employer.post-job');
+                /** die('Some error occur, sorry for inconvenient'); **/
+            }
+        }
+        foreach($payment->getLinks() as $link) {
+            if($link->getRel() == 'approval_url') {
+                $redirect_url = $link->getHref();
+                break;
+            }
+        }
+		 $pay_id=$payment->getId();
+         Session::put('paypal_payment_id', $payment->getId());
+        /** add payment ID to session **/
+		// $pay_id=$payment->getId();
+        if(isset($redirect_url)) {
+            /** redirect to paypal **/
+	
+            return Redirect::away($redirect_url);
+        }
+       return 'Unknown error occurred';
+        return Redirect::route('frontend.employer.post-job');
+    
+	}
+	
+    public function writeStatus(Request $request)
+    {
+		$payment_id = Session::get('paypal_payment_id');
+        
+       // $request->session()->put('input', $input);
+		
+        /** Get the payment ID before session clear **/
+        
+        /** clear the session payment ID **/
+        Session::forget('paypal_payment_id');
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+            \Session::put('error','Payment failed');
+            return Redirect::route('addmoney.frontend.employer.post-job');
+        }
+        $payment = Payment::get($payment_id, $this->_api_context);
+        /** PaymentExecution object includes information necessary **/
+        /** to execute a PayPal account payment. **/
+        /** The payer_id is added to the request query parameters **/
+        /** when the user is redirected from paypal back to your site **/
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+        /**Execute the payment **/
+        $result = $payment->execute($execution, $this->_api_context);
+        /** dd($result);exit; /** DEBUG RESULT, remove it later **/
+        if ($result->getState() == 'approved') { 
+            $apps = $request->session()->get('jcmUser');
+           // dd($apps);
+            $input = Session::get('input');
+            $input['payment_id']=$payment_id;
+        // $inputs = Session::get('input');
+		//dd($input['paymentMode']);
+        
+	   DB::table('jcm_upskills')->insert($input);
+
+		//echo $jobId;
+            /** it's all right **/
+            /** Here Write your database logic like that insert record or value in database if you want **/
+            \Session::put('successs','Upskill add success');
+            //return Redirect::route('account/upskill');
+            return redirect('account/upskill');
+        }
+        \Session::put('error','Payment failed');
+        return Redirect::route('addmoney.frontend.employer.post-job');
+    }
+
+
+
 
     public function deleteArticle(Request $request){
         
