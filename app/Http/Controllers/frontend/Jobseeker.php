@@ -151,7 +151,8 @@ class Jobseeker extends Controller{
 		}
 		$categoryId = $request->segment(3);
 		$result = JobCallMe::getSubCategories($categoryId);
-		echo @json_encode($result);
+		return view('frontend.jobseeker.subCatView',compact('result'));
+		/*echo @json_encode($result);*/
 	}
 
 	public function getSubCategory2(Request $request){
@@ -160,7 +161,8 @@ class Jobseeker extends Controller{
 		}
 		$categoryId2 = $request->segment(3);
 		$result2 = JobCallMe::getSubCategories2($categoryId2);
-		echo @json_encode($result2);
+		return view('frontend.jobseeker.subCatView2',compact('result2'));
+		/*echo @json_encode($result2);*/
 	}
 
 	public function savePersonalInfo(Request $request){

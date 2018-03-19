@@ -254,6 +254,7 @@ return [
 	'windowed' => 'Windowed!~',
 	'divorced' => 'Divorced',
 	'search' => 'SEARCH',
+	'similarpeople' => 'Similar Peoples',
 	
 	//Read//
 	'read_heading' => 'Real-time forums are upgraded to self-development!',
@@ -415,6 +416,9 @@ return [
 	'postli4' => 'The resumes collected in response to this ad will be used for the hiring process of this job only and not for any other purpose; violation of this term may lead to stern legal action.',
 	'postp' => 'I understand that if I violate any of the above terms, my job(s) could be removed and my account could be blocked permanently.',
 	'postjob' => 'POST JOB',
+	'Computer_Software' => 'Computer Software',
+	'web_development' => 'Web Development',
+	'Web_Development' => 'Web Development',
 	
 	//Update Job//
 	'jobupdate' => 'Job Update',
@@ -154199,7 +154203,7 @@ return [
 "Cheongwon-gu, Cheongju-si"=>"Cheongwon-gu, Cheongju-si",
 "Heungdeok-gu, Cheongju-si"=>"Heungdeok-gu, Cheongju-si",
 "Chungju-si"=>"Chungju-si",
-
+"selectCountry" => "Select Country"
 
 
 
