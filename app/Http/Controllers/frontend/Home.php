@@ -363,7 +363,7 @@ class Home extends Controller{
 	    	}
 	    }
 		$people->where('jcm_users_meta.userId','!=','');
-    	$people->limit(30);
+    //	$people->limit(30);
     	$people->orderBy('jcm_users.userId','desc');
     	$peoples = $people->paginate(18);
       // dd($peoples);
@@ -374,7 +374,7 @@ class Home extends Controller{
  public function peoples(Request $request){
     	/* peoples query */
     	$people = DB::table('jcm_users');
-    	$people->select('jcm_users.*');
+    	$people->select('*');
     	$people->rightJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
         $people->rightJoin('jcm_resume','jcm_resume.userId','=','jcm_users.userId');
 
@@ -425,7 +425,8 @@ class Home extends Controller{
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
 	    	}
 	    }
-    	$people->limit(12);
+		$people->where('jcm_users_meta.userId','!=','');
+    	//$people->limit(12);
     	$people->orderBy('jcm_users.userId','desc');
          $people->distinct('jcm_users.firstName');
     	$peoples = $people->paginate(18);
