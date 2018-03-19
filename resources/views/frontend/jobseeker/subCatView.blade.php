@@ -1,3 +1,3 @@
 @foreach($result as $res)
-<option value="{{ $res->subCategoryId }}">@lang('home.'.str_replace(' ','_',$res->subName))</option>
+<option value="{{ $res->subCategoryId }}">@lang('home.'.$res->subName)</option>
 @endforeach

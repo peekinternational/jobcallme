@@ -301,7 +301,7 @@ $lToken = csrf_token();
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img hj-type-job">
                             <div class="" style="height: 80px; width:100%">
-                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:80px !important;margin: 0 auto;width: auto !important;" alt="img"> <b class="pull-right">{!! $job->companyName !!}</b>
+                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;" alt="img"> <b class="pull-right">{!! $job->companyName !!}</b>
                                 </div>
                                
                                 <div class="clearfix"></div>
