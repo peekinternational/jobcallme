@@ -113,7 +113,7 @@
                                 <select class="form-control select2 job-category" name="category" onchange="getSubCategories(this.value)" required>
 										<option value="">@lang('home.s_category')</option>
 									@foreach(JobCallMe::getCategories() as $cat)
-                                        <option value="{!! $cat->categoryId !!}">@lang('home.'.str_replace(" ","_",$cat->name))</option>
+                                        <option value="{!! $cat->categoryId !!}">@lang('home.'.$cat->name)</option>
                                     @endforeach
                                 </select>
                             </div>
