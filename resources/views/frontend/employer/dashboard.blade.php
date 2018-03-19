@@ -151,9 +151,17 @@
 					 <?php
                         $pImage = url('profile-photos/profile-logo.jpg');
                         if($appl->profilePhoto != '' && $appl->profilePhoto != NULL){
-                            $pImage = url('profile-photos/'.$appl->profilePhoto);
-                        }
-                        ?>
+                        $pos = strpos($appl->profilePhoto,"ttp");
+                            if($pos == 1)
+                            {
+                            $pImage = url($appl->profilePhoto);
+                            } 
+                            else{
+                                $pImage = url('profile-photos/'.$appl->profilePhoto);
+                                }
+                                            
+                                    }
+                                    ?>
                         <div class="col-md-4 col-xs-6 sp-item" style="padding-top:10px">
 						
 								<img src="{{ $pImage }}" style="width: 70px;height:75px !important;">

@@ -3,12 +3,20 @@
 @section('title','Applicant')
 
 @section('content')
-<?php
-$userImage = url('profile-photos/profile-logo.jpg');
-if($applicant->profilePhoto != ''){
-    $userImage = url('profile-photos/'.$applicant->profilePhoto);
-}
-?>
+ <?php
+     $pImage = url('profile-photos/profile-logo.jpg');
+      if($applicant->profilePhoto != '' && $applicant->profilePhoto != NULL){
+       $pos = strpos($applicant->profilePhoto,"ttp");
+        if($pos == 1)
+        {
+          $pImage = url($applicant->profilePhoto);
+         } 
+          else{
+            $pImage = url('profile-photos/'.$applicant->profilePhoto);
+              }
+                           
+                }
+                   ?>
 <section id="myResume">
     <div class="container">
     
@@ -21,10 +29,10 @@ if($applicant->profilePhoto != ''){
                         <div class="row">
                             <div class="col-md-3">
                                 <div>
-                                    <img src="@if($privacy->profileImage == 'Yes') {{ $userImage}} @else {{url('profile-photos/profile-logo.jpg')}} @endif" class="img-circle" style="width: 100%">
+                                    <img src="@if($privacy->profileImage == 'Yes') {{ $pImage}} @else {{url('profile-photos/profile-logo.jpg')}} @endif" class="img-circle" style="width: 100%">
                                 </div>
                                 <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">$applicant->firstName Smith</h3>
-                                <p class="text-center hidden-md hidden-lg jp-profession-heading">Web Developer and Designer</p>
+                                <p class="text-center hidden-md hidden-lg jp-profession-heading">{{ JobCallMe::categoryTitle($applicant->industry) }}</p>
                                 <a href="#" class="btn btn-primary btn-block jp-contact-btn">CONTACT DETAILS</a>
 								<div class="" style="text-align:center">
                                    <a href="{{ url('account/jobseeker/cv/'.$applicant->userId)}}" style="color:#737373" class=""><i class="fa fa-download"></i> @lang('home.DOWNLOAD')</a>
@@ -32,9 +40,9 @@ if($applicant->profilePhoto != ''){
                             </div>
                             <div class="col-md-9 personal-info-right">
                                 <h3 class="hidden-sm hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}}</h3>
-                                <p class="jp-profession-heading hidden-sm hidden-xs">Web Developer and Designer</p>
+                                <p class="jp-profession-heading hidden-sm hidden-xs">{{ JobCallMe::categoryTitle($applicant->industry) }}</p>
                                 <p><span class="pi-title">Experiance:</span>{{$applicant->experiance}}</p>
-                                <p><span class="pi-title">Industry:</span> {{ JobCallMe::categoryTitle($applicant->industry) }}</p>
+                                
                                 <p><span class="pi-title">Salary:</span> {{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',2).' '.$applicant->currency }}</p>
 								<p><span class="pi-title">@lang('home.location'):</span> {!! JobCallMe::cityName($applicant->city).' ,'.JobCallMe::countryName($applicant->country) !!}</p>
                                 <div class="professional-summary">
@@ -296,13 +304,20 @@ if($applicant->profilePhoto != ''){
 				<h4>@lang('home.similarpeople') {{JobCallMe::countryName(JobCallMe::getHomeCountry())}}</h4>
 				    <div class="row" style="margin-right: 0 !important;">
 					@foreach($Query as $appl)
-					
 					 <?php
                         $pImage = url('profile-photos/profile-logo.jpg');
                         if($appl->profilePhoto != '' && $appl->profilePhoto != NULL){
-                            $pImage = url('profile-photos/'.$appl->profilePhoto);
-                        }
-                        ?>
+                        $pos = strpos($appl->profilePhoto,"ttp");
+                            if($pos == 1)
+                            {
+                            $pImage = url($appl->profilePhoto);
+                            } 
+                            else{
+                                $pImage = url('profile-photos/'.$appl->profilePhoto);
+                                }
+                                            
+                                    }
+                                    ?>
                          <div class="col-md-12 sr-item">
 					      <div class="col-md-4">
                             <img src="{{ $pImage }}" style="width: 70px;height:75px;">

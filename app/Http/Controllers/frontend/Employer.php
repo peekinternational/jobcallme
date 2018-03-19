@@ -831,11 +831,14 @@ curl_close ($ch);
 			return redirect('account/employer/application');
 		}
 		$app = $request->session()->get('jcmUser');
+		$country= $app->country;
 		$resume = $this->userResume($userId);
 		//print_r($resume);exit;
 		$people = DB::table('jcm_users');
     	$people->select('jcm_users.*');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
+		$people->where('jcm_users_meta.userId','!=','');
+		$people->where('jcm_users.country','=',$country);
 		$people->limit(4);
 		$people->inRandomOrder();
 		$Query=$people->get();
