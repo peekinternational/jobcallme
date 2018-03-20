@@ -50,6 +50,6 @@ return [
     'linkedin' => [
         'client_id' => '818xstq8efstw9',
         'client_secret' => 'j094fcTdDgY7Mx6b',
-       'redirect' => url('lnCallback'),
+      'redirect' => url('lnCallback'),
     ], 
 ];

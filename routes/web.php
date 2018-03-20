@@ -303,6 +303,10 @@ Route::get('messages', function () {
 Route::post('skillpaypal', array('as' => 'addmoney.skillpaypal','uses' => 'frontend\ExtraSkills@postPayment',));
 Route::get('skillpaypal', array('as' => 'payment.skillstatus','uses' => 'frontend\ExtraSkills@getStatus',));
 
+Route::post('writepaypal', array('as' => 'addmoney.writepaypal','uses' => 'frontend\ExtraSkills@writePayment',));
+Route::get('writepaypal', array('as' => 'payment.writestatus','uses' => 'frontend\ExtraSkills@writeStatus',));
+
+
 
 Route::get('account/employer/job/share', array('as' => 'addmoney.account/employer/job/share','uses' => 'frontend\Employer@jobupdate',));
 Route::post('employer/update', array('as' => 'addmoney.paypal','uses' => 'frontend\Employer@update',));
