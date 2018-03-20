@@ -11,8 +11,8 @@ if($user->profilePhoto != ''){
     if($pos == 1)
     {
         $userImage = url($user->profilePhoto);
-     } 
-     else{
+    } 
+    else{
         $userImage = url('profile-photos/'.$user->profilePhoto);
         }
     }
@@ -1694,10 +1694,35 @@ if($user->profilePhoto != ''){
                     <div class="resume-listing-section hidden-sm hidden-xs">
                         <h4>@lang('home.resumesections')</h4>
                         <hr>
+                        <?php 
+                               /*count user info*/
+                            $usercount = 0;
+                            $useremcount =0;
+                            /* this loop count the empty and fill record */
+                            foreach ($user as $key => $value) {
+                               if($value != ''){
+                                $usercount += 1;
+                               }else{
+                                $useremcount += 1; 
+                               }
+                            }
+                            
+                            /* this if check if fill record greater then empty then assign 10% */
+                            if($usercount > $useremcount){
+                                $userhis = 10;
+                            }else{
+                                $userhis = 0;
+                            }
+                            /*count whole resume record is percentage */
+
+                            $resume = count($resume)*10;
+
+                            $width = $resume + $userhis;
+                        ?>
                         <div class="progress">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                          aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                            70%
+                          <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $width?>"
+                          aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $width?>%">
+                            <?php echo $width?>%
                           </div>
                         </div>
                         <ul class="rls" style="padding-left: 0;">

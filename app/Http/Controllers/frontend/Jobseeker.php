@@ -126,6 +126,7 @@ class Jobseeker extends Controller{
 		foreach($record as $rec){
 			$return[$rec->type][$rec->resumeId] = @json_decode($rec->resumeData);
 		}
+		
 		return $return;
 	}
 
