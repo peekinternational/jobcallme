@@ -66,7 +66,8 @@ class ExtraSkills extends Controller{
        $rec = DB::table('jcm_writingpayment')->where('id','=',$request->cat_id)->get();
 	   $amount=$rec[0]->price;
 	  // dd($amount);
-	   $durations= $amount*$request->duration;
+	   $durations=  $request->input('duration');
+       
 
     	$app = $request->session()->get('jcmUser');
     	if($request->ajax()){
@@ -95,6 +96,8 @@ class ExtraSkills extends Controller{
             }else{
                 $input['wIcon'] = $request->input('prevIcon');
             }
+            
+            $durations= $amount * $request->input('duration');
             $input['amount'] = $durations;
             $input['title'] = $request->input('title');
             $input['category'] = $request->input('category');
@@ -103,10 +106,12 @@ class ExtraSkills extends Controller{
             $input['status'] = $request->input('option');
             $input['userId'] = $app->userId;
             $input['createdTime'] = date('Y-m-d H:i:s');
-            $input['cat_names'] = $catnames; 
+           // $input['cat_names'] = $catnames; 
+            
+           
             $request->session()->put('inputs', $input);
 			$alldata = Session::get('inputs');
-            dd($alldata);
+           // dd($alldata);
 
            // $input['title'] = $request->input('title');
            //print_r($input['category']);die;
@@ -115,11 +120,12 @@ class ExtraSkills extends Controller{
                 foreach ($input['category'] as $value) {
                     $catnames .= DB::table('jcm_read_category')->where('id',$value)->first()->name.",";
                 }
-                $input['cat_names'] = $catnames;    
+                $input['cat_names'] = $catnames; 
+                $input['amount'] = $request->input('amount');
             	DB::table('jcm_writings')->where('writingId','=',$request->input('writingId'))->update($input);
                 return redirect('account/writings');
-               exit('1');
-              }else{
+                exit('1');
+               }else{
                 if($amount == 0)
                 {
                    $catnames = "";
@@ -129,6 +135,8 @@ class ExtraSkills extends Controller{
                 $input['userId'] = $app->userId;
                 $input['createdTime'] = date('Y-m-d H:i:s');
                 $input['cat_names'] = $catnames;    
+               //  return $input;
+            // die;
                 /*foreach ($input['category'] as $key => $value) {
                     $input['userId'] = $app->userId;
                     $input['cat_names'] = $catnames;
@@ -141,6 +149,7 @@ class ExtraSkills extends Controller{
                  exit('1');
                 }
                 else{
+                   // exit();
                    return 1 ;
                 }
               //  $catnames = "";
@@ -183,7 +192,7 @@ class ExtraSkills extends Controller{
 
 		public function writePayment(Request $request)
     {
-		$am = Session::get('input');
+		$am = Session::get('inputs');
 			//dd($am['amount']);
 		
 		//dd(Session::get('amount'));
@@ -206,8 +215,8 @@ class ExtraSkills extends Controller{
             ->setItemList($item_list)
             ->setDescription('Your transaction description');
         $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::route('payment.skillstatus')) /** Specify return URL **/
-            ->setCancelUrl(URL::route('payment.skillstatus'));
+        $redirect_urls->setReturnUrl(URL::route('payment.writestatus')) /** Specify return URL **/
+            ->setCancelUrl(URL::route('payment.writestatus'));
         $payment = new Payment();
         $payment->setIntent('Sale')
             ->setPayer($payer)
@@ -277,19 +286,24 @@ class ExtraSkills extends Controller{
         if ($result->getState() == 'approved') { 
             $apps = $request->session()->get('jcmUser');
            // dd($apps);
-            $input = Session::get('input');
-            $input['payment_id']=$payment_id;
+            $input = Session::get('inputs');
+               $catnames = "";
+                foreach ($input['category'] as $value) {
+                  $catnames .= DB::table('jcm_read_category')->where('id',$value)->first()->name.",";
+                }
+            $input['cat_names'] = $catnames;  
+          //  $input['payment_id']=$payment_id;
         // $inputs = Session::get('input');
 		//dd($input['paymentMode']);
         
-	   DB::table('jcm_upskills')->insert($input);
+	    DB::table('jcm_writings')->insert($input);
 
 		//echo $jobId;
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
-            \Session::put('successs','Upskill add success');
+            \Session::put('successs','Writing add success');
             //return Redirect::route('account/upskill');
-            return redirect('account/upskill');
+            return redirect('account/writings');
         }
         \Session::put('error','Payment failed');
         return Redirect::route('addmoney.frontend.employer.post-job');

@@ -160,6 +160,7 @@ if($user->profilePhoto != ''){
                            <div class="form-group">
                             <label class="control-label col-sm-3 text-right">@lang('home.country')</label>
                             <div class="col-md-6">
+                            
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
                                         <option value="{{ $cntry->id }}" {{ $user->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
@@ -1879,12 +1880,26 @@ function getStates(countryId){
             $(".job-state").html('');
             var newOption = new Option('Select State', '0', true, false);
             $(".job-state").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
+            var selected = "selected";
+            
+            for (var i =0; i < obj.length; i++) {
+                if(obj[i].id == currentState){
+                    var option = "<option value='"+obj[i].id+"' selected='selected'>"+obj[i].name+"</option>";
+                    $(".job-state").append(option);
+                }else{
+                    var option = "<option value='"+obj[i].id+"'>"+obj[i].name+"</option>";
+                    $(".job-state").append(option);
+                }
+                
+            };
+            $(".job-state").trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = k.id == currentState ? true : false;
-                var newOption = new Option(k.name, k.id, true, vOption);
+                console.log(vOption);
+                var newOption = new Option(k.name, k.id, true, true);
                 $(".job-state").append(newOption);
             })
-            $(".job-state").trigger('change');
+            $(".job-state").trigger('change');*/
         }
     })
 }

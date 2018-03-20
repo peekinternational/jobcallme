@@ -12,6 +12,9 @@
                     <input type="hidden" name="prevIcon" value="{{ $article->wIcon }}">
                     <input type="hidden" name="writingId" value="{{ $article->writingId }}">
                     <h3>@lang('home.warticle')</h3>
+                    @if($article->writingId)
+
+                    @else
                     <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:50px;">
                      <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types" class="please">
@@ -68,7 +71,7 @@
                     
                 </div>
             </div>
-
+@endif
 					<div class="pnj-form-section">
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.title')</label>
@@ -116,24 +119,43 @@
                             </div>
                         </div>
                         @endif
+                        @if($article->writingId)
+                         <div class="form-group" id="palndate">
+                           
+                            <div class="col-sm-9 pnj-form-field">
+                                <input type="hidden" class="form-control date-picker" id="wrDate" name="endDate" onkeypress="return false;" value="{{ $article->endDate }}">
+                            </div>
+                        </div>
+						<div class="form-group" id="wrplan">
+                           
+                            <div class="col-sm-9 pnj-form-field">
+                             
+                               <input type="hidden" class="form-control" id="" name="amount" value="{{ $article->amount }}" >
+								
+                            </div>
+                        </div>
+
+                        @else
                           <div class="form-group" id="palndate">
                             <label class="control-label col-sm-3">@lang('home.edate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" id="wrDate" name="endDate" onkeypress="return false;" value="{{ $upskill->endDate }}">
+                                <input type="text" class="form-control date-picker" id="wrDate" name="endDate" onkeypress="return false;" value="{{ $article->endDate }}">
                             </div>
                         </div>
 						<div class="form-group" id="wrplan">
                             <label class="control-label col-sm-3">@lang('home.adduration')</label>
                             <div class="col-sm-9 pnj-form-field">
-                               <input type="text" class="form-control" id="wrpas" name="duration" disabled >
+                               <input type="text" class="form-control" id="wrpas"  disabled value="{{ $article->amount }}">
+                               <input type="hidden" class="form-control" id="wrpass" name="duration"  >
 								
                             </div>
                         </div>
+                        @endif
 
                     </div>
 
 					<div class="col-md-offset-2 col-md-3  pnj-btns">
-                        <span style="font-size:17px;padding-right:50px;">@lang('home.TotalAmount') : US$ </span>						
+                        <span style="font-size:17px;padding-right:50px;"  id="wrtotal"></span>						
                     </div>
 
                     <div class="col-md-6  pnj-btns">
@@ -161,7 +183,7 @@ $(document).ready(function(){
       $('.please li').first().find('.mat-radio-input').bind('click',function(e){
        $('#wrplan').hide();
         $('#palndate').hide();
-       // $('#expirediv').hide();
+        $('#wrtotal').hide();
     })
 
      $('.please li').first().find('.mat-radio-input').trigger('click');
@@ -174,6 +196,7 @@ $(document).ready(function(){
 	 console.log(alrt);
      $('#wrplan').show();
      $('#palndate').show();
+     $('#wrtotal').show();
 		
 	})
   
@@ -190,9 +213,10 @@ $(document).ready(function(){
       var to= Math.round(days);
       var total= to * alrt;
       $('#wrpas').val(to);
-	  $('#total').html("Total Amount : "+total+" $" );
+      $('#wrpass').val(to);
+	  $('#wrtotal').html("Total Amount : "+total+" $" );
       
-      // alert(total);
+      //alert(total);
        
        }
 tinymce.init({
@@ -238,7 +262,7 @@ $('form.writing-form').submit(function(e){
             isARunning = false;
            if($.trim(response) != '1'){
               toastr.success('Article successfully saved', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
-           window.location.href = "{{ url('account/writings') }}";
+              window.location.href = "{{ url('account/writings') }}";
            // window.location.href = "{{ url('writingpayment') }}";
             $('.writing-form button[type="submit"]').prop('disabled',false);
            }

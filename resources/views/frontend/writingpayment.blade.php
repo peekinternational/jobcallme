@@ -13,7 +13,7 @@
                 <br>
                 <div class="col-md-6" style="text-align:end">
                 
-                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.skillpaypal') !!}" >
+                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.writepaypal') !!}" >
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
                         </form>

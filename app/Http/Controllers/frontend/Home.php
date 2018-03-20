@@ -13,6 +13,9 @@ class Home extends Controller{
 	public function home(){
 		$ip = \Request::ip();
 		$position = \Location::get($ip);
+		$currentCountry = $position->countryCode;
+		$currentCity    = $position->cityName;
+		
 		if($position->countryCode != 'KR'){
 			App::setLocale('en');
 			\Session::put('locale', 'en');
