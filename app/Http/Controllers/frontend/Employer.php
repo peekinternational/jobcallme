@@ -912,8 +912,13 @@ public function userResume($userId){
 		extract($request->all());
 		$opHours = $request->input('opHours');
 		foreach($opHours as $i => $k){
-			if($k[0] == ''){ $k[0] = '09:00 AM';}
-			if($k[1] == ''){ $k[1] = '05:00 PM';}
+			if($i == 'sun' || $i == 'sat'){
+				if($k[0] == ''){ $k[0] = 'Closed';}
+				if($k[1] == ''){ $k[1] = 'Closed';}
+			}else{
+				if($k[0] == ''){ $k[0] = '09:00 AM';}
+				if($k[1] == ''){ $k[1] = '05:00 PM';}
+			}
 			$opHoursArr[$i] = array('from' => $k[0], 'to' => $k[1]);
 		}
 		

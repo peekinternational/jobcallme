@@ -107,11 +107,11 @@ if($company->companyLogo != ''){
                                    </tr>
                                    <tr>
                                        <td>@lang('home.saturday')</td>
-                                       <td>@if($opHour['sat']['from'] == '09:00 AM') Closed @else {!! $opHour['sat']['from'] !!} - {!! $opHour['sat']['to'] !!} @endif</td>
+                                       <td>{!! $opHour['sat']['from'] !!} - {!! $opHour['sat']['to'] !!} </td>
                                    </tr>
                                    <tr>
                                        <td>@lang('home.sunday')</td>
-                                       <td>@if($opHour['sun']['from'] == '09:00 AM') Closed @else {!! $opHour['sun']['from'] !!} - {!! $opHour['sun']['to'] !!} @endif</td>
+                                       <td>{!! $opHour['sun']['from'] !!} - {!! $opHour['sun']['to'] !!} </td>
                                    </tr>
                                </tbody>
                            </table>
@@ -414,7 +414,7 @@ if($company->companyLogo != ''){
                                            </select>
                                        </div>
                                        <div class="col-sm-4 pnj-form-field ">
-                                           <select name="opHours['sun'][]" class="form-control">
+                                           <select name="opHours[sun][]" class="form-control">
                                                 <option value="">@lang('home.to')</option>
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" {!! $time == $opHour['sun']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>

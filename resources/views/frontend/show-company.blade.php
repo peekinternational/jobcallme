@@ -133,6 +133,10 @@ $opHour = json_decode($company->companyOperationalHour,true);
                             <td>@lang('home.saturday')</td>
                             <td>{!! $opHour['sat']['from'] !!} - {!! $opHour['sat']['to'] !!}</td>
                         </tr>
+                        <tr>
+                            <td>@lang('home.sunday')</td>
+                            <td>{!! $opHour['sun']['from'] !!} - {!! $opHour['sun']['to'] !!}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

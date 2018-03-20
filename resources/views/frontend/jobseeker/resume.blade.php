@@ -1706,18 +1706,20 @@ if($user->profilePhoto != ''){
                                 $useremcount += 1; 
                                }
                             }
-                            
+
                             /* this if check if fill record greater then empty then assign 10% */
                             if($usercount > $useremcount){
-                                $userhis = 10;
+                                $userhis = 16.6666;
                             }else{
                                 $userhis = 0;
                             }
                             /*count whole resume record is percentage */
-
-                            $resume = count($resume)*10;
-
-                            $width = $resume + $userhis;
+                            foreach ($resume as $key => $value) {
+                                if($key == 'academic' || $key == 'skills' || $key == 'experience' || $key == 'project' || $key == 'language'){
+                                    $re += 16.6666;
+                                }
+                            }
+                            $width = round($re + $userhis);
                         ?>
                         <div class="progress">
                           <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $width?>"
