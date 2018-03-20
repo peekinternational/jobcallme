@@ -13,7 +13,7 @@ class Home extends Controller{
 	public function home(){
 		$ip = \Request::ip();
 		$position = \Location::get($ip);
-		echo $position;die;
+		print_r($position);die;
 		App::setLocale('en');
 		//print_r($position->countryCode);die;
 		/* job shift query */
