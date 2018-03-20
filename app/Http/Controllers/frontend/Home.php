@@ -12,7 +12,7 @@ class Home extends Controller{
 	public function home(){
 		$ip = \Request::ip();
 		$position = \Location::get($ip);
-		 //print_r($position->countryCode);die;
+		//print_r($position->countryCode);die;
 		/* job shift query */
 		$jobShifts = DB::table('jcm_job_shift')->get();
 
