@@ -38,8 +38,7 @@ return [
     'facebook' => [
         'client_id' => '377749349357447',
         'client_secret' => 'dd4c2236c3c3c64a397efbb3b40f5832',
-
-     'redirect' =>  url('fbCallback'),
+        'redirect' =>  url('fbCallback'),
     ],
 
     'google' => [
@@ -50,6 +49,6 @@ return [
     'linkedin' => [
         'client_id' => '818xstq8efstw9',
         'client_secret' => 'j094fcTdDgY7Mx6b',
-       'redirect' => url('lnCallback'),
+        'redirect' => url('lnCallback'),
     ], 
 ];

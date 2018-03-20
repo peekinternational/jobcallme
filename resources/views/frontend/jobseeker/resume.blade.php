@@ -154,7 +154,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.address')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm" name="address" required>{{ $meta->address }} </textarea>
+                                    <textarea class="form-control input-sm" name="address">{{ $meta->address }} </textarea>
                                 </div>
                             </div>
                            <div class="form-group">
@@ -304,7 +304,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.p_summary')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="about" required>{{ $user->about }}</textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="about">{{ $user->about }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -476,7 +476,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="details" required></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -579,7 +579,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="details" required></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -690,7 +690,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="details" required></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -911,7 +911,7 @@ if($user->profilePhoto != ''){
 							<div class="form-group">
                             <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
                             <div class="col-md-6">
-                                <textarea name="detail" class="form-control tex-editor" required></textarea>
+                                <textarea name="detail" class="form-control tex-editor" ></textarea>
                             </div>
                         </div>
                             <div class="form-group">
