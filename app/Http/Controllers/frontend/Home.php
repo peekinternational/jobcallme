@@ -15,6 +15,7 @@ class Home extends Controller{
 		$position = \Location::get($ip);
 		if($position->countryCode != 'KR'){
 			App::setLocale('en');
+			\Session::put('locale', 'en');
 		}
 		//print_r($position->countryCode);die;
 		/* job shift query */
