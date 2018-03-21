@@ -32,13 +32,13 @@ $opHour = json_decode($company->companyOperationalHour,true);
                                <span>@lang('home.industry'):</span> {!! JobCallMe::categoryName($company->category) !!}
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.established'):</span>  {!! date('M d, Y',strtotime($company->companyEstablishDate)) !!}
+                               <span>@lang('home.established'):</span> @if($company->companyEstablishDate != "") {!! date('M d, Y',strtotime($company->companyEstablishDate)) !!} @endif
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.noemployees'):</span>  {!! $company->companyNoOfUsers !!}
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.location'):</span>  {!! JobCallMe::cityName($company->companyCity).', '.JobCallMe::stateName($company->companyState).', '.JobCallMe::countryName($company->companyCountry) !!}
+                               <span>@lang('home.location'):</span>  @if($company->companyCity != 0) {!! JobCallMe::cityName($company->companyCity).', '.JobCallMe::stateName($company->companyState).', '.JobCallMe::countryName($company->companyCountry) !!} @endif
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.website'):</span> <a href="{!! $company->companyWebsite !!}">{!! $company->companyWebsite !!}</a>
