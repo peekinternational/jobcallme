@@ -11,8 +11,8 @@ if($user->profilePhoto != ''){
     if($pos == 1)
     {
         $userImage = url($user->profilePhoto);
-     } 
-     else{
+    } 
+    else{
         $userImage = url('profile-photos/'.$user->profilePhoto);
         }
     }
@@ -154,12 +154,13 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.address')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm" name="address" required>{{ $meta->address }} </textarea>
+                                    <textarea class="form-control input-sm" name="address">{{ $meta->address }} </textarea>
                                 </div>
                             </div>
                            <div class="form-group">
                             <label class="control-label col-sm-3 text-right">@lang('home.country')</label>
                             <div class="col-md-6">
+                            
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
                                         <option value="{{ $cntry->id }}" {{ $user->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
@@ -304,7 +305,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.p_summary')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="about" required>{{ $user->about }}</textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="about">{{ $user->about }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -476,7 +477,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="details" required></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -579,7 +580,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="details" required></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -690,7 +691,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.details')</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="details" required></textarea>
+                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -911,7 +912,7 @@ if($user->profilePhoto != ''){
 							<div class="form-group">
                             <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
                             <div class="col-md-6">
-                                <textarea name="detail" class="form-control tex-editor" required></textarea>
+                                <textarea name="detail" class="form-control tex-editor" ></textarea>
                             </div>
                         </div>
                             <div class="form-group">
@@ -1693,10 +1694,37 @@ if($user->profilePhoto != ''){
                     <div class="resume-listing-section hidden-sm hidden-xs">
                         <h4>@lang('home.resumesections')</h4>
                         <hr>
+                        <?php 
+                               /*count user info*/
+                            $usercount = 0;
+                            $useremcount =0;
+                            /* this loop count the empty and fill record */
+                            foreach ($user as $key => $value) {
+                               if($value != ''){
+                                $usercount += 1;
+                               }else{
+                                $useremcount += 1; 
+                               }
+                            }
+
+                            /* this if check if fill record greater then empty then assign 10% */
+                            if($usercount > $useremcount){
+                                $userhis = 16.6666;
+                            }else{
+                                $userhis = 0;
+                            }
+                            /*count whole resume record is percentage */
+                            foreach ($resume as $key => $value) {
+                                if($key == 'academic' || $key == 'skills' || $key == 'experience' || $key == 'project' || $key == 'language'){
+                                    $re += 16.6666;
+                                }
+                            }
+                            $width = round($re + $userhis);
+                        ?>
                         <div class="progress">
-                          <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                          aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                            70%
+                          <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $width?>"
+                          aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $width?>%">
+                            <?php echo $width?>%
                           </div>
                         </div>
                         <ul class="rls" style="padding-left: 0;">
@@ -1879,12 +1907,26 @@ function getStates(countryId){
             $(".job-state").html('');
             var newOption = new Option('Select State', '0', true, false);
             $(".job-state").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
+            var selected = "selected";
+            
+            for (var i =0; i < obj.length; i++) {
+                if(obj[i].id == currentState){
+                    var option = "<option value='"+obj[i].id+"' selected='selected'>"+obj[i].name+"</option>";
+                    $(".job-state").append(option);
+                }else{
+                    var option = "<option value='"+obj[i].id+"'>"+obj[i].name+"</option>";
+                    $(".job-state").append(option);
+                }
+                
+            };
+            $(".job-state").trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = k.id == currentState ? true : false;
-                var newOption = new Option(k.name, k.id, true, vOption);
+                console.log(vOption);
+                var newOption = new Option(k.name, k.id, true, true);
                 $(".job-state").append(newOption);
             })
-            $(".job-state").trigger('change');
+            $(".job-state").trigger('change');*/
         }
     })
 }
@@ -1958,6 +2000,7 @@ $('form.form-personal-info').submit(function(e){
         data: $('.form-personal-info').serialize(),
         url: "{{ url('account/jobseeker/resume/personal/save') }}",
         success: function(response){
+            console.log(response);
             if($.trim(response) != '1'){
                 $('.form-personal-info .error-group').show();
                 $('.form-personal-info .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
@@ -1970,10 +2013,12 @@ $('form.form-personal-info').submit(function(e){
         },
         error: function(data){
             var errors = data.responseJSON;
+            console.log(errors);
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
+             console.log(vErrors);
             $('.form-personal-info .error-group').show();
             $('.form-personal-info .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
             $('.form-personal-info button[name="save"]').prop('disabled',false);
@@ -2018,7 +2063,7 @@ $('form.form-academic').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-academic .error-group').show();
             $('.form-academic .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2090,7 +2135,7 @@ $('form.form-certification').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-certification .error-group').show();
             $('.form-certification .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2151,7 +2196,7 @@ $('form.form-experience').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-experience .error-group').show();
             $('.form-experience .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2217,7 +2262,7 @@ $('form.form-skills').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-skills .error-group').show();
             $('.form-skills .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2272,7 +2317,7 @@ $('form.form-skill').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-skill .error-group').show();
             $('.form-skill .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2335,7 +2380,7 @@ $('form.form-skil').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-skill .error-group').show();
             $('.form-skill .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2401,7 +2446,7 @@ $('form.form-ski').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-ski .error-group').show();
             $('.form-ski .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2471,7 +2516,7 @@ $('form.form-aff').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                 vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-aff .error-group').show();
             $('.form-aff .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2539,7 +2584,7 @@ $('form.form-sk').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-sk .error-group').show();
             $('.form-sk .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2596,7 +2641,7 @@ $('form.form-s').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-s .error-group').show();
             $('.form-s .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2657,7 +2702,7 @@ $('form.form-port').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-port .error-group').show();
             $('.form-port .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2802,31 +2847,37 @@ function getSubCategories(categoryId){
     $.ajax({
         url: "{{ url('account/get-subCategory') }}/"+categoryId,
         success: function(response){
-            var obj = $.parseJSON(response);
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
             $(".job-sub-category").html('').trigger('change');
-            $.each(obj,function(i,k){
+            $(".job-sub-category").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = false;
                 var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
                 $(".job-sub-category").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }
 
 function getSubCategories2(categoryId2){
+
     $.ajax({
         url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
         success: function(response){
-            var obj = $.parseJSON(response);
+
+            /*var obj = $.parseJSON(response);*/
             $(".job-sub-category2").html('').trigger('change');
-            $.each(obj,function(i,k){
+            $(".job-sub-category2").html(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = false;
                 var newOption = new Option(k.subName, k.subCategoryId2, true, vOption);
                 $(".job-sub-category2").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }
+
 //**dataURL to blob**
     function dataURLtoBlob(dataurl) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],

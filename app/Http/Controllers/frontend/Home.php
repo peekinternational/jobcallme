@@ -7,12 +7,20 @@ use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
 use Mail;
+use App;
 class Home extends Controller{
 
 	public function home(){
 		$ip = \Request::ip();
 		$position = \Location::get($ip);
-		 //print_r($position->countryCode);die;
+		$currentCountry = $position->countryCode;
+		$currentCity    = $position->cityName;
+		
+		if($position->countryCode != 'KR'){
+			App::setLocale('en');
+			\Session::put('locale', 'en');
+		}
+		//print_r($position->countryCode);die;
 		/* job shift query */
 		$jobShifts = DB::table('jcm_job_shift')->get();
 
@@ -339,8 +347,9 @@ class Home extends Controller{
     	$request->all();
     	/* peoples query */
     	$people = DB::table('jcm_users');
-    	$people->select('*');
+    	$people->select('*','privacy.profileImage as pImage');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
+    	$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
 		//$people->leftJoin('jcm_resume','jcm_resume.userId','=','jcm_users.userId');
 
     	if($request->isMethod('post')){
@@ -362,8 +371,17 @@ class Home extends Controller{
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
 	    	}
 	    }
+
+    	$people->where('privacy.profile','=','Yes');
+    	$people->limit(30);
+
 		$people->where('jcm_users_meta.userId','!=','');
     	
+<<<<<<< HEAD
+=======
+    //	$people->limit(30);
+
+>>>>>>> 28d3ae96a13b1fa20b2df19d14db97193e5f8faa
     	$people->orderBy('jcm_users.userId','desc');
     	$peoples = $people->paginate(18);
       // dd($peoples);

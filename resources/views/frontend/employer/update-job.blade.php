@@ -585,28 +585,33 @@ function getSubCategories(categoryId){
     $.ajax({
         url: "{{ url('account/get-subCategory') }}/"+categoryId,
         success: function(response){
-            var obj = $.parseJSON(response);
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
             $(".job-sub-category").html('').trigger('change');
-            $.each(obj,function(i,k){
+            $(".job-sub-category").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = false;
                 var newOption = new Option(k.subName, k.subCategoryId, true, vOption);
                 $(".job-sub-category").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }
 
 function getSubCategories2(categoryId2){
+
     $.ajax({
         url: "{{ url('account/get-subCategory2') }}/"+categoryId2,
         success: function(response){
-            var obj = $.parseJSON(response);
+
+            /*var obj = $.parseJSON(response);*/
             $(".job-sub-category2").html('').trigger('change');
-            $.each(obj,function(i,k){
+            $(".job-sub-category2").html(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = false;
                 var newOption = new Option(k.subName, k.subCategoryId2, true, vOption);
                 $(".job-sub-category2").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }

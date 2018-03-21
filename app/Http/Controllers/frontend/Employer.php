@@ -437,9 +437,7 @@ curl_close ($ch);
     		return redirect('account/login?next='.$request->route()->uri);
     	}
     	
-    	
-		$app = $request->session()->get('jcmUser');
-		$country= $app->country;
+    	$app = $request->session()->get('jcmUser');
 
     	/* posted jobs*/
     	//$postedJobs = DB::table('jcm_jobs')->leftJoin('jcm_job_applied','jcm_jobs.jobId','=','jcm_job_applied.jobId')->select(DB::raw('count(jcm_job_applied.userId) as count,jcm_jobs.*'))->where('jcm_jobs.userId','=',$app->userId)->GroupBy('jcm_job_applied.jobId')->orderBy('jcm_jobs.jobId','desc')->get();
@@ -458,14 +456,12 @@ curl_close ($ch);
 						
 						
 		$applicants = DB::table('jcm_companies')
-    					->select('jcm_users.city','jcm_users.country','jcm_companies.companyName','jcm_companies.companyId','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto')
+    					->select('jcm_users.city','privacy.profileImage as privacyImage','jcm_users.country','jcm_companies.companyName','jcm_companies.companyId','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto')
     					
 						->join('jcm_users','jcm_users.companyId','=','jcm_companies.companyId')
-						->Join('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId')
-						->where('jcm_users_meta.userId','!=','')
-						->where('jcm_users.country','=',$country)
+						->join('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId')
+						->where('privacy.profile','=','Yes')
 						->limit(6)
-    					
     					->get();				
     	/* end */
 
@@ -561,7 +557,7 @@ curl_close ($ch);
 		//dd($company[0]->category);
 		if($company[0]->category== "0")
 		{
-			$request->session()->flash('companyAlert', 'Please Complate you company profile to a post job');
+			$request->session()->flash('companyAlert', 'Please first Complate you company profile then post your job');
 			return redirect('account/employer/organization');
 		}
 
@@ -837,14 +833,13 @@ curl_close ($ch);
 			return redirect('account/employer/application');
 		}
 		$app = $request->session()->get('jcmUser');
-		$country= $app->country;
 		$resume = $this->userResume($userId);
 		//print_r($resume);exit;
 		$people = DB::table('jcm_users');
-    	$people->select('jcm_users.*');
+    	$people->select('jcm_users.*','privacy.profileImage as privacyImage');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
-		$people->where('jcm_users_meta.userId','!=','');
-		$people->where('jcm_users.country','=',$country);
+    	$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
+    	$people->where('privacy.profile','=','Yes');
 		$people->limit(4);
 		$people->inRandomOrder();
 		$Query=$people->get();
@@ -874,8 +869,10 @@ curl_close ($ch);
 		//print_r($resume);exit;
 		//dd($applicant);
 		$people = DB::table('jcm_users');
-    	$people->select('jcm_users.*');
+    	$people->select('jcm_users.*','privacy.profileImage as privacyImage');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
+		$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
+    	$people->where('privacy.profile','=','Yes');
 		$people->limit(4);
 		$people->inRandomOrder();
 		$Query=$people->get();
@@ -915,8 +912,16 @@ public function userResume($userId){
 		extract($request->all());
 		$opHours = $request->input('opHours');
 		foreach($opHours as $i => $k){
+			if($i == 'sun' || $i == 'sat'){
+				if($k[0] == ''){ $k[0] = 'Closed';}
+				if($k[1] == ''){ $k[1] = 'Closed';}
+			}else{
+				if($k[0] == ''){ $k[0] = '09:00 AM';}
+				if($k[1] == ''){ $k[1] = '05:00 PM';}
+			}
 			$opHoursArr[$i] = array('from' => $k[0], 'to' => $k[1]);
 		}
+		
 		$inputOr = array('businessType' => $businessType,'category' => $industry,'Capital' =>$capital,'sales' => $sales,'formofbussiness' => $formofbusiness,'corporatenumber'=> $corporatenumber,'companyName' => $companyName, 'companyAddress' => $companyAddress, 'companyEmail' => $companyEmail, 'companyPhoneNumber' => $companyPhoneNumber, 'companyState' => $companyState, 'companyCity' => $companyCity, 'companyCountry' => $companyCountry, 'companyWebsite' => $companyWebsite, 'companyFb' => $companyFb, 'companyLinkedin' => $companyLinkedin, 'companyTwitter' => $companyTwitter, 'companyNoOfUsers' => $companyNoOfUsers, 'companyEstablishDate' => $companyEstablishDate, 'companyOperationalHour' => @json_encode($opHoursArr), 'companyModifiedTime' => date('Y-m-d H:i:s'));
 		
 		if($companyId != '0'){

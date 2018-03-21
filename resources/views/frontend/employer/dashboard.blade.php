@@ -103,7 +103,7 @@
                                 <div class="col-md-12 rtj-item">
                                     <img src="{{ url('profile-photos/'.$appl->profilePhoto) }}" style="width: 50px">
                                     <div class="rtj-details">
-                                        <p><strong><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
+                                        <p><strong><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
                                         <p>{!! $appl->title !!}</p>
                                         <p>{{ date('d M',strtotime($appl->applyTime)) }}</p>
                                     </div>
@@ -123,7 +123,7 @@
                             <div class="col-md-12 rtj-item">
                                 <img src="{{ url('profile-photos/'.$interview->profilePhoto)}}" style="width: 50px">
                                 <div class="rtj-details">
-                                    <p><strong><a href="{{ url('account/employer/application/applicant/'.$interview->jobseekerId) }}">{{ $interview->firstName." ".$interview->lastName}}</a></strong></p>
+                                    <p><strong><a href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">{{ $interview->firstName." ".$interview->lastName}}</a></strong></p>
                                     <p><a href="{{ url('jobs/'.$interview->jobId) }}">{{ $interview->title }}</a> <span class="label" style="background-color:{{ $colorArr[array_rand($colorArr)] }}"><a style="color:#fff" href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">interview Details</a></span></p>
                                     <p><i class="fa fa-clock-o"></i>  {{ $interview->fromDate }} to {{ $interview->toDate }}   <i class="fa fa-map-marker"></i> {{ $interview->country }}, {{ $interview->state }}, {{ $interview->city }}</p>
                                 </div>
@@ -164,7 +164,7 @@
                                     ?>
                         <div class="col-md-4 col-xs-6 sp-item" style="padding-top:10px">
 						
-								<img src="{{ $pImage }}" style="width: 70px;height:75px !important;">
+								<img src="@if($appl->privacyImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg') }}@endif" style="width: 70px;height:75px !important;">
 							
 						
 								<p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
@@ -201,7 +201,7 @@
                         ?>
                     <div class="col-md-12 sr-item">
 						<div class="col-md-4 col-xs-12">
-							<img src="{{ $pImage }}" style="width: 100%;height:90px !important;">
+							<img src="{{ $pImage }}" style="width: 100%;height:autopx !important;">
 						</div>
 						<div class="col-md-8 col-xs-12" style="padding-top:10px">
 							<div class="sr-details">
@@ -230,6 +230,7 @@
                    
                       <div class="col-md-12 sr-item">
 				      <div class="col-md-4 col-xs-12">
+<<<<<<< HEAD
                         <div class="sr-item-img">
                             @if($rec->upskillImage != '')
                             <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:80px;">
@@ -237,6 +238,13 @@
                             <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:80px !important;">
                             @endif
                         </div>
+=======
+                        @if($rec->upskillImage != '')
+                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:auto;">
+                        @else
+                        <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:80px !important;">
+                        @endif
+>>>>>>> 28d3ae96a13b1fa20b2df19d14db97193e5f8faa
 						</div>
                         <div class="col-md-8 col-xs-12" style="margin-top: 10px;">
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>

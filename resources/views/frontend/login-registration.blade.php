@@ -131,6 +131,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 </div>
                 <div class="form-group">
                     <select class="form-control select2 job-country" name="country">
+                             <option value="">@lang('home.selectCountry')</option>
                         @foreach(JobCallMe::getJobCountries() as $country)
                             <option value="{{ $country->id }}">{{ $country->name }}</option>
                         @endforeach

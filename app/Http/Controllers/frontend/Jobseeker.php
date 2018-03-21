@@ -126,6 +126,7 @@ class Jobseeker extends Controller{
 		foreach($record as $rec){
 			$return[$rec->type][$rec->resumeId] = @json_decode($rec->resumeData);
 		}
+		
 		return $return;
 	}
 
@@ -153,7 +154,8 @@ class Jobseeker extends Controller{
 		}
 		$categoryId = $request->segment(3);
 		$result = JobCallMe::getSubCategories($categoryId);
-		echo @json_encode($result);
+		return view('frontend.jobseeker.subCatView',compact('result'));
+		/*echo @json_encode($result);*/
 	}
 
 	public function getSubCategory2(Request $request){
@@ -162,7 +164,8 @@ class Jobseeker extends Controller{
 		}
 		$categoryId2 = $request->segment(3);
 		$result2 = JobCallMe::getSubCategories2($categoryId2);
-		echo @json_encode($result2);
+		return view('frontend.jobseeker.subCatView2',compact('result2'));
+		/*echo @json_encode($result2);*/
 	}
 
 	public function savePersonalInfo(Request $request){
@@ -830,7 +833,7 @@ class Jobseeker extends Controller{
 		
 	//return view('frontend.jobseeker.resume');
     	 $pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
-		 // $pdf->SetFont('Courier', 'B', 18);
+		 //$pdf->SetFont('Courier', 'B', 18);
         return $pdf->download($name.'_cv.pdf');
 		   //return view('frontend.cv',compact('user','meta','resume'));
 	}

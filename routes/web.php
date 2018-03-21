@@ -15,6 +15,7 @@
 if (version_compare(PHP_VERSION, '7.2.0', '>=')) {    // Ignores notices and reports all other kinds... and warnings    
 error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);    // error_reporting(E_ALL ^ E_WARNING); // Maybe this is enough
 }
+/* get current location of user */
 Route::get('get-location-from-ip',function(){
     $ip= \Request::ip();
     $data = \Location::get($ip);
@@ -292,6 +293,9 @@ Route::get('test', function () {
 Route::get('skillpayment', function () {
     return view('frontend.skillpayment');
 });
+Route::get('writingpayment', function () {
+    return view('frontend.writingpayment');
+});
 Route::get('messages', function () {
     return view('frontend.employer.employerMessenger');
 });
@@ -299,6 +303,10 @@ Route::get('messages', function () {
 //upskill
 Route::post('skillpaypal', array('as' => 'addmoney.skillpaypal','uses' => 'frontend\ExtraSkills@postPayment',));
 Route::get('skillpaypal', array('as' => 'payment.skillstatus','uses' => 'frontend\ExtraSkills@getStatus',));
+
+Route::post('writepaypal', array('as' => 'addmoney.writepaypal','uses' => 'frontend\ExtraSkills@writePayment',));
+Route::get('writepaypal', array('as' => 'payment.writestatus','uses' => 'frontend\ExtraSkills@writeStatus',));
+
 
 
 Route::get('account/employer/job/share', array('as' => 'addmoney.account/employer/job/share','uses' => 'frontend\Employer@jobupdate',));

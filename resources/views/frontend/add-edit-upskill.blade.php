@@ -29,12 +29,12 @@ if($upskill->country != 0){
                     <input type="hidden" name="prevIcon" value="{{ $upskill->upskillImage }}">
                     <h3>@lang('home.basicinformation')</h3>
 
-				@if($upskill->skillId)
+			               	@if($upskill->skillId)
 			
-@else
-		<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:30px;"">
-                <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
-                
+                    @else
+                    <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:30px;"">
+                            <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
+                            
  
                         <ul id="post-job-ad-types">
 							@foreach($uppayment as $payment)
@@ -66,14 +66,11 @@ if($upskill->country != 0){
 							@endforeach
 
 							
-                        </ul>
-                 
+                                    </ul>
+                            </div>
+                        </div>
 
-                    
-                </div>
-            </div>
-
-@endif
+              @endif
 
                     <div class="pnj-form-section">
                         <div class="form-group">
