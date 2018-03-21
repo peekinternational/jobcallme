@@ -304,6 +304,7 @@ $next = Request::route()->uri;
         $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
         e.preventDefault();
     });
+   
 </script>
 {{ Session()->forget('fNotice') }}
 @endif
