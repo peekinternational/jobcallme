@@ -427,7 +427,7 @@
                     </div>
                     <div class="col-md-6  pnj-btns">                        
 						<button type="submit" class="btn btn-primary" name="save">@lang('home.postjob')</button>
-                        <a href="{{ url('account/employer') }}" class="btn btn-default">@lang('home.CANCEL')</a>
+                        <button class="btn btn-default"><a href="{{ url('account/employer') }}">@lang('home.CANCEL')</a></button>
                     </div>
                 
             </div>

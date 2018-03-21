@@ -363,7 +363,7 @@ class Home extends Controller{
 	    	}
 	    }
 		$people->where('jcm_users_meta.userId','!=','');
-    //	$people->limit(30);
+    	
     	$people->orderBy('jcm_users.userId','desc');
     	$peoples = $people->paginate(18);
       // dd($peoples);
@@ -425,12 +425,9 @@ class Home extends Controller{
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
 	    	}
 	    }
-		$people->where('jcm_users_meta.userId','!=','');
 		
-    	//$people->limit(12);
     	$people->orderBy('jcm_users.userId','desc');
-		$people->distinct('jcm_users.userId');
-        // $people->distinct('jcm_users.firstName');
+         $people->distinct('jcm_users.firstName');
     	$peoples = $people->paginate(18);
         // dd($peoples);
 

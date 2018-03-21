@@ -74,7 +74,9 @@
             @foreach($read_record as $rec)
                 <div class="col-xs-12 col-sm-6 col-md-3 grid-item">
                     <div class="la-item">
-                        <img class=" img-responsive" src="{{ url('article-images/'.$rec->wIcon) }}" alt="">
+                        <div class="la-item-img">
+                            <img class=" img-responsive" src="{{ url('article-images/'.$rec->wIcon) }}" alt="">
+                        </div>
                         <div class="col-md-12">
                             <p> <a href="{{ url('read/article/'.$rec->writingId ) }}" class="la-title">{!! $rec->title !!}</a></p>
                             <span>{{ $rec->cat_names }}</span>

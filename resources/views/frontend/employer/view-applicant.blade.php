@@ -28,7 +28,7 @@
                     <section class="personal-info-section" id="personal-information">
                         <div class="row">
                             <div class="col-md-3">
-                                <div>
+                                <div class="profile-img">
                                     <img src="@if($privacy->profileImage == 'Yes') {{ $pImage}} @else {{url('profile-photos/profile-logo.jpg')}} @endif" class="img-circle" style="width: 100%">
                                 </div>
                                 <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">$applicant->firstName Smith</h3>
@@ -300,39 +300,41 @@
                 <div class="alert alert-danger"> this profile is restricted</div>
                 </div>
             @endif
-				<div class="pnj-box">
-				<h4>@lang('home.similarpeople') {{JobCallMe::countryName(JobCallMe::getHomeCountry())}}</h4>
-				    <div class="row" style="margin-right: 0 !important;">
-					@foreach($Query as $appl)
-					 <?php
-                        $pImage = url('profile-photos/profile-logo.jpg');
-                        if($appl->profilePhoto != '' && $appl->profilePhoto != NULL){
-                        $pos = strpos($appl->profilePhoto,"ttp");
-                            if($pos == 1)
-                            {
-                            $pImage = url($appl->profilePhoto);
-                            } 
-                            else{
-                                $pImage = url('profile-photos/'.$appl->profilePhoto);
-                                }
-                                            
+				<div class="col-md-3">
+                    <div class="pnj-box">
+                    <h4>@lang('home.similarpeople') {{JobCallMe::countryName(JobCallMe::getHomeCountry())}}</h4>
+                        <div class="row" style="margin-right: 0 !important;">
+                        @foreach($Query as $appl)
+                         <?php
+                            $pImage = url('profile-photos/profile-logo.jpg');
+                            if($appl->profilePhoto != '' && $appl->profilePhoto != NULL){
+                            $pos = strpos($appl->profilePhoto,"ttp");
+                                if($pos == 1)
+                                {
+                                $pImage = url($appl->profilePhoto);
+                                } 
+                                else{
+                                    $pImage = url('profile-photos/'.$appl->profilePhoto);
                                     }
-                                    ?>
-                         <div class="col-md-12 sr-item">
-					      <div class="col-md-4">
-                            <img src="{{ $pImage }}" style="width: 70px;height:75px;">
-							</div>
-							<div class="col-md-8 sp-item">
-                            <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
-                            <p>{!! $appl->companyName !!}</p>
-                            <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
-                        </div>
-						</div>
-						 @endforeach
+                                                
+                                        }
+                                        ?>
+                             <div class="col-md-12 sr-item">
+                              <div class="col-md-4 applicant-SimilarImg">
+                                <img src="{{ $pImage }}" style="width: 70px;height:75px;">
+                                </div>
+                                <div class="col-md-8 sp-item">
+                                <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
+                                <p>{!! $appl->companyName !!}</p>
+                                <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
+                            </div>
+                            </div>
+                             @endforeach
 
-                    </div>
-				
-				</div>
+                        </div>
+                    
+                    </div>            
+                </div>
 				
             </div>
         </div>

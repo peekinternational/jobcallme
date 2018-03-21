@@ -33,8 +33,8 @@ $dispatch='';
         <div class="col-md-9">
 		
             <div class="jobs-suggestions">
-			<div style="display: -webkit-box;">
-			 <img src="{{ $cLogo }}"  style="width:118px;margin-top:32px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
+			<div style="display: -webkit-box;" class="suggestions-user-info">
+			 <img src="{{ $cLogo }}"  style="width:118px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
 			<div style="padding-left: 42px;">
 			<span style="text-transform: uppercase;font-size: 26px;">{{$job->companyName}}</span>
                 <p style="font-size: 18px;margin-top: 24px; margin-left: 6px;">{{ $job->title }},  &nbsp;<span style="font-size: 13px; padding-top: 9px;">{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }} </span> &nbsp;<span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">
