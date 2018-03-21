@@ -833,7 +833,7 @@ class Jobseeker extends Controller{
 		
 	//return view('frontend.jobseeker.resume');
     	 $pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
-		 // $pdf->SetFont('Courier', 'B', 18);
+		 //$pdf->SetFont('Courier', 'B', 18);
         return $pdf->download($name.'_cv.pdf');
 		   //return view('frontend.cv',compact('user','meta','resume'));
 	}

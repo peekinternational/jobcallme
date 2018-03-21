@@ -2000,6 +2000,7 @@ $('form.form-personal-info').submit(function(e){
         data: $('.form-personal-info').serialize(),
         url: "{{ url('account/jobseeker/resume/personal/save') }}",
         success: function(response){
+            console.log(response);
             if($.trim(response) != '1'){
                 $('.form-personal-info .error-group').show();
                 $('.form-personal-info .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
@@ -2012,10 +2013,12 @@ $('form.form-personal-info').submit(function(e){
         },
         error: function(data){
             var errors = data.responseJSON;
+            console.log(errors);
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
+             console.log(vErrors);
             $('.form-personal-info .error-group').show();
             $('.form-personal-info .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
             $('.form-personal-info button[name="save"]').prop('disabled',false);
@@ -2060,7 +2063,7 @@ $('form.form-academic').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-academic .error-group').show();
             $('.form-academic .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2132,7 +2135,7 @@ $('form.form-certification').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-certification .error-group').show();
             $('.form-certification .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2193,7 +2196,7 @@ $('form.form-experience').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-experience .error-group').show();
             $('.form-experience .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2259,7 +2262,7 @@ $('form.form-skills').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-skills .error-group').show();
             $('.form-skills .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2314,7 +2317,7 @@ $('form.form-skill').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-skill .error-group').show();
             $('.form-skill .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2377,7 +2380,7 @@ $('form.form-skil').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-skill .error-group').show();
             $('.form-skill .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2443,7 +2446,7 @@ $('form.form-ski').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-ski .error-group').show();
             $('.form-ski .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2513,7 +2516,7 @@ $('form.form-aff').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                 vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-aff .error-group').show();
             $('.form-aff .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2581,7 +2584,7 @@ $('form.form-sk').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-sk .error-group').show();
             $('.form-sk .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2638,7 +2641,7 @@ $('form.form-s').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-s .error-group').show();
             $('.form-s .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
@@ -2699,7 +2702,7 @@ $('form.form-port').submit(function(e){
             var errors = data.responseJSON;
             var vErrors = '';
             $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
+                  vErrors += '<li style="list-style-type: none;">' +i+ ' field is requried</li>';
             })
             $('.form-port .error-group').show();
             $('.form-port .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');

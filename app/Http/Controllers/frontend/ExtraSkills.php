@@ -338,6 +338,9 @@ class ExtraSkills extends Controller{
     }
 
     public function addEditUpskill(Request $request){
+        	if(!$request->session()->has('jcmUser')){
+    		return redirect('account/login?next='.$request->route()->uri);
+    	}
 		 $rec = DB::table('jcm_upskillpayment')->where('id','=',$request->cat_id)->get();
 	   $amount=$rec[0]->price;
 	   //dd();
