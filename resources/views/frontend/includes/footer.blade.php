@@ -170,3 +170,11 @@
       top: 50%;
       width: 0; }
 </style>
+<script type="text/javascript">
+     function jsUrl(){
+        return "{{ url('') }}";
+    }
+    function jsCsrfToken(){
+        return "{{ csrf_token() }}";
+    }
+</script>

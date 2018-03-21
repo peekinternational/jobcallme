@@ -3,21 +3,6 @@
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style type="text/css">
-@font-face {
-  font-family: 'Jeju Myeongjo';
-  font-style: normal;
-  font-weight: 400;
-  src: url("{{asset('frontend-assets/fonts/korean/JejuMyeongjo-Regular.eot')}}");
-  src: url("{{asset('frontend-assets/fonts/korean/JejuMyeongjo-Regular(1).eot')}}") format('embedded-opentype'),
-       url("{{asset('frontend-assets/fonts/korean/JejuMyeongjo-Regular.woff2')}}") format('woff2'),
-       url("{{asset('frontend-assets/fonts/korean/JejuMyeongjo-Regular.woff')}}") format('woff'),
-       url("{{asset('frontend-assets/fonts/korean/JejuMyeongjo-Regular.ttf')}}") format('truetype');
-}
-body{
-   font-family: 'Jeju Myeongjo', serif;
-}
-</style>
 <body>
 
  <section class="personal-info-section" id="personal-information">
