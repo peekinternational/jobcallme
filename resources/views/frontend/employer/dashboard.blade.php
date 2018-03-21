@@ -201,7 +201,7 @@
                         ?>
                     <div class="col-md-12 sr-item">
 						<div class="col-md-4 col-xs-12">
-							<img src="{{ $pImage }}" style="width: 100%;height:90px !important;">
+							<img src="{{ $pImage }}" style="width: 100%;height:autopx !important;">
 						</div>
 						<div class="col-md-8 col-xs-12" style="padding-top:10px">
 							<div class="sr-details">
@@ -231,7 +231,7 @@
                       <div class="col-md-12 sr-item">
 				      <div class="col-md-4 col-xs-12">
                         @if($rec->upskillImage != '')
-                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:80px;">
+                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:auto;">
                         @else
                         <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:80px !important;">
                         @endif
