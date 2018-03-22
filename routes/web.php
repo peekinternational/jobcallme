@@ -21,7 +21,10 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
-
+/* pdf template for resume*/
+Route::get('pdf',function(){
+   	return view('frontend.cv');
+});
 Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');
 Route::post('addreadCat','frontend\Home@addreadCat');
@@ -46,6 +49,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 	Route::get('dashboard','admin\Dashboard@index');
 	Route::get('orders','admin\Dashboard@home');
+	Route::post('cms/jobs/delete','admin\cms@deleteJob');
+	Route::get('cms/jobs/update/{id}','admin\cms@editjob');
 
 	/* setting */
 	Route::match(['get','post'],'settings/profile','admin\Setting@profile');
@@ -71,6 +76,7 @@ Route::group(['prefix' => 'admin'], function () {
 	/* cms */
 	/* job categories */
 	Route::match(['get','post'],'cms/category','admin\Cms@viewCategories');
+	Route::match(['get','post'],'cms/alljobs','admin\Cms@viewjobs');
 	Route::post('cms/category/save','admin\Cms@saveCategory');
 	Route::get('cms/category/get/{id}','admin\Cms@getCategory');
 	Route::delete('cms/category/delete','admin\Cms@deleteCategory');
