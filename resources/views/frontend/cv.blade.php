@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="{{ app()->getLocale() }}">
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+</style>
 <body>
 
  <section class="personal-info-section" id="personal-information">
