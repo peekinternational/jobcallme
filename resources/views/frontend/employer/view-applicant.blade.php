@@ -31,7 +31,7 @@
                                 <div class="profile-img">
                                     <img src="@if($privacy->profileImage == 'Yes') {{ $pImage}} @else {{url('profile-photos/profile-logo.jpg')}} @endif" class="img-circle" style="width: 100%">
                                 </div>
-                                <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">$applicant->firstName Smith</h3>
+                                <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">{{$applicant->firstName}} {{$applicant->lastName}}</h3>
                                 <p class="text-center hidden-md hidden-lg jp-profession-heading">{{ JobCallMe::categoryTitle($applicant->industry) }}</p>
                                 <a href="#" class="btn btn-primary btn-block jp-contact-btn">CONTACT DETAILS</a>
 								<div class="" style="text-align:center">
@@ -316,13 +316,13 @@
                                 else{
                                     $pImage = url('profile-photos/'.$appl->profilePhoto);
                                     }
-<<<<<<< HEAD
+
                                                 
                                         }
                                         ?>
                              <div class="col-md-12 sr-item">
                               <div class="col-md-4 applicant-SimilarImg">
-                                <img src="{{ $pImage }}" style="width: 70px;height:75px;">
+                                <img src="@if($appl->privacyImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg') }} @endif" style="width: 70px;height:75px;">
                                 </div>
                                 <div class="col-md-8 sp-item">
                                 <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
@@ -330,22 +330,7 @@
                                 <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
                             </div>
                             </div>
-                             @endforeach
-=======
-                                    ?>
-                         <div class="col-md-12 sr-item">
-					      <div class="col-md-4">
-                            <img src="@if($appl->privacyImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg') }} @endif" style="width: 70px;height:75px;">
-							</div>
-							<div class="col-md-8 sp-item">
-                            <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
-                            <p>{!! $appl->companyName !!}</p>
-                            <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
-                        </div>
-						</div>
-						 @endforeach
->>>>>>> 28d3ae96a13b1fa20b2df19d14db97193e5f8faa
-
+                             @endforeach                         
                         </div>
                     
                     </div>            

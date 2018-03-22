@@ -230,7 +230,7 @@
                    
                       <div class="col-md-12 sr-item">
 				      <div class="col-md-4 col-xs-12">
-<<<<<<< HEAD
+
                         <div class="sr-item-img">
                             @if($rec->upskillImage != '')
                             <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:80px;">
@@ -238,13 +238,6 @@
                             <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:80px !important;">
                             @endif
                         </div>
-=======
-                        @if($rec->upskillImage != '')
-                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:auto;">
-                        @else
-                        <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:80px !important;">
-                        @endif
->>>>>>> 28d3ae96a13b1fa20b2df19d14db97193e5f8faa
 						</div>
                         <div class="col-md-8 col-xs-12" style="margin-top: 10px;">
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>

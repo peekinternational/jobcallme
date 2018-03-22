@@ -12,27 +12,15 @@
                     <input type="hidden" name="prevIcon" value="{{ $article->wIcon }}">
                     <input type="hidden" name="writingId" value="{{ $article->writingId }}">
                     <h3>@lang('home.warticle')</h3>
-<<<<<<< HEAD
-                    <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:50px;">
-                <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
-                
-                        <ul id="post-job-ad-types">
-						
-							<li style="position:relative">
-                                <!---->
-
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="basicplan" name="p_Category" value="0">
-=======
                     @if($article->writingId)
 
                     @else
                     <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:50px;">
                      <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types" class="please">
-							<li style="position:relative">
+                            <li style="position:relative">
                              <input class="mat-radio-input cdk-visually-hidden" type="radio" id="basicplan" name="cat_id" value="0" >
->>>>>>> 28d3ae96a13b1fa20b2df19d14db97193e5f8faa
-							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                               <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
                                <span class="b">@lang('home.Basic')</span></div>
                                 <div>
                                     <!----><label for="basicplan">
@@ -40,54 +28,14 @@
                                                 <li>@lang('home.Featuredonhomepage')</li>
                                                 <li>@lang('home.adcost')</li>
                                             </ul>
-										
+                                        
                                         <div class="credits b">
-										<span class="text-success">@lang('home.Free')</span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
-									</div>
+                                        <span class="text-success">@lang('home.Free')</span>
+                                    <i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+                                    </div>
                                     </label>
-<<<<<<< HEAD
-                                    <!---->
-                                    <!---->
-                                    <!---->
                                 </div>
                             </li>
-
-
-                            <!----><li style="position:relative">
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@lang('home.FreetillEndofApril')
-							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.special')</span></div>
-                                <div>
-                                    <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
-                                            <li>@lang('home.Featuredonhomepage') ( 3 @lang('home.day') )</li>
-                                            <li>@lang('home.adcost')</li>
-                                        </ul>
-										
-                                        <div class="credits b">
-										<span class="text-success">@lang('home.costwon1')</span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
-									</div>
-                                    </label>
-                                    <!---->
-                                    <!---->
-                                    <!---->
-                                </div>
-                            </li>
-							
-                        </ul>
-                 
-
-                    
-                </div>
-            </div>
-
-
-=======
-                                </div>
-                            </li>
->>>>>>> 28d3ae96a13b1fa20b2df19d14db97193e5f8faa
 
                          @foreach($wrpayment as $payment)
                          
@@ -95,7 +43,7 @@
                             <!----><li style="position:relative">
                             <span class="wr">
                                <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="cat_id" value="{!! $payment->id!!}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@lang('home.'.$payment->title)
-							   <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}"></span>
+                               <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}"></span>
                                <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
                              <span class="b">@lang('home.'.$payment->tag1)</span></div>
                                 <div>
@@ -104,11 +52,11 @@
                                             <li>@lang('home.'.$payment->tag2) ( {!! $payment->days!!}  @lang('home.day') )</li>
                                             <li>@lang('home.'.$payment->tag3)</li>
                                         </ul>
-										
+                                        
                                         <div class="credits b">
-										<span class="text-success">US$ {!! $payment->price !!}.00</span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
-									</div>
+                                        <span class="text-success">US$ {!! $payment->price !!}.00</span>
+                                    <i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+                                    </div>
                                     </label>
                                     <!---->
                                     <!---->
@@ -116,7 +64,7 @@
                                 </div>
                             </li>
                            
-							@endforeach
+                            @endforeach
                         </ul>
                  
 
@@ -124,7 +72,7 @@
                 </div>
             </div>
 @endif
-					<div class="pnj-form-section">
+                    <div class="pnj-form-section">
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
@@ -140,7 +88,7 @@
                                         <option value="{{ $cat->id }}">@lang('home.'.$cat->name)</option>
                                     @endforeach
                                 </select>
-								
+                                
                             </div>
                         </div>
                         <div class="form-group">
@@ -178,12 +126,12 @@
                                 <input type="hidden" class="form-control date-picker" id="wrDate" name="endDate" onkeypress="return false;" value="{{ $article->endDate }}">
                             </div>
                         </div>
-						<div class="form-group" id="wrplan">
+                        <div class="form-group" id="wrplan">
                            
                             <div class="col-sm-9 pnj-form-field">
                              
                                <input type="hidden" class="form-control" id="" name="amount" value="{{ $article->amount }}" >
-								
+                                
                             </div>
                         </div>
 
@@ -194,20 +142,20 @@
                                 <input type="text" class="form-control date-picker" id="wrDate" name="endDate" onkeypress="return false;" value="{{ $article->endDate }}">
                             </div>
                         </div>
-						<div class="form-group" id="wrplan">
+                        <div class="form-group" id="wrplan">
                             <label class="control-label col-sm-3">@lang('home.adduration')</label>
                             <div class="col-sm-9 pnj-form-field">
                                <input type="text" class="form-control" id="wrpas"  disabled value="{{ $article->amount }}">
                                <input type="hidden" class="form-control" id="wrpass" name="duration"  >
-								
+                                
                             </div>
                         </div>
                         @endif
 
                     </div>
 
-					<div class="col-md-offset-2 col-md-3  pnj-btns">
-                        <span style="font-size:17px;padding-right:50px;"  id="wrtotal"></span>						
+                    <div class="col-md-offset-2 col-md-3  pnj-btns">
+                        <span style="font-size:17px;padding-right:50px;"  id="wrtotal"></span>                      
                     </div>
 
                     <div class="col-md-6  pnj-btns">
@@ -243,30 +191,30 @@ $(document).ready(function(){
     $('#readcat').select2();
     
     $('body').on('click','.wr',function(e){
-		console.log($(e.target).val());
-	 alrt=$(e.target).siblings('input').val();
-	 console.log(alrt);
+        console.log($(e.target).val());
+     alrt=$(e.target).siblings('input').val();
+     console.log(alrt);
      $('#wrplan').show();
      $('#palndate').show();
      $('#wrtotal').show();
-		
-	})
+        
+    })
   
 });
     $('#wrDate').on('change', function() {
-		  myfunc()
+          myfunc()
 });
       
        function myfunc(){
        var start = new Date();
       // var start= $("#firstDate").datepicker("getDate");
-    	var end= $("#wrDate").datetimepicker("getDate");
-   		days = (end- start) / (1000 * 60 * 60 * 24);
+        var end= $("#wrDate").datetimepicker("getDate");
+        days = (end- start) / (1000 * 60 * 60 * 24);
       var to= Math.round(days);
       var total= to * alrt;
       $('#wrpas').val(to);
       $('#wrpass').val(to);
-	  $('#wrtotal').html("Total Amount : "+total+" $" );
+      $('#wrtotal').html("Total Amount : "+total+" $" );
       
       //alert(total);
        
