@@ -1,21 +1,19 @@
 @extends('frontend.layouts.app')
 
-@section('title','Post New Job')
+@section('title','Job Update')
 
 @section('content')
 
-<section id="postNewJob" style="margin-bottom:70px">
- <form action='{{ url("paypals") }}' method='post' class='form-horizontal' enctype='multipart/form-data'>
-                        {{ csrf_field() }}
+<section id="postNewJob">
+    <!--  <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypals') !!}" > -->
+    {!! Form::open(['action'=>['frontend\Employer@updatejobbyadmin'],'method'=>'post','class'=>'form-horizontal','files'=>true,'enctype'=>'multipart/form-data']) !!}
+    {{ csrf_field() }}
     <div class="container">
-
-	  <div class="row">
-            <div class="col-md-12" style="margin-top:70px">
 	
         <div class="col-md-12">
 		
             <div class="pnj-box">
-			  <h3>@lang('home.postnewjob')</h3>
+			  <h3>@lang('home.jobupdate')</h3>
 					<div class="col-md-12">
 					   <div class="form-group error-group" style="display: none;">
                             <label class="control-label col-sm-3">&nbsp;</label>
@@ -24,42 +22,37 @@
               
                
                
-                  <!--  <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypals') !!}" > -->
-					<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-top:30px;">
+                 
+						
+                    
+				<!--  	<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;">
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                 
  
                         <ul id="post-job-ad-types">
-						 @foreach($rec as $payment)
-						 
-                            <!----><li style="position:relative">
+						@foreach($recs as $payment)
+                            <!----<li style="position:relative">
                                 <!---->
-								<span class="pay_blog">
-									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
-									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
-								</span>
-							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.'.$payment->title)</span></div>
+                                <!--  <input class="mat-radio-input cdk-visually-hidden" type="radio" id="md-radio-2-input" name="p_Category" 
+								   value="{!! $payment->id!!}" name="md-radio-group-0" @if($result->amount == $payment->price) checked @endif><div class="mat-radio-label-content"><span style="display:none">&nbsp;</span><span class="b">{!! $payment->title!!}</span></div></label></md-radio-button>
                                 <div>
-                                    <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
-											<li>@lang('home.'.$payment->tag1)</li>
-                                            <li>@lang('home.adcost')</li>
-                                            <!-- <li>{!! $payment->tag1!!}</li>
-                                             <li>{!! $payment->tag2!!}</li> -->
+                                  <!----<label for="{!! $payment->id!!}">
+                                     <!--     <ul class="list-unstyled desc" >
+                                            <li>{!! $payment->tag1!!}</li>
+                                            <li>{!! $payment->tag2!!}</li>
                                         </ul>
 										
                                         <div class="credits b">@if($payment->price ==0)
-									<span class="free">	@lang('home.Free')</span>
+										Free
 										@else
-										<span class="text-success">@lang('home.'.$payment->price)</span>
+										<span class="text-success">$ {!! $payment->price!!}</span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									@endif</div>
                                     </label>
                                     <!---->
                                     <!---->
                                     <!---->
-                                </div>
+                                <!--  </div>
                             </li>
 							@endforeach
                         </ul>
@@ -67,53 +60,50 @@
 
                     
                 </div>
-            </div>
+            </div> -->
 		</div>
                
                   
                     <div class="pnj-form-section">
                        
-                        
-
-						<div class="form-group">
+                        <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="title" id="title"  required>
+                                <input type="text" class="form-control" value="{!! $result->title !!}" name="title" id="title" required >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_department')</label>
-                            <div class="col-md-8 pnj-form-field">
-                                <select class="form-control select2" name="department" required>
-                                    <option value="">@lang('home.s_department')</option>
-                                    <option value="Accounting">@lang('home.Accounting')</option>
-                                    <option value="Administration">@lang('home.Administration')</option>
-                                    <option value="Customer Services">@lang('home.Customer Services')</option>
-                                    <option value="Finance">@lang('home.Finance')</option>
-                                    <option value="Human Resources">@lang('home.Human Resources')</option>
-                                    <option value="Information Technology">@lang('home.Information Technology')</option>
-                                    <option value="Marketing">@lang('home.Marketing')</option>
-                                    <option value="Procurement">@lang('home.Procurement')</option>
-                                    <option value="Production">@lang('home.Production')</option>
-                                    <option value="Quality Control">@lang('home.Quality Control')</option>
-                                     <option value="Research & Development">@lang('home.Research & Development')</option>
-                                      <option value="Sales">@lang('home.Sales')</option>
+                            <div class="col-sm-8 pnj-form-field">
+                                <select class="form-control select2" name="department">
                                     
+                                        <option value="Accounting" {{ $result->department == 'Accounting' ? 'selected="selected"' : '' }}>@lang('home.Accounting')</option>
+                                    <option value="Administration" {{ $result->department == 'Administration' ? 'selected="selected"' : '' }}>@lang('home.Administration')</option>
+                                    <option value="Customer Services" {{ $result->department == 'Customer Services' ? 'selected="selected"' : '' }}>@lang('home.Customer Services')</option>
+                                    <option value="Finance" {{ $result->department == 'Finance' ? 'selected="selected"' : '' }}>@lang('home.Finance')</option>
+                                    <option value="Human Resources" {{ $result->department == 'Human Resources' ? 'selected="selected"' : '' }}>@lang('home.Human Resources')</option>
+                                    <option value="Information Technology" {{ $result->department == 'Information Technology' ? 'selected="selected"' : '' }}>@lang('home.Information Technology')</option>
+                                    <option value="Marketing" {{ $result->department == 'Marketing' ? 'selected="selected"' : '' }}>@lang('home.Marketing')</option>
+                                    <option value="Procurement" {{ $result->department == 'Procurement' ? 'selected="selected"' : '' }}>@lang('home.Procurement')</option>
+                                    <option value="Production" {{ $result->department == 'Production' ? 'selected="selected"' : '' }}>@lang('home.Production')</option>
+                                    <option value="Quality Control" {{ $result->department == 'Quality Control' ? 'selected="selected"' : '' }}>@lang('home.Quality Control')</option>
+                                     <option value="Research & Development" {{ $result->department == 'Research & Development' ? 'selected="selected"' : '' }}>@lang('home.Research & Development')</option>
+                                      <option value="Sales" {{ $result->department == 'Sales' ? 'selected="selected"' : '' }}>@lang('home.Sales')</option>
 
                                     @foreach(JobCallMe::getDepartments() as $depart)
-                                        <option value="{!! $depart->name !!}">{!! $depart->name !!}</option>
+                                        <option value="{!! $depart->name !!}" {{ $result->department == $depart->name ? 'selected="selected"' : '' }}>{!! $depart->name !!}</option>
                                     @endforeach
+
                                 </select>
                             </div>
-                           <div class="col-md-1 pnj-form-field"> <span><a href="{{ url('account/employer/departments') }}">@lang('home.addDepartment')</a></span></div>
+                             <div class="col-md-1 pnj-form-field"> <span><a href="{{ url('account/employer/departments') }}">@lang('home.addDepartment')</a></span></div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.s_category')</label>
+                            <label class="control-label col-sm-3">@lang('home.category')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-category" name="category" onchange="getSubCategories(this.value)" required>
-										<option value="">@lang('home.s_category')</option>
-									@foreach(JobCallMe::getCategories() as $cat)
-                                        <option value="{!! $cat->categoryId !!}">@lang('home.'.$cat->name)</option>
+                                <select class="form-control select2 job-category" name="category" onchange="getSubCategories(this.value)">
+                                    @foreach(JobCallMe::getCategories() as $cat)
+                                        <option value="{!! $cat->categoryId !!}" {{ $result->category == $cat->categoryId ? 'selected="selected"' : '' }}>{!! $cat->name !!}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -121,25 +111,24 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.Subcategory')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)" required>
-									<option value="">@lang('home.Subcategory')</option>
-								</select>
+                                <select class="form-control select2 job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
+                                </select>
                             </div>
                         </div>
-						<div class="form-group">
+                        <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.Subcategory2')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-sub-category2" name="subCategory2" required>
-									<option value="">@lang('home.Subcategory2')</option>
+                                <select class="form-control select2 job-sub-category2" name="subCategory2">
+									
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.careerlevel')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2" name="careerLevel" required>
+                                <select class="form-control select2" name="careerLevel">
                                     @foreach(JobCallMe::getCareerLevel() as $career)
-                                        <option value="{!! $career !!}">@lang('home.'.$career)</option>
+                                        <option value="{!! $career !!}" {{ $result->careerLevel == $career ? 'selected="selected"' : '' }}>{!! $career !!}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -147,9 +136,9 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.experiencelevel')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2" name="experience" required>
+                                <select class="form-control select2" name="experience">
                                     @foreach(JobCallMe::getExperienceLevel() as $experience)
-                                        <option value="{!! $experience !!}">@lang('home.'.$experience)</option>
+                                        <option value="{!! $experience !!}" {{ $result->experience == $experience ? 'selected="selected"' : '' }}>{!! $experience !!}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -157,44 +146,31 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.vacancy')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="vacancy" placeholder="@lang('home.numbervacancy')" required>
+                                <input type="text" class="form-control" name="vacancy"  value="{!! $result->vacancies !!}" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.description')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <textarea name="description" class="form-control tex-editor"></textarea>
+                                <textarea name="description" class="form-control tex-editor">{!! $result->description !!}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.requireskills')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <textarea name="skills" class="form-control tex-editor"></textarea>
+                                <textarea name="skills" class="form-control tex-editor">{!! $result->skills !!}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.qualification')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="qualification" placeholder="@lang('home.qualification')" required>
+                                <input type="text" class="form-control" value="{!! $result->qualification !!}" name="qualification" placeholder="Qualification" required>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.expiryhiringdate')</label>
-                            <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker"  name="expiryDate" onkeypress="return false" required>
-                            </div>
-                        </div>
-                        <div class="form-group" id="expirediv">
+                        <div class="form-group" style="display:none">
                             <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" id="secondDate" name="expiryAd" onkeypress="return false">
-                            </div>
-                        </div>
-						<div class="form-group" id="durationdiv">
-                            <label class="control-label col-sm-3">@lang('home.adduration')</label>
-                            <div class="col-sm-9 pnj-form-field">
-                           <input type="text" class="form-control" id="pas" name="duration" >
-								
+                                <input type="text" class="form-control date-picker" value="{!! $result->expiryDate !!}"  name="expiryDate" onkeypress="return false">
                             </div>
                         </div>
                     </div>
@@ -204,9 +180,9 @@
                        <div class="form-group">
                            <label class="control-label col-sm-3">@lang('home.type')</label>
                            <div class="col-sm-9 pnj-form-field">
-                               <select class="form-control select2" name="type" >
+                               <select class="form-control select2" name="type">
                                     @foreach(JobCallMe::getJobType() as $jtype)
-                                        <option value="{!! $jtype->name !!}">@lang('home.'.$jtype->name)</option>
+                                        <option value="{!! $jtype->name !!}" {{ $result->jobType == $jtype->name ? 'selected="selected"' : '' }}>{!! $jtype->name !!}</option>
                                     @endforeach
                                </select>
                            </div>
@@ -216,28 +192,23 @@
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control select2" name="shift">
                                     @foreach(JobCallMe::getJobShifts() as $jshift)
-                                        <option value="{!! $jshift->name !!}">@lang('home.'.$jshift->name)</option>
+                                        <option value="{!! $jshift->name !!}" {{ $result->jobShift == $jshift->name ? 'selected="selected"' : '' }}>{!! $jshift->name !!}</option>
                                     @endforeach
                                </select>
                            </div>
                        </div>
-
-					   <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.jobaddr')</label>
-                            <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="jobaddr" id="jobaddr" placeholder="@lang('home.jobaddrtext')"  required>
-                            </div>
-                        </div>
-
-					   <div class="form-group">
+					     <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.postcate1')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
-                                    <div class="col-md-4 benefits-checks">
-                                        <input id="head" type="checkbox" class="cbx-field" name="head" value="yes">								
-										<label class="cbx" for="head"></label>
-                                        <label class="lbl" for="head">@lang('home.abouthead')</label>
-                                    </div>
+                                
+                                        <div class="col-md-4 benefits-checks">
+                                            <input id="head" type="checkbox" class="cbx-field" name="head" value="yes" {{ $result->head == 'yes' ? 'checked=""' : '' }}>								
+											<label class="cbx" for="head"></label>
+                                            <label class="lbl" for="head">@lang('home.abouthead')</label>
+                                            
+                                        </div>
+                              
                                 </div>
                             </div>
                         </div>
@@ -248,7 +219,7 @@
                                 <div class="row">
                                 
                                         <div class="col-md-4 benefits-checks">                                        
-											<input id="dispatch" type="checkbox" class="cbx-field" name="dispatch" value="yes">
+											<input id="dispatch" type="checkbox" class="cbx-field" name="dispatch" value="yes" {{ $result->dispatch == 'yes' ? 'checked=""' : '' }}>
 											<label class="cbx" for="dispatch"></label>
                                             <label class="lbl" for="dispatch">@lang('home.dispatchinformation')</label>
                                         </div>
@@ -256,20 +227,23 @@
                                 </div>
                             </div>
                         </div>
-
                    </div>
-
-				   <h3>@lang('home.admissionsprocess')</h3>
+                   
+                   <h3>@lang('home.admissionsprocess')</h3>
                     <div class="pnj-form-section">                        
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.admissionsprocess')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
-                                    @foreach(JobCallMe::jobProcess() as $process)
+                                    <?php $addmissionprocess = explode(',', $result->process); ?>
+                                    <?php 
+                                        $array = array_unique (array_merge (JobCallMe::jobProcess(),$addmissionprocess)); 
+                                    ?>
+                                    @foreach($array as $process)
                                         <div class="col-md-4 benefits-checks">
-                                            <input id="{{ str_replace(' ','-',$process) }}"  type="checkbox" class="cbx-field" name="process[]" value="{{ $process }}">
+                                            <input id="{{ str_replace(' ','-',$process) }}"  type="checkbox" class="cbx-field" name="process[]" value="{{ $process }}" @foreach($addmissionprocess as $addmission) @if($process == $addmission) checked @endif @endforeach>
                                             <label class="cbx" for="{{ str_replace(' ','-',$process) }}"></label>
-                                            <label class="lbl" for="{{ str_replace(' ','-',$process) }}">@lang('home.'.$process)<!-- {{ $process }} --></label>
+                                            <label class="lbl" for="{{ str_replace(' ','-',$process) }}">@if(Lang::has('home.'.$process, 'en') || Lang::has('home.'.$process, 'kr')) @lang('home.'.$process) @else {{ $process}} @endif<!-- {{ $process }} --></label>
                                         </div>
                                     @endforeach
                                         <div class="col-md-4 ">
@@ -283,15 +257,14 @@
                                                 <button type="button" class="add btn btn-success"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
-						
+                        
                                 </div>
 
-								
+                                
 
-                            </div>							
+                            </div>                          
                         </div>
-                    </div>	
-
+                    </div>  
                     <h3>@lang('home.compensationbenefits')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
@@ -299,15 +272,16 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="number" class="form-control" name="minSalary" placeholder="@lang('home.minsalary') 20,000,000" required>
+                                        <input type="text" class="form-control" name="minSalary" value="{!! $result->minSalary !!}" required>
                                     </div>
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="number" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary') 25,000,000" required>
+                                        <input type="text" class="form-control" name="maxSalary" value="{!! $result->maxSalary !!}" required>
                                     </div>
                                     <div class="col-md-4">
-                                        <select class="form-control col-md-4 select2" name="currency" required>
+                                        <select class="form-control col-md-4 select2" name="currency">
+                                        
                                             @foreach(JobCallMe::siteCurrency() as $currency)
-                                                <option value="{!! $currency !!}">{!! $currency !!}</option>
+                                                <option value="{!! $currency !!}" {{ $result->currency == $currency ? 'selected="selected"' : '' }}>{!! $currency !!}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -318,26 +292,29 @@
                             <label class="control-label col-sm-3">@lang('home.benefits')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
-                                    @foreach(JobCallMe::jobBenefits() as $benefit)
+                                    
+                                    <?php $compensationbenefit = explode(',', $result->benefits); ?>
+                                    <?php 
+                                        $array2 = array_unique (array_merge (JobCallMe::jobBenefits(),$compensationbenefit));
+                                    ?> 
+                                    @foreach($array2 as $benefit)
                                         <div class="col-md-4 benefits-checks">
-                                            <input id="{{ str_replace(' ','-',$benefit) }}"  type="checkbox" class="cbx-field" name="benefits[]" value="{{ $benefit }}">
+                                            <input id="{{ str_replace(' ','-',$benefit) }}"  type="checkbox" class="cbx-field" name="benefits[]" value="{{ $benefit }}" @foreach($compensationbenefit as $benefitser) @if($benefit == $benefitser) checked @endif @endforeach>
                                             <label class="cbx" for="{{ str_replace(' ','-',$benefit) }}"></label>
-                                            <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">{{ $benefit }}</label>
+                                            <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">@if(Lang::has('home.'.$benefit, 'en') || Lang::has('home.'.$benefit, 'kr')) @lang('home.'.$benefit) @else {{ $benefit}} @endif</label>
                                         </div>
                                     @endforeach
-                                        <div class="col-md-4 ">
+                                    <div class="col-md-4 ">
                                             <input id="addbenefit"  type="checkbox" class="cbx-field" value="yes">
                                             <label class="cbx" for="addbenefit"></label>
                                             <label class="lbl" for="addbenefit">@lang('home.add')</label>
                                         </div>
                                         <div class="optionBox" id="morebenefit" style="display:none">
                                             
-                                            <div class="col-md-10 block">
+                                            <div class="col-md-10 block2">
                                                 <button type="button" class="add2 btn btn-success"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -350,7 +327,7 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                        <option value="{{ $cntry->id }}" {{ $result->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -358,22 +335,21 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.state')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-state" name="state" required>
+                                <select class="form-control select2 job-state" name="state" data-state="{{ $result->state }}">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.city')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-city" name="city" required>
+                                <select class="form-control select2 job-city" name="city" data-city="{{ $result->city }}">
                                 </select>
                             </div>
                         </div>
-                        
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.address')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input id="pac-input" name="Address" class="form-control" type="text" placeholder="Enter a location">
+                                <input id="pac-input" name="Address" class="form-control" type="text" placeholder="Enter a location" value="{!! $result->Address !!}">
                                 <div class="pac-card" id="pac-card">
                                   <div>
                                     <div id="type-selector" class="pac-controls">
@@ -411,10 +387,10 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3"></label>
                             <div class="col-sm-9 da-box">
-                                <p>@lang('home.pleasereadcarefully')</p>
+                                <p>@lang('home.readcarefully')</p>
                                 <ul>
                                     <li>@lang('home.postli1')</li>
-                                    <li>@lang('home.postli2')</li>
+                                    <li>@lang('home.postl12')</li>
                                     <li>@lang('home.postli3')</li>
                                     <li>@lang('home.postli4')</li>
                                 </ul>
@@ -422,20 +398,15 @@
                             </div>
                         </div>
                     </div>
-					<div class="col-md-offset-3 col-md-2  pnj-btns">
-                        <span style="font-size:17px;padding-right:50px;" id="total">Total Amount : US$</span>						
-                    </div>
-                    <div class="col-md-6  pnj-btns">                        
-						<button type="submit" class="btn btn-primary" name="save">@lang('home.postjob')</button>
-                        <button class="btn btn-default"><a href="{{ url('account/employer') }}">@lang('home.CANCEL')</a></button>
+                    <div class="col-md-offset-4 col-md-8  pnj-btns">
+                        <button type="submit" class="btn btn-primary" name="save">@lang('home.updatejob')</button>
+                        <a href="{{ url('account/employer') }}" class="btn btn-default">@lang('home.CANCEL')</a>
                     </div>
                 
             </div>
         </div>
     </div>
-	</div>
-	</div>
-</form>
+    </form>
 <style type="text/css">
      #map {
         height: 500px;
@@ -508,102 +479,48 @@
 @endsection
 @section('page-footer')
 <script type="text/javascript">
-var process = "";
-var alrt="";
 $(document).ready(function(){
-    $('#post-job-ad-types li').first().find('span .mat-radio-input').bind('click',function(e){
-        $('#durationdiv').hide();
-        $('#total').hide();
-        $('#expirediv').hide();
+        $('#addprocess').on('change', function() {
+      // process= $('#addprocess').val();
+        if(this.checked)
+        {
+            //alert("hi nabeel");
+            //$('#addlable').show();
+            $('#moreprocess').show();
+        }
+        else{
+            //$('#addlable').hide();
+            $('#moreprocess').hide();
+        }
+    });
+
+     $('#addbenefit').on('change', function() {
+      // process= $('#addprocess').val();
+        if(this.checked)
+        {
+            //alert("hi nabeel");
+           // $('#addlable').show();
+            $('#morebenefit').show();
+        }
+        else{
+          //  $('#addlable').hide();
+            $('#morebenefit').hide();
+        }
     })
-    
-    $('#post-job-ad-types li').first().find('span .mat-radio-input').trigger('click');
-	
-    $('body').on('click','.mat-radio-input',function(e){
-		console.log($(e.target).val());
-	 alrt=$(e.target).siblings('input').val();
-	 console.log(alrt);
-     if(alrt==0)
-     {
-         $('#durationdiv').hide();
-         $('#total').hide();
-         $('#expirediv').hide();
-         
-        // alert("nabeel");
-     }
-     else{
-          $('#durationdiv').show();
-         $('#total').show();
-          $('#expirediv').show();
-        
-     }
-		
-	})
-    $('#addprocess').on('change', function() {
-  // process= $('#addprocess').val();
-    if(this.checked)
-    {
-        //alert("hi nabeel");
-        //$('#addlable').show();
-        $('#moreprocess').show();
-    }
-    else{
-        //$('#addlable').hide();
-        $('#moreprocess').hide();
-    }
+    $('.add').click(function() {
+     $('#moreprocess').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" required /><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
+
+    });
+    $('.add2').click(function() {
+     $('#morebenefit').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" required /><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
+
+    });
+    $('.optionBox').on('click','.remove',function() {
+    $(this).parent().remove();
 });
-
- $('#addbenefit').on('change', function() {
-  // process= $('#addprocess').val();
-    if(this.checked)
-    {
-        //alert("hi nabeel");
-       // $('#addlable').show();
-        $('#morebenefit').show();
-    }
-    else{
-      //  $('#addlable').hide();
-        $('#morebenefit').hide();
-    }
-})
- 
-  
-
     getStates($('.job-country option:selected:selected').val());
     getSubCategories($('.job-category option:selected:selected').val());
-
-	getSubCategories2($('.job-category option:selected:selected').val());
 });
-
-$('.add').click(function() {
-    $('#moreprocess').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="process[]" required/><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
-
-});
-$('.add2').click(function() {
-    $('#morebenefit').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" required/><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
-
-});
-$('.optionBox').on('click','.remove',function() {
- 	$(this).parent().remove();
-});
-$('#secondDate').on('change', function() {
-		  myfunc()
-});
-      
-       function myfunc(){
-       var start = new Date();
-      // var start= $("#firstDate").datepicker("getDate");
-    	var end= $("#secondDate").datetimepicker("getDate");
-   		days = (end- start) / (1000 * 60 * 60 * 24);
-      var to= Math.round(days);
-      var total= to * alrt;
-      $('#pas').val(to);
-	  $('#total').html("Total Amount : "+total+" $" );
-      
-      // alert(total);
-       
-       }
-  
 
 $('.job-country').on('change',function(){
     var countryId = $(this).val();
@@ -706,6 +623,7 @@ function firstCapital(myString){
     return firstChar + tail;
 }
 var formPost = 1;
+
 </script>
 <!-- google map code start from there  -->
 <script>

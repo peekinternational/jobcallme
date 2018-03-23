@@ -520,5 +520,31 @@ class Cms extends Controller{
             echo 2;
         }
     }
+    public function viewjobs(Request $request){
+        $data = DB::table('jcm_jobs as job');
+        $data->select('job.*','cat.name','subcat.subName','subcat2.subName as cat2');
+        $data->leftJoin('jcm_categories as cat','cat.categoryId','=','job.category');
+        $data->leftJoin('jcm_sub_categories as subcat','subcat.subCategoryId','=','job.subCategory');
+        $data->leftJoin('jcm_sub_categories2 as subcat2','subcat2.subCategoryId2','=','job.subCategory2');
+        $jobs = $data->paginate(15);;
 
+      return view('admin.cms.viewjobs',compact('jobs'));
+    }
+    public function deleteJob(Request $request){
+         $jobId = $request->input('jobId');
+
+        if(DB::table('jcm_jobs')->where('jobId','=',$jobId)->delete()){
+           return  redirect('admin/cms/alljobs');
+        }else{
+            return " there is an error on CMS controller line number 539";
+        }
+    }
+    public function editjob($id){
+        $data = DB::table('jcm_jobs')->where('jobId','=',$id)->first();
+        $recs = DB::table('jcm_payments')->get();
+        
+        return view('frontend.employer.job-update-admin',compact('result','recs'));
+
+        
+    }
 }

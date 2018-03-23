@@ -62,7 +62,7 @@
 						<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
                             @foreach($postedJobs as $pjobs)
 							
-                                <div class="col-md-10 rtj-item">
+                                <div class="col-xs-10 col-md-10 rtj-item">
 							
                                     <div class="rtj-details">
                                         <p><strong><a href="{{ url('jobs/'.$pjobs->jobId) }}">{!! $pjobs->title !!}</a></strong> <i class="fa fa-check-circle-o"></i></p>
@@ -80,7 +80,7 @@
                                     </div>
 									
                                 </div>
-									<div class="col-md-2"><div class="dropdown">
+									<div class="col-xs-2 col-md-2"><div class="dropdown">
 									  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
 									  <div class="dropdown-content">
 										<a href="{{url('account/employer/job_update/'.$pjobs->jobId)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')</a>
@@ -223,18 +223,21 @@
                     <h4>@lang('home.ImproveCompetitiveAdvantage')</h4>					
 				</div>
 				<div class="follow-companies">
-                    <h4 class="pull-left">@lang('home.ImproveCompetitiveAdvantage')</h4><h5 class="pull-right">@lang('home.ADVERTISE')</h5>
-                    <hr style="margin-top:44px !important">
+                    <!-- <h4 class="pull-left">@lang('home.ImproveCompetitiveAdvantage')</h4><h5 class="pull-right">@lang('home.ADVERTISE')</h5>
+                    <hr style="margin-top:44px !important"> -->
                     <div class="row">
 				            @foreach($lear_record as $rec)
                    
                       <div class="col-md-12 sr-item">
 				      <div class="col-md-4 col-xs-12">
-                        @if($rec->upskillImage != '')
-                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:auto;">
-                        @else
-                        <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:80px !important;">
-                        @endif
+
+                        <div class="sr-item-img">
+                            @if($rec->upskillImage != '')
+                            <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:80px;">
+                            @else
+                            <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:80px !important;">
+                            @endif
+                        </div>
 						</div>
                         <div class="col-md-8 col-xs-12" style="margin-top: 10px;">
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>

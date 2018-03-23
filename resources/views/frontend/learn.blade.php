@@ -21,6 +21,10 @@
 										<button type="submit" id="l_fasearch" style="width:9% !important" class="search-btn">
                                     <i class="fa fa-search"></i>
                                 </button> 
+
+                                <button  type="button" id="l_search" class="hidden-sm hidden-md hidden-lg" style="margin-left: 9px;width: 4%;height: 33px;background: transparent;border: 2px solid #cecdcd;">
+                                 <span class="caret" style="color:white"></span></button>
+                                
                                 </div>
 								<div class="search-field-box search-item" id="l_type" style="display:none;padding-top: 14px;">
 								<select class="form-control select2 job-country" name="type" >
@@ -33,6 +37,7 @@
                                 Search</button>
 								<button  type="button" id="l_close" class="btn btn-default" style="margin-top: 12px;">
                                 Close</button>
+
                                 </div>
                                 
                                 <div class="search-field-box search-item" id="l_country" style="display:none;padding-top: 14px;">
@@ -44,12 +49,12 @@
                                     @endforeach
 									</select>
 
-									
+	                               
 									
                                 </div>
 							
                                 
-								<button  type="button" id="l_search" style="margin-left: 9px;width: 21px;height: 33px;background: transparent;">
+								<button  type="button" class="hidden-xs" id="l_search" style="margin-left: 9px;width: 4%;height: 33px;background: transparent;border: 2px solid #cecdcd;">
                                 <span class="caret" style="color:white"></span></button>
 								
                             </div>
@@ -101,11 +106,13 @@
             @foreach($lear_record as $rec)
                 <div class="col-xs-12 col-sm-6 col-md-3 grid-item">
                    <div class="la-item">
-                        @if($rec->upskillImage != '')
-                        <img class=" img-responsive" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="">
-                        @else
-                        <img src="{{ url('d-cover.jpg') }}">
-                        @endif
+                        <div class="la-item-img">
+                            @if($rec->upskillImage != '')
+                            <img class=" img-responsive" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="">
+                            @else
+                            <img src="{{ url('d-cover.jpg') }}">
+                            @endif
+                        </div>
                         <div class="col-md-12">
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
                             <p>{{ $rec->organiser != '' ?  $rec->organiser : JobCallMe::userName($rec->userId) }}</p>

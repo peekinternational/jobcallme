@@ -923,7 +923,7 @@ a.job-location:hover span.shine {
 .sr-item img{
     display: inline-block;
     float: left;
-    width: 70px;
+    /*width: 70px;*/
     margin-right: 10px;
 }
 .sr-details{
@@ -1356,6 +1356,8 @@ ul.jd-rewards li i{
     border: 1px solid #cccccc;
     margin-bottom: 20px;
     background: #ffffff;
+    padding-right: 15px;
+    padding-left: 5px;
 }
 .ja-content-item{
 	padding-left:10px;
@@ -1861,9 +1863,14 @@ ul.jd-rewards li i{
     margin: 0 auto;
     text-align: center;
     /* width: 100%; */
-    height: 100px;
+    /*height: 100px;*/
     margin-bottom: 10px;
 	margin-top: 10px;
+}
+.la-item-img{
+    height: 120px;
+    overflow: hidden;
+    padding: 0 15px;
 }
 .la-pad{
     padding: 10px;
@@ -1961,6 +1968,7 @@ ul.jd-rewards li i{
 }
 .rd-author img{
     width: 70px;
+    height: 70px;
     display: inline-block;
     float: left;
     margin-right: 15px;
@@ -2061,8 +2069,9 @@ ul.jd-rewards li i{
 }
 .sp-item img{
     display: inline-block;
-    width: 70px;
+    /*width: 70px;*/
     margin-bottom: 0px;
+    width: 100%;
 }
 .sp-item p{
     margin-bottom: 2px;
@@ -3514,6 +3523,87 @@ img.profile-photo-xs{
         width: 100%;
         margin-bottom: 10px;
     }
+    /*Zeeshan Css Chnges*/
+    .pnj-box h3 span{
+        padding-left: 0 !important;
+    }
+    .upskill-box p{
+        padding: 10px;
+    }
+    #l_city input{
+        width: 79%;
+    }
+    #l_city #l_search{
+        margin-left: 0 !important;
+        width: 9% !important;
+    }
+    #p_city input{
+        width: 79%;
+    }
+    #p_city .hidden-md{
+        width: 9% !important;
+        margin-left: 0 !important;
+    }
+    .sc-thumbnail{
+        padding: 0;
+    }
+    .sc-cost{
+        padding-top: 40px;
+    }
+    .sc-desc{
+        width: 56%;
+    }
+    .sc-desc ul li{
+        float: left;
+        padding-right: 9px;
+        margin-right: 0 !important;
+    }
+    .sr-item img{
+        width: 100% !important;
+        height: auto !important;
+    }
+    .sr-item-img{
+        height: 114px;
+        overflow: hidden;
+    }
+    .jobs-suggestions img{
+        width: 30% !important;
+    }
+    .la-item-img{
+        height: 140px;
+    }
+    #pnj-form .control-label{
+        text-align: left;
+    }
+    a.job-location{
+        width: 32.5%;
+    }
+    .suggestions-user-info{
+        display: block !important;
+    }
+    .suggestions-user-info img{
+        margin-top: 0 !important;
+    }
+    .suggestions-user-info >div{
+        padding-left: 0 !important;
+    }
+    .suggestions-user-info >div >span{
+        font-size: 25px;
+    }
+    .profile-img{
+        text-align: center;
+    }
+    .profile-img >img{
+        width: 42% !important; 
+    }
+    .applicant-SimilarImg img{
+        width: 70px !important; 
+        height: 75px !important;
+    }
+    .jd-job-details{
+        margin-left: -15px;
+        margin-right: -15px;
+    }
 }
 @media (max-width: 465px) {
     .tabbable-panel{
@@ -3546,7 +3636,7 @@ img.profile-photo-xs{
 
 /*==================================================
   Media = Images and Videos CSS
-  ==================================================*/
+  ==================================================
 
 .media .media-grid{
     background: #f8f8f8;

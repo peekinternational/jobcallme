@@ -379,6 +379,7 @@ class Home extends Controller{
     	
     //	$people->limit(30);
 
+
     	$people->orderBy('jcm_users.userId','desc');
     	$peoples = $people->paginate(18);
       // dd($peoples);

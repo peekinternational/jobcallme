@@ -16,14 +16,16 @@
                                 <div class="search-field-box search-item">
                                     <input type="search" placeholder="@lang('home.lookingpeople')" name="keyword">
                                 </div>
-                                <div class="search-field-box search-item">
+                                <div class="search-field-box search-item" id="p_city">
                                     <input type="search" placeholder="@lang('home.Cities')" name="city">
-                                <button type="submit" class="search-btn" style="width:9% !important">
+                                  <button type="submit" class="search-btn" style="width:9% !important">
                                     <i class="fa fa-search"></i>
-                                </button>
+                                  </button>
+                                  <button  type="button" data-toggle="modal" data-target="#myModal" class="hidden-sm hidden-md hidden-lg" style="margin-left: 9px;width: 4%;height: 33px;background: transparent; border: 2px solid white;">
+                                <span class="caret" style="color:white"></span></button>
                                 </div>
                                 
-				<button  type="button" data-toggle="modal" data-target="#myModal" style="margin-left: 9px;width: 21px;height: 33px;background: transparent;">
+				<button  type="button" data-toggle="modal" data-target="#myModal" class="hidden-xs" style="margin-left: 9px;width: 4%;height: 33px;background: transparent; border: 2px solid #cecdcd;">
                                 <span class="caret" style="color:white"></span></button>
                             </div>
                         </form>

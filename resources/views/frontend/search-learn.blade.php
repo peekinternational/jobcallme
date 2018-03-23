@@ -67,8 +67,9 @@
                             </li>
                             <li><i class="fa fa-calendar-check-o"></i> {{ date('d F, Y',strtotime($rec->startDate)) }}</li>
                             <li><i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</li>
+                            <li class="hidden-sm hidden-md hidden-lg text-success"><i class="fa fa-map-marker"></i> online, {{ JobCallMe::cityName($rec->city).' '.JobCallMe::countryName($rec->country)}}</li>
                         </ul>
-                        <p><i class="fa fa-map-marker"></i> online, {{ JobCallMe::cityName($rec->city).' '.JobCallMe::countryName($rec->country)}}</p>
+                        <p class="hidden-xs"><i class="fa fa-map-marker"></i> online, {{ JobCallMe::cityName($rec->city).' '.JobCallMe::countryName($rec->country)}}</p>
                     </div>
                     <div class="sc-cost">
                         {{ $rec->currency.' '.number_format($rec->cost).'/-'}}
