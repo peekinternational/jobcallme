@@ -21,7 +21,9 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
-
+Route::get('pdfview',function() {
+    return view('frontend.cv');
+});
 Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');
 Route::post('addreadCat','frontend\Home@addreadCat');
