@@ -7,17 +7,23 @@
 <section style="margin-bottom: 123px;padding-top: 180px;">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h3 style="text-align:center">@lang('home.selectpaymentmethod')</h3>
-                <br>
-                <br>
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-6" style="display:-webkit-box">
-                <div style="padding-left: 22px;padding-right: 13px;">
-                    <span>Bank Detail</span>
-                    <span>{{$amount}}</span>
-                    <span>{{$amounts}}</span>
+        <div class="col-md-3">
+        </div>
+            <div class="col-md-6">
+                <div class="modal-content" style="border: 2px solid #c8a616;">
+                    <div class="modal-header" style="background-color: #c8a616;border-bottom: 1px solid #c8a616;color: white;">
+                   
+                    <h4 class="modal-title">@lang('home.cashpayment')</h4>
+                    </div>
+                    <div class="modal-body">
+                    <p>Job title: {{ $inputs['title']}}</p>
+                    <p>Amount: ${{ $inputs['amount']}}</p>
+                    <p>Bank Name: Industrail Bank</p>
+                    <p>Account Holder: <b>Jobcallme Co.,Ltd</b></p>
+                    <p>Account Number: 068-078905-04-012</p>
+                    
+                    </div>
+                    
                 </div>
             </div>
         </div>

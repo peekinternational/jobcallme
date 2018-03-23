@@ -391,7 +391,7 @@ curl_close ($ch);
 			$skillss =Session::get('skills');
 			$jobaddrs =Session::get('jobaddr');
 			$qualifications = Session::get('qualification');
-			$expiryDates = Session::get('expiryDate');
+			$durations = Session::get('duration');
 			$minSalarys = Session::get('minSalary');
 			$maxSalarys = Session::get('maxSalary');
 			$descriptions = Session::get('description');
@@ -409,7 +409,7 @@ curl_close ($ch);
 	
 			extract($request->all());
 
-			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process),'country' => $countrys, 'state' => $states, 'city' => $citys,'Address' => $Addresss, 'expiryDate' => $expiryDates, 'expiryAd' => $expiryAds,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
+			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys,'duration' => $durations, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process),'country' => $countrys, 'state' => $states, 'city' => $citys,'Address' => $Addresss, 'expiryDate' => $expiryDates, 'expiryAd' => $expiryAds,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
 			if($subCategorys == ''){
 				$inputs['subCategory'] = '';
 			}
@@ -1352,30 +1352,30 @@ public function userResume($userId){
         $app = $request->session()->get('jcmUser');
 		//dd($request->department);
 		//$request->session()->put('amount', $amount);
-		$request->session()->put('title', $request->title);
-		//$request->session()->put('jType', 'Paid');
-		$request->session()->put('head', $request->head);
-		$request->session()->put('dispatch', $request->dispatch);
-		$request->session()->put('department', $request->department);
-		$request->session()->put('category', $request->category);
-		$request->session()->put('subCategory', $request->subCategory);
-		$request->session()->put('careerLevel', $request->careerLevel);
-		$request->session()->put('experience', $request->experience);
-		$request->session()->put('vacancy', $request->vacancy);
-		$request->session()->put('description', $request->description);
-		$request->session()->put('skills', $request->skills);
-		$request->session()->put('qualification', $request->qualification);
-		//$request->session()->put('expiryDate', $request->expiryDate);
-		$request->session()->put('minSalary', $request->minSalary);
-		$request->session()->put('maxSalary', $request->maxSalary);
-		$request->session()->put('description', $request->description);
-		$request->session()->put('type', $request->type);
-		$request->session()->put('currency', $request->currency);
-		$request->session()->put('benefits', $request->benefits);
-		$request->session()->put('state', $request->state);
-		$request->session()->put('city', $request->city);
-		$request->session()->put('country', $request->country);
-		$request->session()->put('shift', $request->shift);
+		// $request->session()->put('title', $request->title);
+		// //$request->session()->put('jType', 'Paid');
+		// $request->session()->put('head', $request->head);
+		// $request->session()->put('dispatch', $request->dispatch);
+		// $request->session()->put('department', $request->department);
+		// $request->session()->put('category', $request->category);
+		// $request->session()->put('subCategory', $request->subCategory);
+		// $request->session()->put('careerLevel', $request->careerLevel);
+		// $request->session()->put('experience', $request->experience);
+		// $request->session()->put('vacancy', $request->vacancy);
+		// $request->session()->put('description', $request->description);
+		// $request->session()->put('skills', $request->skills);
+		// $request->session()->put('qualification', $request->qualification);
+		// //$request->session()->put('expiryDate', $request->expiryDate);
+		// $request->session()->put('minSalary', $request->minSalary);
+		// $request->session()->put('maxSalary', $request->maxSalary);
+		// $request->session()->put('description', $request->description);
+		// $request->session()->put('type', $request->type);
+		// $request->session()->put('currency', $request->currency);
+		// $request->session()->put('benefits', $request->benefits);
+		// $request->session()->put('state', $request->state);
+		// $request->session()->put('city', $request->city);
+		// $request->session()->put('country', $request->country);
+		// $request->session()->put('shift', $request->shift);
 		//$request->session()->put('expiryDate', $request->expiryDate);
 		
 	
@@ -1547,13 +1547,15 @@ public function userResume($userId){
 		$shift = Session::get('shift');
 		$city = Session::get('city');
 		$expiryDate = Session::get('expiryDate');
+		$expiryAd= Session::get('expiryAd');
 		$state = Session::get('state');
+		$duration = Session::get('duration');
 
 		
 
 		extract($request->all());
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'paymentType'=> '1', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'department' => $department, 'category' => $category, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'paymentType'=> '1', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'department' => $department, 'category' => $category,'duration' => $duration, 'subCategory' => $subCategory, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits), 'country' => $country, 'state' => $state, 'city' => $city, 'expiryDate' => $expiryDate,'expiryAd' => $expiryAd,  'createdTime' => date('Y-m-d H:i:s'));
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
@@ -1643,17 +1645,20 @@ public function userResume($userId){
 			$cityss = Session::get('city');
 			$Addressss = Session::get('Address');
 			$expiryDates = Session::get('expiryDate');
+			$expiryAdss= Session::get('expiryAd');
 			$statess = Session::get('state');
+			$durationss = Session::get('duration');
       //	dd($amounts);
 			extract($request->all());
 
-			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'pay_id' => $payment, 'paymentType'=> '1', 'amount' => $amountss, 'p_Category' => $p_Categoryss, 'title' => $titless, 'jType' => $jTypess, 'department' => $departmentss, 'category' => $categoryss, 'subCategory' => $subCategoryss, 'subCategory2' => $subCategorys2s, 'careerLevel' => $careerLevelss, 'experience' => $experiencess, 'vacancies' => $vacancyss, 'description' => $descriptionss, 'skills' => $skillsss, 'qualification' => $qualificationss, 'jobType' => $typess, 'jobShift' => $shiftss,'jobaddr' => $jobaddrss, 'minSalary' => $minSalaryss, 'maxSalary' => $maxSalaryss, 'currency' => $currencyss, 'benefits' => @implode(',', $benefitsss), 'process' => @implode(',', $processs),'country' => $countryss, 'state' => $statess, 'city' => $cityss,'Address' => $Addressss,'expiryDate' => $expiryDatess,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
+			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'pay_id' => $payment, 'paymentType'=> '3','status'=> '2', 'amount' => $amountss,'duration' => $durationss, 'p_Category' => $p_Categoryss, 'title' => $titless, 'jType' => $jTypess, 'department' => $departmentss, 'category' => $categoryss, 'subCategory' => $subCategoryss, 'subCategory2' => $subCategorys2s, 'careerLevel' => $careerLevelss, 'experience' => $experiencess, 'vacancies' => $vacancyss, 'description' => $descriptionss, 'skills' => $skillsss, 'qualification' => $qualificationss, 'jobType' => $typess, 'jobShift' => $shiftss,'jobaddr' => $jobaddrss, 'minSalary' => $minSalaryss, 'maxSalary' => $maxSalaryss, 'currency' => $currencyss, 'benefits' => @implode(',', $benefitsss), 'process' => @implode(',', $processs),'country' => $countryss, 'state' => $statess, 'city' => $cityss,'Address' => $Addressss,'expiryDate' => $expiryDatess,'expiryAd' => $expiryAdss, 'createdTime' => date('Y-m-d H:i:s'));
 			if($subCategorys == ''){
 				$inputs['subCategory'] = '';
 			}
 			
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
-			return view('frontend.employer.cashpayment_detail',compact('amountss','titless'));
+			//dd($inputs);
+			return view('frontend.employer.cashpayment_detail',compact('inputs'));
 	
 		 }
 		 public function addUser(Request $request){
