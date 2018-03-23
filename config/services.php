@@ -38,11 +38,8 @@ return [
     'facebook' => [
         'client_id' => '377749349357447',
         'client_secret' => 'dd4c2236c3c3c64a397efbb3b40f5832',
-<<<<<<< HEAD
-      'redirect' =>  url('fbCallback'),
-=======
+      // 'redirect' =>  url('fbCallback'),
         //'redirect' =>  url('fbCallback'),
->>>>>>> a81827dcfc7e86d5eb9ba76a22a9605fd749ad47
     ],
 
     'google' => [
@@ -53,11 +50,8 @@ return [
     'linkedin' => [
         'client_id' => '818xstq8efstw9',
         'client_secret' => 'j094fcTdDgY7Mx6b',
-<<<<<<< HEAD
-     'redirect' => url('lnCallback'),
-=======
+     // 'redirect' => url('lnCallback'),
       //'redirect' => url('lnCallback'),
->>>>>>> a81827dcfc7e86d5eb9ba76a22a9605fd749ad47
         
     ], 
 ];
