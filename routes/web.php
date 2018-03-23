@@ -21,8 +21,14 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
+<<<<<<< HEAD
 Route::get('pdfview',function() {
     return view('frontend.cv');
+=======
+/* pdf template for resume*/
+Route::get('pdf',function(){
+   	return view('frontend.cv');
+>>>>>>> 3be77e1d440b941cb18f7fbc659b72a0dd673d1f
 });
 Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');
@@ -48,6 +54,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 	Route::get('dashboard','admin\Dashboard@index');
 	Route::get('orders','admin\Dashboard@home');
+	Route::post('cms/jobs/delete','admin\cms@deleteJob');
+	Route::get('cms/jobs/update/{id}','admin\cms@editjob');
 
 	/* setting */
 	Route::match(['get','post'],'settings/profile','admin\Setting@profile');
@@ -73,6 +81,7 @@ Route::group(['prefix' => 'admin'], function () {
 	/* cms */
 	/* job categories */
 	Route::match(['get','post'],'cms/category','admin\Cms@viewCategories');
+	Route::match(['get','post'],'cms/alljobs','admin\Cms@viewjobs');
 	Route::post('cms/category/save','admin\Cms@saveCategory');
 	Route::get('cms/category/get/{id}','admin\Cms@getCategory');
 	Route::delete('cms/category/delete','admin\Cms@deleteCategory');
@@ -251,8 +260,6 @@ Route::get('employer/advance_serach', function () {
 Route::get('employer/nicerequest', function () {
     return view('frontend.employer.nicerequest');
 });
-
-
 
 Route::get('employer/niceresult', function () {
     return view('frontend.employer.niceresult');
