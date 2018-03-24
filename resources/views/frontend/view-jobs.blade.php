@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="keyword" value="{{ Request::input('keyword') }}" placeholder="@lang('home.key')">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden-xs">
                        <select class="form-control job-category" name="categoryId" onchange="getSubCategories(this.value)">
                        		<option value="">@lang('home.s_category')</option>
                        		@foreach(JobCallMe::getCategories() as $cat)
@@ -27,17 +27,17 @@
                             @endforeach
                        </select>
                     </div>
-					<div class="form-group">
+					<div class="form-group hidden-xs">
                        <select class="form-control job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
 									<option value="">@lang('home.Subcategory')</option>
 									</select>
                     </div>
-					<div class="form-group">
+					<div class="form-group hidden-xs">
                        <select class="form-control job-sub-category2" name="subCategory2">
 								<option value="">@lang('home.Subcategory2')</option>
 									</select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden-xs">
                         <select class="form-control" name="jobType">
                             <option value="">@lang('home.s_type')</option>
                             @foreach(JobCallMe::getJobType() as $jtype)
@@ -45,7 +45,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden-xs">
                         <select class="form-control" name="jobShift">
                             <option value="">@lang('home.s_shift')</option>
                             @foreach(JobCallMe::getJobShifts() as $jshift)
@@ -53,7 +53,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden-xs">
                         <select class="form-control" name="careerLevel">
                             <option value="">@lang('home.s_career')</option>
                             @foreach(JobCallMe::getCareerLevel() as $career)
@@ -61,7 +61,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden-xs">
                         <select class="form-control" name="experience">
                             <option value="">@lang('home.s_experience')</option>
                             @foreach(JobCallMe::getExperienceLevel() as $experience)
@@ -69,13 +69,13 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden-xs">
                         <input type="text" class="form-control" name="minSalary" value="" placeholder="@lang('home.minsalary') ">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden-xs">
                         <input type="text" class="form-control" name="maxSalary" value="" placeholder="@lang('home.Maxsalary')">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden-xs">
                         <select class="form-control" name="currency">
                             <option value="">@lang('home.s_currency')</option>
                             @foreach(JobCallMe::siteCurrency() as $currency)
