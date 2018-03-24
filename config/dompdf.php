@@ -149,11 +149,9 @@ return array(
          * Used if no suitable fonts can be found. This must exist in the font folder.
          * @var string
          */
-<<<<<<< HEAD
+
         "DOMPDF_DEFAULT_FONT" => "serif",
-=======
-        "default_font" => "serif",
->>>>>>> 3be77e1d440b941cb18f7fbc659b72a0dd673d1f
+
 
         /**
          * Image DPI setting

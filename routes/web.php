@@ -21,14 +21,13 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
-<<<<<<< HEAD
+
 Route::get('pdfview',function() {
     return view('frontend.cv');
-=======
-/* pdf template for resume*/
-Route::get('pdf',function(){
-   	return view('frontend.cv');
->>>>>>> 3be77e1d440b941cb18f7fbc659b72a0dd673d1f
+
+//Route::get('pdf',function(){
+   //	return view('frontend.cv');
+
 });
 Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');
