@@ -7,37 +7,23 @@
 <section style="margin-bottom: 123px;padding-top: 180px;">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h3 style="text-align:center">@lang('home.selectpaymentmethod')</h3>
-                <br>
-                <br>
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-6" style="display:-webkit-box">
-                <div style="padding-left: 22px;padding-right: 13px;">
-                
-                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.skillpaypal') !!}" >
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
-                        </form>
+        <div class="col-md-3">
+        </div>
+            <div class="col-md-6">
+                <div class="modal-content" style="border: 2px solid #c8a616;">
+                    <div class="modal-header" style="background-color: #c8a616;border-bottom: 1px solid #c8a616;color: white;">
                    
-                </div>
-                 <div class="" style="padding-left: 22px;padding-right: 13px;" >
-                   
-                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{{ action('frontend\ExtraSkills@cashpayment') }}" >
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-warning btn-lg" name="save">Cash Payment</button> 
-                        </form>
-                   
-                </div>
-                  <div class="" style="padding-left: 22px;padding-right: 13px;" >
-            
-                    <form action="{{url('nicepay/payRequest_utf.php')}}" method="post" id='nicePayForm'> 
-                        
-                        <a href='javascript:void(0)'  class="btn btn-primary btn-lg nicePay">NicePay</a>
-                    </form>
-                
-                </div>
+                    <h4 class="modal-title">@lang('home.cashpayment')</h4>
+                    </div>
+                    <div class="modal-body">
+                    <p>Job title: {{ $order['orderBy']}}</p>
+                    <p>Amount: ${{ $order['amount']}}</p>
+                    <p>Bank Name: Industrail Bank</p>
+                    <p>Account Holder: <b>Jobcallme Co.,Ltd</b></p>
+                    <p>Account Number: 068-078905-04-012</p>
+                    
+                    </div>
+                    
                 </div>
             </div>
         </div>

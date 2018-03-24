@@ -373,7 +373,7 @@ class Home extends Controller{
 	    }
 
     	$people->where('privacy.profile','=','Yes');
-    	$people->limit(30);
+    	//$people->limit(30);
 
 		$people->where('jcm_users_meta.userId','!=','');
     	
@@ -441,7 +441,10 @@ class Home extends Controller{
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
 	    	}
 	    }
-		
+		$people->where('privacy.profile','=','Yes');
+    	//$people->limit(30);
+
+		$people->where('jcm_users_meta.userId','!=','');
     	$people->orderBy('jcm_users.userId','desc');
          $people->distinct('jcm_users.firstName');
     	$peoples = $people->paginate(18);
@@ -555,9 +558,10 @@ class Home extends Controller{
     	if($request->input('in') != ''){
     		$company->where('category','=',$request->input('in'));
     	}
+		$company->where('category','!=','');
     	$company->orderBy('companyId','desc');
-    	$company->limit(24);
-    	$companies = $company->get();
+    	
+    	$companies = $company->paginate(30);
 
     	return view('frontend.view-companies',compact('companies'));
     }

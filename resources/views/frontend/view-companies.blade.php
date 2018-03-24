@@ -54,8 +54,11 @@
                     </div>
                 </div>
             </div>
+            
         </div>
+       
     </div>
+     
 </section>
 <section>
     <div class="container">
@@ -85,6 +88,7 @@
                 @endforeach
             </div>
         </div>
+        <div style="text-align:center"><?php	echo $companies->render(); ?></div>
     </div>
 </section>
 <link href="{{ asset('frontend-assets/css/ihover.css') }}" rel="stylesheet">

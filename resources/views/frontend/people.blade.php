@@ -200,7 +200,7 @@
 							
 			
 
-			<div class="col-md-6">
+		     	<div class="col-md-6">
                           <div class="form-group">
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -232,15 +232,15 @@
 						    </div>
                   
 							
-			</div>
-                   </div>
-        <div class="modal-footer">
-          <button type="submit" style="float:left" class="btn btn-success" >@lang('home.search')</button>   <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">@lang('home.close')</button>
-        </div>
-      </form>	
-      </div>
-    </div>
-  </div>
+                        </div>
+                            </div>
+                    <div class="modal-footer">
+                    <button type="submit" style="float:left" class="btn btn-success" >@lang('home.search')</button>   <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">@lang('home.close')</button>
+                    </div>
+                </form>	
+                </div>
+                </div>
+            </div>
   
             <div class="row">
                 <div class="col-md-12">
@@ -250,31 +250,31 @@
                             
 							@if($cat->name == "outsourcingok")
 								<a  href="https://www.outsourcingok.com" target="_blank" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: auto; 
-    padding: 5px 5px;
-    color: #ffffff;
-    font-size: 12px;
-    margin-bottom: 10px;
-    display: block; 
-	position: relative;
-    float: left;
-    margin-right: 0.5%;
-    overflow: hidden;
-    text-decoration: none;">
+                                    width: auto; 
+                                    padding: 5px 5px;
+                                    color: #ffffff;
+                                    font-size: 12px;
+                                    margin-bottom: 10px;
+                                    display: block; 
+                                    position: relative;
+                                    float: left;
+                                    margin-right: 0.5%;
+                                    overflow: hidden;
+                                    text-decoration: none;">
 							@else
 								<a  href="{{ url('account/people?industry='.$cat->categoryId) }}" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: auto; 
-    padding: 5px 5px;
-    color: #ffffff;
-    font-size: 12px;
-    margin-bottom: 10px;
-    display: block; 
-	position: relative;
-    float: left;
-    margin-right: 0.5%;
-    overflow: hidden;
-    text-decoration: none;">
-							@endif
+                                    width: auto; 
+                                    padding: 5px 5px;
+                                    color: #ffffff;
+                                    font-size: 12px;
+                                    margin-bottom: 10px;
+                                    display: block; 
+                                    position: relative;
+                                    float: left;
+                                    margin-right: 0.5%;
+                                    overflow: hidden;
+                                    text-decoration: none;">
+                                   @endif
 
 
 							<span class="text">@lang('home.'.$cat->name)</span></a>
