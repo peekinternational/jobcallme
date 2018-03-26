@@ -13,7 +13,7 @@
            url("{{asset('frontend-assets/fonts/korean/JejuMyeongjo-Regular.woff')}}") format('woff'),
            url("{{asset('frontend-assets/fonts/korean/JejuMyeongjo-Regular.ttf')}}") format('truetype');
     }
-    body{
+    *{
        font-family: 'Jeju Myeongjo', serif;
     }
 </style>
@@ -28,7 +28,7 @@
                 <img src="{{ $userImage }}" class="img-circle">
                
             </div>
-            <h3 class="hidden-md hidden-lg" style="font-weight: 600">{{ $user->firstName.' '.$user->lastName }}</h3>
+            <h3 class="hidden-md hidden-lg" style="font-weight: 400">{{ $user->firstName.' '.$user->lastName }}</h3>
             <p><span class="pi-title">@lang('home.fathername'):</span> {{ $meta->fatherName }}</p>
             <p><span class="pi-title">@lang('home.email'):</span> {{ $user->email }}</p>
             <p><span class="pi-title">@lang('home.mobile'):</span> {{ $user->phoneNumber }}</p>
@@ -44,7 +44,7 @@
             <p><span class="pi-title">@lang('home.industry'):</span> {{ JobCallMe::categoryTitle($meta->industry) }}</p>
             <p><span class="pi-title">@lang('home.salary'):</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
             <div class="professional-summary">
-                <h4>@lang('home.p_summary')</h4>
+                <div>@lang('home.p_summary')</div>
                 <p>{!! $user->about !!}</p>
                 <p><span class="pi-title">@lang('home.furtherexpertise')</span></p>
                 <ul style="margin-left: 50px;padding-left: 0;">
@@ -60,7 +60,7 @@
 </section>
 <section class="resume-box" id="academic">
 
-<h4><i class="fa fa-book r-icon bg-primary"></i>  @lang('home.academic')</h4>
+<div>@lang('home.academic') </div>
 <?php //print_r($resume); ?>
 <ul class="resume-details">
     @if(count($resume['academic']) > 0)
@@ -81,7 +81,7 @@
 </section>
 <section class="resume-box" id="certification">
 
-<h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.certification')</h4>
+<div> @lang('home.certification')</div>
 <ul class="resume-details">
     @if(count($resume['certification']) > 0)
         @foreach($resume['certification'] as $resumeId => $certification)
@@ -108,7 +108,7 @@
 </section>
 <section class="resume-box" id="experience">
 
-<h4><i class="fa fa-book r-icon bg-primary"></i>@lang('home.experiences')</h4>
+<div>@lang('home.experiences')</div>
 <ul class="resume-details">
     @if(count($resume['experience']) > 0)
         @foreach($resume['experience'] as $resumeId => $experience)
@@ -135,7 +135,7 @@
 <!--Skills Section Start-->
 <section class="resume-box" id="skills">
 
-<h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.skills')</h4>
+<div> @lang('home.skills')</div>
 <ul class="resume-details">
     @if(count($resume['skills']) > 0)
         @foreach($resume['skills'] as $resumeId => $skills)
@@ -160,7 +160,7 @@
 <!---Project -->
    <section class="resume-box" id="ski">
     <a class="btn btn-primary r-add-btn" onclick="addProject()"><i class="fa fa-plus"></i> </a>
-    <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.project')</h4>
+    <div> @lang('home.project')</div>
     <ul class="resume-details">
         @if(count($resume['project']) > 0)
             @foreach($resume['project'] as $resumeId => $skills)
@@ -189,7 +189,7 @@
 <!---Affilation -->
    <section class="resume-box" id="aff">
     <a class="btn btn-primary r-add-btn" onclick="addAffi()"><i class="fa fa-plus"></i> </a>
-    <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Affiliation')</h4>
+    <div> @lang('home.Affiliation')</div>
     <ul class="resume-details">
         @if(count($resume['affiliation']) > 0)
             @foreach($resume['affiliation'] as $resumeId => $afflls)
@@ -217,7 +217,7 @@
 
  <section class="resume-box" id="sk">
     <a class="btn btn-primary r-add-btn" onclick="addLanguage()"><i class="fa fa-plus"></i> </a>
-    <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.language')</h4>
+    <div><i class="fa fa-book r-icon bg-primary"></i> @lang('home.language')</div>
     <ul class="resume-details">
         @if(count($resume['language']) > 0)
             @foreach($resume['language'] as $resumeId => $skills)
@@ -244,7 +244,7 @@
 
   <section class="resume-box" id="skill">
     <a class="btn btn-primary r-add-btn" onclick="addSkill()"><i class="fa fa-plus"></i> </a>
-    <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.references')</h4>
+    <div><i class="fa fa-book r-icon bg-primary"></i> @lang('home.references')</div>
     <ul class="resume-details">
         @if(count($resume['reference']) > 0)
             @foreach($resume['reference'] as $resumeId => $skills)
@@ -273,7 +273,7 @@
 	<!---Publication -->
    <section class="resume-box" id="skil">
     <a class="btn btn-primary r-add-btn" onclick="addSkil()"><i class="fa fa-plus"></i> </a>
-    <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.publication')</h4>
+    <div><i class="fa fa-book r-icon bg-primary"></i> @lang('home.publication')</div>
     <ul class="resume-details">
         @if(count($resume['publish']) > 0)
             @foreach($resume['publish'] as $resumeId => $skills)
@@ -301,7 +301,7 @@
 </section>
  <section class="resume-box" id="s">
     <a class="btn btn-primary r-add-btn" onclick="addAward()"><i class="fa fa-plus"></i> </a>
-    <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.award')</h4>
+    <div><i class="fa fa-book r-icon bg-primary"></i> @lang('home.award')</div>
     <ul class="resume-details">
         @if(count($resume['award']) > 0)
             @foreach($resume['award'] as $resumeId => $skills)
@@ -331,7 +331,7 @@
 <!--Portfolio Section-->
 <section class="resume-box" id="port">
     <a class="btn btn-primary r-add-btn" onclick="addPortfolio()"><i class="fa fa-plus"></i> </a>
-    <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Portfolio')</h4>
+    <div><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Portfolio')</div>
     <ul class="resume-details">
         @if(count($resume['portfolio']) > 0)
             @foreach($resume['portfolio'] as $resumeId => $skills)

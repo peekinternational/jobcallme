@@ -461,6 +461,16 @@ class Cms extends Controller{
             echo 2;
         }
     }
+    public function jobstatupdate(Request $request){
+        $id = $request->input('id');
+        $status = $request->input('status');
+        $check = DB::table('jcm_jobs')->where('jobId',$id)->update(['jobStatus'=>$status]);
+        if($check){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
     public function viewwriting(Request $request){
         $id = $request->input('id');
         
