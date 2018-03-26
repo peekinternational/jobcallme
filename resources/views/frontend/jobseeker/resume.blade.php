@@ -90,7 +90,7 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.name')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.name') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <div class="col-md-6 f-name" style="margin-bottom: 5px;padding-left: 0;">
                                         <input type="text" class="form-control input-sm" name="firstName" value="{{ $user->firstName }}" required>
@@ -101,19 +101,19 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.fathername')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.fathername') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="fatherName" value="{{ $meta->fatherName }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.cnic')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.cnic') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" placeholder="@lang('home.cnicNumber')" name="cnicNumber" value="{{ $meta->cnicNumber }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.gender')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.gender') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="gender">
                                         <option value="Male" {{ $meta->gender == 'Male' ? 'selected="selected"' : '' }}>@lang('home.male')</option>
@@ -122,7 +122,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.maritalstatus')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.maritalstatus') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="maritalStatus">
                                         <option value="Single" {{ $meta->maritalStatus == 'Single' ? 'selected="selected"' : '' }}>@lang('home.single')</option>
@@ -134,31 +134,31 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.datebirth')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.datebirth') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-pickers" name="dateOfBirth" value="{{ $meta->dateOfBirth }}" onkeypress="return false" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.email')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.email') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="email" value="{{ $user->email }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.phonenumber')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.phonenumber') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="phoneNumber" value="{{ $user->phoneNumber }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.address')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.address') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm" name="address">{{ $meta->address }} </textarea>
                                 </div>
                             </div>
                            <div class="form-group">
-                            <label class="control-label col-sm-3 text-right">@lang('home.country')</label>
+                            <label class="control-label col-sm-3 text-right">@lang('home.country') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                             
                                 <select class="form-control select2 job-country" name="country">
@@ -169,21 +169,21 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3 text-right">@lang('home.state')</label>
+                            <label class="control-label col-sm-3 text-right">@lang('home.state') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <select class="form-control select2 job-state" name="state" data-state="{{ $user->state }}" required>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3 text-right">@lang('home.city')</label>
+                            <label class="control-label col-sm-3 text-right">@lang('home.city') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <select class="form-control select2 job-city" name="city" data-city="{{ $user->city }}" required>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.experiancelevel')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.experiancelevel') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
 									<select class="form-control select2" name="experiance">
 										@foreach(JobCallMe::getCareerLevel() as $career)
@@ -199,7 +199,7 @@ if($user->profilePhoto != ''){
                                </div>
                             </div>
                              <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.education')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.education') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control" name="education">                                    
                                         <option value="highschool" {{ $meta->education == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
@@ -214,7 +214,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div> 
                             <!-- <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.experiancelevel')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.experiancelevel') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="experiance">
                                         @foreach(JobCallMe::getExperienceLevel() as $el)
@@ -224,13 +224,13 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>-->
                             <!-- <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.education')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.education') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="education" value="{{ $meta->education }}">
                                 </div>
                             </div> -->
                                <div class="form-group">
-                            <label class="control-label col-md-3 text-right">@lang('home.category')</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.category') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <select class="form-control select2 job-category" name="industry" onchange="getSubCategories(this.value)">
                                     @foreach(JobCallMe::getCategories() as $cat)
@@ -240,7 +240,7 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">@lang('home.Subcategory')</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.Subcategory') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <select class="form-control select2 job-sub-category" name="subCategoryId" onchange="getSubCategories2(this.value)">
                                
@@ -248,7 +248,7 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 text-right">@lang('home.Subcategory2')</label>
+                            <label class="control-label col-md-3 text-right">@lang('home.Subcategory2') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <select class="form-control select2 job-sub-category2" name="subCategoryId2">
 									
@@ -256,7 +256,7 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                           <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.expectedwork')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.expectedwork') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
 									<select class="form-control select2" name="shift" required>
                                     <option value="">Type Of Work</option>
@@ -274,19 +274,19 @@ if($user->profilePhoto != ''){
                             </div>
                            
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.currentsalary')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.currentsalary') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control input-sm" name="currentSalary" value="{{ $meta->currentSalary }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.expectedsalary')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.expectedsalary') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control input-sm" name="expectedSalary" value="{{ $meta->expectedSalary }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.currency')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.currency') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="currency">
                                         @foreach(JobCallMe::siteCurrency() as $currency)
@@ -296,14 +296,14 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.expertise')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.expertise') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="expertise" value="{{ $meta->expertise }}" required>
                                     <p class="help-block">@lang('home.commaexpertise')</p>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.p_summary')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.p_summary') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm tex-editor" name="about">{{ $user->about }}</textarea>
                                 </div>
@@ -387,7 +387,7 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.degreelevel')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.degreelevel') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="degreeLevel">
                                        
@@ -400,7 +400,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							<div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.graduationstatus')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.graduationstatus') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm" name="graduationstatus">
                                         <option value="graduation">@lang('home.graduation')</option>
@@ -412,7 +412,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							<div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.transferstatus')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.transferstatus') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm" name="transferstatus">
                                         <option value="Yes">@lang('home.Yes')</option>
@@ -421,19 +421,19 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.degree')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.degree') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="degree" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.enterdate')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.enterdate') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="date" class="form-control input-sm date-picker" name="enterDate" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.completiondate')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.completiondate') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="date" class="form-control input-sm date-picker" name="completionDate" required>
                                 </div>
@@ -445,13 +445,13 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.institution')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.institution') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="institution" required>
                                 </div>
                             </div>
                            <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.country')</label>
+                            <label class="control-label col-sm-3">@lang('home.country') <span style="color:red">*</span></label>
                             <div class="col-sm-6 ">
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -461,21 +461,21 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <label class="control-label col-sm-3">@lang('home.state') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-state" name="state">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <label class="control-label col-sm-3">@lang('home.city') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-city" name="city">
                                 </select>
                             </div>
                         </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.details')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
@@ -529,31 +529,31 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.certification')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.certification') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="certificate" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.completiondate')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.completiondate') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-picker" name="completionDate" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.score')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.score') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="score" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.institution')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.institution') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="institution" required>
                                 </div>
                             </div>
                              <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.country') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -563,14 +563,14 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							   <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <label class="control-label col-sm-3">@lang('home.state') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-state" name="state">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <label class="control-label col-sm-3">@lang('home.city') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-city" name="city">
                                 </select>
@@ -578,7 +578,7 @@ if($user->profilePhoto != ''){
 							</div>
 							
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.details')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
@@ -631,25 +631,25 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.jobtitle')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.jobtitle') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="jobTitle" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.organization') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="organization" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.sdate')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.sdate') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-picker" name="startDate" required>
                                 </div>
                             </div>
                             <div class="form-group" id="enddate">
-                                <label class="control-label col-md-3 text-right">@lang('home.edate')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.edate') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-picker" name="endDate" >
                                 </div>
@@ -660,12 +660,12 @@ if($user->profilePhoto != ''){
                                     <div class="cntr">
                                         <input id="Currently" type="checkbox" class="cbx-field" name="currently" value="yes">
                                         <label class="cbx" for="Currently"></label>
-                                        <label class="lbl" for="Currently">@lang('home.currentlyworking')</label>
+                                        <label class="lbl" for="Currently">@lang('home.currentlyworking') <span style="color:red">*</span></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.country') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -675,21 +675,21 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							   <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <label class="control-label col-sm-3">@lang('home.state') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-state" name="state">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <label class="control-label col-sm-3">@lang('home.city') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-city" name="city">
                                 </select>
                             </div>
 							</div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.details')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                                 </div>
@@ -740,13 +740,13 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.skill')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.skill') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="skill" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.level')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.level') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="level">
                                         <option value="Beginner">@lang('home.beginner')</option>
@@ -803,19 +803,19 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
 							<div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.title')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.title') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="title" required>
                                 </div>
                             </div>
 							<div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.position')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.position') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="position" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.type')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.type') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="type">
                                         <option value="@lang('home.academic')">@lang('home.academic')</option>
@@ -828,19 +828,19 @@ if($user->profilePhoto != ''){
                             </div>
 							 
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.occupation')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.occupation') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="occupation" required>
                                 </div>
                             </div>
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.organization') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="organization" required>
                                 </div>
                             </div>
 							  <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.startyear')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.startyear') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="syear" name="startyear" required>
                                        
@@ -849,7 +849,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                              <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.startmonth')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.startmonth') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="smonth" name="startmonth" required>
 									<option value=''>Select Month</option>
@@ -910,7 +910,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							<div class="form-group">
-                            <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
+                            <label class="control-label col-sm-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <textarea name="detail" class="form-control tex-editor" ></textarea>
                             </div>
@@ -965,13 +965,13 @@ if($user->profilePhoto != ''){
                             </div>
 							 
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.organization_resume')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.organization_resume') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="org" required>
                                 </div>
                             </div>
 							<div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.position')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.position') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="pos" required>
                                 </div>
@@ -979,7 +979,7 @@ if($user->profilePhoto != ''){
                             
 							
 							  <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.startyear')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.startyear') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="ssyear" name="stayear" required>
                                        
@@ -988,7 +988,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                              <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.startmonth')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.startmonth') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="startmonth" name="stamonth" required>
 									<option value=''>Select Month</option>
@@ -1010,7 +1010,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							    <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.endyear')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.endyear') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="esyear" name="enyear">
                                        
@@ -1019,7 +1019,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.endmonth')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.endmonth') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="endmonth" name="enmonth">
 									<option value=''>Select Month</option>
@@ -1040,7 +1040,7 @@ if($user->profilePhoto != ''){
                             </div>
 							
 							<div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.country')</label>
+                            <label class="control-label col-sm-3">@lang('home.country') <span style="color:red">*</span></label>
                             <div class="col-sm-6 ">
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -1050,14 +1050,14 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <label class="control-label col-sm-3">@lang('home.state') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-state" name="state">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <label class="control-label col-sm-3">@lang('home.city') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-city" name="city">
                                 </select>
@@ -1113,7 +1113,7 @@ if($user->profilePhoto != ''){
                             </div>
 							
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.language')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.language') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="language">
                                           <option value="Afrikanns">Afrikanns</option>
@@ -1193,7 +1193,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							<div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.proficiencylevel')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.proficiencylevel') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="level">
 									<option value="@lang('home.Basic - Familiar')">@lang('home.Basic - Familiar')</option>
@@ -1255,37 +1255,37 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.name')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.name') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="name" required>
                                 </div>
                             </div>
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.jobtitle')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.jobtitle') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="jobtitle" required>
                                 </div>
                             </div>
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.organization') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="organization" required>
                                 </div>
                             </div>
                              <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.phone')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.phone') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control input-sm" name="phone" required>
                                 </div>
                             </div>
 							  <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.email')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.email') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="email" class="form-control input-sm" name="email" required>
                                 </div>
                             </div>
 							    <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.country') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -1295,21 +1295,21 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							   <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <label class="control-label col-sm-3">@lang('home.state') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-state" name="state">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <label class="control-label col-sm-3">@lang('home.city') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-city" name="city">
                                 </select>
                             </div>
 							</div>
 							                            <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.type')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.type') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="type">
                                         <option value="@lang('home.professional')">@lang('home.professional')</option>
@@ -1371,7 +1371,7 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.type')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.type') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="pu_type">
                                         <option value="@lang('home.book')">@lang('home.book')</option>
@@ -1384,25 +1384,25 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.title')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.title') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="title" required>
                                 </div>
                             </div>
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.Author')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.Author') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="author" required>
                                 </div>
                             </div>
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.publisher')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.publisher') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="publisher" required>
                                 </div>
                             </div>
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.country')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.country') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
@@ -1412,33 +1412,33 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							   <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <label class="control-label col-sm-3">@lang('home.state') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-state" name="state">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <label class="control-label col-sm-3">@lang('home.city') <span style="color:red">*</span></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-city" name="city">
                                 </select>
                             </div>
 							</div>
                              <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.year')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.year') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="year" required>
                                 </div>
                             </div>
 							  <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.month')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.month') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="month" required>
                                 </div>
                             </div>
 							<div class="form-group">
-                            <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
+                            <label class="control-label col-sm-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <textarea name="detail" class="form-control tex-editor"></textarea>
                             </div>
@@ -1491,14 +1491,14 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
 							<div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.title')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.title') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="title" required>
                                 </div>
                             </div>
 							
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.type')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.type') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="type">
                                         <option value="@lang('home.academic')">@lang('home.academic')</option>
@@ -1510,19 +1510,19 @@ if($user->profilePhoto != ''){
                             </div>
 							 
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.occupation')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.occupation') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="occupation" required>
                                 </div>
                             </div>
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.organization')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.organization') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="organization" required>
                                 </div>
                             </div>
 							  <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.year')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.year') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="years" name="startyear">
                                        
@@ -1531,7 +1531,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                              <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.month')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.month') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="smonth" name="startmonth">
 									<option value=''>Select Month</option>
@@ -1554,7 +1554,7 @@ if($user->profilePhoto != ''){
                             </div>
 							 
 							<div class="form-group">
-                            <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
+                            <label class="control-label col-sm-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <textarea name="detail" class="form-control tex-editor"></textarea>
                             </div>
@@ -1610,14 +1610,14 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
 							<div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.title')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.title') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="title" required>
                                 </div>
                             </div>
 							
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.type')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.type') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="type">
                                         <option value="@lang('home.academic')">@lang('home.academic')</option>
@@ -1629,14 +1629,14 @@ if($user->profilePhoto != ''){
                             </div>
 							 
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.occupation')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.occupation') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="occupation" required>
                                 </div>
                             </div>
 							 
 							  <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.year')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.year') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="yearss" name="startyear">
                                        
@@ -1645,7 +1645,7 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                              <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.month')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.month') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="smonth" name="startmonth">
 									<option value=''>Select Month</option>
@@ -1667,13 +1667,13 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							 <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.website')</label>
+                                <label class="control-label col-md-3 text-right">@lang('home.website') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="website" required>
                                 </div>
                             </div>
 							<div class="form-group">
-                            <label class="control-label col-sm-3 text-right">@lang('home.details')</label>
+                            <label class="control-label col-sm-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <textarea name="detail" class="form-control tex-editor"></textarea>
                             </div>
