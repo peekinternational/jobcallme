@@ -56,6 +56,7 @@ $('.jaTabBtn').click(function () {
     $.ajax({
         url: "{{ url('account/jobseeker/application') }}/"+type,
         success: function(response){
+            console.log(response);
             $('#application-show').html(response);
         }
     })
