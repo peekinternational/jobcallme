@@ -44,17 +44,24 @@ $s_app = Session()->get('shiftSearch');
                                         <th>subCategory</th>
                                         <th>3rdCategory</th>
                                         <th>Created On</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </thead>
                                     <tbody>
                                     
                                         @foreach($jobs as $i => $job)
                                             <tr>
-                                                <td>{{ ++$i }}</td>
+                                                <td>
+                                                    {{ ++$i }}
+                                                    <input type="hidden" value="{{ $job->jobId }}" id="jobId">
+                                                </td>
                                                 <td><a data-toggle="tooltip" title="View Job" target="_blank" href="{{ url('jobs/'.$job->jobId)}}">{{ $job->title }}</a></td>
                                                 <td>{{ $job->name }}</td>
                                                 <td>{{ $job->subName }}</td>
                                                 <td>{{ $job->cat2 }}</td>
+                                                <td>
+                                                    <input type="checkbox" class="jobstatus" @if($job->jobStatus == 'Publish') Checked @endif>
+                                                </td>
                                                 <td>{{ $job->createdTime }}</td>
                                                 <td>
                                                     <a href="{{ url('admin/cms/jobs/update/'.$job->jobId) }}" data-toggle="tooltip" data-original-title="Update"><i class="icon icon-pencil"></i></a>&nbsp;&nbsp;&nbsp;
@@ -132,9 +139,41 @@ $s_app = Session()->get('shiftSearch');
 @section('page-footer')
 <script type="text/javascript">
 $(document).ready(function(){
+     $('.jobstatus').bootstrapToggle({
+      on: 'Publish',
+      off: 'Draft',
+      offstyle:'info',
+      onstyle:'success'
+    });
+    var token = "{{ csrf_token() }}";
+    $('.jobstatus').on('change',function(e){
+       
+        var id = $(this).closest('tr').find('#jobId').val();
+        var status = '';
+        if($(e.target).parent().hasClass('off')){
+            status = 'Draft';
+        }else{
+            status = 'Publish';
+        };
+        $.ajax({
+            url:'{{url("admin/cms/jobstatupdate")}}',
+            data:{id:id,status:status,_token:token },
+            type:'POST',
+            success:function(res){
+               if(res == 1){
+                toastr.success('status Updated');
+               }else{
+                alert('error in controller admin/Cms/jobstatupdate line no 469');
+               }
+            }
+        });
+    })
     $('.select2').select2();
     $('.date-picker').datepicker({format:'yyyy-mm-dd'})
-})
+  })
+
+    
+
 function deleteShift(jobId){
     $('.actionId').val(jobId);
     $('#modal-warning').modal();

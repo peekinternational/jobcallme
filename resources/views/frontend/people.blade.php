@@ -214,6 +214,7 @@
                           <select class="form-control select2 job-state" name="state">
                           </select>
 
+
                              
                               </div>
 						        </div>
