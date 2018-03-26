@@ -158,6 +158,7 @@ Route::get('companies/company/{id}','frontend\Home@viewCompany');
 Route::group(['prefix' => 'account'], function () {
 	/* generals */
 	Route::post('feedback','frontend\Home@feedback');
+	Route::get('employer/questionnaires','frontend\Employer@questionnaires');
 	Route::post('employer/savecompic','frontend\Home@savecompic');
 	Route::get('writings','frontend\ExtraSkills@writings');
 	Route::match(['get','post'],'writings/article/add','frontend\ExtraSkills@addEditArticle');

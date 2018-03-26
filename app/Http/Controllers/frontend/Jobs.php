@@ -70,7 +70,7 @@ class Jobs extends Controller{
 		if($state != '0' && $state != "") $jobs->where('jcm_jobs.state','=',$state);
 		if($city != '0') $jobs->where('jcm_jobs.city','=',$city);
 		if($currency != '') $jobs->where('jcm_jobs.currency','=',$currency);
-
+		$jobs->where('jobStatus','=','Publish');
 		if($keyword != ''){
 			$jobs->where(function ($query) use ($keyword) {
 				$expl = @explode(' ', $keyword);

@@ -1684,5 +1684,8 @@ public function userResume($userId){
 				echo 2;
 			}
 		}
+		public function questionnaires(Request $request){
+			return view('frontend.employer.questionnaires');
+		}
 
 }

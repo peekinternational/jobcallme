@@ -19,6 +19,9 @@ return [
 	'manage' => 'Manage',
 	'logout' => 'Logout',
 	'login' => 'Login',
+	'TEST'  => 'Test',
+	'Test/Questionnaires' => 'Test/Questionnaires',
+	'AddQuestionnaire' => 'Add Questionnaire',
 	///end navbar//
 	
 	//Homepage//
