@@ -1351,7 +1351,7 @@ ul.jd-rewards li i{
     padding: 10px 10px;
  }
  .jobMblTabs >li.active >a{
-    border-bottom: 1px solid yellow;
+    /*border-bottom: 1px solid yellow;*/
  }
 .ja-tab-active{
     border-left: 4px solid #e6b706;
@@ -3555,6 +3555,7 @@ img.profile-photo-xs{
     /*Zeeshan Css Chnges*/
     .pnj-box h3 span{
         padding-left: 0 !important;
+        font-size: 19px;
     }
     .upskill-box p{
         padding: 10px;
@@ -3645,12 +3646,16 @@ img.profile-photo-xs{
     }
     .js-note{
         width: 65%;
+        word-wrap: break-word;
     }
     .tabbable-line > .nav-tabs > li{
         margin-right: 0;
     }
     .tabbable-line > .nav-tabs > li > a{
         padding: 10px 10px;
+    }
+    .jobseeker-mbl-nav>li>a{
+        padding: 10px 12px;
     }
 }
 @media (max-width: 465px) {
