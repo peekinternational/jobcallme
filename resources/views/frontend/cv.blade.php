@@ -28,7 +28,7 @@
                 <img src="{{ $userImage }}" class="img-circle">
                
             </div>
-            <h3 class="hidden-md hidden-lg" style="font-weight: 600">{{ $user->firstName.' '.$user->lastName }}</h3>
+            <h3 class="hidden-md hidden-lg" style="font-weight: 400">{{ $user->firstName.' '.$user->lastName }}</h3>
             <p><span class="pi-title">@lang('home.fathername'):</span> {{ $meta->fatherName }}</p>
             <p><span class="pi-title">@lang('home.email'):</span> {{ $user->email }}</p>
             <p><span class="pi-title">@lang('home.mobile'):</span> {{ $user->phoneNumber }}</p>
