@@ -115,6 +115,7 @@ Route::group(['prefix' => 'admin'], function () {
 	/* Aprove Writing*/
 	Route::get('cms/aprovewriting','admin\Cms@writing');
 	Route::post('cms/writestatupdate','admin\Cms@writestatupdate');
+	Route::post('cms/jobstatupdate','admin\Cms@jobstatupdate');
 	Route::post('cms/viewwriting','admin\Cms@viewwriting');
 	Route::post('cms/deletewriting','admin\Cms@deletewriting');
 	/*Aprove Upskills*/
@@ -303,6 +304,8 @@ Route::get('writingpayment', function () {
 Route::get('messages', function () {
     return view('frontend.employer.employerMessenger');
 });
+Route::post('skillcashpayment', 'frontend\ExtraSkills@cashpayment');
+Route::post('writecashpayment', 'frontend\ExtraSkills@writecashpayment');
 
 //upskill
 Route::post('skillpaypal', array('as' => 'addmoney.skillpaypal','uses' => 'frontend\ExtraSkills@postPayment',));

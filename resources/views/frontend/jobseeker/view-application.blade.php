@@ -73,6 +73,25 @@ if(Request::input('show') != ''){
         var firstSelect = $('.jaTabBtn.ja-tab-active');
         $(firstSelect).removeClass('ja-tab-active');
         $(firstSelect).click();
+var token = "{{ csrf_token() }}";
+$(document).ready(function(){
+    $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
+    var firstSelect = $('.jaTabBtn.ja-tab-active');
+    $(firstSelect).removeClass('ja-tab-active');
+    $(firstSelect).click();
+})
+$('.jaTabBtn').click(function () {
+    if($(this).hasClass('ja-tab-active')){
+        return false;
+    }
+    $(this).addClass('ja-tab-active').siblings().removeClass('ja-tab-active');
+    var type = $(this).attr('id');
+    $.ajax({
+        url: "{{ url('account/jobseeker/application') }}/"+type,
+        success: function(response){
+            console.log(response);
+            $('#application-show').html(response);
+        }
     })
     // Mobile  Tab 
     // End 
