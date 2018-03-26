@@ -213,134 +213,6 @@
                         <div class="form-group">
                           <select class="form-control select2 job-state" name="state">
                           </select>
-<<<<<<< HEAD
-                             
-                              </div>
-						        </div>
-
-								<div class="col-md-6">
-								   <div class="form-group">
-                                    <select class="form-control job-sub-category" name="subCategory" onchange="getSubCategories2(this.value)">
-							<option value="">@lang('home.Subcategory')</option>
-									</select>
-                                </div>
-                            </div>
-
-								 <div class="col-md-6">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                   <select class="form-control job-sub-category2" name="subCategory2">
-							<option value="">@lang('home.Subcategory2')</option>
-									</select>
-                                 </div>
-                               </div>
-						    </div>
-
-								<div class="col-md-6">
-								   <div class="form-group">
-                                    <select class="form-control" name="degreeLevel">
-									<option value="">@lang('home.selectdegree')</option>
-                                        <option value="High School">High School</option>
-                                        <option value="Intermediate">Intermediate</option>
-                                        <option value="Bachelor">Bachelor</option>
-                                        <option value="Master">Master</option>
-                                        <option value="PhD">PhD</option>
-                                    </select>
-                                </div>
-                            </div>
-								 <div class="col-md-6">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                   <input type="text" class="form-control" name="degree" placeholder="@lang('home.degree')" >
-                                 </div>
-                               </div>
-						    </div>
-							<div class="col-md-6">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                   <input type="number" class="form-control" name="minsalary" placeholder="@lang('home.minsalary')">
-                                 </div>
-                               </div>
-						    </div>
-							<div class="col-md-6">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                   <input type="number" class="form-control" name="maxsalary" placeholder="@lang('home.Maxsalary')">
-                                 </div>
-                               </div>
-						    </div>
-
-							<div class="col-md-6">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                   <input type="number" class="form-control" name="minexperience" placeholder="@lang('home.Minimum Experience')">
-                                 </div>
-                               </div>
-						    </div>
-							<div class="col-md-6">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                   <input type="number" class="form-control" name="maxexperience" placeholder="@lang('home.Maximum Experience')">
-                                 </div>
-                               </div>
-						    </div>
-
-							<div class="col-md-6">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                   <input type="number" class="form-control" name="minage" placeholder="@lang('home.Minimum Age')">
-                                 </div>
-                               </div>
-						    </div>
-							<div class="col-md-6">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                   <input type="number" class="form-control" name="maxage" placeholder="@lang('home.Maximum Age')">
-                                 </div>
-                               </div>
-						    </div>
-
-						<div class="col-md-6">
-							<div class="form-group">
-                                    <select class="form-control" name="gender">
-									<option value="">@lang('home.selectgender')</option>
-                                        <option value="Male" >@lang('home.male')</option>
-                                        <option value="Female">@lang('home.female')</option>
-                                    </select>
-                                </div>
-                            </div>
-							<div class="col-md-6">
-							 <div class="form-group">
-                                    <select class="form-control" name="maritalStatus">
-									@if(app()->getLocale() == "kr")
-						    <option value="Single" {{ $meta->maritalStatus == 'Single' ? 'selected="selected"' : '' }}>@lang('home.single')</option>
-                                        
-                                        <option value="Married" {{ $meta->maritalStatus == 'Married' ? 'selected="selected"' : '' }}>@lang('home.married')</option>
-                                        
-						@else
-						    <option value="Single" {{ $meta->maritalStatus == 'Single' ? 'selected="selected"' : '' }}>@lang('home.single')</option>
-                                        <option value="Engaged" {{ $meta->maritalStatus == 'Engaged' ? 'selected="selected"' : '' }}>@lang('home.engaged')</option>
-                                        <option value="Married" {{ $meta->maritalStatus == 'Married' ? 'selected="selected"' : '' }}>@lang('home.married')</option>
-                                        <option value="Widowed" {{ $meta->maritalStatus == 'Widowed' ? 'selected="selected"' : '' }}>@lang('home.widowed')</option>
-                                        <option value="Divorced" {{ $meta->maritalStatus == 'Divorced' ? 'selected="selected"' : '' }}>@lang('home.divorced')</option>
-						@endif
-                                    </select>
-                                </div>
-                            </div>
-							
-							
-			
-
-		     	<div class="col-md-6">
-                          <div class="form-group">
-                                <select class="form-control select2 job-country" name="country">
-                                    @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-=======
->>>>>>> 3be77e1d440b941cb18f7fbc659b72a0dd673d1f
                         </div>
                       </div>
 
@@ -370,64 +242,6 @@
             </div>
           </div>
 
-<<<<<<< HEAD
-						<div class="col-md-6">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                   <input type="text" class="form-control" name="skill" placeholder="@lang('home.skill')">
-                                 </div>
-                               </div>
-						    </div>
-                  
-							
-                        </div>
-                            </div>
-                    <div class="modal-footer">
-                    <button type="submit" style="float:left" class="btn btn-success" >@lang('home.search')</button>   <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">@lang('home.close')</button>
-                    </div>
-                </form>	
-                </div>
-                </div>
-            </div>
-  
-            <div class="row">
-                <div class="col-md-12">
-                    <?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9','#9e947b','#5b5c5e','#7b767d','#a0b1b9','#6d846f'); $i=0; ?>
-                    <div class="job-locations-box">
-                        @foreach(JobCallMe::getCategories() as $cat)
-                            
-							@if($cat->name == "outsourcingok")
-								<a  href="https://www.outsourcingok.com" target="_blank" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                                    width: auto; 
-                                    padding: 5px 5px;
-                                    color: #ffffff;
-                                    font-size: 12px;
-                                    margin-bottom: 10px;
-                                    display: block; 
-                                    position: relative;
-                                    float: left;
-                                    margin-right: 0.5%;
-                                    overflow: hidden;
-                                    text-decoration: none;">
-							@else
-								<a  href="{{ url('account/people?industry='.$cat->categoryId) }}" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                                    width: auto; 
-                                    padding: 5px 5px;
-                                    color: #ffffff;
-                                    font-size: 12px;
-                                    margin-bottom: 10px;
-                                    display: block; 
-                                    position: relative;
-                                    float: left;
-                                    margin-right: 0.5%;
-                                    overflow: hidden;
-                                    text-decoration: none;">
-                                   @endif
-
-
-							<span class="text">@lang('home.'.$cat->name)</span></a>
-                        @endforeach
-=======
           <div class="row">
             <div class="col-md-12">
               <?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9','#9e947b','#5b5c5e','#7b767d','#a0b1b9','#6d846f'); $i=0; ?>
@@ -504,7 +318,6 @@
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     <div class="fp-img">
                       <img src="@if($people->pImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
->>>>>>> 3be77e1d440b941cb18f7fbc659b72a0dd673d1f
                     </div>
                     <div class="fp-item-details" style="height: 121px;">
                       <p>{!! $people->firstName.' '.$people->lastName !!}</p>
