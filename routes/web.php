@@ -304,6 +304,8 @@ Route::get('writingpayment', function () {
 Route::get('messages', function () {
     return view('frontend.employer.employerMessenger');
 });
+Route::post('skillcashpayment', 'frontend\ExtraSkills@cashpayment');
+Route::post('writecashpayment', 'frontend\ExtraSkills@writecashpayment');
 
 //upskill
 Route::post('skillpaypal', array('as' => 'addmoney.skillpaypal','uses' => 'frontend\ExtraSkills@postPayment',));

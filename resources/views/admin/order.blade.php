@@ -47,8 +47,10 @@
 												<td style="text-align: center;"><label class="label label-success">{!! $job->jType!!}</label></td>
 												@if($job->paymentType==1)
 												<td style="text-align: center;"><label class="label label-success">Paypal</label></td>
-											@else
+									            @elseif($job->paymentType==2)
 												<td style="text-align: center;"><label class="label label-success">Nicepay</label></td>
+                                                @else
+                                                <td style="text-align: center;"><label class="label label-success">Cash Payment</label></td>
 											@endif
 												<td>{!! $job->createdTime!!}</td>
                                                    

@@ -154205,7 +154205,8 @@ return [
 "Cheongwon-gu, Cheongju-si"=>"Cheongwon-gu, Cheongju-si",
 "Heungdeok-gu, Cheongju-si"=>"Heungdeok-gu, Cheongju-si",
 "Chungju-si"=>"Chungju-si",
-"selectCountry" => "Select Country"
+"selectCountry" => "Select Country",
+'cashpayment' => 'Cash Payment',
 
 
 

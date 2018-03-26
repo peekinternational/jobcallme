@@ -37,6 +37,7 @@ class Jobseeker extends Controller{
 		/* companies */
 		$company = DB::table('jcm_companies');
     	$company->orderBy('companyId','desc');
+		$company->where('category','!=','');
     	$company->limit(4);
     	$companies = $company->get();
 

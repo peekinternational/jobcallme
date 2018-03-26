@@ -587,6 +587,41 @@ class ExtraSkills extends Controller{
         \Session::put('error','Payment failed');
         return Redirect::route('addmoney.frontend.employer.post-job');
     }
+
+     public function cashpayment(Request $request){
+            $apps = $request->session()->get('jcmUser');
+            $input = Session::get('input');
+            $input['status']='Inactive';
+            $input['paymentMode']='Cash Payment';
+	        DB::table('jcm_upskills')->insert($input);
+
+            $order['user_id']=$apps->userId;
+            $order['payment_mode']='Cash Payment';
+            $order['orderBy']=$input['title'];
+            $order['amount']=$input['amount'];
+            $order['status']='Pending';
+            $order['date']= date('Y-m-d');
+
+            DB::table('jcm_orders')->insert($order);
+            return view('frontend.upskillcashpayment_detail',compact('order'));
+
+     }
+
+        public function writecashpayment(Request $request){
+            $apps = $request->session()->get('jcmUser');
+            $input = Session::get('inputs');
+               $catnames = "";
+                foreach ($input['category'] as $value) {
+                  $catnames .= DB::table('jcm_read_category')->where('id',$value)->first()->name.",";
+                }
+            $input['cat_names'] = $catnames;  
+            $input['status'] = 'Draft';  
+        
+	        DB::table('jcm_writings')->insert($input);
+
+            return view('frontend.writecashpayment_detail',compact('input'));
+
+     }
 	
 
     public function deleteUpskill(Request $request,$skillId){
