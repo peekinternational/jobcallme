@@ -9,9 +9,12 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 style="text-align:center">@lang('home.selectpaymentmethod')</h3>
+               <br>
                 <br>
-                <br>
-                <div class="col-md-6" style="text-align:end">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-6" style="display:-webkit-box">
+                <div style="padding-left: 22px;padding-right: 13px;">
                 
                         <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.writepaypal') !!}" >
                             {{ csrf_field() }}
@@ -19,13 +22,22 @@
                         </form>
                    
                 </div>
-                <div class="col-md-6">
+                <div class="" style="padding-left: 22px;padding-right: 13px;" >
+                   
+                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{{ action('frontend\ExtraSkills@writecashpayment') }}" >
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-warning btn-lg" name="save">Cash Payment</button> 
+                        </form>
+                   
+                </div>
+                 <div class="" style="padding-left: 22px;padding-right: 13px;" >
             
                     <form action="{{url('nicepay/payRequest_utf.php')}}" method="post" id='nicePayForm'> 
                         
                         <a href='javascript:void(0)'  class="btn btn-primary btn-lg nicePay">NicePay</a>
                     </form>
                 
+                </div>
                 </div>
             </div>
         </div>
