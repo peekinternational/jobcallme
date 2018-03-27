@@ -161,7 +161,7 @@
                     <div class="col-md-6  pnj-btns">
                         <button type="submit" class="btn btn-primary" name="publis" onclick="saveOption('p')">@lang('home.publish')</button>
                         <button type="submit" class="btn btn-default" name="draft" onclick="saveOption('d')">@lang('home.draft')</button>
-                        <a href="{{ url('account/writings') }}" class="btn btn-default">@lang('home.cancel')</a>
+                        <button class="btn btn-default"><a href="{{ url('account/writings') }}">@lang('home.cancel')</a></button>
                     </div>
                 </form>
             </div>

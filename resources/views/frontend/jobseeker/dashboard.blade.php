@@ -213,7 +213,9 @@
               ?>
               <div class="col-md-3 col-xs-6 sp-item">
 
-                <img src="{{ $cLogo }}" style="width:100%;">
+                <div class="companies-mbl-view">
+                  <img src="{{ $cLogo }}" style="width:100%;">
+                </div>
 
                 <p style="height:42px"><a href="{{ url('companies/company/'.$comp->companyId) }}">{!! $comp->companyName !!}</a></p>
 
@@ -251,7 +253,9 @@
             ?>
             <div class="col-md-12 sr-item">
               <div class="col-md-5 col-xs-12">
-                <img src="{{ $pImage }}" style="width: 100%;">
+                <div class="suggestedreading-img-mbl">
+                  <img src="{{ $pImage }}" style="width: 100%;">
+                </div>
               </div>
               <div class="col-md-7 col-xs-12">
                 <div class="sr-details">

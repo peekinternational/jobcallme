@@ -314,12 +314,12 @@
               ?>
 
               <div class="col-md-2 col-sm-4 col-xs-6">
-                <div class="fp-item" style="height: 304px;">
+                <div class="fp-item" style="height: 256px;">
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     <div class="fp-img">
                       <img src="@if($people->pImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
                     </div>
-                    <div class="fp-item-details" style="height: 121px;">
+                    <div class="fp-item-details" style="height: 95px;">
                       <p>{!! $people->firstName.' '.$people->lastName !!}</p>
                       <p>{{ JobCallMe::categoryTitle($people->industry) }}</p>
                       <p>{{ JobCallMe::cityName($people->city).', '.JobCallMe::countryName($people->country)}}</p>
