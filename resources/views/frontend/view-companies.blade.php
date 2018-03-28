@@ -73,12 +73,12 @@
                       $cLogo = url('compnay-logo/'.$company->companyLogo);
                     }
                     ?>
-                    <div class="col-md-2 hvr-bob" style="padding-right: 0px">
+                    <div class="col-md-2 col-xs-6 hvr-bob companies-mbl-vew" style="padding-right: 0px">
                         <!-- normal -->
                         <div class="ih-item square effect8 scale_up">
                             <a href="{{ url('companies/company/'.$company->companyId) }}">
-                            <div class="img" style="height: 100%;"><img src="{{ $cLogo }}" alt="img" class="img-resposive"></div>
-                            <div class="info">
+                            <div class="img"><img src="{{ $cLogo }}" alt="img" class="img-resposive"></div>
+                            <div class="info companies-mbl-info">
                                 <h3>{!! $company->companyName !!}</h3>
                                 <p>{!! substr(strip_tags($company->companyAbout),0,100) !!}</p>
                             </div></a>

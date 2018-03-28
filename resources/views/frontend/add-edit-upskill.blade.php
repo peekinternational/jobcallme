@@ -20,7 +20,7 @@ if($upskill->country != 0){
 ?>
 <section id="postNewJob">
     <div class="container">
-        <div class="col-md-9">
+        <div class="col-md-9 mbl-view-upskills">
             <h2>@lang('home.up_heading')</h2>
             <div class="pnj-box">
                 <form id="pnj-form" action="" method="post" class="upskill-form">
@@ -458,7 +458,7 @@ if($upskill->country != 0){
 
                     <div class="col-md-6  pnj-btns">
                         <button type="submit" class="btn btn-primary">@lang('home.save')</button>
-                        <a href="{{ url('account/upskill') }}" class="btn btn-default">@lang('home.cancel')</a>
+                        <button class="btn btn-default"><a href="{{ url('account/upskill') }}">@lang('home.cancel')</a></button>
                     </div>
                 </form>
             </div>

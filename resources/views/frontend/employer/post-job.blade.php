@@ -266,7 +266,7 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     @foreach(JobCallMe::jobProcess() as $process)
-                                        <div class="col-md-4 benefits-checks">
+                                        <div class="col-md-4 benefits-checks col-xs-6">
                                             <input id="{{ str_replace(' ','-',$process) }}"  type="checkbox" class="cbx-field" name="process[]" value="{{ $process }}">
                                             <label class="cbx" for="{{ str_replace(' ','-',$process) }}"></label>
                                             <label class="lbl" for="{{ str_replace(' ','-',$process) }}">@lang('home.'.$process)<!-- {{ $process }} --></label>
@@ -319,13 +319,13 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     @foreach(JobCallMe::jobBenefits() as $benefit)
-                                        <div class="col-md-4 benefits-checks">
+                                        <div class="col-md-4 benefits-checks col-xs-6">
                                             <input id="{{ str_replace(' ','-',$benefit) }}"  type="checkbox" class="cbx-field" name="benefits[]" value="{{ $benefit }}">
                                             <label class="cbx" for="{{ str_replace(' ','-',$benefit) }}"></label>
                                             <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">{{ $benefit }}</label>
                                         </div>
                                     @endforeach
-                                        <div class="col-md-4 ">
+                                        <div class="col-md-4 col-xs-6">
                                             <input id="addbenefit"  type="checkbox" class="cbx-field" value="yes">
                                             <label class="cbx" for="addbenefit"></label>
                                             <label class="lbl" for="addbenefit">@lang('home.add')</label>
