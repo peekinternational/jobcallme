@@ -16,7 +16,7 @@
                     <h4 class="modal-title">@lang('home.cashpayment')</h4>
                     </div>
                     <div class="modal-body">
-                    <p>Job title: {{ $order['orderBy']}}</p>
+                    <p>Upskill title: {{ $order['orderBy']}}</p>
                     <p>Amount: ${{ $order['amount']}}</p>
                     <p>Bank Name: Industrail Bank</p>
                     <p>Account Holder: <b>Jobcallme Co.,Ltd</b></p>

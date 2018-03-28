@@ -58,7 +58,7 @@ if($user->profilePhoto != ''){
                 <!-- <a class="btn btn-block jaTabBtn">Users</a>
                 <a class="btn btn-block jaTabBtn">Evaluation Form</a>
                 <a class="btn btn-block jaTabBtn">Questionnaires</a> -->
-                <h5 class="mtab-heading">@lang('home.subscription')</h5>
+                <h5 class="mtab-heading" id="credit_plan">@lang('home.subscription')</h5>
                 <ul class="nav nav-tabs jobMblTabs">
                     <li>
                         <a id="credit" class="btn btn-block  ">@lang('home.credits')</a>
@@ -141,20 +141,60 @@ if($user->profilePhoto != ''){
                         <h4>@lang('home.employerAccount')</h4>
                         <table class="table">
                             <tr>
+                            <form action="{{ action('frontend\Employer@package') }}" method="post">
+                            {!! csrf_field() !!} 
                                 <td> <i class="fa fa-remove color-red"></i> Premium Jobs</td>
-                                <td><button class="btn btn-info">Buy Now</button></td>
+                                <input type="hidden" value="Premium" name="type">
+                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                </form>
                             </tr>
-                            <tr>
+                             <tr>
+                             <form action="{{ action('frontend\Employer@package') }}" method="post">
+                              {!! csrf_field() !!} 
+                                <td> <i class="fa fa-remove color-red"></i> Top Jobs</td>
+                                <input type="hidden" value="Top" name="type">
+                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                </form>
+                            </tr>
+                             <tr>
+                            <form action="{{ action('frontend\Employer@package') }}" method="post">
+                             {!! csrf_field() !!} 
                                 <td> <i class="fa fa-remove color-red"></i> Hot Jobs</td>
-                                <td><button class="btn btn-info">Buy Now</button></td>
+                                <input type="hidden" value="Hot" name="type">
+                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                </form>
+                            </tr>
+                             <tr>
+                            <form action="{{ action('frontend\Employer@package') }}" method="post">
+                             {!! csrf_field() !!} 
+                                <td> <i class="fa fa-remove color-red"></i> Latest Jobs</td>
+                                <input type="hidden" value="Latest" name="type">
+                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                </form>
                             </tr>
                             <tr>
-                                <td> <i class="fa fa-remove color-red"></i> Gallery Jobs</td>
-                                <td><button class="btn btn-info">Buy Now</button></td>
+                             <form action="{{ action('frontend\Employer@package') }}" method="post">
+                              {!! csrf_field() !!} 
+                                <td> <i class="fa fa-remove color-red"></i> Special Jobs</td>
+                                <input type="hidden" value="Special" name="type">
+                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                </form>
                             </tr>
                             <tr>
+                             <form action="{{ action('frontend\Employer@package') }}" method="post">
+                              {!! csrf_field() !!} 
+                                <td> <i class="fa fa-remove color-red"></i> Goldan Jobs</td>
+                                <input type="hidden" value="Goldan" name="type">
+                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                </form>
+                            </tr>
+                            <tr>
+                             <form action="{{ action('frontend\Employer@package') }}" method="post">
+                              {!! csrf_field() !!} 
                                 <td> <i class="fa fa-remove color-red"></i> Resume Downloads</td>
-                                <td><button class="btn btn-info">Buy Now</button></td>
+                                <input type="hidden" value="Resume Download" name="type">
+                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                </form>
                             </tr>
                         </table>
                     </div>
@@ -786,10 +826,17 @@ $(document).ready(function(){
     var id = url.substring(url.lastIndexOf('?') + 1);
 	//alert(id);
 	if(id=='noti'){
-	$('#notification').addClass( "ja-tab-active" );
-	$('#password').removeClass( "ja-tab-active" );
-	$('#notification-show').show();
-	$('#password-show').hide();
+        $('#notification').addClass( "ja-tab-active" );
+        $('#password').removeClass( "ja-tab-active" );
+        $('#notification-show').show();
+        $('#password-show').hide();
+	}
+
+    	if(id=='plan'){
+            $('#credit_plan').addClass( "ja-tab-active" );
+            $('li #password').removeClass( "ja-tab-active" );
+            $('#credit-show').show();
+            $('#password-show').hide();
 	}
     getStates($('.job-country option:selected:selected').val(),'job-state');
     getStates($('.job-country option:selected:selected').val(),'jjob-state');

@@ -118,7 +118,7 @@ curl_close ($ch);
 	 
     public function postPaymentWithpaypals(Request $request)
     {
-	/*dd($request->all());*/
+	//dd($request->plan);
 	   $rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
 	   $amount=$rec[0]->price;
 	   //dd();
@@ -127,7 +127,7 @@ curl_close ($ch);
         $mul=$durations;
         $am=$mul*1100;
       //  dd($am);
-	  $request->session()->put('p_Category', $request->p_Category);
+	    $request->session()->put('p_Category', $request->p_Category);
         $goodsname = Session::get('p_Category');
         $app = $request->session()->get('jcmUser');
 		//dd($request->department);
@@ -165,6 +165,62 @@ curl_close ($ch);
 		$request->session()->put('expiryAd', $request->expiryAd);
 		
 		 $goodsname = Session::get('p_Category');
+		 $plan=$request->plan;
+		if($plan != null)
+		{       
+			$name =$request->allarray;
+			    $result_explode = explode('|', $name);
+				
+				$p_category = $result_explode[0];
+				$pckg_id = $result_explode[1];
+				$price= $result_explode[2];
+				$dur= $result_explode[3];
+				$quantity= $result_explode[4];
+				//dd($duration);
+
+				$date = strtotime('+'.$dur.' day');
+                $expiry= date('Y-m-d', $date);
+			
+				$request->merge(['jType'=>'Paid']);
+				$app = $request->session()->get('jcmUser');
+
+		$this->validate($request,[
+				'title' => 'required|max:255',
+				'department' => 'required',
+				'category' => 'required',
+				'careerLevel' => 'required',
+				'experience' => 'required',
+				'vacancy' => 'required|numeric',
+				'description' => 'required|max:1024',
+				'skills' => 'required|max:1024',
+				'qualification' => 'required',
+				'expiryDate' => 'required|date',
+				'minSalary' => 'required|numeric',
+				'maxSalary' => 'required|numeric',
+				'state' => 'required',
+			]);
+	
+   
+		extract($request->all());
+
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'pckg_id' => $pckg_id, 'jobStatus' => 'Publish', 'paymentType' => '4', 'amount' => $price, 'p_Category' => $p_category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $dur, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiry, 'createdTime' => date('Y-m-d H:i:s'));
+		//dd($input);
+		if($subCategory == ''){
+			$input['subCategory'] = '';
+		}
+		$jobId = DB::table('jcm_jobs')->insertGetId($input);
+		 
+		 $remain =$quantity-1;
+		 $inputs['quantity']=$remain;
+
+		DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
+
+
+		//dd($jobId);
+		\Session::put('success','Add Job Successfully');
+		return Redirect::route('addmoney.account/employer/job/share');	
+		}
+		
 		if($amount!='0')
 		{
 			$request->merge(['jType'=>'Paid']);
@@ -193,7 +249,7 @@ curl_close ($ch);
    
 		extract($request->all());
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1','jobStatus' => 'Publish', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
 		
 		if($subCategory == ''){
 			$input['subCategory'] = '';
@@ -340,7 +396,7 @@ curl_close ($ch);
 
 		extract($request->all());
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' =>'1', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'dispatch' => $dispatch, 'head' => $head, 'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits),'process' => @implode(',', $process), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate,'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' =>'1', 'jobStatus' => 'Publish', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'dispatch' => $dispatch, 'head' => $head, 'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits),'process' => @implode(',', $process), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate,'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
@@ -409,7 +465,7 @@ curl_close ($ch);
 	
 			extract($request->all());
 
-			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys,'duration' => $durations, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process),'country' => $countrys, 'state' => $states, 'city' => $citys,'Address' => $Addresss, 'expiryDate' => $expiryDates, 'expiryAd' => $expiryAds,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
+			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'jobStatus' => 'Publish', 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys,'duration' => $durations, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process),'country' => $countrys, 'state' => $states, 'city' => $citys,'Address' => $Addresss, 'expiryDate' => $expiryDates, 'expiryAd' => $expiryAds,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
 			if($subCategorys == ''){
 				$inputs['subCategory'] = '';
 			}
@@ -567,10 +623,13 @@ curl_close ($ch);
 	//		$request->session()->flash('depAlert', 'Please first add your company department then post your job');
 	//		return redirect('account/employer/departments');
 	//	}
+	$userid = $request->session()->get('jcmUser')->userId;
 		
     	$rec = DB::table('jcm_payments')->get();
-		//dd($rec);
-		return view('frontend.employer.post-job',compact('rec'));
+		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->get();
+		$single= $plan[0]->quantity;
+		//dd($single);
+		return view('frontend.employer.post-job',compact('rec','plan','single'));
 	}
 
 	public function saveJob(Request $request){
@@ -1651,7 +1710,7 @@ public function userResume($userId){
       //	dd($amounts);
 			extract($request->all());
 
-			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'pay_id' => $payment, 'paymentType'=> '3','status'=> '2', 'amount' => $amountss,'duration' => $durationss, 'p_Category' => $p_Categoryss, 'title' => $titless, 'jType' => $jTypess, 'department' => $departmentss, 'category' => $categoryss, 'subCategory' => $subCategoryss, 'subCategory2' => $subCategorys2s, 'careerLevel' => $careerLevelss, 'experience' => $experiencess, 'vacancies' => $vacancyss, 'description' => $descriptionss, 'skills' => $skillsss, 'qualification' => $qualificationss, 'jobType' => $typess, 'jobShift' => $shiftss,'jobaddr' => $jobaddrss, 'minSalary' => $minSalaryss, 'maxSalary' => $maxSalaryss, 'currency' => $currencyss, 'benefits' => @implode(',', $benefitsss), 'process' => @implode(',', $processs),'country' => $countryss, 'state' => $statess, 'city' => $cityss,'Address' => $Addressss,'expiryDate' => $expiryDatess,'expiryAd' => $expiryAdss, 'createdTime' => date('Y-m-d H:i:s'));
+			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'jobStatus' => 'Publish', 'pay_id' => $payment, 'paymentType'=> '3','status'=> '2', 'amount' => $amountss,'duration' => $durationss, 'p_Category' => $p_Categoryss, 'title' => $titless, 'jType' => $jTypess, 'department' => $departmentss, 'category' => $categoryss, 'subCategory' => $subCategoryss, 'subCategory2' => $subCategorys2s, 'careerLevel' => $careerLevelss, 'experience' => $experiencess, 'vacancies' => $vacancyss, 'description' => $descriptionss, 'skills' => $skillsss, 'qualification' => $qualificationss, 'jobType' => $typess, 'jobShift' => $shiftss,'jobaddr' => $jobaddrss, 'minSalary' => $minSalaryss, 'maxSalary' => $maxSalaryss, 'currency' => $currencyss, 'benefits' => @implode(',', $benefitsss), 'process' => @implode(',', $processs),'country' => $countryss, 'state' => $statess, 'city' => $cityss,'Address' => $Addressss,'expiryDate' => $expiryDatess,'expiryAd' => $expiryAdss, 'createdTime' => date('Y-m-d H:i:s'));
 			if($subCategorys == ''){
 				$inputs['subCategory'] = '';
 			}
@@ -1684,5 +1743,180 @@ public function userResume($userId){
 				echo 2;
 			}
 		}
+
+
+		//// Package Plan/////
+
+		public function package(Request $request){
+			//dd($request->all());
+			$type=$request->input('type');
+			$plan=DB::table('jcm_package_plan')->where('type','=',$type)->get();
+			$id = session()->get('jcmUser')->userId;
+			//dd($plan);
+			return view('frontend.employer.package_plan',compact('plan','id'));
+		}
+		
+		public function packageinfo(Request $request){
+			$info = $request->all();
+			//dd($info);
+			$id = session()->get('jcmUser')->userId;
+			//$info =$id;
+			
+			$request->session()->put('pckg_info', $info);
+			$get_info = $request->session()->get('pckg_info');
+			//dd($get_info['amount']);
+
+			return view('frontend.employer.package_payment');
+
+			
+		}
+
+			public function packagePayment(Request $request)
+    {
+		$am = Session::get('pckg_info');
+			//dd($am['amount']);
+		
+		//dd(Session::get('amount'));
+		//exit();
+        $payer = new Payer();
+		//dd($payer);
+        $payer->setPaymentMethod('paypal');
+        $item_1 = new Item();
+        $item_1->setName('Item 1') /** item name **/
+            ->setCurrency('USD')
+            ->setQuantity(1)
+            ->setPrice($am['amount']); /** unit price **/
+        $item_list = new ItemList();
+        $item_list->setItems(array($item_1));
+        $amount = new Amount();
+        $amount->setCurrency('USD')
+            ->setTotal($am['amount']);
+        $transaction = new Transaction();
+        $transaction->setAmount($amount)
+            ->setItemList($item_list)
+            ->setDescription('Your transaction description');
+        $redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('payment.packagestatus')) /** Specify return URL **/
+            ->setCancelUrl(URL::route('payment.packagestatus'));
+        $payment = new Payment();
+        $payment->setIntent('Sale')
+            ->setPayer($payer)
+            ->setRedirectUrls($redirect_urls)
+            ->setTransactions(array($transaction));
+            /** dd($payment->create($this->_api_context));exit; **/
+        try {
+			//dd($this->_api_context);
+            $payment->create($this->_api_context);
+        } catch (\PayPal\Exception\PPConnectionException $ex) {
+            if (\Config::get('app.debug')) {
+                return 'Connection timeout';
+                return Redirect::route('add.frontend.employer.post-job');
+                /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
+                /** $err_data = json_decode($ex->getData(), true); **/
+                /** exit; **/
+            } else {
+                return 'Some error occur, sorry for inconvenient';
+                return Redirect::route('ey.frontend.employer.post-job');
+                /** die('Some error occur, sorry for inconvenient'); **/
+            }
+        }
+        foreach($payment->getLinks() as $link) {
+            if($link->getRel() == 'approval_url') {
+                $redirect_url = $link->getHref();
+                break;
+            }
+        }
+		 $pay_id=$payment->getId();
+         Session::put('paypal_payment_id', $payment->getId());
+        /** add payment ID to session **/
+		// $pay_id=$payment->getId();
+        if(isset($redirect_url)) {
+            /** redirect to paypal **/
+	
+            return Redirect::away($redirect_url);
+        }
+       return 'Unknown error occurred';
+        return Redirect::route('frontend.employer.post-job');
+    
+	}
+	
+    public function packageStatus(Request $request)
+    {
+		$payment_id = Session::get('paypal_payment_id');
+        
+       // $request->session()->put('input', $input);
+		
+        /** Get the payment ID before session clear **/
+        
+        /** clear the session payment ID **/
+        Session::forget('paypal_payment_id');
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+            \Session::put('error','Payment failed');
+            return Redirect::route('addmoney.frontend.employer.post-job');
+        }
+        $payment = Payment::get($payment_id, $this->_api_context);
+        /** PaymentExecution object includes information necessary **/
+        /** to execute a PayPal account payment. **/
+        /** The payer_id is added to the request query parameters **/
+        /** when the user is redirected from paypal back to your site **/
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+        /**Execute the payment **/
+        $result = $payment->execute($execution, $this->_api_context);
+        /** dd($result);exit; /** DEBUG RESULT, remove it later **/
+        if ($result->getState() == 'approved') { 
+            $id = session()->get('jcmUser')->userId;
+           // dd($apps);
+            $input = Session::get('pckg_info');
+            $input['user_id']=$id;
+			$input['paymentMode']='Paypal';
+			$input['status']=1;
+
+	        DB::table('jcm_save_packeges')->insert($input);
+
+			$order['user_id']=$id;
+			$order['payment_mode']='Paypal';
+			$order['orderBy']=$input['type'];
+			$order['amount']=$input['amount'];
+			$order['status']='Approved';
+			$order['category']='Package Plan';
+			$order['date']= date('Y-m-d');
+
+       DB::table('jcm_orders')->insert($order);
+
+		//echo $jobId;
+            /** it's all right **/
+            /** Here Write your database logic like that insert record or value in database if you want **/
+            \Session::put('successs','Package add success');
+            //return Redirect::route('account/upskill');
+            return redirect('account/employer/orders');
+        }
+        \Session::put('error','Payment failed');
+        return Redirect::route('addmoney.frontend.employer.post-job');
+    }
+
+	public function cashpackage(Request $request)
+	{
+           $id = session()->get('jcmUser')->userId;
+           // dd($apps);
+            $input = Session::get('pckg_info');
+            $input['user_id']=$id;
+			$input['paymentMode']='Cash Payment';
+			$input['status']=2;
+
+	        DB::table('jcm_save_packeges')->insert($input);
+
+			$order['user_id']=$id;
+			$order['payment_mode']='Cash Payment';
+			$order['orderBy']=$input['type'];
+			$order['amount']=$input['amount'];
+			$order['status']='Pending';
+			$order['category']='Package Plan';
+			$order['date']= date('Y-m-d');
+
+            DB::table('jcm_orders')->insert($order);
+			 return view('frontend.writecashpayment_detail',compact('input'));
+	} 
+
 
 }
