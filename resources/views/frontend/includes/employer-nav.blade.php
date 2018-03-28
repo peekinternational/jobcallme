@@ -23,6 +23,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ url('account/employer/questionnaires') }}" id="jaTab-3">
+                        <img src="../frontend-assets/images/test.jpg" style="padding-top:0px">
+                        <div class="udp-type">@lang('home.TEST')</div>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ url('messages') }}">
                         <img src="../frontend-assets/images/employer_icon5.png" style="padding-top:0px">
                         <div class="udp-type">@lang('home.MESSAGE')</div>

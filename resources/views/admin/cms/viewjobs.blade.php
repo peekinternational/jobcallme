@@ -64,7 +64,7 @@ $s_app = Session()->get('shiftSearch');
                                                 </td>
                                                 <td>{{ $job->createdTime }}</td>
                                                 <td>
-                                                    <a href="{{ url('admin/cms/jobs/update/'.$job->jobId) }}" data-toggle="tooltip" data-original-title="Update"><i class="icon icon-pencil"></i></a>&nbsp;&nbsp;&nbsp;
+                                                   <!--  <a href="{{ url('admin/cms/jobs/update/'.$job->jobId) }}" data-toggle="tooltip" data-original-title="Update"><i class="icon icon-pencil"></i></a>&nbsp;&nbsp;&nbsp; -->
                                                     <a href="javascript:;" onclick="deleteShift('{{ $job->jobId }}')" data-toggle="tooltip" data-original-title="Delete"><i class="icon icon-remove"></i></a>
                                                 </td>
                                             </tr>

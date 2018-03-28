@@ -70,7 +70,7 @@ class Jobs extends Controller{
 		if($state != '0' && $state != "") $jobs->where('jcm_jobs.state','=',$state);
 		if($city != '0') $jobs->where('jcm_jobs.city','=',$city);
 		if($currency != '') $jobs->where('jcm_jobs.currency','=',$currency);
-
+		$jobs->where('jobStatus','=','Publish');
 		if($keyword != ''){
 			$jobs->where(function ($query) use ($keyword) {
 				$expl = @explode(' ', $keyword);
@@ -199,7 +199,7 @@ class Jobs extends Controller{
 				{
 					$comUrl = url('companies/company/'.$sim->companyId);
 					$cityUrl = url('jobs?city='.$sim->city);
-					$vhtml .= '<p style="color: #999999;text-transform: uppercase;"><a style="color: #999999;" href="'.$cityUrl.'">'.trans('home.similerjob').'  '.JobCallMe::cityName($sim->city).'</a><span style="padding-left: 85px;" ><a style="color: #999999;" href="'.$comUrl.'">'.trans('home.jobIn').' '.$sim->companyName.'</a></span></p>';
+					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'">'.trans('home.similerjob').'  '.JobCallMe::cityName($sim->city).'</a><span style="padding-left: 85px;" ><a style="color: #999999;" href="'.$comUrl.'">'.trans('home.jobIn').' '.$sim->companyName.'</a></span></p>';
 				}
 				$vhtml .= '</div>';
 			}

@@ -57,7 +57,7 @@ $next = Request::route()->uri;
 </script>
         <style type="text/css">
             .mce-branding-powered-by {display: none;}
-            .udp-items li {width: 10%;}
+            .udp-items li {width: 9%;}
 			
         </style>
 		<style>
