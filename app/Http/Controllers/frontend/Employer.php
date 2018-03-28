@@ -1685,7 +1685,49 @@ public function userResume($userId){
 			}
 		}
 		public function questionnaires(Request $request){
-			return view('frontend.employer.questionnaires');
+			$id = $request->session()->get('jcmUser')->userId;
+			$questionaires = DB::table('jcm_questionnaire')->where('user_id','=',$id)->get();
+			return view('frontend.employer.questionnaires',compact('questionaires'));
+		}
+		public function addquestionaires(Request $request){
+
+			$data['user_id'] = $request->session()->get('jcmUser')->userId;
+			$data['title'] = $request->input('title');
+			$data['type']  = $request->input('type');
+			$data['submission_date']  = $request->input('submission_date');
+			($request->input('late_submission') != '') ? $data['accept_late_submission']  = $request->input('late_submission') : $data['accept_late_submission'] = "No";
+			($request->input('shuffle_question') != '') ? $data['shuffle_questions']  = $request->input('shuffle_question') : $data['shuffle_questions'] = "No" ;
+			if($request->input('ques_id') != ''){
+				$ques_id = $request->input('ques_id');
+				DB::table('jcm_questionnaire')->where('ques_id',$ques_id)->update($data);
+				return redirect('account/employer/questionnaires/edit/'.$ques_id);
+			}else{
+				if($id = DB::table('jcm_questionnaire')->insertGetId($data)){
+					return redirect('account/employer/questionnaires/edit/'.$id);
+				}else{
+					echo "error in frontend/Employer line 1697";
+				}
+			}
+			
+		}
+		public function editquestionnaires($id){
+			$ques = DB::table('jcm_questionnaire')->where('ques_id',$id)->first();
+			$questions = DB::table('jcm_questions')->where('ques_id',$id)->get();
+			return view('frontend.employer.editquestionnaires',compact('ques','questions'));
+		}
+		public function addquestion(Request $request){
+			$data['ques_id'] = $request->input('ques_id');
+			$data['question'] = $request->input('question');
+			$data['marks'] = $request->input('marks');
+			$data['options'] = implode(",", $request->input('options'));
+			($request->input('shuffle_question') != '') ? $data['shuffle'] = $request->input('shuffle_question') :"";
+			($request->input('required') != '') ? $data['required'] = $request->input('required') : "";
+			if(DB::table('jcm_questions')->insert($data)){
+				return redirect('account/employer/questionnaires/edit/'.$data['ques_id']);
+			}else{
+				echo "error in frontend/Employer line 1715";
+			}
+			
 		}
 
 }

@@ -213,10 +213,6 @@
                         <div class="form-group">
                           <select class="form-control select2 job-state" name="state">
                           </select>
-<<<<<<< HEAD
-
-=======
->>>>>>> 8c3c4e92dee8fbe4decdba80fbd05e6dcd327a36
                         </div>
                       </div>
 
@@ -245,11 +241,6 @@
               </div>
             </div>
           </div>
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 8c3c4e92dee8fbe4decdba80fbd05e6dcd327a36
           <div class="row">
             <div class="col-md-12">
               <?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9','#9e947b','#5b5c5e','#7b767d','#a0b1b9','#6d846f'); $i=0; ?>
@@ -326,10 +317,7 @@
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     <div class="fp-img">
                       <img src="@if($people->pImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
-<<<<<<< HEAD
-
-=======
->>>>>>> 8c3c4e92dee8fbe4decdba80fbd05e6dcd327a36
+                      
                     </div>
                     <div class="fp-item-details" style="height: 121px;">
                       <p>{!! $people->firstName.' '.$people->lastName !!}</p>

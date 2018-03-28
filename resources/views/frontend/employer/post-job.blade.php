@@ -350,7 +350,7 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
                                     @endforeach
                                 </select>
                             </div>
