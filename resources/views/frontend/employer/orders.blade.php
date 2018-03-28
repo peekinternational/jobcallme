@@ -54,6 +54,7 @@
         					<thead>
         						<tr>
         							<th>ID</th>
+											<th>Category By</th>
         							<th>Ordered By</th>
         							<th>Payment Mode</th>
         							<th>Amount</th>
@@ -65,6 +66,7 @@
         						@foreach($data as $order)
         						<tr>
         							<td>{{$order->order_id}}</td>
+											<td>{{$order->category}}</td>
         							<td>{{$order->orderBy}}</td>
         							<td>{{$order->payment_mode}}</td>
         							<td>{{$order->amount}}$</td>

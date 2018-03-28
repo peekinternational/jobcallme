@@ -16,9 +16,6 @@
                                 <tr>
                                     <th>Questionnaire</th>
                                     <th>Type</th>
-                                    <th>Duration</th>
-                                    <th>Total Questions</th>
-                                    <th>Marks</th>
                                     <th>Submitted in</th>
                                     <th>Late Submission</th>
                                     <th>Shuffle</th>
@@ -26,9 +23,16 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @foreach($questionaires as $question)
                                 <tr>
-                                    
+                                    <td>{{ $question->title }}</td>
+                                    <td>{{ $question->type }}</td>
+                                    <td>{{ $question->submission_date }}</td>
+                                    <td>{{ $question->accept_late_submission }}</td>
+                                    <td>{{ $question->shuffle_questions }}</td>
+                                    <td><a href="{{ url('account/employer/questionnaires/edit/'.$question->ques_id) }}"><i class="fa fa-edit"></i></a> <span><i class="fa fa-remove"></i></span></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <!-- <ul class="resume-details">
@@ -57,10 +61,11 @@
                     </section>
                     <section class="resume-box" id="academic-edit" style="display: none;">
                         <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.AddQuestionnaire')asdasd</c></h4>
-                        <form action="/action_page.php">
+                        <form method="post" action="{{ url('account/employer/questionnaires/new') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                           <div class="form-group">
                             <label for="title">Title:</label>
-                            <input type="text" class="form-control" id="title">
+                            <input type="text" name="title" class="form-control" id="title">
                           </div>
                           <div class="form-group">
                             <label for="type">Type:</label>
@@ -72,18 +77,18 @@
                           </div>
                           <div class="form-group">
                             <label for="days">Submission Days:</label>
-                            <input type="number" class="form-control" id="days">
+                            <input type="number" name="submission_date" class="form-control" id="days">
                           </div>
                           <div class="checkbox">
-                            <label><input type="checkbox"> Accept Late Submission</label>
+                            <label><input name="late_submission" value="Yes" type="checkbox"> Accept Late Submission</label>
                           </div>
                           <div class="checkbox">
-                            <label><input type="checkbox"> Shuffle Questions</label>
+                            <label><input name="shuffle_question" value="Yes" type="checkbox"> Shuffle Questions</label>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 text-right">&nbsp;</label>
                             <div class="col-md-6">
-                                <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                <button class="btn btn-primary" type="submit">@lang('home.save')</button>
                                 <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">Cancel</button>
                             </div>
                           </div>

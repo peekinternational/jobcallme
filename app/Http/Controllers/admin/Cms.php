@@ -557,4 +557,86 @@ class Cms extends Controller{
 
         
     }
+
+    // package Plan //
+
+        public function viewplan(Request $request){
+        $startI = $request->input('page',1);
+        $startI = ($startI - 1) * 25;
+        if($request->isMethod('post')){
+            $request->session()->put('jobtypeSearch',$request->all());
+        }
+
+        if($request->input('reset') && $request->input('reset') == 'true'){
+            $request->session()->forget('jobtypeSearch');
+            return redirect('admin/cms/plan');
+        }
+
+        /* category query*/
+        $s_app = $request->session()->get('jobtypeSearch');
+        $plan = DB::table('jcm_package_plan')
+                    ->where(function ($query) use ($s_app) {
+                        if(count($s_app) > 0){
+                            if($s_app['search'] != ''){
+                                $query->where('type', 'like', '%'.$s_app['search'].'%');
+                            }
+                        }
+                    })->orderBy('pckg_id','desc')->paginate(25);
+        /* end */
+
+        return view('admin.cms.package_plan',compact('plan','startI'));
+    }
+	
+	
+
+    public function saveplan(Request $request){
+        if(!$request->ajax()){
+            exit('Directory access is forbidden');
+        }
+        $typeId = trim($request->input('pckg_id'));
+        $name = trim($request->input('type'));
+            $result_explode = explode('|', $name);
+            $type = $result_explode[0];
+            $p_category = $result_explode[1];
+        
+        $amount = trim($request->input('amount'));
+        $quantity = trim($request->input('quantity'));
+        $duration = trim($request->input('duration'));
+        $expiryDays = trim($request->input('expiryDays'));
+
+        if($name == ''){
+            exit('Please enter job type.');
+        }
+       
+        $input = array('type' => $type, 'amount' => $amount,'cat_id' => $p_category, 'quantity' => $quantity, 'duration' => $duration );
+        if($typeId != '0'){
+            DB::table('jcm_package_plan')->where('pckg_id','=',$typeId)->update($input);
+            $sMsg = 'Job Type Updated';
+        }else{
+           // $input['createdTime'] = date('Y-m-d H:i:s');
+            DB::table('jcm_package_plan')->insert($input);
+            $sMsg = 'New Job Type Added';
+        }
+        $request->session()->flash('alert',['message' => $sMsg, 'type' => 'success']);
+        exit('1');
+    }
+
+    public function getplan(Request $request){
+        if(!$request->ajax()){
+            exit('Directory access is forbidden');
+        }
+        $typeId = $request->segment(5);
+        $cat = DB::table('jcm_package_plan')->where('pckg_id',$typeId)->first();
+        echo @json_encode($cat);
+    }
+
+    public function deleteplan(Request $request){
+        if($request->isMethod('delete')){
+            $typeId = $request->input('pckg_id');
+            DB::table('jcm_package_plan')->where('pckg_id','=',$typeId)->delete();
+            $request->session()->flash('alert',['message' => 'Job Type Deleted','type' => 'success']);
+        }
+        return redirect(url()->previous());
+    }
+	
 }
