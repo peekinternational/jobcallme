@@ -297,7 +297,14 @@ class ExtraSkills extends Controller{
 		//dd($input['paymentMode']);
         
 	    DB::table('jcm_writings')->insert($input);
-
+            $order['user_id']=$apps->userId;
+            $order['payment_mode']='Paypal';
+            $order['orderBy']=$input['title'];
+            $order['amount']=$input['amount'];
+            $order['status']='Approved';
+            $order['category']='Article';
+            $order['date']= date('Y-m-d');
+             DB::table('jcm_orders')->insert($order);
 		//echo $jobId;
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
@@ -573,6 +580,7 @@ class ExtraSkills extends Controller{
        $order['orderBy']=$input['title'];
        $order['amount']=$input['amount'];
        $order['status']='Approved';
+       $order['category']='Upskill';
        $order['date']= date('Y-m-d');
 
        DB::table('jcm_orders')->insert($order);
@@ -600,6 +608,7 @@ class ExtraSkills extends Controller{
             $order['orderBy']=$input['title'];
             $order['amount']=$input['amount'];
             $order['status']='Pending';
+            $order['category']='Upskill';
             $order['date']= date('Y-m-d');
 
             DB::table('jcm_orders')->insert($order);
@@ -618,6 +627,16 @@ class ExtraSkills extends Controller{
             $input['status'] = 'Draft';  
         
 	        DB::table('jcm_writings')->insert($input);
+
+
+            $order['user_id']=$apps->userId;
+            $order['payment_mode']='Cash Payment';
+            $order['orderBy']=$input['title'];
+            $order['amount']=$input['amount'];
+            $order['status']='Pending';
+            $order['category']='Article';
+            $order['date']= date('Y-m-d');
+             DB::table('jcm_orders')->insert($order);
 
             return view('frontend.writecashpayment_detail',compact('input'));
 

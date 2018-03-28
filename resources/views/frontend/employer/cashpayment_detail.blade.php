@@ -16,7 +16,7 @@
                     <h4 class="modal-title">@lang('home.cashpayment')</h4>
                     </div>
                     <div class="modal-body">
-                    <p>Job title: {{ $inputs['title']}}</p>
+                    <p>Package Plan: {{ $inputs['type']}}</p>
                     <p>Amount: ${{ $inputs['amount']}}</p>
                     <p>Bank Name: Industrail Bank</p>
                     <p>Account Holder: <b>Jobcallme Co.,Ltd</b></p>

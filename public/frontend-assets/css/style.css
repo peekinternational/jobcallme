@@ -755,7 +755,7 @@ a.job-location:hover span.shine {
 }
 .udp-items li{
     display: inline-block;
-    width: 12.5%;
+    width: 9% !important;
     text-align: center;
     color: #666666;
     float: left;
@@ -894,6 +894,10 @@ a.job-location:hover span.shine {
     /*margin-top: 10px;
     margin-bottom: -10px;*/
 }
+.companies-mbl-view {
+    height: 90px;
+    overflow: hidden;
+}
 .fc-item{
     text-align: center;
     padding-top: 10px;
@@ -942,7 +946,10 @@ a.job-location:hover span.shine {
 .sr-author a:hover{
     text-decoration: none;
 }
-
+.suggestedreading-img-mbl{
+    height: 110px;
+    overflow: hidden;
+}
 /*================================
     Resume Page
 ==================================
@@ -973,7 +980,8 @@ a.job-location:hover span.shine {
 
 .re-img-box{
     position: relative;
-    width: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     margin-bottom: 20px;
     margin-right: 17px;
@@ -1351,7 +1359,7 @@ ul.jd-rewards li i{
     padding: 10px 10px;
  }
  .jobMblTabs >li.active >a{
-    border-bottom: 1px solid yellow;
+    /*border-bottom: 1px solid yellow;*/
  }
 .ja-tab-active{
     border-left: 4px solid #e6b706;
@@ -1727,7 +1735,7 @@ ul.jd-rewards li i{
 }
 .eo-dp-box{
     width: 16%;
-    height: 243px;
+    height: 200px;
     overflow: hidden;
     top: -69px;
     position: relative;
@@ -2063,6 +2071,9 @@ ul.jd-rewards li i{
 .us-duration hr{
     width: 100%;
     float: left;
+}
+.mbl-view-upskills >h2{
+    font-size: 28px;
 }
 /*================================
     Employers Page
@@ -2542,7 +2553,6 @@ Jobseeker Profile
     background: #f8f8f8;
     margin-bottom: 20px;
 }
-
 /*==================================================
   Chat Room CSS
   ==================================================*/
@@ -2842,7 +2852,7 @@ img.profile-photo-xs{
 	height:170px;
 }
 .fp-img{
-    height: 171px;
+    height: 148px;
     width: 100%;
     overflow: hidden;
 }
@@ -3252,6 +3262,11 @@ img.profile-photo-xs{
     margin-bottom: 20px;
 
 }
+#personal-information .profile-img{
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+}
 /*=====================
     Search Courses
 ========================
@@ -3345,7 +3360,8 @@ img.profile-photo-xs{
     }
     .re-img-box{
         position: relative;
-        width: 150px;
+        width: 220px;
+        height: 220px;
         border-radius: 50%;
         margin: 0 auto;
         overflow: hidden;
@@ -3553,8 +3569,15 @@ img.profile-photo-xs{
         margin-bottom: 10px;
     }
     /*Zeeshan Css Chnges*/
+    .job-search{
+        padding-top: 25px;
+    }
+    .hp_strip .wrapper h2{
+        padding-top: 60px !important;
+    }
     .pnj-box h3 span{
         padding-left: 0 !important;
+        font-size: 19px;
     }
     .upskill-box p{
         padding: 10px;
@@ -3634,8 +3657,8 @@ img.profile-photo-xs{
         margin-right: -15px;
     }
     .eo-dp-box {
-        width: 53%;
-        left: 90px;
+        width: 44%;
+        left: 27%;
     }
     .follow-companies4{
         margin-right: 13px;
@@ -3645,12 +3668,95 @@ img.profile-photo-xs{
     }
     .js-note{
         width: 65%;
+        word-wrap: break-word;
     }
     .tabbable-line > .nav-tabs > li{
         margin-right: 0;
     }
     .tabbable-line > .nav-tabs > li > a{
         padding: 10px 10px;
+    }
+    .jobseeker-mbl-nav>li>a{
+        padding: 10px 12px;
+    }
+    .mbl-view-upskills >h2{
+        font-size: 23px;
+    }
+    .companies-mbl-view{
+        height: 154px;
+        overflow: hidden;
+    }
+    .companies-mbl-vew{
+        padding-right: 15px !important;
+    }
+    .companies-mbl-info{
+        top: 129px !important;
+        color: white;
+        transform: none !important;
+        opacity: 1 !important; 
+        visibility: visible;
+    }
+    .hvr-bob .ih-item.square.effect8{
+        height: 200px;
+    }
+    .hvr-bob .ih-item.square.effect8 .img{
+        height: 155px;
+        overflow: hidden;
+    }
+    .ih-item .square .effect8 .scale_up .companies-mbl-info {
+        top: 129px; 
+    }
+     .companies-mbl-info h3{
+        transform: none !important;
+        visibility: visible !important;
+    }
+    .suggestedreading-img-mbl{
+        height: 150px;
+        overflow: hidden;
+    }
+    #latest-jobs{
+        background: transparent;
+    }
+    .job-types-section{
+        background: transparent !important;
+    }
+    .benefits-checks:first-Child{
+        padding-right: 0;
+    }
+    .benefits-checks:nth-Child(7)
+    {
+        width: 100%;
+    }
+    .l-name{
+        padding-left: 0;
+    }
+    .f-name{
+        padding-right: 0;
+    }
+    .ph-nmbr{
+        padding-left: 0;
+    }
+    .mb-nmbr{
+        padding-right: 0;
+    }
+    .eo-timeline-details{
+        right: 0;
+    }
+    .pnj-form-section{
+        padding: 10px 0;
+        text-align: left;
+    }
+     #personal-information .profile-img >img{
+        width: 100% !important;
+     }
+     #personal-information .col-md-3{
+        text-align: -webkit-center;
+     }
+    #personal-information .profile-img{
+        height: 240px;
+        width: 240px;
+        overflow: hidden;
+        border-radius: 50%;
     }
 }
 @media (max-width: 465px) {
@@ -3870,8 +3976,8 @@ border-top-color: rgb(255, 255, 255) !important;
 .pricing h3 {
     color: #fff;
     font-weight: 400;
-    margin-left: -24px;
-    margin-right: -24px;
+    margin-left: -16px;
+    margin-right: -16px;
     margin-top: -24px!important;
     padding: 15px!important;
 }

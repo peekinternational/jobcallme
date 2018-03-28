@@ -14,22 +14,49 @@ if(Request::input('show') != ''){
 <section id="jobsApplications">
     <div class="container">
 
-	<div class="follow-companies6" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
-                    <h3 style="margin-left: 15px">@lang('home.APPLICATION')</h3>
-				</div>
-
-        <div class="col-md-2 jobApp-tabs">
+        <div class="follow-companies6" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
+            <h3 style="margin-left: 15px">@lang('home.APPLICATION')</h3>
+        </div>
+        <!-- Mobile View Only -->
+        <div class="col-md-2 jobApp-tabs hidden-sm hidden-md hidden-lg">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a id="delivered" class="mblTabBtn {{ $delivered }}" data-toggle="tab" href="#delivered" role="tab" aria-controls="delivered">@lang('home.delivered')</a>
+                </li>
+                <li>
+                    <a id="shortlist" class=" mblTabBtn {{ $shortlist }}" data-toggle="tab" href="#shortlist" role="tab" aria-controls="shortlist">@lang('home.shortlisted')</a>
+                </li>
+                <li>
+                    <a id="interview" class="mblTabBtn {{ $interview }}" data-toggle="tab" href="#interview" role="tab" aria-controls="interview">@lang('home.interviews')</a>
+                </li>
+                <li>
+                    <a id="offer" class="mblTabBtn {{ $offer }}" data-toggle="tab" href="#offer" role="tab" aria-controls="offer">@lang('home.offered')</a>
+                </li>
+                <li>
+                    <a id="reject" class="mblTabBtn {{ $reject }}" data-toggle="tab" href="#reject" role="tab" aria-controls="reject">@lang('home.unsuccessful')</a>
+                </li>
+            </ul>
+            <!-- <a id="delivered" class="btn btn-block jaTabBtn {{ $delivered }}">@lang('home.delivered')</a>
+            <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}">@lang('home.shortlisted')</a>
+            <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}">@lang('home.interviews')</a>
+            <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}">@lang('home.offered')</a>
+            <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}">@lang('home.unsuccessful')</a> -->
+         </div>
+        <!-- End Mobile View -->
+        <div class="col-md-2 jobApp-tabs hidden-xs">
             <a id="delivered" class="btn btn-block jaTabBtn {{ $delivered }}">@lang('home.delivered')</a>
             <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}">@lang('home.shortlisted')</a>
             <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}">@lang('home.interviews')</a>
             <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}">@lang('home.offered')</a>
             <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}">@lang('home.unsuccessful')</a>
-         </div>
+        </div>
         <div class="col-md-10">
-            <div class="ja-content">
-                <!--Application-->
-                <div id="application-show" class="ja-content-item"></div>
-                <!--Application End-->
+            <div class="tab-content">
+                <div class="ja-content">
+                    <!--Application-->
+                    <div id="application-show" class="ja-content-item"></div>
+                    <!--Application End-->
+                </div>
             </div>
         </div>
     </div>
@@ -40,6 +67,12 @@ if(Request::input('show') != ''){
 .input-error{color: red;}
 </style>
 <script type="text/javascript">
+    var token = "{{ csrf_token() }}";
+    $(document).ready(function(){
+        $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
+        var firstSelect = $('.jaTabBtn.ja-tab-active');
+        $(firstSelect).removeClass('ja-tab-active');
+        $(firstSelect).click();
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
     $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
@@ -48,7 +81,7 @@ $(document).ready(function(){
     $(firstSelect).click();
 })
 $('.jaTabBtn').click(function () {
-    if($(this).hasClass('ja-tab-active')){
+    if($(this).hasClass('nav-tab-active')){
         return false;
     }
     $(this).addClass('ja-tab-active').siblings().removeClass('ja-tab-active');
@@ -60,16 +93,30 @@ $('.jaTabBtn').click(function () {
             $('#application-show').html(response);
         }
     })
-});
-function removeApplication(applyId){
-    if(confirm('Are you sure?')){
+    // Mobile  Tab 
+    // End 
+    $('.jaTabBtn').click(function () {
+        if($(this).hasClass('ja-tab-active')){
+            return false;
+        }
+        $(this).addClass('ja-tab-active').siblings().removeClass('ja-tab-active');
+        var type = $(this).attr('id');
         $.ajax({
-            url: "{{ url('account/jobseeker/application/remove') }}/"+applyId,
+            url: "{{ url('account/jobseeker/application') }}/"+type,
             success: function(response){
-                $('#apply-'+applyId).remove();
+                $('#application-show').html(response);
             }
         })
+    });
+    function removeApplication(applyId){
+        if(confirm('Are you sure?')){
+            $.ajax({
+                url: "{{ url('account/jobseeker/application/remove') }}/"+applyId,
+                success: function(response){
+                    $('#apply-'+applyId).remove();
+                }
+            })
+        }
     }
-}
 </script>
 @endsection

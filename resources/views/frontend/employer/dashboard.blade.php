@@ -201,7 +201,9 @@
                         ?>
                     <div class="col-md-12 sr-item">
 						<div class="col-md-4 col-xs-12">
-							<img src="{{ $pImage }}" style="width: 100%;height:autopx !important;">
+                            <div class="suggestedreading-img-mbl">
+							    <img src="{{ $pImage }}" style="width: 100%;height:auto !important;">
+                            </div>    
 						</div>
 						<div class="col-md-8 col-xs-12" style="padding-top:10px">
 							<div class="sr-details">

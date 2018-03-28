@@ -20,7 +20,42 @@ if(Request::input('show') != ''){
 
 
         <div class="col-md-12">
-            <div class="col-md-2 ">
+            <!-- Mobile View Only -->
+            <div class="col-md-2 hidden-sm hidden-md hidden-lg">
+                <div class="row">
+                    <div class="col-md-12 jobApp-tabs jobMblTabs">
+                        <ul class="nav nav-tabs jobMblTabs">
+                            <li>
+                                <a id="inbox" class="mblTabBtn nav-tab-active {{ $inbox }}"><i class="fa fa-users"></i> @lang('home.inbox')</a>
+                            </li>
+                            <li>
+                                <a id="junk" class="mblTabBtn {{ $junk }}"><i class="fa fa-ban"></i>  @lang('home.junks')</a>
+                            </li>
+                            <li>
+                                <a id="shortlist" class="mblTabBtn {{ $shortlist }}"><i class="fa fa-thumbs-up"></i>  @lang('home.shortlists')</a>
+                            </li>
+                            <li>
+                                <a id="screened" class="mblTabBtn {{ $screened }}"><i class="fa fa-mobile"></i>  @lang('home.screened')</a>
+                            </li>
+                            <li>
+                                <a id="interview" class="mblTabBtn {{ $interview }}"><i class="fa fa-calendar"></i>  @lang('home.interviews')</a>
+                            </li>
+                            <li>
+                                <a id="offer" class="mblTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  @lang('home.offered')</a>
+                            </li>
+                            <li>
+                                <a id="hire" class="mblTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
+                            </li>
+                            <li>
+                                <a id="reject" class="mblTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End Mobile View -->
+
+            <div class="col-md-2 hidden-xs">
                 <div class="row">
                     <div class="col-md-12 jobApp-tabs">
                         <a id="inbox" class="btn btn-block jaTabBtn {{ $inbox }}"><i class="fa fa-users"></i> @lang('home.inbox')</a>

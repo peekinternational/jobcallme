@@ -245,7 +245,6 @@
 						</div>
 					  </div>
 
-
           <div class="row">
             <div class="col-md-12">
               <?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9','#9e947b','#5b5c5e','#7b767d','#a0b1b9','#6d846f'); $i=0; ?>
@@ -318,13 +317,13 @@
               ?>
 
               <div class="col-md-2 col-sm-4 col-xs-6">
-                <div class="fp-item" style="height: 304px;">
+                <div class="fp-item" style="height: 256px;">
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     <div class="fp-img">
                       <img src="@if($people->pImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
 
                     </div>
-                    <div class="fp-item-details" style="height: 121px;">
+                    <div class="fp-item-details" style="height: 95px;">
                       <p>{!! $people->firstName.' '.$people->lastName !!}</p>
                       <p>{{ JobCallMe::categoryTitle($people->industry) }}</p>
                       <p>{{ JobCallMe::cityName($people->city).', '.JobCallMe::countryName($people->country)}}</p>

@@ -104,6 +104,12 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/jobtype/save','admin\Cms@saveJobType');
 	Route::get('cms/jobtype/get/{id}','admin\Cms@getJobType');
 	Route::delete('cms/jobtype/delete','admin\Cms@deleteJobType');
+
+	/* Package Plan */
+	Route::match(['get','post'],'cms/plan','admin\Cms@viewplan');
+	Route::post('cms/plan/save','admin\Cms@saveplan');
+	Route::get('cms/plan/get/{id}','admin\Cms@getplan');
+	Route::delete('cms/plan/delete','admin\Cms@deleteplan');
 	
 	/* upskill type */
 	Route::match(['get','post'],'cms/upskilltype','admin\Cms@viewupskillType');
@@ -162,6 +168,10 @@ Route::get('companies/company/{id}','frontend\Home@viewCompany');
 Route::group(['prefix' => 'account'], function () {
 	/* generals */
 	Route::post('feedback','frontend\Home@feedback');
+	Route::post('employer/questionnaires/new','frontend\Employer@addquestionaires');
+	Route::post('employer/questionnaires/question/new','frontend\Employer@addquestion');
+	Route::get('employer/questionnaires','frontend\Employer@questionnaires');
+	Route::get('employer/questionnaires/edit/{id}','frontend\Employer@editquestionnaires');
 	Route::post('employer/savecompic','frontend\Home@savecompic');
 	Route::get('writings','frontend\ExtraSkills@writings');
 	Route::match(['get','post'],'writings/article/add','frontend\ExtraSkills@addEditArticle');
@@ -234,16 +244,25 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/department/get/{id}','frontend\Employer@getDepartment');
     Route::get('employer/department/delete/{id}','frontend\Employer@deleteDepartment');
 	Route::post('post','frontend\Employer@post');
+	Route::post('packageplan','frontend\Employer@package');
+	Route::post('packageinfo','frontend\Employer@packageinfo');
+	Route::post('cashpackage','frontend\Employer@cashpackage');
+
 	Route::post('nicepay', 'frontend\Employer@getresponse');
 	Route::post('cashpayment', 'frontend\Employer@cashpayment');
 	Route::get('employer/delete/{id}','frontend\Employer@deletejob');
 	Route::match(['get','post'],'employer/orders','frontend\Employer@orders');
 	Route::get('employer/setfilter/{id}','frontend\Employer@setfilter');
-	
 	Route::get('employer/cashpayment', function () {
     return view('frontend.employer.cashpayment_detail');
 });
-Route::get('employer/nice', function () {
+	Route::get('employer/package_payment', function () {
+    return view('frontend.employer.package_payment');
+});
+	Route::get('employer/package_plan', function () {
+    return view('frontend.employer.package_plan');
+});
+    Route::get('employer/nice', function () {
     return view('frontend.employer.nice');
 });
 Route::get('employer/users','frontend\Employer@addUser');
@@ -310,6 +329,13 @@ Route::get('messages', function () {
 });
 Route::post('skillcashpayment', 'frontend\ExtraSkills@cashpayment');
 Route::post('writecashpayment', 'frontend\ExtraSkills@writecashpayment');
+
+/// Package Plan ////
+
+Route::post('packagepaypal', array('as' => 'addmoney.packagepaypal','uses' => 'frontend\Employer@packagePayment',));
+Route::get('packagepaypal', array('as' => 'payment.packagestatus','uses' => 'frontend\Employer@packageStatus',));
+
+
 
 //upskill
 Route::post('skillpaypal', array('as' => 'addmoney.skillpaypal','uses' => 'frontend\ExtraSkills@postPayment',));
