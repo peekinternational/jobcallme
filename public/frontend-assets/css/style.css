@@ -755,7 +755,7 @@ a.job-location:hover span.shine {
 }
 .udp-items li{
     display: inline-block;
-    width: 12.5%;
+    width: 9% !important;
     text-align: center;
     color: #666666;
     float: left;
@@ -980,7 +980,8 @@ a.job-location:hover span.shine {
 
 .re-img-box{
     position: relative;
-    width: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     margin-bottom: 20px;
     margin-right: 17px;
@@ -1734,7 +1735,7 @@ ul.jd-rewards li i{
 }
 .eo-dp-box{
     width: 16%;
-    height: 243px;
+    height: 200px;
     overflow: hidden;
     top: -69px;
     position: relative;
@@ -3261,6 +3262,11 @@ img.profile-photo-xs{
     margin-bottom: 20px;
 
 }
+#personal-information .profile-img{
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+}
 /*=====================
     Search Courses
 ========================
@@ -3354,7 +3360,8 @@ img.profile-photo-xs{
     }
     .re-img-box{
         position: relative;
-        width: 150px;
+        width: 220px;
+        height: 220px;
         border-radius: 50%;
         margin: 0 auto;
         overflow: hidden;
@@ -3562,6 +3569,12 @@ img.profile-photo-xs{
         margin-bottom: 10px;
     }
     /*Zeeshan Css Chnges*/
+    .job-search{
+        padding-top: 25px;
+    }
+    .hp_strip .wrapper h2{
+        padding-top: 60px !important;
+    }
     .pnj-box h3 span{
         padding-left: 0 !important;
         font-size: 19px;
@@ -3644,8 +3657,8 @@ img.profile-photo-xs{
         margin-right: -15px;
     }
     .eo-dp-box {
-        width: 53%;
-        left: 90px;
+        width: 44%;
+        left: 27%;
     }
     .follow-companies4{
         margin-right: 13px;
@@ -3705,7 +3718,7 @@ img.profile-photo-xs{
         background: transparent;
     }
     .job-types-section{
-        background: transparent;
+        background: transparent !important;
     }
     .benefits-checks:first-Child{
         padding-right: 0;
@@ -3713,6 +3726,37 @@ img.profile-photo-xs{
     .benefits-checks:nth-Child(7)
     {
         width: 100%;
+    }
+    .l-name{
+        padding-left: 0;
+    }
+    .f-name{
+        padding-right: 0;
+    }
+    .ph-nmbr{
+        padding-left: 0;
+    }
+    .mb-nmbr{
+        padding-right: 0;
+    }
+    .eo-timeline-details{
+        right: 0;
+    }
+    .pnj-form-section{
+        padding: 10px 0;
+        text-align: left;
+    }
+     #personal-information .profile-img >img{
+        width: 100% !important;
+     }
+     #personal-information .col-md-3{
+        text-align: -webkit-center;
+     }
+    #personal-information .profile-img{
+        height: 240px;
+        width: 240px;
+        overflow: hidden;
+        border-radius: 50%;
     }
 }
 @media (max-width: 465px) {

@@ -81,7 +81,7 @@ $(document).ready(function(){
     $(firstSelect).click();
 })
 $('.jaTabBtn').click(function () {
-    if($(this).hasClass('ja-tab-active')){
+    if($(this).hasClass('nav-tab-active')){
         return false;
     }
     $(this).addClass('ja-tab-active').siblings().removeClass('ja-tab-active');

@@ -35,7 +35,7 @@ if($user->profilePhoto != ''){
                         <div class="row">
                             <div class="col-md-3 personal-info-left">
                                 <div class="re-img-box">
-                                    <img src="{{ $userImage }}" class="img-circle">
+                                    <img src="{{ $userImage }}">
                                     <div class="re-img-toolkit">
                                         <div class="re-file-btn">
                                             @lang('home.change') <i class="fa fa-camera"></i>
@@ -1690,7 +1690,7 @@ if($user->profilePhoto != ''){
                     <!--Project Section End-->
 					
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 hidden-xs">
                     <div class="resume-listing-section hidden-sm hidden-xs">
                         <h4>@lang('home.resumesections')</h4>
                         <hr>
