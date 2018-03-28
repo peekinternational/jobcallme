@@ -26,28 +26,28 @@
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types">
                          
-						 @foreach($plan as $payment)
+						 @foreach($plan as $pay)
                          <!----><li style="position:relative">
                                 <!---->
 								<span class="pay_blog">
-									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="allarray" value="{!! $payment->cat_id!!}|{!! $payment->id!!}|{!! $payment->amount!!}|{!! $payment->duration!!}|{!! $payment->quantity!!}">
-									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"  value="{!! $payment->amount!!}">
+									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $pay->id!!}" name="allarray" value="{!! $pay->cat_id!!}|{!! $pay->id!!}|{!! $pay->amount!!}|{!! $pay->duration!!}|{!! $pay->quantity!!}">
+									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"  value="{!! $pay->amount!!}">
                                     
-                                    <input class="mat-radio-input visually-hidden" id="checkplan" type="hidden" name="plan"  value="plan">
+                                    <input class="checkplan"  type="hidden" name="plan"  value="plan">
 								</span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.'.$payment->type)</span></div>
+                             <span class="b">@lang('home.'.$pay->type)</span></div>
                                 <div>
-                                    <!----><label for="{!! $payment->id!!}">
+                                    <!----><label for="{!! $pay->id!!}">
                                         <ul class="list-unstyled desc" >
-											<li>@lang('home.'.$payment->quantity)</li>
+											<li>@lang('home.'.$pay->quantity)</li>
                                             <li>@lang('home.adcost')</li>
                                             <!-- <li>{!! $payment->tag1!!}</li>
                                              <li>{!! $payment->tag2!!}</li> -->
                                         </ul>
 										
                                         <div class="credits b">
-										<span class="text-success">@lang('home.'.$payment->amount)</span>
+										<span class="text-success">@lang('home.'.$pay->amount)</span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									</div>
                                     </label>
@@ -608,8 +608,8 @@ $(document).ready(function(){
     $('body').on('click','.mat-radio-input',function(e){
 		console.log($(e.target).val());
 	 alrt=$(e.target).siblings('input').val();
-     var plans=$('#checkplan').val();
-    // alert(plans);
+     var plans=$('.checkplan').val();
+     alert(plans);
 	 console.log(alrt);
      if(alrt==0 || plans=='plan')
      {
@@ -672,7 +672,7 @@ $('.add2').click(function() {
 
 });
 $('#nopckg').click(function() {
-    $('#checkplan').val('');
+    $('.checkplan').val('');
     $('#pckg').hide();
     $('#notpckg').show();
      $('#durationdiv').show();
@@ -680,7 +680,7 @@ $('#nopckg').click(function() {
           $('#expirediv').show();
 });
 $('#nonpckg').click(function() {
-    $('#checkplan').val('plan');
+    $('.checkplan').val('plan');
     $('#pckg').show();
     $('#notpckg').hide();
      $('#durationdiv').hide();

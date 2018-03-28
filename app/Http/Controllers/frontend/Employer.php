@@ -118,7 +118,7 @@ curl_close ($ch);
 	 
     public function postPaymentWithpaypals(Request $request)
     {
-	//dd($request->plan);
+	//dd($request->all());
 	   $rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
 	   $amount=$rec[0]->price;
 	   //dd();
@@ -166,7 +166,8 @@ curl_close ($ch);
 		
 		 $goodsname = Session::get('p_Category');
 		 $plan=$request->plan;
-		if($plan != null)
+
+		if($plan != null && $plan != '')
 		{       
 			$name =$request->allarray;
 			    $result_explode = explode('|', $name);
@@ -221,7 +222,7 @@ curl_close ($ch);
 		return Redirect::route('addmoney.account/employer/job/share');	
 		}
 		
-		if($amount!='0')
+		elseif($amount!='0')
 		{
 			$request->merge(['jType'=>'Paid']);
 		}
