@@ -105,8 +105,9 @@
                         <div>
                             <ol type='1' style="margin-left:30px;">
                              @foreach($questions as $key => $question)
-                                <li style="position:relative;"><strong>{{ $question->question }}</strong>
+                                <li style="position:relative;margin-bottom: 5px;"><strong>{{ $question->question }}</strong>
                                 <input type="hidden" value="{{$key}}" id="index">
+                                <input type="hidden" value="{{$question->q_id}}" id="q_id">
                                     <ol type="1" style="margin-left:20px;">
                                         <?php $options = explode(',', $question->options); ?>
                                         @foreach($options as $option)
@@ -114,8 +115,8 @@
                                         @endforeach
                                     </ol>
                                     <span style="position:absolute;top:10px;right:10px;">
-                                        <i class="fa fa-edit"></i>
-                                        <i class="fa fa-remove"></i>
+                                        <i class="fa fa-edit queseditbtn pointer"></i>
+                                        <i class="fa fa-remove pointer quesdelid"></i>
                                     </span>
                                     
                                 </li>
@@ -169,7 +170,7 @@
 		@endsection
 		@section('page-footer')
 <script type="text/javascript">
-		
+
 function addAcademic(){
    /* $('.form-academic input').val('');*/
     $('#academic-edit h4 c').text('@lang('home.AddQuestionnaire')');
@@ -181,10 +182,51 @@ function addquestion(){
     $('#academic-edit h4 c').text('@lang('home.AddQuestionnaire')');
     $('#question').hide();
     $('#aquestion-edit').fadeIn();
+    $('#aquestion-edit').find('input[name="question"]').val('');
+    $('#aquestion-edit').find('input[name="marks"]').val('');
+    $('#addoption').html('');
+    $('#addoption').append('<label for="days">Option:</label><input type="text" name="options[]" class="form-control" id="days">');
 }
 $('#addMore').on("click",function(){
    $('#addoption').append('<div><input type="text" name="options[]" style="width:98%;display:inline" class="form-control" id="days"><span style="font-size:25px;cursor:pointer;" onclick="$(this).parent().remove()" class="remove">&times;</span></div>');
 })
-
+$('.queseditbtn').on('click',function(){
+    var index = $(this).closest('li').find('#index').val();
+    var arrayName = <?php echo json_encode($questions); ?>;
+    var some = arrayName[index].options.split(',')
+    
+    $('#academic-edit h4 c').text('@lang('home.AddQuestionnaire')');
+    $('#question').hide();
+    $('#aquestion-edit').fadeIn();
+    $('input[name="question"]').val(arrayName[index].question);
+    $('input[name="marks"]').val(arrayName[index].marks);
+     $('#addoption').html('');
+     $('#addoption').append('<label for="days">Option:</label><input type="hidden" value="'+arrayName[index].q_id+'" name="q_id">');
+    $(some).each(function(index){
+        $('#addoption').append('<div><input type="text" value="'+some[index]+'" name="options[]" style="width:98%;display:inline" class="form-control" id="days"><span style="font-size:25px;cursor:pointer;" onclick="$(this).parent().remove()" class="remove">&times;</span></div>');
+    });
+    if(arrayName[index].shuffle == 'Yes'){
+        $('input[name="shuffle_question"]').attr('checked','checked');
+    }
+    if(arrayName[index].required == 'Yes'){
+        $('input[name="required"]').attr('checked','checked');
+    }
+})
+$('.quesdelid').on('click',function(){
+    var q_id = $(this).closest('li').find('#q_id').val();
+    if(confirm("Are you sure want to delete!")){
+        $.ajax({
+            url:"{{url('account/employer/questionnaires/question/delete')}}",
+            type:"post",
+            data:{q_id:q_id,_token:"{{ csrf_token()}}"},
+            success:function(res){
+              if(res == 2){
+                alert("frontend/employer line no 1741 error");
+              }
+            }
+        });
+        $(this).closest('li').remove();
+    }
+})
 </script>
 		@endsection

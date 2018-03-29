@@ -184,6 +184,35 @@
                                 <input type="text" class="form-control date-picker"  name="expiryDate" onkeypress="return false" required>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">Associate Test/Questionnaire</label>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input id="Questionnaire" type="checkbox" class="cbx-field" name="Questionnaire" value="yes">                             
+                                        <label class="cbx" for="Questionnaire"></label>
+                                        <label class="lbl" for="Questionnaire">Associate Test/Questionnaire</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3"></label>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                       <select class="form-control" name="questionaire_id" id="ques_sel" disabled="disabled">
+                                           <option value=""> select questionaires</option>
+                                           @foreach($questionaires as $question)
+                                           <option value="{{ $question->ques_id}}">{{$question->title}}</option>
+
+                                           @endforeach
+                                       </select>                             
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group" id="expirediv">
                             <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
@@ -510,6 +539,14 @@
 <script type="text/javascript">
 var process = "";
 var alrt="";
+$('#Questionnaire').on('change',function(){
+    if($(this).is(':checked') == false){
+        $('#ques_sel').attr('disabled','disabled');
+    }else{
+        $('#ques_sel').removeAttr('disabled');
+    }
+   
+})
 $(document).ready(function(){
     $('#post-job-ad-types li').first().find('span .mat-radio-input').bind('click',function(e){
         $('#durationdiv').hide();
