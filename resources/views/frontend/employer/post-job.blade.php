@@ -40,14 +40,14 @@
                                 <div>
                                     <!----><label for="{!! $pay->id!!}">
                                         <ul class="list-unstyled desc" >
-											<li>@lang('home.'.$pay->quantity)</li>
-                                            <li>@lang('home.adcost')</li>
+											<li>@lang('home.jobquentity') {{ $pay->quantity}}</li>
+                                            <li>@lang('home.Featuredonhomepage') ({{ $pay->duration}} days)</li>
                                             <!-- <li>{!! $payment->tag1!!}</li>
                                              <li>{!! $payment->tag2!!}</li> -->
                                         </ul>
 										
                                         <div class="credits b">
-										<span class="text-success">@lang('home.'.$pay->amount)</span>
+										<span class="text-success">US ${{ $pay->amount}}.00</span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									</div>
                                     </label>
@@ -609,7 +609,7 @@ $(document).ready(function(){
 		console.log($(e.target).val());
 	 alrt=$(e.target).siblings('input').val();
      var plans=$('.checkplan').val();
-     alert(plans);
+    // alert(plans);
 	 console.log(alrt);
      if(alrt==0 || plans=='plan')
      {

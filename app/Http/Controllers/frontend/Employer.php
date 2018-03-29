@@ -627,7 +627,7 @@ curl_close ($ch);
 	$userid = $request->session()->get('jcmUser')->userId;
 		
     	$rec = DB::table('jcm_payments')->get();
-		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->get();
+		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','>','0')->get();
 		$single= $plan[0]->quantity;
 		//dd($single);
 		return view('frontend.employer.post-job',compact('rec','plan','single'));

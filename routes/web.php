@@ -303,7 +303,8 @@ Route::get('send_test_email', function(){
 	});
 });
  Route::get('account/jobseeker/cv','frontend\Jobseeker@convertpdf');
- Route::get('account/jobseeker/cv/{id}','frontend\Jobseeker@convertpdffile');
+ Route::get('account/jobseeker/cv/{id}','frontend\Jobseeker@resume_pckg');
+// Route::get('account/jobseeker/download/{id}','frontend\Jobseeker@resume_pckg');
 Route::get('download', function () {
     return view('frontend.employer.download');
 });

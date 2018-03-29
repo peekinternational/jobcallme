@@ -23,9 +23,12 @@
                             <h5 class="title">Jobs {!!$payment->type !!}</h5>
                             <div class="desc">
                                 <!----><ul class="list-unstyled">
-                                    
+                                @if($payment->type == 'Resume Download')
+                                  <li>Quantity: {!!$payment->quantity !!} resumes</li>
+                                @else    
                                     <li>On Homepage: {!!$payment->duration !!} days</li>
                                     <li>Quantity: {!!$payment->quantity !!} jobs</li>
+                                    @endif
                                     
                                 </ul>
                                 

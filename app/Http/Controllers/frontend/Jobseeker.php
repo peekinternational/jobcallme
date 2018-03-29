@@ -842,16 +842,7 @@ class Jobseeker extends Controller{
 		public function convertpdffile(Request $request, $id){
 		$app = $request->session()->get('jcmUser');
 		
-		$user = DB::table('jcm_users')->where('userId',$id)->first();
-		$name= $user->firstName;
-		//return $name;
-		$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
-		$resume = $this->userResume($id);
-		//dd($resume);
 		
-	//return view('frontend.jobseeker.resume');
-    	  $pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
-          return $pdf->download($name.'_cv.pdf');
 	}
 	public function removeProPic(Request $request){
 		 $id = $request->input('userId');
@@ -862,4 +853,29 @@ class Jobseeker extends Controller{
 			echo 2;
 		}
 	}
+
+	public function resume_pckg(Request $request, $id){
+		$app = $request->session()->get('jcmUser');
+		$userid = $request->session()->get('jcmUser')->userId;
+		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('type','=','Resume Download')->get();
+		//dd($plan);
+			if($plan == '' || $plan == null)
+			{
+                return redirect('account/manage?plan');
+			}
+				else{
+
+					$user = DB::table('jcm_users')->where('userId',$id)->first();
+						$name= $user->firstName;
+						//return $name;
+						$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
+						$resume = $this->userResume($id);
+						//dd($resume);
+						
+					//return view('frontend.jobseeker.resume');
+						$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+						return $pdf->download($name.'_cv.pdf');
+				}
+				
+		}
 }

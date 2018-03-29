@@ -593,6 +593,7 @@ class Cms extends Controller{
         if(!$request->ajax()){
             exit('Directory access is forbidden');
         }
+       // dd($request->all());
         $typeId = trim($request->input('pckg_id'));
         $name = trim($request->input('type'));
             $result_explode = explode('|', $name);
