@@ -103,7 +103,7 @@
                                 <div class="col-md-12 rtj-item">
                                     <img src="{{ url('profile-photos/'.$appl->profilePhoto) }}" style="width: 50px">
                                     <div class="rtj-details">
-                                        <p><strong><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
+                                        <p><strong><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}?jobId={{$appl->jobId}}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
                                         <p>{!! $appl->title !!}</p>
                                         <p>{{ date('d M',strtotime($appl->applyTime)) }}</p>
                                     </div>

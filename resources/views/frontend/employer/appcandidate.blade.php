@@ -293,7 +293,17 @@
                         <section class="personal-info-section" id="personal-information">
                             <div class="row">
                                 <div class="col-md-12">
+                                @if(count($questionData) == 0)
                                     <p>No Questionnaire or Test scheduled yet.</p>
+                                @endif
+                                    <ol type="1" style="margin-left:30px;">
+                                    <?php $i =0 ;?>
+                                    @foreach($questionData as $question)
+                                        <li><strong>{{$question->title}}</strong><br>
+                                            Ans) <strong>{{$question->answer}}</strong>
+                                        </li>
+                                        @endforeach
+                                    </ol>
                                 </div>
                             </div>
                         </section>

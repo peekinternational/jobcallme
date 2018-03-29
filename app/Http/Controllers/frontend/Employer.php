@@ -250,16 +250,12 @@ curl_close ($ch);
    
 		extract($request->all());
 
-<<<<<<< HEAD
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1','jobStatus' => 'Publish', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
 		if($questionaire_id){
 			$input['questionaire_id'] = $questionaire_id;
 		}
 		//dd($request->all());
-=======
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1','jobStatus' => 'Publish', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
 		
->>>>>>> 8d21852490a1f1da0112fededc46ab9c03b27d92
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
@@ -635,18 +631,17 @@ curl_close ($ch);
 	$userid = $request->session()->get('jcmUser')->userId;
 		
     	$rec = DB::table('jcm_payments')->get();
-<<<<<<< HEAD
+
 		
 		$userId = $request->session()->get('jcmUser')->userId;
 		$questionaires = DB::table('jcm_questionnaire')->where('user_id','=',$userId)->get();
 		//dd($questionaires);
-		return view('frontend.employer.post-job',compact('rec','questionaires'));
-=======
+
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->get();
 		$single= $plan[0]->quantity;
 		//dd($single);
-		return view('frontend.employer.post-job',compact('rec','plan','single'));
->>>>>>> 8d21852490a1f1da0112fededc46ab9c03b27d92
+		return view('frontend.employer.post-job',compact('rec','plan','single','questionaires'));
+
 	}
 
 	public function saveJob(Request $request){
@@ -895,7 +890,6 @@ curl_close ($ch);
 		if(!$request->session()->has('jcmUser')){
     		return redirect('account/login?next='.$request->route()->uri);
     	}
-    	
 
 		$userId = $request->segment(5);
 		$privacy = DB::table('jcm_privacy_setting')->where('userId',$userId)->first();
@@ -924,6 +918,7 @@ curl_close ($ch);
 		//return view('frontend.employer.view-applicant',compact('applicant','resume'));
 	}
 		public function viewApplicants(Request $request){
+
 		if(!$request->session()->has('jcmUser')){
     		return redirect('account/login?next='.$request->route()->uri);
     	}
@@ -952,8 +947,11 @@ curl_close ($ch);
 		$people->limit(4);
 		$people->inRandomOrder();
 		$Query=$people->get();
-		//dd($applicant);
-		return view('frontend.employer.appcandidate',compact('applicant','resume','Query','userId'));
+		$jobId = $_GET['jobId'];
+		
+		$questionData = DB::table('jcm_ques_answer')->select('*')->leftJoin('jcm_questionnaire','jcm_ques_answer.ques_id','=','jcm_questionnaire.ques_id')->where('jobId',$jobId)->where('jobseeker_id',$userId)->get();
+		
+		return view('frontend.employer.appcandidate',compact('applicant','resume','Query','userId','questionData'));
 	}
 public function userResume($userId){
 		$record = DB::table('jcm_resume')->where('userId','=',$userId)->orderBy('resumeId','asc')->get();
@@ -1827,6 +1825,31 @@ public function userResume($userId){
 		}else{
 			echo 2;
 		}
+	}
+	public function questionnaireAnswer(Request $request){
+		
+			$i =0;
+			$jobseekerId = $request->session()->get('jcmUser')->userId;
+			$array =[];
+			$jobId = $request->input('job_id');
+		foreach ($request->all() as $key => $value) {
+			if($key == '_token' || $key == 'job_id'){
+
+			}else{
+				$array[$i] = array(
+					'ques_id' => $key,
+					'answer' => $value,
+					'jobseeker_id' => $jobseekerId,
+					'jobId' => $jobId
+					);
+			}
+			$i++;
+		}
+		foreach ($array as  $data) {
+			DB::table('jcm_ques_answer')->insert($data);
+		}
+		return redirect('jobs');
+		
 	}
 
 

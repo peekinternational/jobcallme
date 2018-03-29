@@ -432,6 +432,17 @@ class Jobs extends Controller{
 	    	$jobId = trim($request->input('jobId'));
 
 	    	$input = array('userId' => $app->userId, 'jobId' => $jobId, 'applyTime' => date('Y-m-d H:i:s'));
+	    	$currentjob = DB::table('jcm_jobs')->where('jobId',$jobId)->first();
+	    	$questionaire_id = $currentjob->questionaire_id;
+
+	    	/* check if this job has questionaire or not if has add one extra step*/
+	    	if($questionaire_id != ''){
+	    		$quesdata = DB::table('jcm_questionnaire')->where('ques_id',$questionaire_id)->first();
+	    		$questiondata = DB::table('jcm_questions')->where('ques_id',$quesdata->ques_id)->get();
+	    		DB::table('jcm_job_applied')->insert($input);
+	    		return view('frontend.employer.questionaireScreen',compact('currentjob','quesdata','questiondata'));
+	    	}
+	    	/* insert apply job data to database*/
 	    	DB::table('jcm_job_applied')->insert($input);
 	    	return redirect('account/jobseeker');
 		}else{
