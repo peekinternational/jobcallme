@@ -12,3 +12,6 @@
 .eo-dp-toolkit label{
 	cursor: pointer;
 }
+.pointer{
+	cursor: pointer !important;
+}

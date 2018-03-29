@@ -21,9 +21,13 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
-/* pdf template for resume*/
-Route::get('pdf',function(){
-   	return view('frontend.cv');
+
+Route::get('pdfview',function() {
+    return view('frontend.cv');
+
+//Route::get('pdf',function(){
+   //	return view('frontend.cv');
+
 });
 Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');
@@ -165,7 +169,9 @@ Route::group(['prefix' => 'account'], function () {
 	/* generals */
 	Route::post('feedback','frontend\Home@feedback');
 	Route::post('employer/questionnaires/new','frontend\Employer@addquestionaires');
+	Route::post('employer/questionnaires/delete','frontend\Employer@deletequestionaires');
 	Route::post('employer/questionnaires/question/new','frontend\Employer@addquestion');
+	Route::post('employer/questionnaires/question/delete','frontend\Employer@deletequestion');
 	Route::get('employer/questionnaires','frontend\Employer@questionnaires');
 	Route::get('employer/questionnaires/edit/{id}','frontend\Employer@editquestionnaires');
 	Route::post('employer/savecompic','frontend\Home@savecompic');

@@ -213,34 +213,38 @@
                         <div class="form-group">
                           <select class="form-control select2 job-state" name="state">
                           </select>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6 pnj-form-field">
-                        <div class="form-group">
-                          <select class="form-control select2 job-city" name="citys">
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <div class=" pnj-form-field">
-                            <input type="text" class="form-control" name="skill" placeholder="@lang('home.skill')">
-                          </div>
-                        </div>
-                      </div>
 
 
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="submit" style="float:left" class="btn btn-success" >@lang('home.search')</button>   <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">@lang('home.close')</button>
-                  </div>
-                </form>	
-              </div>
-            </div>
-          </div>
+                             
+                              </div>
+						        </div>
+
+								  <div class="col-md-6 pnj-form-field">
+									<div class="form-group">
+									  <select class="form-control select2 job-city" name="citys">
+									  </select>
+									</div>
+								  </div>
+
+								  <div class="col-md-6">
+									<div class="form-group">
+									  <div class=" pnj-form-field">
+										<input type="text" class="form-control" name="skill" placeholder="@lang('home.skill')">
+									  </div>
+									</div>
+								  </div>
+
+
+								</div>
+							  </div>
+							  <div class="modal-footer">
+								<button type="submit" style="float:left" class="btn btn-success" >@lang('home.search')</button>   <button type="button" style="float:left" class="btn btn-default" data-dismiss="modal">@lang('home.close')</button>
+							  </div>
+							</form>	
+						  </div>
+						</div>
+					  </div>
+
           <div class="row">
             <div class="col-md-12">
               <?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9','#9e947b','#5b5c5e','#7b767d','#a0b1b9','#6d846f'); $i=0; ?>
@@ -317,6 +321,7 @@
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     <div class="fp-img">
                       <img src="@if($people->pImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
+
                     </div>
                     <div class="fp-item-details" style="height: 95px;">
                       <p>{!! $people->firstName.' '.$people->lastName !!}</p>

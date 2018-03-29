@@ -173,7 +173,8 @@ $(document).ready(function(){
        // alert("ohhh noo");
         }
         else{
-        alert("ohhh noo");
+        $('#this_disabled').prop('disabled', false);
+        $('#this_hide').show();
         }
     });
 

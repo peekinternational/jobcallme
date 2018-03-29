@@ -859,13 +859,17 @@ class Jobseeker extends Controller{
 		$userid = $request->session()->get('jcmUser')->userId;
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('type','=','Resume Download')->get();
 		//dd($plan);
-			if($plan == '' || $plan == null)
+		$pckg_id= $plan[0]->id;
+		$quantity= $plan[0]->quantity;
+		$remain = $quantity - 1;
+		$inputs['quantity']=$remain;
+			if(count($plan) == 0)
 			{
                 return redirect('account/manage?plan');
 			}
 				else{
-
-					$user = DB::table('jcm_users')->where('userId',$id)->first();
+                     DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
+					 $user = DB::table('jcm_users')->where('userId',$id)->first();
 						$name= $user->firstName;
 						//return $name;
 						$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
