@@ -210,12 +210,13 @@ curl_close ($ch);
 				$app = $request->session()->get('jcmUser');
 
 		
+		
+
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'pckg_id' => $pckg_id, 'jobStatus' => 'Publish', 'paymentType' => '4', 'amount' => $price, 'p_Category' => $p_category, 'title' => $title, 'jType' => 'Paid','dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $dur, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiry, 'createdTime' => date('Y-m-d H:i:s'));
+		//dd($input);
 		if($questionaire_id){
 			$input['questionaire_id'] = $questionaire_id;
 		}
-
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'pckg_id' => $pckg_id, 'jobStatus' => 'Publish', 'paymentType' => '4', 'amount' => $price, 'p_Category' => $p_category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $dur, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiry, 'createdTime' => date('Y-m-d H:i:s'));
-		//dd($input);
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
@@ -245,20 +246,13 @@ curl_close ($ch);
    
 		extract($request->all());
 
-<<<<<<< HEAD
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1','jobStatus' => 'Publish', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
-=======
 		//$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
->>>>>>> 36c78659e5772e200bde4be652d413d92083b1e6
+		
+		//dd($request->all());
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1','jobStatus' => 'Publish', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
 		if($questionaire_id){
 			$input['questionaire_id'] = $questionaire_id;
 		}
-		//dd($request->all());
-<<<<<<< HEAD
-=======
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1','jobStatus' => 'Publish', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
->>>>>>> 36c78659e5772e200bde4be652d413d92083b1e6
-		
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
@@ -401,12 +395,13 @@ curl_close ($ch);
 		$state = Session::get('state');
 		$questionaire_id = Session::get('questionaire_id');
 		
-        $input['questionaire_id'] = $questionaire_id;
+        
 		
 
 		extract($request->all());
 
 		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' =>'1', 'jobStatus' => 'Publish', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'dispatch' => $dispatch, 'head' => $head, 'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits),'process' => @implode(',', $process), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate,'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
+		$input['questionaire_id'] = $questionaire_id;
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
@@ -474,11 +469,12 @@ curl_close ($ch);
 			$states = Session::get('state');
 			$questionaire_id = Session::get('questionaire_id');
 		
-        $input['questionaire_id'] = $questionaire_id;
+       
 	
 			extract($request->all());
 
 			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'jobStatus' => 'Publish', 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys,'duration' => $durations, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process),'country' => $countrys, 'state' => $states, 'city' => $citys,'Address' => $Addresss, 'expiryDate' => $expiryDates, 'expiryAd' => $expiryAds,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
+			 $input['questionaire_id'] = $questionaire_id;
 			if($subCategorys == ''){
 				$inputs['subCategory'] = '';
 			}
@@ -640,23 +636,14 @@ curl_close ($ch);
 		
     	$rec = DB::table('jcm_payments')->get();
 
-<<<<<<< HEAD
-=======
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','>','0')->get();
 
->>>>>>> 36c78659e5772e200bde4be652d413d92083b1e6
 		
 		$userId = $request->session()->get('jcmUser')->userId;
 		$questionaires = DB::table('jcm_questionnaire')->where('user_id','=',$userId)->get();
 		//dd($questionaires);
-<<<<<<< HEAD
 
-		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->get();
-=======
-	
-		//$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->get();
 
->>>>>>> 36c78659e5772e200bde4be652d413d92083b1e6
 		$single= $plan[0]->quantity;
 		//dd($single);
 		return view('frontend.employer.post-job',compact('rec','plan','single','questionaires'));
@@ -1744,6 +1731,8 @@ public function userResume($userId){
 			$expiryAdss= Session::get('expiryAd');
 			$statess = Session::get('state');
 			$durationss = Session::get('duration');
+			$questionaire_id = Session::get('questionaire_id');
+		
       //	dd($amounts);
 			extract($request->all());
 
@@ -1752,6 +1741,7 @@ public function userResume($userId){
 				$inputs['subCategory'] = '';
 			}
 			
+        $input['questionaire_id'] = $questionaire_id;
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
 			//dd($inputs);
 			return view('frontend.employer.cashpayment_detail',compact('inputs'));
