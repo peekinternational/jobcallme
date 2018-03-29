@@ -42,7 +42,7 @@ $s_app = Session()->get('jobtypeSearch');
                                         <th>#</th>
                                         <th>Type</th>
                                         <th>Amount</th>
-                                        <th>Job Quantity</th>
+                                        <th>Quantity</th>
                                         <th>Ad Duration</th>
                                        
                                         <th>Created On</th>
@@ -54,10 +54,15 @@ $s_app = Session()->get('jobtypeSearch');
                                                 <td>{{ ++$startI }}</td>
                                                 <td>{{ $jtype->type }}</td>
                                                 <td>${{ $jtype->amount }}</td>
+                                                @if($jtype->type == 'Resume Download')
+                                                <td>{{ $jtype->quantity }} resumes</td>
+                                                <td>{{ $jtype->duration }} </td>
+                                                @else
                                                 <td>{{ $jtype->quantity }} jobs</td>
                                                 <td>{{ $jtype->duration }} days</td>
+                                                @endif
                                                
-                                                <td>{{ JobCallMe::reportTime($jtype->createdTime) }}</td>
+                                                <td>{{ JobCallMe::reportTime($jtype->created_at) }}</td>
                                                 <td>
                                                     <a href="javascript:;" onclick="editType('{{ $jtype->pckg_id }}')" data-toggle="tooltip" data-original-title="Update"><i class="icon icon-pencil"></i></a>&nbsp;&nbsp;&nbsp;
                                                     <a href="javascript:;" onclick="deleteType('{{ $jtype->pckg_id }}')" data-toggle="tooltip" data-original-title="Delete"><i class="icon icon-remove"></i></a>
@@ -89,7 +94,7 @@ $s_app = Session()->get('jobtypeSearch');
                         <input type="hidden" class="pckg_id" name="pckg_id" value="0">
                         <div class="form-group">
                             <label>Type</label>
-                            <select class="form-control" name="type">
+                            <select class="form-control" name="type" id="type_select">
                                 <option value="Premium|7">Premium</option>
                                 <option value="Top|6">Top</option>
                                 <option value="Hot|5">Hot</option>
@@ -107,9 +112,9 @@ $s_app = Session()->get('jobtypeSearch');
                             <label>Quantity</label>
                             <input type="number" class="form-control" name="quantity" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="this_hide">
                             <label>Duration</label>
-                            <input type="number" class="form-control" name="duration" required>
+                            <input type="number" id="this_disabled" class="form-control" name="duration" required>
                         </div>
                         
                         <div class="alert alert-danger" style="display: none;"></div>
@@ -158,6 +163,21 @@ $(document).ready(function(){
     $('.select2').select2();
     $('.date-picker').datepicker({format:'yyyy-mm-dd'})
 })
+
+  $("#type_select").change(function(){
+    var ye=$('#type_select').val();
+    //alert(ye);
+    if(ye == "Resume Download"){
+        $('#this_disabled').prop('disabled', true);
+        $('#this_hide').hide();
+       // alert("ohhh noo");
+        }
+        else{
+        $('#this_disabled').prop('disabled', false);
+        $('#this_hide').show();
+        }
+    });
+
 function deleteType(pckg_id){
     $('.actionId').val(pckg_id);
     $('#modal-warning').modal();
