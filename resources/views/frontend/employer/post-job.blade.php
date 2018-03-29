@@ -21,14 +21,100 @@
                             <label class="control-label col-sm-3">&nbsp;</label>
                             <div class="col-sm-9 pnj-form-field"><div class="alert alert-danger"></div></div>
                         </div>
-              
+                        @if($single > 0)
+              <div id="pckg" class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-top:30px;">
+                <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
+                        <ul id="post-job-ad-types">
+                         
+						 @foreach($plan as $pay)
+                         <!----><li style="position:relative">
+                                <!---->
+								<span class="pay_blog">
+									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $pay->id!!}" name="allarray" value="{!! $pay->cat_id!!}|{!! $pay->id!!}|{!! $pay->amount!!}|{!! $pay->duration!!}|{!! $pay->quantity!!}">
+									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"  value="{!! $pay->amount!!}">
+                                    
+                                    <input class="checkplan"  type="hidden" name="plan"  value="plan">
+								</span>
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                             <span class="b">@lang('home.'.$pay->type)</span></div>
+                                <div>
+                                    <!----><label for="{!! $pay->id!!}">
+                                        <ul class="list-unstyled desc" >
+											<li>@lang('home.'.$pay->quantity)</li>
+                                            <li>@lang('home.adcost')</li>
+                                            <!-- <li>{!! $payment->tag1!!}</li>
+                                             <li>{!! $payment->tag2!!}</li> -->
+                                        </ul>
+										
+                                        <div class="credits b">
+										<span class="text-success">@lang('home.'.$pay->amount)</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </li>
+							@endforeach
+                        </ul>
+                        <a id="nopckg" href="javascript:void(0)" style="float:right">Not Use Package Plan?</a>
+                 
+
+                    
+                </div>
+            </div>
+		
+          <!--  <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypals') !!}" > -->
+					<div id="notpckg"  class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: none; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-top:30px;">
+                <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
+                        <ul id="post-job-ad-types">
+						 @foreach($rec as $payment)
+						 
+                            <!----><li style="position:relative">
+                                <!---->
+								<span class="pay_blog">
+									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
+									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
+								</span>
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
+                             <span class="b">@lang('home.'.$payment->title)</span></div>
+                                <div>
+                                    <!----><label for="{!! $payment->id!!}">
+                                        <ul class="list-unstyled desc" >
+											<li>@lang('home.'.$payment->tag1)</li>
+                                            <li>@lang('home.adcost')</li>
+                                            <!-- <li>{!! $payment->tag1!!}</li>
+                                             <li>{!! $payment->tag2!!}</li> -->
+                                        </ul>
+										
+                                        <div class="credits b">@if($payment->price ==0)
+									<span class="free">	@lang('home.Free')</span>
+										@else
+										<span class="text-success">@lang('home.'.$payment->price)</span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									@endif</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </li>
+							@endforeach
+                        </ul>
+                   <a id="nonpckg" href="javascript:void(0)" style="float:right">Use Package Plan?</a>
+
+                    
+                </div>
+            </div>
+		</div>
                
+
+               @else
                
                   <!--  <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypals') !!}" > -->
-					<div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-top:30px;">
+					<div id="notpckg" class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-top:30px;">
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
-                
- 
                         <ul id="post-job-ad-types">
 						 @foreach($rec as $payment)
 						 
@@ -64,13 +150,13 @@
 							@endforeach
                         </ul>
                  
-
+                 <a id="nonpckg" href="{{ url('account/manage?plan')}}" style="float:right">Use Package Plan?</a>
                     
                 </div>
             </div>
 		</div>
                
-                  
+                  @endif
                     <div class="pnj-form-section">
                        
                         
@@ -559,8 +645,10 @@ $(document).ready(function(){
     $('body').on('click','.mat-radio-input',function(e){
 		console.log($(e.target).val());
 	 alrt=$(e.target).siblings('input').val();
+     var plans=$('.checkplan').val();
+     alert(plans);
 	 console.log(alrt);
-     if(alrt==0)
+     if(alrt==0 || plans=='plan')
      {
          $('#durationdiv').hide();
          $('#total').hide();
@@ -620,6 +708,23 @@ $('.add2').click(function() {
     $('#morebenefit').append('<div class="col-md-8 pnj-salary block" style="display: flex;margin-bottom: 9px;"><input type="text" class="form-control" name="benefits[]" required/><button type="button" class="remove btn btn-danger" style="padding-left: 14px;"><i class="fa fa-minus"></i></button></div>');
 
 });
+$('#nopckg').click(function() {
+    $('.checkplan').val('');
+    $('#pckg').hide();
+    $('#notpckg').show();
+     $('#durationdiv').show();
+         $('#total').show();
+          $('#expirediv').show();
+});
+$('#nonpckg').click(function() {
+    $('.checkplan').val('plan');
+    $('#pckg').show();
+    $('#notpckg').hide();
+     $('#durationdiv').hide();
+         $('#total').hide();
+         $('#expirediv').hide();
+});
+
 $('.optionBox').on('click','.remove',function() {
  	$(this).parent().remove();
 });
