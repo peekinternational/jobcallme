@@ -533,13 +533,8 @@ curl_close ($ch);
 		$readQry = DB::table('jcm_writings')->join('jcm_users','jcm_users.userId','=','jcm_writings.userId');
     	$readQry->leftJoin('jcm_categories','jcm_categories.categoryId','=','jcm_writings.category');
     	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_categories.name');
-    	if($request->input('category') != '0' && $request->input('category') != ''){
-    		$readQry->where('jcm_writings.category','=',$request->input('category'));
-    	}
-    	if($request->input('keyword') != ''){
-    		$readQry->where('jcm_writings.title','LIKE','%'.$request->input('keyword').'%');
-    	}
-    	$readQry->orderBy('jcm_writings.writingId','desc')->limit(6);
+    	
+    	$readQry->orderBy('jcm_writings.writingId','desc')->groupBy('jcm_writings.title')->limit(6);
     	$read_record = $readQry->get();
 		//dd($postedJobs);
 		

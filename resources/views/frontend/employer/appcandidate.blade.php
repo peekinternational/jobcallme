@@ -51,7 +51,7 @@
                                     <p><span class="pi-title">@lang('home.location'):</span> {!! JobCallMe::cityName($applicant->city).' ,'.JobCallMe::countryName($applicant->country) !!}</p>
                                     <div class="professional-summary">
                                         <h4>@lang('home.p_summary')</h4>
-                                        <p><?php strip_tags($applicant->about) ?>
+                                        <p>{!! $applicant->about !!}
                                         </p>
                                     </div>
                                 </div>
