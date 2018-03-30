@@ -232,7 +232,7 @@ $lToken = csrf_token();
                                     <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryDate) }} days left</span>
+                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }} days left</span>
                                 </div>
                             </div>
                         </a>
@@ -272,7 +272,7 @@ $lToken = csrf_token();
 							</span>
                             <div class="info">
                                 <h3>{!! $comp->companyName !!}</h3>
-                                <p>{!! $comp->companyAbout !!}</p>
+                                <p>{!! $comp->description !!}</p>
                               
                             </div>
 							  
@@ -320,7 +320,7 @@ $lToken = csrf_token();
                                     <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryDate) }} days left</span>
+                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }} days left</span>
                                 </div>
                             </div>
                         </a>
@@ -365,7 +365,7 @@ $lToken = csrf_token();
                                     <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryDate) }} days left</span>
+                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }} days left</span>
                                 </div>
                             </div>
                         </a>
@@ -411,7 +411,7 @@ $lToken = csrf_token();
                                 <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                             </div>
                             <div class="job-status days-left">
-                                <span>{{ JobCallMe::timeInDays($job->expiryDate) }} days left</span>
+                                <span>{{ JobCallMe::timeInDays($job->expiryAd) }} days left</span>
                             </div>
                         </div>
                         </a>
@@ -459,7 +459,7 @@ $lToken = csrf_token();
                                     <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryDate) }} days left</span>
+                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }} days left</span>
                                 </div>
                             </div>
                         </a>
