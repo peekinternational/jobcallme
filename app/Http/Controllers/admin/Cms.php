@@ -475,6 +475,8 @@ class Cms extends Controller{
         $id = $request->input('id');
         
         $check = DB::table('jcm_writings')->where('writingId',$id)->first();
+        $check->description = strip_tags($check->description);
+      
         if($check){
           echo json_encode($check);
         }else{

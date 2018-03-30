@@ -46,8 +46,8 @@
                                 <p><span class="pi-title">Salary:</span> {{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',2).' '.$applicant->currency }}</p>
 								<p><span class="pi-title">@lang('home.location'):</span> {!! JobCallMe::cityName($applicant->city).' ,'.JobCallMe::countryName($applicant->country) !!}</p>
                                 <div class="professional-summary">
-                                    <h4>Professional Summary</h4>
-                                    <p>{{$applicant->about}}
+                                    <h4>@lang('home.p_summary')</h4>
+                                    <p>{!! $applicant->about !!}
                                     </p>
                                 </div>
                             </div>
