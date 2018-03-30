@@ -536,10 +536,38 @@ class Cms extends Controller{
         $data->leftJoin('jcm_categories as cat','cat.categoryId','=','job.category');
         $data->leftJoin('jcm_sub_categories as subcat','subcat.subCategoryId','=','job.subCategory');
         $data->leftJoin('jcm_sub_categories2 as subcat2','subcat2.subCategoryId2','=','job.subCategory2');
+        $data->orderBy('job.jobId','des');
         $jobs = $data->paginate(15);;
 
       return view('admin.cms.viewjobs',compact('jobs'));
     }
+
+ public function publishjobs(Request $request){
+        $data = DB::table('jcm_jobs as job');
+        $data->select('job.*','cat.name','subcat.subName','subcat2.subName as cat2');
+        $data->leftJoin('jcm_categories as cat','cat.categoryId','=','job.category');
+        $data->leftJoin('jcm_sub_categories as subcat','subcat.subCategoryId','=','job.subCategory');
+        $data->leftJoin('jcm_sub_categories2 as subcat2','subcat2.subCategoryId2','=','job.subCategory2');
+        $data->where('job.jobStatus','=','Publish');
+        $data->orderBy('job.jobId','des');
+        $jobs = $data->paginate(15);
+
+      return view('admin.cms.publishjobs',compact('jobs'));
+    }
+
+     public function draftjobs(Request $request){
+        $data = DB::table('jcm_jobs as job');
+        $data->select('job.*','cat.name','subcat.subName','subcat2.subName as cat2');
+        $data->leftJoin('jcm_categories as cat','cat.categoryId','=','job.category');
+        $data->leftJoin('jcm_sub_categories as subcat','subcat.subCategoryId','=','job.subCategory');
+        $data->leftJoin('jcm_sub_categories2 as subcat2','subcat2.subCategoryId2','=','job.subCategory2');
+        $data->where('job.jobStatus','=','Draft');
+        $data->orderBy('job.jobId','des');
+        $jobs = $data->paginate(15);
+
+      return view('admin.cms.draftjobs',compact('jobs'));
+    }
+
     public function deleteJob(Request $request){
          $jobId = $request->input('jobId');
 

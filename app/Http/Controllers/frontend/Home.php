@@ -33,6 +33,7 @@ class Home extends Controller{
 		->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
 		->where('jcm_jobs.p_Category','=','7')
 		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.jobStatus','=','Publish')
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_countries.sortname','=',$position->countryCode)
@@ -43,6 +44,7 @@ class Home extends Controller{
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
 		->where('jcm_jobs.p_Category','=','7')
 		->where('jcm_jobs.status','=','1')
+		->where('jcm_jobs.jobStatus','=','Publish')
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->orderBy('jcm_jobs.jobId','desc')
@@ -57,6 +59,7 @@ class Home extends Controller{
 		->where('jcm_jobs.status','=','1')
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->where('jcm_jobs.jobStatus','=','Publish')
 		->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
@@ -67,6 +70,7 @@ class Home extends Controller{
 		->where('jcm_jobs.status','=','1')
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->where('jcm_jobs.jobStatus','=','Publish')
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
 		}
@@ -79,6 +83,7 @@ class Home extends Controller{
 		->where('jcm_jobs.status','=','1')
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->where('jcm_jobs.jobStatus','=','Publish')
 		->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
@@ -89,6 +94,7 @@ class Home extends Controller{
 		->where('jcm_jobs.status','=','1')
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->where('jcm_jobs.jobStatus','=','Publish')
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
 		}
@@ -100,6 +106,7 @@ class Home extends Controller{
 			->where('jcm_jobs.status','=','1')
 			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+			->where('jcm_jobs.jobStatus','=','Publish')
 			->where('jcm_countries.sortname','=',$position->countryCode)
 			->orderBy('jcm_jobs.jobId','desc')
 			->limit(12)
@@ -110,6 +117,7 @@ class Home extends Controller{
 			->leftJoin('jcm_countries','jcm_countries.id','=','jcm_jobs.country')
 			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+			->where('jcm_jobs.jobStatus','=','Publish')
 			->where('jcm_jobs.p_Category','=','4')
 			->where('jcm_jobs.status','=','1')
 			->orderBy('jcm_jobs.jobId','desc')
@@ -123,6 +131,7 @@ class Home extends Controller{
 			->where('jcm_jobs.status','=','1')
 			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+			->where('jcm_jobs.jobStatus','=','Publish')
 			->where('jcm_countries.sortname','=',$position->countryCode)
 			->orderBy('jcm_jobs.jobId','desc')
 			->limit(12)
@@ -134,6 +143,7 @@ class Home extends Controller{
 			->where('jcm_jobs.status','=','1')
 			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+			->where('jcm_jobs.jobStatus','=','Publish')
 			->orderBy('jcm_jobs.jobId','desc')
 			->limit(12)
 			->get();
@@ -146,6 +156,7 @@ class Home extends Controller{
 		->where('jcm_jobs.status','=','1')
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->where('jcm_jobs.jobStatus','=','Publish')
 		->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
@@ -156,6 +167,7 @@ class Home extends Controller{
 		->where('jcm_jobs.status','=','1')
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
+		->where('jcm_jobs.jobStatus','=','Publish')
 		->orderBy('jcm_jobs.jobId','desc')
 		->limit(12)->get();
 		}

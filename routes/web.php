@@ -81,6 +81,8 @@ Route::group(['prefix' => 'admin'], function () {
 	/* job categories */
 	Route::match(['get','post'],'cms/category','admin\Cms@viewCategories');
 	Route::match(['get','post'],'cms/alljobs','admin\Cms@viewjobs');
+	Route::match(['get','post'],'cms/publishjobs','admin\Cms@publishjobs');
+	Route::match(['get','post'],'cms/draftjobs','admin\Cms@draftjobs');
 	Route::post('cms/category/save','admin\Cms@saveCategory');
 	Route::get('cms/category/get/{id}','admin\Cms@getCategory');
 	Route::delete('cms/category/delete','admin\Cms@deleteCategory');

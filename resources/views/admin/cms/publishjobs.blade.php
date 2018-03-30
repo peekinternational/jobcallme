@@ -41,7 +41,6 @@ $s_app = Session()->get('shiftSearch');
                                         <th>#</th>
                                         <th>title</th>
                                         <th>category</th>
-                                        <th>Ad Category</th>
                                         <th>subCategory</th>
                                         <th>3rdCategory</th>
                                         <th>Created On</th>
@@ -58,21 +57,6 @@ $s_app = Session()->get('shiftSearch');
                                                 </td>
                                                 <td><a data-toggle="tooltip" title="View Job" target="_blank" href="{{ url('jobs/'.$job->jobId)}}">{{ $job->title }}</a></td>
                                                 <td>{{ $job->name }}</td>
-                                                @if($job->p_Category==1)
-												<td>Basic</td>
-									            @elseif($job->p_Category==2)
-												<td>Goldan</td>
-                                                @elseif($job->p_Category==3)
-												<td>Special</td>
-                                                @elseif($job->p_Category==4)
-												<td>Latest</td>
-                                                @elseif($job->p_Category==5)
-												<td>Hot</td>
-                                                @elseif($job->p_Category==6)
-												<td>Top</td>
-                                                @else
-                                                <td>Premium</td>
-											@endif
                                                 <td>{{ $job->subName }}</td>
                                                 <td>{{ $job->cat2 }}</td>
                                                 <td>
