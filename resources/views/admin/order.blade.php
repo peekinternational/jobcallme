@@ -44,7 +44,11 @@
                                                 <td>${!! $job->amount!!}</td>
 												<td>{!! $job->duration!!}</td>
 												<td>{!! $job->p_title!!}</td>
-												<td style="text-align: center;"><label class="label label-success">{!! $job->jType!!}</label></td>
+                                                @if($job->status==1)
+												<td style="text-align: center;"><label class="label label-success">Paid</label></td>
+                                                @else
+                                                <td style="text-align: center;"><label class="label label-danger">Unpaid</label></td>
+                                                @endif
 												@if($job->paymentType==1)
 												<td style="text-align: center;"><label class="label label-success">Paypal</label></td>
 									            @elseif($job->paymentType==2)
@@ -61,6 +65,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <?php echo $jobs->render(); ?>
                             </div>
                             
                         </div>

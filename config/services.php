@@ -38,20 +38,20 @@ return [
     'facebook' => [
         'client_id' => '377749349357447',
         'client_secret' => 'dd4c2236c3c3c64a397efbb3b40f5832',
-        'redirect' =>  url('fbCallback'),
+       // 'redirect' =>  url('fbCallback'),
 
     ],
 
     'google' => [
         'client_id' => '821126400778-i3ca74in5m8i2m8n0dcvccnktpidae08.apps.googleusercontent.com',
         'client_secret' => 'smr0ucFyrp9aZcKfwnbkkorf',
-       'redirect' => url('googleCallback'),
+      // 'redirect' => url('googleCallback'),
 		
     ],
     'linkedin' => [
         'client_id' => '818xstq8efstw9',
         'client_secret' => 'j094fcTdDgY7Mx6b',
-       'redirect' => url('lnCallback'),
+      // 'redirect' => url('lnCallback'),
 
         
     ], 
