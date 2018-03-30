@@ -165,15 +165,18 @@ $(document).ready(function(){
     $('.jobstatus').on('change',function(e){
        
         var id = $(this).closest('tr').find('#jobId').val();
+       var jobstatus = '';
         var status = '';
         if($(e.target).parent().hasClass('off')){
-            status = 'Draft';
+            jobstatus = 'Draft';
+             status = '2';
         }else{
-            status = 'Publish';
+            jobstatus = 'Publish';
+             status = '1';
         };
         $.ajax({
             url:'{{url("admin/cms/jobstatupdate")}}',
-            data:{id:id,status:status,_token:token },
+            data:{id:id,jobstatus:jobstatus,status:status,_token:token },
             type:'POST',
             success:function(res){
                if(res == 1){
