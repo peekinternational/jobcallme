@@ -299,7 +299,7 @@
                                     <ol type="1" style="margin-left:30px;">
                                     <?php $i =0 ;?>
                                     @foreach($questionData as $question)
-                                        <li><strong>{{$question->title}}</strong><br>
+                                        <li><strong>{{$question->question}}</strong><br>
                                             Ans) <strong>{{$question->answer}}</strong>
                                         </li>
                                         @endforeach
