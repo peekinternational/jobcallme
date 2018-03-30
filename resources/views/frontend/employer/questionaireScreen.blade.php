@@ -20,8 +20,8 @@
     <div class="container" id="questions" style="display:none;">
         <div class="col-md-10">
             <form method="post" action="{{ url('account/employer/questionnaire/answer') }}">
-            <input  type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input  type="hidden" name="job_id" value="{{ $currentjob->jobId }}">
+                <input  type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input  type="hidden" name="job_id" value="{{ $currentjob->jobId }}">
                 <div class="jobs-suggestions">
                     <h4>Questionaires/Test</h4>
                     <ol type="1" style="margin-left:30px;">
