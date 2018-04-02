@@ -3,11 +3,13 @@
 @section('title', "$job->title")
 
 @section('content')
+
+</style>
 <section id="jobs">
     <div class="container" id="msg">
         <div class="col-md-10">
             <div class="jobs-suggestions">
-            	<h2 style="color:#716a6a">{{$currentjob->title}}</h2>
+            	<h2 style="color:#716a6a">{!!$currentjob->title!!}</h2>
             <div class="bgblue" align="center">
                 <h3>Additional Requirements - Submit an Online Questionnaires</h3>
                 <p>You are required to <strong>submit an online questionaire</strong> schedule by employer with in {{$quesdata->submission_date}} <strong>days</strong></p>
