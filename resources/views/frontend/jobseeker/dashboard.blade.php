@@ -253,13 +253,13 @@
             ?>
             <div class="col-md-12 sr-item">
               <div class="col-md-5 col-xs-12">
-                <div class="suggestedreading-img-mbl">
+                <div class="">
                   <img src="{{ $pImage }}" style="width: 100%;">
                 </div>
               </div>
               <div class="col-md-7 col-xs-12">
                 <div class="sr-details">
-                  <p class="sr-title"><a href="{{ url('read') }}" style="text-overflow: ellipsis;">{!! $rec->title !!} </a> </p>
+                  <p class="sr-title"><a href="{{ url('read/article/'.$rec->writingId) }}" style="text-overflow: ellipsis;">{!! $rec->title !!} </a> </p>
                   <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.'.$rec->name)</a> </p>
                 </div>
               </div>

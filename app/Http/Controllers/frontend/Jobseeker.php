@@ -58,7 +58,7 @@ class Jobseeker extends Controller{
     	if($request->input('keyword') != ''){
     		$readQry->where('jcm_writings.title','LIKE','%'.$request->input('keyword').'%');
     	}
-      $readQry->orderBy('jcm_writings.writingId','desc')->limit(6);
+      $readQry->orderBy('jcm_writings.writingId','desc')->groupBy('jcm_writings.title')->limit(6);
     	$read_record = $readQry->get();
 		//dd($read_record );
 		return view('frontend.jobseeker.dashboard',compact('savedJobs','savedJobArr','suggested','application','interview','companies','followArr','lear_record','read_record'));
