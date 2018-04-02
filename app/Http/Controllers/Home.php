@@ -10,6 +10,7 @@ use App\Jobs;
 use App\CometChat;
 use App\JobsApplied;
 use App\User; 
+use App\Package; 
 class Home extends Controller{
     
     public function notFound(){
@@ -106,12 +107,30 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 			$fileContents.=" ======== IN TESTING ====== ";
 			Storage::disk('local')->put($fileName, $fileContents);
 			$jId=explode('-',$jId);
+
+			if($jId[1] == 'package'){
+            $jobData=Package::findOrFail($jId[0]); 
+			$jobData->status=1;
+			$jobData->save();
+			}
+			elseif($jId[1] == 'write'){
+			$jobData=Write::findOrFail($jId[0]); 
+			$jobData->status='Publish';
+			$jobData->save();
+			}
+			elseif($jId[1] == 'upskill'){
+			$jobData=Skill::findOrFail($jId[0]); 
+			$jobData->status='Active';
+			$jobData->save();
+			}
+			else{
 			$jobData=Jobs::findOrFail($jId[0]); 
 			$jobData->status=1;
 			$jobData->pay_id=$authCode;
 			$jobData->p_Category=$jId[1];
 			$jobData->package_start_time=date('Y-m-d H:i:s');
 			$jobData->save();
+			}
 
 			$fileContents= Storage::disk('local')->get($fileName);
 			$fileContents.=" <== Run Successfully ====== > ";
