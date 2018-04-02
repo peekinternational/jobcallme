@@ -629,7 +629,7 @@ curl_close ($ch);
 		
     	$rec = DB::table('jcm_payments')->get();
 
-		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','>','0')->get();
+		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','>','0')->where('status','=','1')->get();
 
 		
 		$userId = $request->session()->get('jcmUser')->userId;
