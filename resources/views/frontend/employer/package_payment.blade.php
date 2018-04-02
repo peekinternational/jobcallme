@@ -32,7 +32,13 @@
                 </div>
                 <div class="" style="padding-left: 22px;padding-right: 13px;">
             
-                    <form action="{{url('nicepay/payRequest_utf.php')}}" method="post" id='nicePayForm'> 
+                    <form action="{{url('nicepay/payRequest_utf.php')}}" method="post" id='nicepckg'> 
+                        <input type="hidden" value="{!! $amount !!}" name="price" >
+                        <input type="hidden" value="1" name="goodscount" >
+                        <input type="hidden" value="jobcallme" name="goodsName" >
+                        <input type="hidden" value="{!! $app->email !!}" name="Email" >
+                        <input type="hidden" value="{!! $app->phoneNumber!!}" name="tel" >
+                        <input type="hidden" value="0" name="buyerName" id='buyer' >
                      
                         <a href='javascript:void(0)'  class="btn btn-info btn-lg nicePay">NicePay</a>
                     </form>
@@ -65,11 +71,11 @@ $(document).on('click','.nicePay',function(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }, 
-        url: "<?=url('account/nicepay')?>",
+        url: "<?=url('account/pckgnicepay')?>",
         data:{'type':1}, /*make a job post*/
         success: function(result){  
-            $("#buyerName").val(result);
-            $("#nicePayForm").submit();
+            $("#buyer").val(result);
+            $("#nicepckg").submit();
         }
     });
 });

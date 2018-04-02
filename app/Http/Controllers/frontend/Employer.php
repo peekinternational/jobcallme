@@ -1859,15 +1859,17 @@ public function userResume($userId){
 		
 		public function packageinfo(Request $request){
 			$info = $request->all();
-			//dd($info);
-			$id = session()->get('jcmUser')->userId;
-			//$info =$id;
+			
+			$app= session()->get('jcmUser');
+			$amount=$info['amount'] * 1100;
+
+			//dd($amount);
 			
 			$request->session()->put('pckg_info', $info);
 			$get_info = $request->session()->get('pckg_info');
 			//dd($get_info['amount']);
 
-			return view('frontend.employer.package_payment');
+			return view('frontend.employer.package_payment',compact('app','amount'));
 
 			
 		}
@@ -2019,5 +2021,30 @@ public function userResume($userId){
 			 return view('frontend.writecashpayment_detail',compact('input'));
 	} 
 
+	public function nicepaypckg(Request $request)
+	{
+           $id = session()->get('jcmUser')->userId;
+           // dd($apps);
+            $input = Session::get('pckg_info');
+            $input['user_id']=$id;
+			$input['paymentMode']='Nice Pay';
+			$input['status']=2;
+
+	        $pk_id=DB::table('jcm_save_packeges')->insertGetId($input);
+
+			$order['user_id']=$id;
+			$order['payment_mode']='Nice Pay';
+			$order['orderBy']=$input['type'];
+			$order['amount']=$input['amount'];
+			$order['status']='Pending';
+			$order['category']='Package Plan';
+			$order['date']= date('Y-m-d');
+
+            DB::table('jcm_orders')->insert($order);
+			echo $pk_id.'-package';
+
+			die();
+			// return view('frontend.writecashpayment_detail',compact('input'));
+	} 
 
 }

@@ -181,12 +181,14 @@ Route::group(['prefix' => 'account'], function () {
 	Route::match(['get','post'],'writings/article/add','frontend\ExtraSkills@addEditArticle');
 	Route::match(['get','post'],'writings/article/edit/{id}','frontend\ExtraSkills@addEditArticle');
 	Route::post('writings/article/delete','frontend\ExtraSkills@deleteArticle');
+	Route::post('writenicepay','frontend\ExtraSkills@writenicepay');
 	Route::post('employer/questionnaire/answer','frontend\Employer@questionnaireAnswer');
 
 	Route::get('upskill','frontend\ExtraSkills@upskill');
 	Route::match(['get','post'],'upskill/add','frontend\ExtraSkills@addEditUpskill');
 	Route::match(['get','post'],'upskill/edit/{id}','frontend\ExtraSkills@addEditUpskill');
 	Route::get('upskill/delete/{id}','frontend\ExtraSkills@deleteUpskill');
+	Route::post('upskillnicepay','frontend\ExtraSkills@upskillnicepay');
 	Route::post('manage/removeProPic','frontend\jobseeker@removeProPic');
 	/* job seeker */
     Route::get('jobseeker','frontend\Jobseeker@home');
@@ -254,6 +256,7 @@ Route::group(['prefix' => 'account'], function () {
 	Route::post('cashpackage','frontend\Employer@cashpackage');
 
 	Route::post('nicepay', 'frontend\Employer@getresponse');
+	Route::post('pckgnicepay', 'frontend\Employer@nicepaypckg');
 	Route::post('cashpayment', 'frontend\Employer@cashpayment');
 	Route::get('employer/delete/{id}','frontend\Employer@deletejob');
 	Route::match(['get','post'],'employer/orders','frontend\Employer@orders');
