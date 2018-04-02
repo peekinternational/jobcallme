@@ -207,7 +207,7 @@
 						</div>
 						<div class="col-md-8 col-xs-12" style="padding-top:10px">
 							<div class="sr-details">
-								<p class="sr-title"><a href="{{ url('read') }}">{!! $rec->title !!} </a> </p>
+								<p class="sr-title"><a href="{{ url('read/article/'.$rec->writingId) }}">{!! $rec->title !!} </a> </p>
 								<p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.'.$rec->name)</a> </p>
 							</div>
 						</div>
@@ -235,9 +235,9 @@
 
                         <div class="sr-item-img">
                             @if($rec->upskillImage != '')
-                            <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:80px;">
+                            <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;">
                             @else
-                            <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:80px !important;">
+                            <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;">
                             @endif
                         </div>
 						</div>

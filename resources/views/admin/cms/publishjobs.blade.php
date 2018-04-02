@@ -165,7 +165,7 @@ $(document).ready(function(){
     $('.jobstatus').on('change',function(e){
        
         var id = $(this).closest('tr').find('#jobId').val();
-       var jobstatus = '';
+        var jobstatus = '';
         var status = '';
         if($(e.target).parent().hasClass('off')){
             jobstatus = 'Draft';

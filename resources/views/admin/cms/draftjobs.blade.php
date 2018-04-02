@@ -58,7 +58,8 @@ $s_app = Session()->get('shiftSearch');
                                                 </td>
                                                 <td><a data-toggle="tooltip" title="View Job" target="_blank" href="{{ url('jobs/'.$job->jobId)}}">{{ $job->title }}</a></td>
                                                 <td>{{ $job->name }}</td>
-                                                @if($job->p_Category==1)
+                                               
+												@if($job->p_Category==1)
 												<td>Basic</td>
 									            @elseif($job->p_Category==2)
 												<td>Goldan</td>
@@ -165,7 +166,7 @@ $(document).ready(function(){
     $('.jobstatus').on('change',function(e){
        
         var id = $(this).closest('tr').find('#jobId').val();
-       var jobstatus = '';
+        var jobstatus = '';
         var status = '';
         if($(e.target).parent().hasClass('off')){
             jobstatus = 'Draft';

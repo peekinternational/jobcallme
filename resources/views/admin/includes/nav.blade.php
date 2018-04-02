@@ -60,7 +60,19 @@ $$nav = 'active';
                         <ul class="sidenav-subnav">
                             <li class="sidenav-subheading">CMS</li>
                             <li class="{{ $alljobs }}">
-                                <a href="{{ url('admin/cms/alljobs') }}">All jobs</a>
+                                <a href="{{ url('admin/cms/alljobs') }}">Jobs</a>
+                                 <ul class="sidenav-subnav">
+                                 <li class="{{ $publishjobs }}">
+                                <a href="{{ url('admin/cms/alljobs') }}">All Jobs</a>
+                              </li>
+                                 <li class="{{ $publishjobs }}">
+                                <a href="{{ url('admin/cms/publishjobs') }}"> Publish Jobs</a>
+                              </li>
+
+                             <li class="{{ $draftjobs }}">
+                                <a href="{{ url('admin/cms/draftjobs') }}">Draft Jobs</a>
+                            </li>
+                                 </ul>
                             </li>
                             <li class="{{ $category }}">
                                 <a href="{{ url('admin/cms/category') }}">Job Category</a>

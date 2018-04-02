@@ -67,12 +67,6 @@ if(Request::input('show') != ''){
 .input-error{color: red;}
 </style>
 <script type="text/javascript">
-    var token = "{{ csrf_token() }}";
-    $(document).ready(function(){
-        $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
-        var firstSelect = $('.jaTabBtn.ja-tab-active');
-        $(firstSelect).removeClass('ja-tab-active');
-        $(firstSelect).click();
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
     $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
@@ -93,6 +87,8 @@ $('.jaTabBtn').click(function () {
             $('#application-show').html(response);
         }
     })
+
+     });
     // Mobile  Tab 
     // End 
     $('.jaTabBtn').click(function () {
