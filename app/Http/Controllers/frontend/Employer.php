@@ -2053,5 +2053,6 @@ public function userResume($userId){
 			die();
 			// return view('frontend.writecashpayment_detail',compact('input'));
 	} 
+	
 
 }
