@@ -668,7 +668,7 @@ $(document).ready(function(){
     }
 }) ;
     
-    
+
     ////// FOR PLAN//////////
 
  ////// FOR Simle/////////
@@ -811,7 +811,7 @@ $('#secondDate').on('change', function() {
       $('#pas').val(to);
       
     if ($('#kr').is(':checked')) {
-	  $('#total').html("Total Amount : "+total*1100+" $" );
+	  $('#total').html("Total Amount : "+total*1100+" ₩" );
      // alert('kr');
     }
 
