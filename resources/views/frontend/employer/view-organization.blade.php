@@ -91,7 +91,7 @@ if($company->companyLogo != ''){
                                    </tr>
                                    <tr>
                                        <td>@lang('home.tuesday')</td>
-                                       <td>{!! $opHour['tue']['from'] !!} - {!! $opHour['thu']['to'] !!}</td>
+                                       <td>{!! $opHour['tue']['from'] !!} - {!! $opHour['tue']['to'] !!}</td>
                                    </tr>
                                    <tr>
                                        <td>@lang('home.wednesday')</td>

@@ -35,7 +35,7 @@ if($user->profilePhoto != ''){
                         <div class="row">
                             <div class="col-md-3 personal-info-left">
                                 <div class="re-img-box">
-                                    <img src="{{ $userImage }}">
+                                    <img src="{{ $userImage }}" class="img-target">
                                     <div class="re-img-toolkit">
                                         <div class="re-file-btn">
                                             @lang('home.change') <i class="fa fa-camera"></i>
@@ -2748,7 +2748,7 @@ $('.profile-pic').on('change',function(){
         timeout: 30000000,
         success : function(response) {
             if($.trim(response) != '1'){
-                $('img.img-circle').attr('src',response);
+                $('img.img-target').attr('src',response);
             }else{
                 alert('Following format allowed (PNG/JPG/JPEG)');
             }
@@ -2895,7 +2895,7 @@ function getSubCategories2(categoryId2){
         a.readAsDataURL(blob);
     }
     function editResumeProPic(){
-        var proImg = $('.img-circle').attr('src');
+        var proImg = $('.img-target').attr('src');
        $('#editProResumeModel').modal('show');
        $('#proEditImg img').attr('src',proImg);
        $('#proEditImg img').rcrop({
@@ -2914,7 +2914,7 @@ function getSubCategories2(categoryId2){
         var srcOriginal = $(this).rcrop('getDataURL');
         var srcResized = $(this).rcrop('getDataURL', 50,50);
         var userId = "{{ session()->get('jcmUser')->userId }}";
-        $('.img-circle').attr('src',srcOriginal);
+        $('.img-target').attr('src',srcOriginal);
         //test:
         var blob = dataURLtoBlob(srcOriginal);
         var imagelink = $('#proEditImg img').attr('src');
@@ -2948,7 +2948,7 @@ function getSubCategories2(categoryId2){
         success:function(res){
             if(res == 1){
                 toastr.success('Profile Pic Remove');
-                $('.img-circle').attr('src','{{ asset("profile-photos/profile-logo.jpg") }}');
+                $('.img-target').attr('src','{{ asset("profile-photos/profile-logo.jpg") }}');
             }
         }
        });
