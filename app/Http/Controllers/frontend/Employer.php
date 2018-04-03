@@ -250,7 +250,7 @@ curl_close ($ch);
 			$input['questionaire_id'] = $questionaire_id;
 		}
 
-		
+
 		if($subCategory == ''){
 			$input['subCategory'] = '';
 		}
@@ -463,16 +463,12 @@ curl_close ($ch);
 			$expiryAds = Session::get('expiryAd');
 			$states = Session::get('state');
 			$questionaire_id = Session::get('questionaire_id');
-	
-			extract($request->all());
 
-			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'jobStatus' => 'Publish', 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys,'duration' => $durations, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process),'country' => $countrys, 'state' => $states, 'city' => $citys,'Address' => $Addresss, 'expiryDate' => $expiryDates, 'expiryAd' => $expiryAds,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
-			 $input['questionaire_id'] = $questionaire_id;
-		
 			extract($request->all());
 
 			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'jobStatus' => 'Publish', 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys,'duration' => $durations, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process),'country' => $countrys, 'state' => $states, 'city' => $citys,'Address' => $Addresss, 'expiryDate' => $expiryDates, 'expiryAd' => $expiryAds,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
 			$inputs['questionaire_id'] = $questionaire_id;
+
 			if($subCategorys == ''){
 				$inputs['subCategory'] = '';
 			}
@@ -629,7 +625,9 @@ curl_close ($ch);
 		
     	$rec = DB::table('jcm_payments')->get();
 
+
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','>','0')->where('status','=','1')->get();
+
 
 		
 		$userId = $request->session()->get('jcmUser')->userId;
@@ -990,7 +988,7 @@ public function userResume($userId){
 				if($k[1] == ''){ $k[1] = 'Closed';}
 			}else{
 				if($k[0] == ''){ $k[0] = '09:00 AM';}
-				if($k[1] == ''){ $k[1] = '05:00 PM';}
+				if($k[1] == ''){ $k[1] = '06:00 PM';}
 			}
 			$opHoursArr[$i] = array('from' => $k[0], 'to' => $k[1]);
 		}

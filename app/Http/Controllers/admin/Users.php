@@ -40,7 +40,7 @@ class Users extends Controller{
     public function addEditUser(Request $request){
         $userId = 0;
         $rPath = $request->segment(3);
-        $companies = JobCallMe::getCompanies();
+        $companies = JobCallMe::getUserCompanies();
         if($request->isMethod('post')){
             $userId = $request->input('userId',0);
             $this->validate($request, [
@@ -51,7 +51,16 @@ class Users extends Controller{
                 'username' => 'required|max:50',
                 'password' => 'sometimes|nullable|min:6|max:16',
                 'about' => 'required|max:800',
-            ]);
+            ],
+            [
+                'about.required' => 'about field is required',
+                'about.max'      => 'About Employer must be less then 800 characters',
+                'firstName.max'  => 'First name just be less then 100 characters',
+                'phoneNumber.digits_between'  => 'Phone Number must be 10 to 12 digits',
+                'password.min'  => 'minimum password contain 6 char',
+                'password.max'  => 'maximum password contain 16 char',
+            ]
+            );
             if($userId == '0'){
                 $this->validate($request, [
                     'password' => 'required|min:6|max:16',
@@ -309,4 +318,5 @@ class Users extends Controller{
         }
         return redirect(url()->previous());
     }
+   
 }

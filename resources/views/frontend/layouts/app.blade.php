@@ -75,7 +75,7 @@ $next = Request::route()->uri;
     
     <a href="{{ url('/subscribe')}}" class="job-notification" style="@if(session()->has('bell_color')) background:{{ session()->get('bell_color') }} @endif">
         <i class="fa fa-bell" style=" @if(session()->has('bell_color')) background:{{ session()->get('bell_color') }} @endif"></i>
-        <span class="notification-label">@if(session()->has('bell_color')) @if(session()->get('bell_color') == '#45c536') Subscribed @else Subscribe for job notifications @endif @else Subscribe for job notifications @endif</span>
+        <span class="notification-label">@if(session()->has('bell_color')) @if(session()->get('bell_color') == '#45c536') @lang('home.subscribed') @else @lang('home.subscribe') @endif @else @lang('home.subscribe') @endif</span>
     </a>
 
     <a href="#" class="back-to-top" style="display: inline;">

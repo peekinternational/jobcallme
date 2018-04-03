@@ -240,6 +240,9 @@ class JobCallMe{
 	public function getCompanies(){
 		return DB::table('jcm_companies')->where('companyStatus','=','Active')->get();
 	}
+	public function getUserCompanies(){
+		return DB::table('jcm_companies')->get();
+	}
 
 	public function slugify($string){
 		$string = str_replace(array("'",'"'),'',$string);
