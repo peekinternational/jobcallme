@@ -13,6 +13,18 @@
                 </select>
             </div>
         </div>
+        <div id="feed-header" class="none">@lang('home.feedback_header')</div>
+        <div id="feedback-main" class="none">@lang('home.feedback')</div>
+        <div id="feedback-email" class="none">@lang('home.enteremail')</div>
+        <div id="feedback-message" class="none">@lang('home.details')</div>
+        <div id="feedback-submit" class="none">@lang('home.submit')</div>
+        <div id="feedback-drop" class="none">
+            <option>@lang('home.selecttype')</option>
+            <option>@lang('home.bug')</option>
+            <option>@lang('home.feature')</option>
+            <option>@lang('home.feedback')</option>
+            <option>@lang('home.testimonial')</option>
+        </div>
 
         <div class="col-md-2">
             <!-- <h5><span class="footer-title-box" style="background-color: #8d7d8d">@lang('home.hourwork')</span></h5> -->
@@ -162,4 +174,20 @@
 function jsCsrfToken(){
     return "{{ csrf_token() }}";
 }
+
+setTimeout(function(){ 
+    var header = $('#feed-header').html();
+    var feedback = $('#feedback-main').html();
+    var email = $('#feedback-email').html();
+    var drop = $('#feedback-drop').html();
+    var message = $('#feedback-message').html();
+    var submit = $('#feedback-submit').html();
+    $('#fpi_header_message').html(header); 
+    $('#fpi_title h2').html(feedback); 
+    $('input[type="email"]').attr('placeholder',email); 
+    $('select[name="type"]').html(drop); 
+    $('textarea[name="message"]').html(message); 
+    $('#fpi_submit_submit button[type="submit"]').html(submit); 
+}, 3000);      
+
 </script>

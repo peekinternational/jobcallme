@@ -16,10 +16,10 @@ class Home extends Controller{
 		$currentCountry = $position->countryCode;
 		$currentCity    = $position->cityName;
 		
-		if($position->countryCode != 'KR'){
+		/*if($position->countryCode != 'KR'){
 			App::setLocale('en');
 			\Session::put('locale', 'en');
-		}
+		}*/
 		//print_r($position->countryCode);die;
 		/* job shift query */
 		$jobShifts = DB::table('jcm_job_shift')->get();
