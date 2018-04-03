@@ -106,7 +106,7 @@ if($user['profilePhoto'] != ''){
                                         <select class="form-control select2" name="companyId">
                                             <option value="0">Select Company</option>
                                             @foreach($companies as $x => $y)
-                                                <option value="{{ $y->companyId }}">{{ $y->companyName }}</option>
+                                                <option value="{{ $y->companyId }}" @if($user['companyId'] == $y->companyId) selected @endif>{{ $y->companyName }}</option>
                                             @endforeach
                                         </select>
                                     </div>

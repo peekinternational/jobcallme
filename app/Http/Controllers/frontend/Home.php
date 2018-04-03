@@ -745,6 +745,9 @@ public function removeCompanyProPic(Request $request){
 public function deactiveUser(Request $request){
 	$id = $request->input('id');
 	if(DB::table('jcm_users')->where('userId','=',$id)->update(['user_status'=>'N'])){
+		$data = DB::table('jcm_users')->where('userId','=',$id)->first();
+		DB::table('jcm_companies')->where('companyId','=',$data->companyId)->update(['companyStatus'=>'Inactive']);
+
 		$request->session()->flush('jcmUser');
 		$request->session()->flash('loginAlert', 'Your Account is Deactivated for activation contact Administration thanks');
 		   echo 1;
