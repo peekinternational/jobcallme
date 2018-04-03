@@ -11,12 +11,18 @@
 
 	  <div class="row">
             <div class="col-md-12" style="margin-top:70px">
+          
 	
         <div class="col-md-12">
 		
             <div class="pnj-box">
 			  <h3>@lang('home.postnewjob')</h3>
 					<div class="col-md-12">
+                    <div>
+                    <span>@lang('home.selectcurrency'): &nbsp;</span>
+                      <input type="radio" name="gender" id="kr" value="kr" checked="checked"> korean
+                      &nbsp;&nbsp;<input type="radio" name="gender" id="us" value="us"> US$
+                      </div>
 					   <div class="form-group error-group" style="display: none;">
                             <label class="control-label col-sm-3">&nbsp;</label>
                             <div class="col-sm-9 pnj-form-field"><div class="alert alert-danger"></div></div>
@@ -26,12 +32,12 @@
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types">
                          
-						 @foreach($plan as $pay)
+						 @foreach($plan as $key=>$pay)
                          <!----><li style="position:relative">
                                 <!---->
 								<span class="pay_blog">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $pay->id!!}" name="allarray" value="{!! $pay->cat_id!!}|{!! $pay->id!!}|{!! $pay->amount!!}|{!! $pay->duration!!}|{!! $pay->quantity!!}">
-									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"  value="{!! $pay->amount!!}">
+									<input class="mat-radio-input visually-hidden pckg_amount" id="radioval" type="hidden"  value="{!! $pay->amount!!}">
                                     
                                     <input class="checkplan"  type="hidden" name="plan"  value="plan">
 								</span>
@@ -47,7 +53,7 @@
                                         </ul>
 										
                                         <div class="credits b">
-										<span class="text-success">US ${{ $pay->amount}}.00</span>
+										<span class="text-success" id="class_text{{$key}}"></span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									</div>
                                     </label>
@@ -69,7 +75,7 @@
 					<div id="notpckg"  class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: none; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-top:30px;">
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types">
-						 @foreach($rec as $payment)
+						 @foreach($rec as $k=>$payment)
 						 
                             <!----><li style="position:relative">
                                 <!---->
@@ -91,7 +97,7 @@
                                         <div class="credits b">@if($payment->price ==0)
 									<span class="free">	@lang('home.Free')</span>
 										@else
-										<span class="text-success">@lang('home.'.$payment->price)</span>
+										<span class="text-success" id="simple_text{{$k}}"></span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									@endif</div>
                                     </label>
@@ -116,7 +122,7 @@
 					<div id="notpckg" class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-top:30px;">
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types">
-						 @foreach($rec as $payment)
+						 @foreach($rec as $keys=>$payment)
 						 
                             <!----><li style="position:relative">
                                 <!---->
@@ -138,7 +144,7 @@
                                         <div class="credits b">@if($payment->price ==0)
 									<span class="free">	@lang('home.Free')</span>
 										@else
-										<span class="text-success">@lang('home.'.$payment->price)</span>
+										<span class="text-success" id="simple_text{{$keys}}"></span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									@endif</div>
                                     </label>
@@ -634,6 +640,69 @@ $('#Questionnaire').on('change',function(){
    
 })
 $(document).ready(function(){
+
+   ////// FOR PLAN//////////
+     var jArray = <?php echo json_encode($plan); ?>;
+
+     for(var i=0;i<jArray.length;i++){
+     $('#class_text'+i).html('KRNW '+jArray[i].amount*1100+'.00')
+        //alert(jArray[i].amount);
+       }
+     
+    $('#us').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<jArray.length;i++){
+
+     $('#class_text'+i).html('US$ '+jArray[i].amount+'.00')
+        //alert(jArray[i].amount);
+         }
+        }
+    }) ;
+
+    $('#kr').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<jArray.length;i++){
+     $('#class_text'+i).html('KRNW '+jArray[i].amount*1100 +'.00')
+       // alert(jArray[i].amount*1100);
+      }
+    }
+}) ;
+    
+    
+    ////// FOR PLAN//////////
+
+ ////// FOR Simle/////////
+     var simplearray = <?php echo json_encode($rec); ?>;
+
+     for(var i=0;i<simplearray.length;i++){
+     $('#simple_text'+i).html('KRNW '+simplearray[i].price*1100+'.00')
+        //alert(jArray[i].amount);
+       }
+     
+    $('#us').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<simplearray.length;i++){
+
+     $('#simple_text'+i).html('US$ '+simplearray[i].price+'.00')
+        //alert(jArray[i].amount);
+         }
+        }
+    }) ;
+
+    $('#kr').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<simplearray.length;i++){
+     $('#simple_text'+i).html('KRNW '+simplearray[i].price*1100 +'.00')
+       // alert(jArray[i].amount*1100);
+      }
+    }
+}) ;
+    
+    ////// FOR PLAN//////////
+    
+
+
+   //console.log(l);
     $('#post-job-ad-types li').first().find('span .mat-radio-input').bind('click',function(e){
         $('#durationdiv').hide();
         $('#total').hide();
@@ -731,16 +800,26 @@ $('.optionBox').on('click','.remove',function() {
 $('#secondDate').on('change', function() {
 		  myfunc()
 });
-      
+      var total='';
        function myfunc(){
        var start = new Date();
       // var start= $("#firstDate").datepicker("getDate");
     	var end= $("#secondDate").datetimepicker("getDate");
    		days = (end- start) / (1000 * 60 * 60 * 24);
       var to= Math.round(days);
-      var total= to * alrt;
+       total= to * alrt;
       $('#pas').val(to);
+      
+    if ($('#kr').is(':checked')) {
+	  $('#total').html("Total Amount : "+total*1100+" $" );
+     // alert('kr');
+    }
+
+     if ($('#us').is(':checked')) {
 	  $('#total').html("Total Amount : "+total+" $" );
+      //alert('us');
+    }
+   
       
       // alert(total);
        
@@ -857,9 +936,10 @@ var formPost = 1;
 
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
+          center: {lat: 37.532600, lng: 127.024612},
           zoom: 13
         });
+        
         var card = document.getElementById('pac-card');
         var input = document.getElementById('pac-input');
         var types = document.getElementById('type-selector');

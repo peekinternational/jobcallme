@@ -286,6 +286,11 @@ class Home extends Controller{
 				'country' => 'required',
 				'state' => 'required',
 				'phoneNumber' => 'required|digits_between:10,12',
+			],[
+				'email.unique' => 'Email must be unique',
+				'country.required' => 'Enter Country',
+				'state.required' => 'Enter State',
+				'phoneNumber.digits_between' => 'Phone Number must be contain 10,12 digits',
 			]);
 			$regdata['email'] = $request->input('email');
 			$regdata['password'] = $request->input('password');

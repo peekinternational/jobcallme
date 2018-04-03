@@ -82,7 +82,7 @@ class Jobs extends Controller{
 		}
 		$app = $request->session()->get('jcmUser');
 
-		$result = $jobs->orderBy('jobId','desc')->limit(100)->get();
+		$result = $jobs->orderBy('jobId','desc')->paginate(15);
 		
 		//dd($result);
         $head = '';
@@ -201,7 +201,7 @@ class Jobs extends Controller{
 					$cityUrl = url('jobs?city='.$sim->city);
 					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'">'.trans('home.similerjob').'  '.JobCallMe::cityName($sim->city).'</a><span style="padding-left: 85px;" ><a style="color: #999999;" href="'.$comUrl.'">'.trans('home.jobIn').' '.$sim->companyName.'</a></span></p>';
 				}
-				$vhtml .= '</div>';
+				$vhtml .='<span style="text-align:center">'.$result->render().'</span> </div>';
 			}
 		}else{
 			$vhtml  = '<div class="jobs-suggestions">';
@@ -209,6 +209,7 @@ class Jobs extends Controller{
 			$vhtml .= '</div>';
 		}
 		echo $vhtml;
+		//echo $result->render();
 	}
 	public function homePageJobSerach(Request $request){
 

@@ -144,6 +144,7 @@ $(document).ready(function(){
                data: {country:getcountry,state:getsate,_token:"{{ csrf_token() }}"},
                url: "{{ url('jobs/search') }}?_find="+isFirst,
                success: function(response){
+                   console.log(response);
                    $('.show-jobs').html(response);
                    $('.search-job button[name="save"]').prop('disabled',false);
 
