@@ -52,7 +52,7 @@ if($user->profilePhoto != ''){
                         <a href="{{ url('account/employer/addevaluation/') }}" class="  ext-link">@lang('home.evaluationforms')</a>
                     </li>
                     <li>
-                        <a href="#" class=" ext-link">@lang('home.questionnaires')</a>
+                        <a href="{{ url('account/employer/questionnaires') }}" class=" ext-link">@lang('home.questionnaires')</a>
                     </li>
                 </ul>
                 <!-- <a class="btn btn-block jaTabBtn">Users</a>
@@ -90,7 +90,7 @@ if($user->profilePhoto != ''){
             <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.interviewvenues')</a>
 			<a href="{{ url('account/employer/users/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.users')</a>
 			<a href="{{ url('account/employer/addevaluation/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.evaluationforms')</a>
-			<a href="#" class="btn btn-block jaTabBtn ext-link">@lang('home.questionnaires')</a>
+			<a href="{{ url('account/employer/questionnaires') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.questionnaires')</a>
             <!-- <a class="btn btn-block jaTabBtn">Users</a>
             <a class="btn btn-block jaTabBtn">Evaluation Form</a>
             <a class="btn btn-block jaTabBtn">Questionnaires</a> -->
