@@ -668,6 +668,7 @@ $(document).ready(function(){
     }
 }) ;
     
+    
     ////// FOR PLAN//////////
 
  ////// FOR Simle/////////
