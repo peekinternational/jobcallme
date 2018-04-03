@@ -4,7 +4,7 @@
 
 @section('content')
 <?php 
-$s_app = Session()->get('shiftSearch');
+$s_app = Session()->get('jobSearch');
 ?>
     <div class="layout-content">
         <div class="layout-content-body">
@@ -14,7 +14,7 @@ $s_app = Session()->get('shiftSearch');
                 </h1>
             </div>
             <div class="row">
-                <form method="post" action="{{ url('admin/cms/shift') }}">
+                <form method="post" action="{{ url('admin/cms/alljobs') }}">
                     {{ csrf_field() }}
                     <div class="col-md-6">
                         <label>Search String</label>
@@ -24,7 +24,7 @@ $s_app = Session()->get('shiftSearch');
                         <label style="display: block;">&nbsp;</label>
                         <button class="btn btn-primary" type="submit" name="filter">Search</button>
                         @if(count($s_app) > 0)
-                            <a class="btn btn-default" href="{{ url('admin/cms/shift?reset=true') }}">Reset</a>
+                            <a class="btn btn-default" href="{{ url('admin/cms/alljobs?reset=true') }}">Reset</a>
                         @endif
                     </div>
                 </form>
@@ -105,7 +105,7 @@ $s_app = Session()->get('shiftSearch');
                     </button>
                     <h4 class="modal-title">Job Shift</h4>
                 </div>
-                <form onsubmit="return false" class="shift-form">
+                <form onsubmit="return false" class="">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <input type="hidden" class="shiftId" name="shiftId" value="0">
@@ -217,7 +217,7 @@ $('form.shift-form').submit(function(e){
                 $('.shift-form .do-save').prop('disabled',false);
                 $('.shift-form .do-save').removeClass('spinner spinner-default');
             }else{
-                window.location.href = "{{ url('admin/cms/shift') }}";
+                window.location.href = "{{ url('admin/cms/alljobs') }}";
             }
         }
     })

@@ -14,7 +14,7 @@ $s_app = Session()->get('shiftSearch');
                 </h1>
             </div>
             <div class="row">
-                <form method="post" action="{{ url('admin/cms/shift') }}">
+                <form method="post" action="{{ url('admin/cms/alljobs') }}">
                     {{ csrf_field() }}
                     <div class="col-md-6">
                         <label>Search String</label>
@@ -24,7 +24,7 @@ $s_app = Session()->get('shiftSearch');
                         <label style="display: block;">&nbsp;</label>
                         <button class="btn btn-primary" type="submit" name="filter">Search</button>
                         @if(count($s_app) > 0)
-                            <a class="btn btn-default" href="{{ url('admin/cms/shift?reset=true') }}">Reset</a>
+                            <a class="btn btn-default" href="{{ url('admin/cms/alljobs?reset=true') }}">Reset</a>
                         @endif
                     </div>
                 </form>

@@ -112699,4 +112699,6 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Cheongwon-gu, Cheongju-si"=>"청주시 청원구",
 "Heungdeok-gu, Cheongju-si"=>"청주 흥덕구",
 "Chungju-si"=>"충주시",
+'selectcurrency'=>'통화 선택',
+'companyAlert'=>'채용공고 등록 하기 전에 회사 프로필을 필히 작성 하 셔야 채용 공고 등록아 가능합니다 ',
 ];
