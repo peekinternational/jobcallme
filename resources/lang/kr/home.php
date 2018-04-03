@@ -19,6 +19,16 @@ return [
 	'manage' => '정보관리 설정',
 	'logout' => '로그아웃',
 	'login' => '로그인',
+	'feedback_header' => '의견 보내기',
+	'feedback' => '피드백',
+	'enteremail' => '이메일 주소 입력',
+	'selecttype' => '유형 선택',
+	'bug' => '오류 신고',
+	'feature' => '기술 장애신고',
+	'testimonial' => '사용 후기',
+	'details' => '고객님의 의견을 작성 바랍니다',
+	'submit' => '보내기',
+	'subscribe' => '구직 알림 신청',
 	///end navbar//
 	
 	//Homepage//

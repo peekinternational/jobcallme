@@ -23,6 +23,9 @@
 	//box-shadow: 5px 10px 10px;
 	margin-bottom: 30px;
 }
+.none{
+  display: none;
+}
 /* cssss*/
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 @keyframes ripple {

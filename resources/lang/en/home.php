@@ -19,6 +19,22 @@ return [
 	'manage' => 'Manage',
 	'logout' => 'Logout',
 	'login' => 'Login',
+
+	'TEST'  => 'Test',
+	'Test/Questionnaires' => 'Test/Questionnaires',
+	'AddQuestionnaire' => 'Add Questionnaire',
+	'feedback_header' => 'Send us your Feedback.',
+	'feedback' => 'Feedback',
+	'enteremail' => 'Enter your email',
+	'selecttype' => 'Select type',
+	'bug' => 'Bug Report',
+	'feature' => 'Feature Report',
+	'testimonial' => 'Testimonial',
+	'details' => 'Details',
+	'submit' => 'Submit',
+	'subscribed' => 'Subscribed',
+	'subscribe' => 'Subscribe for job notifications',
+
 	///end navbar//
 	
 	//Homepage//
