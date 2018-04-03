@@ -98,6 +98,8 @@ class ExtraSkills extends Controller{
             }
             
             $durations= $amount * $request->input('duration');
+            $nicepayamount=$durations*1100;
+            $request->session()->put('wr_amount', $nicepayamount);
             $input['amount'] = $durations;
             $input['title'] = $request->input('title');
             $input['category'] = $request->input('category');
@@ -352,7 +354,8 @@ class ExtraSkills extends Controller{
 	   $amount=$rec[0]->price;
 	   //dd();
 	   $durations= $amount*$request->duration;
-	  // $request->session()->put('vacancy', $request->vacancy);
+       $up=$durations*1100;
+	   $request->session()->put('price', $up);
         $app = $request->session()->get('jcmUser');
         if($request->ajax()){
             $this->validate($request,[
@@ -616,6 +619,28 @@ class ExtraSkills extends Controller{
 
      }
 
+      public function upskillnicepay(Request $request){
+            $apps = $request->session()->get('jcmUser');
+            $input = Session::get('input');
+            $input['status']='Inactive';
+            $input['paymentMode']='Nice Pay';
+	        $up_id=DB::table('jcm_upskills')->insertGetId($input);
+
+            $order['user_id']=$apps->userId;
+            $order['payment_mode']='Nice Pay';
+            $order['orderBy']=$input['title'];
+            $order['amount']=$input['amount'];
+            $order['status']='Pending';
+            $order['category']='Upskill';
+            $order['date']= date('Y-m-d');
+
+            DB::table('jcm_orders')->insert($order);
+            //return view('frontend.upskillcashpayment_detail',compact('order'));
+            echo $up_id.'-upskill';
+            die();
+
+     }
+
         public function writecashpayment(Request $request){
             $apps = $request->session()->get('jcmUser');
             $input = Session::get('inputs');
@@ -640,6 +665,32 @@ class ExtraSkills extends Controller{
 
             return view('frontend.writecashpayment_detail',compact('input'));
 
+     }
+
+        public function writenicepay(Request $request){
+            $apps = $request->session()->get('jcmUser');
+            $input = Session::get('inputs');
+               $catnames = "";
+                foreach ($input['category'] as $value) {
+                  $catnames .= DB::table('jcm_read_category')->where('id',$value)->first()->name.",";
+                }
+            $input['cat_names'] = $catnames;  
+            $input['status'] = 'Draft';  
+        
+	        $wr_id=DB::table('jcm_writings')->insertGetId($input);
+
+
+            $order['user_id']=$apps->userId;
+            $order['payment_mode']='Nice Pay';
+            $order['orderBy']=$input['title'];
+            $order['amount']=$input['amount'];
+            $order['status']='Pending';
+            $order['category']='Article';
+            $order['date']= date('Y-m-d');
+             DB::table('jcm_orders')->insert($order);
+
+          echo $wr_id.'-write';
+          die();
      }
 	
 

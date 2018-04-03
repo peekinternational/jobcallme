@@ -3,6 +3,9 @@
 @section('title','Payment Method')
 
 @section('content')
+<?php $amount= Session::get('price');
+      $app= Session::get('jcmUser'); 
+ ?>
 
 <section style="margin-bottom: 123px;padding-top: 180px;">
     <div class="container">
@@ -32,7 +35,13 @@
                 </div>
                   <div class="" style="padding-left: 22px;padding-right: 13px;" >
             
-                    <form action="{{url('nicepay/payRequest_utf.php')}}" method="post" id='nicePayForm'> 
+                    <form action="{{url('nicepay/payRequest_utf.php')}}" method="post" id='upnicePayForm'> 
+                     <input type="hidden" value="{!! $amount !!}" name="price" >
+                        <input type="hidden" value="1" name="goodscount" >
+                        <input type="hidden" value="jobcallme" name="goodsName" >
+                        <input type="hidden" value="{!! $app->email !!}" name="Email" >
+                        <input type="hidden" value="{!! $app->phoneNumber!!}" name="tel" >
+                        <input type="hidden" value="0" name="buyerName" id='upName' >
                         
                         <a href='javascript:void(0)'  class="btn btn-primary btn-lg nicePay">NicePay</a>
                     </form>
@@ -66,11 +75,11 @@ $(document).on('click','.nicePay',function(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }, 
-        url: "<?=url('account/nicepay')?>",
+        url: "<?=url('account/upskillnicepay')?>",
         data:{'type':1}, /*make a job post*/
         success: function(result){  
-            $("#buyerName").val(result);
-            $("#nicePayForm").submit();
+            $("#upName").val(result);
+            $("#upnicePayForm").submit();
         }
     });
 });
