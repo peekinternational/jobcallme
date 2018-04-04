@@ -164,7 +164,7 @@ return [
 	'draft' => 'DRAFT',
 	
 	//CV //
-	 'fathername' => 'Father Name',
+	 'fathername' => 'Nick Name',
 	 'cnic' => 'Phone Number',
 	 'cnicNumber' => 'Please include the area code and number (eg.0212345678)',
 	 'age' => 'Age',

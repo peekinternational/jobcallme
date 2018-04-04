@@ -518,7 +518,9 @@ curl_close ($ch);
     					->select('jcm_users.city','privacy.profileImage as privacyImage','jcm_users.country','jcm_companies.companyName','jcm_companies.companyId','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto')
     					
 						->join('jcm_users','jcm_users.companyId','=','jcm_companies.companyId')
+						->join('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId')
 						->join('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId')
+						->where('jcm_users_meta.userId','!=','')
 						->where('privacy.profile','=','Yes')
 						->limit(6)
     					->get();				

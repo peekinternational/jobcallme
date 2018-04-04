@@ -203,6 +203,7 @@ class Jobs extends Controller{
 				}
 				$vhtml .='<span style="text-align:center">'.$result->render().'</span> </div>';
 			}
+			$vhtml .='<span style="text-align:center">'.$result->render().'</span> ';
 		}else{
 			$vhtml  = '<div class="jobs-suggestions">';
 				$vhtml .= '<p class="js-note" style="text-align:center;">No Matching record found</p>';
