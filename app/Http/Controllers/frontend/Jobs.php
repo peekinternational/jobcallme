@@ -201,9 +201,8 @@ class Jobs extends Controller{
 					$cityUrl = url('jobs?city='.$sim->city);
 					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'">'.trans('home.similerjob').'  '.JobCallMe::cityName($sim->city).'</a><span style="padding-left: 85px;" ><a style="color: #999999;" href="'.$comUrl.'">'.trans('home.jobIn').' '.$sim->companyName.'</a></span></p>';
 				}
-				$vhtml .='<span style="text-align:center">'.$result->render().'</span> </div>';
+				$vhtml .='</div>';
 			}
-			$vhtml .='<span style="text-align:center">'.$result->render().'</span> ';
 		}else{
 			$vhtml  = '<div class="jobs-suggestions">';
 				$vhtml .= '<p class="js-note" style="text-align:center;">No Matching record found</p>';
