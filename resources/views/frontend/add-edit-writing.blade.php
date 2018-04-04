@@ -15,6 +15,11 @@
                     @if($article->writingId)
 
                     @else
+                     <div>
+                    <span>@lang('home.selectcurrency'): &nbsp;</span>
+                      <input type="radio" name="gender" id="wr_kr" value="kr" checked="checked"> korean
+                      &nbsp;&nbsp;<input type="radio" name="gender" id="wr_us" value="us"> US$
+                      </div>
                     <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:50px;">
                      <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types" class="please">
@@ -37,7 +42,7 @@
                                 </div>
                             </li>
 
-                         @foreach($wrpayment as $payment)
+                         @foreach($wrpayment as $key=>$payment)
                          
 
                             <!----><li style="position:relative">
@@ -54,7 +59,7 @@
                                         </ul>
                                         
                                         <div class="credits b">
-                                        <span class="text-success">US$ {!! $payment->price !!}.00</span>
+                                        <span class="text-success" id="wr_text{{$key}}"></span>
                                     <i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
                                     </div>
                                     </label>
@@ -201,20 +206,59 @@ $(document).ready(function(){
     })
   
 });
+
+ ////// FOR Simle/////////
+     var simplearray = <?php echo json_encode($wrpayment); ?>;
+
+     for(var i=0;i<simplearray.length;i++){
+     $('#wr_text'+i).html('KRNW '+simplearray[i].price*1100+'.00')
+        //alert(jArray[i].amount);
+       }
+     
+    $('#wr_us').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<simplearray.length;i++){
+
+     $('#wr_text'+i).html('US$ '+simplearray[i].price+'.00')
+        //alert(jArray[i].amount);
+         }
+        }
+    }) ;
+
+    $('#wr_kr').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<simplearray.length;i++){
+     $('#wr_text'+i).html('KRNW '+simplearray[i].price*1100 +'.00')
+       // alert(jArray[i].amount*1100);
+      }
+    }
+}) ;
+    
+    ////// FOR PLAN//////////
+
     $('#wrDate').on('change', function() {
           myfunc()
 });
-      
+      var total="";
        function myfunc(){
        var start = new Date();
       // var start= $("#firstDate").datepicker("getDate");
         var end= $("#wrDate").datetimepicker("getDate");
         days = (end- start) / (1000 * 60 * 60 * 24);
       var to= Math.round(days);
-      var total= to * alrt;
+       total= to * alrt;
       $('#wrpas').val(to);
       $('#wrpass').val(to);
-      $('#wrtotal').html("Total Amount : "+total+" $" );
+      if ($('#wr_kr').is(':checked')) {
+	  $('#wrtotal').html("Total Amount : "+total*1100+" ₩" );
+     // alert('kr');
+    }
+
+     if ($('#wr_us').is(':checked')) {
+	  $('#wrtotal').html("Total Amount : "+total+" $" );
+      //alert('us');
+    }
+      
       
       //alert(total);
        

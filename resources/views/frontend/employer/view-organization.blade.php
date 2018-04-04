@@ -477,8 +477,8 @@ if($company->companyLogo != ''){
             
             <h3 class="eo-about-heading">@lang('home.organizationmap')</h3>
             <div class="eo-about-org">
-                <div style="width: 100%; height: 500px;">
-                  {!! Mapper::render() !!}
+                <div id="map" style="width: 100%; height: 500px;">
+                  
                 </div>
             </div>
             
@@ -803,5 +803,36 @@ $('.compnay-cover').on('change',function(){
         }
        });
     }
-</script>
+
+  
+   
+
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      function initAutocomplete() {
+             
+   var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 37.532600, lng: 127.024612},
+          zoom: 14,
+          mapTypeId: 'roadmap'
+      
+});
+     
+      }
+
+    </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1RaWWrKsEf2xeBjiZ5hk1gannqeFxMmw&libraries=places&callback=initAutocomplete" async defer></script>
+
+
 @endsection
