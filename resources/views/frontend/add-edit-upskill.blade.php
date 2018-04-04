@@ -32,12 +32,17 @@ if($upskill->country != 0){
 			               	@if($upskill->skillId)
 			
                     @else
+                       <div>
+                    <span>@lang('home.selectcurrency'): &nbsp;</span>
+                      <input type="radio" name="gender" id="up_kr" value="kr" checked="checked"> korean
+                      &nbsp;&nbsp;<input type="radio" name="gender" id="up_us" value="us"> US$
+                      </div>
                     <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:30px;"">
                             <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                             
  
                         <ul id="post-job-ad-types">
-							@foreach($uppayment as $payment)
+							@foreach($uppayment as $key=> $payment)
 							<li style="position:relative">
                                 <!---->
                           <span class="pay_skill">
@@ -54,7 +59,7 @@ if($upskill->country != 0){
                                         </ul>
 										
                                         <div class="credits b">
-										<span class="text-success">$ {!! $payment->price!!}.00</span>
+										<span class="text-success" id="up_text{{$key}}"></span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									</div>
                                     </label>
@@ -486,19 +491,57 @@ $(document).ready(function(){
     getStates($('.job-country option:selected:selected').val());
     orgFun("{{ $upskill->organiser != '' ? 'other' : 'user'}}");
 })
+ ////// FOR Simle/////////
+     var simplearray = <?php echo json_encode($uppayment); ?>;
+
+     for(var i=0;i<simplearray.length;i++){
+     $('#up_text'+i).html('KRNW '+simplearray[i].price*1100+'.00')
+        //alert(jArray[i].amount);
+       }
+     
+    $('#up_us').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<simplearray.length;i++){
+
+     $('#up_text'+i).html('US$ '+simplearray[i].price+'.00')
+        //alert(jArray[i].amount);
+         }
+        }
+    }) ;
+
+    $('#up_kr').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<simplearray.length;i++){
+     $('#up_text'+i).html('KRNW '+simplearray[i].price*1100 +'.00')
+       // alert(jArray[i].amount*1100);
+      }
+    }
+}) ;
+    
+    ////// FOR PLAN//////////
   $('#second').on('change', function() {
 				  myfun()
 			  });
-      
+      var total ="";
        function myfun(){
        var start =$("#firstDate").datetimepicker("getDate");
       // var start= $("#firstDate").datepicker("getDate");
     	var end= $("#second").datetimepicker("getDate");
    		days = (end- start) / (1000 * 60 * 60 * 24);
       var to= Math.round(days);
-      var total= to * alt;
+      total= to * alt;
       $('#adduration').val(to);
+            
+    if ($('#up_kr').is(':checked')) {
+	  $('#totalam').html("Total Amount : "+total*1100+" ₩" );
+     // alert('kr');
+    }
+
+     if ($('#up_us').is(':checked')) {
 	  $('#totalam').html("Total Amount : "+total+" $" );
+      //alert('us');
+    }
+	
       
       // alert(total);
        
