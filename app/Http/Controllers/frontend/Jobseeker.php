@@ -234,6 +234,7 @@ class Jobseeker extends Controller{
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}
+
 		$app = $request->session()->get('jcmUser');
 		$this->validate($request, [
 				'degreeLevel' => 'required',
@@ -241,12 +242,22 @@ class Jobseeker extends Controller{
 				'completionDate' => 'required|date',
 				'grade' => 'required|max:10',
 				'institution' => 'required|max:150',
-				'country' => 'required'
+				'country' => 'required',
 			]);
-
 		extract(array_map('trim', $request->all()));
+		if($request->file('academicfile') != ''){
+			$image = $request->file('academicfile');
 
-		$academicQry = array('degreeLevel' => $degreeLevel, 'degree' => $degree, 'enterDate' => $enterDate,'completionDate' => $completionDate, 'grade' => $grade, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
+			$imagename = time().'.'.$image->getClientOriginalExtension();
+
+			$destinationPath = public_path('/resume_images');
+
+			$image->move($destinationPath, $imagename);
+		}else{
+			$imagename = $old_academicfile;
+		}
+	    
+		$academicQry = array('academicfile'=>$imagename,'degreeLevel' => $degreeLevel, 'degree' => $degree, 'enterDate' => $enterDate,'completionDate' => $completionDate, 'grade' => $grade, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
 
 		$input = array('type' => 'academic', 'resumeData' => @json_encode($academicQry));
 
@@ -292,7 +303,18 @@ class Jobseeker extends Controller{
 
 		extract(array_map('trim', $request->all()));
 
-		$certificationQry = array('certificate' => $certificate, 'completionDate' => $completionDate, 'score' => $score, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city,  'details' => $details);
+		if($request->file('certificatefile') != ''){
+			$image = $request->file('certificatefile');
+
+			$imagename = time().'.'.$image->getClientOriginalExtension();
+
+			$destinationPath = public_path('/resume_images');
+
+			$image->move($destinationPath, $imagename);
+		}else{
+			$imagename = $old_certificatefile;
+		}
+		$certificationQry = array('certificatefile'=>$imagename,'certificate' => $certificate, 'completionDate' => $completionDate, 'score' => $score, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city,  'details' => $details);
 
 		$input = array('type' => 'certification', 'resumeData' => @json_encode($certificationQry));
 
@@ -319,13 +341,23 @@ class Jobseeker extends Controller{
 			]);
 
 		extract(array_map('trim', $request->all()));
+		if($request->file('experiencefile') != ''){
+			$image = $request->file('experiencefile');
 
+			$imagename = time().'.'.$image->getClientOriginalExtension();
+
+			$destinationPath = public_path('/resume_images');
+
+			$image->move($destinationPath, $imagename);
+		}else{
+			$imagename = $old_experiencefile;
+		}
 		if($currently != 'yes'){
 			$this->validate($request, ['endDate' => 'required|date']);
 			$currently = 'no';
 		}
 
-		$experienceQry = array('jobTitle' => $jobTitle, 'organization' => $organization, 'currently' => $currently, 'startDate' => $startDate, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
+		$experienceQry = array('experiencefile'=>$imagename,'jobTitle' => $jobTitle, 'organization' => $organization, 'currently' => $currently, 'startDate' => $startDate, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
 		if($currently == 'no'){
 			$experienceQry['endDate'] = $endDate;
 		}
@@ -405,8 +437,18 @@ class Jobseeker extends Controller{
 			]);
 
 		extract(array_map('trim', $request->all()));
+		if($request->file('publicationfile') != ''){
+			$image = $request->file('publicationfile');
 
-		$skillsQry = array('pu_type' => $pu_type, 'title' => $title, 'author' => $author, 'publisher' => $publisher, 'year' => $year, 'month' => $month, 'country' => $country,'state' => $state,'city' => $city, 'detail' => $detail);
+			$imagename = time().'.'.$image->getClientOriginalExtension();
+
+			$destinationPath = public_path('/resume_images');
+
+			$image->move($destinationPath, $imagename);
+		}else{
+			$imagename = $old_publicationfile;
+		}
+		$skillsQry = array('publicationfile'=>$imagename,'pu_type' => $pu_type, 'title' => $title, 'author' => $author, 'publisher' => $publisher, 'year' => $year, 'month' => $month, 'country' => $country,'state' => $state,'city' => $city, 'detail' => $detail);
 
 		$input = array('type' => 'publish', 'resumeData' => @json_encode($skillsQry));
 
@@ -431,8 +473,18 @@ class Jobseeker extends Controller{
 			]);
 
 		extract(array_map('trim', $request->all()));
+		if($request->file('projectfile') != ''){
+			$image = $request->file('projectfile');
 
-		$skillsQry = array('title' => $title, 'position' => $position, 'type' => $type, 'occupation' => $occupation, 'organization' => $organization, 'startyear' => $startyear, 'startmonth' => $startmonth,'currently' => $currently,'detail' => $detail);
+			$imagename = time().'.'.$image->getClientOriginalExtension();
+
+			$destinationPath = public_path('/resume_images');
+
+			$image->move($destinationPath, $imagename);
+		}else{
+			$imagename = $old_projectfile;
+		}
+		$skillsQry = array('projectfile'=>$imagename,'title' => $title, 'position' => $position, 'type' => $type, 'occupation' => $occupation, 'organization' => $organization, 'startyear' => $startyear, 'startmonth' => $startmonth,'currently' => $currently,'detail' => $detail);
             if($currently == 'no'){
 			    $skillsQry['endyear'] = $endyear;
 				$skillsQry['endmonth'] = $endmonth;
@@ -460,8 +512,18 @@ class Jobseeker extends Controller{
 			]);
 
 		extract(array_map('trim', $request->all()));
+		if($request->file('affiliationfile') != ''){
+			$image = $request->file('affiliationfile');
 
-		$skillsQry = array('org' => $org,'pos' => $pos,'stayear' => $stayear, 'stamonth' => $stamonth,'enyear' => $enyear, 'enmonth' => $enmonth, 'country' => $country, 'state' => $state, 'city' => $city);
+			$imagename = time().'.'.$image->getClientOriginalExtension();
+
+			$destinationPath = public_path('/resume_images');
+
+			$image->move($destinationPath, $imagename);
+		}else{
+			$imagename = $old_affiliationfile;
+		}
+		$skillsQry = array('affiliationfile'=>$imagename,'org' => $org,'pos' => $pos,'stayear' => $stayear, 'stamonth' => $stamonth,'enyear' => $enyear, 'enmonth' => $enmonth, 'country' => $country, 'state' => $state, 'city' => $city);
 
 		$input = array('type' => 'affiliation', 'resumeData' => @json_encode($skillsQry));
 
@@ -513,8 +575,19 @@ class Jobseeker extends Controller{
 			]);
 
 		extract(array_map('trim', $request->all()));
+		if($request->file('awardfile') != ''){
+			$image = $request->file('awardfile');
 
-		$skillsQry = array('title' => $title,'type' => $type, 'occupation' => $occupation, 'organization' => $organization, 'startyear' => $startyear, 'startmonth' => $startmonth, 'detail' => $detail);
+			$imagename = time().'.'.$image->getClientOriginalExtension();
+
+			$destinationPath = public_path('/resume_images');
+
+			$image->move($destinationPath, $imagename);
+		}else{
+			$imagename = $old_awardfile;
+		}
+
+		$skillsQry = array('awardfile'=>$imagename,'title' => $title,'type' => $type, 'occupation' => $occupation, 'organization' => $organization, 'startyear' => $startyear, 'startmonth' => $startmonth, 'detail' => $detail);
 
 		$input = array('type' => 'award', 'resumeData' => @json_encode($skillsQry));
 
@@ -539,8 +612,18 @@ class Jobseeker extends Controller{
 			]);
 
 		extract(array_map('trim', $request->all()));
+		if($request->file('portfoliofile') != ''){
+			$image = $request->file('portfoliofile');
 
-		$skillsQry = array('title' => $title,'type' => $type, 'occupation' => $occupation, 'startyear' => $startyear, 'startmonth' => $startmonth, 'website' => $website, 'detail' => $detail);
+			$imagename = time().'.'.$image->getClientOriginalExtension();
+
+			$destinationPath = public_path('/resume_images');
+
+			$image->move($destinationPath, $imagename);
+		}else{
+			$imagename = $old_portfoliofile;
+		}
+		$skillsQry = array('portfoliofile'=>$imagename,'title' => $title,'type' => $type, 'occupation' => $occupation, 'startyear' => $startyear, 'startmonth' => $startmonth, 'website' => $website, 'detail' => $detail);
 
 		$input = array('type' => 'portfolio', 'resumeData' => @json_encode($skillsQry));
 

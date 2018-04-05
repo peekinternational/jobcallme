@@ -767,5 +767,6 @@ public function savecompic(Request $request){
 		echo 2;
 	}
 }
+
 }
 ?>

@@ -474,19 +474,33 @@ if($user->profilePhoto != ''){
                                 </select>
                             </div>
                         </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
-                                <div class="col-md-6">
-                                    <textarea class="form-control input-sm tex-editor" name="details"></textarea>
-                                </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
+                            <div class="col-md-6">
+                                <textarea class="form-control input-sm tex-editor" name="details"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 text-right">&nbsp;</label>
-                                <div class="col-md-6">
-                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
-                                    <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">@lang('home.cancel')</button>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 text-right">@lang('home.upload') </label>
+                            <div class="col-md-6">
+                                <input type="file" class="form-control" name="academicfile">
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                            <div class="col-md-6" id="academic-file">
+                               <a href="" target="_blank"></a>
+                               <input type="hidden" name="old_academicfile" value="">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-3 text-right">&nbsp;</label>
+                            <div class="col-md-6">
+                                <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">@lang('home.cancel')</button>
+                            </div>
+                        </div>
                         </form>
                     </section>
                     <!--Academic Section End-->
@@ -581,6 +595,19 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm tex-editor" name="details"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.upload') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="certificatefile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="certificate-file">
+                                    <a href="" target="_blank"></a>
+                                    <input type="hidden" name="old_certificatefile" value="">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -692,6 +719,19 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm tex-editor" name="details"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.upload') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="experiencefile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="experience-file">
+                                   <a href="" target="_blank"></a>
+                                   <input type="hidden" name="old_experiencefile" value="">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -910,11 +950,24 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							<div class="form-group">
-                            <label class="control-label col-sm-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
-                            <div class="col-md-6">
-                                <textarea name="detail" class="form-control tex-editor" ></textarea>
+                                <label class="control-label col-sm-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
+                                <div class="col-md-6">
+                                    <textarea name="detail" class="form-control tex-editor" ></textarea>
+                                </div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.upload') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="projectfile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="project-file">
+                                   <a href="" target="_blank"></a>
+                                   <input type="hidden" name="old_projectfile" value="">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
@@ -1063,7 +1116,19 @@ if($user->profilePhoto != ''){
                                 </select>
                             </div>
                         </div>
-							
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.upload') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="affiliationfile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="affiliation-file">
+                                   <a href="" target="_blank"></a>
+                                   <input type="hidden" name="old_affiliationfile" value="">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
@@ -1444,6 +1509,19 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.upload') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="publicationfile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="publication-file">
+                                   <a href="" target="_blank"></a>
+                                   <input type="hidden" name="old_publicationfile" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
                                     <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
@@ -1552,13 +1630,25 @@ if($user->profilePhoto != ''){
                                     </select>
                                 </div>
                             </div>
-							 
 							<div class="form-group">
                             <label class="control-label col-sm-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <textarea name="detail" class="form-control tex-editor"></textarea>
                             </div>
-                        </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.upload') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="awardfile">
+                                </div>
+                             </div>
+                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="award-file">
+                                   <a href="" target="_blank"></a>
+                                   <input type="hidden" name="old_awardfile" value="">
+                                </div>
+                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
@@ -1679,6 +1769,19 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                             <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.upload') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="portfoliofile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="portfolio-file">
+                                   <a href="" target="_blank"></a>
+                                   <input type="hidden" name="old_portfoliofile" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
                                     <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
@@ -1791,6 +1894,18 @@ if($user->profilePhoto != ''){
                             <p style="margin-top: 4px">
                                 <input type="checkbox" id="profile-visible" class="switch-field" name="profile" {{ $privacy->profile != 'No' ? 'checked=""' : '' }}>
                                 <label for="profile-visible" class="switch-label"></label> <span>@lang('home.profilevisible')</span>
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="gender-visible" class="switch-field" name="gender" {{ $privacy->gender != 'No' ? 'checked=""' : '' }}>
+                                <label for="gender-visible" class="switch-label"></label> <span>@lang('home.gendervisible')</span>
+                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <p style="margin-top: 4px">
+                                <input type="checkbox" id="dfb-visible" class="switch-field" name="dateofbirth" {{ $privacy->dateofbirth != 'No' ? 'checked=""' : '' }}>
+                                <label for="dfb-visible" class="switch-label"></label> <span>@lang('home.birthvisible')</span>
                             </p>
                         </div>
                         <div class="col-md-12">
@@ -2046,7 +2161,10 @@ $('form.form-academic').submit(function(e){
     $('.form-academic .error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-academic').serialize(),
+        data: new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/academic/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -2079,17 +2197,23 @@ function getAcademic(resumeId){
         url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
         success: function(response){
             var obj = $.parseJSON(response);
+
+
             $('.form-academic input[name="resumeId"]').val(resumeId);
-            $('.form-academic select[name="degreeLevel"]').val(obj.degreeLevel).trigger('change');
+            $('.form-academic select[name="degreeLevel"] option[value='+obj.degreeLevel+']').attr('selected','selected').trigger('change.select2');
             $('.form-academic input[name="degree"]').val(obj.degree);
+            $('.form-academic input[name="old_academicfile"]').val(obj.academicfile);
             $('.form-academic input[name="enterDate"]').val(obj.enterDate);
             $('.form-academic input[name="completionDate"]').val(obj.completionDate);
             $('.form-academic input[name="grade"]').val(obj.grade);
             $('.form-academic input[name="institution"]').val(obj.institution);
             $('.form-academic select[name="country"]').val(obj.country).trigger('change');
 			$('.form-academic select[name="state"]').val(obj.state).trigger('change');
-			$('.form-academic select[name="city"]').val(obj.city).trigger('change');
-            $('.form-academic textarea[name="details"]').val(obj.details);
+			$('.form-academic select[name="city"] option[value='+obj.city+']').attr('selected','selected').trigger('change.select2');
+            tinymce.get('details').setContent(obj.details);
+            $('.form-academic #academic-file a').attr('href',jsUrl()+"/resume_images/"+obj.academicfile);
+            $('.form-academic #academic-file a').text(obj.academicfile);
+            $('.form-academic #academic-file input[name="old_academicfile"]').val(obj.academicfile);
             $('#academic-edit h4 c').text('Edit Academics');
             $('#academic').hide();
             $('#academic-edit').fadeIn();
@@ -2118,7 +2242,10 @@ $('form.form-certification').submit(function(e){
     $('.form-certification .error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-certification').serialize(),
+        data: new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/certification/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -2159,7 +2286,10 @@ function getCertification(resumeId){
             $('.form-certification select[name="country"]').val(obj.country).trigger('change');
             $('.form-certification select[name="state"]').val(obj.state).trigger('change');
             $('.form-certification select[name="city"]').val(obj.city).trigger('change');
-            $('.form-certification textarea[name="details"]').val(obj.details);
+            tinymce.get('details').setContent(obj.details);
+            $('.form-certification #certificate-file a').attr('href',jsUrl()+"/resume_images/"+obj.certificatefile);
+            $('.form-certification #certificate-file a').text(obj.certificatefile);
+            $('.form-certification #certificate-file input[name="old_certificatefile"]').val(obj.certificatefile);
             $('#certification-edit h4 c').text('Edit Certificate');
             $('#certification').hide();
             $('#certification-edit').fadeIn();
@@ -2179,7 +2309,10 @@ $('form.form-experience').submit(function(e){
     $('.form-experience .error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-experience').serialize(),
+        data: new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/experience/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -2227,6 +2360,10 @@ function getExperience(resumeId){
 			$('.form-experience select[name="city"]').val(obj.city).trigger('change');
 			
             $('.form-experience textarea[name="details"]').val(obj.details);
+
+            $('.form-experience #experience-file a').attr('href',jsUrl()+"/resume_images/"+obj.experiencefile);
+            $('.form-experience #experience-file a').text(obj.experiencefile);
+            $('.form-experience #experience-file input[name="old_academicfile"]').val(obj.experiencefile);
             $('#experience-edit h4 c').text('Edit Experience');
             $('#experience').hide();
             $('#experience-edit').fadeIn();
@@ -2363,7 +2500,10 @@ $('form.form-skil').submit(function(e){
     $('.form-skil .error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-skil').serialize(),
+        data: new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/publish/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -2407,6 +2547,9 @@ function getSkil(resumeId){
 			$('.form-skil select[name="state"]').val(obj.state).trigger('change');
 			$('.form-skil select[name="city"]').val(obj.city).trigger('change');
 			$('.form-skil textarea[name="detail"]').val(obj.detail);
+            $('.form-skil #publication-file a').attr('href',jsUrl()+"/resume_images/"+obj.publicationfile);
+            $('.form-skil #publication-file a').text(obj.publicationfile);
+            $('.form-skil #publication-file input[name="old_publicationfile"]').val(obj.publicationfile);
             $('#skil-edit h4 c').text('Edit Publisher');
             $('#skil').hide();
             $('#skil-edit').fadeIn();
@@ -2428,8 +2571,11 @@ $('form.form-ski').submit(function(e){
     $('.form-ski button[name="save"]').prop('disabled',true);
     $('.form-ski .error-group').hide();
     $.ajax({
-        type: 'post',
-        data: $('.form-ski').serialize(),
+        type:'post',
+        data: new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/project/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -2465,7 +2611,7 @@ function getProject(resumeId){
             $('.form-ski input[name="resumeId"]').val(resumeId);
 			$('.form-ski input[name="title"]').val(obj.title);
 			$('.form-ski input[name="position"]').val(obj.position);
-            $('.form-ski select[name="type"]').val(obj.type).trigger('change');
+            //$('.form-ski select[name="type"]').val(obj.type).trigger('change');
 			$('.form-ski input[name="occupation"]').val(obj.occupation);
 			$('.form-ski input[name="organization"]').val(obj.organization);
 			$('.form-ski select[name="startyear"]').val(obj.startyear).trigger('change');
@@ -2476,7 +2622,9 @@ function getProject(resumeId){
 		     	$('.form-ski select[name="endmonth"]').val(obj.endmonth).trigger('change');
                 $('.form-ski input[name="currently"]').prop('checked',false);
             } 
-			
+			$('.form-ski #project-file a').attr('href',jsUrl()+"/resume_images/"+obj.projectfile);
+            $('.form-ski #project-file a').text(obj.projectfile);
+            $('.form-ski #project-file input[name="old_projectfile"]').val(obj.projectfile);
 			$('.form-ski textarea[name="detail"]').val(obj.detail);
             $('#ski-edit h4 c').text('Edit Project');
             $('#ski').hide();
@@ -2499,7 +2647,10 @@ $('form.form-aff').submit(function(e){
     $('.form-aff .error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-aff').serialize(),
+        data: new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/affiliation/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -2533,16 +2684,18 @@ function getAffi(resumeId){
         success: function(response){
             var obj = $.parseJSON(response);
             $('.form-aff input[name="resumeId"]').val(resumeId);
-			//$('.form-aff input[name="title"]').val(obj.title);
+			$('.form-aff input[name="title"]').val(obj.title);
 			$('.form-aff input[name="pos"]').val(obj.pos);
-           // $('.form-aff select[name="type"]').val(obj.type).trigger('change');
-			//$('.form-aff input[name="occupation"]').val(obj.occupation);
+            $('.form-aff select[name="type"]').val(obj.type).trigger('change');
+			$('.form-aff input[name="occupation"]').val(obj.occupation);
 			$('.form-aff input[name="org"]').val(obj.org);
 			$('.form-aff select[name="stayear"]').val(obj.stayear).trigger('change');
             $('.form-aff select[name="stamonth"]').val(obj.stamonth).trigger('change');
 			$('.form-aff select[name="enyear"]').val(obj.enyear).trigger('change');
 			$('.form-aff select[name="enmonth"]').val(obj.enmonth).trigger('change');
-			
+			$('.form-aff #affiliation-file a').attr('href',jsUrl()+"/resume_images/"+obj.affiliationfile);
+            $('.form-aff #affiliation-file a').text(obj.affiliationfile);
+            $('.form-aff #affiliation-file input[name="old_affiliationfile"]').val(obj.affiliationfile);
 			
 			//$('.form-aff textarea[name="detail"]').val(obj.detail);
             $('#aff-edit h4 c').text('Edit Affiliation');
@@ -2624,7 +2777,10 @@ $('form.form-s').submit(function(e){
     $('.form-s.error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-s').serialize(),
+        data: new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/award/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -2665,6 +2821,9 @@ function getAward(resumeId){
 			$('.form-s select[name="startyear"]').val(obj.startyear).trigger('change');
             $('.form-s select[name="startmonth"]').val(obj.startmonth).trigger('change');
 			
+            $('.form-s #award-file a').attr('href',jsUrl()+"/resume_images/"+obj.awardfile);
+            $('.form-s #award-file a').text(obj.awardfile);
+            $('.form-s #award-file input[name="old_awardfile"]').val(obj.awardfile);
             $('#s-edit h4 c').text('Edit  Honours & Awards');
             $('#s').hide();
             $('#s-edit').fadeIn();
@@ -2685,7 +2844,10 @@ $('form.form-port').submit(function(e){
     $('.form-prt.error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-port').serialize(),
+        data: new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/portfolio/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -2725,7 +2887,9 @@ function getPortfolio(resumeId){
 			$('.form-port select[name="startyear"]').val(obj.startyear).trigger('change');
             $('.form-port select[name="startmonth"]').val(obj.startmonth).trigger('change');
 			$('.form-port input[name="website"]').val(obj.organization);
-			
+			$('.form-port #portfolio-file a').attr('href',jsUrl()+"/resume_images/"+obj.portfoliofile);
+            $('.form-port #portfolio-file a').text(obj.portfoliofile);
+            $('.form-port #portfolio-file input[name="old_portfoliofile"]').val(obj.portfoliofile);
             $('#port-edit h4 c').text('Edit Portfolio');
             $('#port').hide();
             $('#port-edit').fadeIn();

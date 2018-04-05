@@ -29,6 +29,7 @@ Route::get('pdfview',function() {
    //	return view('frontend.cv');
 
 });
+
 Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');
 Route::post('addreadCat','frontend\Home@addreadCat');
