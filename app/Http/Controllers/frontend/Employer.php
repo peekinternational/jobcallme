@@ -1197,7 +1197,7 @@ public function userResume($userId){
 
 		extract($request->all());
 
-		$dataArray = array('profile' => 'No', 'profileImage' => 'No', 'academic' => 'No', 'experience' => 'No', 'skills' => 'No', 'projectVisible' => 'No', 'publicationsVisible' => 'No');
+		$dataArray = array('profile' => 'No', 'profileImage' => 'No', 'academic' => 'No', 'experience' => 'No', 'skills' => 'No', 'projectVisible' => 'No', 'publicationsVisible' => 'No','gender' => 'No','dateofbirth' =>'No');
 
 		if($profile == 'on') $dataArray['profile'] = 'Yes';
 		if($profileImage == 'on') $dataArray['profileImage'] = 'Yes';
@@ -1206,6 +1206,8 @@ public function userResume($userId){
 		if($skills == 'on') $dataArray['skills'] = 'Yes';
 		if($projectVisible == 'on') $dataArray['projectVisible'] = 'Yes';
 		if($publicationsVisible == 'on') $dataArray['publicationsVisible'] = 'Yes';
+		if($gender == 'on') $dataArray['gender'] = 'Yes';
+		if($dateofbirth == 'on') $dataArray['dateofbirth'] = 'Yes';
 		$isExist = DB::table('jcm_privacy_setting')->where('userId','=',$app->userId)->get();
 		if(count($isExist) == 0){
 			$dataArray['userId'] = $app->userId;
