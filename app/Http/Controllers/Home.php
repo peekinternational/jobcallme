@@ -11,6 +11,8 @@ use App\CometChat;
 use App\JobsApplied;
 use App\User; 
 use App\Package; 
+use App\Write; 
+use App\Skill; 
 class Home extends Controller{
     
     public function notFound(){

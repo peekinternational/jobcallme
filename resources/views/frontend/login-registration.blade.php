@@ -113,7 +113,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 {{ csrf_field() }}
                 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')">
+                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')" requried>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="Password">
@@ -122,10 +122,10 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="firstName" value="{{ old('firstName') }}" placeholder="@lang('home.fname')">
+                            <input type="text" class="form-control" name="firstName" value="{{ old('firstName') }}" placeholder="@lang('home.fname')" requried>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="lastName" value="{{ old('lastName') }}" placeholder="@lang('home.lname')">
+                            <input type="text" class="form-control" name="lastName" value="{{ old('lastName') }}" placeholder="@lang('home.lname')" requried>
                         </div>
                     </div>
                 </div>
@@ -144,7 +144,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <select class="form-control select2 job-city" name="city"></select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber')">
+                    <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber')" requried>
                 </div>
                 <div class="input-group">
                     <div class="checkbox">

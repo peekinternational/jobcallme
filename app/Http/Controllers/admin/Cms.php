@@ -535,13 +535,30 @@ class Cms extends Controller{
         }
     }
     public function viewjobs(Request $request){
-        $data = DB::table('jcm_jobs as job');
-        $data->select('job.*','cat.name','subcat.subName','subcat2.subName as cat2');
-        $data->leftJoin('jcm_categories as cat','cat.categoryId','=','job.category');
-        $data->leftJoin('jcm_sub_categories as subcat','subcat.subCategoryId','=','job.subCategory');
-        $data->leftJoin('jcm_sub_categories2 as subcat2','subcat2.subCategoryId2','=','job.subCategory2');
-        $data->orderBy('job.jobId','des');
-        $jobs = $data->paginate(15);;
+    if($request->isMethod('post')){
+            $request->session()->put('jobSearch',$request->all());
+        }
+
+        if($request->input('reset') && $request->input('reset') == 'true'){
+            $request->session()->forget('jobSearch');
+            return redirect('admin/cms/alljobs');
+        }
+
+       $s_app = $request->session()->get('jobSearch');
+        $jobs = DB::table('jcm_jobs as job')
+       ->select('job.*','cat.name','subcat.subName','subcat2.subName as cat2')
+        ->leftJoin('jcm_categories as cat','cat.categoryId','=','job.category')
+        ->leftJoin('jcm_sub_categories as subcat','subcat.subCategoryId','=','job.subCategory')
+        ->leftJoin('jcm_sub_categories2 as subcat2','subcat2.subCategoryId2','=','job.subCategory2')
+          ->where(function ($query) use ($s_app) {
+                        if(count($s_app) > 0){
+                            if($s_app['search'] != ''){
+                                $query->where('job.title', 'like', '%'.$s_app['search'].'%');
+                            }
+                        }
+          })
+        ->orderBy('job.jobId','des')
+        ->paginate(15);
 
       return view('admin.cms.viewjobs',compact('jobs'));
     }
