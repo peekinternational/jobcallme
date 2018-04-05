@@ -164,19 +164,23 @@ $(document).ready(function(){
     var token = "{{ csrf_token() }}";
     $('.jobstatus').on('change',function(e){
        
-        var id = $(this).closest('tr').find('#jobId').val();
-        var jobstatus = '';
+       var id = $(this).closest('tr').find('#jobId').val();
+        var userId = $(this).closest('tr').find('#userId').val();
+       var jobstatus = '';
         var status = '';
+        var orderstatus = '';
         if($(e.target).parent().hasClass('off')){
             jobstatus = 'Draft';
              status = '2';
+             orderstatus='Pending';
         }else{
             jobstatus = 'Publish';
              status = '1';
+             orderstatus='Approved';
         };
         $.ajax({
             url:'{{url("admin/cms/jobstatupdate")}}',
-            data:{id:id,jobstatus:jobstatus,status:status,_token:token },
+            data:{id:id,userId:userId,jobstatus:jobstatus,status:status,orderstatus:orderstatus,_token:token },
             type:'POST',
             success:function(res){
                if(res == 1){

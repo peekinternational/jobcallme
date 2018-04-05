@@ -53,6 +53,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 	Route::get('dashboard','admin\Dashboard@index');
 	Route::get('orders','admin\Dashboard@home');
+	Route::get('receivepayment','admin\Dashboard@receive');
 	Route::post('cms/jobs/delete','admin\cms@deleteJob');
 	Route::get('cms/jobs/update/{id}','admin\cms@editjob');
 
@@ -320,6 +321,9 @@ Route::get('send_test_email', function(){
 Route::get('download', function () {
     return view('frontend.employer.download');
 });
+Route::get('afterpayment/{id}','frontend\Home@after_payment');
+Route::post('makepayment','frontend\Home@make_payment');
+
 Route::get('career-tab', function () {
     return view('frontend.employer.career-tab');
 });
