@@ -240,6 +240,11 @@ class JobCallMe{
 	public function getCompanies(){
 		return DB::table('jcm_companies')->where('companyStatus','=','Active')->get();
 	}
+
+	public function getOrders($userId){
+		return DB::table('jcm_orders')->where('status','=','pending')->where('payment_mode','=','Cash Payment')->where('user_id','=',$userId)->get();
+	}
+
 	public function getUserCompanies(){
 		return DB::table('jcm_companies')->get();
 	}

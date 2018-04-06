@@ -110,6 +110,12 @@ $$nav = 'active';
                         </a>
                     </li>
                     <li class="sidenav-item">
+                        <a href="{{ url ('admin/receivepayment') }}">
+                        <span class="sidenav-icon icon icon-briefcase"></span>
+                        <span class="sidenav-label">Receive Payment</span>
+                        </a>
+                    </li>
+                    <li class="sidenav-item">
                         <a href="{{ url ('admin/logout') }}">
                         <span class="sidenav-icon icon icon-sign-out"></span>
                         <span class="sidenav-label">Logout</span>

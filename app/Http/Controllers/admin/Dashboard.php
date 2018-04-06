@@ -31,4 +31,18 @@ class Dashboard extends Controller{
 
 		return view('admin.order',compact('jobs'));
 	}
+	 public function receive(){
+		/* job shift query */
+		//$jobShifts = DB::table('jcm_job_shift')->get();
+
+		/* companies query */
+		$companies = DB::table('jcm_companies')->get();
+		$admin = DB::table('jcm_users')->get();
+
+		/* jobs query */
+		$orders = DB::table('jcm_make_payment')->orderBy('id','desc')->paginate(12);
+		
+
+		return view('admin.receive_payment',compact('orders'));
+	}
 }

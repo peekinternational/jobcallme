@@ -40,12 +40,13 @@ $s_app = Session()->get('shiftSearch');
                                     <thead>
                                         <th>#</th>
                                         <th>title</th>
+                                        <th>Email</th>
                                         <th>category</th>
                                         <th>Ad Category</th>
                                         <th>subCategory</th>
                                         <th>3rdCategory</th>
-                                        <th>Created On</th>
                                         <th>Status</th>
+                                         <th>Created On</th>
                                         <th>Action</th>
                                     </thead>
                                     <tbody>
@@ -57,6 +58,7 @@ $s_app = Session()->get('shiftSearch');
                                                     <input type="hidden" value="{{ $job->jobId }}" id="jobId">
                                                 </td>
                                                 <td><a data-toggle="tooltip" title="View Job" target="_blank" href="{{ url('jobs/'.$job->jobId)}}">{{ $job->title }}</a></td>
+                                                <td>{{$job->email}}</td>
                                                 <td>{{ $job->name }}</td>
                                                
 												@if($job->p_Category==1)
@@ -165,19 +167,23 @@ $(document).ready(function(){
     var token = "{{ csrf_token() }}";
     $('.jobstatus').on('change',function(e){
        
-        var id = $(this).closest('tr').find('#jobId').val();
-        var jobstatus = '';
+         var id = $(this).closest('tr').find('#jobId').val();
+        var userId = $(this).closest('tr').find('#userId').val();
+       var jobstatus = '';
         var status = '';
+        var orderstatus = '';
         if($(e.target).parent().hasClass('off')){
             jobstatus = 'Draft';
              status = '2';
+             orderstatus='Pending';
         }else{
             jobstatus = 'Publish';
              status = '1';
+             orderstatus='Approved';
         };
         $.ajax({
             url:'{{url("admin/cms/jobstatupdate")}}',
-            data:{id:id,jobstatus:jobstatus,status:status,_token:token },
+            data:{id:id,userId:userId,jobstatus:jobstatus,status:status,orderstatus:orderstatus,_token:token },
             type:'POST',
             success:function(res){
                if(res == 1){

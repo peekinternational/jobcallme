@@ -1736,6 +1736,16 @@ public function userResume($userId){
 			
         $input['questionaire_id'] = $questionaire_id;
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
+			$order['job_id']=$jobId;
+			$order['user_id']=$apps->userId;
+            $order['payment_mode']='Cash Payment';
+            $order['orderBy']=$inputs['title'];
+            $order['amount']=$inputs['amount'];
+            $order['status']='Pending';
+            $order['category']='Job';
+            $order['date']= date('Y-m-d');
+
+            DB::table('jcm_orders')->insert($order);
 			//dd($inputs);
 			return view('frontend.employer.cashpayment_detail',compact('inputs'));
 	

@@ -185,8 +185,8 @@ setTimeout(function(){
     $('#fpi_header_message').html(header); 
     $('#fpi_title h2').html(feedback); 
     $('input[type="email"]').attr('placeholder',email); 
-    $('select[name="type"]').html(drop); 
-    $('textarea[name="message"]').html(message); 
+    $('#feedback-Form select[name="type"]').html(drop); 
+    $('#feedback-Form textarea[name="message"]').html(message); 
     $('#fpi_submit_submit button[type="submit"]').html(submit); 
 }, 3000);      
 

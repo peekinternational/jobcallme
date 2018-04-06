@@ -453,8 +453,12 @@ class Cms extends Controller{
     }
     public function writestatupdate(Request $request){
         $id = $request->input('id');
+        $wr_id = $request->input('wr_id');
         $status = $request->input('status');
+        $wrstatus = $request->input('wrstatus');
         $check = DB::table('jcm_writings')->where('title',$id)->update(['status'=>$status]);
+        DB::table('jcm_orders')->where('wr_id',$wr_id)->update(['status'=>$wrstatus]);
+        DB::table('jcm_make_payment')->where('wr_id',$wr_id)->update(['status'=>$wrstatus]);
         if($check){
             echo 1;
         }else{
@@ -464,8 +468,13 @@ class Cms extends Controller{
     public function jobstatupdate(Request $request){
         $id = $request->input('id');
         $jobstatus = $request->input('jobstatus');
+        $userid = $request->input('userId');
+        $orderstatus = $request->input('orderstatus');
         $status = $request->input('status');
         $check = DB::table('jcm_jobs')->where('jobId',$id)->update(['jobStatus'=>$jobstatus,'status'=>$status]);
+        DB::table('jcm_orders')->where('job_id',$id)->update(['status'=>$orderstatus]);
+        DB::table('jcm_make_payment')->where('job_id',$id)->update(['status'=>$orderstatus]);
+
         if($check){
             echo 1;
         }else{
@@ -526,7 +535,10 @@ class Cms extends Controller{
     public function upskillstatupdate(Request $request){
         $id = $request->input('id');
         $status = $request->input('status');
+        $upstatus = $request->input('upstatus');
         $check = DB::table('jcm_upskills')->where('skillId',$id)->update(['status'=>$status]);
+        DB::table('jcm_orders')->where('upskill_id',$id)->update(['status'=>$upstatus]);
+        DB::table('jcm_make_payment')->where('upskill_id',$id)->update(['status'=>$upstatus]);
         if($check){
             echo 1;
         }else{
@@ -546,7 +558,8 @@ class Cms extends Controller{
 
        $s_app = $request->session()->get('jobSearch');
         $jobs = DB::table('jcm_jobs as job')
-       ->select('job.*','cat.name','subcat.subName','subcat2.subName as cat2')
+       ->select('jcm_users.*','job.*','cat.name','subcat.subName','subcat2.subName as cat2')
+        ->leftJoin('jcm_users','jcm_users.userId','=','job.userId')
         ->leftJoin('jcm_categories as cat','cat.categoryId','=','job.category')
         ->leftJoin('jcm_sub_categories as subcat','subcat.subCategoryId','=','job.subCategory')
         ->leftJoin('jcm_sub_categories2 as subcat2','subcat2.subCategoryId2','=','job.subCategory2')
@@ -559,13 +572,15 @@ class Cms extends Controller{
           })
         ->orderBy('job.jobId','des')
         ->paginate(15);
+        //dd($jobs);
 
       return view('admin.cms.viewjobs',compact('jobs'));
     }
 
  public function publishjobs(Request $request){
         $data = DB::table('jcm_jobs as job');
-        $data->select('job.*','cat.name','subcat.subName','subcat2.subName as cat2');
+       $data->select('jcm_users.*','job.*','cat.name','subcat.subName','subcat2.subName as cat2');
+      $data->leftJoin('jcm_users','jcm_users.userId','=','job.userId');
         $data->leftJoin('jcm_categories as cat','cat.categoryId','=','job.category');
         $data->leftJoin('jcm_sub_categories as subcat','subcat.subCategoryId','=','job.subCategory');
         $data->leftJoin('jcm_sub_categories2 as subcat2','subcat2.subCategoryId2','=','job.subCategory2');
@@ -578,7 +593,8 @@ class Cms extends Controller{
 
      public function draftjobs(Request $request){
         $data = DB::table('jcm_jobs as job');
-        $data->select('job.*','cat.name','subcat.subName','subcat2.subName as cat2');
+        $data->select('jcm_users.*','job.*','cat.name','subcat.subName','subcat2.subName as cat2');
+        $data->leftJoin('jcm_users','jcm_users.userId','=','job.userId');
         $data->leftJoin('jcm_categories as cat','cat.categoryId','=','job.category');
         $data->leftJoin('jcm_sub_categories as subcat','subcat.subCategoryId','=','job.subCategory');
         $data->leftJoin('jcm_sub_categories2 as subcat2','subcat2.subCategoryId2','=','job.subCategory2');
