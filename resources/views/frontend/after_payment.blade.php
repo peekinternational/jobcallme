@@ -24,6 +24,10 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control"placeholder="@lang('home.title')" value="{{ $order->order_id}}" disabled>
                                 <input type="hidden" class="form-control" name="order_id" placeholder="@lang('home.title')" value="{{ $order->order_id}}" >
+                             <input type="hidden" class="form-control" name="job_id" placeholder="@lang('home.title')" value="{{ $order->job_id}}" >
+                             <input type="hidden" class="form-control" name="upskill_id" placeholder="@lang('home.title')" value="{{ $order->upskill_id}}" >
+                              <input type="hidden" class="form-control" name="wr_id" placeholder="@lang('home.title')" value="{{ $order->wr_id}}" >
+                              <input type="hidden" class="form-control" name="status" placeholder="@lang('home.title')" value="{{ $order->status}}" >
                             </div>
                         </div>
                         <div class="form-group">

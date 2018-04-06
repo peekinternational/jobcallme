@@ -7,7 +7,7 @@
         <div class="layout-content-body">
             <div class="title-bar">
                 <h1 class="title-bar-title">
-                    <span class="d-ib">Receive Payments</span>
+                    <span class="d-ib">Receive Cash Payments</span>
                 </h1>
             </div>
 			<div class="row">
@@ -24,17 +24,16 @@
 										<th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Order Tittle</th>
+                                        <th>Product Category</th>
 										<th>Amount</th>
-										<th>Category</th>
 										<th>Bank Name</th>
 										<th>Branch</th>
+                                        <th>Status</th>
                                         <th>Payment Date</th>
                                     </thead>
                                      <tbody>
                                         @foreach($orders as $i => $job)
-										<?php 
-										$sum=$job->amount*$job->duration;
-										?>
+									
                                             <tr>
                                                 <td>{{ ++$startI }}</td>
 												<td>{!! $job->order_id!!}</td>
@@ -42,10 +41,11 @@
 												<td>{!! $job->email!!}</td>
                                                 <td>{!! $job->phonenum !!}</td>
                                                 <td>{!! $job->order_title!!}</td>
-                                                <td>${!! $job->amount!!}</td>
-												<td>{!! $job->category!!}</td>
+                                                <td>{!! $job->category!!}</td>
+                                                <td>{!! $job->amount!!}$</td>
 												<td>{!! $job->bank_name!!}</td>
                                                 <td>{!! $job->branch!!}</td>
+                                                 <td>{!! $job->status!!}</td>
                                               
 												<td>{!! $job->created_at!!}</td>
                                                    

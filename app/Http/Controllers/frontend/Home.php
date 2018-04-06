@@ -777,6 +777,7 @@ public function savecompic(Request $request){
     	//$request->session()->destroy();
 		$makeorder= DB::table('jcm_orders')->where('status','=','pending')->where('payment_mode','=','Cash Payment')->where('order_id','=',$id)->get();
 		$order=$makeorder[0];
+		//dd($order);
     	return view('frontend.after_payment',compact('userinfo','order'));
     }
 	  public function make_payment(Request $request){

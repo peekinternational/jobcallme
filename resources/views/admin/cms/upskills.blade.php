@@ -151,14 +151,17 @@ function deletewriting(id){
     $('.status').on('change',function(e){
         var id = $(this).closest('tr').find('#wid').val();
         var status = '';
+        var upstatus = '';
         if($(e.target).parent().hasClass('off')){
             status = 'Inactive';
+            upstatus = 'Pending';
         }else{
             status = 'Active';
+            upstatus = 'Approved';
         };
         $.ajax({
             url:'{{url("admin/cms/upskillstatupdate")}}',
-            data:{id:id,status:status,_token:token },
+            data:{id:id,status:status,upstatus:upstatus,_token:token },
             type:'POST',
             success:function(res){
                if(res == 1){

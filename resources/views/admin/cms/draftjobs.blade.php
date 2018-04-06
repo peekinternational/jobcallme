@@ -40,6 +40,7 @@ $s_app = Session()->get('shiftSearch');
                                     <thead>
                                         <th>#</th>
                                         <th>title</th>
+                                        <th>Email</th>
                                         <th>category</th>
                                         <th>Ad Category</th>
                                         <th>subCategory</th>
@@ -57,6 +58,7 @@ $s_app = Session()->get('shiftSearch');
                                                     <input type="hidden" value="{{ $job->jobId }}" id="jobId">
                                                 </td>
                                                 <td><a data-toggle="tooltip" title="View Job" target="_blank" href="{{ url('jobs/'.$job->jobId)}}">{{ $job->title }}</a></td>
+                                                <td>{{$job->email}}</td>
                                                 <td>{{ $job->name }}</td>
                                                
 												@if($job->p_Category==1)
