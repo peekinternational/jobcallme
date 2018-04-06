@@ -1197,7 +1197,7 @@ public function userResume($userId){
 
 		extract($request->all());
 
-		$dataArray = array('profile' => 'No', 'profileImage' => 'No', 'academic' => 'No', 'experience' => 'No', 'skills' => 'No', 'projectVisible' => 'No', 'publicationsVisible' => 'No');
+		$dataArray = array('profile' => 'No', 'profileImage' => 'No', 'academic' => 'No', 'experience' => 'No', 'skills' => 'No', 'projectVisible' => 'No', 'publicationsVisible' => 'No','gender' => 'No','dateofbirth' =>'No');
 
 		if($profile == 'on') $dataArray['profile'] = 'Yes';
 		if($profileImage == 'on') $dataArray['profileImage'] = 'Yes';
@@ -1206,6 +1206,8 @@ public function userResume($userId){
 		if($skills == 'on') $dataArray['skills'] = 'Yes';
 		if($projectVisible == 'on') $dataArray['projectVisible'] = 'Yes';
 		if($publicationsVisible == 'on') $dataArray['publicationsVisible'] = 'Yes';
+		if($gender == 'on') $dataArray['gender'] = 'Yes';
+		if($dateofbirth == 'on') $dataArray['dateofbirth'] = 'Yes';
 		$isExist = DB::table('jcm_privacy_setting')->where('userId','=',$app->userId)->get();
 		if(count($isExist) == 0){
 			$dataArray['userId'] = $app->userId;
@@ -1733,6 +1735,16 @@ public function userResume($userId){
 			
         $input['questionaire_id'] = $questionaire_id;
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
+			$order['job_id']=$jobId;
+			$order['user_id']=$apps->userId;
+            $order['payment_mode']='Cash Payment';
+            $order['orderBy']=$inputs['title'];
+            $order['amount']=$inputs['amount'];
+            $order['status']='Pending';
+            $order['category']='Job';
+            $order['date']= date('Y-m-d');
+
+            DB::table('jcm_orders')->insert($order);
 			//dd($inputs);
 			return view('frontend.employer.cashpayment_detail',compact('inputs'));
 	

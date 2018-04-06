@@ -464,8 +464,12 @@ class Cms extends Controller{
     public function jobstatupdate(Request $request){
         $id = $request->input('id');
         $jobstatus = $request->input('jobstatus');
+        $userid = $request->input('userId');
+        $orderstatus = $request->input('orderstatus');
         $status = $request->input('status');
         $check = DB::table('jcm_jobs')->where('jobId',$id)->update(['jobStatus'=>$jobstatus,'status'=>$status]);
+        DB::table('jcm_orders')->where('job_id',$id)->update(['status'=>$orderstatus]);
+
         if($check){
             echo 1;
         }else{

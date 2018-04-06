@@ -594,7 +594,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="col-md-3 control-label">@lang('home.country')</label>
                                 <div class="col-md-9">
-                                    <select class="form-control input-sm mc-field jjob-country" name="country">
+                                    <select class="form-control input-sm mc-field job-country" name="country">
                                         @foreach(JobCallMe::getJobCountries() as $cntry)
                                             <option value="{{ $cntry->id }}" {{ $noti->country == $cntry->id ? 'selected="selected"' : ''}}>{{ $cntry->name }}</option>
                                         @endforeach
@@ -604,14 +604,14 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="col-md-3 control-label">@lang('home.state')</label>
                                 <div class="col-md-9">
-                                    <select class="form-control input-sm mc-field jjob-state" name="state" data-state="{{ $noti->state }}">
+                                    <select class="form-control input-sm mc-field job-state" name="state" data-state="{{ $noti->state }}">
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label">@lang('home.city')</label>
                                 <div class="col-md-9">
-                                    <select class="form-control input-sm mc-field jjob-city" name="city" data-city="{{ $noti->city }}">
+                                    <select class="form-control input-sm mc-field job-city" name="city" data-city="{{ $noti->city }}">
                                     </select>
                                 </div>
                             </div>

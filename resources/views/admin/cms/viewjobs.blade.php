@@ -55,6 +55,7 @@ $s_app = Session()->get('jobSearch');
                                                 <td>
                                                     {{ ++$i }}
                                                     <input type="hidden" value="{{ $job->jobId }}" id="jobId">
+                                                    <input type="hidden" value="{{ $job->userId }}" id="userId">
                                                 </td>
                                                 <td><a data-toggle="tooltip" title="View Job" target="_blank" href="{{ url('jobs/'.$job->jobId)}}">{{ $job->title }}</a></td>
                                                 <td>{{ $job->name }}</td>
@@ -165,18 +166,22 @@ $(document).ready(function(){
     $('.jobstatus').on('change',function(e){
        
         var id = $(this).closest('tr').find('#jobId').val();
+        var userId = $(this).closest('tr').find('#userId').val();
        var jobstatus = '';
         var status = '';
+        var orderstatus = '';
         if($(e.target).parent().hasClass('off')){
             jobstatus = 'Draft';
              status = '2';
+             orderstatus='Pending';
         }else{
             jobstatus = 'Publish';
              status = '1';
+             orderstatus='Approved';
         };
         $.ajax({
             url:'{{url("admin/cms/jobstatupdate")}}',
-            data:{id:id,jobstatus:jobstatus,status:status,_token:token },
+            data:{id:id,userId:userId,jobstatus:jobstatus,status:status,orderstatus:orderstatus,_token:token },
             type:'POST',
             success:function(res){
                if(res == 1){

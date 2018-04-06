@@ -72,6 +72,16 @@
         							<td>{{$order->amount}}$</td>
         							<td>{{$order->status}}</td>
         							<td>{{$order->order_date}}</td>
+											@if($order->status == 'Pending' && $order->payment_mode == 'Cash Payment'  )<td>	<div class="col-xs-2 col-md-2"><div class="dropdown">
+									  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+									  <div class="dropdown-content">
+										<a href="{{url('afterpayment/'.$order->order_id)}}"><span style="font-size: 12px;"> @lang('home.MakePayment')</span></a>
+										
+									  </div>
+									</div></div></td>
+									@else
+									<td></td>
+									@endif
         						</tr>
         						@endforeach
         					</tbody>

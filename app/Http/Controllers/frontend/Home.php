@@ -772,5 +772,29 @@ public function savecompic(Request $request){
 		echo 2;
 	}
 }
+  public function after_payment(Request $request, $id){
+    	$userinfo = session()->get('jcmUser');
+    	//$request->session()->destroy();
+		$makeorder= DB::table('jcm_orders')->where('status','=','pending')->where('payment_mode','=','Cash Payment')->where('order_id','=',$id)->get();
+		$order=$makeorder[0];
+    	return view('frontend.after_payment',compact('userinfo','order'));
+    }
+	  public function make_payment(Request $request){
+		  $input=$request->all();
+		  $userinfo = session()->get('jcmUser');
+		  $name=$userinfo->firstName.' '.$userinfo->lastName;
+		  $email=$userinfo->email;
+		  $phone=$userinfo->phoneNumber;
+		  $input['user_id']=$userinfo->userId;
+		  $input['name']=$name;
+		  $input['email']=$email;
+		  $input['phonenum']=$phone;
+		  $data=DB::table('jcm_make_payment')->insert($input);
+
+		  return view('frontend.Completed');
+
+    	
+    }
+
 }
 ?>
