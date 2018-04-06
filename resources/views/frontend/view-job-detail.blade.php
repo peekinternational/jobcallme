@@ -272,43 +272,44 @@ $dispatch='';
                 $recommend[] = $review->recommend;
                 $future[] = $review->future;
             }
-
-            $result = array_count_values($overallreview);
-            $max = max($result);
-            $star = array_search($max, $result);
-            /*career*/
-            $career_result = array_count_values($career);
-            $career_max = max($career_result);
-            $career_star = array_search($career_max, $career_result);
-            /*benefit*/
-            $benefit_result = array_count_values($benefit);
-            $benefit_max = max($benefit_result);
-            $benefit_star = array_search($benefit_max, $benefit_result);
-            /*work/life banlance*/
-            $lifebalance_result = array_count_values($lifebalance);
-            $lifebalance_max = max($lifebalance_result);
-            $lifebalance_star = array_search($lifebalance_max, $lifebalance_result);
-            /*Management*/
-            $management_result = array_count_values($management);
-            $management_max = max($management_result);
-            $management_star = array_search($management_max, $management_result);
-             /*Culture*/
-            $culture_result = array_count_values($culture);
-            $culture_max = max($culture_result);
-            $culture_star = array_search($culture_max, $culture_result);
-             /*Ceo recommend*/
-            $ceo_recommend_result = array_count_values($recommend_ceo);
-            $ceo_recommend_max = max($ceo_recommend_result);
-            $ceo_recommend_star = array_search($ceo_recommend_max, $ceo_recommend_result);
-            /*recommend to friend*/
-            $recommend_result = array_count_values($recommend);
-            $recommend_max = max($recommend_result);
-            $recommend_star = array_search($recommend_max, $recommend_result);
-            /*future*/
-            $future_result = array_count_values($future);
-            $future_max = max($future_result);
-            $future_star = array_search($future_max, $future_result);
-           
+            if(sizeof($overallreview) > 0){
+                $result = array_count_values($overallreview);
+                $max = max($result);
+                $star = array_search($max, $result);
+            
+                /*career*/
+                $career_result = array_count_values($career);
+                $career_max = max($career_result);
+                $career_star = array_search($career_max, $career_result);
+                /*benefit*/
+                $benefit_result = array_count_values($benefit);
+                $benefit_max = max($benefit_result);
+                $benefit_star = array_search($benefit_max, $benefit_result);
+                /*work/life banlance*/
+                $lifebalance_result = array_count_values($lifebalance);
+                $lifebalance_max = max($lifebalance_result);
+                $lifebalance_star = array_search($lifebalance_max, $lifebalance_result);
+                /*Management*/
+                $management_result = array_count_values($management);
+                $management_max = max($management_result);
+                $management_star = array_search($management_max, $management_result);
+                 /*Culture*/
+                $culture_result = array_count_values($culture);
+                $culture_max = max($culture_result);
+                $culture_star = array_search($culture_max, $culture_result);
+                 /*Ceo recommend*/
+                $ceo_recommend_result = array_count_values($recommend_ceo);
+                $ceo_recommend_max = max($ceo_recommend_result);
+                $ceo_recommend_star = array_search($ceo_recommend_max, $ceo_recommend_result);
+                /*recommend to friend*/
+                $recommend_result = array_count_values($recommend);
+                $recommend_max = max($recommend_result);
+                $recommend_star = array_search($recommend_max, $recommend_result);
+                /*future*/
+                $future_result = array_count_values($future);
+                $future_max = max($future_result);
+                $future_star = array_search($future_max, $future_result);
+            }
             ?>
             <div class="jobs-suggestions">
                 <div class="jd-action-btn">
