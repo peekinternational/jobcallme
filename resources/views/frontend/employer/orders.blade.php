@@ -27,13 +27,8 @@
         				  	<div class="form-group">
         				  	    <select class="form-control" name="payment_mode" id="exampleFormControlSelect1">
         				  	      <option value="">Select Pay Mode </option>
-        				  	      <option>Credit Card</option>
-        				  	      <option>Internet Banking</option>
-        				  	      <option>Cross Cheque</option>
-        				  	      <option>ATM Machine</option>
-        				  	      <option>Cash Deposit</option>
-        				  	      <option>Mobile Payment</option>
-        				  	      <option>Bank Wire</option>
+        				  	      <option>Cash Payment</option>
+        				  	      <option>Nice Pay</option>
         				  	      <option>PayPal</option>
         				  	    </select>
         				  	  </div>
