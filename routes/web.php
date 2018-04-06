@@ -55,8 +55,8 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('dashboard','admin\Dashboard@index');
 	Route::get('orders','admin\Dashboard@home');
 	Route::get('receivepayment','admin\Dashboard@receive');
-	Route::post('cms/jobs/delete','admin\cms@deleteJob');
-	Route::get('cms/jobs/update/{id}','admin\cms@editjob');
+	Route::post('cms/jobs/delete','admin\Cms@deleteJob');
+	Route::get('cms/jobs/update/{id}','admin\Cms@editjob');
 
 	/* setting */
 	Route::match(['get','post'],'settings/profile','admin\Setting@profile');
