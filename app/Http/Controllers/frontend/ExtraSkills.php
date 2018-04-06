@@ -604,9 +604,10 @@ class ExtraSkills extends Controller{
             $input = Session::get('input');
             $input['status']='Inactive';
             $input['paymentMode']='Cash Payment';
-	        DB::table('jcm_upskills')->insert($input);
+	       $up_id= DB::table('jcm_upskills')->insertGetId($input);
 
             $order['user_id']=$apps->userId;
+            $order['upskill_id']=$up_id;
             $order['payment_mode']='Cash Payment';
             $order['orderBy']=$input['title'];
             $order['amount']=$input['amount'];
@@ -651,10 +652,11 @@ class ExtraSkills extends Controller{
             $input['cat_names'] = $catnames;  
             $input['status'] = 'Draft';  
         
-	        DB::table('jcm_writings')->insert($input);
+	        $wr_id=DB::table('jcm_writings')->insertGetId($input);
 
 
             $order['user_id']=$apps->userId;
+            $order['wr_id']=$wr_id;
             $order['payment_mode']='Cash Payment';
             $order['orderBy']=$input['title'];
             $order['amount']=$input['amount'];

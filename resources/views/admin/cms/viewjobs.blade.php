@@ -40,6 +40,7 @@ $s_app = Session()->get('jobSearch');
                                     <thead>
                                         <th>#</th>
                                         <th>title</th>
+                                        <th>Email</th>
                                         <th>category</th>
                                         <th>Ad Category</th>
                                         <th>subCategory</th>
@@ -58,6 +59,7 @@ $s_app = Session()->get('jobSearch');
                                                     <input type="hidden" value="{{ $job->userId }}" id="userId">
                                                 </td>
                                                 <td><a data-toggle="tooltip" title="View Job" target="_blank" href="{{ url('jobs/'.$job->jobId)}}">{{ $job->title }}</a></td>
+                                               <td>{{$job->email}}
                                                 <td>{{ $job->name }}</td>
                                                 @if($job->p_Category==1)
 												<td>Basic</td>
@@ -157,8 +159,9 @@ $s_app = Session()->get('jobSearch');
 <script type="text/javascript">
 $(document).ready(function(){
      $('.jobstatus').bootstrapToggle({
-      on: 'Publish',
       off: 'Draft',
+      on: 'Publish',
+      
       offstyle:'info',
       onstyle:'success'
     });

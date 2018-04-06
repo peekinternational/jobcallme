@@ -28,6 +28,7 @@
                                                 <td>
                                                     {{$write->writingId}}
                                                     <input type="hidden" name="id" id="wid" value="{{$write->title}}">
+                                                    <input type="hidden" name="wr_id" id="wr_id" value="{{$write->writingId}}">
                                                 </td>
                                                 <td>{{$write->title}}</td>
                                                 <td>
@@ -150,15 +151,19 @@ function deletewriting(id){
     var token = "{{ csrf_token() }}";
     $('.status').on('change',function(e){
         var id = $(this).closest('tr').find('#wid').val();
+        var wr_id = $('#wr_id').val();
         var status = '';
+        var wrstatus = '';
         if($(e.target).parent().hasClass('off')){
             status = 'Draft';
+            wrstatus = 'Pending';
         }else{
             status = 'Publish';
+            wrstatus = 'Approved';
         };
         $.ajax({
             url:'{{url("admin/cms/writestatupdate")}}',
-            data:{id:id,status:status,_token:token },
+            data:{id:id,wr_id:wr_id,status:status,wrstatus:wrstatus,_token:token },
             type:'POST',
             success:function(res){
                if(res == 1){
