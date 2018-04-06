@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use DB;
 use Mail;
+use Session;
 class LogDemo extends Command
 {
     /**
@@ -12,14 +13,14 @@ class LogDemo extends Command
      *
      * @var string
      */
-    protected $signature = 'log:demo';
+    protected $signature = 'sendjobs';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'send latest jobs to jobseeker on daily base related to his field';
 
     /**
      * Create a new command instance.
@@ -37,15 +38,15 @@ class LogDemo extends Command
      * @return mixed
      */
     public function handle()
-    {
-      $userid = session()->get('jcmUser')->userId;
+    { 
+      $userid = \Session::get('jcmUser')->userId;
     $getCat = DB::table('jcm_users_meta')->where('userId',$userid)->first()->industry;
     $jobs = DB::table('jcm_jobs')->where('category',$getCat)->get();
     $jobstoview = array('jobs' => $jobs);
     $currentDate = \Carbon\Carbon::now();
-    print_r($currentDate->toDateTimeString());die;
+    print_r($currentDate->toDateTimeString());
     Mail::send('emails.jobs',$jobstoview,function($message){
-        $message->to(session()->get('jcmUser')->email)->subject('Latest jobs');
+        $message->to(\Session()->get('jcmUser')->email)->subject('Latest jobs');
     });
     
     }

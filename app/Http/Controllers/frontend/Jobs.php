@@ -412,8 +412,9 @@ class Jobs extends Controller{
 				$benefits = @explode(',', $job->benefits);
 				$process = @explode(',', $job->process);
 		     //dd($benefits);
-
-		return view('frontend.view-job-detail',compact('job','savedJobArr','followArr','userId','suggest','jobApplied','benefits','process'));
+			$companyReview = DB::table('jcm_companyreview')->where('company_id',$job->companyId)->get();
+			
+		return view('frontend.view-job-detail',compact('companyReview','job','savedJobArr','followArr','userId','suggest','jobApplied','benefits','process'));
 		
 	}
 

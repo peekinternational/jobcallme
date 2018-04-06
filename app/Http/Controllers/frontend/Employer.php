@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use App\Http\Requests;
+use App\review;
 use DB;
 use PDF;
 use Validator;
@@ -2057,5 +2058,22 @@ public function userResume($userId){
 			die();
 			// return view('frontend.writecashpayment_detail',compact('input'));
 	} 
+public function companyreview(Request $request)
+{
+	$userid = $request->session()->get('jcmUser')->userId;
+	$companyId = $request->input('CompanyId');
+	return view('frontend.employer.companyReview',compact('companyId','userid'));
+}
+public function addreview(Request $request)
+{
+	$data = $request->input();
+	unset($data['_token']);
+
+	if(DB::table('jcm_companyreview')->insert($data)){
+		return redirect('account/jobseeker');
+	}else{
+		echo "error in query controller employer line number 2072";
+	}
+}
 
 }
