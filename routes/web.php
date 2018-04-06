@@ -407,3 +407,6 @@ Route::get('locale/{locale}', function ($locale) {
     \Session::put('locale', $locale);
     return redirect()->back();
 });
+/*review routes */
+Route::get('account/employeer/companies/company/review', 'frontend\Employer@companyreview');
+Route::post('account/employer/company/addreview', 'frontend\Employer@addreview');
