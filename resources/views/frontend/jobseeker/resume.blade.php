@@ -371,6 +371,7 @@ if($user->profilePhoto != ''){
                                             <p class="rd-organization">{!! $academic->institution !!}</p>
                                             <p class="rd-location">{!! JobCallMe::cityName($academic->city).' ,'.JobCallMe::countryName($academic->country)!!}</p>
                                             <p class="rd-grade">Grade/GPA : {!! $academic->grade !!}</p>
+                                            <a href="{{ url('/resume_images/'.$academic->academicfile)}}">{!! $academic->academicfile !!}</a>
                                         </div>
                                     </li>
                                 @endforeach
@@ -527,6 +528,7 @@ if($user->profilePhoto != ''){
                                             <p class="rd-organization">{!! $certification->institution !!}</p>
                                             <p class="rd-location">{!! JobCallMe::cityName($certification->city).' ,'.JobCallMe::countryName($certification->country)!!}</p>
                                             <p class="rd-grade">Score : {!! $certification->score !!}</p>
+                                             <a href="{{ url('/resume_images/'.$certification->certificatefile)}}">{!! $certification->certificatefile !!}</a>
                                         </div>
                                     </li>
                                 @endforeach
@@ -642,6 +644,7 @@ if($user->profilePhoto != ''){
                                             <p class="rd-title">{!! $experience->jobTitle !!}</p>
                                             <p class="rd-organization">{!! $experience->organization !!}</p>
                                             <p class="rd-location">{!! JobCallMe::cityName($experience->city).' ,'.JobCallMe::countryName($academic->country)!!}</p>
+                                             <a href="{{ url('/resume_images/'.$experience->academicfile)}}">{!! $experience->academicfile !!}</a>
                                         </div>
                                     </li>
                                 @endforeach
@@ -826,6 +829,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-location"> As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
 											
                                            <p class="rd-location">{!! $skills->detail !!}</p>
+                                            <a href="{{ url('/resume_images/'.$skills->academicfile)}}">{!! $skills->academicfile !!}</a>
 										  
                                         </div>
                                     </li>
@@ -999,7 +1003,7 @@ if($user->profilePhoto != ''){
                                             <p class="rd-title">{!! $afflls->pos !!}</p>
 											<p class="rd-location"> {!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}</p>
 											<p class="rd-location">{!! $afflls->org .', '.JobCallMe::cityName($afflls->city).' ,'.JobCallMe::countryName($afflls->country) !!}
-											
+											  <a href="{{ url('/resume_images/'.$afflls->academicfile)}}">{!! $afflls->academicfile !!}</a>
 										  
                                         </div>
                                     </li>
