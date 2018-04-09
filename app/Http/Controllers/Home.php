@@ -111,9 +111,8 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 			$jId=explode('-',$jId);
 
 			if($jId[1] == 'package'){
-            $jobData=Package::findOrFail($jId[0]); 
-			$jobData->status=1;
-			$jobData->save();
+			DB::table('jcm_save_packeges')->where('id','=',$jId[0])->update(['status'=>1]);
+            
 			}
 			elseif($jId[1] == 'write'){
 			$jobData=Write::findOrFail($jId[0]); 

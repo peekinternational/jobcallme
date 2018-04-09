@@ -11,7 +11,18 @@
 
 	  <div class="row">
             <div class="col-md-12" style="margin-top:70px">
-          
+           @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul style="list-style: none;">
+                            @foreach ($errors->all() as $error)
+                            @if($error=='validation.max.string')
+                                <li>The maximum length for Description is 1024 characters.</li>
+                                @endif
+                               <li> {{ $error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 	
         <div class="col-md-12">
 		
@@ -249,13 +260,13 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.vacancy')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="vacancy" placeholder="@lang('home.numbervacancy')" required>
+                                <input type="number" class="form-control" name="vacancy" placeholder="@lang('home.numbervacancy')" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.description')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <textarea name="description" class="form-control tex-editor"></textarea>
+                                <textarea name="description" class="form-control tex-editor" maxlength="1024"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -494,7 +505,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.address')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input id="pac-input" name="Address" class="form-control" type="text" placeholder="Enter a location">
+                                <input id="pac-input" name="Address" class="form-control" type="text" placeholder="Enter a location" requried>
                                 <div class="pac-card" id="pac-card">
                                   <div>
                                     <div id="type-selector" class="pac-controls">

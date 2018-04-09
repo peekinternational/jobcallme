@@ -22,8 +22,6 @@
                                     <i class="fa fa-search"></i>
                                 </button> 
 
-                                <button  type="button" id="l_search" class="hidden-sm hidden-md hidden-lg" style="margin-left: 9px;width: 4%;height: 33px;background: transparent;border: 2px solid #cecdcd;">
-                                 <span class="caret" style="color:white"></span></button>
                                 
                                 </div>
 								<div class="search-field-box search-item" id="l_type" style="display:none;padding-top: 14px;">
@@ -54,7 +52,7 @@
                                 </div>
 							
                                 
-								<button  type="button" class="hidden-xs" id="l_search" style="margin-left: 9px;width: 4%;height: 33px;background: transparent;border: 2px solid #cecdcd;">
+								<button  type="button" class="" id="l_search" style="margin-left: 9px;width: 4%;height: 33px;background: transparent;border: 2px solid #cecdcd;">
                                 <span class="caret" style="color:white"></span></button>
 								
                             </div>
@@ -70,17 +68,17 @@
                         $i = 0;
                         foreach(JobCallMe::getUpkillsType() as $skill){ ?>
                             <a href="{{ url('learn/search?type='.strtolower($skill->name)) }}" style="background-color: {{ $cArr[$i] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /* width: 9.5%; */
-    padding: 5px 5px;
-    color: #ffffff;
-    font-size: 12px;
-    margin-bottom: 10px;
-    /* display: block; */
-    position: relative;
-    /* float: left; */
-    margin-right: 0.5%;
-    overflow: hidden;
-    text-decoration: none;">@lang('home.'.$skill->name)</a>
+                                /* width: 9.5%; */
+                                padding: 5px 5px;
+                                color: #ffffff;
+                                font-size: 12px;
+                                margin-bottom: 10px;
+                                /* display: block; */
+                                position: relative;
+                                /* float: left; */
+                                margin-right: 0.5%;
+                                overflow: hidden;
+                                text-decoration: none;">@lang('home.'.$skill->name)</a>
                         <?php $i++; } ?>
                     </div>
                     <div class="promote-learning-box" style="margin-bottom:30px">

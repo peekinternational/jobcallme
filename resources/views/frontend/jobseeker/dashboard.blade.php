@@ -260,7 +260,7 @@
               <div class="col-md-7 col-xs-12">
                 <div class="sr-details">
                   <p class="sr-title"><a href="{{ url('read/article/'.$rec->writingId) }}" style="text-overflow: ellipsis;">{!! $rec->title !!} </a> </p>
-                  <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.'.$rec->name)</a> </p>
+                  <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> {{$rec->firstName.' '.$rec->firstName}}</a> </p>
                 </div>
               </div>
             </div>

@@ -940,7 +940,7 @@ class Jobseeker extends Controller{
 	public function resume_pckg(Request $request, $id){
 		$app = $request->session()->get('jcmUser');
 		$userid = $request->session()->get('jcmUser')->userId;
-		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('type','=','Resume Download')->get();
+		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		//dd($plan);
 		$pckg_id= $plan[0]->id;
 		$quantity= $plan[0]->quantity;
