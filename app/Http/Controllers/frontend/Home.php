@@ -410,6 +410,7 @@ class Home extends Controller{
     	$people->select('*');
     	$people->rightJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
         $people->rightJoin('jcm_resume','jcm_resume.userId','=','jcm_users.userId');
+		$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
 
     	if($request->isMethod('post')){
     		if($request->input('keyword') != ''){

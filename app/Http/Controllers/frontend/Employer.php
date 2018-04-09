@@ -134,6 +134,20 @@ curl_close ($ch);
 				'minSalary' => 'required|numeric',
 				'maxSalary' => 'required|numeric',
 				'state' => 'required',
+				'city' => 'required',
+				'Address' => 'required',
+			],[
+				'description.max:1024' => 'description is requried',
+				'description.required' => 'description is requried',
+				'skills.max:1024' => 'Skills Limit Across',
+				'skills.required' => 'Skills is requried',
+				'title.required' => 'Title is requried',
+				'department.required' => 'department is requried',
+				'category.required' => 'category is requried',
+				'qualification.required' => 'qualification is requried',
+				'state.required' => 'state is requried',
+				'Address.required' => 'Address is required',
+				
 			]);
 	
    
@@ -1027,7 +1041,23 @@ public function userResume($userId){
 		DB::table('jcm_companies')->where('companyId','=',$companyId)->update($input);
 		exit('1');
 	}
+public function mapOrganization(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$companyId = JobCallMe::getUser($app->userId)->companyId;
 
+		$companymap = trim($request->input('address'));
+		if($companymap == ''){
+			exit('Please enter some text');
+		}
+
+		$input = array('companyMap' => $companymap);
+
+		DB::table('jcm_companies')->where('companyId','=',$companyId)->update($input);
+		exit('1');
+	}
 	public function companyLogo(Request $request){
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');

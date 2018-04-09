@@ -19,7 +19,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);    // error_reporting(E_ALL ^ E_W
 Route::get('get-location-from-ip',function(){
     $ip= \Request::ip();
     $data = \Location::get($ip);
-    dd($data);
+   // dd($data);
 });
 
 Route::get('pdfview',function() {
@@ -245,6 +245,7 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/organization', 'frontend\Employer@organization');
     Route::post('employer/organization/save', 'frontend\Employer@savdOrganization');
     Route::post('employer/organization/about', 'frontend\Employer@aboutOrganization');
+	Route::post('employer/organization/map', 'frontend\Employer@mapOrganization');
     Route::post('employer/company/logo', 'frontend\Employer@companyLogo');
     Route::post('employer/company/cover', 'frontend\Employer@companyCover');
     Route::post('employer/application/interview/save', 'frontend\Employer@saveJobInterview');

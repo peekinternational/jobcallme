@@ -477,9 +477,17 @@ if($company->companyLogo != ''){
             
             <h3 class="eo-about-heading">@lang('home.organizationmap')</h3>
             <div class="eo-about-org">
+            <form action="" id="pnj-form" method="post" class="organization-desc-map">
+                    <input type="hidden" name="_token" class="token">
+              <input id="p-input" class="form-control controls" type="text" name="address" value="{!! $company->companyMap !!}" >
+             
+              
                 <div id="map" style="width: 100%; height: 500px;">
                   
                 </div>
+                 <button type="submit" class="btn btn-primary col-md-3" name="save" style="margin-right:5px;margin-top: 13px;">@lang('home.SAVE')</button>
+
+              </form>
             </div>
             
         </div>
@@ -687,6 +695,28 @@ $('form.organization-desc-form').submit(function(e){
     })
     e.preventDefault();
 })
+
+$('form.organization-desc-map').submit(function(e){
+    if(formOp == 1){
+        formOp++
+        return false;
+    }
+    $('.organization-desc-map .token').val(token);
+    $('.organization-desc-map button[name="save"]').prop('disabled',true);
+    $.ajax({
+        type: 'post',
+        data: $('.organization-desc-map').serialize(),
+        url: "{{ url('account/employer/organization/map') }}",
+        success: function(response){
+            if($.trim(response) == '1'){
+                window.location.reload();
+            }else{
+                toastr.error(response, '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+            }
+        }
+    })
+    e.preventDefault();
+})
 $('.compnay-logo').on('change',function(){
     var formData = new FormData();
     formData.append('cLogo', $(this)[0].files[0]);
@@ -805,34 +835,117 @@ $('.compnay-cover').on('change',function(){
     }
 
   
-   
-
-
-      // This example requires the Places library. Include the libraries=places
+     // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-      // This example adds a search box to a map, using the Google Place Autocomplete
-      // feature. People can enter geographical searches. The search box will return a
-      // pick list containing a mix of places and predicted search terms.
-
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-      function initAutocomplete() {
-             
-   var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 37.532600, lng: 127.024612},
-          zoom: 14,
-          mapTypeId: 'roadmap'
+      var addr=$('#p-input').val();
       
-});
-     
-      }
+      function initMap() {
+             var geocoder = new google.maps.Geocoder();
+              
+               var address = addr;
+               var long="";
+               var lati="";
+               var myLatLng="";
+   
+geocoder.geocode( { 'address': address}, function(results, status) {
 
-    </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1RaWWrKsEf2xeBjiZ5hk1gannqeFxMmw&libraries=places&callback=initAutocomplete" async defer></script>
+  if (status == google.maps.GeocoderStatus.OK) {
+        lati = results[0].geometry.location.lat();
+        long = results[0].geometry.location.lng();
+        myLatLng={lat: lati, lng: long}
+      
+        var map = new google.maps.Map(document.getElementById('map'), {
+            // /  alert(longitude);
+          center: {lat: lati, lng: long},
+          zoom: 13
+        });
+        
+        var card = document.getElementById('pac-card');
+        var input = document.getElementById('p-input');
+        var types = document.getElementById('type-selector');
+        var strictBounds = document.getElementById('strict-bounds-selector');
+
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+        // Bind the map's bounds (viewport) property to the autocomplete object,
+        // so that the autocomplete requests use the current map bounds for the
+        // bounds option in the request.
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById('infowindow-content');
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: addr,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+
+          var address = '';
+          if (place.address_components) {
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
+
+          infowindowContent.children['place-icon'].src = place.icon;
+          infowindowContent.children['place-name'].textContent = place.name;
+          infowindowContent.children['place-address'].textContent = address;
+          infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+          var radioButton = document.getElementById(id);
+          radioButton.addEventListener('click', function() {
+            autocomplete.setTypes(types);
+          });
+        }
+
+        setupClickListener('changetype-all', []);
+        setupClickListener('changetype-address', ['address']);
+        setupClickListener('changetype-establishment', ['establishment']);
+        setupClickListener('changetype-geocode', ['geocode']);
+
+        document.getElementById('use-strict-bounds')
+            .addEventListener('click', function() {
+              console.log('Checkbox clicked! New state=' + this.checked);
+              autocomplete.setOptions({strictBounds: this.checked});
+            });
+      }
+      });
+               }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1RaWWrKsEf2xeBjiZ5hk1gannqeFxMmw&libraries=places&callback=initMap" async defer></script>
 
 
 @endsection
