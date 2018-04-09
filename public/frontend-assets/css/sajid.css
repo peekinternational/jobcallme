@@ -5,6 +5,20 @@
 .color-red{
 	color:red;
 }
+.margintop{
+  margin-top: 80px;
+}
+.bg-white{
+  background-color: #fff;
+}
+.content-area{
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+.paddingleft-none{
+  padding-left: 0px;
+}
 
 .eo-dp-toolkit{
 	height: 100px;

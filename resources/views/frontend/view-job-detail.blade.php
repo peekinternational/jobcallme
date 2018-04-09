@@ -249,6 +249,68 @@ $dispatch='';
                     </p>
                 </div>
             </div> -->
+            <?php 
+            //print_r($companyReview);
+            $overallreview = array();
+            $career = array();
+            $benefit = array();
+            $lifebalance = array();
+            $management = array();
+            $culture = array();
+            $recommend_ceo = array();
+            $recommend = array();
+            $future = array();
+            foreach($companyReview as $review)
+            {
+                $overallreview[] = $review->overall_review;
+                $career[] = $review->career_opportunity;
+                $benefit[] = $review->benefits;
+                $lifebalance[] = $review->work_lifebalance;
+                $management[] = $review->rate_management;
+                $culture[] = $review->rate_culture;
+                $recommend_ceo[] = $review->recommend_ceo;
+                $recommend[] = $review->recommend;
+                $future[] = $review->future;
+            }
+            if(sizeof($overallreview) > 0){
+                $result = array_count_values($overallreview);
+                $max = max($result);
+                $star = array_search($max, $result);
+            
+                /*career*/
+                $career_result = array_count_values($career);
+                $career_max = max($career_result);
+                $career_star = array_search($career_max, $career_result);
+                /*benefit*/
+                $benefit_result = array_count_values($benefit);
+                $benefit_max = max($benefit_result);
+                $benefit_star = array_search($benefit_max, $benefit_result);
+                /*work/life banlance*/
+                $lifebalance_result = array_count_values($lifebalance);
+                $lifebalance_max = max($lifebalance_result);
+                $lifebalance_star = array_search($lifebalance_max, $lifebalance_result);
+                /*Management*/
+                $management_result = array_count_values($management);
+                $management_max = max($management_result);
+                $management_star = array_search($management_max, $management_result);
+                 /*Culture*/
+                $culture_result = array_count_values($culture);
+                $culture_max = max($culture_result);
+                $culture_star = array_search($culture_max, $culture_result);
+                 /*Ceo recommend*/
+                $ceo_recommend_result = array_count_values($recommend_ceo);
+                $ceo_recommend_max = max($ceo_recommend_result);
+                $ceo_recommend_star = array_search($ceo_recommend_max, $ceo_recommend_result);
+                /*recommend to friend*/
+                $recommend_result = array_count_values($recommend);
+                $recommend_max = max($recommend_result);
+                $recommend_star = array_search($recommend_max, $recommend_result);
+                /*future*/
+                $future_result = array_count_values($future);
+                $future_max = max($future_result);
+                $future_star = array_search($future_max, $future_result);
+            }
+            ?>
             <div class="jobs-suggestions">
                 <div class="jd-action-btn">
                     @if(in_array($job->companyId,$followArr))
@@ -256,7 +318,7 @@ $dispatch='';
                     @else
                         <a href="javascript:;" onclick="followCompany({{ $job->companyId }},this)" class="btn btn-primary">@lang('home.follow')</a>
                     @endif   
-                    <a href="javascript:;" class="btn btn-default">Write Review</a>   
+                    <a href="{{ url('account/employeer/companies/company/review?CompanyId='.$job->companyId) }}" class="btn btn-default">Write Review</a>   
                 </div>
                 <h4>{{ $job->companyName }} </h4>
                 <p>{{ JobCallMe::cityName($job->companyCity) }}, {{ JobCallMe::countryName($job->companyCountry) }}</p>
@@ -264,12 +326,45 @@ $dispatch='';
                     <p>{!! $job->companyAbout !!}</p>
                 </div>
                 <p align="center">
+                    @if($star == 'Excellent')
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i><br>
+                    @elseif($star == 'Verygood')
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i><br>
+                    @elseif($star == 'Good')
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i><br>
+                     @elseif($star == 'Fair')
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i><br>
+                     @elseif($star == 'Poor')
+                    <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i>
                     <i class="fa fa-star-o"></i>
                     <i class="fa fa-star-o"></i>
                     <i class="fa fa-star-o"></i><br>
-                        View all 0 reviews
+                    @else
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-0"></i>
+                    <i class="fa fa-star-o"></i><br>
+                    @endif
+                        Total reviews {{ count($companyReview) }} 
+                    
                 </p>
                 <hr>
                 <p>
@@ -278,55 +373,215 @@ $dispatch='';
                             <td>Career Growth</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
+                            @if($career_star == 'Excellent')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            @elseif($career_star == 'Verygood')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($career_star == 'Good')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($career_star == 'Fair')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($career_star == 'Poor')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @else
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
+                            @endif
                             </td>
                         </tr>
                         <tr>
                             <td>Compensation & Benefits</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
+                            @if($benefit_star == 'Excellent')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            @elseif($benefit_star == 'Verygood')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($benefit_star == 'Good')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($benefit_star == 'Fair')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($benefit_star == 'Poor')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @else
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
+                            @endif
                             </td>
                         </tr>
                         <tr>
                             <td>Work/Life Balance</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
+                            @if($lifebalance_star == 'Excellent')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            @elseif($lifebalance_star == 'Verygood')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($lifebalance_star == 'Good')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($lifebalance_star == 'Fair')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($lifebalance_star == 'Poor')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @else
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
+                            @endif
                             </td>
                         </tr>
                         <tr>
                             <td>Management</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
+                            @if($management_star == 'Excellent')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            @elseif($management_star == 'Verygood')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($management_star == 'Good')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($management_star == 'Fair')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($management_star == 'Poor')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @else
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
+                            @endif
                             </td>
                         </tr>
                         <tr>
                             <td>Culture</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
+                            @if($culture_star == 'Excellent')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            @elseif($culture_star == 'Verygood')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($culture_star == 'Good')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($culture_star == 'Fair')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @elseif($culture_star == 'Poor')
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            @else
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
                                 <i class="fa fa-star-o"></i>
+                            @endif
                             </td>
                         </tr>
                     </table>
@@ -335,15 +590,15 @@ $dispatch='';
                     <div class="col-md-8 col-md-offset-4">
                         <div class="row" align="center">
                             <div class="col-md-4">
-                                <span style="font-size:12px">Not Rated Yet</span>
+                                <span style="font-size:12px">{{$ceo_recommend_star}}</span>
                                 <p>CEO Recommended</p>
                             </div>
                             <div class="col-md-4">
-                                <span style="font-size:12px">Not Rated Yet</span>
+                                <span style="font-size:12px">@if($recommend_star == 'on') Yes @else Not recommend @endif</span>
                                 <p>Recommend to a friend</p>
                             </div>
                             <div class="col-md-4">
-                                <span style="font-size:12px">&nbsp;</span>
+                                <span style="font-size:12px">{{$future_star}}</span>
                                 <p>Future Expectations</p>
                             </div>
                         </div>
