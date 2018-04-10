@@ -270,6 +270,8 @@ Route::group(['prefix' => 'account'], function () {
 	Route::get('employer/package_payment', function () {
     return view('frontend.employer.package_payment');
 });
+Route::get('employer/status/{id}', 'frontend\Employer@viewJobstatus');
+
 	Route::get('employer/package_plan', function () {
     return view('frontend.employer.package_plan');
 });

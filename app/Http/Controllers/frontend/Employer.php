@@ -2116,4 +2116,22 @@ public function addreview(Request $request)
 	}
 }
 
+public function viewJobstatus(Request $request,$id){
+		
+		$jobId = $request->segment(2);
+
+		$jobrs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_users.*','jcm_payments.title as p_title','jcm_companies.*');
+		$jobrs->join('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId');
+		$jobrs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
+		$jobrs->Join('jcm_users','jcm_jobs.userId','=','jcm_users.userId');
+		$jobrs->where('jcm_jobs.status','=','1');
+		$jobrs->where('jcm_jobs.jobId','=',$id);
+		$job = $jobrs->first();
+		$benefits = @explode(',', $job->benefits);
+		$process = @explode(',', $job->process);
+		// /dd($job);
+		return view('frontend.employer.status',compact('job','benefits','process'));
+
+}
+
 }
