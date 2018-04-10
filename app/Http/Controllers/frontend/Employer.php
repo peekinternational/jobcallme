@@ -2134,4 +2134,44 @@ public function viewJobstatus(Request $request,$id){
 
 }
 
+public function saveEvaluation(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+     // $resumeId = $request->segment(1);
+	  //dd($request->all());
+		$app = $request->session()->get('jcmUser');
+		$this->validate($request, [
+				'title' => 'required',
+				
+			]);
+			 $input['title']=$request->title;
+			 $id=$request->resumeId;
+			if($id != '' && $id != '0' && $id != NULL){
+			DB::table('jcm_evaluation')->where('id','=',$id)->update($input);
+		}else{
+			$input['user_id']=$app->userId;
+           $input['criterion']='1';
+		    DB::table('jcm_evaluation')->insert($input);
+		}
+            exit('1');
+}
+
+public function allform(Request $request){
+		
+		$app = $request->session()->get('jcmUser');
+		$resumeId = $request->segment(5);
+		$record = DB::table('jcm_evaluation')->where('user_id','=',$app->userId)->get();
+		return view('frontend.employer.addevaluation',compact('record'));
+	}
+
+public function getform(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$Id = $request->segment(5);
+		$record = DB::table('jcm_evaluation')->where('id','=',$Id)->first();
+		echo @json_encode($record);
+	}
 }

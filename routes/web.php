@@ -271,6 +271,7 @@ Route::group(['prefix' => 'account'], function () {
     return view('frontend.employer.package_payment');
 });
 Route::get('employer/status/{id}', 'frontend\Employer@viewJobstatus');
+Route::post('employer/form/save', 'frontend\Employer@saveEvaluation');
 
 	Route::get('employer/package_plan', function () {
     return view('frontend.employer.package_plan');
@@ -281,9 +282,9 @@ Route::get('employer/status/{id}', 'frontend\Employer@viewJobstatus');
 Route::get('employer/users','frontend\Employer@addUser');
 Route::post('employer/useradd','frontend\Employer@useradd');
 Route::post('employer/userdel','frontend\Employer@userdel');
-Route::get('employer/addevaluation', function () {
-    return view('frontend.employer.addevaluation');
-});
+Route::get('employer/addevaluation', 'frontend\Employer@allform');
+Route::get('employer/form/get/{id}', 'frontend\Employer@getform');
+
 Route::get('employer/job_update/{id}','frontend\Employer@updatejob');
 Route::get('employer/advance_serach', function () {
     return view('frontend.advance-job');
