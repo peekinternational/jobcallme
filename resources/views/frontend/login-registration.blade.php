@@ -48,6 +48,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                     <input id="login-password" type="password" class="form-control" name="password" placeholder="@lang('home.password')">
+                 <span toggle="#password-field" class="fa fa-fw fa-eye field-icon " id="toggle-passwords"></span>
                 </div>
 				<div class="">
 				<h5><a href="{{url('password/reset')}}">Forget Password ?</a></h5>
@@ -116,9 +117,15 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')" requried>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="Password">
+                    <input type="password" class="form-control" id="pwd" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="Password">
+                    <!-- <span toggle="#password-field" class="fa fa-fw fa-eye field-icon " id="toggle-password"></span> -->
                     <p style="color:red" id="errorpass"></p>
                 </div>
+                    <div class="form-group">
+                    <input type="password" class="form-control" id="confirm_password"   value="{{ old('password') }}" placeholder="Re-enter Password">
+                     <span id='message'></span>
+                </div>
+
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
@@ -181,10 +188,69 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
 @endsection
 @section('page-footer')
 <style type="text/css">
+.field-icon {
+  float: right;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+  right: 10px;
+}
+
 /*.select2-selection__rendered {background-color: #fff;}*/
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
+    function shows() {
+    var p = document.getElementById('login-password');
+    p.setAttribute('type', 'text');
+}
+
+function hides() {
+    var p = document.getElementById('login-password');
+    p.setAttribute('type', 'password');
+}
+
+var pwShowns = 0;
+
+document.getElementById("toggle-passwords").addEventListener("click", function () {
+    if (pwShowns == 0) {
+        pwShowns = 1;
+        shows();
+    } else {
+        pwShowns = 0;
+        hides();
+    }
+}, false);
+
+/*function show() {
+    var p = document.getElementById('pwd');
+    p.setAttribute('type', 'text');
+}
+
+function hide() {
+    var p = document.getElementById('pwd');
+    p.setAttribute('type', 'password');
+}
+
+var pwShown = 0;
+
+document.getElementById("toggle-password").addEventListener("click", function () {
+    if (pwShown == 0) {
+        pwShown = 1;
+        show();
+    } else {
+        pwShown = 0;
+        hide();
+    }
+}, false);*/
+
+$('#pwd, #confirm_password').on('keyup', function () {
+    if ($('#pwd').val() == $('#confirm_password').val()) {
+        $('#message').html('Password Matching').css('color', 'green');
+    } else 
+        $('#message').html('Not Matching').css('color', 'red');
+});
+
     setTimeout(function(){
         getStates($('.job-country option:selected:selected').val());
     },700);
