@@ -1,7 +1,7 @@
 <section id="jobseeker-box">
     <div class="container">
         <h2>@lang('home.welcome') {{ Session::get('jcmUser')->firstName.' '.Session::get('jcmUser')->lastName }} @lang('home.welcomeend')</h2>
-        <div class="col-md-12 user-dashboard-panel">
+        <div class="col-md-12 user-dashboard-panel" style="background:#717171">
             <ul class="udp-itemss">
                 <li>
                     <a href="{{ url('account/jobseeker/resume') }}">

@@ -115,7 +115,8 @@
                     <option value="{{ url('terms-conditions') }}">@lang('home.Terms & Conditions')</option>
                     <option value="{{ url('account/register') }}">@lang('home.Login')</option>
                     <option value="{{ url('account/register') }}">@lang('home.Signup')</option>
-                    <option value="{{ url('account/register') }}">@lang('home.Companiesad')</option>
+                    <option value="{{ url('account/employer/job/new') }}">@lang('home.newpostedjobs')</option>
+
 
                 </select>
             </div>
@@ -124,6 +125,10 @@
                 <li><a href="https://twitter.com"><i class="fa fa-twitter-square"></i> </a> </li>
                 <li><a href="https://linkedin.com"><i class="fa fa-linkedin-square"></i> </a> </li>
             </ul>
+            <br><br>
+			<button class="btn btn-warning" style="background:#695244;border:#695244;"><a style="color:white" href="{{ url('account/employer/job/new') }}">@lang('home.postjobnew')</a></button>
+			<br><br>
+            <button class="btn btn-warning" style="background:#6d846f;border:#6d846f;"><a style="color:white" href="{{ url('companies') }}">&nbsp;@lang('home.Companiesad')&nbsp;&nbsp;</a></button>
             <br><br>
             <button class="btn btn-warning"><a style="color:white" target="_blank" href="https://www.outsourcingok.com/">www.outsourcingok.com</a></button>
         </div>

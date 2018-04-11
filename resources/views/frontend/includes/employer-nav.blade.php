@@ -13,7 +13,7 @@
                 <li>
                     <a href="{{ url('account/employer/application') }}">
                         <img src="../frontend-assets/images/employer_icon3.png" style="padding-top:0px">
-                        <div class="udp-type">@lang('home.APPLICATION')</div>
+                        <div class="udp-type">@lang('home.empAPPLICATION')</div>
                     </a>
                 </li>
                 <li>

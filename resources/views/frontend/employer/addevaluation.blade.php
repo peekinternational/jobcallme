@@ -10,35 +10,42 @@
 				 <section class="resume-box" id="academic">
                         <a class="btn btn-primary r-add-btn" onclick="addAcademic()"><i class="fa fa-plus"></i> </a>
                         <h4> @lang('home.evaluationforms')</h4>
-                        <?php //print_r($resume); ?>
-                        <ul class="resume-details">
-                            @if(count($resume['academic']) > 0)
-                                @foreach($resume['academic'] as $resumeId => $academic)
-                                    <li id="resume-{{ $resumeId }}">
-                                        <div class="col-md-12">
-                                            <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getAcademic('{{ $resumeId }}')">
+                        <?php// print_r($record); ?>
+                        <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Evaluation Form</th>
+                                            <th>No. of Criterion</th>
+                                            <th>Created on</th>
+                                            <th>Action</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        @foreach($record as $order)
+                                        <tr>
+                                            <td>{{$order->title}}</td>
+                                            <td>{{$order->criterion}}</td>
+                                            <td>{{$order->created_at}}</td>
+        							
+        							       <td><a href="javascript:;" title="Edit" onclick="getAcademic('{{ $order->id }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                 <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $order->id}}')">
                                                     <i class="fa fa-trash"></i>
-                                                </a>&nbsp;
-                                            </span>
-                                            <p class="rd-date">{!! date('M, Y',strtotime($academic->completionDate)) !!}</p>
-                                            <p class="rd-title">{!! $academic->degree !!}</p>
-                                            <p class="rd-organization">{!! $academic->institution !!}</p>
-                                            <p class="rd-location">{!! JobCallMe::cityName($academic->city).' ,'.JobCallMe::countryName($academic->country)!!}</p>
-                                            <p class="rd-grade">Grade/GPA : {!! $academic->grade !!}</p>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            @endif
+                                                </a>&nbsp;</td>
+                                         </tr>
+                                           	@endforeach                
+        					</tbody>
+        				</table>
+                            
                         </ul>
                     </section>
                     <section class="resume-box" id="academic-edit" style="display: none;">
                         <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.evaluationforms')</c></h4>
                         <form class="form-horizontal form-academic" method="post" action="">
-                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="resumeId" value="">
                             <div class="form-group error-group" style="display: none;">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
@@ -48,7 +55,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.title')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="degree">
+                                    <input type="text" class="form-control input-sm" name="title">
                                 </div>
                             </div>
 							 <div class="form-group">
@@ -79,7 +86,7 @@
 		@endsection
 		@section('page-footer')
 		<script type="text/javascript">
-		
+		var pageToken = '{{ csrf_token() }}';
 function addAcademic(){
     $('.form-academic input').val('');
     $('#academic-edit h4 c').text('@lang('home.evaluationforms')');
@@ -87,13 +94,14 @@ function addAcademic(){
     $('#academic-edit').fadeIn();
 }
 $('form.form-academic').submit(function(e){
-    $('.form-academic input[name="_token"]').val(pageToken);
+    //alert('hello');
+    $('.form-academic input[name="_token"]').val('{{ csrf_token() }}');
     $('.form-academic button[name="save"]').prop('disabled',true);
     $('.form-academic .error-group').hide();
     $.ajax({
         type: 'post',
         data: $('.form-academic').serialize(),
-        url: "{{ url('account/jobseeker/resume/academic/save') }}",
+        url: "{{ url('account/employer/form/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
                 $('.form-academic .error-group').show();
@@ -101,7 +109,7 @@ $('form.form-academic').submit(function(e){
                 $('html, body').animate({scrollTop:$('#academic-edit').position().top}, 1000);
                 $('.form-academic button[name="save"]').prop('disabled',false);
             }else{
-                window.location.href = "{{ url('account/jobseeker/resume') }}";
+                window.location.href = "{{ url('account/employer/addevaluation') }}";
             }
             Pace.stop;
         },
@@ -122,20 +130,14 @@ $('form.form-academic').submit(function(e){
 })
 function getAcademic(resumeId){
     $.ajax({
-        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        url: "{{ url('account/employer/form/get') }}/"+resumeId,
         success: function(response){
             var obj = $.parseJSON(response);
-            $('.form-academic input[name="resumeId"]').val(resumeId);
-            $('.form-academic select[name="degreeLevel"]').val(obj.degreeLevel).trigger('change');
-            $('.form-academic input[name="degree"]').val(obj.degree);
-            $('.form-academic input[name="completionDate"]').val(obj.completionDate);
-            $('.form-academic input[name="grade"]').val(obj.grade);
-            $('.form-academic input[name="institution"]').val(obj.institution);
-            $('.form-academic select[name="country"]').val(obj.country).trigger('change');
-			$('.form-academic select[name="state"]').val(obj.state).trigger('change');
-			$('.form-academic select[name="city"]').val(obj.city).trigger('change');
-            $('.form-academic textarea[name="details"]').val(obj.details);
-            $('#academic-edit h4 c').text('Edit Academics');
+            console.log(obj);
+            $('.form-academic input[name="resumeId"]').val(obj.id);
+            $('.form-academic input[name="title"]').val(obj.title);
+            
+            $('#academic-edit h4 c').text('Edit @lang('home.evaluationforms')');
             $('#academic').hide();
             $('#academic-edit').fadeIn();
         }

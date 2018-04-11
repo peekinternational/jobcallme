@@ -42,6 +42,10 @@
                                 <h3 class="hidden-sm hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}}</h3>
                                 <p class="jp-profession-heading hidden-sm hidden-xs">{{ JobCallMe::categoryTitle($applicant->industry) }}</p>
                                 <p><span class="pi-title">Experiance:</span>{{$applicant->experiance}}</p>
+                                @if($privacy->dateofbirth == 'Yes')
+                                 <p><span class="pi-title">@lang('home.age'):</span>  {{ JobCallMe::timeInYear($applicant->dateOfBirth) }},
+                                 @else
+                                 @endif @if($privacy->gender == 'Yes')<span class="pi-title"> @lang('home.gender'):</span> @lang('home.'.$applicant->gender)@endif</p>
                                 
                                 <p><span class="pi-title">Salary:</span> {{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',2).' '.$applicant->currency }}</p>
 								<p><span class="pi-title">@lang('home.location'):</span> {!! JobCallMe::cityName($applicant->city).' ,'.JobCallMe::countryName($applicant->country) !!}</p>

@@ -50,7 +50,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <input id="login-password" type="password" class="form-control" name="password" placeholder="@lang('home.password')">
                 </div>
 				<div class="">
-				<h5><a href="{{url('password/reset')}}">Forget Password ?</a></h5>
+				<h5><a href="{{url('password/reset')}}">@lang('home.forgetpassword')</a></h5>
 				</div>
                 <div class="input-group">
                     <div class="checkbox">
@@ -70,7 +70,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                
             </form>
             <div class="col-md-12 sns-box">
-                <p>Login using</p>
+                <p>@lang('home.loginusing')</p>
                 <button class="fb-btn">
                     <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
                 </button> 
@@ -133,15 +133,16 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <select class="form-control select2 job-country" name="country">
                              <option value="">@lang('home.selectCountry')</option>
                         @foreach(JobCallMe::getJobCountries() as $country)
-                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                            <option value="{{ $country->id }}">@lang('home.'.$country->name)</option>
                         @endforeach
                     </select>
+					<p class="terms-condition" style="padding-top:5px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.alphabetical order')</p>
                 </div>
                 <div class="form-group">
-                    <select class="form-control select2 job-state" name="state"></select>
+                    <select class="form-control select2 job-state" name="state"><option value="">@lang('home.s_state')</option></select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control select2 job-city" name="city"></select>
+                    <select class="form-control select2 job-city" name="city"><option value="">@lang('home.s_city')</option></select>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber')" requried>
@@ -156,14 +157,14 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <div>
                     <input type="checkbox" name="agree" value="agree" id="agree" required>
                     <label for="agree">
-                        <p class="terms-condition">@lang('home.agree')<a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.website')</p>    
+                        <p class="terms-condition"><a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.agree')<!-- @lang('home.website') --></p>    
                     </label>
                 </div>
                 <button id="regbtn" type="submit" class="btn btn-primary btn-block" name="register">@lang('home.register')</button>
                 <p class="text-center show-loginBox">@lang('home.alreadyaccount') <a href="javascript:;" onclick="switchPage('login')">@lang('home.loginhere')</a></p>
 
                 <div class="col-md-12 sns-box"> 
-                    <p>Register using</p> 
+                    <p>@lang('home.loginusing')</p> 
                     <button class="fb-btn">
                         <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
                     </button> 
@@ -253,7 +254,7 @@ function sendpassword(pass){
     type:"post",
     success:function(res){
         if(res == 1){
-            $('#errorpass').text("Password must have atleast one upper char,digit,special char");
+            $('#errorpass').text("@lang('home.passwordway')");
             $('#regbtn').attr('disabled','disabled');
         }else{
             $('#errorpass').text(" ");
