@@ -95,7 +95,7 @@ if(Request::input('show') != ''){
                           <a href="{{url('account/employer/job/share/'.$job->jobId)}}" style="color: black;"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="offer">
-                            <i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')
+                           <a href="{{url('account/employer/evalution')}}" style="color: black;"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" >
                             <a href="{{url('account/employer/job_update/'.$job->jobId )}}" style="color: black;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')</a>
