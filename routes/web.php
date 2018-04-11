@@ -285,10 +285,15 @@ Route::post('employer/userdel','frontend\Employer@userdel');
 Route::get('employer/addevaluation', 'frontend\Employer@allform');
 Route::get('employer/form/get/{id}', 'frontend\Employer@getform');
 
+
 Route::get('employer/job_update/{id}','frontend\Employer@updatejob');
 Route::get('employer/advance_serach', function () {
     return view('frontend.advance-job');
 });
+Route::get('employer/evalution', function () {
+    return view('frontend.employer.evalution');
+});
+
 
 Route::get('employer/nicerequest', function () {
     return view('frontend.employer.nicerequest');

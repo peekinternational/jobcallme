@@ -1502,7 +1502,7 @@ public function mapOrganization(Request $request){
 				'careerLevel' => 'required',
 				'experience' => 'required',
 				'vacancy' => 'required|numeric',
-				'description' => 'required|max:1024',
+				'description' => 'required',
 				'skills' => 'required|max:1024',
 				'qualification' => 'required',
 				'expiryDate' => 'required|date',

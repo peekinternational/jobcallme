@@ -87,7 +87,7 @@
 										<a href="{{url('account/employer/setfilter/'.$pjobs->jobId)}}"><i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')</a>
 										<a href="{{url('account/employer/job/share/'.$pjobs->jobId)}}"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
 										<a href="{{url('account/employer/status/'.$pjobs->jobId)}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')</a>
-										<a href="#"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
+										<a href="{{url('account/employer/evalution')}}"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
 										<a href="{{ url('account/employer/delete/'.$pjobs->jobId) }}"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')</a>
 									  </div>
 									</div></div>
