@@ -127,7 +127,7 @@ curl_close ($ch);
 				'careerLevel' => 'required',
 				'experience' => 'required',
 				'vacancy' => 'required|numeric',
-				'description' => 'required|max:1024',
+				'description' => 'required',
 				'skills' => 'required|max:1024',
 				'qualification' => 'required',
 				'expiryDate' => 'required|date',
@@ -137,7 +137,7 @@ curl_close ($ch);
 				'city' => 'required',
 				'Address' => 'required',
 			],[
-				'description.max:1024' => 'description is requried',
+				
 				'description.required' => 'description is requried',
 				'skills.max:1024' => 'Skills Limit Across',
 				'skills.required' => 'Skills is requried',
