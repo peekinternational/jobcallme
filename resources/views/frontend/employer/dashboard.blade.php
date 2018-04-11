@@ -88,6 +88,7 @@
 										<a href="{{url('account/employer/job/share/'.$pjobs->jobId)}}"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
 										<a href="{{url('account/employer/status/'.$pjobs->jobId)}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')</a>
 										<a href="{{url('account/employer/evalution')}}"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
+                                        <a href="#" onclick="return false;" class="active_deactive"><i class="fa fa-eye" aria-hidden="true"></i> Active</a>
 										<a href="{{ url('account/employer/delete/'.$pjobs->jobId) }}"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')</a>
 									  </div>
 									</div></div>
@@ -274,6 +275,17 @@
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+var oye=1;
+$('.active_deactive').click(function(){
+  if(oye==1){
+      $(this).html('<i class="fa fa-eye" aria-hidden="true"></i> Active');
+      oye=0;
+  }
+  else if(oye==0){
+       $(this).html('<i class="fa fa-eye-slash" aria-hidden="true"></i> Deactive');
+      oye=1;
+  }
+})
     var ctx = document.getElementById('job-response').getContext('2d');
     var chart = new Chart(ctx, {
         // The type of chart we want to create
