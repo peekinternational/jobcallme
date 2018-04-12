@@ -60,7 +60,7 @@
                     <div class="tab-content joblisting">
                         <div class="tab-pane active" id="rtj_tab_posted_jobs">
 						<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
-                            @foreach($postedJobs as $pjobs)
+                            @foreach($postedJobs as $key=>$pjobs)
 							
                                 <div class="col-xs-10 col-md-10 rtj-item">
 							
@@ -87,7 +87,10 @@
 										<a href="{{url('account/employer/setfilter/'.$pjobs->jobId)}}"><i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')</a>
 										<a href="{{url('account/employer/job/share/'.$pjobs->jobId)}}"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
 										<a href="{{url('account/employer/status/'.$pjobs->jobId)}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')</a>
-										<a href="#"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
+										<a href="{{url('account/employer/evalution')}}"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
+                                        <a href="#" onclick="return false;" class="active_deactive{{$pjobs->jobId}}" id="active_deactive{{$key}}"><i class="fa fa-eye" aria-hidden="true"></i> Active</a>
+                                        <input type="hidden" class="JobId" value="{{$pjobs->jobId}}">
+                                        <input type="hidden" class="check{{$pjobs->jobId}}" value="{{$pjobs->jobStatus}}">
 										<a href="{{ url('account/employer/delete/'.$pjobs->jobId) }}"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')</a>
 									  </div>
 									</div></div>
@@ -274,6 +277,81 @@
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+var jArray = <?php echo json_encode($postedJobs); ?>;
+
+var oye='';
+//var id='';
+var i='';
+var token = "{{ csrf_token() }}";
+$(document).ready(function(){
+
+
+     for(i=0;i<jArray.data.length;i++){
+         console.log(jArray.data[i].jobStatus);
+         // id = jArray.data[i].jobId;
+           // alert(id);
+            oye = jArray.data[i].jobStatus;
+           // alert(oye);
+         if(oye=='Publish'){
+            $('#active_deactive'+i).html('<i class="fa fa-eye" id="active"></i> Active');
+            }else{
+            $('#active_deactive'+i).html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+            }
+
+         var jobstatus = '';
+$('#active_deactive'+i).click(function(e){
+    var id=$(e.target).siblings('input').val();
+    var yes=$('.check'+id).val();
+   // var id=$('.JobId').val();
+    //alert(yes);
+  
+  if(yes=='Publish'){
+      $('.active_deactive'+id).html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+      yes='Draft';
+      //alert(oye);
+      var token = "{{ csrf_token() }}";
+       jobstatus = 'Draft';
+        $.ajax({
+            url:'{{url("account/jobs/status")}}',
+            data:{id:id,jobstatus:jobstatus,_token:token },
+            type:'POST',
+            success:function(res){
+               //alert(res);
+               if(res == 1){
+                toastr.success('status deactivate');
+               }else{
+                alert('error in controller admin/Cms/jobstatupdate line no 469');
+               }
+            }
+        });
+  }
+  else if(yes=='Draft'){
+      
+       $('.active_deactive'+id).html('<i class="fa fa-eye" id="active"></i> Active');
+        yes='Publish';
+           jobstatus = 'Publish';
+             var token = "{{ csrf_token() }}";
+        
+        $.ajax({
+            url:'{{url("account/jobs/status")}}',
+            data:{id:id,jobstatus:jobstatus,_token:token },
+            type:'POST',
+            success:function(res){
+               // alert(res);
+               if(res == 1){
+                toastr.success('status active');
+               }else{
+                alert('error in controller admin/Cms/jobstatupdate line no 469');
+               }
+            }
+        });
+  }
+})
+       }
+
+
+});
+
     var ctx = document.getElementById('job-response').getContext('2d');
     var chart = new Chart(ctx, {
         // The type of chart we want to create

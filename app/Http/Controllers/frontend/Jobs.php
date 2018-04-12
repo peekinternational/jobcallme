@@ -460,4 +460,6 @@ class Jobs extends Controller{
 			return view('frontend.job-apply',compact('job','jobApplied'));
 		}
 	}
+
+	 
 }

@@ -127,7 +127,7 @@ curl_close ($ch);
 				'careerLevel' => 'required',
 				'experience' => 'required',
 				'vacancy' => 'required|numeric',
-				'description' => 'required|max:1024',
+				'description' => 'required',
 				'skills' => 'required|max:1024',
 				'qualification' => 'required',
 				'expiryDate' => 'required|date',
@@ -137,7 +137,7 @@ curl_close ($ch);
 				'city' => 'required',
 				'Address' => 'required',
 			],[
-				'description.max:1024' => 'description is requried',
+				
 				'description.required' => 'description is requried',
 				'skills.max:1024' => 'Skills Limit Across',
 				'skills.required' => 'Skills is requried',
@@ -1502,7 +1502,7 @@ public function mapOrganization(Request $request){
 				'careerLevel' => 'required',
 				'experience' => 'required',
 				'vacancy' => 'required|numeric',
-				'description' => 'required|max:1024',
+				'description' => 'required',
 				'skills' => 'required|max:1024',
 				'qualification' => 'required',
 				'expiryDate' => 'required|date',
@@ -2183,5 +2183,25 @@ public function allform(Request $request){
 		$record = DB::table('jcm_evaluation')->where('id','=',$Id)->first();
 		echo @json_encode($record);
 	}
+<<<<<<< HEAD
 	
+=======
+
+	  public function jobstatsupdate(Request $request){
+        $id = $request->input('id');
+		
+        $jobstatus = $request->input('jobstatus');
+      //  echo $id;
+		//echo $jobstatus;
+		$input['jobStatus']=$jobstatus;
+        $check = DB::table('jcm_jobs')->where('jobId',$id)->update($input);
+    
+
+        if($check){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
+>>>>>>> 22f80808ee739ac54a59879533509db2f95307e8
 }

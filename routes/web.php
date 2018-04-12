@@ -171,6 +171,7 @@ Route::get('companies/company/{id}','frontend\Home@viewCompany');
 
 Route::group(['prefix' => 'account'], function () {
 	/* generals */
+	Route::post('jobs/status','frontend\Employer@jobstatsupdate');
 	Route::post('feedback','frontend\Home@feedback');
 	Route::post('employer/questionnaires/new','frontend\Employer@addquestionaires');
 	Route::post('employer/questionnaires/delete','frontend\Employer@deletequestionaires');
@@ -285,10 +286,15 @@ Route::post('employer/userdel','frontend\Employer@userdel');
 Route::get('employer/addevaluation', 'frontend\Employer@allform');
 Route::get('employer/form/get/{id}', 'frontend\Employer@getform');
 
+
 Route::get('employer/job_update/{id}','frontend\Employer@updatejob');
 Route::get('employer/advance_serach', function () {
     return view('frontend.advance-job');
 });
+Route::get('employer/evalution', function () {
+    return view('frontend.employer.evalution');
+});
+
 
 Route::get('employer/nicerequest', function () {
     return view('frontend.employer.nicerequest');
@@ -305,6 +311,7 @@ Route::get('employer/niceresult', function () {
 /* jobs */
 Route::get('jobs','frontend\Jobs@home');
 Route::post('jobs/search','frontend\Jobs@searchJobs');
+
 Route::match(['get','post'],'jobs/homeJobSearch','frontend\Jobs@homePageJobSerach');
 Route::match(['get','post'],'jobs/{id}','frontend\Jobs@viewJob');
 

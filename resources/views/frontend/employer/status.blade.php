@@ -4,6 +4,7 @@
 
 @section('content')
 <?php
+$oye=1;
 $inbox = 'ja-tab-active';
 if(Request::input('show') != ''){
     $showTab = Request::input('show');
@@ -85,7 +86,7 @@ if(Request::input('show') != ''){
                 <div class="ja-content">
                     <div class="ea-top-panel">
                         
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="shortlist">
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="shortlist" id="status_click">
                             <i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="reject">
@@ -95,11 +96,19 @@ if(Request::input('show') != ''){
                           <a href="{{url('account/employer/job/share/'.$job->jobId)}}" style="color: black;"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="offer">
-                            <i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')
+                           <a href="{{url('account/employer/evalution')}}" style="color: black;"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" >
                             <a href="{{url('account/employer/job_update/'.$job->jobId )}}" style="color: black;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')</a>
                         </button>
+                        
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk" id="showMore">
+                        
+                         <input type="hidden" id="JobId" value="{{$job->jobId}}">
+                         <input type="hidden" id="checkstatus" value="{{$job->jobStatus}}">
+                        </button>
+                   
+                        
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk">
                          <a href="{{ url('account/employer/delete/'.$job->jobId) }}" style="color: black;"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')</a>
                         </button>
@@ -260,12 +269,31 @@ if(Request::input('show') != ''){
 	                	@endforeach
 	                </ul>
                 @endif
-                </div>
-                <br>
-              
-            </div>
-                        
+                        </div>
+                        <br>
                     </div>
+                                
+                    </div>
+                 <div id="chart_show" style="display:none">
+                    <div class="col-md-4">
+                   <div class="eg-job-response" style="min-height: 225px;">
+                    <h4>@lang('home.jobresponse')</h4>
+                    <canvas id="job-response"></canvas>
+                   </div>
+                   </div>
+                     <div class="col-md-4">
+                <div class="eg-job-response" style="min-height: 225px;">
+                    <h4>@lang('home.experiencelevel')</h4>
+                    <canvas id="experience-level"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="eg-job-response" style="min-height: 225px;">
+                    <h4>@lang('home.recruitmentactivity')</h4>
+                    <canvas id="recruitment-activity"></canvas>
+                </div>
+            </div>
+            </div>
                 </div>
             </div>
         </div>
@@ -274,11 +302,183 @@ if(Request::input('show') != ''){
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+var id = $('#JobId').val();
+var oye = $('#checkstatus').val();
+//alert(oye);
+
+//var oye=1;
+
 var isRunning = false;
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
+    if(oye=='Publish'){
+$('#showMore').html('<i class="fa fa-eye" id="active"></i> Active');
+}else{
+$('#showMore').html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+}
     initialize();
     $('.jaTabBtn.ja-tab-active').click();
+      var ctx = document.getElementById('job-response').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+
+        // The data for our dataset
+        data: {
+            labels: ['Job response'],
+            datasets: [{
+                label: "Job response",
+                //backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [1],
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+     var ctx = document.getElementById("experience-level");
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+           labels: ['Experience'],
+            datasets: [{
+                label: '# of Votes',
+                data: [0],
+                backgroundColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 170, 125, 1)',
+                    'rgba(75, 120, 225, 1)',
+                    'rgba(54, 120, 54, 1)',
+                    'rgba(220,60,232,1)',
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 170, 64, 1)',
+                    'rgba(75, 120, 225, 1)',
+                    'rgba(54, 120, 54, 1)',
+                    'rgba(220,60,232,1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx = document.getElementById("recruitment-activity");
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Activity'],
+            datasets: [{
+                label: "@lang('home.recruitmentactivity')",
+                data: [0],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+})
+
+$('#status_click').click(function () {
+$("#chart_show").toggle();
+$(".jd-job-details").toggle();
+
+});
+
+    
+     var jobstatus = '';
+        
+
+$('#showMore').click(function(){
+  var checktext=$('#showMore').html();
+
+  if(oye=='Publish'){
+      $('#showMore').html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+      oye='Draft';
+      //alert(oye);
+      var token = "{{ csrf_token() }}";
+      
+            jobstatus = 'Draft';
+         //   alert(id);
+           
+        
+        $.ajax({
+            url:'{{url("account/jobs/status")}}',
+            data:{id:id,jobstatus:jobstatus,_token:token },
+            type:'POST',
+            success:function(res){
+               // alert(res);
+               if(res == 1){
+                toastr.success('status deactivate');
+               }else{
+                alert('error in controller admin/Cms/jobstatupdate line no 469');
+               }
+            }
+        });
+  }
+  else if(oye=='Draft'){
+      
+       $('#showMore').html('<i class="fa fa-eye" id="active"></i> Active');
+        oye='Publish';
+           jobstatus = 'Publish';
+             var token = "{{ csrf_token() }}";
+        
+        $.ajax({
+            url:'{{url("account/jobs/status")}}',
+            data:{id:id,jobstatus:jobstatus,_token:token },
+            type:'POST',
+            success:function(res){
+               if(res == 1){
+                toastr.success('status active');
+               }else{
+                alert('error in controller admin/Cms/jobstatupdate line no 469');
+               }
+            }
+        });
+  }
 })
 $('.jaTabBtn').click(function () {
     var type = $(this).attr('id');
