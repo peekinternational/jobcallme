@@ -2183,9 +2183,7 @@ public function allform(Request $request){
 		$record = DB::table('jcm_evaluation')->where('id','=',$Id)->first();
 		echo @json_encode($record);
 	}
-<<<<<<< HEAD
-	
-=======
+
 
 	  public function jobstatsupdate(Request $request){
         $id = $request->input('id');
@@ -2203,5 +2201,4 @@ public function allform(Request $request){
             echo 2;
         }
     }
->>>>>>> 22f80808ee739ac54a59879533509db2f95307e8
 }
