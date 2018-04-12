@@ -2174,4 +2174,21 @@ public function getform(Request $request){
 		$record = DB::table('jcm_evaluation')->where('id','=',$Id)->first();
 		echo @json_encode($record);
 	}
+
+	  public function jobstatsupdate(Request $request){
+        $id = $request->input('id');
+		
+        $jobstatus = $request->input('jobstatus');
+      //  echo $id;
+		//echo $jobstatus;
+		$input['jobStatus']=$jobstatus;
+        $check = DB::table('jcm_jobs')->where('jobId',$id)->update($input);
+    
+
+        if($check){
+            echo 1;
+        }else{
+            echo 2;
+        }
+    }
 }
