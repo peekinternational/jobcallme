@@ -107,7 +107,7 @@ if(Request::input('show') != ''){
                             <i class="fa fa-briefcase" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.scheduleinterview')</div>
                         </button>
-                        <button type="button" class="ea-panel-btn"><i class="fa fa-download" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn" id="resume-download"><i class="fa fa-download" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.exportselected')</div>
                         </button>
                         <select class="form-control pull-right select-jobs" style="width: 150px;height: 35px;" onchange="findApplication(this.value)">
@@ -257,6 +257,7 @@ $("#ea-showFrom").click(function(){
         $(".ea-messageForm").slideToggle("slow");
     }
 });
+
 function initialize(){
     $(".cbx-field").prop("checked", false);
     $(".cbx-field").click(function () {
@@ -344,5 +345,20 @@ $('form.interview-form').submit(function(e){
     })
     e.preventDefault();
 })
+$('body').on('click','#resume-download',function(event) {
+$('.ea-record-selected').each(function(index,element){
+   var id = $(this).closest('tr').find('#user_id').val();
+    $.ajax({
+        url : "{{ url('account/jobseeker/cv') }}/"+id,
+        type: "get",
+        success:function(res){
+            console.log(res);
+            if(res == 'fail'){
+                window.location ="{{ url('account/manage?plan') }}";
+            }
+        }
+    });
+})
+});
 </script>
 @endsection

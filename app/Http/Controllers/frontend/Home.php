@@ -596,8 +596,8 @@ class Home extends Controller{
 			$savedJobArr = @explode(',', $meta->saved);
 			$followArr = @explode(',', $meta->follow);
 		}
-
-    	return view('frontend.show-company',compact('company','jobs','followArr'));
+		$companyReview = DB::table('jcm_companyreview')->leftJoin('jcm_users','jcm_users.userId','=','jcm_companyreview.user_id')->where('company_id','=',$companyId)->get();
+    	return view('frontend.show-company',compact('company','jobs','followArr','companyReview'));
     }
 
     public function sendFeedback(Request $request){

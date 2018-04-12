@@ -5,7 +5,9 @@
 @section('content')
 <div class="container margintop bg-white content-area">
 	<form method="post" action="{{ url('account/employer/company/addreview')}}">
-
+		@if(Session::has('review-message'))
+		<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('review-message') }}</p>
+		@endif
 	  <h4><strong>Add Review</strong></h4><br>	
 	  <div class="form-group">
 	    <label for="exampleInputEmail1">Overall Review</label>
@@ -26,13 +28,13 @@
 	    <input type="hidden" name="user_id" value="{{$userid}}">
 	    <input type="hidden" name="_token" value="{{csrf_token()}}">
 	  </div>
-	  <div class="form-group">
+	  <div class="form-group" id="upto">
 	    <label for="exampleInputPassword1">Employed Upto</label>
 	    <input type="text" name="employer_upto" class="form-control date-picker" placeholder="Employed upto">
 	  </div>
 	  <div class="form-check">
-	    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-	    <label class="form-check-label" name="current_working" value="Yes" for="exampleCheck1"> i am working currently</label>
+	    <input type="checkbox" class="form-check-input" id="current_working">
+	    <label class="form-check-label" name="current_working" value="Yes" for="current_working"> i am working currently</label>
 	  </div>
 	  <div class="form-group">
 	    <label for="exampleInputPassword1">Designation</label>
@@ -54,6 +56,14 @@
 	  	<div class="form-group">
 	  	  <label for="exampleInputPassword1">Review title</label>
 	  	  <input type="text" name="review_title" class="form-control" placeholder="Review title">
+	  	</div>
+	  	<div class="form-group">
+	  	  <label for="exampleInputPassword1">Pros</label>
+	  	  <input type="text" name="pros" class="form-control" placeholder="Review title">
+	  	</div>
+	  	<div class="form-group">
+	  	  <label for="exampleInputPassword1">Cons</label>
+	  	  <input type="text" name="cons" class="form-control" placeholder="Review title">
 	  	</div>
 	  	<div class="form-group">
 	  	  <label for="exampleInputPassword1">Advice to Management</label>
@@ -148,6 +158,15 @@
 
 @endsection
 @section('page-footer')
-
+<script type="text/javascript">
+	$('#current_working').on('change',function(){
+		if($('#current_working').is(':checked')){
+			$('#upto').hide();
+		}else{
+			$('#upto').show();
+		}
+	})
+	
+</script>
 
 @endsection

@@ -938,6 +938,7 @@ class Jobseeker extends Controller{
 	}
 
 	public function resume_pckg(Request $request, $id){
+
 		$app = $request->session()->get('jcmUser');
 		$userid = $request->session()->get('jcmUser')->userId;
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
@@ -948,7 +949,12 @@ class Jobseeker extends Controller{
 		$inputs['quantity']=$remain;
 			if(count($plan) == 0)
 			{
-                return redirect('account/manage?plan');
+				if($request->ajax()){
+					echo "fail";
+				}else{
+					return redirect('account/manage?plan');
+				}
+                
 			}
 				else{
                      DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
