@@ -171,6 +171,7 @@ Route::get('companies/company/{id}','frontend\Home@viewCompany');
 
 Route::group(['prefix' => 'account'], function () {
 	/* generals */
+	Route::post('jobs/status','frontend\Employer@jobstatsupdate');
 	Route::post('feedback','frontend\Home@feedback');
 	Route::post('employer/questionnaires/new','frontend\Employer@addquestionaires');
 	Route::post('employer/questionnaires/delete','frontend\Employer@deletequestionaires');
@@ -310,6 +311,7 @@ Route::get('employer/niceresult', function () {
 /* jobs */
 Route::get('jobs','frontend\Jobs@home');
 Route::post('jobs/search','frontend\Jobs@searchJobs');
+
 Route::match(['get','post'],'jobs/homeJobSearch','frontend\Jobs@homePageJobSerach');
 Route::match(['get','post'],'jobs/{id}','frontend\Jobs@viewJob');
 

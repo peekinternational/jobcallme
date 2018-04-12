@@ -103,7 +103,9 @@ if(Request::input('show') != ''){
                         </button>
                         
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk" id="showMore">
-                         <i class="fa fa-eye"></i> Active</a>
+                        
+                         <input type="hidden" id="JobId" value="{{$job->jobId}}">
+                         <input type="hidden" id="checkstatus" value="{{$job->jobStatus}}">
                         </button>
                    
                         
@@ -300,11 +302,20 @@ if(Request::input('show') != ''){
 @endsection
 @section('page-footer')
 <script type="text/javascript">
-var oye=1;
+var id = $('#JobId').val();
+var oye = $('#checkstatus').val();
+//alert(oye);
+
+//var oye=1;
 
 var isRunning = false;
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
+    if(oye=='Publish'){
+$('#showMore').html('<i class="fa fa-eye" id="active"></i> Active');
+}else{
+$('#showMore').html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+}
     initialize();
     $('.jaTabBtn.ja-tab-active').click();
       var ctx = document.getElementById('job-response').getContext('2d');
@@ -416,14 +427,57 @@ $("#chart_show").toggle();
 $(".jd-job-details").toggle();
 
 });
+
+    
+     var jobstatus = '';
+        
+
 $('#showMore').click(function(){
-  if(oye==1){
-      $(this).html('<i class="fa fa-eye"></i> Active</a>');
-      oye=0;
+  var checktext=$('#showMore').html();
+
+  if(oye=='Publish'){
+      $('#showMore').html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+      oye='Draft';
+      //alert(oye);
+      var token = "{{ csrf_token() }}";
+      
+            jobstatus = 'Draft';
+         //   alert(id);
+           
+        
+        $.ajax({
+            url:'{{url("account/jobs/status")}}',
+            data:{id:id,jobstatus:jobstatus,_token:token },
+            type:'POST',
+            success:function(res){
+               // alert(res);
+               if(res == 1){
+                toastr.success('status deactivate');
+               }else{
+                alert('error in controller admin/Cms/jobstatupdate line no 469');
+               }
+            }
+        });
   }
-  else if(oye==0){
-       $(this).html('<i class="fa fa-eye-slash"></i> Deactive</a>');
-      oye=1;
+  else if(oye=='Draft'){
+      
+       $('#showMore').html('<i class="fa fa-eye" id="active"></i> Active');
+        oye='Publish';
+           jobstatus = 'Publish';
+             var token = "{{ csrf_token() }}";
+        
+        $.ajax({
+            url:'{{url("account/jobs/status")}}',
+            data:{id:id,jobstatus:jobstatus,_token:token },
+            type:'POST',
+            success:function(res){
+               if(res == 1){
+                toastr.success('status active');
+               }else{
+                alert('error in controller admin/Cms/jobstatupdate line no 469');
+               }
+            }
+        });
   }
 })
 $('.jaTabBtn').click(function () {
