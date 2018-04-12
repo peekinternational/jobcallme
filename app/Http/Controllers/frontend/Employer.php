@@ -782,7 +782,7 @@ curl_close ($ch);
 					$vhtml .= '<tr class="ea-single-record">';
 						$vhtml .= '<td scope="row" style="vertical-align: middle">';
 							$vhtml .= '<input id="inbox-'.$randId.'"  type="checkbox" class="cbx-field" name="applicant[]" value="'.$rec->userId.'_'.$rec->jobId.'"><label class="cbx" for="inbox-'.$randId.'"></label>';
-						$vhtml .= '</td>';
+						$vhtml .= '<input type="hidden" id="user_id" value="'.$rec->userId.'"></td>';
 						$vhtml .= '<td>';
 							$vhtml .= '<div class="row hidden-sm hidden-xs">';
 								$vhtml .= '<div class="col-md-4">';
@@ -2106,14 +2106,23 @@ public function companyreview(Request $request)
 }
 public function addreview(Request $request)
 {
+	$userid = $request->session()->get('jcmUser')->userId;
 	$data = $request->input();
 	unset($data['_token']);
-
-	if(DB::table('jcm_companyreview')->insert($data)){
-		return redirect('account/jobseeker');
+	$checkrecord = DB::table('jcm_companyreview')->where('user_id','=',$userid)->get();
+	if( count($checkrecord) > 0 ){
+		Session::flash('review-message', 'you already used your review'); 
+		Session::flash('alert-class', 'alert-danger');
+		return redirect('account/employeer/companies/company/review'); 
 	}else{
-		echo "error in query controller employer line number 2072";
+		if(DB::table('jcm_companyreview')->insert($data)){
+			return redirect('account/jobseeker');
+		}else{
+			echo "error in query controller employer line number 2072";
+		}
 	}
+
+	
 }
 
 public function viewJobstatus(Request $request,$id){
@@ -2165,7 +2174,7 @@ public function allform(Request $request){
 		return view('frontend.employer.addevaluation',compact('record'));
 	}
 
-public function getform(Request $request){
+	public function getform(Request $request){
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}
@@ -2174,6 +2183,9 @@ public function getform(Request $request){
 		$record = DB::table('jcm_evaluation')->where('id','=',$Id)->first();
 		echo @json_encode($record);
 	}
+<<<<<<< HEAD
+	
+=======
 
 	  public function jobstatsupdate(Request $request){
         $id = $request->input('id');
@@ -2191,4 +2203,5 @@ public function getform(Request $request){
             echo 2;
         }
     }
+>>>>>>> 22f80808ee739ac54a59879533509db2f95307e8
 }

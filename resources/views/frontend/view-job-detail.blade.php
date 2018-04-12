@@ -352,51 +352,14 @@ $dispatch='';
                     @endif   
                     <a href="{{ url('account/employeer/companies/company/review?CompanyId='.$job->companyId) }}" class="btn btn-default">@lang('home.Write Review')</a>   
                 </div>
-                <h4>{{ $job->companyName }} </h4>
+                <a href="{{url('companies/company/'.$job->companyId)}}"><h4>{{ $job->companyName }}</h4></a>
                 <p>{{ JobCallMe::cityName($job->companyCity) }}, {{ JobCallMe::countryName($job->companyCountry) }}</p>
                 <div class="jd-about-organization">
                     <p>{!! $job->companyAbout !!}</p>
                 </div>
                 <p align="center">
-                    @if($star == 'Excellent')
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i><br>
-                    @elseif($star == 'Verygood')
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i><br>
-                    @elseif($star == 'Good')
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i><br>
-                     @elseif($star == 'Fair')
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i><br>
-                     @elseif($star == 'Poor')
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i><br>
-                    @else
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-0"></i>
-                    <i class="fa fa-star-o"></i><br>
-                    @endif
-                        Total reviews {{ count($companyReview) }} 
-                    
+                   <?= checkreview($star)?><br>
+                   <span><a href="{{url('companies/company/'.$job->companyId)}}">View all Review</a> <span class="badge"><?= count($companyReview)?></span></span>
                 </p>
                 <hr>
                 <p>
@@ -405,215 +368,35 @@ $dispatch='';
                             <td>Career Growth</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
-                            @if($career_star == 'Excellent')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            @elseif($career_star == 'Verygood')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($career_star == 'Good')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($career_star == 'Fair')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($career_star == 'Poor')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @else
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @endif
+                            <?= checkreview($career_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>Compensation & Benefits</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
-                            @if($benefit_star == 'Excellent')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            @elseif($benefit_star == 'Verygood')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($benefit_star == 'Good')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($benefit_star == 'Fair')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($benefit_star == 'Poor')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @else
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @endif
+                            <?= checkreview($benefit_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>Work/Life Balance</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
-                            @if($lifebalance_star == 'Excellent')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            @elseif($lifebalance_star == 'Verygood')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($lifebalance_star == 'Good')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($lifebalance_star == 'Fair')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($lifebalance_star == 'Poor')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @else
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @endif
+                            <?= checkreview($lifebalance_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>Management</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
-                            @if($management_star == 'Excellent')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            @elseif($management_star == 'Verygood')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($management_star == 'Good')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($management_star == 'Fair')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($management_star == 'Poor')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @else
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @endif
+                            <?= checkreview($management_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>Culture</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
-                            @if($culture_star == 'Excellent')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            @elseif($culture_star == 'Verygood')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($culture_star == 'Good')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($culture_star == 'Fair')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @elseif($culture_star == 'Poor')
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @else
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            @endif
+                            <?= checkreview($culture_star)?>
                             </td>
                         </tr>
                     </table>
@@ -700,6 +483,56 @@ $dispatch='';
 		</div>
         
     </div>
+   <?php  function checkreview($val){
+      if($val == "Excellent"){
+        return '<span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>';
+      }
+      else if($val == "Verygood"){
+        return '<span>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                </span>';
+      }
+      else if($val == "Good"){
+        return '<span>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                </span>';
+      }
+      else if($val == "Fair"){
+        return '<span>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                </span>';
+      }
+      else if($val == "Poor"){
+        return '<span>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                </span>';
+      }else{
+        return '<span>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                </span>';
+      }
+    }
+    ?>
     <style type="text/css">
       #map {
         height: 300px;

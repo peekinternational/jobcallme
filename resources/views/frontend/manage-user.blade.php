@@ -653,6 +653,18 @@ if($user->profilePhoto != ''){
                             </div>
                             <div class="col-md-12">
                                 <p style="margin-top: 4px">
+                                    <input type="checkbox" id="gender-visible" class="switch-field" name="gender" {{ $privacy->gender != 'No' ? 'checked=""' : '' }}>
+                                    <label for="gender-visible" class="switch-label"></label> <span>@lang('home.gendervisible')</span>
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <p style="margin-top: 4px">
+                                    <input type="checkbox" id="dateofbirth-visible" class="switch-field" name="dateofbirth" {{ $privacy->dateofbirth != 'No' ? 'checked=""' : '' }}>
+                                    <label for="dateofbirth-visible" class="switch-label"></label> <span>@lang('home.birthvisible')</span>
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <p style="margin-top: 4px">
                                     <input type="checkbox" id="academic-visible" class="switch-field" name="academic" {{ $privacy->academic != 'No' ? 'checked=""' : '' }}>
                                     <label for="academic-visible" class="switch-label"></label> <span>@lang('home.academicvisible')</span>
                                 </p>
