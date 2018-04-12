@@ -48,7 +48,7 @@
                                     @foreach($writing as $write)
                                         <tr id="write-{{ $write->writingId }}">
                                             <td><a href="{{ url('read/article/'.$write->writingId ) }}">{!! $write->title !!}</a></td>
-                                            <td>{!! $write->cat_names !!}</td>
+                                            <td><?for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i])<?}?></td>
                                             <td>@lang('home.'.$write->status)</td>
                                             <td>@if(app()->getLocale() == "kr")
 						    {!! date('Y-m-d',strtotime($write->createdTime)) !!}
@@ -70,11 +70,14 @@
         @else
             <div class="col-md-12">
                 <div class="pnj-box">
-                    <h3><span style="padding-left:15px;">@lang('home.mywriting')</span></h3>
+                    <h3><span style="padding-left:15px;">@lang('home.mywriting2')</span></h3>
                     <div class="upskill-box">
-                        <p style="font-size:20px">@lang('home.creativewriting')</p>
-                        <p style="font-size:15px">@lang('home.eagerlywaiting')</p>
+                        <p style="font-size:25px">@lang('home.creativewriting')</p>
+                        <p style="font-size:15px;padding-top:20px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.eagerlywaiting')</p>
+						<p style="font-size:15px;padding-bottom:80px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.eagerlywaiting2')</p>
                         <a href="{{ url('account/writings/article/add') }}" class="btn btn-primary">@lang('home.WRITE YOUR FIRST ARTICLE')</a>
+						<!-- <p style="font-size:15px;padding-top:30px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.eagerlywaiting3')</p> -->
+						<p style="font-size:15px;padding-top:50px;color:#820923;"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:#820923;"></i> @lang('home.eagerlywaiting4')</p>
                     </div>
                 </div>
             </div>

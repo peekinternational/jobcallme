@@ -80,7 +80,7 @@
                           <select class="form-control job-category" name="category" onchange="getSubCategories(this.value)">
                             <option value="">@lang('home.s_category')</option>
                             @foreach(JobCallMe::getCategories() as $cat)
-                            <option value="{!! $cat->categoryId !!}">{!! $cat->name !!}</option>
+                            <option value="{!! $cat->categoryId !!}">@lang('home.'.$cat->name)</option>
                             @endforeach
                           </select>
 
@@ -108,12 +108,15 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <select class="form-control" name="degreeLevel">
-                            <option value="">@lang('home.selectdegree')</option>
-                            <option value="High School">High School</option>
-                            <option value="Intermediate">Intermediate</option>
-                            <option value="Bachelor">Bachelor</option>
-                            <option value="Master">Master</option>
-                            <option value="PhD">PhD</option>
+                            <option value="">@lang('home.degreeLevel-text')</option>
+                                        <option value="highschool" {{ $meta->education == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
+                                        <option value="college" {{ $meta->education == 'college' ? 'selected="selected"' : '' }}>@lang('home.college')</option>
+                                        <option value="university" {{ $meta->education == 'university' ? 'selected="selected"' : '' }}>@lang('home.university')</option>
+                                        <option value="graduateschool" {{ $meta->education == 'graduateschool' ? 'selected="selected"' : '' }}>@lang('home.graduateschool')</option>
+                                        <option value="Doctorate(phd)" {{ $meta->education == 'Doctorate(phd)' ? 'selected="selected"' : '' }}>@lang('home.Doctorate(phd)')</option>
+										<option value="Vocational" {{ $meta->education == 'Vocational' ? 'selected="selected"' : '' }}>@lang('home.Vocational')</option>
+										<option value="Associate Degree" {{ $meta->education == 'Associate Degree' ? 'selected="selected"' : '' }}>@lang('home.Associate Degree')</option>
+										<option value="Certification" {{ $meta->education == 'Certification' ? 'selected="selected"' : '' }}>@lang('home.Certification')</option>
                           </select>
                         </div>
                       </div>
@@ -204,7 +207,7 @@
                         <div class="form-group">
                           <select class="form-control select2 job-country" name="country">
                             @foreach(JobCallMe::getJobCountries() as $cntry)
-                            <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                            <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
                             @endforeach
                           </select>
                         </div>
@@ -325,8 +328,8 @@
                     </div>
                     <div class="fp-item-details" style="height: 95px;">
                       <p>{!! $people->firstName.' '.$people->lastName !!}</p>
-                      <p>{{ JobCallMe::categoryTitle($people->industry) }}</p>
-                      <p>{{ JobCallMe::cityName($people->city).', '.JobCallMe::countryName($people->country)}}</p>
+                      <p>@lang('home.'.JobCallMe::categoryTitle($people->industry))</p>
+                      <p>@lang('home.'.JobCallMe::cityName($people->city)), @lang('home.'.JobCallMe::countryName($people->country))</p>
                     </div>
                   </a>
                 </div>

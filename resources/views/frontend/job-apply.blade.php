@@ -46,17 +46,17 @@
                         </div>
                         <p class="ja-question">@lang('home.q4')</p>
                         <div class="ja-specification">
-                            {!! JobCallMe::cityName($job->city) !!}, {!! JobCallMe::countryName($job->country) !!}
+                            @lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))
                         </div>
                     </div>
                     @if(strtotime($job->expiryDate) < strtotime(date('Y-m-d')))
                         <button type="button" class="btn btn-danger" disabled="disabled">@lang('home.hasbeenclose')</button>
                     @elseif($jobApplied == true)
                         <button type="button" class="btn btn-success">@lang('home.alreadyapply')</button>
-                        <a href="{{ url('jobs/'.$job->jobId) }}" class="btn btn-default">CANCEL</a>
+                        <a href="{{ url('jobs/'.$job->jobId) }}" class="btn btn-default">@lang('home.CANCEL')</a>
                     @else
                         <button type="submit" class="btn btn-primary" id="submitbutton" disabled="disabled">@lang('home.apply')</button>
-                        <a href="{{ url('jobs/'.$job->jobId) }}" class="btn btn-default">CANCEL</a>
+                        <a href="{{ url('jobs/'.$job->jobId) }}" class="btn btn-default">@lang('home.CANCEL')</a>
                     @endif
                 </form>
             </div>

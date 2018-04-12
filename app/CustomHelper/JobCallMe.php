@@ -319,11 +319,11 @@ class JobCallMe{
 	}
 
 	public function getExperienceLevel(){
-		return array('Student', 'Fresh Graduate', '< 1 Year', '1 Year', '2 Year', '3 Year', '4 Year', '5 Year', '< 10 Year', '10 Year', '< 20 Year', '< 30 Year', '< 50 Year');
+		return array('Student', 'Fresh Graduate', 'Experience', 'Fresh Graduate ~ Experience', '-1  Year', '+1  Year', '+2  Year', '+3  Year', '+4  Year', '+5  Year', '+6  Year', '+7  Year', '+8  Year', '+9  Year', '+10 Year', '+15 Year', '-20 Year', '-30 Year', '-50 Year', 'No Need Career');
 	}
 
 	public function jobBenefits(){
-		return array('Accommodation', 'Gratuity', 'Health Insurance', 'Incentive Bonus', 'Leaves', 'Travelling');
+		return array('National pension', 'Employment Insurance', 'Industrial accident insurance', 'Health Insurance', 'Severance Pay', 'Lunch offer', 'Vehicle oil subsidy', 'Overtime pay');
 	}
 
 	//추가

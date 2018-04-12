@@ -14,7 +14,7 @@
                 <div class="col-md-6" style="text-align:end">
                     <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{{ action('frontend\Employer@updatepostPaymentWithpaypal') }}" >
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
+                        <button type="submit" class="btn btn-primary btn-lg" name="save">@lang('home.PayPal')</button> 
                     </form>
                 </div>
                 <div class="col-md-6">
@@ -26,7 +26,7 @@
                         <input type="hidden" value="{!! $app->email!!}" name="Email" >
                         <input type="hidden" value="{!! $app->phoneNumber!!}" name="tel" >
                         <input type="hidden" value="0" name="buyerName" id='buyerName' >
-                        <a href='javascript:void(0)'  class="btn btn-primary btn-lg nicePays">NicePay</a>
+                        <a href='javascript:void(0)'  class="btn btn-primary btn-lg nicePays">@lang('home.NicePay')</a>
                     </form>
                 
                 </div>

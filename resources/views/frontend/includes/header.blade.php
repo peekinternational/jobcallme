@@ -57,10 +57,13 @@ $cPage = Request::segment(2);
                         <a href="{{ url('account/upskill') }}">@lang('home.upskill')</a>
                     </li>
                     <?php }else{ ?>
-                    <li class="hidden-sm {{ Request::segment(1) == 'companies' ? 'active' : '' }}">
+                    <!-- <li class="hidden-sm {{ Request::segment(1) == 'companies' ? 'active' : '' }}">
+                        <a href="{{ url('companies') }}">@lang('home.companies')</a>
+                    </li> -->
+                    <?php } ?>
+					<li class="hidden-sm {{ Request::segment(1) == 'companies' ? 'active' : '' }}">
                         <a href="{{ url('companies') }}">@lang('home.companies')</a>
                     </li>
-                    <?php } ?>
 					 @if(Session::has('jcmUser'))
 						 
 						  @else

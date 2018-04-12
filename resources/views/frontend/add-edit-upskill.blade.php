@@ -50,12 +50,12 @@ if($upskill->country != 0){
 							   <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
 							   </span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">{!! $payment->title!!}</span></div>
+                             <span class="b">@lang('home.'.$payment->title)</span></div>
                                 <div>
                                     <!----><label for="{!! $payment->id!!}">
                                         <ul class="list-unstyled desc" >
-                                            <li>{!! $payment->tag1!!}</li>
-                                            <li>{!! $payment->tag2!!}</li>
+                                            <li>@lang('home.Featuredonhomepage')<!-- {!! $payment->tag1!!} --></li>
+                                            <li>@lang('home.adcost')<!-- {!! $payment->tag2!!} --></li>
                                         </ul>
 										
                                         <div class="credits b">
@@ -85,7 +85,7 @@ if($upskill->country != 0){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.type')</label>
+                            <label class="control-label col-sm-3">@lang('home.category')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="type" required="">
                                     <option value="">@lang('home.s_type')</option>
@@ -100,7 +100,7 @@ if($upskill->country != 0){
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control" name="oType" onchange="orgFun(this.value)">
                                     <option value="user">{{ Session()->get('jcmUser')->firstName.' '.Session()->get('jcmUser')->lastName}}</option>
-                                    <option value="other" {{ $upskill->organiser != '' ? 'selected="selected="' : ''}}>Other</option>
+                                    <option value="other" {{ $upskill->organiser != '' ? 'selected="selected="' : ''}}>@lang('home.Other')</option>
                                 </select>
                             </div>
                         </div>
@@ -147,10 +147,10 @@ if($upskill->country != 0){
                         </div>
 
 						<div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.Cost of Description')</label>
+                            <label class="control-label col-sm-3">@lang('home.CostofDescription')</label>
                             <div class="col-sm-9 pnj-form-field">                                
                                     
-                                        <input type="text" class="form-control" name="costdescription" id="costdescription" placeholder="@lang('home.type on your details of cost')" value="{{ $upskill->costdescription }}">
+                                        <input type="text" class="form-control" name="costdescription" id="costdescription" placeholder="@lang('home.typeonyourdetailsofcost')" value="{{ $upskill->costdescription }}">
                             </div>
                         </div>
 
@@ -173,7 +173,7 @@ if($upskill->country != 0){
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}" {{ $gCountry == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                        <option value="{{ $cntry->id }}" {{ $gCountry == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
                                     @endforeach
                                 </select>
                             </div>

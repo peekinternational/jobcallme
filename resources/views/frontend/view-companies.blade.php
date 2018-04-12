@@ -6,7 +6,7 @@
 <section id="companies-section">
     <div class="container">
         <div class="col-md-12 learn-search-box">
-            <h2 class="text-center">@lang('home.companiesin') {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</h2>
+            <h2 class="text-center">@lang('home.companiesin') @lang('home.'.JobCallMe::countryName(JobCallMe::getHomeCountry()))</h2>
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
                     <div class="ls-box">
@@ -46,7 +46,7 @@
                             echo '<div class="col-md-4">';
                             echo '<ul class="list-unstyled">';
                         }
-                        echo '<li class="ellipsis"><a href="'.url('companies?in='.$cat->categoryId).'" class="hvr-forward">'.$cat->name.'</a></li>';
+                        echo '<li class="ellipsis"><a href="'.url('companies?in='.$cat->categoryId).'" class="hvr-forward">'.trans('home.'.$cat->name).'</a></li>';
                         $i++;
                     ?>
                     <?php }?>

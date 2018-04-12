@@ -29,7 +29,7 @@ $opHour = json_decode($company->companyOperationalHour,true);
                        <h1><a href="{{ url('companies/company/'.$company->companyId) }}">{!! $company->companyName !!}</a></h1>
                        <div class="col-md-8 eo-section">
                            <div class="eo-details">
-                               <span>@lang('home.industry'):</span> {!! JobCallMe::categoryName($company->category) !!}
+                               <span>@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryName($company->category))
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.established'):</span> @if($company->companyEstablishDate != "") {!! date('M d, Y',strtotime($company->companyEstablishDate)) !!} @endif

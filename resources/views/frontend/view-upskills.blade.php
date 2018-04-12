@@ -77,7 +77,7 @@
             <div class="col-md-12">
                 <div class="pnj-box">
                     <h3><span style="padding-left:15px;color:#fff;">@lang('home.promoteofferings')</span></h3>
-                    <div class="upskill-box">
+                    <div class="upskill-box" style="padding-bottom:70px">
                         <p style="font-size:17px">@lang('home.advertisecourses')</p>
                         <a href="{{ url('account/upskill/add') }}" class="btn btn-primary">@lang('home.advertisenow')</a>
                     </div>

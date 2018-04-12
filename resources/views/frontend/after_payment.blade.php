@@ -82,7 +82,7 @@
                             </div>
                         </div>
                         <div class="col-sm-9 pnj-form-field">
-                        <button class="btn btn-success" type="submit">Place Order</button>
+                        <button class="btn btn-success" type="submit">@lang('home.Place Order')</button>
                         </div>
                         </div>
                          </form>

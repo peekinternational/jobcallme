@@ -226,7 +226,7 @@ $lToken = csrf_token();
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-								<p>{!! $job->description !!}</p>
+								<p style="padding-top:50px">{!! $job->description !!}</p>
                                 
                                 <div class="job-status eye-icon">
                                     <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
@@ -301,18 +301,20 @@ $lToken = csrf_token();
                 <div class="col-sm-4">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#717171;">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
-                            <div class="img hj-type-job" style="background:#fff">
-                            <div class="" style="height: 80px; width:100%">
-                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img"> <b class="pull-right" style="padding-right:5px;">{!! $job->companyName !!}</b>
+                            <div class="img hj-type-job">
+							<div style="background:#fff">
+								<div class="" style="height: 70px; width:100%;background:#fff">
+									<img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img"> 
                                 </div>
-                               
+                                <b class="pull-right" style="background:#fff;padding-right:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
-                                <hr>
+							</div>
+                                <!-- <hr> -->
                                 
                                 <div class="pj-single-details">
                                     <p style="padding-left:5px">{!! $job->title !!}</p>
                                     <p style="padding-left:5px">ASK Development</p>
-                                    <p style="padding-left:5px;color:#999999">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
+                                    <p style="padding-left:5px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
                             </div>
                             <div class="info">
@@ -347,22 +349,24 @@ $lToken = csrf_token();
                 <div class="col-sm-4">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#94a5a5;">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
-                            <div class="img lj-type-job" style="background:#fff">
+                            <div class="img lj-type-job">
+							<div style="background:#fff">
                             <div class="" style="height: 60px; width:100%">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:60px !important;margin: 0 auto;width: auto !important;" alt="img">
                                </div>
                                 <b class="pull-right">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
-                                <hr>
-                                <div class="lj-single-details" style="background:#fff">
-                                    <p style="padding-left:5px">{!! $job->title !!}</p>
+							</div>
+                                <!-- <hr> -->
+                                <div class="lj-single-details">
+                                    <p style="padding-left:5px;padding-top:5px">{!! $job->title !!}</p>
                                     <p style="padding-left:5px">ASK Development</p>
-                                    <p style="padding-left:5px">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
+                                    <p style="padding-left:5px;color:#fff">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p>{!! $job->description !!}</p>
+                                <p style="padding-top:10px">{!! $job->description !!}</p>
                                 <div class="job-status eye-icon">
                                     <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
@@ -393,17 +397,19 @@ $lToken = csrf_token();
                 <div class="col-md-3">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#4e6c7c">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
-                        <div class="img sj-job-type" style="background:#fff">
+                        <div class="img sj-job-type">
+						<div style="background:#fff">
                         <div class="" style="height: 50px; width:100%">
                             <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:60px !important;margin: 0 auto;width: auto !important;"  alt="img">
                           </div>
                             <b class="pull-right" style="padding-top:5px;padding-right:5px;">{!! $job->companyName !!}</b>
                             <div class="clearfix"></div>
-                            <hr>
-                            <div class="lj-single-details" style="background:#fff">
-                                <p style="padding-left:5px">{!! $job->title !!}</p>
+						</div>
+                            <!-- <hr> -->
+                            <div class="lj-single-details">
+                                <p style="padding-left:5px;padding-top:5px">{!! $job->title !!}</p>
                                 <p style="padding-left:5px">ASK Development</p>
-                                <p style="padding-left:5px">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
+                                <p style="padding-left:5px;color:#fff">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                             </div>
                         </div>
                         <div class="info">
@@ -441,17 +447,19 @@ $lToken = csrf_token();
                 <div class="col-md-5ths">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#b0a48a">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
-                            <div class="img sj-job-type" style="background:#fff">
+                            <div class="img sj-job-type">
+							  <div style="background:#fff">
                                <div class="" style="height: 40px; width:100%">
                                 <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:50px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
                                </div>
                                 <b class="pull-right" style="padding-top:5px;padding-right:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
-                                <hr>
-                                <div class="lj-single-details" style="background:#fff">
-                                    <p style="padding-left:5px">{!! $job->title !!}</p>
+							  </div>
+                                <!-- <hr> -->
+                                <div class="lj-single-details">
+                                    <p style="padding-left:5px;padding-top:5px">{!! $job->title !!}</p>
                                     <p style="padding-left:5px">ASK Development</p>
-                                    <p style="padding-left:5px">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
+                                    <p style="padding-left:5px;color:#fff;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
                             </div>
                             <div class="info">

@@ -9,7 +9,7 @@
 			 <div class="col-md-2">
 			 </div>
 				<div class="col-md-8 company-box-left">
-				<h4>Set Job Filters</h4>
+				<h4>@lang('home.Set Job Filters')</h4>
 				 <form role="form" action="{{ url('jobs') }}" method="get">
 						  <input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<div class="modal-body">
@@ -17,12 +17,15 @@
 								<div class="col-md-12 pnj-form-field">
 								   <div class="form-group">
                                     <select class="form-control" name="degreeLevel">
-									<option value="">@lang('home.selectdegree')</option>
-                                        <option value="High School">High School</option>
-                                        <option value="Intermediate">Intermediate</option>
-                                        <option value="Bachelor">Bachelor</option>
-                                        <option value="Master">Master</option>
-                                        <option value="PhD">PhD</option>
+									<option value="">@lang('home.degreeLevel-text')</option>
+										<option value="highschool" {{ $meta->education == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
+                                        <option value="college" {{ $meta->education == 'college' ? 'selected="selected"' : '' }}>@lang('home.college')</option>
+                                        <option value="university" {{ $meta->education == 'university' ? 'selected="selected"' : '' }}>@lang('home.university')</option>
+                                        <option value="graduateschool" {{ $meta->education == 'graduateschool' ? 'selected="selected"' : '' }}>@lang('home.graduateschool')</option>
+                                        <option value="Doctorate(phd)" {{ $meta->education == 'Doctorate(phd)' ? 'selected="selected"' : '' }}>@lang('home.Doctorate(phd)')</option>
+										<option value="Vocational" {{ $meta->education == 'Vocational' ? 'selected="selected"' : '' }}>@lang('home.Vocational')</option>
+										<option value="Associate Degree" {{ $meta->education == 'Associate Degree' ? 'selected="selected"' : '' }}>@lang('home.Associate Degree')</option>
+										<option value="Certification" {{ $meta->education == 'Certification' ? 'selected="selected"' : '' }}>@lang('home.Certification')</option>
                                     </select>
                                 </div>
                             </div>
@@ -36,7 +39,7 @@
 					   	 <div class="col-md-6 pnj-form-field">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                  <input type="number" class="form-control" name="exmaz" placeholder="@lang('home.experiencemin')">
+                                  <input type="number" class="form-control" name="exmaz" placeholder="@lang('home.experiencemax')">
                               </div>
                            </div>
 					   </div>
@@ -44,7 +47,7 @@
                           <div class="form-group">
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}">{{ $cntry->name }}</option>
+                                        <option value="{{ $cntry->id }}">@lang('home.'.$cntry->name)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -52,7 +55,7 @@
 						<div class="col-md-12 pnj-form-field">
                               <div class="form-group">
                                 <select class="form-control select2 job-state" name="state">
-                                <option value="">Select State</option>
+                                <option value="">@lang('home.state')</option>
                                 </select>
                                  </div>
                               </div>
@@ -60,7 +63,7 @@
                             <div class="col-md-12 pnj-form-field">
                              <div class="form-group">
                                 <select class="form-control select2 job-city" name="city">
-                                <option value="">Select City</option>
+                                <option value="">@lang('home.city')</option>
 
                                 </select>
                             </div>
@@ -91,79 +94,79 @@
                                 <div class="form-group">
                                    <div class=" pnj-form-field">
                                     <select class="form-control input-sm select2" name="language">
-                                         <option value="">Languages</option>
-                                          <option value="Afrikanns">Afrikanns</option>
-										  <option value="Albanian">Albanian</option>
-										  <option value="Arabic">Arabic</option>
-										  <option value="Armenian">Armenian</option>
-										  <option value="Basque">Basque</option>
-										  <option value="Bengali">Bengali</option>
-										  <option value="Bulgarian">Bulgarian</option>
-										  <option value="Catalan">Catalan</option>
-										  <option value="Cambodian">Cambodian</option>
-										  <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
-										  <option value="Croation">Croation</option>
-										  <option value="Czech">Czech</option>
-										  <option value="Danish">Danish</option>
-										  <option value="Dutch">Dutch</option>
-										  <option value="English">English</option>
-										  <option value="Estonian">Estonian</option>
-										  <option value="Fiji">Fiji</option>
-										  <option value="Finnish">Finnish</option>
-										  <option value="French">French</option>
-										  <option value="Georgian">Georgian</option>
-										  <option value="German">German</option>
-										  <option value="Greek">Greek</option>
-										  <option value="Gujarati">Gujarati</option>
-										  <option value="Hebrew">Hebrew</option>
-										  <option value="Hindi">Hindi</option>
-										  <option value="Hungarian">Hungarian</option>
-										  <option value="Icelandic">Icelandic</option>
-										  <option value="Indonesian">Indonesian</option>
-										  <option value="Irish">Irish</option>
-										  <option value="Italian">Italian</option>
-										  <option value="Japanese">Japanese</option>
-										  <option value="Javanese">Javanese</option>
-										  <option value="Korean">Korean</option>
-										  <option value="Latin">Latin</option>
-										  <option value="Latvian">Latvian</option>
-										  <option value="Lithuanian">Lithuanian</option>
-										  <option value="Macedonian">Macedonian</option>
-										  <option value="Malay">Malay</option>
-										  <option value="Malayalam">Malayalam</option>
-										  <option value="Maltese">Maltese</option>
-										  <option value="Maori">Maori</option>
-										  <option value="Marathi">Marathi</option>
-										  <option value="Mongolian">Mongolian</option>
-										  <option value="Nepali">Nepali</option>
-										  <option value="Norwegian">Norwegian</option>
-										  <option value="Persian">Persian</option>
-										  <option value="Polish">Polish</option>
-										  <option value="Portuguese">Portuguese</option>
-										  <option value="Punjabi">Punjabi</option>
-										  <option value="Quechua">Quechua</option>
-										  <option value="Romanian">Romanian</option>
-										  <option value="Russian">Russian</option>
-										  <option value="Samoan">Samoan</option>
-										  <option value="Serbian">Serbian</option>
-										  <option value="Slovak">Slovak</option>
-										  <option value="Slovenian">Slovenian</option>
-										  <option value="Spanish">Spanish</option>
-										  <option value="Swahili">Swahili</option>
-										  <option value="Swedish ">Swedish </option>
-										  <option value="Tamil">Tamil</option>
-										  <option value="Tatar">Tatar</option>
-										  <option value="Telugu">Telugu</option>
-										  <option value="Thai">Thai</option>
-										  <option value="Tibetan">Tibetan</option>
-										  <option value="Tonga">Tonga</option>
-										  <option value="Turkish">Turkish</option>
-										  <option value="Ukranian">Ukranian</option>
-										  <option value="Urdu">Urdu</option>
-										  <option value="Uzbek">Uzbek</option>
-										  <option value="Vietnamese">Vietnamese</option>
-										  <option value="Welsh">Welsh</option>
-										  <option value="Xhosa">Xhosa</option>
+                                         <option value="">@lang('home.Languages')</option>
+                                          <option value="Afrikanns">@lang('home.Afrikanns')</option>
+										  <option value="Albanian">@lang('home.Albanian')</option>
+										  <option value="Arabic">@lang('home.Arabic')</option>
+										  <option value="Armenian">@lang('home.Armenian')</option>
+										  <option value="Basque">@lang('home.Basque')</option>
+										  <option value="Bengali">@lang('home.Bengali')</option>
+										  <option value="Bulgarian">@lang('home.Bulgarian')</option>
+										  <option value="Catalan">@lang('home.Catalan')</option>
+										  <option value="Cambodian">@lang('home.Cambodian')</option>
+										  <option value="Chinese (Mandarin)">@lang('home.Chinese (Mandarin)')</option>
+										  <option value="Croation">@lang('home.Croation')</option>
+										  <option value="Czech">@lang('home.Czech')</option>
+										  <option value="Danish">@lang('home.Danish')</option>
+										  <option value="Dutch">@lang('home.Dutch')</option>
+										  <option value="English">@lang('home.English')</option>
+										  <option value="Estonian">@lang('home.Estonian')</option>
+										  <option value="Fiji">@lang('home.Fiji')</option>
+										  <option value="Finnish">@lang('home.Finnish')</option>
+										  <option value="French">@lang('home.French')</option>
+										  <option value="Georgian">@lang('home.Georgian')</option>
+										  <option value="German">@lang('home.German')</option>
+										  <option value="Greek">@lang('home.Greek')</option>
+										  <option value="Gujarati">@lang('home.Gujarati')</option>
+										  <option value="Hebrew">@lang('home.Hebrew')</option>
+										  <option value="Hindi">@lang('home.Hindi')</option>
+										  <option value="Hungarian">@lang('home.Hungarian')</option>
+										  <option value="Icelandic">@lang('home.Icelandic')</option>
+										  <option value="Indonesian">@lang('home.Indonesian')</option>
+										  <option value="Irish">@lang('home.Irish')</option>
+										  <option value="Italian">@lang('home.Italian')</option>
+										  <option value="Japanese">@lang('home.Japanese')</option>
+										  <option value="Javanese">@lang('home.Javanese')</option>
+										  <option value="Korean">@lang('home.Korean')</option>
+										  <option value="Latin">@lang('home.Latin')</option>
+										  <option value="Latvian">@lang('home.Latvian')</option>
+										  <option value="Lithuanian">@lang('home.Lithuanian')</option>
+										  <option value="Macedonian">@lang('home.Macedonian')</option>
+										  <option value="Malay">@lang('home.Malay')</option>
+										  <option value="Malayalam">@lang('home.Malayalam')</option>
+										  <option value="Maltese">@lang('home.Maltese')</option>
+										  <option value="Maori">@lang('home.Maori')</option>
+										  <option value="Marathi">@lang('home.Marathi')</option>
+										  <option value="Mongolian">@lang('home.Mongolian')</option>
+										  <option value="Nepali">@lang('home.Nepali')</option>
+										  <option value="Norwegian">@lang('home.Norwegian')</option>
+										  <option value="Persian">@lang('home.Persian')</option>
+										  <option value="Polish">@lang('home.Polish')</option>
+										  <option value="Portuguese">@lang('home.Portuguese')</option>
+										  <option value="Punjabi">@lang('home.Punjabi')</option>
+										  <option value="Quechua">@lang('home.Quechua')</option>
+										  <option value="Romanian">@lang('home.Romanian')</option>
+										  <option value="Russian">@lang('home.Russian')</option>
+										  <option value="Samoan">@lang('home.Samoan')</option>
+										  <option value="Serbian">@lang('home.Serbian')</option>
+										  <option value="Slovak">@lang('home.Slovak')</option>
+										  <option value="Slovenian">@lang('home.Slovenian')</option>
+										  <option value="Spanish">@lang('home.Spanish')</option>
+										  <option value="Swahili">@lang('home.Swahili')</option>
+										  <option value="Swedish">@lang('home.Swedish')</option>
+										  <option value="Tamil">@lang('home.Tamil')</option>
+										  <option value="Tatar">@lang('home.Tatar')</option>
+										  <option value="Telugu">@lang('home.Telugu')</option>
+										  <option value="Thai">@lang('home.Thai')</option>
+										  <option value="Tibetan">@lang('home.Tibetan')</option>
+										  <option value="Tonga">@lang('home.Tonga')</option>
+										  <option value="Turkish">@lang('home.Turkish')</option>
+										  <option value="Ukranian">@lang('home.Ukranian')</option>
+										  <option value="Urdu">@lang('home.Urdu')</option>
+										  <option value="Uzbek">@lang('home.Uzbek')</option>
+										  <option value="Vietnamese">@lang('home.Vietnamese')</option>
+										  <option value="Welsh">@lang('home.Welsh')</option>
+										  <option value="Xhosa">@lang('home.Xhosa')</option>
 										
                                     </select>
                                 </div>
@@ -177,14 +180,14 @@
                                     <input type="checkbox" checked >
                                     <span class="slider round"></span>
                                    </label>
-                                    <span style="color: #CCC;">Filter existing application</span> 
+                                    <span style="color: #CCC;">@lang('home.Filter existing application')</span> 
                                     </div>
                                 </div>
                                   </div>         
 		              	</div>
                     </div>
                     <div class="modal-footer">
-                    <button type="submit" style="float:left" class="btn btn-success" >@lang('home.save')</button>   <button type="button" style="float:left" class="btn btn-default" id="advance_click">@lang('home.Advancefilters')</button>   <button type="button" style="float:left" class="btn btn-default"><a href="{{url('account/employer')}}">@lang('home.skip')</a></button>
+                    <button type="submit" style="float:left" class="btn btn-success" >@lang('home.save')</button>   <button type="button" style="float:left" class="btn btn-default" id="advance_click">@lang('home.Advancefilters')</button>   <button type="button" style="float:left" class="btn btn-default"><a href="{{url('account/employer')}}">@lang('home.filterskip')</a></button>
                     </div>
                 </form>	
 				</div>

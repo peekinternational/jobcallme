@@ -4,7 +4,7 @@
 <section id="learn-section" class='paymentCompleted'>
     <div class="container">
         <div class="col-md-12 learn-search-box">
-            <h2 class="text-center">Payment completed</h2>
+            <h2 class="text-center">@lang('home.Payment completed')</h2>
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
                     <div class="ls-box">

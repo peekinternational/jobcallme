@@ -87,7 +87,7 @@
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types">
 						 @foreach($rec as $k=>$payment)
-						 
+								
                             <!----><li style="position:relative">
                                 <!---->
 								<span class="pay_blog">
@@ -119,7 +119,7 @@
                             </li>
 							@endforeach
                         </ul>
-                   <a id="nonpckg" href="javascript:void(0)" style="float:right">Use Package Plan?</a>
+                   <a id="nonpckg" href="javascript:void(0)" style="float:right">@lang('home.Use Package Plan?')</a>
 
                     
                 </div>
@@ -134,28 +134,48 @@
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types">
 						 @foreach($rec as $keys=>$payment)
-						 
-                            <!----><li style="position:relative">
+								@if($payment->title == "Basic")
+                            <!----><li style="position:relative;background:#3a79d2;">
+								@endif
+								@if($payment->title == "Golden")
+                            <!----><li style="position:relative;background:#b0a48a;">
+								@endif
+								@if($payment->title == "Special")
+                            <!----><li style="position:relative;background:#4e6c7c;">
+								@endif
+								@if($payment->title == "Latest")
+                            <!----><li style="position:relative;background:#94a5a5;">
+								@endif
+								@if($payment->title == "Hot")
+                            <!----><li style="position:relative;background:#717171;">
+								@endif
+								@if($payment->title == "Top Job")
+                            <!----><li style="position:relative;background:#a8b3b9;">
+								@endif
+								@if($payment->title == "Premium")
+                            <!----><li style="position:relative;background:#a09d8e;">
+								@endif
+								
                                 <!---->
 								<span class="pay_blog">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
 									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
 								</span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.'.$payment->title)</span></div>
+                             <span class="b" style="color:#fff;font-size: 17px;">@lang('home.'.$payment->title)</span></div>
                                 <div>
                                     <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
+                                        <ul class="list-unstyled desc" style="font-size:12px">
 											<li>@lang('home.'.$payment->tag1)</li>
                                             <li>@lang('home.adcost')</li>
                                             <!-- <li>{!! $payment->tag1!!}</li>
                                              <li>{!! $payment->tag2!!}</li> -->
                                         </ul>
 										
-                                        <div class="credits b">@if($payment->price ==0)
+                                        <div class="credits b" style="color:#fff;font-size: 15px;" >@if($payment->price ==0)
 									<span class="free">	@lang('home.Free')</span>
 										@else
-										<span class="text-success" id="simple_text{{$keys}}"></span>
+										<span style="color:#fff" class="text-success" id="simple_text{{$keys}}"></span>
 									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
 									@endif</div>
                                     </label>
@@ -167,7 +187,7 @@
 							@endforeach
                         </ul>
                  
-                 <a id="nonpckg" href="{{ url('account/manage?plan')}}" style="float:right">Use Package Plan?</a>
+                 <a id="nonpckg" href="{{ url('account/manage?plan')}}" style="float:right">@lang('home.Use Package Plan?')</a>
                     
                 </div>
             </div>
@@ -288,13 +308,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">Associate Test/Questionnaire</label>
+                            <label class="control-label col-sm-3">@lang('home.Associate Test/Questionnaire')</label>
                             <div class="col-sm-9">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <input id="Questionnaire" type="checkbox" class="cbx-field" name="Questionnaire" value="yes">                             
                                         <label class="cbx" for="Questionnaire"></label>
-                                        <label class="lbl" for="Questionnaire">Associate Test/Questionnaire</label>
+                                        <label class="lbl" for="Questionnaire">@lang('home.Associate Test/Questionnaire')</label>
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +325,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                        <select class="form-control" name="questionaire_id" id="ques_sel" disabled="disabled">
-                                           <option value=""> select questionaires</option>
+                                           <option value=""> @lang('home.select questionaires')</option>
                                            @foreach($questionaires as $question)
                                            <option value="{{ $question->ques_id}}">{{$question->title}}</option>
 
@@ -334,7 +354,7 @@
                     <h3>@lang('home.naturejob')</h3>
                     <div class="pnj-form-section">
                        <div class="form-group">
-                           <label class="control-label col-sm-3">@lang('home.type')</label>
+                           <label class="control-label col-sm-3">@lang('home.jobinformationtype')</label>
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control select2" name="type" >
                                     @foreach(JobCallMe::getJobType() as $jtype)
@@ -454,7 +474,7 @@
                                         <div class="col-md-4 benefits-checks col-xs-6">
                                             <input id="{{ str_replace(' ','-',$benefit) }}"  type="checkbox" class="cbx-field" name="benefits[]" value="{{ $benefit }}">
                                             <label class="cbx" for="{{ str_replace(' ','-',$benefit) }}"></label>
-                                            <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">{{ $benefit }}</label>
+                                            <label class="lbl" for="{{ str_replace(' ','-',$benefit) }}">@lang('home.'.$benefit)</label>
                                         </div>
                                     @endforeach
                                         <div class="col-md-4 col-xs-6">
@@ -505,7 +525,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.address')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input id="pac-input" name="Address" class="form-control" type="text" placeholder="Enter a location" requried>
+                                <input id="pac-input" name="Address" class="form-control" type="text" placeholder="@lang('home.Enter a location')" requried>
                                 <div class="pac-card" id="pac-card">
                                   <div>
                                     <div id="type-selector" class="pac-controls">
@@ -555,7 +575,7 @@
                         </div>
                     </div>
 					<div class="col-md-offset-3 col-md-2  pnj-btns">
-                        <span style="font-size:17px;padding-right:50px;" id="total">Total Amount : US$</span>						
+                        <span style="font-size:17px;padding-right:50px;" id="total">@lang('home.Total Amount') : US$</span>						
                     </div>
                     <div class="col-md-6  pnj-btns">                        
 						<button type="submit" class="btn btn-primary" name="save">@lang('home.postjob')</button>
@@ -822,12 +842,12 @@ $('#secondDate').on('change', function() {
       $('#pas').val(to);
       
     if ($('#kr').is(':checked')) {
-	  $('#total').html("Total Amount : "+total*1100+" ₩" );
+	  $('#total').html("@lang('home.Total Amount') : "+total*1100+" ₩" );
      // alert('kr');
     }
 
      if ($('#us').is(':checked')) {
-	  $('#total').html("Total Amount : "+total+" $" );
+	  $('#total').html("@lang('home.Total Amount') : "+total+" $" );
       //alert('us');
     }
    

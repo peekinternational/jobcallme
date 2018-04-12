@@ -655,7 +655,7 @@ a.job-location:hover span.shine {
     background: rgba(0,0,0,0.8) !important;
 }
 .lj-type-job{   
-    height: 135px;    
+    height: 145px;    
 }
 .lj-type-job img{
     width: 82px !important;
@@ -3570,7 +3570,7 @@ img.profile-photo-xs{
     }
     /*Zeeshan Css Chnges*/
     .job-search{
-        padding-top: 25px;
+        padding-top: 100px;
     }
     .hp_strip .wrapper h2{
         padding-top: 60px !important;

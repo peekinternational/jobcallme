@@ -241,7 +241,7 @@ if(Request::input('show') != ''){
                     </tbody>
                 </table>
                 <h4>@lang('home.description')</h4>
-                <p><strong>We are conveniently located in {{ JobCallMe::getCompany($job->companyId)->companyAddress }}.</strong></p>
+                <p><strong>@lang('home.We are conveniently located in') {{ JobCallMe::getCompany($job->companyId)->companyAddress }}.</strong></p>
                 <p>{!! $job->description !!}</p>
                 <h4>@lang('home.skills')</h4>
                 <p>{!! $job->skills !!}</p>

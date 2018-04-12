@@ -16,11 +16,11 @@
                     <h4 class="modal-title">@lang('home.cashpayment')</h4>
                     </div>
                     <div class="modal-body">
-                    <p>Article title: {{ $input['title']}}</p>
-                    <p>Amount: ${{ $input['amount']}}</p>
-                    <p>Bank Name: Industrail Bank</p>
-                    <p>Account Holder: <b>Jobcallme Co.,Ltd</b></p>
-                    <p>Account Number: 068-078905-04-012</p>
+                    <p>@lang('home.Article title') : {{ $input['title']}}</p>
+                    <p>@lang('home.Amount') : ${{ $input['amount']}}</p>
+                    <p>@lang('home.Bank Name') : 기업은행</p>
+                    <p>@lang('home.Account Holder') : <b>주식회사 잡콜미</b></p>
+                    <p>@lang('home.Account Number') : 068-078905-04-012</p>
                     
                     </div>
                     

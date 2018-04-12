@@ -16,11 +16,11 @@
                     <h4 class="modal-title">@lang('home.cashpayment')</h4>
                     </div>
                     <div class="modal-body">
-                    <p>Upskill title: {{ $order['orderBy']}}</p>
-                    <p>Amount: ${{ $order['amount']}}</p>
-                    <p>Bank Name: Industrail Bank</p>
-                    <p>Account Holder: <b>Jobcallme Co.,Ltd</b></p>
-                    <p>Account Number: 068-078905-04-012</p>
+                    <p>@lang('home.Skill title') : {{ $order['orderBy']}}</p>
+                    <p>@lang('home.Amount') : ${{ $order['amount']}}</p>
+                    <p>@lang('home.Bank Name') : 기업은행</p>
+                    <p>@lang('home.Account Holder') : <b>주식회사 잡콜미</b></p>
+                    <p>@lang('home.Account Number') : 068-078905-04-012</p>
                     
                     </div>
                     

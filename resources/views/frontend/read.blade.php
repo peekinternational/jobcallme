@@ -79,13 +79,21 @@
                         </div>
                         <div class="col-md-12">
                             <p> <a href="{{ url('read/article/'.$rec->writingId ) }}" class="la-title">{!! $rec->title !!}</a></p>
-                            <span>{{ $rec->cat_names }}</span>
+                            <?
+								$cat_names = explode(",",$rec->cat_names);
+								
+							?>
+							<span><?for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i])<?}?></span>
                             <div class="la-text">{!! $rec->citation !!}</div>
                             <div class="ra-author-box">
                                 <img src="{{ url('profile-photos/'.$rec->profilePhoto) }}" class="img-circle" alt="{{ $rec->firstName }}">
                                 <div class="ra-author">
                                     <a href="{{ url('account/employer/application/applicant/'.$rec->userId) }}">{{ $rec->firstName.' '.$rec->lastName }}</a><br>
-                                    <span>{{ date('M d, Y',strtotime($rec->createdTime))}}</span>
+                                    <span>@if(app()->getLocale() == "kr")
+														{{ date('Y-m-d',strtotime($rec->createdTime))}}
+													@else
+														{{ date('M d, Y',strtotime($rec->createdTime))}}
+													@endif</span>
                                 </div>
                             </div>
                         </div>

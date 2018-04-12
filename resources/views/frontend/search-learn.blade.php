@@ -20,17 +20,17 @@
 							    </div>
 								<div class="form-group">
 					         <select class="form-control select2 job-country" name="type" >
-                                     <option value="">@lang('home.type')</option>
+                                     <option value="">@lang('home.s_type')</option>
                               @foreach(JobCallMe::getUpkillsType() as $skill)
-                                <option value="{!! $skill->name !!}">{!! $skill->name !!}</option>
+                                <option value="{!! $skill->name !!}">@lang('home.'.$skill->name)</option>
                               @endforeach
                                </select>
 							      </div>
 						    <div class="form-group">
                                 <select class="form-control select2 job-country" name="country">
-								 <option value="" >Select Country</option>
+								 <option value="" >@lang('home.country')</option>
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}" >{{ $cntry->name }}</option>
+                                        <option value="{{ $cntry->id }}" >@lang('home.'.$cntry->name)</option>
                                     @endforeach
                                 </select>
                         </div>

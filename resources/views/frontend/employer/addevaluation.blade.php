@@ -14,10 +14,10 @@
                         <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Evaluation Form</th>
-                                            <th>No. of Criterion</th>
-                                            <th>Created on</th>
-                                            <th>Action</th>
+                                            <th>@lang('home.Evaluation Form')</th>
+                                            <th>@lang('home.No. of Criterion')</th>
+                                            <th>@lang('home.Created on')</th>
+                                            <th>@lang('home.Action')</th>
                                             
                                         </tr>
                                     </thead>
@@ -29,10 +29,10 @@
                                             <td>{{$order->criterion}}</td>
                                             <td>{{$order->created_at}}</td>
         							
-        							       <td><a href="javascript:;" title="Edit" onclick="getAcademic('{{ $order->id }}')">
+        							       <td><a href="javascript:;" title="@lang('home.Edit')" onclick="getAcademic('{{ $order->id }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                 <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $order->id}}')">
+                                                 <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $order->id}}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;</td>
                                          </tr>
@@ -70,7 +70,7 @@
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
                                     <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
-                                    <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">Cancel</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">@lang('home.Cancel')</button>
                                 </div>
                             </div>
                         </form>
@@ -89,7 +89,7 @@
 		var pageToken = '{{ csrf_token() }}';
 function addAcademic(){
     $('.form-academic input').val('');
-    $('#academic-edit h4 c').text('@lang('home.evaluationforms')');
+    $('#academic-edit h4 c').text('@lang("home.evaluationforms")');
     $('#academic').hide();
     $('#academic-edit').fadeIn();
 }
@@ -144,7 +144,7 @@ function getAcademic(resumeId){
     })
 }
 function deleteElement(resumeId){
-    if(confirm('Are you sure to delete this?')){
+    if(confirm('@lang("home.Are you sure to delete this?")')){
         $.ajax({
             url: "{{ url('account/jobseeker/resume/delete') }}/"+resumeId,
             success: function(response){

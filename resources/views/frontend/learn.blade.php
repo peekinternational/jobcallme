@@ -26,22 +26,22 @@
                                 </div>
 								<div class="search-field-box search-item" id="l_type" style="display:none;padding-top: 14px;">
 								<select class="form-control select2 job-country" name="type" >
-                                     <option value="">@lang('home.type')</option>
+                                     <option value="">@lang('home.category')</option>
                               @foreach(JobCallMe::getUpkillsType() as $skill)
-                                <option value="{!! $skill->name !!}">{!! $skill->name !!}</option>
+                                <option value="{!! $skill->name !!}">@lang('home.'.$skill->name)</option>
                               @endforeach
                           </select>
 									<button  type="submit" class="btn btn-success" style="margin-top: 12px;">
-                                Search</button>
+                                @lang('home.Search')</button>
 								<button  type="button" id="l_close" class="btn btn-default" style="margin-top: 12px;">
-                                Close</button>
+                                @lang('home.Close')</button>
 
                                 </div>
                                 
                                 <div class="search-field-box search-item" id="l_country" style="display:none;padding-top: 14px;">
 								
                                     <select class="form-control select2 job-country" name="country">
-                                        <option value="">select country</option>
+                                        <option value="">@lang('home.country')</option>
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
                                         <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
                                     @endforeach
@@ -121,7 +121,7 @@
 						    {{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
 						@endif </p>
                             <div class="la-text">{{ substr(strip_tags($rec->description),0,200) }}</div>
-                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
+                            <span><i class="fa fa-map-marker"></i> @lang('home.'.JobCallMe::cityName($rec->city)),@lang('home.'.JobCallMe::countryName($rec->country))</span>
                             <div>
                                 <p class="pull-right la-price">{{ $rec->currency.' '.number_format($rec->cost)}}/-</p>
                             </div>
