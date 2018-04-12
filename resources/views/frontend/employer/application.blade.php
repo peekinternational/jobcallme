@@ -348,7 +348,8 @@ $('form.interview-form').submit(function(e){
 $('body').on('click','#resume-download',function(event) {
 $('.ea-record-selected').each(function(index,element){
    var id = $(this).closest('tr').find('#user_id').val();
-    $.ajax({
+    window.location = "{{ url('account/jobseeker/cv') }}/"+id;
+    /*$.ajax({
         url : "{{ url('account/jobseeker/cv') }}/"+id,
         type: "get",
         success:function(res){
@@ -357,7 +358,7 @@ $('.ea-record-selected').each(function(index,element){
                 window.location ="{{ url('account/manage?plan') }}";
             }
         }
-    });
+    });*/
 })
 });
 </script>

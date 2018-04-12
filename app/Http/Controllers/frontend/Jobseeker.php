@@ -949,12 +949,7 @@ class Jobseeker extends Controller{
 		$inputs['quantity']=$remain;
 			if(count($plan) == 0)
 			{
-				if($request->ajax()){
-					echo "fail";
-				}else{
-					return redirect('account/manage?plan');
-				}
-                
+				return redirect('account/manage?plan');
 			}
 				else{
                      DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
