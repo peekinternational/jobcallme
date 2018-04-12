@@ -947,7 +947,7 @@ class Jobseeker extends Controller{
 		$quantity= $plan[0]->quantity;
 		$remain = $quantity - 1;
 		$inputs['quantity']=$remain;
-			if(count($plan) != 0)
+			if(count($plan) == 0)
 			{
 				return redirect('account/manage?plan');
 			}
