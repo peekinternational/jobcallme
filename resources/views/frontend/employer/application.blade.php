@@ -198,6 +198,25 @@ if(Request::input('show') != ''){
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal" role="dialog">
+       <div class="modal-dialog">
+       
+         <!-- Modal content-->
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title">Download Zip File</h4>
+           </div>
+           <div class="modal-body">
+             <p>Some text in the modal.</p>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           </div>
+         </div>
+         
+       </div>
+     </div>
 </section>
 @endsection
 @section('page-footer')
@@ -346,11 +365,21 @@ $('form.interview-form').submit(function(e){
     e.preventDefault();
 })
 $('body').on('click','#resume-download',function(event) {
+    var id_array = [];
 $('.ea-record-selected').each(function(index,element){
    var id = $(this).closest('tr').find('#user_id').val();
-    console.log(index);
-    window.open("{{ url('account/jobseeker/cv') }}/"+id, '_blank');
+    id_array.push(id);
 })
+ 
+ $.ajax({
+    url:"{{ url('sajid')}}",
+    type:"post",
+    data:{id_array:id_array,_token:"{{ csrf_token() }}"},
+    success:function(res){
+        $('#myModal').modal('show');
+        $('#myModal .modal-body').html('<a href="{{ url("")}}/'+res+'">click to download</a>');
+    }
+ })
 });
 </script>
 @endsection

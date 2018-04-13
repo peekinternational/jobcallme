@@ -184,8 +184,9 @@ return [
         App\Providers\JobCallMeServiceProvider::class,
 		/*generate pdf*/
 		Barryvdh\DomPDF\ServiceProvider::class,
-		 Laravel\Socialite\SocialiteServiceProvider::class,
-		 'Collective\Html\HtmlServiceProvider',
+		Laravel\Socialite\SocialiteServiceProvider::class,
+		'Collective\Html\HtmlServiceProvider',
+        Chumper\Zipper\ZipperServiceProvider::class
     ],
 
     /*
@@ -245,6 +246,7 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
 		'Location' => Stevebauman\Location\Facades\Location::class,
         'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class, 
+        'Zipper' => Chumper\Zipper\Zipper::class
     ],
 
 ];

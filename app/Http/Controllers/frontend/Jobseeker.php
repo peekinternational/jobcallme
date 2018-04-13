@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
 use PDF;
+use Zipper;
 
 class Jobseeker extends Controller{
 
@@ -952,18 +953,37 @@ class Jobseeker extends Controller{
 				return redirect('account/manage?plan');
 			}
 				else{
-                     DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
-					 $user = DB::table('jcm_users')->where('userId',$id)->first();
-						$name= $user->firstName;
-						//return $name;
-						$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
-						$resume = $this->userResume($id);
-						//dd($resume);
+
+                    DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
+					$user = DB::table('jcm_users')->where('userId',$id)->first();
+					$name= $user->firstName;
 						
-					//return view('frontend.jobseeker.resume');
-						$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
-						return $pdf->download($name.'_cv.pdf');
+					$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
+					$resume = $this->userResume($id);
+				
+					$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+					return $pdf->download($name.'_cv.pdf');
 				}
 				
 		}
+		public function downloadmulticv(Request $request){
+			$ids = $request->input('id_array');
+			$dirname = rand();
+			mkdir("resumefiles/".$dirname);
+			foreach ($ids as $id) {
+				$user = DB::table('jcm_users')->where('userId',$id)->first();
+				$name= $user->firstName.rand(0,20);
+					
+				$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
+				$resume = $this->userResume($id);
+				$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+				
+				file_put_contents("resumefiles/".$dirname."/".$name.".pdf", $pdf->output());
+			}
+			$files = glob("resumefiles/".$dirname.'/*');
+			Zipper::make('resumeZip/'.$dirname.'.zip')->add($files)->close();
+
+			echo 'resumeZip/'.$dirname.'.zip';
+		}
+		
 }
