@@ -114,6 +114,8 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/plan/save','admin\Cms@saveplan');
 	Route::get('cms/plan/get/{id}','admin\Cms@getplan');
 	Route::delete('cms/plan/delete','admin\Cms@deleteplan');
+	Route::get('cms/plan/get','admin\Cms@allpackage');
+	Route::post('cms/pckgstatupdate','admin\Cms@pckgstatupdate');
 	
 	/* upskill type */
 	Route::match(['get','post'],'cms/upskilltype','admin\Cms@viewupskillType');

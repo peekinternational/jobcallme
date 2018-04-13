@@ -704,5 +704,33 @@ class Cms extends Controller{
         }
         return redirect(url()->previous());
     }
+
+     public function allpackage(Request $request){
+        $data = DB::table('jcm_save_packeges');
+        $data->select('jcm_users.email','jcm_save_packeges.*');
+       $data->leftJoin('jcm_users','jcm_users.userId','=','jcm_save_packeges.user_id');
+        $data->orderBy('id','des');
+        $jobs = $data->paginate(15);
+    //    / dd($jobs);
+
+      return view('admin.cms.pakages',compact('jobs'));
+    }
+  public function pckgstatupdate(Request $request){
+        $id = $request->input('id');
+        $status = $request->input('status');
+         $jobstatus = $request->input('jobstatus');
+        
+        $orderstatus = $request->input('orderstatus');
+        $check = DB::table('jcm_save_packeges')->where('id',$id)->update(['status'=>$status]);
+        DB::table('jcm_orders')->where('pckg_id',$id)->update(['status'=>$orderstatus]);
+        DB::table('jcm_make_payment')->where('pckg_id',$id)->update(['status'=>$orderstatus]);
+       
+        if($check){
+            echo 1;
+        }else{
+            echo 2;
+            
+        }
+    }
 	
 }

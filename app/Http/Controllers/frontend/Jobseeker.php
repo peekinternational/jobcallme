@@ -39,7 +39,7 @@ class Jobseeker extends Controller{
     	$company->orderBy('companyId','desc');
 		$company->where('category','!=','');
     	$company->limit(4);
-    	$companies = $company->get();
+    	$companies = $company->inRandomOrder()->get();
 
     	$followArr = array();
 		if($request->session()->has('jcmUser')){
@@ -72,6 +72,8 @@ class Jobseeker extends Controller{
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
 		$jobs->where('jcm_jobs.country','=',$country);
 		$jobs->where('jcm_jobs.amount','>=','1');
+		$jobs->where('jcm_jobs.jobStatus','=','Publish');
+		$jobs->where('jcm_jobs.status','=','1');
 		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
 		if(count($meta) > 0){
 			$jobs->where('jcm_jobs.category','=',$meta->industry);
