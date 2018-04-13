@@ -117,12 +117,12 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')" requried>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="pwd" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="Password">
+                    <input type="password" class="form-control" id="pwd" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="@lang('home.Password')">
                     <!-- <span toggle="#password-field" class="fa fa-fw fa-eye field-icon " id="toggle-password"></span> -->
                     <p style="color:red" id="errorpass"></p>
                 </div>
                     <div class="form-group">
-                    <input type="password" class="form-control" id="confirm_password"   value="{{ old('password') }}" placeholder="Re-enter Password">
+                    <input type="password" class="form-control" id="confirm_password"   value="{{ old('password') }}" placeholder="@lang('home.Re-enter Password')">
                      <span id='message'></span>
                 </div>
 
@@ -247,9 +247,9 @@ document.getElementById("toggle-password").addEventListener("click", function ()
 
 $('#pwd, #confirm_password').on('keyup', function () {
     if ($('#pwd').val() == $('#confirm_password').val()) {
-        $('#message').html('Password Matching').css('color', 'green');
+        $('#message').html('@lang("home.Password Matching")').css('color', 'green');
     } else 
-        $('#message').html('Not Matching').css('color', 'red');
+        $('#message').html('@lang("home.Not Matching")').css('color', 'red');
 });
 
     setTimeout(function(){

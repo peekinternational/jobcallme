@@ -88,7 +88,7 @@
 										<a href="{{url('account/employer/job/share/'.$pjobs->jobId)}}"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
 										<a href="{{url('account/employer/status/'.$pjobs->jobId)}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')</a>
 										<a href="{{url('account/employer/evalution')}}"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
-                                        <a href="#" onclick="return false;" class="active_deactive{{$pjobs->jobId}}" id="active_deactive{{$key}}"><i class="fa fa-eye" aria-hidden="true"></i> Active</a>
+                                        <a href="#" onclick="return false;" class="active_deactive{{$pjobs->jobId}}" id="active_deactive{{$key}}"><i class="fa fa-eye" aria-hidden="true"></i> @lang('home.Active')</a>
                                         <input type="hidden" class="JobId" value="{{$pjobs->jobId}}">
                                         <input type="hidden" class="check{{$pjobs->jobId}}" value="{{$pjobs->jobStatus}}">
 										<a href="{{ url('account/employer/delete/'.$pjobs->jobId) }}"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')</a>
@@ -293,9 +293,9 @@ $(document).ready(function(){
             oye = jArray.data[i].jobStatus;
            // alert(oye);
          if(oye=='Publish'){
-            $('#active_deactive'+i).html('<i class="fa fa-eye" id="active"></i> Active');
+            $('#active_deactive'+i).html('<i class="fa fa-eye" id="active"></i> @lang("home.Active")');
             }else{
-            $('#active_deactive'+i).html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+            $('#active_deactive'+i).html('<i class="fa fa-eye-slash" id="deactive"></i> @lang("home.Deactive")');
             }
 
          var jobstatus = '';
@@ -306,7 +306,7 @@ $('#active_deactive'+i).click(function(e){
     //alert(yes);
   
   if(yes=='Publish'){
-      $('.active_deactive'+id).html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+      $('.active_deactive'+id).html('<i class="fa fa-eye-slash" id="deactive"></i> @lang("home.Deactive")');
       yes='Draft';
       //alert(oye);
       var token = "{{ csrf_token() }}";
@@ -318,7 +318,7 @@ $('#active_deactive'+i).click(function(e){
             success:function(res){
                //alert(res);
                if(res == 1){
-                toastr.success('status deactivate');
+                toastr.success('@lang("home.status deactivate")');
                }else{
                 alert('error in controller admin/Cms/jobstatupdate line no 469');
                }
@@ -327,7 +327,7 @@ $('#active_deactive'+i).click(function(e){
   }
   else if(yes=='Draft'){
       
-       $('.active_deactive'+id).html('<i class="fa fa-eye" id="active"></i> Active');
+       $('.active_deactive'+id).html('<i class="fa fa-eye" id="active"></i> @lang("home.Active")');
         yes='Publish';
            jobstatus = 'Publish';
              var token = "{{ csrf_token() }}";
@@ -339,7 +339,7 @@ $('#active_deactive'+i).click(function(e){
             success:function(res){
                // alert(res);
                if(res == 1){
-                toastr.success('status active');
+                toastr.success('@lang("home.status active")');
                }else{
                 alert('error in controller admin/Cms/jobstatupdate line no 469');
                }

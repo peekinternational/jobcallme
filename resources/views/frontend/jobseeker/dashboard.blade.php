@@ -16,7 +16,7 @@
           <!-- <ul class="nav nav-tabs"> -->
             <ul class="nav jobseeker-mbl-nav">
               <li class="active col-md-3 col-xs-7">
-                <a href="#rtj_tab_suggested" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-info-circle"></i> @lang('home.suggested') </a>
+                <a href="#rtj_tab_suggested" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-info-circle"></i>@lang('home.suggested')</a>
               </li>
               <li class="col-md-3 col-xs-5">
                 <a href="#rtj_tab_saved" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-heart"></i> @lang('home.savedjobs') </a>
@@ -253,7 +253,7 @@
             ?>
             <div class="col-md-12 sr-item">
               <div class="col-md-5 col-xs-12">
-                <div class="">
+                <div class="suggestedreading-img-mbl">
                   <img src="{{ $pImage }}" style="width: 100%;">
                 </div>
               </div>

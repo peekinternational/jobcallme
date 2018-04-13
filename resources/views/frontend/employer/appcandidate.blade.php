@@ -151,8 +151,11 @@
 						@else
 						    {!! $skills->startmonth !!} {!! $skills->startyear !!} - {{ $skills->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($skills->endDate)) }}
 						@endif </p>
-                                                <p class="rd-location"> As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
-                                                
+                                                <p class="rd-location"> @if(app()->getLocale() == "kr")
+						    @lang('home.projectposition') : {!! $skills->position !!}, @lang('home.occupation') : {!! $skills->occupation !!}, @lang('home.projectorganization') : {!! $skills->organization !!}
+						@else
+						    @lang('home.projectposition') :  {!! $skills->position !!}, @lang('home.occupation') : {!! $skills->occupation !!}, @lang('home.projectorganization') : {!! $skills->organization !!}
+						@endif 
                                             <p class="rd-location">{!! $skills->detail !!}</p>
                                             
                                             </div>
@@ -170,8 +173,12 @@
                                         <li id="resume-{{ $resumeId }}">
                                             <div class="col-md-12"> 
                                                 <p class="rd-title">{!! $afflls->pos !!}</p>
-                                                <p class="rd-location"> {!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}</p>
-                                                <p class="rd-location">{!! $afflls->org .', '.JobCallMe::cityName($afflls->city).' ,'.JobCallMe::countryName($afflls->country) !!}</p>
+                                                <p class="rd-location"> @if(app()->getLocale() == "kr")
+						    {!! $afflls->stayear !!}년 @lang('home.'.$afflls->stamonth) - {!! $afflls->enyear !!} @lang('home.'.$afflls->enmonth)
+						@else
+						    {!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}
+						@endif  </p>
+                                                <p class="rd-location">{!! $afflls->org !!} , @lang('home.'.JobCallMe::cityName($afflls->city)),@lang('home.'.JobCallMe::countryName($afflls->country))</p>
                                             </div>
                                         </li>
                                     @endforeach
@@ -207,10 +214,10 @@
                                             <div class="col-md-12">
                                             
                                                 <p class="rd-title">{!! $skills->name !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
-                                                <p class="rd-location"> Job Title: {!! $skills->jobtitle !!}</p>
-                                                <p class="rd-location">Organization: {!! $skills->organization .', '.JobCallMe::cityName($skills->city).', '.JobCallMe::countryName($skills->country)  !!}</p>
-                                            <p class="rd-location">Phone Number : {!! $skills->phone !!}</p>
-                                            <p class="rd-location">Email : {!! $skills->email !!}</p>
+                                                <p class="rd-location"> @lang('home.refjobtitle'): {!! $skills->jobtitle !!}</p>
+                                                <p class="rd-location">@lang('home.reforganization'): {!! $skills->organization !!}, @lang('home.'.JobCallMe::cityName($skills->city)),@lang('home.'.JobCallMe::countryName($skills->country))</p>
+                                            <p class="rd-location">@lang('home.phone') : {!! $skills->phone !!}</p>
+                                            <p class="rd-location">@lang('home.email') : {!! $skills->email !!}</p>
                                             </div>
                                         </li>
                                     @endforeach
@@ -227,10 +234,10 @@
                                         <li id="resume-{{ $resumeId }}">
                                             <div class="col-md-12">
                                             
-                                                <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->pu_type !!})</span></p>
-                                                <p class="rd-location"> {!! $skills->month !!}-{!! $skills->year !!}</p>
-                                                <p class="rd-location"> Author: {!! $skills->author !!}</p>
-                                                <p class="rd-location">Publisher: {!! $skills->publisher.', '.JobCallMe::cityName($skills->city).' ,'.JobCallMe::countryName($skills->country)  !!}</p>
+                                                <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >(@lang('home.'.$skills->pu_type))</span></p>
+                                                <p class="rd-location"> {!! $skills->year !!}-{!! $skills->month !!}</p>
+                                                <p class="rd-location"> @lang('home.Author'): {!! $skills->author !!}</p>
+                                                <p class="rd-location">@lang('home.publisher'): {!! $skills->publisher !!}, @lang('home.'.JobCallMe::cityName($skills->city)),@lang('home.'.JobCallMe::countryName($skills->country))</p>
                                             <p class="rd-location">{!! $skills->detail !!}</p>
                                             
                                             </div>
@@ -249,7 +256,11 @@
                                             <div class="col-md-12">
                                                 
                                                 <p class="rd-title">{!! $skills->title !!}</p>
-                                                <p class="rd-location"> {!! $skills->type !!},{!! $skills->startmonth !!} {!! $skills->startyear !!}</p>
+                                                <p class="rd-location"> {!! $skills->type !!},@if(app()->getLocale() == "kr")
+						    {!! $skills->startyear !!}년 @lang('home.'.$skills->startmonth)
+						@else
+						    {!! $skills->startmonth !!} {!! $skills->startyear !!}
+						@endif</p>
                                                 <p class="rd-location"> {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
                                                 
                                             <p class="rd-location">{!! $skills->detail !!}</p>
@@ -270,7 +281,11 @@
                                         <li id="resume-{{ $resumeId }}">
                                             <div class="col-md-12"> 
                                                 <p class="rd-title">{!! $skills->title !!}<span class="rd-location">({!! $skills->type !!})</span></p>
-                                                <p class="rd-location">{!! $skills->startmonth !!} {!! $skills->startyear !!}</p>
+                                                <p class="rd-location">@if(app()->getLocale() == "kr")
+						    {!! $skills->startyear !!}년 @lang('home.'.$skills->startmonth)
+						@else
+						    {!! $skills->startmonth !!} {!! $skills->startyear !!}
+						@endif </p>
                                                 <p class="rd-location">http://{!! $skills->website !!}</p>
                                                 <p class="rd-location"> {!! $skills->occupation !!}</p> 
                                             <p class="rd-location">{!! $skills->detail !!}</p> 
@@ -310,13 +325,13 @@
                             <div class="row">
                                 <div class="col-md-12">
                                 @if(count($questionData) == 0)
-                                    <p>No Questionnaire or Test scheduled yet.</p>
+                                    <p>@lang('home.No Questionnaire or Test scheduled yet.')</p>
                                 @endif
                                     <ol type="1" style="margin-left:30px;">
                                     <?php $i =0 ;?>
                                     @foreach($questionData as $question)
                                         <li><strong>{{$question->question}}</strong><br>
-                                            Ans) <strong>{{$question->answer}}</strong>
+                                            @lang('home.Ans') <strong>{{$question->answer}}</strong>
                                         </li>
                                         @endforeach
                                     </ol>
@@ -354,7 +369,7 @@
                                         <div class="col-md-6">
                                             <select class="form-control select2" name="perInterview">
                                                 @for($i = 1; $i < 10; $i++)
-                                                    <option value="{{ $i * 20 }}">{{ ($i * 20).' Minutes' }}</option>
+                                                    <option value="{{ $i * 20 }}">{{ ($i * 20).trans('home.Minutes') }}</option>
                                                 @endfor
                                             </select>
                                         </div>
@@ -383,7 +398,7 @@
 				</div>
             </div>
 			<div class="pnj-box">
-				<h4>@lang('home.similarpeople') {{JobCallMe::countryName(JobCallMe::getHomeCountry())}}</h4>
+				<h4>@lang('home.similarpeople') @lang('home.'.JobCallMe::countryName(JobCallMe::getHomeCountry()))</h4>
 				<div class="row" style="margin-right: 0 !important;">
 					@foreach($Query as $appl) 
                         <?php
@@ -407,7 +422,7 @@
 							<div class="col-md-8 sp-item">
                                 <p><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
                                 <p>{!! $appl->companyName !!}</p>
-                                <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
+                                <p>@lang('home.'.JobCallMe::cityName($appl->city)), @lang('home.'.JobCallMe::countryName($appl->country))</p>
                             </div>
 						</div>
 					@endforeach 
@@ -438,7 +453,7 @@
                 if($.trim(response) != '1'){
                     toastr.error(response, '', {timeOut: 5000, positionClass: "toast-bottom-center"});
                 }else{
-                    toastr.success('Action perform successfully', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                    toastr.success('@lang("home.Action perform successfully")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
                     $('.ea-scheduleInerview').fadeOut();
                 }
                 $('.interview-form button[name="save"]').prop('disabled',false);

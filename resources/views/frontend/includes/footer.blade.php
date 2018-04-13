@@ -126,11 +126,11 @@
                 <li><a href="https://linkedin.com"><i class="fa fa-linkedin-square"></i> </a> </li>
             </ul>
             <br><br>
-			<button class="btn btn-warning" style="background:#695244;border:#695244;"><a style="color:white" href="{{ url('account/employer/job/new') }}">@lang('home.postjobnew')</a></button>
+			<a style="color:white" href="{{ url('account/employer/job/new') }}"><button class="btn btn-warning" style="background:#695244;border:#695244;">@lang('home.postjobnew')</button></a>
 			<br><br>
-            <button class="btn btn-warning" style="background:#6d846f;border:#6d846f;"><a style="color:white" href="{{ url('companies') }}">&nbsp;@lang('home.Companiesad')&nbsp;&nbsp;</a></button>
+            <a style="color:white" href="{{ url('companies') }}"><button class="btn btn-warning" style="background:#6d846f;border:#6d846f;">&nbsp;@lang('home.Companiesad')&nbsp;&nbsp;</button></a>
             <br><br>
-            <button class="btn btn-warning"><a style="color:white" target="_blank" href="https://www.outsourcingok.com/">www.outsourcingok.com</a></button>
+            <a style="color:white" target="_blank" href="https://www.outsourcingok.com/"><button class="btn btn-warning">www.outsourcingok.com</button></a>
         </div>
     </div>
     <div class="foot-links-hr hidden-xs"></div>

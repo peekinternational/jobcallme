@@ -79,15 +79,15 @@ if($user->profilePhoto != ''){
         <!-- End Mobile View -->
 
         <div class="col-md-2 jobApp-tabs hidden-xs">
-            <h5 class="mtab-heading">@lang('home.account')</h5>
-            <a id="password" class="btn btn-block jaTabBtn ja-tab-active">@lang('home.changepassword')</a>
-            <a id="profile" class="btn btn-block jaTabBtn">@lang('home.editprofile')</a>
-            <a id="notification" class="btn btn-block jaTabBtn">@lang('home.notification')</a>
-            <a id="privacy" class="btn btn-block jaTabBtn">@lang('home.p_privacy')</a>
-            <h5 class="mtab-heading">@lang('home.organization')</h5>
-            <a href="{{ url('account/employer/departments') }}" class="btn btn-block jaTabBtn">@lang('home.departments')</a>
-            <a href="{{ url('account/employer/organization') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.editorganization')</a>
-            <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.interviewvenues')</a>
+            <h5 class="mtab-heading"><img src="/frontend-assets/images/manage_icon1.png" style="padding-top:0px"><span style="padding-left:10px;font-size:15px;">@lang('home.account')</span></h5>
+            <a id="password" class="btn btn-block jaTabBtn ja-tab-active"><img src="/frontend-assets/images/manage_icon2.png" style="padding-top:0px"> @lang('home.changepassword')</a>
+            <a id="profile" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon3.png" style="padding-top:0px"> @lang('home.editprofile')</a>
+            <a id="notification" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon4.png" style="padding-top:0px"> @lang('home.notification')</a>
+            <a id="privacy" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon5.png" style="padding-top:0px"> @lang('home.p_privacy')</a>
+            <h5 class="mtab-heading"><img src="/frontend-assets/images/manage_icon6.png" style="padding-top:0px"><span style="padding-left:10px;font-size:15px;">@lang('home.organization')</span></h5>
+            <a href="{{ url('account/employer/departments') }}" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon7.png" style="padding-top:0px"> @lang('home.departments')</a>
+            <a href="{{ url('account/employer/organization') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon8.png" style="padding-top:0px"> @lang('home.editorganization')</a>
+            <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon9.png" style="padding-top:0px"> @lang('home.interviewvenues')</a>
 			<a href="{{ url('account/employer/users/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.users')</a>
 			<a href="{{ url('account/employer/addevaluation/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.evaluationforms')</a>
 			<a href="{{ url('account/employer/questionnaires') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.questionnaires')</a>

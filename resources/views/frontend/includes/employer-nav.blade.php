@@ -24,7 +24,7 @@
                 </li>
                 <li>
                     <a href="{{ url('account/employer/questionnaires') }}" id="jaTab-3">
-                        <img src="../frontend-assets/images/test.jpg" style="padding-top:0px">
+                        <img src="../frontend-assets/images/test.png" style="padding-top:0px">
                         <div class="udp-type">@lang('home.TEST')</div>
                     </a>
                 </li>

@@ -61,8 +61,8 @@
         						@foreach($data as $order)
         						<tr>
         							<td>{{$order->order_id}}</td>
-											<td>{{$order->category}}</td>
-        							<td>{{$order->orderBy}}</td>
+											<td>@lang('home.'.$order->category)</td>
+        							<td>@lang('home.'.$order->orderBy)</td>
         							<td>@lang('home.'.$order->payment_mode)</td>
         							<td>{{$order->amount}}$</td>
         							<td>@lang('home.'.$order->status)</td>

@@ -11,9 +11,9 @@
             <div class="jobs-suggestions">
             	<h2 style="color:#716a6a">{!!$currentjob->title!!}</h2>
             <div class="bgblue" align="center">
-                <h3>Additional Requirements - Submit an Online Questionnaires</h3>
-                <p>You are required to <strong>submit an online questionaire</strong> schedule by employer with in {{$quesdata->submission_date}} <strong>days</strong></p>
-                <button class="btn btn-info" id="next"> Start Now</button>
+                <h3>@lang('home.Additional Requirements - Submit an Online Questionnaires')</h3>
+                <p>You are required to <strong>submit an online questionaire</strong> schedule by employer with in {{$quesdata->submission_date}} <strong>@lang('home.days')</strong></p>
+                <button class="btn btn-info" id="next"> @lang('home.Start Now')</button>
             </div>
                
             </div>
@@ -25,7 +25,7 @@
                 <input  type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input  type="hidden" name="job_id" value="{{ $currentjob->jobId }}">
                 <div class="jobs-suggestions">
-                    <h4>Questionaires/Test</h4>
+                    <h4>@lang('home.Questionaires/Test')</h4>
                     <ol type="1" style="margin-left:30px;">
                     <?php $i =0 ;?>
                     @foreach($questiondata as $question)
@@ -42,7 +42,7 @@
                         @endforeach
                     </ol>
 
-                    <button class="btn btn-info"> Submit </button>
+                    <button class="btn btn-info"> @lang('home.Submit') </button>
                 </div>
             </form>
         </div>

@@ -63,16 +63,16 @@ if(Request::input('show') != ''){
                         <a href="{{ url('account/employer/application') }}" id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
                     </div>
                     <div class="jd-job-details">
-                <h4>Posted By</h4>
+                <h4>@lang('home.Posted By')</h4>
                 <span style="color:#3f535c;">{{ $job->firstName }} {{ $job->lastName }}</span>
                 </div>
                  <div class="jd-job-details">
-                <h4>Hiring Managers</h4>
+                <h4>@lang('home.Hiring Managers')</h4>
                 <span style="color:#3f535c;">{{ $job->firstName }} {{ $job->lastName }}</span>
                 </div>
                  <div class="jd-job-details">
-                <h4>Job Ad Type</h4>
-               <span style="color:#3f535c;"> {!! $job->p_title !!}</span>
+                <h4>@lang('home.Job Ad Type')</h4>
+               <span style="color:#3f535c;"> @lang('home.'.$job->p_title)</span>
                 @if ($job->p_title =='Basic')
 				<a href="{{ url('account/employer/jobupdate/'.$job->jobId) }}">(@lang('home.upgrade'))</a>
                  @else
@@ -129,14 +129,14 @@ if(Request::input('show') != ''){
                     <tbody>
                        <tr>
                         <td class="active">@lang('home.experience')</td>
-                        <td>{{ $job->experience }}</td>
+                        <td>@lang('home.'.$job->experience)</td>
                         <td class="active">@lang('home.salary')</td>
                         <td>{{ number_format($job->minSalary) }} - {{ number_format($job->maxSalary) }} {{ $job->currency }}</td>
                     </tr>
 					
                     <tr>
                         <td class="active">@lang('home.shift')</td>
-                        <td>{{ $job->jobShift }}</td>
+                        <td>@lang('home.'.$job->jobShift)</td>
                           <td class="active">@lang('home.travelling')</td>
                         <td>@if($benefits != '')
 							@foreach( $benefits as $benefit)
@@ -158,9 +158,9 @@ if(Request::input('show') != ''){
                     </tr>
                     <tr>
                         <td class="active">@lang('home.category')</td>
-                        <td>{{ JobCallMe::categoryTitle($job->category) }}</td>
+                        <td>@lang('home.'.JobCallMe::categoryTitle($job->category))</td>
                         <td class="active">@lang('home.careerlevel')</td>
-                        <td>{{ $job->careerLevel }}</td>
+                        <td>@lang('home.'.$job->careerLevel)</td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.qualification')</td>
@@ -170,14 +170,22 @@ if(Request::input('show') != ''){
                     </tr>
                     <tr>
                         <td class="active">@lang('home.poston')</td>
-                        <td>{{ date('M d, Y',strtotime($job->createdTime))}}</td>
+                        <td>@if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($job->createdTime))}}
+						@else
+							  {{ date('M d, Y',strtotime($job->createdTime))}}
+						@endif</td>
                         <td class="active">@lang('home.lastdate')</td>
-                        <td>{{ date('M d, Y',strtotime($job->expiryDate))}}</td>
+                        <td>@if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($job->expiryDate))}}
+						@else
+							  {{ date('M d, Y',strtotime($job->expiryDate))}}
+						@endif</td>
 						
                     </tr>
                     <tr>
 					 <td class="active">@lang('home.location')</td>
-                        <td colspan="3">{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</td>
+                        <td colspan="3">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</td>
                       
 						
                     </tr>
@@ -312,9 +320,9 @@ var isRunning = false;
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
     if(oye=='Publish'){
-$('#showMore').html('<i class="fa fa-eye" id="active"></i> Active');
+$('#showMore').html('<i class="fa fa-eye" id="active"></i> @lang("home.Active")');
 }else{
-$('#showMore').html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+$('#showMore').html('<i class="fa fa-eye-slash" id="deactive"></i> @lang("home.Deactive")');
 }
     initialize();
     $('.jaTabBtn.ja-tab-active').click();
@@ -436,7 +444,7 @@ $('#showMore').click(function(){
   var checktext=$('#showMore').html();
 
   if(oye=='Publish'){
-      $('#showMore').html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+      $('#showMore').html('<i class="fa fa-eye-slash" id="deactive"></i> @lang("home.Deactive")');
       oye='Draft';
       //alert(oye);
       var token = "{{ csrf_token() }}";
@@ -452,7 +460,7 @@ $('#showMore').click(function(){
             success:function(res){
                // alert(res);
                if(res == 1){
-                toastr.success('status deactivate');
+                toastr.success('@lang("home.status deactivate")');
                }else{
                 alert('error in controller admin/Cms/jobstatupdate line no 469');
                }
@@ -461,7 +469,7 @@ $('#showMore').click(function(){
   }
   else if(oye=='Draft'){
       
-       $('#showMore').html('<i class="fa fa-eye" id="active"></i> Active');
+       $('#showMore').html('<i class="fa fa-eye" id="active"></i> @lang("home.Active")');
         oye='Publish';
            jobstatus = 'Publish';
              var token = "{{ csrf_token() }}";
@@ -472,7 +480,7 @@ $('#showMore').click(function(){
             type:'POST',
             success:function(res){
                if(res == 1){
-                toastr.success('status active');
+                toastr.success('@lang("home.status active")');
                }else{
                 alert('error in controller admin/Cms/jobstatupdate line no 469');
                }
