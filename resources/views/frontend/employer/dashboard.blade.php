@@ -18,19 +18,19 @@
             <div class="col-md-4">
                 <div class="eg-job-response">
                     <h4>@lang('home.jobresponse')</h4>
-                    <canvas id="job-response"></canvas>
+                    <canvas id="job-response" style="margin-top: 54px;"></canvas>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="eg-job-response">
                     <h4>@lang('home.experiencelevel')</h4>
-                    <canvas id="experience-level"></canvas>
+                    <canvas id="experience-level" ></canvas>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="eg-job-response">
                     <h4>@lang('home.recruitmentactivity')</h4>
-                    <canvas id="recruitment-activity"></canvas>
+                    <canvas id="recruitment-activity" style="margin-top: 54px;"></canvas>
                 </div>
             </div>
         </div>

@@ -376,10 +376,24 @@ $('.ea-record-selected').each(function(index,element){
     type:"post",
     data:{id_array:id_array,_token:"{{ csrf_token() }}"},
     success:function(res){
+        var url = res.split('/');
+        
         $('#myModal').modal('show');
-        $('#myModal .modal-body').html('<a href="{{ url("")}}/'+res+'">click to download</a>');
+        $('#myModal .modal-body').html('<a href="{{ url("")}}/'+res+'" onclick="delresume('+url[1]+')">click to download</a>');
     }
  })
 });
+function delresume(url){
+   setTimeout(function(){
+    $.ajax({
+        url:"{{ url('') }}/delcv",
+        type:"post",
+        data:{dir:url,_token:"{{ csrf_token() }}"},
+        success:function(res){
+            console.log(res);
+        }
+    });
+    }, 60000);
+}
 </script>
 @endsection

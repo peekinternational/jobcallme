@@ -70,7 +70,7 @@ class Jobs extends Controller{
 		if($state != '0' && $state != "") $jobs->where('jcm_jobs.state','=',$state);
 		if($city != '0') $jobs->where('jcm_jobs.city','=',$city);
 		if($currency != '') $jobs->where('jcm_jobs.currency','=',$currency);
-		$jobs->where('jobStatus','=','Publish');
+		$jobs->where('jcm_jobs.jobStatus','=','Publish');
 		if($keyword != ''){
 			$jobs->where(function ($query) use ($keyword) {
 				$expl = @explode(' ', $keyword);
@@ -109,7 +109,7 @@ class Jobs extends Controller{
 				else{
 					$vhtml .= '<div class="js-action">';
 					if($jobApplied == true){
-                        $vhtml .= '<a href="'.$applyUrl.'" class="btn btn-success btn-xs" disabled>'.trans('home.applied').'</a>';
+                        $vhtml .= '<a href="javascript:void();" class="btn btn-success btn-xs" disabled>'.trans('home.applied').'</a>';
 					}
 					else{
 						$vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">'.trans('home.apply').'</a>';

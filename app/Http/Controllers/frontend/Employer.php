@@ -2059,9 +2059,10 @@ public function mapOrganization(Request $request){
 			$input['paymentMode']='Cash Payment';
 			$input['status']=2;
 
-	        DB::table('jcm_save_packeges')->insert($input);
+	       $pckg_id=DB::table('jcm_save_packeges')->insertGetId($input);
 
 			$order['user_id']=$id;
+			$order['pckg_id']=$pckg_id;
 			$order['payment_mode']='Cash Payment';
 			$order['orderBy']=$input['type'];
 			$order['amount']=$input['amount'];

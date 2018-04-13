@@ -8,6 +8,7 @@ use App\Facade\JobCallMe;
 use DB;
 use PDF;
 use Zipper;
+use File;
 
 class Jobseeker extends Controller{
 
@@ -40,7 +41,7 @@ class Jobseeker extends Controller{
     	$company->orderBy('companyId','desc');
 		$company->where('category','!=','');
     	$company->limit(4);
-    	$companies = $company->get();
+    	$companies = $company->inRandomOrder()->get();
 
     	$followArr = array();
 		if($request->session()->has('jcmUser')){
@@ -73,6 +74,8 @@ class Jobseeker extends Controller{
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
 		$jobs->where('jcm_jobs.country','=',$country);
 		$jobs->where('jcm_jobs.amount','>=','1');
+		$jobs->where('jcm_jobs.jobStatus','=','Publish');
+		$jobs->where('jcm_jobs.status','=','1');
 		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
 		if(count($meta) > 0){
 			$jobs->where('jcm_jobs.category','=',$meta->industry);
@@ -981,9 +984,13 @@ class Jobseeker extends Controller{
 				file_put_contents("resumefiles/".$dirname."/".$name.".pdf", $pdf->output());
 			}
 			$files = glob("resumefiles/".$dirname.'/*');
-			Zipper::make('resumeZip/'.$dirname.'.zip')->add($files)->close();
-
-			echo 'resumeZip/'.$dirname.'.zip';
+			Zipper::make('resumeZip/'.$dirname.'/'.$dirname.'.zip')->add($files)->close();
+			echo 'resumeZip/'.$dirname.'/'.$dirname.'.zip';
+		}
+		public function deletedownloadedcv(Request $request){
+			$dirname = $request->input('dir');
+			$success = File::deleteDirectory("resumefiles/".$dirname);
+			echo $success = File::deleteDirectory("resumeZip/".$dirname);
 		}
 		
 }

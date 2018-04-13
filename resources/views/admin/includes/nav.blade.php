@@ -78,7 +78,10 @@ $$nav = 'active';
                                 <a href="{{ url('admin/cms/category') }}">Job Category</a>
                             </li>
                              <li class="{{ $package_plan }}">
-                                <a href="{{ url('admin/cms/plan') }}">Packages</a>
+                                <a href="{{ url('admin/cms/plan') }}">Add Packages</a>
+                            </li>
+                             <li class="{{ $package }}">
+                                <a href="{{ url('admin/cms/plan/get') }}">All Packages</a>
                             </li>
                             <li class="{{ $shift }}">
                                 <a href="{{ url('admin/cms/shift') }}">Job Shift</a>

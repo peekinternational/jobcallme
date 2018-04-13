@@ -114,6 +114,8 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/plan/save','admin\Cms@saveplan');
 	Route::get('cms/plan/get/{id}','admin\Cms@getplan');
 	Route::delete('cms/plan/delete','admin\Cms@deleteplan');
+	Route::get('cms/plan/get','admin\Cms@allpackage');
+	Route::post('cms/pckgstatupdate','admin\Cms@pckgstatupdate');
 	
 	/* upskill type */
 	Route::match(['get','post'],'cms/upskilltype','admin\Cms@viewupskillType');
@@ -422,3 +424,4 @@ Route::get('locale/{locale}', function ($locale) {
 Route::get('account/employeer/companies/company/review', 'frontend\Employer@companyreview');
 Route::post('account/employer/company/addreview', 'frontend\Employer@addreview');
 Route::post('sajid', 'frontend\Jobseeker@downloadmulticv');
+Route::post('delcv', 'frontend\Jobseeker@deletedownloadedcv');
