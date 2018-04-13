@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
 use PDF;
+use Zipper;
+use File;
 
 class Jobseeker extends Controller{
 
@@ -940,6 +942,7 @@ class Jobseeker extends Controller{
 	}
 
 	public function resume_pckg(Request $request, $id){
+
 		$app = $request->session()->get('jcmUser');
 		$userid = $request->session()->get('jcmUser')->userId;
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
@@ -950,21 +953,44 @@ class Jobseeker extends Controller{
 		$inputs['quantity']=$remain;
 			if(count($plan) == 0)
 			{
-                return redirect('account/manage?plan');
+				return redirect('account/manage?plan');
 			}
 				else{
-                     DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
-					 $user = DB::table('jcm_users')->where('userId',$id)->first();
-						$name= $user->firstName;
-						//return $name;
-						$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
-						$resume = $this->userResume($id);
-						//dd($resume);
+
+                    DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
+					$user = DB::table('jcm_users')->where('userId',$id)->first();
+					$name= $user->firstName;
 						
-					//return view('frontend.jobseeker.resume');
-						$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
-						return $pdf->download($name.'_cv.pdf');
+					$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
+					$resume = $this->userResume($id);
+				
+					$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+					return $pdf->download($name.'_cv.pdf');
 				}
 				
 		}
+		public function downloadmulticv(Request $request){
+			$ids = $request->input('id_array');
+			$dirname = rand();
+			mkdir("resumefiles/".$dirname);
+			foreach ($ids as $id) {
+				$user = DB::table('jcm_users')->where('userId',$id)->first();
+				$name= $user->firstName.rand(0,20);
+					
+				$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
+				$resume = $this->userResume($id);
+				$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+				
+				file_put_contents("resumefiles/".$dirname."/".$name.".pdf", $pdf->output());
+			}
+			$files = glob("resumefiles/".$dirname.'/*');
+			Zipper::make('resumeZip/'.$dirname.'/'.$dirname.'.zip')->add($files)->close();
+			echo 'resumeZip/'.$dirname.'/'.$dirname.'.zip';
+		}
+		public function deletedownloadedcv(Request $request){
+			$dirname = $request->input('dir');
+			$success = File::deleteDirectory("resumefiles/".$dirname);
+			echo $success = File::deleteDirectory("resumeZip/".$dirname);
+		}
+		
 }

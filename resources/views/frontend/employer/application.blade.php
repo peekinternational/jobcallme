@@ -107,7 +107,7 @@ if(Request::input('show') != ''){
                             <i class="fa fa-briefcase" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.scheduleinterview')</div>
                         </button>
-                        <button type="button" class="ea-panel-btn"><i class="fa fa-download" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn" id="resume-download"><i class="fa fa-download" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.exportselected')</div>
                         </button>
                         <select class="form-control pull-right select-jobs" style="width: 150px;height: 35px;" onchange="findApplication(this.value)">
@@ -198,6 +198,25 @@ if(Request::input('show') != ''){
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal" role="dialog">
+       <div class="modal-dialog">
+       
+         <!-- Modal content-->
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title">Download Zip File</h4>
+           </div>
+           <div class="modal-body">
+             <p>Some text in the modal.</p>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           </div>
+         </div>
+         
+       </div>
+     </div>
 </section>
 @endsection
 @section('page-footer')
@@ -257,6 +276,7 @@ $("#ea-showFrom").click(function(){
         $(".ea-messageForm").slideToggle("slow");
     }
 });
+
 function initialize(){
     $(".cbx-field").prop("checked", false);
     $(".cbx-field").click(function () {
@@ -344,5 +364,36 @@ $('form.interview-form').submit(function(e){
     })
     e.preventDefault();
 })
+$('body').on('click','#resume-download',function(event) {
+    var id_array = [];
+$('.ea-record-selected').each(function(index,element){
+   var id = $(this).closest('tr').find('#user_id').val();
+    id_array.push(id);
+})
+ 
+ $.ajax({
+    url:"{{ url('sajid')}}",
+    type:"post",
+    data:{id_array:id_array,_token:"{{ csrf_token() }}"},
+    success:function(res){
+        var url = res.split('/');
+        
+        $('#myModal').modal('show');
+        $('#myModal .modal-body').html('<a href="{{ url("")}}/'+res+'" onclick="delresume('+url[1]+')">click to download</a>');
+    }
+ })
+});
+function delresume(url){
+   setTimeout(function(){
+    $.ajax({
+        url:"{{ url('') }}/delcv",
+        type:"post",
+        data:{dir:url,_token:"{{ csrf_token() }}"},
+        success:function(res){
+            console.log(res);
+        }
+    });
+    }, 60000);
+}
 </script>
 @endsection
