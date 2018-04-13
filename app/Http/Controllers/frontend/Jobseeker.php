@@ -948,14 +948,11 @@ class Jobseeker extends Controller{
 		$quantity= $plan[0]->quantity;
 		$remain = $quantity - 1;
 		$inputs['quantity']=$remain;
-			if(count($plan) != 0)
+			if(count($plan) == 0)
 			{
 				return redirect('account/manage?plan');
 			}
 				else{
-
-					/*$files = glob('featured-photos/*');
-					Zipper::make('public/test.zip')->add($files)->close();*/
 
                     DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
 					$user = DB::table('jcm_users')->where('userId',$id)->first();
@@ -965,8 +962,7 @@ class Jobseeker extends Controller{
 					$resume = $this->userResume($id);
 				
 					$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
-					file_put_contents("order_email.pdf", $pdf->output());
-					/*return $pdf->download($name.'_cv.pdf');*/
+					return $pdf->download($name.'_cv.pdf');
 				}
 				
 		}
