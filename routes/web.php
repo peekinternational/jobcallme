@@ -422,3 +422,4 @@ Route::get('locale/{locale}', function ($locale) {
 Route::get('account/employeer/companies/company/review', 'frontend\Employer@companyreview');
 Route::post('account/employer/company/addreview', 'frontend\Employer@addreview');
 Route::post('sajid', 'frontend\Jobseeker@downloadmulticv');
+Route::post('delcv', 'frontend\Jobseeker@deletedownloadedcv');

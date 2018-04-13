@@ -8,6 +8,7 @@ use App\Facade\JobCallMe;
 use DB;
 use PDF;
 use Zipper;
+use File;
 
 class Jobseeker extends Controller{
 
@@ -981,9 +982,13 @@ class Jobseeker extends Controller{
 				file_put_contents("resumefiles/".$dirname."/".$name.".pdf", $pdf->output());
 			}
 			$files = glob("resumefiles/".$dirname.'/*');
-			Zipper::make('resumeZip/'.$dirname.'.zip')->add($files)->close();
-
-			echo 'resumeZip/'.$dirname.'.zip';
+			Zipper::make('resumeZip/'.$dirname.'/'.$dirname.'.zip')->add($files)->close();
+			echo 'resumeZip/'.$dirname.'/'.$dirname.'.zip';
+		}
+		public function deletedownloadedcv(Request $request){
+			$dirname = $request->input('dir');
+			$success = File::deleteDirectory("resumefiles/".$dirname);
+			echo $success = File::deleteDirectory("resumeZip/".$dirname);
 		}
 		
 }
