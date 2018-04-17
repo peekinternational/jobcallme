@@ -703,29 +703,56 @@ class Jobseeker extends Controller{
 			exit('Directory access is forbidden');
 		}
 		$app = $request->session()->get('jcmUser');
+		if($request->file('profilePicture') != ''){
 
 		$fName = $_FILES['profilePicture']['name'];
 		$ext = @end(@explode('.', $fName));
 		if(!in_array(strtolower($ext), array('png','jpg','jpeg'))){
 			exit('1');
 		}
+
 		$user = DB::table('jcm_users')->where('userId',$app->userId)->first();
 		
-		$pImage = '';
-		if($user->profilePhoto != ''){
-			$pImage = $user->profilePhoto;
-		}
-
 		$image = $request->file('profilePicture');
 		$profilePicture = 'profile-'.time().'-'.rand(000000,999999).'.'.$image->getClientOriginalExtension();       
         $destinationPath = public_path('/profile-photos');
         $image->move($destinationPath, $profilePicture);
 
-        if($pImage != ''){
-            @unlink(public_path('/profile-photos/'.$pImage));
         }
-        DB::table('jcm_users')->where('userId',$app->userId)->update(array('profilePhoto' => $profilePicture,'profileImage'=>''));
-        echo url('profile-photos/'.$profilePicture);
+        if($request->input('chat') == 'yes'){
+        	$pImage = '';
+        	$data = array();
+        	if($user->chatImage != ''){
+        		$pImage = $user->chatImage;
+        	}
+        	if($pImage != ''){
+        	    @unlink(public_path('/profile-photos/'.$pImage));
+        	}
+        	if($request->input('nickName') != ''){
+        		$data['nickName'] = $request->input('nickName');
+        	}
+        	if($request->file('profilePicture') != ''){
+        		$data['chatImage'] = $profilePicture;
+        	}
+        	DB::table('jcm_users')->where('userId',$app->userId)->update($data);
+        	if($request->file('profilePicture') != ''){
+        		echo url('profile-photos/'.$profilePicture);
+        	}else{
+        		echo 'noUrl';
+        	}
+        	
+        }else{
+        	$pImage = '';
+        	if($user->profilePhoto != ''){
+        		$pImage = $user->profilePhoto;
+        	}
+        	if($pImage != ''){
+        	    @unlink(public_path('/profile-photos/'.$pImage));
+        	}
+        	DB::table('jcm_users')->where('userId',$app->userId)->update(array('profilePhoto' => $profilePicture));
+        	echo url('profile-photos/'.$profilePicture);
+        }
+        
 	}
 
 	public function jobAction(Request $request){
@@ -933,12 +960,14 @@ class Jobseeker extends Controller{
 	}
 	public function removeProPic(Request $request){
 		 $id = $request->input('userId');
-		 
-		if( DB::table('jcm_users')->where('userId',$id)->update(['profilePhoto'=>'','profileImage'=>'']) ){
+		if($request->input('chat') == 'yes'){
+			DB::table('jcm_users')->where('userId',$id)->update(['chatImage'=>'']);
 			echo 1;
 		}else{
-			echo 2;
+			DB::table('jcm_users')->where('userId',$id)->update(['profilePhoto'=>'']);
+			echo 1;
 		}
+		
 	}
 
 	public function resume_pckg(Request $request, $id){

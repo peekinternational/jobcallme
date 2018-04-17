@@ -19,7 +19,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\LogDemo'
+        'App\Console\Commands\LogDemo',
+        'App\Console\Commands\sajid'
     ];
 
     /**
@@ -83,6 +84,7 @@ class Kernel extends ConsoleKernel
                 endforeach;
             endif; 
         })->everyMinute();
+       $schedule->call('echo')->everyMinute();
     }
 
     /**
