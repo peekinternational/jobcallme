@@ -2112,7 +2112,7 @@ public function addreview(Request $request)
 	$userid = $request->session()->get('jcmUser')->userId;
 	$data = $request->input();
 	unset($data['_token']);
-	$checkrecord = DB::table('jcm_companyreview')->where('user_id','=',$userid)->get();
+	$checkrecord = DB::table('jcm_companyreview')->where('company_id',$data['company_id'])->where('user_id','=',$userid)->get();
 	if( count($checkrecord) > 0 ){
 		Session::flash('review-message', 'you already used your review'); 
 		Session::flash('alert-class', 'alert-danger');
