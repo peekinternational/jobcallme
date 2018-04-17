@@ -115,6 +115,8 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('cms/plan/get/{id}','admin\Cms@getplan');
 	Route::delete('cms/plan/delete','admin\Cms@deleteplan');
 	Route::get('cms/plan/get','admin\Cms@allpackage');
+	Route::get('cms/plan/resume','admin\Cms@resumepackage');
+	Route::get('cms/plan/jobpckg','admin\Cms@jobspackage');
 	Route::post('cms/pckgstatupdate','admin\Cms@pckgstatupdate');
 	
 	/* upskill type */
@@ -275,6 +277,7 @@ Route::group(['prefix' => 'account'], function () {
 });
 Route::get('employer/status/{id}', 'frontend\Employer@viewJobstatus');
 Route::post('employer/form/save', 'frontend\Employer@saveEvaluation');
+Route::get('employer/form/delete/{id}', 'frontend\Employer@deleteform');
 
 	Route::get('employer/package_plan', function () {
     return view('frontend.employer.package_plan');
