@@ -173,7 +173,7 @@
             ?>
             <div class="col-md-12 sr-item">
               <div class="col-md-5 col-xs-12">
-                <div style="height:100px">
+                <div class="suggestedreading-img-mbl">
                   <img src="{{ $pImage }}" style="width: 100%">
                 </div>
               </div>

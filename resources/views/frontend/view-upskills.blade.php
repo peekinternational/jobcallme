@@ -90,7 +90,7 @@
 @section('page-footer')
 <script type="text/javascript">
 function deleteUpskill(skillId){
-    if(confirm('Are you sure?')){
+    if(confirm('@lang("home.Are you sure?")')){
         $.ajax({
             url: "{{ url('account/upskill/delete') }}/"+skillId,
             success: function(response){
@@ -98,7 +98,7 @@ function deleteUpskill(skillId){
                     toastr.error(response, '', {timeOut: 5000, positionClass: "toast-top-center"});
                 }else{
                     $('#upskill-'+skillId).remove();
-                    toastr.success('Upskill Deleted', '', {timeOut: 5000, positionClass: "toast-top-center"});
+                    toastr.success('@lang("home.Upskill Deleted")', '', {timeOut: 5000, positionClass: "toast-top-center"});
                 }
             }
         })

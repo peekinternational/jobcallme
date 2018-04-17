@@ -62,7 +62,8 @@
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <div class="job-locations-box">
+                    <div class="job-schedule-box">
+                    <!-- <div class="job-locations-box"> -->
                         <?php 
                         $cArr = array('#0e8bcc','#94a5a5','#8d846e','#4e6c7c','#919090','#b0a48a','#8d7e8d','#a69b82','#6b91a7','#9b9b36');
                         $i = 0;

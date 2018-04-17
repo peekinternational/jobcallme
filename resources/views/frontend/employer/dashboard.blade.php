@@ -236,11 +236,11 @@
                       <div class="col-md-12 sr-item">
 				      <div class="col-md-4 col-xs-12">
 
-                        <div class="sr-item-img">
+                        <div class="suggestedreading-img-mbl">
                             @if($rec->upskillImage != '')
-                            <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;">
+                            <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:auto !important;">
                             @else
-                            <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;">
+                            <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:auto !important;">
                             @endif
                         </div>
 						</div>

@@ -88,7 +88,7 @@
 @section('page-footer')
 <script type="text/javascript">
 function deleteArticle(writingId){
-    if(confirm('Are you sure?')){
+    if(confirm('@lang("home.Are you sure?")')){
         $.ajax({
             url: "{{ url('account/writings/article/delete') }}",
             type:"POST",
@@ -98,7 +98,7 @@ function deleteArticle(writingId){
                     toastr.error(response, '', {timeOut: 5000, positionClass: "toast-top-center"});
                 }else{
                     $('#write-'+writingId).remove();
-                    toastr.success('Article Deleted', '', {timeOut: 5000, positionClass: "toast-top-center"});
+                    toastr.success('@lang("home.Article Deleted")', '', {timeOut: 5000, positionClass: "toast-top-center"});
                 }
             }
         })

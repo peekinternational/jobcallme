@@ -1345,7 +1345,7 @@ ul.jd-rewards li i{
     text-align: left;
     margin-left: -15px;
     margin-right: -15px;
-    width: 115.2%;
+    /* width: 115.2%; */                 /* 수정 */
     border-radius: 0;
 	padding-top:15px;
 	padding-bottom:15px;
@@ -2024,6 +2024,7 @@ ul.jd-rewards li i{
 #companies-section .category-label{
     font-size: 14px;
     color: #fff;
+	padding-bottom:10px;
     border-bottom: 1px dotted #fff;
 }
 .ellipsis a{
@@ -3287,7 +3288,7 @@ img.profile-photo-xs{
     border: 1px solid #cccccc;
     background: #ffffff;
     margin-bottom: 20px;
-    height: 118px;
+    height: 130px;  /* 수정 */
 }
 .sc-thumbnail{
     width: 18%;
@@ -3861,8 +3862,8 @@ curveIn {  0% {
 
 #post-job-ad-types>li {
     display: inline-block;
-    width: 221px;
-    min-height: 112px;
+    width: 260px;
+    min-height: 120px;
     cursor: pointer;
     padding: 3px 13px 10px 13px;
     border: 1px solid #cfd8dc;

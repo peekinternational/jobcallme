@@ -24,17 +24,26 @@
                 @endif
             <h3 class="text-center text-lg mb20">
                 
-                Job Posting that Deliver Results
+                @lang('home.Job Posting that Deliver Results')
             </h3>
-            <p class="text-sm">Better job exposure! View, Save and Export all received resumes.</p>
+            <p class="text-sm">@lang('home.Better job exposure! View, Save and Export all received resumes.')</p>
+			<p class="col-md-12">
+                    <span>@lang('home.selectcurrency'): &nbsp;</span>
+                      <input type="radio" name="gender" id="wr_kr" value="kr" checked="checked"> @lang('home.paykorean')
+                      &nbsp;&nbsp;<input type="radio" name="gender" id="wr_us" value="us"> @lang('home.US$')
+                      </p>
               @foreach($recs as $key => $payment)
 			  @if($key > 0)
 				  <div class="col-md-4">
                         <div class="pricing-block mat-elevation-z6">
-                            <h5 class="title">Jobs {!!$payment->title !!}</h5>
+                            <h5 class="title">
+							@if(app()->getLocale() == "kr")
+						        @lang('home.'.$payment->title) @lang('home.payJobs')
+							@else
+								@lang('home.payJobs') @lang('home.'.$payment->title)
+							@endif </h5>
                             <div class="desc">
-                                <!----><ul class="list-unstyled">
-                                    <li>Exposure: Basic</li>
+                                <!----><ul class="list-unstyled">                                    
                                     <li>On Homepage: 3 days</li>
                                     <li>Job Mail 2 times</li>
                                     <li>Notifications: Multiple</li>
@@ -49,7 +58,7 @@
                             <div class="price">
                                 <span class="text-success">
                                     <!---->
-                                    <span class="text-md b">${!!$payment->price !!}</span>
+                                    <span class="text-md b" id="wr_text{{$key}}"></span>
                                 </span>
                             </div>
 
@@ -59,7 +68,7 @@
 								
 								<input name="jType" type="hidden" value="Paid"/>
                                 <div>
-                                    <button class="btn btn-primary" color="primary"  type="submit"><span class="mat-button-wrapper">Buy Now</span><div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div></button>
+                                    <button class="btn btn-primary" color="primary"  type="submit"><span class="mat-button-wrapper">@lang('home.Buy Now')</span><div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div></button>
                                 </div>
                             </form>
                         </div>
@@ -82,5 +91,64 @@
 		@endsection
 		@section('page-footer')
 		<script type="text/javascript">
+
+
+			function number_format(data) 
+			{
+				var tmp = '';
+				var number = '';
+				var cutlen = 3;
+				var comma = ',';
+				var i;
+				var data = String(data);
+				len = data.length;
+			 
+				mod = (len % cutlen);
+				k = cutlen - mod;
+				for (i=0; i<data.length; i++) 
+				{
+					number = number + data.charAt(i);
+					
+					if (i < data.length - 1) 
+					{
+						k++;
+						if ((k % cutlen) == 0) 
+						{
+							number = number + comma;
+							k = 0;
+						}
+					}
+				}
+			 
+				return number;
+			}
+
+
+			 var simplearray = <?php echo json_encode($recs); ?>;
+
+				 for(var i=0;i<simplearray.length;i++){
+				 $('#wr_text'+i).html('￦'+number_format(simplearray[i].price*1000)+'')
+					//alert(jArray[i].amount);
+				   }
+				 
+				$('#wr_us').click(function(){
+				if ($(this).is(':checked')) {
+				for(var i=0;i<simplearray.length;i++){
+
+				 $('#wr_text'+i).html('US$ '+simplearray[i].price+'.00')
+					//alert(jArray[i].amount);
+					 }
+					}
+				}) ;
+
+				$('#wr_kr').click(function(){
+				if ($(this).is(':checked')) {
+				for(var i=0;i<simplearray.length;i++){
+				 $('#wr_text'+i).html('￦ '+number_format(simplearray[i].price*1000) +'')
+				   // alert(jArray[i].amount*1100);
+				  }
+				}
+			}) ;
+
 		</script>
 		@endsection

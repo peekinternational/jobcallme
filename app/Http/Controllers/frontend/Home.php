@@ -8,6 +8,7 @@ use App\Facade\JobCallMe;
 use DB;
 use Mail;
 use App;
+date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
 	public function home(){
@@ -478,7 +479,7 @@ class Home extends Controller{
 
     public function learn(Request $request){
     	/* read query */
-    	$lear_record = DB::table('jcm_upskills')->where('status','=','Active')->orderBy('skillId','desc')->limit(12)->get();
+    	$lear_record = DB::table('jcm_upskills')->where('status','=','Active')->where('adstartDate','<=',date('Y-m-d'))->where('adendDate','>=',date('Y-m-d'))->orderBy('skillId','desc')->limit(12)->get();
 
     	return view('frontend.learn',compact('lear_record'));
     }

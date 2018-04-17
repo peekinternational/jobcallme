@@ -5,6 +5,8 @@ if(file_exists('../website/'.$headerWeb['webLogo'])){
     $headerWebLogo = url('../website/'.$headerWeb['webLogo']);
 }
 $cPage = Request::segment(2);
+
+
 ?>
 <nav class="nav navbar-inverse navbar-fixed-top" >
  @if(Session::has('jcmUser'))

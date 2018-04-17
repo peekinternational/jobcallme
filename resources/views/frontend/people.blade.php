@@ -250,8 +250,10 @@
 
           <div class="row">
             <div class="col-md-12">
+			  <div class="col-smd-8 col-sm-offset-1">	
               <?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9','#9e947b','#5b5c5e','#7b767d','#a0b1b9','#6d846f'); $i=0; ?>
-              <div class="job-locations-box">
+              <!-- <div class="job-locations-box"> -->
+			  <div class="job-schedule-box">
                 @foreach(JobCallMe::getCategories() as $cat)
 
                 @if($cat->name == "outsourcingok")
@@ -285,12 +287,15 @@
 
                 <span class="text">@lang('home.'.$cat->name)</span></a>
                 @endforeach
+				</div>
               </div>
               <div class="clearfix"></div>
               <div class="job-schedule-box">
+                <a href="{{ url('account/people?city='.$loca->id) }}">@lang('home.All')<!-- {{ $loca->name }} --></a>
                 @foreach(JobCallMe::getHomeCities() as $loca)
-                <a href="{{ url('account/people?city='.$loca->id) }}">{{ $loca->name }}</a>
+                <a href="{{ url('account/people?city='.$loca->id) }}">@lang('home.'.$loca->name)<!-- {{ $loca->name }} --></a>
                 @endforeach
+				<a href="{{ url('account/people?city=000') }}">@lang('home.globalOverseas')<!-- {{ $loca->name }} --></a>
               </div>
             </div>
           </div>

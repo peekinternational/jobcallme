@@ -102,8 +102,8 @@ $lToken = csrf_token();
                                                 </div>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="search-field-box search-item">
-                                                    <select class="form-control" name="category" style="background: transparent;">
-                                                        <option value="0">@lang('home.category')</option>
+                                                    <select class="form-control" id="home-cat" name="category" style="background: transparent;color: #fff">
+                                                        
                                                         @foreach(JobCallMe::getReadCategories() as $cat)
                                                         <option value="{{$cat->id}}">@lang('home.'.$cat->name)</option>
                                                         @endforeach

@@ -30,7 +30,7 @@
                 </div>
                 <table class="table table-bordered">
                     <tr>
-                        <td class="active">@lang('home.organizer')</td>
+                        <td class="active" width="150px">@lang('home.organiser')</td>
                         <td>{{ $record->organiser != '' ?  $record->organiser : JobCallMe::userName($record->userId) }}</td>
                     </tr>
                     <tr>
@@ -105,15 +105,18 @@
                     foreach($opHour as $i => $z){
                         if($z['from'] != '' || $z['to'] != ''){
                             echo '<tr>';
-                                echo '<th>'.$aArr[$i].'</th>';
+                                echo '<th>'.trans('home.'.$aArr[$i]).'</th>';
                                 echo '<td>'.$z['from'].' - '.$z['to'].'</td>';
                             echo '</tr>';
                         }
                     }
                     ?>
                 </table>
-                <h3>@lang('home.details')</h3>
-                <p>{!! $record->description !!}</p>
+				<table class="table">
+					<tr>
+					  <td>
+                <h3><span style="padding-left:20px">@lang('home.details')</span></h3>
+                <p>{!! $record->description !!}</p></td></tr></table>
             </div>
         </div>
         <div class="col-md-3">

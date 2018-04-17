@@ -388,15 +388,17 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	
 	//Edit Upskill//
 	
-	'up_heading' => '세미나ㆍ전시회ㆍ웹세미나ㆍ회의ㆍ교육연수ㆍ워크샵ㆍ강좌ㆍ각종 교육 홍보에 관련된 광고 등록',
+	'up_heading' => '세미나ㆍ전시회ㆍ웹세미나ㆍ회의ㆍ교육연수ㆍ워크샵ㆍ강좌ㆍ교육ㆍ학원 홍보 등록',
 	'basicinformation' => '기본 정보',
 	'title' => '제목',
 	'type' => '유형',
 	's_type' => '유형 선택',
 	'organiser' => '주최ㆍ주관사',
 	'description' => '내용',
-	'cost' => '참가비용',
-	'free' => '참가비용 무료',
+	'cost' => '참석비용',
+	'free' => '참석비용 무료',
+	'Contact person' => '상담센터 문의',
+	'notfree' => '참석비용 유료',
 	'venue' => '장소',
 	//'Country' => '',
 	'country' => '국가',
@@ -488,10 +490,15 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'Conference' => '회의',
 	'Course' => '강좌',
 	'Seminar' => '세미나',
-	'Training' => '교육',
+	'Training' => '교육연수',
 	'Webinar' => '웹세미나',
 	'Workshop' => '워크샵',
 	'Exhibition' => '전시회',
+
+	'Forum · Conference' => '포럼 · 컨퍼런스',
+	'Course · Education · Academy' => '강의 · 교육 · 학원',
+	'Seminar · Exhibition · Webinar' => '세미나 · 전시회 · 웹세미나',
+	'Training · Workshop' => '교육연수 · 워크샵',	
 	
 	
 	//Manage User//
@@ -541,6 +548,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'warningdeactive' => '주의! 회원을 탈퇴할 경우 로그인을 할 수 없습니다, 그래도 회원 탈퇴하시겠습니까?',
 	'yesdeactive' => '예. 회원 탈퇴',
 	'close' => '닫기',
+	'Close' => '닫기',
 	'NOTIFICATION' => '알림설정',
 
 	'organizationmap' => '회사 위치',
@@ -579,7 +587,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
    'follow' => '관심기업 저장',
    'operationhours' => '근무시간',
    'companiesin' => '근무지',
-   'companiesindustry' => '업종',
+   'companiesindustry' => '산업별 기업찾기',
    
    //View Course//
    
@@ -739,7 +747,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	
 	//Jobskeer Dashboard//
 	'suggested' => '관련 기업채용',
-	'savedjobs' => '관련 기업채용저장',
+	'savedjobs' => '기업채용저장',
 	'applications' => '지원자',
 	'companiesfollow' => '기업팔로워',
 	'suggestedreadings' => '추천 지식정보',
@@ -1101,7 +1109,11 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'Dance'=>'댄스ㆍ무용',
 	'Healthy diet'=>'건강 식단',
 	'Diet'=>'다이어트',
-	'Other'=>'기타',
+	'Others'=>'기타',
+	'Machin'=>'기계',
+	'Chemistry'=>'화확',
+	'Civil engineering'=>'토목',
+
 
 
 	'Apply'=>'지원',
@@ -1226,10 +1238,10 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 	'TotalAmount' => '총 합계',
 
-	'advertisecourses' => '세미나ㆍ전시회ㆍ웹세미나ㆍ회의ㆍ교육연수ㆍ워크샵ㆍ강좌ㆍ각종 교육 홍보에 관련된 광고를 지금 홍보하십시오!',
+	'advertisecourses' => '세미나ㆍ전시회ㆍ웹세미나ㆍ회의ㆍ교육연수ㆍ워크샵ㆍ강좌ㆍ교육ㆍ학원에 관련된 홍보를 지금 하십시오!',
 
-	'CostofDescription' => '참가비 상세설명',
-	'typeonyourdetailsofcost' => '참가ㆍ참석비용에 관한 설명을 작성바랍니다.(예시:시간당,입회비,참석 등)',
+	'CostofDescription' => '참석비 상세설명',
+	'typeonyourdetailsofcost' => '참가ㆍ참석비용에 관한여 간단히 작성바랍니다.(예시:시간당,입회비,참석 등)',
 
 	'AddNewInterviewVenue' => '인터뷰 장소 등록',
 
@@ -1244,10 +1256,10 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'Conference' => '회의 | 컨퍼런스',
 	'TrainingWorkshop' => '교육연수 | 워크샵',
 	'Training | Workshop' => '교육연수 | 워크샵',
-	'Course' => '강좌 | 각종 교육홍보',
+	'Course' => '강좌 | 교육 | 학원홍보',
 
 	'day' => '일',
-	'adcost' => '광고가격',
+	'adcost' => '1일 홍보가격',
 	'costwon1' => '1,000원(VAT별도)',
 	'costwon2' => '3,000원(VAT별도)',
 	'costwon3' => '4,000원(VAT별도)',
@@ -1270,7 +1282,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'Featured on homepage' => '잡콜미 홈페이지 추천',
 	'Featured on homepage (2 days)' => '잡콜미 홈페이지 추천 ( 2일 )',
 	'special' => '스페셜',
-	'FreetillEndofApril' => '4월달까지 무료 이벤트',
+	'FreetillEndofOctober' => '10월달까지 무료 이벤트',
 
 	'To apply on jobs please build your resume. <a href="https://www.jobcallme.com/account/jobseeker/resume">Click Here</a> To create your resume' => '입사지원을 하시려면 이력서를 필히 작성해야 합니다. 이력서를 작성하려면 <a href="https://www.jobcallme.com/account/jobseeker/resume">여기를 </a> 클릭하십시오!',
 
@@ -55718,18 +55730,18 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Dongducheon-si"=>"동두천시",
 "Bucheon-si"=>"부천시",
 "Bundang-gu, Seongnam-si"=>"성남시 분당구",
-"Sujeong-gu, Seongnam-si"=>"성남 수정구 수정구",
-"Jungwon-gu, Seongnam-si"=>"성남시 중원구 중원구",
+"Sujeong-gu, Seongnam-si"=>"성남 수정구",
+"Jungwon-gu, Seongnam-si"=>"성남시 중원구",
 "Gwonseon-gu, Suwon-si"=>"수원시 권선구",
 "Yeongtong-gu, Suwon-si"=>"수원시 영통구",
 "Jangan-gu, Suwon-si"=>"수원시 장안구",
 "Paldal-gu, Suwon-si"=>"수원 팔달구",
 "Siheung-si"=>"시흥시",
 "Danwon-gu, Ansan-si"=>"안산시 단원구",
-"Sangnok-gu, Ansan-si"=>"안산시 상목구",
+"Sangnok-gu, Ansan-si"=>"안산시 상록구",
 "Anseong-si"=>"안성시",
 "Dongan-gu, Anyang-si"=>"안양시 동안구",
-"Manan-gu, Anyang-si"=>"안양 마안구",
+"Manan-gu, Anyang-si"=>"안양 만안구",
 "Yangju-si"=>"양주시",
 "Yangpyeong-gun"=>"양평군",
 "Yeoju-si"=>"여주시",
@@ -55737,7 +55749,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Osan-si"=>"오산시",
 "Giheung-gu, Yongin-si"=>"용인시 기흥구",
 "Suji-gu, Yongin-si"=>"용인시 수지구",
-"Cheoin-gu, Yongin-si"=>"용인시 천인구",
+"Cheoin-gu, Yongin-si"=>"용인시 처인구",
 "Uiwang-si"=>"의왕시",
 "Uijeongbu-si"=>"의정부시",
 "Icheon-si"=>"이천시",
@@ -55758,7 +55770,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Uiryeong-gun"=>"위령군",
 "Jinju-si"=>"진주시",
 "Changnyeong-gun"=>"창녕군",
-"Masanhappo-gu, Changwon-si"=>"창원시 마산합구",
+"Masanhappo-gu, Changwon-si"=>"창원시 마산합포구",
 "Masanhoewon-gu, Changwon-si"=>"창원시 마산로 원구",
 "Seongsan-gu, Changwon-si"=>"창원시 성산구",
 "Uichang-gu, Changwon-si"=>"창원시 위창구",
@@ -55799,7 +55811,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Seo-gu"=>"서구",
 "Nam-gu"=>"남구",
 "Dalseo-gu"=>"달서구",
-"Dalseong-gun"=>"달군군",
+"Dalseong-gun"=>"달성군",
 "Dong-gu"=>"동구",
 "Buk-gu"=>"북구",
 "Seo-gu"=>"서구",
@@ -55837,7 +55849,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Nowon-gu"=>"노원구",
 "Dobong-gu"=>"도봉구",
 "Dongdaemun-gu"=>"동대문구",
-"Dongjak-gu"=>"동학구",
+"Dongjak-gu"=>"동작구",
 "Mapo-gu"=>"마포구",
 "Seodaemun-gu"=>"서대문구",
 "Seocho-gu"=>"서초구",
@@ -113846,4 +113858,19 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Posted By"=>"등록자",
 "Hiring Managers"=>"채용 담당자",
 "Job Ad Type"=>"광고형태",
+
+"You Might Be Interested In"=>"관심 지식정보",
+"companyGallery"=>"기업 이미지",
+"Total reviews"=>"전체 리뷰",
+"lean1000"=>"￦1,000",
+"paykorean"=>"원화결제",
+"US$"=>"US$",
+"adsdate"=>"광고 시작날짜",
+"adedate"=>"광고 마감날짜",
+"Enter description"=>"내용을 입력바랍니다",
+"Enter Image"=>"이미지파일을 업로드 바랍니다",
+
+"Job Posting that Deliver Results"=>"채용공고 광고",
+"Better job exposure! View, Save and Export all received resumes."=>"채용공고 광고 효과! 모든 이력서보기, 저장 및 다운로드.",
+"payJobs"=>"채용 광고"
 ];

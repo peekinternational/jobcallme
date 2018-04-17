@@ -135,33 +135,48 @@ class Jobs extends Controller{
 				else{
 					$dispatch="";
 				}
+
+					if(app()->getLocale() == "kr"){
+						$joblist_date = date('Y-m-d',strtotime($rec->createdTime));
+						$joblist_date2 = date('Y-m-d',strtotime($rec->expiryDate));
+					}else{
+						$joblist_date = date('M d, Y',strtotime($rec->createdTime));
+						$joblist_date2 = date('M d, Y',strtotime($rec->expiryDate));
+					}
+
+					if($rec->currency == "KRW" or $rec->currency == "KRW|대한민국 원"){
+						$salarycurrency = '원';
+					}else{
+						$salarycurrency = $rec->currency;
+					}
+
 				$colorArr = array('purple','green','darkred','orangered','blueviolet');
                     $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_title.'</span></a>  '.$head.' '.$dispatch.' </h4>';
-                    $vhtml .= '<p>'.$rec->companyName.'</p>';
+                    $vhtml .= '<p style="font-size:15px;color:#113886;"><b>'.$rec->companyName.'</b></p>';
                     $vhtml .= '<ul class="js-listing">';
                     	$vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">'.trans('home.jobtype').'</p>';
-                            $vhtml .= '<p>'.$rec->jobType.'</p>';
+                            $vhtml .= '<p class="js-title" style="color:#008000;">'.trans('home.jobtype').'</p>';
+                            $vhtml .= '<p>'.trans('home.'.$rec->jobType).'</p>';
                         $vhtml .= '</li>';
                         $vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">'.trans('home.shift').'</p>';
-                            $vhtml .= '<p>'.$rec->jobShift.'</p>';
+                            $vhtml .= '<p class="js-title" style="color:#008000;">'.trans('home.shift').'</p>';
+                            $vhtml .= '<p>'.trans('home.'.$rec->jobShift).'</p>';
                         $vhtml .= '</li>';
                         $vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">'.trans('home.experience').'</p>';
-                            $vhtml .= '<p>'.$rec->experience.'</p>';
+                            $vhtml .= '<p class="js-title" style="color:#008000;">'.trans('home.experience').'</p>';
+                            $vhtml .= '<p>'.trans('home.'.$rec->experience).'</p>';
                         $vhtml .= '</li>';
-                        $vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">'.trans('home.salary').'</p>';
-                            $vhtml .= '<p>'.$rec->minSalary.' - '.$rec->maxSalary.' '.$rec->currency.'</p>';
+                        $vhtml .= '<li style="border-right: 0px solid #cccccc;">';
+                            $vhtml .= '<p class="js-title" style="color:#008000;">'.trans('home.salary').'</p>';
+                            $vhtml .= '<p>'.number_format($rec->minSalary).' - '.number_format($rec->maxSalary).' '.$salarycurrency.'</p>';
+                        $vhtml .= '</li>';
+						$vhtml .= '<li style="border-right: 0px solid #cccccc;">';
+                            $vhtml .= '<p class="js-title" style="color:#0000ff;">'.trans('home.poston').'</p>';
+                             $vhtml .= '<p>'.$joblist_date.'</p>';
                         $vhtml .= '</li>';
 						$vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">'.trans('home.poston').'</p>';
-                             $vhtml .= '<p>'.date('M d, Y',strtotime($rec->createdTime)).'</p>';
-                        $vhtml .= '</li>';
-						$vhtml .= '<li>';
-                            $vhtml .= '<p class="js-title">'.trans('home.lastdate').'</p>';
-                            $vhtml .= '<p>'.date('M d, Y',strtotime($rec->expiryDate)).'</p>';
+                            $vhtml .= '<p class="js-title" style="color:#ff4500;">'.trans('home.lastdate').'</p>';
+                            $vhtml .= '<p>'.$joblist_date2.'</p>';
                         $vhtml .= '</li>';
                     $vhtml .= '</ul>';
                     $cLogo = url('compnay-logo/default-logo.jpg');
@@ -178,13 +193,13 @@ class Jobs extends Controller{
 
                         //if the string doesn't contain any space then it will cut without word basis.
                             $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
-                            $string .= '<a href="'.$viewUrl.'">... ReadMore</a>';
+                            $string .= '<a href="'.$viewUrl.'">... '.trans('home.Read More').'</a>';
                         }
                    
 
                    
                     $vhtml .= '<p class="js-note">'.$string.'<img style="padding-top: 17px;" src="'.$cLogo.'" width="100"></p>';
-                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.JobCallMe::cityName($rec->city).', '.JobCallMe::countryName($rec->country).'<span class="pull-right" style="color: #999999;margin-top: 28px;">'.date('M d,Y',strtotime($rec->createdTime)).'</span></p>';
+                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 28px;">'.$joblist_date.'</span></p>';
 				
 				$job = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
 				$job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
@@ -199,13 +214,13 @@ class Jobs extends Controller{
 				{
 					$comUrl = url('companies/company/'.$sim->companyId);
 					$cityUrl = url('jobs?city='.$sim->city);
-					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'">'.trans('home.similerjob').'  '.JobCallMe::cityName($sim->city).'</a><span style="padding-left: 85px;" ><a style="color: #999999;" href="'.$comUrl.'">'.trans('home.jobIn').' '.$sim->companyName.'</a></span></p>';
+					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'"><span style="color:#337ab7">'.trans('home.similerjob').'</span>  '.trans('home.'.JobCallMe::cityName($sim->city)).'</a><span style="padding-left: 85px;" ><a style="color: #337ab7;" href="'.$comUrl.'">'.trans('home.jobIn').' <span style="color:#999999"> '.$sim->companyName.'</span></a></span></p>';
 				}
 				$vhtml .='</div>';
 			}
 		}else{
 			$vhtml  = '<div class="jobs-suggestions">';
-				$vhtml .= '<p class="js-note" style="text-align:center;">No Matching record found</p>';
+				$vhtml .= '<p class="js-note" style="text-align:center;">'.trans('home.No Matching record found').'</p>';
 			$vhtml .= '</div>';
 		}
 		echo $vhtml;

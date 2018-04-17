@@ -9,6 +9,8 @@ $navPage =  Request::segment(2);
 
 $app = Session::get('jcmUser');
 $next = Request::route()->uri;
+
+date_default_timezone_set("Asia/Seoul");
 ?>
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
@@ -91,7 +93,11 @@ $next = Request::route()->uri;
         <script src="{{ asset('frontend-assets/js/ckeditor/ckeditor.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/select2.js') }}"></script>
 		<script src="{{ asset('frontend-assets/js/select3.js') }}"></script>
-        <script src="{{ asset('frontend-assets/js/bootstrap-datetimepicker.js') }}"></script>
+        @if(app()->getLocale() == "kr")
+			<script src="{{ asset('frontend-assets/js/bootstrap-datetimepicker_kr.js') }}"></script>
+		@else
+			<script src="{{ asset('frontend-assets/js/bootstrap-datetimepicker.js') }}"></script>
+		@endif 
 		<!--For Text animation-->
          <script src="{{ asset('frontend-assets/js/TweenMax.min.js') }}"></script>
         <script src="{{ asset('frontend-assets/js/cooltext.animate.js') }}"></script>

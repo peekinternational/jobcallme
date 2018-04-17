@@ -32,13 +32,17 @@ $opHour = json_decode($company->companyOperationalHour,true);
                                <span>@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryName($company->category))
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.established'):</span> @if($company->companyEstablishDate != "") {!! date('M d, Y',strtotime($company->companyEstablishDate)) !!} @endif
+                               <span>@lang('home.established'):</span> @if(app()->getLocale() == "kr")
+						    @if($company->companyEstablishDate != "") {!! date('Y-m-d',strtotime($company->companyEstablishDate)) !!} @endif
+						@else
+						    @if($company->companyEstablishDate != "") {!! date('M d, Y',strtotime($company->companyEstablishDate)) !!} @endif
+						@endif  
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.noemployees'):</span>  {!! $company->companyNoOfUsers !!}
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.location'):</span>  @if($company->companyCity != 0) {!! JobCallMe::cityName($company->companyCity).', '.JobCallMe::stateName($company->companyState).', '.JobCallMe::countryName($company->companyCountry) !!} @endif
+                               <span>@lang('home.location'):</span>  @if($company->companyCity != 0) @lang('home.'.JobCallMe::cityName($company->companyCity)), @lang('home.'.JobCallMe::stateName($company->companyState)), @lang('home.'.JobCallMe::countryName($company->companyCountry)) @endif
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.website'):</span> <a href="{!! $company->companyWebsite !!}">{!! $company->companyWebsite !!}</a>
@@ -51,7 +55,7 @@ $opHour = json_decode($company->companyOperationalHour,true);
                                 @else
                                     <a href="javascript:;" onclick="followCompany({{ $company->companyId }},this)" class="btn btn-primary hvr-sweep-to-right">@lang('home.follow')</a>
                                 @endif
-                                <a href="{{ url('account/employeer/companies/company/review?CompanyId='.$company->companyId) }}" class="btn btn-default">Write Review</a>
+                                <a href="{{ url('account/employeer/companies/company/review?CompanyId='.$company->companyId) }}" class="btn btn-default">@lang('home.Write Review')</a>
                                <div class="jd-share-btn cp-social">
                                    <a href="{!! $company->companyFb !!}"><i class="fa fa-facebook" style="background: #2e6da4;"></i> </a>
                                    <a href="{!! $company->companyLinkedin !!}"><i class="fa fa-linkedin" style=" background: #007BB6;"></i> </a>
@@ -212,47 +216,47 @@ $opHour = json_decode($company->companyOperationalHour,true);
                 <div class="jobs-suggestions">
                     
                    <h4>{{ $company->companyName }}</h4>
-                    <p>{{ JobCallMe::cityName($company->companyCity) }}, {{ JobCallMe::countryName($company->companyCountry) }}</p>
+                    <p>@lang('home.'.JobCallMe::cityName($company->companyCity)), @lang('home.'.JobCallMe::countryName($company->companyCountry))</p>
                     <div class="jd-about-organization">
                         <p>{!! $job->companyAbout !!}</p>
                     </div>
                     <p align="center">
                         <?php echo checkreview($star) ?><br>
-                        Total reviews <span class="badge">{{ count($companyReview) }} </span>
+                        @lang('home.Total reviews') <span class="badge">{{ count($companyReview) }} </span>
                     </p>
                     <hr>
                     <p>
                         <table>
                             <tr>
-                                <td>Career Growth</td>
+                                <td>@lang('home.Career Growth')</td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
                                 <?php echo checkreview($career_star) ?>
                                 </td>
                             </tr>
                             <tr>
-                                <td>Compensation & Benefits</td>
+                                <td>@lang('home.Compensation & Benefits')</td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
                                <?php echo checkreview($benefit_star) ?>
                                 </td>
                             </tr>
                             <tr>
-                                <td>Work/Life Balance</td>
+                                <td>@lang('home.Work/Life Balance')</td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
                                 <?php echo checkreview($lifebalance_star) ?>
                                 </td>
                             </tr>
                             <tr>
-                                <td>Management</td>
+                                <td>@lang('home.Management')</td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
                                 <?php echo checkreview($management_star) ?>
                                 </td>
                             </tr>
                             <tr>
-                                <td>Culture</td>
+                                <td>@lang('home.Culture')</td>
                                 <td>&nbsp;&nbsp;</td>
                                 <td>
                                 <?php echo checkreview($culture_star) ?>
@@ -265,15 +269,15 @@ $opHour = json_decode($company->companyOperationalHour,true);
                             <div class="row" align="center">
                                 <div class="col-md-4">
                                     <span style="font-size:12px">{{$ceo_recommend_star}}</span>
-                                    <p>CEO Recommended</p>
+                                    <p>@lang('home.CEO Recommended')</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <span style="font-size:12px">@if($recommend_star == 'on') Yes @else Not recommend @endif</span>
-                                    <p>Recommend to a friend</p>
+                                    <span style="font-size:12px">@if($recommend_star == 'on') Yes @else @lang('home.Not recommend') @endif</span>
+                                    <p>@lang('home.Recommend to a friend')</p>
                                 </div>
                                 <div class="col-md-4">
                                     <span style="font-size:12px">{{$future_star}}</span>
-                                    <p>Future Expectations</p>
+                                    <p>@lang('home.Future Expectations')</p>
                                 </div>
                             </div>
                         </div>

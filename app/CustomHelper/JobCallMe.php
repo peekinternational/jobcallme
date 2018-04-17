@@ -319,7 +319,8 @@ class JobCallMe{
 	}
 
 	public function getExperienceLevel(){
-		return array('Student', 'Fresh Graduate', '< 1 Year', '1 Year', '2 Year', '3 Year', '4 Year', '5 Year', '< 10 Year', '10 Year', '< 20 Year', '< 30 Year', '< 50 Year');
+		return array('Student', 'Fresh Graduate', 'Experience', 'Fresh Graduate ~ Experience', '-1  Year', '+1  Year', '+2  Year', '+3  Year', '+4  Year', '+5  Year', '+6  Year', '+7  Year', '+8  Year', '+9  Year', '+10 Year', '+15 Year', '-20 Year', '-30 Year', '-50 Year', 'No Need Career');
+		//return array('Student', 'Fresh Graduate', '< 1 Year', '1 Year', '2 Year', '3 Year', '4 Year', '5 Year', '< 10 Year', '10 Year', '< 20 Year', '< 30 Year', '< 50 Year');
 	}
 
 	//public function getExperienceLevel(){
@@ -405,7 +406,7 @@ class JobCallMe{
 	}
 
 	public function cityId($name){
-		$record = DB::table('jcm_cities')->select('id')->where('name','LIKE','%'.$name.'%');
+		$record = DB::table('jcm_cities')->select('id')->where('name_ko','LIKE','%'.$name.'%');
 		$rec = $record->get()->first();
 		$return = '0';
 		if(count($rec) > 0){
