@@ -418,6 +418,7 @@ curl_close ($ch);
 			$input['subCategory'] = '';
 		}
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
+		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_category,'companyModifiedTime'=>date('Y-m-d H:i:s')]);  
 		echo $jobId;
             
             /** it's all right **/
