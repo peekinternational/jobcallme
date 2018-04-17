@@ -239,7 +239,7 @@ curl_close ($ch);
 
 		DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
         
-		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_category]);   
+		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_category,'companyModifiedTime'=>date('Y-m-d H:i:s')]);   
 
 		//dd($jobId);
 		\Session::put('success','Add Job Successfully');
@@ -271,7 +271,7 @@ curl_close ($ch);
 			$input['subCategory'] = '';
 		}
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
-			DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_category]);
+			DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_category,'companyModifiedTime'=>NOW()]);
 		//dd($jobId);
 		\Session::put('success','Add Job Successfully');
 		return Redirect::route('addmoney.account/employer/job/share');	
