@@ -336,6 +336,35 @@
                                 </div>
                             </div>
                         </div>
+                           <div class="form-group">
+                            <label class="control-label col-sm-3">Associate Evaluation Form</label>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input id="evform" type="checkbox" class="cbx-field" name="evform" value="yes">                             
+                                        <label class="cbx" for="evform"></label>
+                                        <label class="lbl" for="evform">Associate Evaluation Form</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3"></label>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                       <select class="form-control" name="evaluation_form" id="ev_form" disabled="disabled">
+                                           <option value=""> select evaluation</option>
+                                           @foreach($evaluation as $form)
+                                           <option value="{{ $form->id}}">{{$form->title}}</option>
+
+                                           @endforeach
+                                       </select>                             
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group" id="expirediv">
                             <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
@@ -667,6 +696,14 @@ $('#Questionnaire').on('change',function(){
         $('#ques_sel').attr('disabled','disabled');
     }else{
         $('#ques_sel').removeAttr('disabled');
+    }
+   
+})
+$('#evform').on('change',function(){
+    if($(this).is(':checked') == false){
+        $('#ev_form').attr('disabled','disabled');
+    }else{
+        $('#ev_form').removeAttr('disabled');
     }
    
 })

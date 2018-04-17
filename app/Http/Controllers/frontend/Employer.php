@@ -649,12 +649,13 @@ curl_close ($ch);
 		
 		$userId = $request->session()->get('jcmUser')->userId;
 		$questionaires = DB::table('jcm_questionnaire')->where('user_id','=',$userId)->get();
+		$evaluation = DB::table('jcm_evaluation')->where('user_id','=',$userId)->get();
 		//dd($questionaires);
 
 
 		$single= $plan[0]->quantity;
 		//dd($single);
-		return view('frontend.employer.post-job',compact('rec','plan','single','questionaires'));
+		return view('frontend.employer.post-job',compact('rec','plan','single','questionaires','evaluation'));
 
 	}
 
@@ -1709,6 +1710,7 @@ public function mapOrganization(Request $request){
     	if( $payment_mode != '' ) $db->where('payment_mode','LIKE','%'.$payment_mode.'%');
     	if( $from != '' && $to != '') $db->whereBetween('date', array($from, $to));
     	$db->where('user_id','=',$id);
+		$db->orderBy('order_id','des');
     	$data = $db->get();
     	
     	return view('frontend.employer.orders',compact('data'));
@@ -2071,7 +2073,7 @@ public function mapOrganization(Request $request){
 			$order['date']= date('Y-m-d');
 
             DB::table('jcm_orders')->insert($order);
-			 return view('frontend.writecashpayment_detail',compact('input'));
+			 return view('frontend.employer.writecashpayment_detail',compact('input'));
 	} 
 
 	public function nicepaypckg(Request $request)
@@ -2184,6 +2186,15 @@ public function allform(Request $request){
 		$record = DB::table('jcm_evaluation')->where('id','=',$Id)->first();
 		echo @json_encode($record);
 	}
+
+	public function deleteform(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$resumeId = $request->segment(5);
+		DB::table('jcm_evaluation')->where('id','=',$resumeId)->delete();
+	}
+
 
 
 	  public function jobstatsupdate(Request $request){

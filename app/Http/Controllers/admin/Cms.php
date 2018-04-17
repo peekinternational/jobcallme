@@ -715,6 +715,30 @@ class Cms extends Controller{
 
       return view('admin.cms.pakages',compact('jobs'));
     }
+
+       public function resumepackage(Request $request){
+        $data = DB::table('jcm_save_packeges');
+        $data->select('jcm_users.email','jcm_save_packeges.*');
+       $data->leftJoin('jcm_users','jcm_users.userId','=','jcm_save_packeges.user_id');
+       $data->where('jcm_save_packeges.type','Resume Download');
+        $data->orderBy('id','des');
+        $jobs = $data->paginate(15);
+    //    / dd($jobs);
+
+      return view('admin.cms.resumepakages',compact('jobs'));
+    }
+
+      public function jobspackage(Request $request){
+        $data = DB::table('jcm_save_packeges');
+        $data->select('jcm_users.email','jcm_save_packeges.*');
+       $data->leftJoin('jcm_users','jcm_users.userId','=','jcm_save_packeges.user_id');
+       $data->where('jcm_save_packeges.type','!=','Resume Download');
+        $data->orderBy('id','des');
+        $jobs = $data->paginate(15);
+    //    / dd($jobs);
+
+      return view('admin.cms.jobspakages',compact('jobs'));
+    }
   public function pckgstatupdate(Request $request){
         $id = $request->input('id');
         $status = $request->input('status');

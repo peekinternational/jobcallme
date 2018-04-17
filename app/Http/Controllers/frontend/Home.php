@@ -588,7 +588,7 @@ class Home extends Controller{
     	$company->orderBy('jcm_jobs.p_Category','desc');
     	
     	$companies = $company->paginate(30);
-
+		
     	return view('frontend.view-companies',compact('companies'));
     }
 

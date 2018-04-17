@@ -16,11 +16,26 @@
                     <h4 class="modal-title">@lang('home.cashpayment')</h4>
                     </div>
                     <div class="modal-body">
+<<<<<<< HEAD
                     <p>@lang('home.Package Plan'): {{ $input['type'] }}</p>
                     <p>@lang('home.Amount'): ${{ $input['amount']}}</p>
                     <p>@lang('home.Bank Name'): 기업은행</p>
                     <p>@lang('home.Account Holder'): <b>주식회사 잡콜미</b></p>
                     <p>@lang('home.Account Number'): 068-078905-04-012</p>
+=======
+                    <h2>Your order is pending payment clearance!</h2>
+                    <p>Thank you for shopping at jobcallme.com. Your order has been placed successfully. </p>
+                    <p>Your satisfaction is important to us, so if you have any questions or feedback please don't hesitate to contact us.</p>
+                    </br>
+                    </p>You can track your orders by visiting Manage > Orders Hisory from top menu. </p>
+                    <hr>
+                    <br>
+                    <p>Package Plan: {{ $input['type'] }}</p>
+                    <p>Amount: ${{ $input['amount']}}</p>
+                    <p>Bank Name: Industrail Bank</p>
+                    <p>Account Holder: <b>Jobcallme Co.,Ltd</b></p>
+                    <p>Account Number: 068-078905-04-012</p>
+>>>>>>> 6f5ff40a839962c929886f0ada2574d43cfab749
                     
                     </div>
                     

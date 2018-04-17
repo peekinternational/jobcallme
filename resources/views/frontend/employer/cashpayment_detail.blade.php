@@ -20,16 +20,16 @@
                     <p>Thank you for shopping at jobcallme.com. Your order has been placed successfully. </p>
                     <p>Your satisfaction is important to us, so if you have any questions or feedback please don't hesitate to contact us.</p>
                     </br>
-                    </p>After payment visiting Manage > After Payment page from top menu. </p>
+                    
                     </p>You can track your orders by visiting Manage > Orders Hisory from top menu. </p>
                     <hr>
                     <br>
                     <h4>Order Detail:</h4>
                     <p>Job Title: {{ $inputs['title']}}</p>
-                    <p>Amount: ${{ $inputs['amount']}}</p>
-                    <p>Bank Name: Industrail Bank</p>
-                    <p>Account Holder: <b>Jobcallme Co.,Ltd</b></p>
-                    <p>Account Number: 068-078905-04-012</p>
+                    <p>@lang('home.Amount') : ${{ $inputs['amount']}}</p>
+                    <p>@lang('home.Bank Name') : 기업은행</p>
+                    <p>@lang('home.Account Holder') : <b>주식회사 잡콜미</b></p>
+                    <p>@lang('home.Account Number') : 068-078905-04-012</p>
                     
                     </div>
                     
