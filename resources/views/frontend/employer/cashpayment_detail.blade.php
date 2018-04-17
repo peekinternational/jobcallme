@@ -20,7 +20,7 @@
                     <p>Thank you for shopping at jobcallme.com. Your order has been placed successfully. </p>
                     <p>Your satisfaction is important to us, so if you have any questions or feedback please don't hesitate to contact us.</p>
                     </br>
-                    </p>After payment visiting Manage > After Payment page from top menu. </p>
+                    
                     </p>You can track your orders by visiting Manage > Orders Hisory from top menu. </p>
                     <hr>
                     <br>

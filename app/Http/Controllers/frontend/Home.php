@@ -587,7 +587,7 @@ class Home extends Controller{
     	$company->orderBy('companyId','desc');
     	
     	$companies = $company->paginate(30);
-
+		
     	return view('frontend.view-companies',compact('companies'));
     }
 

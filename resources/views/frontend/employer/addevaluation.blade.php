@@ -24,7 +24,7 @@
                                     
                                     <tbody>
                                         @foreach($record as $order)
-                                        <tr>
+                                        <tr id="form-{{$order->id}}">
                                             <td>{{$order->title}}</td>
                                             <td>{{$order->criterion}}</td>
                                             <td>{{$order->created_at}}</td>
@@ -146,9 +146,9 @@ function getAcademic(resumeId){
 function deleteElement(resumeId){
     if(confirm('Are you sure to delete this?')){
         $.ajax({
-            url: "{{ url('account/jobseeker/resume/delete') }}/"+resumeId,
+            url: "{{ url('account/employer/form/delete') }}/"+resumeId,
             success: function(response){
-                $('#resume-'+resumeId).remove();
+                $('#form-'+resumeId).remove();
             }
         })
     }

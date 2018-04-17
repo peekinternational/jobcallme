@@ -60,7 +60,7 @@ $$nav = 'active';
                         <ul class="sidenav-subnav">
                             <li class="sidenav-subheading">CMS</li>
                             <li class="{{ $alljobs }}">
-                                <a href="{{ url('admin/cms/alljobs') }}">Jobs</a>
+                                <a href="{{ url('admin/cms/alljobs') }}">Jobs >></a>
                                  <ul class="sidenav-subnav">
                                  <li class="{{ $publishjobs }}">
                                 <a href="{{ url('admin/cms/alljobs') }}">All Jobs</a>
@@ -81,7 +81,18 @@ $$nav = 'active';
                                 <a href="{{ url('admin/cms/plan') }}">Add Packages</a>
                             </li>
                              <li class="{{ $package }}">
+                                <a href="{{ url('admin/cms/plan/get') }}">Packages Status >></a>
+                                 <ul class="sidenav-subnav">
+                                 <li class="{{ $package }}">
                                 <a href="{{ url('admin/cms/plan/get') }}">All Packages</a>
+                                </li>
+                                 <li class="{{ $Packagesjobs }}">
+                                <a href="{{ url('admin/cms/plan/jobpckg') }}">Jobs Packages</a>
+                              </li>
+                                 <li class="{{ $Resume}}">
+                                <a href="{{ url('admin/cms/plan/resume') }}"> Resume Packages</a>
+                              </li>
+                              </ul>
                             </li>
                             <li class="{{ $shift }}">
                                 <a href="{{ url('admin/cms/shift') }}">Job Shift</a>
