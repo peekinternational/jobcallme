@@ -567,7 +567,7 @@ class Home extends Controller{
     public function companies(Request $request){
     	/* companies query */
     	$company = DB::table('jcm_companies');
-    	$company->leftJoin('jcm_jobs','jcm_companies.companyId','=','jcm_jobs.companyId');
+    	
     	if($request->isMethod('post')){
     		if($request->input('keyword') != ''){
     			$company->where('companyName','like','%'.$request->input('keyword').'%');
@@ -583,8 +583,8 @@ class Home extends Controller{
     		$company->where('category','=',$request->input('in'));
     	}
 		$company->where('jcm_companies.category','!=','');
-    	$company->groupBy('jcm_companies.companyId');
-    	$company->orderBy('jcm_jobs.p_Category','desc');
+    	
+    	$company->orderBy('companyId','desc');
     	
     	$companies = $company->paginate(30);
 
