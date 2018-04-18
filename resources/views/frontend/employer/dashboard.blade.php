@@ -121,8 +121,9 @@
 
                         <!--Upcoming Interviews Start-->
                         
-                        @foreach( $upcommingInterviews as $interview)
+                        
                         <div class="tab-pane" id="rtj_tab_interview">
+                        @foreach( $upcommingInterviews as $interview)
                             <div class="col-md-12 rtj-item">
                                 <img src="{{ url('profile-photos/'.$interview->profilePhoto)}}" style="width: 50px">
                                 <div class="rtj-details">
@@ -131,11 +132,12 @@
                                     <p><i class="fa fa-clock-o"></i>  {{ $interview->fromDate }} to {{ $interview->toDate }}   <i class="fa fa-map-marker"></i> {{ $interview->country }}, {{ $interview->state }}, {{ $interview->city }}</p>
                                 </div>
                             </div>
+                             @endforeach
                             <div class="col-md-12">
                                 <a href="{{ url('account/employer/application?show=interview')}}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
                             </div>
                         </div>
-                        @endforeach
+                       
                         <!--Upcoming Interviews End-->
                     </div>
                 </div>
