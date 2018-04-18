@@ -316,6 +316,7 @@ class Home extends Controller{
 			$input['country'] = $request->input('country');
 			$input['state'] = $request->input('state');
 			$input['city'] = $request->input('city');
+			$input['subscribe'] = $request->input('jobalert');
 			$input['profilePhoto'] = '';
 			$input['about'] = '';
 			$input['createdTime'] = date('Y-m-d H:i:s');
@@ -585,7 +586,8 @@ class Home extends Controller{
     	}
 		$company->where('jcm_companies.category','!=','');
     	
-    	$company->orderBy('companyId','desc');
+    	$company->orderBy('package','desc');
+    	$company->orderBy('companyModifiedTime','desc');
     	
     	$companies = $company->paginate(30);
 		

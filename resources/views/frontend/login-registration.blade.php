@@ -157,7 +157,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <div class="input-group">
                     <div class="checkbox">
                         <label>
-                            <input id="job-alert" type="checkbox" name="remember" value="1"> @lang('home.jobalert')
+                            <input id="job-alert" type="checkbox" name="jobalert" value="Y"> @lang('home.jobalert')
                         </label>
                     </div>
                 </div>
