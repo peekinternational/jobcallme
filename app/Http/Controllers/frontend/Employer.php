@@ -418,7 +418,7 @@ curl_close ($ch);
 			$input['subCategory'] = '';
 		}
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
-		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_category,'companyModifiedTime'=>date('Y-m-d H:i:s')]);  
+		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]);  
 		echo $jobId;
             
             /** it's all right **/
@@ -492,6 +492,7 @@ curl_close ($ch);
 			}
 			
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
+			DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 			Session::put('postedJobId',$jobId);
 		else: 
 			if(Session::get('p_Category')):
@@ -1771,6 +1772,7 @@ public function mapOrganization(Request $request){
 			
         $input['questionaire_id'] = $questionaire_id;
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
+			DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Categoryss,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 			$order['job_id']=$jobId;
 			$order['user_id']=$apps->userId;
             $order['payment_mode']='Cash Payment';
