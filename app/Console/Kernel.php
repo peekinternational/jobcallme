@@ -84,13 +84,10 @@ class Kernel extends ConsoleKernel
                 endforeach;
             endif; 
         })->everyMinute();
-<<<<<<< HEAD
 		$schedule->call(function () {
 			\Log::info('this is sajid');
 			})->everyMinute();
-=======
        $schedule->call('echo')->everyMinute();
->>>>>>> 6d377dcff2b34404e0a13cfc92fcc0c6e5bb6c8e
     }
 
     /**

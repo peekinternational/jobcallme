@@ -2206,8 +2206,8 @@ public function allform(Request $request){
         $id = $request->input('id');
 		
         $jobstatus = $request->input('jobstatus');
-      //  echo $id;
-		//echo $jobstatus;
+      //echo $id;
+	//	echo $jobstatus;
 		$input['jobStatus']=$jobstatus;
         $check = DB::table('jcm_jobs')->where('jobId',$id)->update($input);
     

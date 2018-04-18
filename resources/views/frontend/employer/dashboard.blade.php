@@ -309,7 +309,7 @@ $('#active_deactive'+i).click(function(e){
   
   if(yes=='Publish'){
       $('.active_deactive'+id).html('<i class="fa fa-eye-slash" id="deactive"></i> @lang("home.Deactive")');
-      yes='Draft';
+      yes=$('.check'+id).val('Draft');
       //alert(oye);
       var token = "{{ csrf_token() }}";
        jobstatus = 'Draft';
@@ -318,7 +318,7 @@ $('#active_deactive'+i).click(function(e){
             data:{id:id,jobstatus:jobstatus,_token:token },
             type:'POST',
             success:function(res){
-               //alert(res);
+              //alert(res);
                if(res == 1){
                 toastr.success('@lang("home.status deactivate")');
                }else{
@@ -330,7 +330,8 @@ $('#active_deactive'+i).click(function(e){
   else if(yes=='Draft'){
       
        $('.active_deactive'+id).html('<i class="fa fa-eye" id="active"></i> @lang("home.Active")');
-        yes='Publish';
+      //  yes='Publish';
+        yes=$('.check'+id).val('Publish');
            jobstatus = 'Publish';
              var token = "{{ csrf_token() }}";
         
@@ -339,7 +340,7 @@ $('#active_deactive'+i).click(function(e){
             data:{id:id,jobstatus:jobstatus,_token:token },
             type:'POST',
             success:function(res){
-               // alert(res);
+             //  alert(res);
                if(res == 1){
                 toastr.success('@lang("home.status active")');
                }else{
