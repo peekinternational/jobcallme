@@ -1995,6 +1995,24 @@ if($user->profilePhoto != ''){
                         </div>
                     </form>
                 </div>
+                 <div class="ja-content-item mc-item resume-listing-section">
+                    <h4>Vedio & Chat Image</h4>
+                    <div class="re-img-box" style="left: 50px;">
+                        <img src="<?= ($user->chatImage != '') ? url('profile-photos/'.$user->chatImage) : asset('profile-photos/profile-logo.jpg') ?>" class="chat-img-target">
+                        <div class="re-img-toolkit">
+                            <div class="re-file-btn" style="left:35px">
+                                Change <i class="fa fa-camera"></i>
+                                <input type="file" class="upload chatImage" name="image">
+                            </div>
+                            <span id="remove-re-image" style="margin-left: 35px;" onclick="removeResumePic('chat')">Remove <i class="fa fa-remove"></i></span>
+                            <p id="remove-re-image" style="margin-left: 35px;" onclick="editResumeChatPic()">Edit <i class="fa fa-edit"><input type="hidden" value="1" id="userID"></i></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="nickName" id="nickName" class="form-control" value="{{$user->nickName}}" placeholder="Enter your Nick Name">
+                    </div>
+                    <button type="button" id="chat-save" class="btn btn-primary">Save</button>
+                </div>
                 </div>
             </div>
         </div>
@@ -2968,6 +2986,35 @@ $('.profile-pic').on('change',function(){
         }
     });
 });
+
+$('#chat-save').on('click',function(e){
+    e.preventDefault();
+    var formData = new FormData();
+    var nickName = $('#nickName').val();
+    formData.append('profilePicture', $('.chatImage')[0].files[0]);
+    formData.append('_token', pageToken);
+    formData.append('chat', 'yes');
+    formData.append('nickName', nickName);
+
+    $.ajax({
+        url : "{{ url('account/jobseeker/profile/picture') }}",
+        type : 'POST',
+        data : formData,
+        processData: false,
+        contentType: false,
+        timeout: 30000000,
+        success : function(response) {
+            if($.trim(response) == 'noUrl'){
+            }
+            else{
+                $('img.chat-img-target').attr('src',response);
+            }
+            if($.trim(response) == '1'){
+                alert('Following format allowed (PNG/JPG/JPEG)');
+            }
+        }
+    });
+});
 tinymce.init({
     selector: '.tex-editor',
     setup: function (editor) {
@@ -3166,6 +3213,104 @@ function getSubCategories2(categoryId2){
         }
        });
     }
+ function editResumeChatPic(){
+        var proImg = $('.chat-img-target').attr('src');
+       $('#editchatModel').modal('show');
+       $('#editchatModel #proEditImg img').attr('src',proImg);
+       $('#editchatModel #proEditImg img').rcrop({
+            minSize : [100,100],
+            preserveAspectRatio : true,
+            
+            preview : {
+                display: true,
+                size : [100,100],
+                wrapper : '#custom-preview-wrapper'
+            }
+        });
+      
+    }
+    $('#editchatModel #proEditImg img').on('rcrop-changed', function(){
+        var srcOriginal = $(this).rcrop('getDataURL');
+        var srcResized = $(this).rcrop('getDataURL', 50,50);
+        var userId = "{{ session()->get('jcmUser')->userId }}";
+        $('.chat-img-target').attr('src',srcOriginal);
+        //test:
+        var blob = dataURLtoBlob(srcOriginal);
+        var imagelink = $('#editchatModel #proEditImg img').attr('src');
 
+        /*blobToDataURL(blob, function(dataurl){
+            console.log(dataurl);
+        });*/
+        var fd = new FormData();
+        fd.append('profileImage', blob);
+        fd.append('_token', "{{ csrf_token() }}");
+        fd.append('userId', userId);
+        fd.append('imagelink', imagelink);
+        $.ajax({
+            type: 'POST',
+            url: '{{ url("cropProfileImage") }}',
+            data: fd,
+            processData: false,
+            contentType: false
+        }).done(function(data) {
+               console.log(data);
+        });
+        
+    });
+    $('#editProResumeModel #proEditImg img').on('rcrop-changed', function(){
+        var srcOriginal = $(this).rcrop('getDataURL');
+        var srcResized = $(this).rcrop('getDataURL', 50,50);
+        var userId = "{{ session()->get('jcmUser')->userId }}";
+        $('.img-target').attr('src',srcOriginal);
+        //test:
+        var blob = dataURLtoBlob(srcOriginal);
+        var imagelink = $('#editProResumeModel #proEditImg img').attr('src');
+
+        /*blobToDataURL(blob, function(dataurl){
+            console.log(dataurl);
+        });*/
+        var fd = new FormData();
+        fd.append('profileImage', blob);
+        fd.append('_token', "{{ csrf_token() }}");
+        fd.append('userId', userId);
+        fd.append('imagelink', imagelink);
+        $.ajax({
+            type: 'POST',
+            url: '{{ url("cropProfileImage") }}',
+            data: fd,
+            processData: false,
+            contentType: false
+        }).done(function(data) {
+               console.log(data);
+        });
+        
+    });
+    function removeResumePic(req){
+       var userId = $('#userID').val();
+       //alert(userId);
+       var data;
+       if(req == 'chat'){
+         data = {userId:userId,_token:'{{ csrf_token() }}',chat:'yes'};
+       }
+       if(req == 'profile'){
+        data = {userId:userId,_token:'{{ csrf_token() }}'};
+       }
+       $.ajax({
+        url:'{{ url("account/manage/removeProPic") }}',
+        data:data,
+        type:'POST',
+        success:function(res){
+            if(res == 1){
+                toastr.success('Profile Pic Remove');
+                if(req == 'chat'){
+                $('.chat-img-target').attr('src','{{ asset("profile-photos/profile-logo.jpg") }}');
+                } 
+                if(req == 'profile'){
+                $('.img-target').attr('src','{{ asset("profile-photos/profile-logo.jpg") }}');
+                }   
+            }
+        }
+       });
+    }
 </script>
 @endsection
