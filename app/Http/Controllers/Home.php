@@ -13,6 +13,7 @@ use App\User;
 use App\Package; 
 use App\Write; 
 use App\Skill; 
+use DB;
 class Home extends Controller{
     
     public function notFound(){
@@ -108,27 +109,27 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 			$fileContents= Storage::disk('local')->get($fileName);
 			$fileContents.=" ======== IN TESTING ====== ";
 			Storage::disk('local')->put($fileName, $fileContents);
-			$jId=explode('-',$jId);
+			$newid=explode('-',$jId);
 
-			if($jId[1] == 'package'){
-			DB::table('jcm_save_packeges')->where('id','=',$jId[0])->update(['status'=>1]);
+			if($newid[1] == 'package'){
+			DB::table('jcm_save_packeges')->where('id','=',$newid[0])->update(['status'=>1]);
             
 			}
-			elseif($jId[1] == 'write'){
-			$jobData=Write::findOrFail($jId[0]); 
+			elseif($newid[1] == 'write'){
+			$jobData=Write::findOrFail($newid[0]); 
 			$jobData->status='Publish';
 			$jobData->save();
 			}
-			elseif($jId[1] == 'upskill'){
-			$jobData=Skill::findOrFail($jId[0]); 
+			elseif($newid[1] == 'upskill'){
+			$jobData=Skill::findOrFail($newid[0]); 
 			$jobData->status='Active';
 			$jobData->save();
 			}
 			else{
-			$jobData=Jobs::findOrFail($jId[0]); 
+			$jobData=Jobs::findOrFail($newid[0]); 
 			$jobData->status=1;
 			$jobData->pay_id=$authCode;
-			$jobData->p_Category=$jId[1];
+			$jobData->p_Category=$newid[1];
 			$jobData->package_start_time=date('Y-m-d H:i:s');
 			$jobData->save();
 			}
