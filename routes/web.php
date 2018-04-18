@@ -19,7 +19,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);    // error_reporting(E_ALL ^ E_W
 Route::get('get-location-from-ip',function(){
     $ip= \Request::ip();
     $data = \Location::get($ip);
-   // dd($data);
+    dd($data);
 });
 
 Route::get('pdfview',function() {
@@ -183,6 +183,14 @@ Route::group(['prefix' => 'account'], function () {
 	Route::post('employer/questionnaires/question/delete','frontend\Employer@deletequestion');
 	Route::get('employer/questionnaires','frontend\Employer@questionnaires');
 	Route::get('employer/questionnaires/edit/{id}','frontend\Employer@editquestionnaires');
+	/* evaluation routes*/
+	Route::post('employer/evaluation/new','frontend\Employer@addquestionaires');
+	Route::post('employer/evaluation/delete','frontend\Employer@deletequestionaires');
+	Route::post('employer/evaluation/question/new','frontend\Employer@addquestion');
+	Route::post('employer/evaluation/question/delete','frontend\Employer@deletequestion');
+	Route::get('employer/evaluation','frontend\Employer@evaluation');
+	Route::get('employer/evaluation/edit/{id}','frontend\Employer@editquestionnaires');
+	/*end evalutation routes*/
 	Route::post('employer/savecompic','frontend\Home@savecompic');
 	Route::get('writings','frontend\ExtraSkills@writings');
 	Route::match(['get','post'],'writings/article/add','frontend\ExtraSkills@addEditArticle');
