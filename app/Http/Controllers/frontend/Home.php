@@ -21,6 +21,7 @@ class Home extends Controller{
 			App::setLocale('en');
 			\Session::put('locale', 'en');
 		}
+		
 		//print_r($position->countryCode);die;
 		/* job shift query */
 		$jobShifts = DB::table('jcm_job_shift')->get();
