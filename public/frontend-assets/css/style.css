@@ -145,12 +145,12 @@ ul.nav li.active{
 
 
 .main-slide{
-    min-height: 500px;
+    min-height: 200px;
     background-image: url("../images/careerBanner.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
 }
 .btn-2 {
     color: #5c332f;
@@ -206,7 +206,7 @@ ul.nav li.active{
 }
 
 .job-search{
-    padding-top: 110px;
+    padding-top: 100px;
 }
 .job-search h1{
     color: #ffffff;
@@ -317,7 +317,7 @@ ul.nav li.active{
     height: 33px !important;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered{
-    color: #cccccc !important;
+    color: #fff !important;
 }
 .search-btn{
     float: right;
@@ -521,7 +521,7 @@ a.job-location:hover span.shine {
 .pj-single-details  p:nth-child(3){
     margin-bottom: 2px;
     font-size: 10px;
-    color: #999999;
+    color: #fff;
 	padding-top:-5px;
 }
 .ih-item a:hover .job-status{
@@ -606,7 +606,7 @@ a.job-location:hover span.shine {
     width: 100% !important;
     background-color: #fff;
     border: none !important;
-    padding: 5px;
+    padding: 4px 1px 1px 1px;
     margin-bottom: 10px;
 
 }
@@ -634,7 +634,7 @@ a.job-location:hover span.shine {
     height: auto;
 }
 .hj-type-job{   
-    height: 150px;    
+    height: 155px;    
 }
 .hj-type-job img{
     width: 118px !important;
@@ -655,7 +655,7 @@ a.job-location:hover span.shine {
     background: rgba(0,0,0,0.8) !important;
 }
 .lj-type-job{   
-    height: 130px;    
+    height: 145px;    
 }
 .lj-type-job img{
     width: 82px !important;
@@ -732,7 +732,7 @@ a.job-location:hover span.shine {
     color: #666666;
     float: left;
     border-right: 0px solid #cccccc;
-    padding: 0px 0;
+    padding: 10px 0;
 }
 
 .udp-itemss li:last-child{
@@ -760,7 +760,7 @@ a.job-location:hover span.shine {
     color: #666666;
     float: left;
     border-right: 0px solid #cccccc;
-    padding: 0px 0;
+    padding: 10px 0;
 }
 
 .udp-items li:last-child{
@@ -1345,7 +1345,7 @@ ul.jd-rewards li i{
     text-align: left;
     margin-left: -15px;
     margin-right: -15px;
-    width: 115.2%;
+    /* width: 115.2%; */                 /* 수정 */
     border-radius: 0;
 	padding-top:15px;
 	padding-bottom:15px;
@@ -2024,6 +2024,7 @@ ul.jd-rewards li i{
 #companies-section .category-label{
     font-size: 14px;
     color: #fff;
+	padding-bottom:10px;
     border-bottom: 1px dotted #fff;
 }
 .ellipsis a{
@@ -3287,7 +3288,7 @@ img.profile-photo-xs{
     border: 1px solid #cccccc;
     background: #ffffff;
     margin-bottom: 20px;
-    height: 118px;
+    height: 130px;  /* 수정 */
 }
 .sc-thumbnail{
     width: 18%;
@@ -3570,7 +3571,7 @@ img.profile-photo-xs{
     }
     /*Zeeshan Css Chnges*/
     .job-search{
-        padding-top: 25px;
+        padding-top: 100px;
     }
     .hp_strip .wrapper h2{
         padding-top: 60px !important;
@@ -3861,8 +3862,8 @@ curveIn {  0% {
 
 #post-job-ad-types>li {
     display: inline-block;
-    width: 221px;
-    min-height: 112px;
+    width: 260px;
+    min-height: 120px;
     cursor: pointer;
     padding: 3px 13px 10px 13px;
     border: 1px solid #cfd8dc;
@@ -4111,4 +4112,90 @@ margin-bottom: 17px;
 /*By saad*/ 
 #menu1 .personal-info-section{
     padding-top:0px; 
+}
+
+
+/* 주소 */ 
+.ui-menu{outline:0;list-style:none}
+.ui-menu{position:absolute}
+.ui-widget{font-family:Arial,Helvetica,sans-serif}.ui-widget button,.ui-widget input,.ui-widget select,.ui-widget textarea{font-family:Arial,Helvetica,sans-serif;font-size:1em}.ui-widget.ui-widget-content{border:1px solid #c5c5c5}.ui-widget-content{border:1px solid #ddd;background:#FFF;color:#333}
+
+
+
+/* 기업정보편집 시간*/
+.ui-timepicker-wrapper {
+	overflow-y: auto;
+	height: 150px;
+	width: 300px;
+	background: #fff;
+	border: 1px solid #ddd;
+	-webkit-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	-moz-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	box-shadow:0 5px 10px rgba(0,0,0,0.2);
+	outline: none;
+	z-index: 10001;
+	margin: 0;
+}
+
+.ui-timepicker-wrapper.ui-timepicker-with-duration {
+	width: 13em;
+}
+
+.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-30,
+.ui-timepicker-wrapper.ui-timepicker-with-duration.ui-timepicker-step-60 {
+	width: 11em;
+}
+
+.ui-timepicker-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ui-timepicker-duration {
+	margin-left: 5px; color: #888;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-duration {
+	color: #888;
+}
+
+.ui-timepicker-list li {
+	padding: 3px 0 3px 5px;
+	cursor: pointer;
+	white-space: nowrap;
+	color: #000;
+	list-style: none;
+	margin: 0;
+}
+
+.ui-timepicker-list:hover .ui-timepicker-selected {
+	background: #fff; color: #000;
+}
+
+li.ui-timepicker-selected,
+.ui-timepicker-list li:hover,
+.ui-timepicker-list .ui-timepicker-selected:hover {
+	background: #1980EC; color: #fff;
+}
+
+li.ui-timepicker-selected .ui-timepicker-duration,
+.ui-timepicker-list li:hover .ui-timepicker-duration {
+	color: #ccc;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled,
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+	color: #888;
+	cursor: default;
+}
+
+.ui-timepicker-list li.ui-timepicker-disabled:hover,
+.ui-timepicker-list li.ui-timepicker-selected.ui-timepicker-disabled {
+	background: #f2f2f2;
+}
+.suggestedreading-img-mbl{
+    height: 110px;
+    overflow: hidden;
 }

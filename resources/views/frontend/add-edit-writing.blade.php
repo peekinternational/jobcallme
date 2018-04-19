@@ -16,17 +16,17 @@
 
                     @else
                      <div>
-                    <span>@lang('home.selectcurrency'): &nbsp;</span>
+                    <span style="padding-left:50px">@lang('home.selectcurrency'): &nbsp;</span>
                       <input type="radio" name="gender" id="wr_kr" value="kr" checked="checked"> korean
                       &nbsp;&nbsp;<input type="radio" name="gender" id="wr_us" value="us"> US$
                       </div>
                     <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:50px;">
                      <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types" class="please">
-                            <li style="position:relative">
-                             <input class="mat-radio-input cdk-visually-hidden" type="radio" id="basicplan" name="cat_id" value="0" >
-                               <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                               <span class="b">@lang('home.Basic')</span></div>
+                            <li style="position:relative;background:#3a79d2;">
+                             <input class="mat-radio-input cdk-visually-hidden" type="radio" id="basicplan" name="cat_id" value="0" ><span style="color:#fff;padding-left:10px;">@lang('home.FreetillEndofOctober')</span>
+                               <div class="mat-radio-label-content" style="padding-top:5px;"><span style="display:none;">&nbsp;</span>
+                               <span class="b" style="color:#fff;font-size: 17px;">@lang('home.Basic')</span></div>
                                 <div>
                                     <!----><label for="basicplan">
                                             <ul class="list-unstyled desc" >
@@ -34,42 +34,62 @@
                                                 <li>@lang('home.adcost')</li>
                                             </ul>
                                         
-                                        <div class="credits b">
-                                        <span class="text-success">@lang('home.Free')</span>
-                                    <i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+                                        <div class="credits b" style="color:#fff;font-size: 15px;padding-top:5px;">
+                                        <span class="text-success" style="color:#fff">@lang('home.Free')<span style="padding-left:20px"><strike>[@lang('home.lean1000')]</strike></span></span>
+                                    <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i>
                                     </div>
                                     </label>
                                 </div>
                             </li>
 
+<!-- 
                          @foreach($wrpayment as $key=>$payment)
-                         
-
-                            <!----><li style="position:relative">
+							
+								@if($payment->tag1 == "Basic")
+                            <li style="position:relative;background:#3a79d2;">
+								@endif
+								@if($payment->tag1 == "Golden")
+                            <li style="position:relative;background:#b0a48a;">
+								@endif
+								@if($payment->tag1 == "Special")
+                            <li style="position:relative;background:#4e6c7c;">
+								@endif
+								@if($payment->tag1 == "Latest")
+                            <li style="position:relative;background:#94a5a5;">
+								@endif
+								@if($payment->tag1 == "Hot")
+                            <li style="position:relative;background:#717171;">
+								@endif
+								@if($payment->tag1 == "Top Job")
+                            <li style="position:relative;background:#a8b3b9;">
+								@endif
+								@if($payment->tag1 == "Premium")
+                            <li style="position:relative;background:#a09d8e;">
+								@endif
+                            
                             <span class="wr">
                                <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="cat_id" value="{!! $payment->id!!}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@lang('home.'.$payment->title)
                                <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}"></span>
                                <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.'.$payment->tag1)</span></div>
+                             <span class="b" style="color:#fff;font-size: 17px;">@lang('home.'.$payment->tag1)</span></div>
                                 <div>
-                                    <!----><label for="{!! $payment->id!!}">
+                                    <label for="{!! $payment->id!!}">
                                         <ul class="list-unstyled desc" >
                                             <li>@lang('home.'.$payment->tag2) ( {!! $payment->days!!}  @lang('home.day') )</li>
                                             <li>@lang('home.'.$payment->tag3)</li>
                                         </ul>
                                         
-                                        <div class="credits b">
-                                        <span class="text-success" id="wr_text{{$key}}"></span>
+                                        <div class="credits b" style="color:#fff;font-size: 15px;">
+                                        <span style="color:#fff;" class="text-success" id="wr_text{{$key}}"></span>
                                     <i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
                                     </div>
                                     </label>
-                                    <!---->
-                                    <!---->
-                                    <!---->
+                                   
                                 </div>
                             </li>
                            
                             @endforeach
+ -->
                         </ul>
                  
 

@@ -39,10 +39,10 @@ if($company->companyLogo != ''){
                        <div class="eo-dp-toolkit">
                            <input type="file" id="eo-dp" class="compnay-logo">
                            <label for="eo-dp"><i class="fa fa-camera"></i> @lang('home.change')</label><br>
-                           <label  style="margin-left:-23px" onclick="editcompanypic()"><i class="fa fa-edit"></i> Edit</label><br>
+                           <label  style="margin-left:-23px" onclick="editcompanypic()"><i class="fa fa-edit"></i> @lang('home.Edit')</label><br>
                            <label onclick="removecompanypic()"><i class="fa fa-remove">
                              <input type="hidden" value="{{ session()->get('jcmUser')->userId }}" id="userID">
-                           </i> Remove</label>
+                           </i> @lang('home.Remove')</label>
                        </div>
 
                    </div>
@@ -55,13 +55,13 @@ if($company->companyLogo != ''){
                                <span>@lang('home.designation'):</span> HR
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.businesstype'):</span> {{ $company->businessType }}
+                               <span>@lang('home.businesstype'):</span> @lang('home.'.$company->businessType)
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.industry'):</span> {{ JobCallMe::categoryName($company->category) }}
+                               <span>@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryName($company->category))
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.address'):</span> {{ $company->companyAddress.' '.JobCallMe::cityName($company->companyCity).' , '.JobCallMe::countryName($company->companyCountry) }}
+                               <span>@lang('home.address'):</span> @lang('home.'.$company->companyAddress), @lang('home.'.JobCallMe::cityName($company->companyCity)), @lang('home.'.JobCallMe::countryName($company->companyCountry))
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.email'):</span> {{ $company->companyEmail }}
@@ -73,7 +73,11 @@ if($company->companyLogo != ''){
                                <span>@lang('home.website'):</span> <a href="{{ $company->companyWebsite }}">{{ $company->companyWebsite }}</a>
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.establishedin'):</span> {{ date('M Y',strtotime($company->companyEstablishDate)) }}
+                               <span>@lang('home.establishedin'):</span> @if(app()->getLocale() == "kr")
+						    {{ date('Y-m',strtotime($company->companyEstablishDate)) }}
+						@else
+						    {{ date('M Y',strtotime($company->companyEstablishDate)) }}
+						@endif
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.noemployees'):</span> {{ $company->companyNoOfUsers }}
@@ -136,17 +140,16 @@ if($company->companyLogo != ''){
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.businesstype')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <select class="form-control select2" name="businessType" required>
-                                                <option value="@lang('home.Sole Proprietorship')">@lang('home.Sole Proprietorship')</option>
-                                                <option value="@lang('home.Partnership')">@lang('home.Partnership')</option>
-                                                <option value="@lang('home.SME Pvt. Ltd')">@lang('home.SME Pvt Ltd')</option>
-                                                <option value="@lang('home.Private Limited Company Pvt Ltd')">@lang('home.Private Limited Company Pvt Ltd')</option>
-                                                <option value="@lang('home.Human Public Limited Company Listed')">@lang('home.Public Limited Company Listed')</option>
-                                                <option value="@lang('home.Public Limited Company Unlisted')">@lang('home.Public Limited Company Unlisted')</option>
-                                                <option value="@lang('home.Nonprofits')">@lang('home.Nonprofits')</option>
-                                                <option value="@lang('home.Joint Venture')">@lang('home.Joint Venture')</option>
-                                                <option value="@lang('home.Inc Incorporated')">@lang('home.Inc Incorporated')</option>
-                                                <option value="@lang('home.Inc Incorporated')">@lang('home.Inc Incorporated')</option>
-                                                <option value="@lang('home.LLC Limited Liability Company')">@lang('home.LLC Limited Liability Company')</option>
+                                                <option value="Sole Proprietorship">@lang('home.Sole Proprietorship')</option>
+                                                <option value="Partnership">@lang('home.Partnership')</option>
+                                                <option value="SME Pvt. Ltd">@lang('home.SME Pvt Ltd')</option>
+                                                <option value="Private Limited Company Pvt Ltd">@lang('home.Private Limited Company Pvt Ltd')</option>
+                                                <option value="Human Public Limited Company Listed">@lang('home.Public Limited Company Listed')</option>
+                                                <option value="Public Limited Company Unlisted">@lang('home.Public Limited Company Unlisted')</option>
+                                                <option value="Nonprofits">@lang('home.Nonprofits')</option>
+                                                <option value="Joint Venture">@lang('home.Joint Venture')</option>
+                                                <option value="Inc Incorporated">@lang('home.Inc Incorporated')</option>  
+                                                <option value="LLC Limited Liability Company">@lang('home.LLC Limited Liability Company')</option>
                                                  
                                            </select>
                                        </div>
@@ -157,7 +160,7 @@ if($company->companyLogo != ''){
                                            <select class="form-control select2" name="industry" required>
                                               
                                                @foreach(JobCallMe::getCategories() as $cat)
-                                                <option value="{{ $cat->categoryId }}" {{ $cat->categoryId == $company->category ? 'selected="selected"' : '' }}>{{ $cat->name }}</option>
+                                                <option value="{{ $cat->categoryId }}" {{ $cat->categoryId == $company->category ? 'selected="selected"' : '' }}>@lang('home.'.$cat->name)</option>
                                                @endforeach
                                            </select>
                                        </div>
@@ -173,7 +176,7 @@ if($company->companyLogo != ''){
                                        <div class="col-sm-9 pnj-form-field">
                                             <select class="form-control input-sm select2 job-country companyCountry" name="companyCountry" required>
                                                 @foreach(JobCallMe::getJobCountries() as $cntry)
-                                                    <option value="{{ $cntry->id }}" {{ $company->companyCountry == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                                    <option value="{{ $cntry->id }}" {{ $company->companyCountry == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
                                                 @endforeach
                                             </select>
                                        </div>
@@ -466,10 +469,10 @@ if($company->companyLogo != ''){
         </div>
 
         <div class="eo-box eo-about">
-            <h3 class="eo-about-heading">@if(Lang::has(home.companypics))@lang('home.companypics') @else Edit Company Pictures @endif</h3>
+            <h3 class="eo-about-heading">@if(Lang::has(home.companypics))@lang('home.companypics') @else @lang('home.Edit Company Pictures') @endif</h3>
             <div class="eo-about-org">
                 <textarea id="editor1" name="companypics">{!! $company->companypics !!}</textarea>
-                <button class="btn btn-success" id="save-company"> Save</button>
+                <button class="btn btn-success" id="save-company"> @lang('home.SAVE')</button>
             </div>
              
         </div>
@@ -564,7 +567,7 @@ $(document).ready(function(){
         data:{comppics:value,_token:"{{ csrf_token() }}"},
         success:function(res){
           if(res == 1){
-            toastr.success('company pics update successfully');
+            toastr.success('@lang("home.company pics update successfully")');
           }
         }
       });
@@ -733,7 +736,7 @@ $('.compnay-logo').on('change',function(){
             if($.trim(response) != '1'){
                 $('img.eo-c-logo').attr('src',response);
             }else{
-                toastr.error('Following format allowed (PNG/JPG/JPEG)', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                toastr.error('@lang("home.Following format allowed (PNG/JPG/JPEG)")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
             }
         }
     });
@@ -754,7 +757,7 @@ $('.compnay-cover').on('change',function(){
             if($.trim(response) != '1'){
                 $('img.eo-timeline-cover').attr('src',response);
             }else{
-                toastr.error('Following format allowed (PNG/JPG/JPEG)', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                toastr.error('@lang("home.Following format allowed (PNG/JPG/JPEG)")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
             }
         }
     });
@@ -827,7 +830,7 @@ $('.compnay-cover').on('change',function(){
         type:'POST',
         success:function(res){
             if(res == 1){
-                toastr.success('Profile Pic Remove');
+                toastr.success('@lang("home.Profile Pic Remove")');
                 $('.eo-dp').attr('src','{{ asset("compnay-logo/default-logo.jpg") }}');
             }
         }

@@ -15,7 +15,7 @@ if(Request::input('show') != ''){
     <div class="container">
 
         <div class="follow-companies6" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
-            <h3 style="margin-left: 15px">@lang('home.APPLICATION')</h3>
+            <h3 style="margin-left: 15px">@lang('home.APPLICATION_title')</h3>
         </div>
         <!-- Mobile View Only -->
         <div class="col-md-2 jobApp-tabs hidden-sm hidden-md hidden-lg">

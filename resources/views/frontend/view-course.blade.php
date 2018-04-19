@@ -13,7 +13,7 @@
                     <img src="{{ url('upskill-images/'.$record->upskillImage)}}">
                 </div>
                 @endif
-                <h3>{{ $record->title.' '.ucfirst($record->type).' in '.JobCallMe::cityName($record->city).', '.JobCallMe::countryName($record->country) }}</h3>
+                <h3>{{ $record->title }} @lang('home.'.ucfirst($record->type)) - <!-- in --> @lang('home.'.JobCallMe::cityName($record->city)), @lang('home.'.JobCallMe::countryName($record->country))</h3>
                 <div class="jd-share-btn">
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('learn/'.strtolower($record->type).'/'.$record->skillId) }}">
                         <i class="fa fa-facebook" style="background: #2e6da4;"></i> 
@@ -30,12 +30,16 @@
                 </div>
                 <table class="table table-bordered">
                     <tr>
-                        <td class="active">@lang('home.organizer')</td>
+                        <td class="active" width="150px">@lang('home.organiser')</td>
                         <td>{{ $record->organiser != '' ?  $record->organiser : JobCallMe::userName($record->userId) }}</td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.startingon')</td>
-                        <td>{{ date('d F, Y',strtotime($record->startDate))}}</td>
+                        <td>@if(app()->getLocale() == "kr")
+						    {{ date('Y-m-d',strtotime($record->startDate))}}
+						@else
+						    {{ date('d F, Y',strtotime($record->startDate))}}
+						@endif </td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.duration')</td>
@@ -82,11 +86,15 @@
                     </tr>
                     <tr>
                         <td class="active">@lang('home.postedon')</td>
-                        <td>{{ date('d F, Y',strtotime($record->createdTime)) }}</td>
+                        <td>@if(app()->getLocale() == "kr")
+						    {{ date('Y-m-d',strtotime($record->createdTime)) }}
+						@else
+						    {{ date('d F, Y',strtotime($record->createdTime)) }}
+						@endif</td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.venue')</td>
-                        <td>{{ $record->address }} , {{ JobCallMe::cityName($record->city) }}</td>
+                        <td>{{ $record->address }} , @lang('home.'.JobCallMe::cityName($record->city))</td>
                     </tr>
                 </table>
                 <h3>@lang('home.schedule')</h3>
@@ -97,20 +105,23 @@
                     foreach($opHour as $i => $z){
                         if($z['from'] != '' || $z['to'] != ''){
                             echo '<tr>';
-                                echo '<th>'.$aArr[$i].'</th>';
+                                echo '<th>'.trans('home.'.$aArr[$i]).'</th>';
                                 echo '<td>'.$z['from'].' - '.$z['to'].'</td>';
                             echo '</tr>';
                         }
                     }
                     ?>
                 </table>
-                <h3>@lang('home.details')</h3>
-                <p>{!! $record->description !!}</p>
+				<table class="table">
+					<tr>
+					  <td>
+                <h3><span style="padding-left:20px">@lang('home.details')</span></h3>
+                <p>{!! $record->description !!}</p></td></tr></table>
             </div>
         </div>
         <div class="col-md-3">
             <div class="ld-right">
-			<h5 style="text-align:center">You Might Be Interested In</h5>
+			<h5 style="text-align:center">@lang('home.You Might Be Interested In')</h5>
 			<div class="row">
 				            @foreach($Qry as $rec)
                    
@@ -128,7 +139,7 @@
                             <span>@lang('home.'.$rec->type)</span>
                             <p><i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</p>
                             
-                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
+                            <span><i class="fa fa-map-marker"></i> @lang('home.'.JobCallMe::cityName($rec->city)), @lang('home.'.JobCallMe::countryName($rec->country))</span>
                             
                        </div>
                    </div>

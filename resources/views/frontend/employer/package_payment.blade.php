@@ -18,7 +18,7 @@
                  
                         <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.packagepaypal') !!}" >
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary btn-lg" name="save">PayPal</button> 
+                            <button type="submit" class="btn btn-primary btn-lg" name="save">@lang('home.PayPal')</button> 
                             </form>
                    
                 </div>
@@ -26,7 +26,7 @@
                    
                         <form class="form-horizontal" method="POST" id="" role="form" action="{{ action('frontend\Employer@cashpackage') }}" >
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-warning btn-lg" name="save">Cash Payment</button> 
+                            <button type="submit" class="btn btn-warning btn-lg" name="save">@lang('home.Cash Payment')</button> 
                         </form>
                    
                 </div>
@@ -40,7 +40,7 @@
                         <input type="hidden" value="{!! $app->phoneNumber!!}" name="tel" >
                         <input type="hidden" value="0" name="buyerName" id='buyer' >
                      
-                        <a href='javascript:void(0)'  class="btn btn-info btn-lg nicePay">NicePay</a>
+                        <a href='javascript:void(0)'  class="btn btn-info btn-lg nicePay">@lang('home.NicePay')</a>
                     </form>
                 </div>
                 </div>

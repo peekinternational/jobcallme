@@ -79,15 +79,15 @@ if($user->profilePhoto != ''){
         <!-- End Mobile View -->
 
         <div class="col-md-2 jobApp-tabs hidden-xs">
-            <h5 class="mtab-heading">@lang('home.account')</h5>
-            <a id="password" class="btn btn-block jaTabBtn ja-tab-active">@lang('home.changepassword')</a>
-            <a id="profile" class="btn btn-block jaTabBtn">@lang('home.editprofile')</a>
-            <a id="notification" class="btn btn-block jaTabBtn">@lang('home.notification')</a>
-            <a id="privacy" class="btn btn-block jaTabBtn">@lang('home.p_privacy')</a>
-            <h5 class="mtab-heading">@lang('home.organization')</h5>
-            <a href="{{ url('account/employer/departments') }}" class="btn btn-block jaTabBtn">@lang('home.departments')</a>
-            <a href="{{ url('account/employer/organization') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.editorganization')</a>
-            <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.interviewvenues')</a>
+            <h5 class="mtab-heading"><img src="/frontend-assets/images/manage_icon1.png" style="padding-top:0px"><span style="padding-left:10px;font-size:15px;">@lang('home.account')</span></h5>
+            <a id="password" class="btn btn-block jaTabBtn ja-tab-active"><img src="/frontend-assets/images/manage_icon2.png" style="padding-top:0px"> @lang('home.changepassword')</a>
+            <a id="profile" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon3.png" style="padding-top:0px"> @lang('home.editprofile')</a>
+            <a id="notification" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon4.png" style="padding-top:0px"> @lang('home.notification')</a>
+            <a id="privacy" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon5.png" style="padding-top:0px"> @lang('home.p_privacy')</a>
+            <h5 class="mtab-heading"><img src="/frontend-assets/images/manage_icon6.png" style="padding-top:0px"><span style="padding-left:10px;font-size:15px;">@lang('home.organization')</span></h5>
+            <a href="{{ url('account/employer/departments') }}" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon7.png" style="padding-top:0px"> @lang('home.departments')</a>
+            <a href="{{ url('account/employer/organization') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon8.png" style="padding-top:0px"> @lang('home.editorganization')</a>
+            <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon9.png" style="padding-top:0px"> @lang('home.interviewvenues')</a>
 			<a href="{{ url('account/employer/users/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.users')</a>
 			<a href="{{ url('account/employer/addevaluation/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.evaluationforms')</a>
 			<a href="{{ url('account/employer/questionnaires') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.questionnaires')</a>
@@ -143,57 +143,57 @@ if($user->profilePhoto != ''){
                             <tr>
                             <form action="{{ action('frontend\Employer@package') }}" method="post">
                             {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> Premium Jobs</td>
+                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Premium Jobs')</td>
                                 <input type="hidden" value="Premium" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
                             </tr>
                              <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> Top Jobs</td>
+                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Top Jobs')</td>
                                 <input type="hidden" value="Top" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
                             </tr>
                              <tr>
                             <form action="{{ action('frontend\Employer@package') }}" method="post">
                              {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> Hot Jobs</td>
+                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Hot Jobs')</td>
                                 <input type="hidden" value="Hot" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
                             </tr>
                              <tr>
                             <form action="{{ action('frontend\Employer@package') }}" method="post">
                              {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> Latest Jobs</td>
+                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Latest Jobs')</td>
                                 <input type="hidden" value="Latest" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
                             </tr>
                             <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> Special Jobs</td>
+                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Special Jobs')</td>
                                 <input type="hidden" value="Special" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
                             </tr>
                             <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> Goldan Jobs</td>
+                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Goldan Jobs')</td>
                                 <input type="hidden" value="Goldan" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
                             </tr>
                             <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> Resume Downloads</td>
+                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Resume Downloads')</td>
                                 <input type="hidden" value="Resume Download" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="Buy Now"></td>
+                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
                             </tr>
                         </table>
@@ -214,10 +214,10 @@ if($user->profilePhoto != ''){
                                                 <input class="upload profile-pic" name="image" type="file" onchange="changeProfile()">
                                             </div>
                                             <div style="color:white;padding-left:42px;cursor: pointer;" onclick="editpic()">
-                                                 <i class="fa fa-pencil"></i> Edit
+                                                 <i class="fa fa-pencil"></i> @lang('home.Edit')
                                             </div>
                                             <div style="color:white;text-align: center;cursor: pointer;" onclick="removepic()">
-                                                 <i class="fa fa-remove"></i> Remove
+                                                 <i class="fa fa-remove"></i> @lang('home.remove')
                                                  <input type="hidden" name="userID" id="userID" value="{{ Session::get('jcmUser')->userId }}">
                                             </div>
 
@@ -504,7 +504,7 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2 job-country" name="country">
                                         @foreach(JobCallMe::getJobCountries() as $cntry)
-                                            <option value="{{ $cntry->id }}" {{ $user->country == $cntry->id ? 'selected="selected"' : ''}}>{{ $cntry->name }}</option>
+                                            <option value="{{ $cntry->id }}" {{ $user->country == $cntry->id ? 'selected="selected"' : ''}}>@lang('home.'.$cntry->name)</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -596,7 +596,7 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-9">
                                     <select class="form-control input-sm mc-field job-country" name="country">
                                         @foreach(JobCallMe::getJobCountries() as $cntry)
-                                            <option value="{{ $cntry->id }}" {{ $noti->country == $cntry->id ? 'selected="selected"' : ''}}>{{ $cntry->name }}</option>
+                                            <option value="{{ $cntry->id }}" {{ $noti->country == $cntry->id ? 'selected="selected"' : ''}}>@lang('home.'.$cntry->name)</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -620,7 +620,7 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-9">
                                     <select class="form-control input-sm mc-field" name="category">
                                         @foreach(JobCallMe::getCategories() as $cat)
-                                            <option value="{{ $cat->categoryId }}" {{ $noti->category == $cat->categoryId ? 'selected="selected"' : '' }}>{!! $cat->name !!}</option>
+                                            <option value="{{ $cat->categoryId }}" {{ $noti->category == $cat->categoryId ? 'selected="selected"' : '' }}>@lang('home.'.$cat->name)</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -996,7 +996,7 @@ $('form.password-form').submit(function(e){
                 var vParent = $('.password-form input[name="oldPassword"]').parent();
                 vParent.append('<p class="text-danger">'+response+'</p>');
             }else{
-                toastr.success('Password Updated', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                toastr.success('@lang("home.Password Updated")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
             }
             $('.password-form button[name="save"]').prop('disabled',false);
         },
@@ -1025,7 +1025,7 @@ $('form.profile-form').submit(function(e){
                 var vParent = $('.profile-form input[name="email"]').parent();
                 vParent.append('<p class="text-danger">'+response+'</p>');
             }else{
-                toastr.success('Profile Updated', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                toastr.success('@lang("home.Profile Updated")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
             }
             $('.profile-form button[name="save"]').prop('disabled',false);
         },
@@ -1057,7 +1057,7 @@ $('form.notification-form').submit(function(e){
             if($.trim(response) != '1'){
                 toastr.error(response, '', {timeOut: 5000, positionClass: "toast-bottom-center"});
             }else{
-                toastr.success('Updated', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                toastr.success('@lang("home.Updated")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
             }
             $('.notification-form button[name="save"]').prop('disabled',false);
         }

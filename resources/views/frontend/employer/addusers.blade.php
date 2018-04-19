@@ -14,10 +14,10 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Created Date</th>
-                                    <th>Action</th>
+                                    <th>@lang('home.Name')</th>
+                                    <th>@lang('home.Email')</th>
+                                    <th>@lang('home.Created Date')</th>
+                                    <th>@lang('home.Action')</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -28,10 +28,10 @@
                                     <td>{{$user->createdTime}}</td>
                                     <td>
                                         <span>
-                                            <a href="#" title="Edit" onclick="edituser('{{$user->email}}')">
+                                            <a href="#" title="@lang('home.Edit')" onclick="edituser('{{$user->email}}')">
                                                 <i class="fa fa-pencil"></i>
                                             </a>&nbsp;
-                                            <a href="javascript:;" title="Delete" onclick="deleteuser('{{$user->userId}}')">
+                                            <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteuser('{{$user->userId}}')">
                                                 <i class="fa fa-trash"></i>
                                             </a>&nbsp;
                                         </span>
@@ -63,8 +63,8 @@
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
     								<p style="font-size: 11px;color: red;display:none;" id="msg">
-        								<span> The user you are trying to add must have a JobCallMe id. Logout and create a new id.  </span><br>
-        								<span>Logout and create a new id.</span>
+        								<span>@lang('home.The user you are trying to add must have a JobCallMe id. Logout and create a new id.')  </span><br>
+        								<span>@lang('home.Logout and create a new id.')</span>
                                     </p>
 								</div>
 							</div>
@@ -74,7 +74,7 @@
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
                                     <button class="btn btn-primary" id="sub" type="button" name="save">@lang('home.save')</button>
-                                    <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">Cancel</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">@lang('home.Cancel')</button>
                                 </div>
                             </div>
                         </form>
@@ -112,7 +112,7 @@ function deleteuser(id){
 }
 function addAcademic(){
     $('.form-academic input:not(input[name="_token"])').val('');
-    $('#academic-edit h4 c').text('@lang('home.users')');
+    $('#academic-edit h4 c').text('@lang("home.users")');
     $('#academic').hide();
     $('#academic-edit').fadeIn();
 }

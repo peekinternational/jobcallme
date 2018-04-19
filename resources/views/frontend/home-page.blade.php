@@ -8,17 +8,17 @@ $lToken = csrf_token();
 ?>
     <section class="main-slide">
         <div class="container">
-            <div class="hp_strip">
+            <!-- <div class="hp_strip">
                 <div class="wrapper">
                     <h2 class="text-center" style="padding-top:85px;">
                         @if(app()->getLocale() == "kr")
-						    <div id="hp_text"></div><!-- @lang('home.headerHeading') -->
+						    <div id="hp_text"></div>@lang('home.headerHeading')
 						@else
-						    <div id="hp_text2"></div><!-- @lang('home.headerHeading') -->
+						    <div id="hp_text2"></div>@lang('home.headerHeading')
 						@endif
                     </h2>
                 </div>
-            </div>
+            </div> -->
             <div class="col-md-12 job-search">
                 <!--<h1 class="second">Your Future Starts Here Now</h1>
                 <h3 class="third">Finding your next job or career more 1000+ availabilities</h3>-->
@@ -103,9 +103,9 @@ $lToken = csrf_token();
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="search-field-box search-item">
                                                     <select class="form-control" id="home-cat" name="category" style="background: transparent;color: #fff">
-                                                        <option value="0">@lang('home.category')</option>
-                                                        @foreach(JobCallMe::getCategories() as $cat)
-                                                        <option value="{{$cat->categoryId}}">@lang('home.'.$cat->name)</option>
+                                                        
+                                                        @foreach(JobCallMe::getReadCategories() as $cat)
+                                                        <option value="{{$cat->id}}">@lang('home.'.$cat->name)</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -191,7 +191,7 @@ $lToken = csrf_token();
             </div>-->
             <ul>
 			@foreach($premium as $job)
-                <div><li><span>{!! $job->title !!} &ndash; <a href="{{ url('jobs/'.$job->jobId) }}">Latest Job</a></span></li></div>
+                <div><li><span>{!! $job->title !!} &ndash; <a href="{{ url('jobs/'.$job->jobId) }}">@lang('home.Latest Job')</a></span></li></div>
 				@endforeach
                
             </ul>
@@ -209,30 +209,30 @@ $lToken = csrf_token();
                 <!--Premium Job Single item Start-->
 				@foreach($premium as $job)
                 <div class="col-sm-4">
-                    <div class="ih-item square effect8 scale_up tc-box">
+                    <div class="ih-item square effect8 scale_up tc-box" style="background:#a09d8e">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
-                            <div class="img pj-type-job">
-                            <div class="" style="height: 100px; width:100%"> 
-                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:100px;margin: 0 auto;width: auto !important;" alt="img">
+                            <div class="img pj-type-job" style="background:#fff">
+                            <div class="" style="height: 90px; width:100%"> 
+                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:90px;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
                                </div>
-                                <b class="pull-right">{!! $job->companyName !!}</b>
+                                <b class="pull-right" style="margin-top:5px;padding-right:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
-                                <hr>
-                                <div class="pj-single-details">
-                                    <p>{!! $job->title !!}</p>
-                                    <p>ASK Development</p>
-                                    <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</p>							
+                                <!-- <hr> -->
+                                <div class="pj-single-details" style="background:#a09d8e;padding-top:5px;padding-bottom:5px;margin-top:5px;">
+                                    <p style="padding-left:5px">{!! $job->title !!}</p>
+                                    <p style="padding-left:5px">ASK Development</p>
+                                    <p style="padding-left:5px">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>							
                                 </div>
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-								<p>{!! $job->description !!}</p>
+								<p style="padding-top:50px">{!! $job->description !!}</p>
                                 
                                 <div class="job-status eye-icon">
                                     <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }} days left</span>
+                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
                                 </div>
                             </div>
                         </a>
@@ -248,7 +248,7 @@ $lToken = csrf_token();
 
     <!--Top Companies Section Start-->
     <section class="feature-companies">
-        <div class="container">
+        <div class="container" style="padding-top:50px;padding-bottom:50px;">
 		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.topcompanies')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
             
             <!--<p class="text-center" id="feature-companies-caption">Sigh ever way now many. Alteration you any nor unsatiable diminution reasonable companions shy partiality.</p>-->
@@ -257,18 +257,20 @@ $lToken = csrf_token();
 			@foreach($top_jobs as $comp)
                 <div class="col-md-5ths">
                     <!-- colored -->
-                    <div class="ih-item square effect8 scale_up tc-box">
+                    <div class="ih-item square effect8 scale_up tc-box" style="background:#a8b3b9">
                         <a href="{{ url('jobs/'.$comp->jobId) }}">
-                            <div class="" style="height: 70px; width:100%">
-                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;"  alt="img">
+						  <div style="background:#fff">
+                            <div class="" style="height: 70px; width:100%;background:#fff"">
+                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;padding-top:5px;"  alt="img">
                             </div>
-                            <b class="pull-right">{!! $comp->companyName !!}</b>
+                            <b class="pull-right" style="background:#fff;margin-top:10px;padding-right:5px;margin-bottom:10px;">{!! $comp->companyName !!}</b>
                             <div class="clearfix"></div>
-                                <hr>
+						  </div>
+                                <!-- <hr> -->
 							<span class="pj-single-details">
-								<p>{!! $comp->title !!}</p>
-                                <p>ASK Development</p>
-                                <p>{{ JobCallMe::cityName($comp->city) }}, {{ JobCallMe::countryName($comp->country) }}</p>
+								<p style="padding-left:5px">{!! $comp->title !!}</p>
+                                <p style="padding-left:5px">ASK Development</p>
+                                <p style="padding-left:5px">@lang('home.'.JobCallMe::cityName($comp->city)), @lang('home.'.JobCallMe::countryName($comp->country))</p>
 							</span>
                             <div class="info">
                                 <h3>{!! $comp->companyName !!}</h3>
@@ -290,27 +292,29 @@ $lToken = csrf_token();
 
     <!--Hot Jobs Section Start-->
     <section class="job-types-section" id="latest-jobs">
-        <div class="container">
+        <div class="container" style="padding-top:50px;padding-bottom:50px;">
 			<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.hotjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
           
             <div class="row">
                 <!--Hot Job Single item Start-->
 				 @foreach($hot as $job)
                 <div class="col-sm-4">
-                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto">
+                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#717171;">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img hj-type-job">
-                            <div class="" style="height: 80px; width:100%">
-                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;" alt="img"> <b class="pull-right">{!! $job->companyName !!}</b>
+							<div style="background:#fff">
+								<div class="" style="height: 70px; width:100%;background:#fff">
+									<img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img"> 
                                 </div>
-                               
+                                <b class="pull-right" style="background:#fff;padding-right:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
-                                <hr>
+							</div>
+                                <!-- <hr> -->
                                 
                                 <div class="pj-single-details">
-                                    <p>{!! $job->title !!}</p>
-                                    <p>ASK Development</p>
-                                    <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</p>
+                                    <p style="padding-left:5px">{!! $job->title !!}</p>
+                                    <p style="padding-left:5px">ASK Development</p>
+                                    <p style="padding-left:5px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
                             </div>
                             <div class="info">
@@ -336,36 +340,38 @@ $lToken = csrf_token();
 
     <!--Latest Jobs Section Start-->
     <section class="job-types-section">
-        <div class="container">
+        <div class="container" style="padding-top:50px;padding-bottom:50px;">
 		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.latestjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
           
             <div class="row">
                 <!--Latest Job Single item Start-->
 				@foreach($latest as $job)
                 <div class="col-sm-4">
-                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto">
+                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#94a5a5;">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img lj-type-job">
+							<div style="background:#fff">
                             <div class="" style="height: 60px; width:100%">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;" alt="img">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:60px !important;margin: 0 auto;width: auto !important;" alt="img">
                                </div>
                                 <b class="pull-right">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
-                                <hr>
+							</div>
+                                <!-- <hr> -->
                                 <div class="lj-single-details">
-                                    <p>{!! $job->title !!}</p>
-                                    <p>ASK Development</p>
-                                    <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</p>
+                                    <p style="padding-left:5px;padding-top:5px">{!! $job->title !!}</p>
+                                    <p style="padding-left:5px">ASK Development</p>
+                                    <p style="padding-left:5px;color:#fff">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p>{!! $job->description !!}</p>
+                                <p style="padding-top:10px">{!! $job->description !!}</p>
                                 <div class="job-status eye-icon">
                                     <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }} days left</span>
+                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
                                 </div>
                             </div>
                         </a>
@@ -382,26 +388,28 @@ $lToken = csrf_token();
 
     <!--Special Jobs Section Start-->
     <section class="job-types-section" id="latest-jobs">
-        <div class="container">
+        <div class="container" style="padding-top:50px;padding-bottom:50px;">
 		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.specialjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
 
             <div class="row">
 			@foreach($special as $job)
                 <!--Special Job Single item Start-->
                 <div class="col-md-3">
-                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto">
+                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#4e6c7c">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                         <div class="img sj-job-type">
+						<div style="background:#fff">
                         <div class="" style="height: 50px; width:100%">
                             <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:60px !important;margin: 0 auto;width: auto !important;"  alt="img">
                           </div>
-                            <b class="pull-right">{!! $job->companyName !!}</b>
+                            <b class="pull-right" style="padding-top:5px;padding-right:5px;">{!! $job->companyName !!}</b>
                             <div class="clearfix"></div>
-                            <hr>
+						</div>
+                            <!-- <hr> -->
                             <div class="lj-single-details">
-                                <p>{!! $job->title !!}</p>
-                                <p>ASK Development</p>
-                                <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</p>
+                                <p style="padding-left:5px;padding-top:5px">{!! $job->title !!}</p>
+                                <p style="padding-left:5px">ASK Development</p>
+                                <p style="padding-left:5px;color:#fff">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                             </div>
                         </div>
                         <div class="info">
@@ -411,7 +419,7 @@ $lToken = csrf_token();
                                 <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                             </div>
                             <div class="job-status days-left">
-                                <span>{{ JobCallMe::timeInDays($job->expiryAd) }} days left</span>
+                                <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
                             </div>
                         </div>
                         </a>
@@ -429,7 +437,7 @@ $lToken = csrf_token();
 
     <!--Golden Jobs Section Start-->
     <section class="job-types-section">
-        <div class="container">
+        <div class="container" style="padding-top:50px;padding-bottom:50px;">
 		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.goldjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
 
             <div class="row">
@@ -437,19 +445,21 @@ $lToken = csrf_token();
                 <!--Golden Job Single item Start-->
 					@foreach($golden as $job)
                 <div class="col-md-5ths">
-                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto">
+                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#b0a48a">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img sj-job-type">
+							  <div style="background:#fff">
                                <div class="" style="height: 40px; width:100%">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:50px !important;margin: 0 auto;width: auto !important;" alt="img">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:50px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
                                </div>
-                                <b class="pull-right">{!! $job->companyName !!}</b>
+                                <b class="pull-right" style="padding-top:5px;padding-right:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
-                                <hr>
+							  </div>
+                                <!-- <hr> -->
                                 <div class="lj-single-details">
-                                    <p>{!! $job->title !!}</p>
-                                    <p>ASK Development</p>
-                                    <p>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</p>
+                                    <p style="padding-left:5px;padding-top:5px">{!! $job->title !!}</p>
+                                    <p style="padding-left:5px">ASK Development</p>
+                                    <p style="padding-left:5px;color:#fff;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
                             </div>
                             <div class="info">
@@ -459,7 +469,7 @@ $lToken = csrf_token();
                                     <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }} days left</span>
+                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
                                 </div>
                             </div>
                         </a>
@@ -504,6 +514,6 @@ $lToken = csrf_token();
 @endsection
 <style type="text/css">
     select option{
-        color:#000;
+        color:#fff;
     }
 </style>

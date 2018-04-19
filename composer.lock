@@ -221,7 +221,11 @@
                 "singularize",
                 "string"
             ],
+<<<<<<< HEAD
+            "time": "2017-07-22T12:18:28+00:00"
+=======
             "time": "2017-07-22 12:18:28"
+>>>>>>> 6f5ff40a839962c929886f0ada2574d43cfab749
         },
         {
             "name": "dompdf/dompdf",
@@ -2120,7 +2124,11 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2018-03-19T22:32:39+00:00"
+=======
             "time": "2018-03-19 22:32:39"
+>>>>>>> 6f5ff40a839962c929886f0ada2574d43cfab749
         },
         {
             "name": "symfony/debug",
@@ -2239,7 +2247,11 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2018-04-06T07:35:25+00:00"
+=======
             "time": "2018-04-06 07:35:25"
+>>>>>>> 6f5ff40a839962c929886f0ada2574d43cfab749
         },
         {
             "name": "symfony/finder",
@@ -2743,7 +2755,11 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2018-02-22T06:28:18+00:00"
+=======
             "time": "2018-02-22 06:28:18"
+>>>>>>> 6f5ff40a839962c929886f0ada2574d43cfab749
         },
         {
             "name": "symfony/var-dumper",
@@ -3025,7 +3041,11 @@
                 "constructor",
                 "instantiate"
             ],
+<<<<<<< HEAD
+            "time": "2015-06-14T21:17:01+00:00"
+=======
             "time": "2015-06-14 21:17:01"
+>>>>>>> 6f5ff40a839962c929886f0ada2574d43cfab749
         },
         {
             "name": "fzaninotto/faker",
@@ -4406,7 +4426,11 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "time": "2018-04-03T05:14:20+00:00"
+=======
             "time": "2018-04-03 05:14:20"
+>>>>>>> 6f5ff40a839962c929886f0ada2574d43cfab749
         },
         {
             "name": "webmozart/assert",

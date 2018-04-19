@@ -34,7 +34,7 @@
                                 @foreach($departments as $department)
                                     <tr id="department-{{ $department->departmentId }}">
                                         <td>{!! $department->name !!}</td>
-                                        <td>{!! JobCallMe::cityName($department->city).', '.JobCallMe::stateName($department->state).', '.JobCallMe::countryName($department->country) !!}</td>
+                                        <td>@lang('home.'.JobCallMe::cityName($department->city)), @lang('home.'.JobCallMe::stateName($department->state)), @lang('home.'.JobCallMe::countryName($department->country))</td>
                                         <td>
                                             <a href="javascript:;" onclick="editDepartment({{ $department->departmentId }})"  data-toggle="tooltip" data-original-title="@lang('home.Edit')">
                                                 <i class="fa fa-pencil"></i>
@@ -75,7 +75,7 @@
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}">{{ $cntry->name }}</option>
+                                        <option value="{{ $cntry->id }}">@lang('home.'.$cntry->name)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -246,12 +246,12 @@ function editDepartment(departmentId){
     })
 }
 function deleteDepartment(departmentId){
-    if(confirm('Are you sure?')){
+    if(confirm('@lang("home.Are you sure to delete this?")')){
         $.ajax({
             url: "{{ url('account/employer/department/delete') }}/"+departmentId,
             success: function(response){
                 $('#department-'+departmentId).remove();
-                toastr.success('Department Deleted', '', {timeOut: 3000, positionClass: "toast-bottom-center"});
+                toastr.success('@lang("home.Department Deleted")', '', {timeOut: 3000, positionClass: "toast-bottom-center"});
             }
         })
     }

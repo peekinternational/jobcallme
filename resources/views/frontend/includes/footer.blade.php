@@ -115,7 +115,8 @@
                     <option value="{{ url('terms-conditions') }}">@lang('home.Terms & Conditions')</option>
                     <option value="{{ url('account/register') }}">@lang('home.Login')</option>
                     <option value="{{ url('account/register') }}">@lang('home.Signup')</option>
-                    <option value="{{ url('account/register') }}">@lang('home.Companiesad')</option>
+                    <option value="{{ url('account/employer/job/new') }}">@lang('home.newpostedjobs')</option>
+
 
                 </select>
             </div>
@@ -125,7 +126,11 @@
                 <li><a href="https://linkedin.com"><i class="fa fa-linkedin-square"></i> </a> </li>
             </ul>
             <br><br>
-            <button class="btn btn-warning"><a style="color:white" target="_blank" href="https://www.outsourcingok.com/">www.outsourcingok.com</a></button>
+			<a style="color:white" href="{{ url('account/employer/job/new') }}"><button class="btn btn-warning" style="background:#695244;border:#695244;">@lang('home.postjobnew')</button></a>
+			<br><br>
+            <a style="color:white" href="{{ url('companies') }}"><button class="btn btn-warning" style="background:#6d846f;border:#6d846f;">&nbsp;@lang('home.Companiesad')&nbsp;&nbsp;</button></a>
+            <br><br>
+            <a style="color:white" target="_blank" href="https://www.outsourcingok.com/"><button class="btn btn-warning">www.outsourcingok.com</button></a>
         </div>
     </div>
     <div class="foot-links-hr hidden-xs"></div>
@@ -134,7 +139,7 @@
         <ul>
             <li>고객센터 : 070-7770-0967 (평일 09:00 ~ 19:00 )  l FAX: 02-2058-0138  l Email: help@jobcallme.com</li>
             <li>서울시 서초구 논현로 27길 39 2층(양재동, 천일빌딩) 잡콜미 l 대표 : 김성영 l 사업자등록번호 : 201-86-41011</li>
-            <li>통신판매업 신고번호 : 제2014-서울서초-1367호 l 직업정보제공사업 신고번호 : 제0000-00호</li> 
+            <li>통신판매업 신고번호 : 제2014-서울서초-1367호 l 직업정보제공사업 신고번호 : 서울청 제2017-26호</li> 
             <li>Copyrihgt &copy; 2017 Jobcallme Co.,Ltd.(RN 201-86-41011)</li>                
         </ul>				
     </div>

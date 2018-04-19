@@ -16,13 +16,13 @@
           <!-- <ul class="nav nav-tabs"> -->
             <ul class="nav jobseeker-mbl-nav">
               <li class="active col-md-3 col-xs-7">
-                <a href="#rtj_tab_suggested" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-info-circle"></i> @lang('home.suggested') </a>
+                <a href="#rtj_tab_suggested" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-info-circle"></i>@lang('home.suggested')</a>
               </li>
               <li class="col-md-3 col-xs-5">
                 <a href="#rtj_tab_saved" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-heart"></i> @lang('home.savedjobs') </a>
               </li>
               <li class="col-md-3 col-xs-7">
-                <a href="#rtj_tab_application" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-file-text"></i> @lang('home.APPLICATION') </a>
+                <a href="#rtj_tab_application" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-file-text"></i> @lang('home.APPLICATION_DASH') </a>
               </li>
               <li class="col-md-3 col-xs-5">
                 <a href="#rtj_tab_interview" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-calendar"></i> @lang('home.interviews') </a>
@@ -46,9 +46,9 @@
                   <div class="rtj-details">
                     <p><strong><a href="{{ url('jobs/'.$sgJob->jobId) }}">{!! $sgJob->title !!}</a></strong></p>
                     <p>{!! $sgJob->companyName !!}</p>
-                    <p>{{ JobCallMe::cityName($sgJob->city) }}, {{ JobCallMe::countryName($sgJob->country) }}</p>
+                    <p>@lang('home.'.JobCallMe::cityName($sgJob->city)), @lang('home.'.JobCallMe::countryName($sgJob->country))</p>
                     <span class="rtj-action">
-                      <a href="{{ url('jobs/apply/'.$sgJob->jobId) }}" title="Apply">
+                      <a href="{{ url('jobs/apply/'.$sgJob->jobId) }}" title="@lang('home.Apply')">
                         <i class="fa fa-paper-plane"></i>
                       </a>&nbsp;
                       @if(in_array($sgJob->jobId, $savedJobArr))
@@ -79,9 +79,9 @@
                   <div class="rtj-details">
                     <p><strong><a href="{{ url('jobs/'.$sJob->jobId) }}">{!! $sJob->title !!}</a></strong></p>
                     <p>{!! $sJob->companyName !!}</p>
-                    <p>{{ JobCallMe::cityName($sJob->city) }}, {{ JobCallMe::countryName($sJob->country) }}</p>
+                    <p>@lang('home.'.JobCallMe::cityName($sJob->city)), @lang('home.'.JobCallMe::countryName($sJob->country))</p>
                     <span class="rtj-action">
-                      <a href="{{ url('jobs/apply/'.$sJob->jobId) }}" title="Apply">
+                      <a href="{{ url('jobs/apply/'.$sJob->jobId) }}" title="@lang('home.Apply')">
                         <i class="fa fa-paper-plane"></i>
                       </a>&nbsp;
                       <a href="javascript:;" onclick="removeJob({{ $sJob->jobId }})" title="Remove" class="application-remove">
@@ -109,7 +109,7 @@
                   <div class="rtj-details">
                     <p><strong><a href="{{ url('jobs/'.$appl->jobId) }}">{!! $appl->title !!}</a></strong></p>
                     <p>{!! $appl->companyName !!}</p>
-                    <p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
+                    <p>@lang('home.'.JobCallMe::cityName($appl->city)), @lang('home.'.JobCallMe::countryName($appl->country))</p>
                     <span class="rtj-action">
                       <a href="javascript:;" title="Applied On">
                         {{ date('M d Y, h:i A',strtotime($appl->applyTime))}}
@@ -138,7 +138,7 @@
                   <div class="rtj-details">
                     <p><strong><a href="{{ $interviewUrl }}">{!! $interv->title !!}</a></strong></p>
                     <p>{!! $interv->companyName !!}</p>
-                    <p>{{ JobCallMe::cityName($interv->city) }}, {{ JobCallMe::countryName($interv->country) }}</p>
+                    <p>@lang('home.'.JobCallMe::cityName($interv->city)), @lang('home.'.JobCallMe::countryName($interv->country))</p>
                     <span class="rtj-action">
                       <a href="javascript:;" title="Applied On">
                         {{ date('M d Y, h:i A',strtotime($interv->applyTime))}}
@@ -173,7 +173,7 @@
             ?>
             <div class="col-md-12 sr-item">
               <div class="col-md-5 col-xs-12">
-                <div style="height:100px">
+                <div class="suggestedreading-img-mbl">
                   <img src="{{ $pImage }}" style="width: 100%">
                 </div>
               </div>
@@ -183,7 +183,7 @@
                   <span>@lang('home.'.$rec->type)</span><br>
                   <span style="font-size: 10px;"><i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}}<br> <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</span>
                   <br>
-                  <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
+                  <span><i class="fa fa-map-marker"></i> @lang('home.'.JobCallMe::cityName($rec->city)), @lang('home.'.JobCallMe::countryName($rec->country))</span>
                 </div>
               </div>
             </div>
@@ -253,14 +253,14 @@
             ?>
             <div class="col-md-12 sr-item">
               <div class="col-md-5 col-xs-12">
-                <div class="">
+                <div class="suggestedreading-img-mbl">
                   <img src="{{ $pImage }}" style="width: 100%;">
                 </div>
               </div>
               <div class="col-md-7 col-xs-12">
                 <div class="sr-details">
                   <p class="sr-title"><a href="{{ url('read/article/'.$rec->writingId) }}" style="text-overflow: ellipsis;">{!! $rec->title !!} </a> </p>
-                  <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> {{$rec->firstName.' '.$rec->firstName}}</a> </p>
+                  <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.read_writer') <span style="color:#337ab7">{{ $rec->firstName.' '.$rec->lastName }}</span></a> </p>
                 </div>
               </div>
             </div>

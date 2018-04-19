@@ -37,9 +37,9 @@ $dispatch='';
 			 <img src="{{ $cLogo }}"  style="width:118px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
 			<div style="padding-left: 42px;">
 			<span style="text-transform: uppercase;font-size: 26px;">{{$job->companyName}}</span>
-                <p style="font-size: 18px;margin-top: 24px; margin-left: 6px;">{{ $job->title }},  &nbsp;<span style="font-size: 13px; padding-top: 9px;">{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }} </span> &nbsp;<span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">
+                <p style="font-size: 18px;margin-top: 24px; margin-left: 6px;">{{ $job->title }},  &nbsp;<span style="font-size: 13px; padding-top: 9px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country)) </span> &nbsp;<span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">
 				{{ $job->p_title }}
-				</span> &nbsp;{!! $head !!} <span style="font-size:9px;margin-left:13px">Never pay for job application, test or interview. <a href="{{ url('/safety')}}">more</a></span></p>
+				</span> &nbsp;{!! $head !!} <span style="font-size:9px;margin-left:13px">@lang('home.Never pay for job application, test or interview') <a href="{{ url('/safety')}}">@lang('home.More')</a></span></p>
 				
 				</div>
 				
@@ -92,43 +92,59 @@ $dispatch='';
                 <ul class="js-listing">
                     <li>
                         <p class="js-title">@lang('home.jobtype')</p>
-                        <p>{{ $job->jobType }}</p>
+                        <p>@lang('home.'.$job->jobType)</p>
                     </li>
                     <li>
                         <p class="js-title">@lang('home.shift')</p>
-                        <p>{{ $job->jobShift }}</p>
+                        <p>@lang('home.'.$job->jobShift)</p>
                     </li>
                     <li>
                         <p class="js-title">@lang('home.experience')</p>
-                        <p>{{ $job->experience }}</p>
+                        <p>@lang('home.'.$job->experience)</p>
                     </li>
                     <li>
                         <p class="js-title">@lang('home.salary')</p>
-                        <p>{{ number_format($job->minSalary) }} - {{ number_format($job->maxSalary) }} {{ $job->currency }}</p>
+                        <p>{{ number_format($job->minSalary) }} - {{ number_format($job->maxSalary) }} @if($job->currency == "KRW" or $job->currency == "KRW|대한민국 원")
+							원
+						@else
+							  {{ $job->currency }}
+						@endif</p>
                     </li>
 					<li>
                         <p class="js-title">@lang('home.poston')</p>
-                        <p>{{ date('M d, Y',strtotime($job->createdTime))}}</p>
+                        <p>@if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($job->createdTime))}}
+						@else
+							  {{ date('M d, Y',strtotime($job->createdTime))}}
+						@endif</p>
                     </li>
 					<li>
                         <p class="js-title">@lang('home.lastdate')</p>
-                        <p>{{ date('M d, Y',strtotime($job->expiryDate))}}</p>
+                        <p>@if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($job->expiryDate))}}
+						@else
+							  {{ date('M d, Y',strtotime($job->expiryDate))}}
+						@endif</p>
                     </li>
                 </ul>
             </div>
 
             <!--JOB Details-->
             <div class="jd-job-details">
-                <h4>{{ $job->title }} at {{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</h4>
+                <h4>{{ $job->title }} @if(app()->getLocale() == "kr")
+							  @lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))
+						@else
+							  at {{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}
+						@endif</h4>
 
                 <!--Large Screen-->
                 <table class="table table-bordered hidden-xs hidden-sm">
                     <tbody>
                     <tr>
                         <td class="active">@lang('home.category')</td>
-                        <td>{{ JobCallMe::categoryTitle($job->category) }}</td>
+                        <td>@lang('home.'.JobCallMe::categoryTitle($job->category)) </td>
                         <td class="active">@lang('home.careerlevel')</td>
-                        <td>{{ $job->careerLevel }}</td>
+                        <td>@lang('home.'.$job->careerLevel)</td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.qualification')</td>
@@ -138,14 +154,22 @@ $dispatch='';
                     </tr>
                     <tr>
                         <td class="active">@lang('home.poston')</td>
-                        <td>{{ date('M d, Y',strtotime($job->createdTime))}}</td>
+                        <td>@if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($job->createdTime))}}
+						@else
+							  {{ date('M d, Y',strtotime($job->createdTime))}}
+						@endif</td>
                         <td class="active">@lang('home.lastdate')</td>
-                        <td>{{ date('M d, Y',strtotime($job->expiryDate))}}</td>
+                        <td>@if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($job->expiryDate))}}
+						@else
+							  {{ date('M d, Y',strtotime($job->expiryDate))}}
+						@endif</td>
 						
                     </tr>
                     <tr>
 					 <td class="active">@lang('home.location')</td>
-                        <td>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</td>
+                        <td>@lang('home.'.JobCallMe::cityName($job->city)),@lang('home.'.JobCallMe::countryName($job->country))</td>
                         <td class="active">@lang('home.travelling')</td>
                         <td>@if($benefits != '')
 							@foreach( $benefits as $benefit)
@@ -175,11 +199,11 @@ $dispatch='';
                     <tbody>
                     <tr>
                         <td class="active">@lang('home.category')</td>
-                        <td>{{ JobCallMe::categoryTitle($job->category) }}</td>
+                        <td>@lang('home.'.JobCallMe::categoryTitle($job->category))</td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.careerlevel')</td>
-                        <td>{{ $job->careerLevel }}</td>
+                        <td>@lang('home.'.$job->careerLevel)</td>
                     </tr>
 					
                     <tr>
@@ -188,21 +212,29 @@ $dispatch='';
                     </tr>
                     <tr>
                         <td class="active">@lang('home.poston')</td>
-                        <td>{{ date('M d, Y',strtotime($job->createdTime))}}</td>
+                        <td>@if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($job->createdTime))}}
+						@else
+							  {{ date('M d, Y',strtotime($job->createdTime))}}
+						@endif</td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.lastdate')</td>
-                        <td>{{ date('M d, Y',strtotime($job->expiryDate))}}</td>
+                        <td>@if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($job->expiryDate))}}
+						@else
+							  {{ date('M d, Y',strtotime($job->expiryDate))}}
+						@endif</td>
                     </tr>
                     <tr>
-                        <td class="active">@lang('home.locationsss')</td>
-                        <td>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</td>
+                        <td class="active">@lang('home.location')</td>
+                        <td>@lang('home.'.JobCallMe::cityName($job->city)),@lang('home.'.JobCallMe::countryName($job->country))</td>
                     </tr>
 					
                     </tbody>
                 </table>
                 <h4>@lang('home.description')</h4>
-                <p><strong>We are conveniently located in {{ JobCallMe::getCompany($job->companyId)->companyAddress }}.</strong></p>
+                <p><strong>@lang('home.We are conveniently located in') {{ JobCallMe::getCompany($job->companyId)->companyAddress }}.</strong></p>
                 <p>{!! $job->description !!}</p>
                 <h4>@lang('home.skills')</h4>
                 <p>{!! $job->skills !!}</p>
@@ -212,7 +244,7 @@ $dispatch='';
 	                <ul class="jd-rewards" style="margin-bottom: 32px;">
 	                	@foreach( $process as $pro)
 						
-	                		<li><i class="fa fa-check-circle"></i> {{ $pro }}</li>
+	                		<li><i class="fa fa-check-circle"></i> @lang('home.'.$pro)</li>
 	                	@endforeach
 	                </ul>
                 @endif
@@ -224,7 +256,7 @@ $dispatch='';
 	                <ul class="jd-rewards">
 	                	@foreach( $benefits as $benefit)
 						
-	                		<li><i class="fa fa-check-circle"></i> {{ $benefit }}</li>
+	                		<li><i class="fa fa-check-circle"></i> @lang('home.'.$benefit)</li>
 	                	@endforeach
 	                </ul>
                 @endif
@@ -318,50 +350,50 @@ $dispatch='';
                     @else
                         <a href="javascript:;" onclick="followCompany({{ $job->companyId }},this)" class="btn btn-primary">@lang('home.follow')</a>
                     @endif   
-                    <a href="{{ url('account/employeer/companies/company/review?CompanyId='.$job->companyId) }}" class="btn btn-default">Write Review</a>   
+                    <a href="{{ url('account/employeer/companies/company/review?CompanyId='.$job->companyId) }}" class="btn btn-default">@lang('home.Write Review')</a>   
                 </div>
                 <a href="{{url('companies/company/'.$job->companyId)}}"><h4>{{ $job->companyName }}</h4></a>
-                <p>{{ JobCallMe::cityName($job->companyCity) }}, {{ JobCallMe::countryName($job->companyCountry) }}</p>
+                <p>@lang('home.'.JobCallMe::cityName($job->companyCity)), @lang('home.'.JobCallMe::countryName($job->companyCountry))</p>
                 <div class="jd-about-organization">
                     <p>{!! $job->companyAbout !!}</p>
                 </div>
                 <p align="center">
                    <?= checkreview($star)?><br>
-                   <span><a href="{{url('companies/company/'.$job->companyId)}}">View all Review</a> <span class="badge"><?= count($companyReview)?></span></span>
+                   <span><a href="{{url('companies/company/'.$job->companyId)}}">@lang('home.View all Review')</a> <span class="badge"><?= count($companyReview)?></span></span>
                 </p>
                 <hr>
                 <p>
                     <table>
                         <tr>
-                            <td>Career Growth</td>
+                            <td>@lang('home.Career Growth')</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
                             <?= checkreview($career_star)?>
                             </td>
                         </tr>
                         <tr>
-                            <td>Compensation & Benefits</td>
+                            <td>@lang('home.Compensation & Benefits')</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
                             <?= checkreview($benefit_star)?>
                             </td>
                         </tr>
                         <tr>
-                            <td>Work/Life Balance</td>
+                            <td>@lang('home.Work/Life Balance')</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
                             <?= checkreview($lifebalance_star)?>
                             </td>
                         </tr>
                         <tr>
-                            <td>Management</td>
+                            <td>@lang('home.Management')</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
                             <?= checkreview($management_star)?>
                             </td>
                         </tr>
                         <tr>
-                            <td>Culture</td>
+                            <td>@lang('home.Culture')</td>
                             <td>&nbsp;&nbsp;</td>
                             <td>
                             <?= checkreview($culture_star)?>
@@ -374,15 +406,15 @@ $dispatch='';
                         <div class="row" align="center">
                             <div class="col-md-4">
                                 <span style="font-size:12px">{{$ceo_recommend_star}}</span>
-                                <p>CEO Recommended</p>
+                                <p>@lang('home.CEO Recommended')</p>
                             </div>
                             <div class="col-md-4">
-                                <span style="font-size:12px">@if($recommend_star == 'on') Yes @else Not recommend @endif</span>
-                                <p>Recommend to a friend</p>
+                                <span style="font-size:12px">@if($recommend_star == 'on') Yes @else @lang('home.Not recommend') @endif</span>
+                                <p>@lang('home.Recommend to a friend')</p>
                             </div>
                             <div class="col-md-4">
                                 <span style="font-size:12px">{{$future_star}}</span>
-                                <p>Future Expectations</p>
+                                <p>@lang('home.Future Expectations')</p>
                             </div>
                         </div>
                     </div>

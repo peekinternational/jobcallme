@@ -51,7 +51,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon " id="toggle-passwords"></span>
                 </div>
 				<div class="">
-				<h5><a href="{{url('password/reset')}}">Forget Password ?</a></h5>
+				<h5><a href="{{url('password/reset')}}">@lang('home.forgetpassword')</a></h5>
 				</div>
                 <div class="input-group">
                     <div class="checkbox">
@@ -71,7 +71,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                
             </form>
             <div class="col-md-12 sns-box">
-                <p>Login using</p>
+                <p>@lang('home.loginusing')</p>
                 <button class="fb-btn">
                     <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
                 </button> 
@@ -117,12 +117,12 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')" requried>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="pwd" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="Password">
+                    <input type="password" class="form-control" id="pwd" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="@lang('home.Password')">
                     <!-- <span toggle="#password-field" class="fa fa-fw fa-eye field-icon " id="toggle-password"></span> -->
                     <p style="color:red" id="errorpass"></p>
                 </div>
                     <div class="form-group">
-                    <input type="password" class="form-control" id="confirm_password"   value="{{ old('password') }}" placeholder="Re-enter Password">
+                    <input type="password" class="form-control" id="confirm_password"   value="{{ old('password') }}" placeholder="@lang('home.Re-enter Password')">
                      <span id='message'></span>
                 </div>
 
@@ -140,15 +140,16 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <select class="form-control select2 job-country" name="country">
                              <option value="">@lang('home.selectCountry')</option>
                         @foreach(JobCallMe::getJobCountries() as $country)
-                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                            <option value="{{ $country->id }}">@lang('home.'.$country->name)</option>
                         @endforeach
                     </select>
+					<p class="terms-condition" style="padding-top:5px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.alphabetical order')</p>
                 </div>
                 <div class="form-group">
-                    <select class="form-control select2 job-state" name="state"></select>
+                    <select class="form-control select2 job-state" name="state"><option value="">@lang('home.s_state')</option></select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control select2 job-city" name="city"></select>
+                    <select class="form-control select2 job-city" name="city"><option value="">@lang('home.s_city')</option></select>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber')" requried>
@@ -163,14 +164,14 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <div>
                     <input type="checkbox" name="agree" value="agree" id="agree" required>
                     <label for="agree">
-                        <p class="terms-condition">@lang('home.agree')<a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.website')</p>    
+                        <p class="terms-condition"><a href="{{ url('terms-conditions') }}">@lang('home.term')</a> @lang('home.tos') <a href="{{ url('privacy-policy') }}">@lang('home.privacy')</a> @lang('home.agree')<!-- @lang('home.website') --></p>    
                     </label>
                 </div>
                 <button id="regbtn" type="submit" class="btn btn-primary btn-block" name="register">@lang('home.register')</button>
                 <p class="text-center show-loginBox">@lang('home.alreadyaccount') <a href="javascript:;" onclick="switchPage('login')">@lang('home.loginhere')</a></p>
 
                 <div class="col-md-12 sns-box"> 
-                    <p>Register using</p> 
+                    <p>@lang('home.loginusing')</p> 
                     <button class="fb-btn">
                         <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
                     </button> 
@@ -246,9 +247,9 @@ document.getElementById("toggle-password").addEventListener("click", function ()
 
 $('#pwd, #confirm_password').on('keyup', function () {
     if ($('#pwd').val() == $('#confirm_password').val()) {
-        $('#message').html('Password Matching').css('color', 'green');
+        $('#message').html('@lang("home.Password Matching")').css('color', 'green');
     } else 
-        $('#message').html('Not Matching').css('color', 'red');
+        $('#message').html('@lang("home.Not Matching")').css('color', 'red');
 });
 
     setTimeout(function(){
@@ -319,7 +320,7 @@ function sendpassword(pass){
     type:"post",
     success:function(res){
         if(res == 1){
-            $('#errorpass').text("Password must have atleast one upper char,digit,special char");
+            $('#errorpass').text("@lang('home.passwordway')");
             $('#regbtn').attr('disabled','disabled');
         }else{
             $('#errorpass').text(" ");

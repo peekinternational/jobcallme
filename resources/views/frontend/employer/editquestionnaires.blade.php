@@ -15,24 +15,24 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="col-md-12">
-                                    <strong>Title:</strong> {{$ques->title}}
+                                    <strong>@lang('home.QueTitle'):</strong> {{$ques->title}}
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>Type:</strong> {{$ques->type}}
+                                    <strong>@lang('home.QueType'):</strong> {{$ques->type}}
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>Duration:</strong> N/A
+                                    <strong>@lang('home.Duration'):</strong> N/A
                                 </div>
                             </div>
                             <di class="col-md-5">
                                 <div class="col-md-12">
-                                    <strong>Submission Days:</strong> {{$ques->submission_date}}
+                                    <strong>@lang('home.Submission Days'):</strong> {{$ques->submission_date}}
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>Late Submission:</strong> {{$ques->accept_late_submission}}
+                                    <strong>@lang('home.Late Submission'):</strong> {{$ques->accept_late_submission}}
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>Suffle Quesyion:</strong> {{$ques->shuffle_questions}}
+                                    <strong>@lang('home.Shuffle Questions'):</strong> {{$ques->shuffle_questions}}
                                 </div>
                             </di>
                         </div>
@@ -66,11 +66,11 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="ques_id" value="{{ $ques->ques_id }}">
                           <div class="form-group">
-                            <label for="title">Title:</label>
+                            <label for="title">@lang('home.QueTitle'):</label>
                             <input type="text" name="title" value="{{$ques->title}}" class="form-control" id="title">
                           </div>
                           <div class="form-group">
-                            <label for="type">Type:</label>
+                            <label for="type">@lang('home.QueType'):</label>
                             <select class="form-control" id="type" name="type" required>
                                 <option value="">Select type</option>
                                 <option @if($ques->type == 'Test') selected @endif>Test</option>
@@ -78,20 +78,20 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <label for="days">Submission Days:</label>
+                            <label for="days">@lang('home.Submission Days'):</label>
                             <input type="number" name="submission_date" value="{{ $ques->submission_date}}" class="form-control" id="days">
                           </div>
                           <div class="checkbox">
-                            <label><input name="late_submission" value="Yes" type="checkbox" @if($ques->accept_late_submission == 'Yes') checked @endif> Accept Late Submission</label>
+                            <label><input name="late_submission" value="Yes" type="checkbox" @if($ques->accept_late_submission == 'Yes') checked @endif> @lang('home.Accept Late Submission')</label>
                           </div>
                           <div class="checkbox">
-                            <label><input name="shuffle_question" value="Yes" type="checkbox" @if($ques->shuffle_questions == 'Yes') checked @endif> Shuffle Questions</label>
+                            <label><input name="shuffle_question" value="Yes" type="checkbox" @if($ques->shuffle_questions == 'Yes') checked @endif> @lang('home.Shuffle Questions')</label>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 text-right">&nbsp;</label>
                             <div class="col-md-6">
                                 <button class="btn btn-primary" type="submit">@lang('home.save')</button>
-                                <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">Cancel</button>
+                                <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">@lang('home.Cancel')</button>
                             </div>
                           </div>
                         </form>
@@ -100,7 +100,7 @@
                 <!-- add question area start -->
                 <section class="resume-box" id="question">
                         <a class="btn btn-primary r-add-btn" onclick="addquestion()"><i class="fa fa-plus"></i> </a>
-                        <h4>Questions</h4>
+                        <h4>@lang('home.Questions')</h4>
                         
                         <div>
                             <ol type='1' style="margin-left:30px;">
@@ -132,31 +132,31 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="ques_id" value="{{ $ques->ques_id }}">
                           <div class="form-group">
-                            <label for="title">Question:</label>
+                            <label for="title">@lang('home.Question'):</label>
                             <input type="text" name="question" class="form-control" id="title">
                           </div>
                           
                           <div class="form-group">
-                            <label for="days">Marks:</label>
+                            <label for="days">@lang('home.Marks'):</label>
                             <input type="number" name="marks" class="form-control" id="days">
                           </div>
                           <div class="form-group" id="addoption">
-                            <label for="days">Option:</label>
+                            <label for="days">@lang('home.Option'):</label>
                             <input type="text" name="options[]" class="form-control" id="days">
                           </div>
                           <div>
-                              <button type="button" id="addMore" class="btn btn-success">Add Options</button>
+                              <button type="button" id="addMore" class="btn btn-success">@lang('home.Add Options')</button>
                           </div>
                           <div class="checkbox">
-                            <label><input name="shuffle_question" value="Yes" type="checkbox"> Shuffle Questions</label>
+                            <label><input name="shuffle_question" value="Yes" type="checkbox"> @lang('home.Shuffle Questions')</label>
                           </div>
                           <div class="checkbox">
-                            <label><input name="required" value="Yes" type="checkbox"> Required</label>
+                            <label><input name="required" value="Yes" type="checkbox"> @lang('home.Required')</label>
                           </div>
                           <div class="form-group">
                             <div class="col-md-6">
                                 <button class="btn btn-primary" type="submit">@lang('home.save')</button>
-                                <button class="btn btn-default" type="button" onclick="$('#question').fadeIn();$('#aquestion-edit').hide();$('html, body').animate({scrollTop:$('#question').position().top}, 700);">Cancel</button>
+                                <button class="btn btn-default" type="button" onclick="$('#question').fadeIn();$('#aquestion-edit').hide();$('html, body').animate({scrollTop:$('#question').position().top}, 700);">@lang('home.Cancel')</button>
                             </div>
                           </div>
                         </form>

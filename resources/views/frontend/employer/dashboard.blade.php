@@ -88,7 +88,7 @@
 										<a href="{{url('account/employer/job/share/'.$pjobs->jobId)}}"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
 										<a href="{{url('account/employer/status/'.$pjobs->jobId)}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')</a>
 										<a href="{{url('account/employer/evalution')}}"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
-                                        <a href="#" onclick="return false;" class="active_deactive{{$pjobs->jobId}}" id="active_deactive{{$key}}"><i class="fa fa-eye" aria-hidden="true"></i> Active</a>
+                                        <a href="#" onclick="return false;" class="active_deactive{{$pjobs->jobId}}" id="active_deactive{{$key}}"><i class="fa fa-eye" aria-hidden="true"></i> @lang('home.Active')</a>
                                         <input type="hidden" class="JobId" value="{{$pjobs->jobId}}">
                                         <input type="hidden" class="check{{$pjobs->jobId}}" value="{{$pjobs->jobStatus}}">
 										<a href="{{ url('account/employer/delete/'.$pjobs->jobId) }}"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')</a>
@@ -128,8 +128,8 @@
                                 <img src="{{ url('profile-photos/'.$interview->profilePhoto)}}" style="width: 50px">
                                 <div class="rtj-details">
                                     <p><strong><a href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">{{ $interview->firstName." ".$interview->lastName}}</a></strong></p>
-                                    <p><a href="{{ url('jobs/'.$interview->jobId) }}">{{ $interview->title }}</a> <span class="label" style="background-color:{{ $colorArr[array_rand($colorArr)] }}"><a style="color:#fff" href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">interview Details</a></span></p>
-                                    <p><i class="fa fa-clock-o"></i>  {{ $interview->fromDate }} to {{ $interview->toDate }}   <i class="fa fa-map-marker"></i> {{ $interview->country }}, {{ $interview->state }}, {{ $interview->city }}</p>
+                                    <p><a href="{{ url('jobs/'.$interview->jobId) }}">{{ $interview->title }}</a> <span class="label" style="background-color:{{ $colorArr[array_rand($colorArr)] }}"><a style="color:#fff" href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">@lang('home.interview Details')</a></span></p>
+                                    <p><i class="fa fa-clock-o"></i>  {{ $interview->fromDate }} to {{ $interview->toDate }}   <i class="fa fa-map-marker"></i> @lang('home.'.$interview->country), @lang('home.'.$interview->state), @lang('home.'.$interview->city)</p>
                                 </div>
                             </div>
                              @endforeach
@@ -174,7 +174,7 @@
 						
 								<p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
 								<p>{!! $appl->companyName !!}</p>
-								<p>{{ JobCallMe::cityName($appl->city) }}, {{ JobCallMe::countryName($appl->country) }}</p>
+								<p>@lang('home.'.JobCallMe::cityName($appl->city)), @lang('home.'.JobCallMe::countryName($appl->country))</p>
 
 							
 						
@@ -213,7 +213,7 @@
 						<div class="col-md-8 col-xs-12" style="padding-top:10px">
 							<div class="sr-details">
 								<p class="sr-title"><a href="{{ url('read/article/'.$rec->writingId) }}">{!! $rec->title !!} </a> </p>
-								<p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> {{$rec->firstName.' '.$rec->firstName}}</a> </p>
+								<p class="sr-author"><a href="{{ url('read/article/'.$rec->writingId) }}"><span class="glyphicon glyphicon-user"></span>@lang('home.read_writer') <span style="color:#337ab7">{{ $rec->firstName.' '.$rec->lastName }}</span></a> </p>
 							</div>
 						</div>
                     </div>
@@ -238,11 +238,11 @@
                       <div class="col-md-12 sr-item">
 				      <div class="col-md-4 col-xs-12">
 
-                        <div class="sr-item-img">
+                        <div class="suggestedreading-img-mbl">
                             @if($rec->upskillImage != '')
-                            <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;">
+                            <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:auto !important;">
                             @else
-                            <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;">
+                            <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 100%;height:auto !important;">
                             @endif
                         </div>
 						</div>
@@ -252,7 +252,7 @@
                             <span>@lang('home.'.$rec->type)</span>
                             <p><i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</p>
                             
-                            <span><i class="fa fa-map-marker"></i> {{ JobCallMe::cityName($rec->city) }},{{ JobCallMe::countryName($rec->country) }}</span>
+                            <span><i class="fa fa-map-marker"></i> @lang('home.'.JobCallMe::cityName($rec->city)), @lang('home.'.JobCallMe::countryName($rec->country))</span>
                             
                        </div>
                    </div>
@@ -295,9 +295,9 @@ $(document).ready(function(){
             oye = jArray.data[i].jobStatus;
            // alert(oye);
          if(oye=='Publish'){
-            $('#active_deactive'+i).html('<i class="fa fa-eye" id="active"></i> Active');
+            $('#active_deactive'+i).html('<i class="fa fa-eye" id="active"></i> @lang("home.Active")');
             }else{
-            $('#active_deactive'+i).html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
+            $('#active_deactive'+i).html('<i class="fa fa-eye-slash" id="deactive"></i> @lang("home.Deactive")');
             }
 
          var jobstatus = '';
@@ -308,8 +308,8 @@ $('#active_deactive'+i).click(function(e){
     //alert(yes);
   
   if(yes=='Publish'){
-      $('.active_deactive'+id).html('<i class="fa fa-eye-slash" id="deactive"></i> Deactive');
-      yes='Draft';
+      $('.active_deactive'+id).html('<i class="fa fa-eye-slash" id="deactive"></i> @lang("home.Deactive")');
+      yes=$('.check'+id).val('Draft');
       //alert(oye);
       var token = "{{ csrf_token() }}";
        jobstatus = 'Draft';
@@ -318,9 +318,9 @@ $('#active_deactive'+i).click(function(e){
             data:{id:id,jobstatus:jobstatus,_token:token },
             type:'POST',
             success:function(res){
-               //alert(res);
+              //alert(res);
                if(res == 1){
-                toastr.success('status deactivate');
+                toastr.success('@lang("home.status deactivate")');
                }else{
                 alert('error in controller admin/Cms/jobstatupdate line no 469');
                }
@@ -329,8 +329,9 @@ $('#active_deactive'+i).click(function(e){
   }
   else if(yes=='Draft'){
       
-       $('.active_deactive'+id).html('<i class="fa fa-eye" id="active"></i> Active');
-        yes='Publish';
+       $('.active_deactive'+id).html('<i class="fa fa-eye" id="active"></i> @lang("home.Active")');
+      //  yes='Publish';
+        yes=$('.check'+id).val('Publish');
            jobstatus = 'Publish';
              var token = "{{ csrf_token() }}";
         
@@ -339,9 +340,9 @@ $('#active_deactive'+i).click(function(e){
             data:{id:id,jobstatus:jobstatus,_token:token },
             type:'POST',
             success:function(res){
-               // alert(res);
+             //  alert(res);
                if(res == 1){
-                toastr.success('status active');
+                toastr.success('@lang("home.status active")');
                }else{
                 alert('error in controller admin/Cms/jobstatupdate line no 469');
                }

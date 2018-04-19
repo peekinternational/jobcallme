@@ -8,6 +8,7 @@ use App\Facade\JobCallMe;
 use DB;
 use Mail;
 use App;
+date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
 	public function home(){
@@ -230,7 +231,7 @@ class Home extends Controller{
 
 			$user = $this->doLogin($email,$password);
 			if($user == 'invalid'){
-				$request->session()->flash('loginAlert', 'Invalid email/password');
+				$request->session()->flash('loginAlert', trans('home.Invalid email/password'));
 				if($next != ''){
 					return redirect('account/login?next='.$next);
 				}else{
@@ -287,15 +288,15 @@ class Home extends Controller{
 				'state' => 'required',
 				'phoneNumber' => 'required|digits_between:10,12',
 			],[
-				'email.unique' => 'Email must be unique',
-				'email.required' => 'Enter Email',
-				'firstName.required' => 'Enter First Name',
-				'lastName.required' => 'Enter Last Name',
-				'password.required' => 'Enter password',	
-				'country.required' => 'Enter Country',
-				'state.required' => 'Enter State',
-				'phoneNumber.required' => 'Enter Phone Number',
-				'phoneNumber.digits_between' => 'Phone Number must be contain 10,12 digits',
+				'email.unique' => trans('home.Email must be unique'),
+				'email.required' => trans('home.Enter Email'),
+				'firstName.required' => trans('home.Enter First Name'),
+				'lastName.required' => trans('home.Enter Last Name'),
+				'password.required' => trans('home.Enter password'),	
+				'country.required' => trans('home.Enter Country'),
+				'state.required' => trans('home.Enter State'),
+				'phoneNumber.required' => trans('home.Enter Phone Number'),
+				'phoneNumber.digits_between' => trans('home.Phone Number must be contain 10,12 digits'),
 			]);
 			$regdata['email'] = $request->input('email');
 			$regdata['password'] = $request->input('password');
@@ -479,7 +480,7 @@ class Home extends Controller{
 
     public function learn(Request $request){
     	/* read query */
-    	$lear_record = DB::table('jcm_upskills')->where('status','=','Active')->orderBy('skillId','desc')->limit(12)->get();
+    	$lear_record = DB::table('jcm_upskills')->where('status','=','Active')->where('adstartDate','<=',date('Y-m-d'))->where('adendDate','>=',date('Y-m-d'))->orderBy('skillId','desc')->limit(12)->get();
 
     	return view('frontend.learn',compact('lear_record'));
     }

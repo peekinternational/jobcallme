@@ -76,12 +76,16 @@ class ExtraSkills extends Controller{
     				'category' => 'required',
     				'description' => 'required',
     				'citation' => 'required'
-    			]);
+    			],[				
+				'description.required' => trans('home.Enter description'),				
+			]);
 
     		if($request->input('prevIcon') == '' || $request->hasFile('articleImage')){
     			$this->validate($request, [
                     'articleImage' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-                ]);
+                ],[				
+				'articleImage.required' => trans('home.Enter Image'),				
+				]);
     		}
     		if($request->hasFile('articleImage')){
                 $image = $request->file('articleImage');
@@ -354,24 +358,22 @@ class ExtraSkills extends Controller{
 	   $amount=$rec[0]->price;
 	   //dd();
 	   $durations= $amount*$request->duration;
-       $up=$durations*1100;
+       $up=$durations*1000;
 	   $request->session()->put('price', $up);
         $app = $request->session()->get('jcmUser');
         if($request->ajax()){
             $this->validate($request,[
                     'title' => 'required',
                     'type' => 'required',
-                    'description' => 'required',
-                    'cost' => 'required|numeric',
+                    'description' => 'required',                
                     'currency' => 'required',
                     'address' => 'required',
                     'country' => 'required',
                     'state' => 'required',
                     'city' => 'required',
-                    'contact' => 'required',
-                    'email' => 'required|email',
-                    'phone' => 'required|numeric',
-                    'mobile' => 'nullable|numeric',
+                    'contact' => 'required',                  
+                    'phone' => 'required',
+                    'mobile' => 'nullable',
                     'website' => 'nullable|url',
                     'facebook' => 'nullable|url',
                     'linkedin' => 'nullable|url',
@@ -379,7 +381,9 @@ class ExtraSkills extends Controller{
                     'google' => 'nullable|url',
                     'startDate' => 'required|date',
                     'endDate' => 'required|date',
-                ]);
+                ],[				
+					'description.required' => trans('home.Enter description'),				
+				]);
 
             if($request->input('oType') == 'other'){
                 $this->validate($request, [
@@ -390,7 +394,9 @@ class ExtraSkills extends Controller{
             if($request->hasFile('upskillImage')){
                 $this->validate($request, [
                     'upskillImage' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-                ]);
+                ],[				
+				'upskillImage.required' => trans('home.Enter Image'),				
+				]);
             }
             if($request->hasFile('upskillImage')){
                 $image = $request->file('upskillImage');
@@ -417,7 +423,10 @@ class ExtraSkills extends Controller{
             $input['description'] = trim($request->input('description'));
             $input['cost'] = trim($request->input('cost'));
             $input['currency'] = trim($request->input('currency'));
+			$input['accommodation'] = trim($request->input('accommodation'));
+			$input['costdescription'] = trim($request->input('costdescription'));
             $input['address'] = trim($request->input('address'));
+			$input['address2'] = trim($request->input('address2'));
             $input['country'] = trim($request->input('country'));
             $input['state'] = trim($request->input('state'));
             $input['city'] = trim($request->input('city'));
@@ -432,6 +441,9 @@ class ExtraSkills extends Controller{
             $input['google'] = trim($request->input('google'));
             $input['startDate'] = trim($request->input('startDate'));
             $input['endDate'] = trim($request->input('endDate'));
+			$input['adstartDate'] = trim($request->input('adstartDate'));
+            $input['adendDate'] = trim($request->input('adendDate'));
+			$input['duration'] = trim($request->input('duration'));
             $input['timing'] = @json_encode($timing);
 			$input['userId'] = $app->userId;
             $input['paymentMode'] = 'Paypal';

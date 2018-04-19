@@ -9,27 +9,27 @@ $headerC = json_decode(file_get_contents(public_path('website/web-setting.info')
 <section id="company-box">
     <div class="container">
     <div class="col-md-8 company-box-left">
-	<h4>Have queries? We are here to help!</h4>
-<h5>Frequently Asked Questions</h5>
-<span>Save time and find answers to popular users queries, visit Frequently Asked Questions.</span>
+		<h4>@lang('home.Have queries? We are here to help!')</h4>
+<h5>@lang('home.Frequently Asked Questions')</h5>
+<span>@lang('home.Save time and find answers to popular users queries, visit Frequently Asked Questions.')</span>
 <hr>
-<h4>Want to Apply for Jobs?</h4>
-Very simple and takes only few minutes.
+<h4>@lang('home.Want to Apply for Jobs?')</h4>
+@lang('home.Very simple and takes only few minutes.')
 <ul style="margin-left:36px">
-<li>Create your Account by visiting<a href="{{url('account/register')}}"> New User Registration</a></li>
-<li>Logon to your account and visit<a href="{{url('account/jobseeker/resume')}}">  Resume Builder</a></li>
-<li>Visit<a href="{{url('jobs')}}">  Jobs</a> section apply online for jobs of your interest.</li>
+<li>@lang("home.Create your Account by visiting<a href='account/register'> New User Registration</a>")</li>
+<li>@lang("home.Logon to your account and visit<a href='account/jobseeker/resume'>  Resume Builder</a>")</li>
+<li>@lang("home.Visit<a href='jobs'>  Jobs</a> section apply online for jobs of your interest.")</li>
 </ul>
 <hr>
-<h4>Want to Hire?</h4>
-Explore various<a href="{{url('account/employer')}}">  Online Recruitment </a> solutions, including <a href="{{url('account/employer/job/new')}}"> Job Posting</a> and<a href="{{url('account/employer')}}">  Resumes Database Search.</a>
+<h4>@lang('home.Want to Hire?')</h4>
+@lang("home.Explore various<a href='account/employer'>  Online Recruitment </a> solutions, including <a href='account/employer/job/new'> Job Posting</a> and<a href='account/employer'>  Resumes Database Search.")</a>
 <hr>
-<h4>Legal Stuff</h4>
+<h4>@lang('home.Legal Stuff')</h4>
 <ul style="margin-left:36px">
-<li>Privacy Policy</li>
-<li>Picture Policy</li>
-<li>Terms of Services</li>
-<li>Refund Policy</li>
+<li>@lang('home.Privacy Policy')</li>
+<li>@lang('home.Picture Policy')</li>
+<li>@lang('home.Terms of Services')</li>
+<li>@lang('home.Refund Policy')</li>
 </ul>
 
 	</div>

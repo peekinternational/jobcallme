@@ -5,6 +5,8 @@ if(file_exists('../website/'.$headerWeb['webLogo'])){
     $headerWebLogo = url('../website/'.$headerWeb['webLogo']);
 }
 $cPage = Request::segment(2);
+
+
 ?>
 <nav class="nav navbar-inverse navbar-fixed-top" >
  @if(Session::has('jcmUser'))
@@ -57,10 +59,13 @@ $cPage = Request::segment(2);
                         <a href="{{ url('account/upskill') }}">@lang('home.upskill')</a>
                     </li>
                     <?php }else{ ?>
-                    <li class="hidden-sm {{ Request::segment(1) == 'companies' ? 'active' : '' }}">
+                    <!-- <li class="hidden-sm {{ Request::segment(1) == 'companies' ? 'active' : '' }}">
+                        <a href="{{ url('companies') }}">@lang('home.companies')</a>
+                    </li> -->
+                    <?php } ?>
+					<li class="hidden-sm {{ Request::segment(1) == 'companies' ? 'active' : '' }}">
                         <a href="{{ url('companies') }}">@lang('home.companies')</a>
                     </li>
-                    <?php } ?>
 					 @if(Session::has('jcmUser'))
 						 
 						  @else

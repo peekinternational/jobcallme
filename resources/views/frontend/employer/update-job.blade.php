@@ -103,7 +103,7 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-category" name="category" onchange="getSubCategories(this.value)">
                                     @foreach(JobCallMe::getCategories() as $cat)
-                                        <option value="{!! $cat->categoryId !!}" {{ $result->category == $cat->categoryId ? 'selected="selected"' : '' }}>{!! $cat->name !!}</option>
+                                        <option value="{!! $cat->categoryId !!}" {{ $result->category == $cat->categoryId ? 'selected="selected"' : '' }}>@lang('home.'.$cat->name)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -128,7 +128,7 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="careerLevel">
                                     @foreach(JobCallMe::getCareerLevel() as $career)
-                                        <option value="{!! $career !!}" {{ $result->careerLevel == $career ? 'selected="selected"' : '' }}>{!! $career !!}</option>
+                                        <option value="{!! $career !!}" {{ $result->careerLevel == $career ? 'selected="selected"' : '' }}>@lang('home.'.$career)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -138,7 +138,7 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="experience">
                                     @foreach(JobCallMe::getExperienceLevel() as $experience)
-                                        <option value="{!! $experience !!}" {{ $result->experience == $experience ? 'selected="selected"' : '' }}>{!! $experience !!}</option>
+                                        <option value="{!! $experience !!}" {{ $result->experience == $experience ? 'selected="selected"' : '' }}>@lang('home.'.$experience)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -182,7 +182,7 @@
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control select2" name="type">
                                     @foreach(JobCallMe::getJobType() as $jtype)
-                                        <option value="{!! $jtype->name !!}" {{ $result->jobType == $jtype->name ? 'selected="selected"' : '' }}>{!! $jtype->name !!}</option>
+                                        <option value="{!! $jtype->name !!}" {{ $result->jobType == $jtype->name ? 'selected="selected"' : '' }}>@lang('home.'.$jtype->name)</option>
                                     @endforeach
                                </select>
                            </div>
@@ -192,7 +192,7 @@
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control select2" name="shift">
                                     @foreach(JobCallMe::getJobShifts() as $jshift)
-                                        <option value="{!! $jshift->name !!}" {{ $result->jobShift == $jshift->name ? 'selected="selected"' : '' }}>{!! $jshift->name !!}</option>
+                                        <option value="{!! $jshift->name !!}" {{ $result->jobShift == $jshift->name ? 'selected="selected"' : '' }}>@lang('home.'.$jshift->name)</option>
                                     @endforeach
                                </select>
                            </div>
@@ -327,7 +327,7 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}" {{ $result->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                        <option value="{{ $cntry->id }}" {{ $result->country == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -387,7 +387,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3"></label>
                             <div class="col-sm-9 da-box">
-                                <p>@lang('home.readcarefully')</p>
+                                <p>@lang('home.pleasereadcarefully')</p>
                                 <ul>
                                     <li>@lang('home.postli1')</li>
                                     <li>@lang('home.postl12')</li>
@@ -633,7 +633,7 @@ var formPost = 1;
 
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
+          center: {lat: 37.516172, lng: 127.038786},
           zoom: 13
         });
         var card = document.getElementById('pac-card');

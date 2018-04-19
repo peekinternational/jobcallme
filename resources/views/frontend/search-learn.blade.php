@@ -9,7 +9,21 @@
 	<div class="row">
         <div class="col-md-4">
             <div class="search-courses-box">
-                <h2>@lang('home.searchcourses')</h2>
+                <h3>				
+
+					@if($_GET[type] == 'forum · conference')
+						@lang('home.Forum · Conference')
+					@endif
+					@if($_GET[type] == 'course · education · academy')
+						@lang('home.Course · Education · Academy')
+					@endif
+					@if($_GET[type] == 'seminar · exhibition · webinar')
+						@lang('home.Seminar · Exhibition · Webinar')
+					@endif
+					@if($_GET[type] == 'training · workshop')
+						@lang('home.Training · Workshop')
+					@endif
+				</h3>
                 <form class="" class="search-form" method="post">
                     {{ csrf_field() }}
 					<div class="form-group">
@@ -20,17 +34,17 @@
 							    </div>
 								<div class="form-group">
 					         <select class="form-control select2 job-country" name="type" >
-                                     <option value="">@lang('home.type')</option>
+                                     <option value="">@lang('home.s_type')</option>
                               @foreach(JobCallMe::getUpkillsType() as $skill)
-                                <option value="{!! $skill->name !!}">{!! $skill->name !!}</option>
+                                <option value="{!! $skill->name !!}">@lang('home.'.$skill->name)</option>
                               @endforeach
                                </select>
 							      </div>
 						    <div class="form-group">
                                 <select class="form-control select2 job-country" name="country">
-								 <option value="" >Select Country</option>
+								 <option value="" >@lang('home.country')</option>
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}" >{{ $cntry->name }}</option>
+                                        <option value="{{ $cntry->id }}" >@lang('home.'.$cntry->name)</option>
                                     @endforeach
                                 </select>
                         </div>
@@ -63,13 +77,17 @@
                         <h4><a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId)}}">{{ $rec->title }}</a></h4>
                         <ul>
                             <li>
-                                <strong>Type:</strong>{{ $rec->type }}
+                                <strong>@lang('home.type'):</strong>@lang('home.'.$rec->type)
                             </li>
-                            <li><i class="fa fa-calendar-check-o"></i> {{ date('d F, Y',strtotime($rec->startDate)) }}</li>
+                            <li><i class="fa fa-calendar-check-o"></i> @if(app()->getLocale() == "kr")
+						    {{ date('Y-m-d',strtotime($rec->startDate)) }}
+						@else
+						    {{ date('d F, Y',strtotime($rec->startDate)) }}
+						@endif </li>
                             <li><i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}</li>
                             <li class="hidden-sm hidden-md hidden-lg text-success"><i class="fa fa-map-marker"></i> online, {{ JobCallMe::cityName($rec->city).' '.JobCallMe::countryName($rec->country)}}</li>
                         </ul>
-                        <p class="hidden-xs"><i class="fa fa-map-marker"></i> online, {{ JobCallMe::cityName($rec->city).' '.JobCallMe::countryName($rec->country)}}</p>
+                        <p class="hidden-xs"><i class="fa fa-map-marker"></i> online, @lang('home.'.JobCallMe::cityName($rec->city)), @lang('home.'.JobCallMe::countryName($rec->country))</p>
                     </div>
                     <div class="sc-cost">
                         {{ $rec->currency.' '.number_format($rec->cost).'/-'}}

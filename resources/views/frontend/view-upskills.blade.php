@@ -77,7 +77,7 @@
             <div class="col-md-12">
                 <div class="pnj-box">
                     <h3><span style="padding-left:15px;color:#fff;">@lang('home.promoteofferings')</span></h3>
-                    <div class="upskill-box">
+                    <div class="upskill-box" style="padding-bottom:70px">
                         <p style="font-size:17px">@lang('home.advertisecourses')</p>
                         <a href="{{ url('account/upskill/add') }}" class="btn btn-primary">@lang('home.advertisenow')</a>
                     </div>
@@ -90,7 +90,7 @@
 @section('page-footer')
 <script type="text/javascript">
 function deleteUpskill(skillId){
-    if(confirm('Are you sure?')){
+    if(confirm('@lang("home.Are you sure?")')){
         $.ajax({
             url: "{{ url('account/upskill/delete') }}/"+skillId,
             success: function(response){
@@ -98,7 +98,7 @@ function deleteUpskill(skillId){
                     toastr.error(response, '', {timeOut: 5000, positionClass: "toast-top-center"});
                 }else{
                     $('#upskill-'+skillId).remove();
-                    toastr.success('Upskill Deleted', '', {timeOut: 5000, positionClass: "toast-top-center"});
+                    toastr.success('@lang("home.Upskill Deleted")', '', {timeOut: 5000, positionClass: "toast-top-center"});
                 }
             }
         })

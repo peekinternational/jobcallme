@@ -39,9 +39,9 @@
                     </div>
                     <div class="form-group hidden-xs">
                         <select class="form-control" name="jobType">
-                            <option value="">@lang('home.s_type')</option>
+                            <option value="">@lang('home.jobinformationtype')</option>
                             @foreach(JobCallMe::getJobType() as $jtype)
-                                <option value="{!! $jtype->name !!}" {{ $jtype->name == Request::input('type') ? 'selected="selected"' : '' }}>{!! $jtype->name !!}</option>
+                                <option value="{!! $jtype->name !!}" {{ $jtype->name == Request::input('type') ? 'selected="selected"' : '' }}>@lang('home.'.$jtype->name)</option>
                             @endforeach
                         </select>
                     </div>
@@ -49,7 +49,7 @@
                         <select class="form-control" name="jobShift">
                             <option value="">@lang('home.s_shift')</option>
                             @foreach(JobCallMe::getJobShifts() as $jshift)
-                                <option value="{!! $jshift->name !!}" {{ $jshift->name == Request::input('shift') ? 'selected="selected"' : '' }}>{!! $jshift->name !!}</option>
+                                <option value="{!! $jshift->name !!}" {{ $jshift->name == Request::input('shift') ? 'selected="selected"' : '' }}>@lang('home.'.$jshift->name)</option>
                             @endforeach
                         </select>
                     </div>
@@ -57,7 +57,7 @@
                         <select class="form-control" name="careerLevel">
                             <option value="">@lang('home.s_career')</option>
                             @foreach(JobCallMe::getCareerLevel() as $career)
-                                <option value="{!! $career !!}" {{ $career == Request::input('career') ? 'selected="selected"' : '' }}>{!! $career !!}</option>
+                                <option value="{!! $career !!}" {{ $career == Request::input('career') ? 'selected="selected"' : '' }}>@lang('home.'.$career)</option>
                             @endforeach
                         </select>
                     </div>
@@ -65,7 +65,7 @@
                         <select class="form-control" name="experience">
                             <option value="">@lang('home.s_experience')</option>
                             @foreach(JobCallMe::getExperienceLevel() as $experience)
-                                <option value="{!! $experience !!}" {{ $experience == Request::input('experience') ? 'selected="selected"' : '' }}>{!! $experience !!}</option>
+                                <option value="{!! $experience !!}" {{ $experience == Request::input('experience') ? 'selected="selected"' : '' }}>@lang('home.'.$experience)</option>
                             @endforeach
                         </select>
                     </div>
@@ -87,7 +87,7 @@
                         <select class="form-control job-country" name="country">
                             <option value="0">@lang('home.country')</option>
                             @foreach(JobCallMe::getJobCountries() as $country)
-                                <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>{{ $country->name }}</option>
+                                <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
                             @endforeach
                         </select>
                     </div>

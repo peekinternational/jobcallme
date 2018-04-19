@@ -27,11 +27,11 @@
                                         <td><a href="{{ url('account/employer/interview-venues/detail/'.$venue->venueId) }}">{!! $venue->title !!}</a></td>
                                         <td>{!! $venue->address !!}</td>
                                         <td>
-                                            <a href="javascript:;" onclick="editVenue({{ $venue->venueId }})"  data-toggle="tooltip" data-original-title="Edit">
+                                            <a href="javascript:;" onclick="editVenue({{ $venue->venueId }})"  data-toggle="tooltip" data-original-title="@lang('home.Edit')">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
                                             &nbsp;&nbsp;&nbsp;
-                                            <a href="javascript:;" onclick="deleteVenue({{ $venue->venueId }})"  data-toggle="tooltip" data-original-title="Delete">
+                                            <a href="javascript:;" onclick="deleteVenue({{ $venue->venueId }})"  data-toggle="tooltip" data-original-title="@lang('home.Delete')">
                                                 <i class="fa fa-remove"></i>
                                             </a>
                                         </td>
@@ -75,7 +75,7 @@
                             <div class="col-md-6">
                                 <select class="form-control input-sm select2 job-country" name="country">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}" {{ $vApp->country == $cntry->id ? 'selected="selected"' : '' }}>{{ $cntry->name }}</option>
+                                        <option value="{{ $cntry->id }}" {{ $vApp->country == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -233,7 +233,7 @@ $('form.venue-form').submit(function(e){
         url: "{{ url('account/employer/interview-venues/save') }}",
         success: function(response){
             //$('.venue-form button[name="save"]').prop('disabled',false);
-            toastr.success('Action perform successfully', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+            toastr.success('@lang("home.Action perform successfully")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
             window.location.href = "{{ url('account/employer/interview-venues') }}";
         },
         error: function(data){
@@ -263,7 +263,7 @@ function editVenue(venueId){
         success: function(response){
             var obj = $.parseJSON(response);
 
-            $('.add-edit-venue .panel-title').text('Edit Interview Venue');
+            $('.add-edit-venue .panel-title').text('@lang("home.Edit Interview Venue")');
             $('.venue-form .venueId').val(venueId);
             $('.venue-form input[name="title"]').val(obj.title);
             $('.venue-form textarea[name="address"]').val(obj.address);
@@ -283,12 +283,12 @@ function editVenue(venueId){
     })
 }
 function deleteVenue(venueId){
-    if(confirm('Are you sure?')){
+    if(confirm('@lang("home.Are you sure?")')){
         $.ajax({
             url: "{{ url('account/employer/interview-venues/delete') }}/"+venueId,
             success: function(response){
                 $('#venue-'+venueId).remove();
-                toastr.success('Interview Venue Removed', '', {timeOut: 3000, positionClass: "toast-bottom-center"});
+                toastr.success('@lang("home.Interview Venue Removed")', '', {timeOut: 3000, positionClass: "toast-bottom-center"});
             }
         })
     }
