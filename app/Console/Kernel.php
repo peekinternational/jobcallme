@@ -82,12 +82,12 @@ class Kernel extends ConsoleKernel
                         /*endif;*/
                     endif;
                 endforeach;
-            endif; 
+            endif;
+
         })->everyMinute();
-		$schedule->call(function () {
-			\Log::info('this is sajid');
-			})->everyMinute();
-       $schedule->call('echo')->everyMinute();
+       $schedule->call(function(){
+            \Log::info('sajid is here');
+       })->everyMinute();
     }
 
     /**

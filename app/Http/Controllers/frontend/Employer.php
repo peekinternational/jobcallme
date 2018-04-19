@@ -1841,6 +1841,11 @@ public function mapOrganization(Request $request){
 			$questions = DB::table('jcm_questions')->where('ques_id',$id)->get();
 			return view('frontend.employer.editquestionnaires',compact('ques','questions'));
 		}
+		public function editevaluation($id){
+			$evaluation = DB::table('jcm_evaluation')->where('evaluation_id',$id)->first();
+			$eval_ques = DB::table('jcm_evaluation_question')->where('evaluation_id',$id)->get();
+			return view('frontend.employer.editevaluation',compact('eval_ques','evaluation'));
+		}
 		public function addquestion(Request $request){
 			$data['ques_id'] = $request->input('ques_id');
 			$data['question'] = $request->input('question');
@@ -2152,32 +2157,51 @@ public function viewJobstatus(Request $request,$id){
 }
 
 public function saveEvaluation(Request $request){
-		if(!$request->ajax()){
-			exit('Directory access is forbidden');
-		}
-     // $resumeId = $request->segment(1);
-	  //dd($request->all());
+     
 		$app = $request->session()->get('jcmUser');
 		$this->validate($request, [
 				'title' => 'required',
-				
 			]);
 			 $input['title']=$request->title;
-			 $id=$request->resumeId;
+			 $input['updated_at']= date('Y-m-d H:i:s');
+			 $id=$request->evaluation_id;
 			if($id != '' && $id != '0' && $id != NULL){
-			DB::table('jcm_evaluation')->where('id','=',$id)->update($input);
+			DB::table('jcm_evaluation')->where('evaluation_id','=',$id)->update($input);
+			return redirect("account/employer/evaluation/edit/".$id);
 		}else{
 			$input['user_id']=$app->userId;
            $input['criterion']='1';
-		    DB::table('jcm_evaluation')->insert($input);
+		  $id = DB::table('jcm_evaluation')->insertGetId($input);
+		  return redirect("account/employer/evaluation/edit/".$id);
 		}
-            exit('1');
+         
+}
+public function addevaluationquestion(Request $request){
+	$data = $request->input();
+	unset($data['_token']);
+	if($data['eva_ques_id'] != ''){
+		if(!$data['is_critical']){
+			$data['is_critical'] = 'No';
+		}
+		
+		DB::table('jcm_evaluation_question')->where('eva_ques_id',$data['eva_ques_id'])->update($data);
+		return redirect("account/employer/evaluation/edit/".$data['evaluation_id']);
+	}else{
+		unset($data['eva_ques_id']);
+		DB::table('jcm_evaluation_question')->insert($data);
+		return redirect("account/employer/evaluation/edit/".$data['evaluation_id']);
+	}
+	
+}
+ public function deleteevaluationques(Request $request)
+{
+	$id = $request->q_id;
+	echo DB::table('jcm_evaluation_question')->where('eva_ques_id',$id)->delete();
 }
 
 public function allform(Request $request){
 		
 		$app = $request->session()->get('jcmUser');
-		$resumeId = $request->segment(5);
 		$record = DB::table('jcm_evaluation')->where('user_id','=',$app->userId)->get();
 		return view('frontend.employer.addevaluation',compact('record'));
 	}
@@ -2188,7 +2212,7 @@ public function allform(Request $request){
 		}
 		$app = $request->session()->get('jcmUser');
 		$Id = $request->segment(5);
-		$record = DB::table('jcm_evaluation')->where('id','=',$Id)->first();
+		$record = DB::table('jcm_evaluation')->where('evaluation_id','=',$Id)->first();
 		echo @json_encode($record);
 	}
 
@@ -2196,8 +2220,8 @@ public function allform(Request $request){
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}
-		$resumeId = $request->segment(5);
-		DB::table('jcm_evaluation')->where('id','=',$resumeId)->delete();
+		$evaluation_id = $request->segment(5);
+		DB::table('jcm_evaluation')->where('evaluation_id','=',$evaluation_id)->delete();
 	}
 
 
