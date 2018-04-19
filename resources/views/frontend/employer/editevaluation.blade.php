@@ -7,9 +7,7 @@
 
 			<div class="container">
                 <a href="{{ url('account/employer/addevaluation')}}" class="btn btn-primary pull-right">Go Back</a>
-
 			<div class="row">
-                
 				<div class="col-md-12">
 				<section class="resume-box" id="academic">
                         <a class="btn btn-primary r-add-btn" onclick="addAcademic()"><i class="fa fa-edit" style="margin-top: 6px;"></i> </a>
