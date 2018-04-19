@@ -68,7 +68,7 @@
                 <div class="sc-item">
                     <div class="sc-thumbnail">
                         @if($rec->upskillImage != '')
-                            <img src="{{ url('upskill-images/'.$rec->upskillImage) }}">
+                            <img src="{{ url('upskill-images/'.$rec->upskillImage) }}" style="height: auto !important;">
                         @else
                             <img src="{{ url('d-cover.jpg') }}">
                         @endif
