@@ -185,11 +185,11 @@ Route::group(['prefix' => 'account'], function () {
 	Route::get('employer/questionnaires/edit/{id}','frontend\Employer@editquestionnaires');
 	/* evaluation routes*/
 	Route::post('employer/evaluation/new','frontend\Employer@addquestionaires');
-	Route::post('employer/evaluation/delete','frontend\Employer@deletequestionaires');
-	Route::post('employer/evaluation/question/new','frontend\Employer@addquestion');
+	Route::post('employer/evaluation/delete','frontend\Employer@deleteevaluationques');
+	Route::post('employer/evaluation/question/new','frontend\Employer@addevaluationquestion');
 	Route::post('employer/evaluation/question/delete','frontend\Employer@deletequestion');
 	Route::get('employer/evaluation','frontend\Employer@evaluation');
-	Route::get('employer/evaluation/edit/{id}','frontend\Employer@editquestionnaires');
+	Route::get('employer/evaluation/edit/{id}','frontend\Employer@editevaluation');
 	/*end evalutation routes*/
 	Route::post('employer/savecompic','frontend\Home@savecompic');
 	Route::get('writings','frontend\ExtraSkills@writings');

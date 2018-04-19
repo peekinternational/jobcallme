@@ -24,15 +24,15 @@
                                     
                                     <tbody>
                                         @foreach($record as $order)
-                                        <tr id="form-{{$order->id}}">
+                                        <tr id="form-{{$order->evaluation_id}}">
                                             <td>{{$order->title}}</td>
                                             <td>{{$order->criterion}}</td>
                                             <td>{{$order->created_at}}</td>
         							
-        							       <td><a href="javascript:;" title="Edit" onclick="getAcademic('{{ $order->id }}')">
+        							       <td><a href="{{ url('account/employer/evaluation/edit/'.$order->evaluation_id)}}" title="Edit">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                 <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $order->id}}')">
+                                                 <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $order->evaluation_id}}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;</td>
                                          </tr>
@@ -44,9 +44,9 @@
                     </section>
                     <section class="resume-box" id="academic-edit" style="display: none;">
                         <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.evaluationforms')</c></h4>
-                        <form class="form-horizontal form-academic" method="post" action="">
+                        <form class="form-horizontal form-academic" method="post" action="{{ url('account/employer/form/save') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="resumeId" value="">
+                            <input type="hidden" name="evaluation_id" value="">
                             <div class="form-group error-group" style="display: none;">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
@@ -88,53 +88,19 @@
 		<script type="text/javascript">
 		var pageToken = '{{ csrf_token() }}';
 function addAcademic(){
-    $('.form-academic input').val('');
+    $('.form-academic input:not(input[name="_token"])').val('');
     $('#academic-edit h4 c').text('@lang('home.evaluationforms')');
     $('#academic').hide();
     $('#academic-edit').fadeIn();
 }
-$('form.form-academic').submit(function(e){
-    //alert('hello');
-    $('.form-academic input[name="_token"]').val('{{ csrf_token() }}');
-    $('.form-academic button[name="save"]').prop('disabled',true);
-    $('.form-academic .error-group').hide();
+
+function getEvaluation(evaluation_id){
     $.ajax({
-        type: 'post',
-        data: $('.form-academic').serialize(),
-        url: "{{ url('account/employer/form/save') }}",
-        success: function(response){
-            if($.trim(response) != '1'){
-                $('.form-academic .error-group').show();
-                $('.form-academic .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
-                $('html, body').animate({scrollTop:$('#academic-edit').position().top}, 1000);
-                $('.form-academic button[name="save"]').prop('disabled',false);
-            }else{
-                window.location.href = "{{ url('account/employer/addevaluation') }}";
-            }
-            Pace.stop;
-        },
-        error: function(data){
-            var errors = data.responseJSON;
-            var vErrors = '';
-            $.each(errors, function(i,k){
-                vErrors += '<li>'+k+'</li>';
-            })
-            $('.form-academic .error-group').show();
-            $('.form-academic .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
-            $('.form-academic button[name="save"]').prop('disabled',false);
-            Pace.stop;
-            $('html, body').animate({scrollTop:$('#academic-edit').position().top}, 1000);
-        }
-    })
-    e.preventDefault();
-})
-function getAcademic(resumeId){
-    $.ajax({
-        url: "{{ url('account/employer/form/get') }}/"+resumeId,
+        url: "{{ url('account/employer/form/get') }}/"+evaluation_id,
         success: function(response){
             var obj = $.parseJSON(response);
             console.log(obj);
-            $('.form-academic input[name="resumeId"]').val(obj.id);
+            $('.form-academic input[name="evaluation_id"]').val(obj.evaluation_id);
             $('.form-academic input[name="title"]').val(obj.title);
             
             $('#academic-edit h4 c').text('Edit @lang('home.evaluationforms')');
