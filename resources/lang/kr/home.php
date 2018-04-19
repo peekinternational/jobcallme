@@ -1113,6 +1113,26 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'Machin'=>'기계',
 	'Chemistry'=>'화확',
 	'Civil engineering'=>'토목',
+	'Service'=>'서비스',
+	'Environment'=>'환경',
+	'Philosophy'=>'철학',
+	'Manufacture'=>'제조',
+	'Medical'=>'의료',
+	'Electric'=>'전기',
+	'Information'=>'정보',
+	'Equipment'=>'설비',
+	'E-Mine'=>'광업',
+	'E-Industry'=>'공업',
+	'Game'=>'게임',
+	'Labor'=>'노동',
+	'Fishery'=>'수산업',
+	'Diplomacy'=>'외교',
+	'Housework'=>'가사',
+	'Fortune Teller'=>'점쟁이',
+	'Book Information'=>'도서 정보',
+	'Life'=>'생활',
+	'Health'=>'건강',
+	'Insurance'=>'보험',
 
 
 
@@ -113872,5 +113892,10 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 "Job Posting that Deliver Results"=>"채용공고 광고",
 "Better job exposure! View, Save and Export all received resumes."=>"채용공고 광고 효과! 모든 이력서보기, 저장 및 다운로드.",
-"payJobs"=>"채용 광고"
+"payJobs"=>"채용 광고",
+
+'public employment' => '공개채용',
+'jobhomepageapply' => '홈페이지 지원',
+'Contest · Show' => '경연 · 공연',
+'leancostlist' => '참관비',
 ];

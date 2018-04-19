@@ -1996,7 +1996,7 @@ if($user->profilePhoto != ''){
                     </form>
                 </div>
                  <div class="ja-content-item mc-item resume-listing-section">
-                    <h4>Vedio & Chat Image</h4>
+                    <h4>Video & Chat Image</h4>
                     <div class="re-img-box" style="left: 50px;">
                         <img src="<?= ($user->chatImage != '') ? url('profile-photos/'.$user->chatImage) : asset('profile-photos/profile-logo.jpg') ?>" class="chat-img-target">
                         <div class="re-img-toolkit">
