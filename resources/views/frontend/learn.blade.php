@@ -9,7 +9,7 @@
             <h2 class="text-center">@lang('home.l_heading')</h2>
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
-                    <div class="ls-box">
+                  <div class="ls-box hidden-xs">
                         <form role="form" action="{{ url('learn/search')}}" method="post">
                             {{ csrf_field() }}
                             <div class="input-fields">
@@ -54,6 +54,53 @@
                                 
 								<button  type="button" class="" id="l_search" style="margin-left: 9px;width: 4%;height: 33px;background: transparent;border: 2px solid #cecdcd;">
                                 <span class="caret" style="color:white"></span></button>
+								
+                            </div>
+                        </form>
+                    </div>
+
+<!--- mobile -->
+
+                    <div class="mob-box hidden-sm hidden-md hidden-lg" style="height:180px" >
+                        <form role="form" action="{{ url('learn/search')}}" method="post">
+                            {{ csrf_field() }}
+                            <div class="input-fields">
+                                <div class="search-field-box search-item" id="mob_key">
+                                    <input type="search" placeholder="@lang('home.key')" name="learn-keyword">
+                                </div>
+                                <div class="search-field-box search-item" id="mob_city">
+                                    <input type="search" placeholder="@lang('home.Cities')" name="city" style="margin-bottom: 12px;">
+                                    <button type="submit" id="mob_fasearch" style="width:10% !important" class="search-btn">
+                                    <i class="fa fa-search"></i>
+                                    </button>
+								<button  type="button" class="" id="mob_search" style="margin-left: 9px;width: 10%;height: 33px;background: transparent;border: 2px solid #cecdcd;">
+                                <span class="caret" style="color:white"></span></button>
+                                </div>
+								<div class="search-field-box search-item" id="mob_type" style="display:none;padding-top: 14px;">
+								<select class="form-control select2 job-country" name="type" >
+                                     <option value="">@lang('home.category')</option>
+                              @foreach(JobCallMe::getUpkillsType() as $skill)
+                                <option value="{!! $skill->name !!}">@lang('home.'.$skill->name)</option>
+                              @endforeach
+                          </select>
+                                </div>
+                                
+                                <div class="search-field-box search-item" id="mob_country" style="display:none;padding-top: 14px;">
+								
+                                    <select class="form-control select2 job-country" name="country">
+                                        <option value="">@lang('home.country')</option>
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
+                                    @endforeach
+									</select>
+	                           <button  type="submit" class="btn btn-success" style="margin-top: 12px;">
+                                @lang('home.Search')</button>
+								<button  type="button" id="mob_close" class="btn btn-default" style="margin-top: 12px;">
+                                @lang('home.Close')</button>
+	                               
+									
+                                </div>
+							
 								
                             </div>
                         </form>
@@ -199,6 +246,7 @@ function lightboxOnResize() {
         $("#l_type").fadeIn();
 		 $("#l_country").fadeIn();
 		 $('.ls-box').css('height', '175px');
+         $('.mob-box').css('height', '300px');
 		 $('#l_city input[name="learn-city"]').css('width', '100%');
 		 $('#l_type').css('padding-right', '40px');
 		 $('#l_fasearch').hide();
@@ -209,9 +257,32 @@ function lightboxOnResize() {
         $("#l_type").fadeOut();
 		 $("#l_country").fadeOut();
 		 $('.ls-box').css('height', 'auto');
+         $('.mob-box').css('height', '175px');
 		 $('#l_city input[name="learn-city"]').css('width', '88%');
 		 $('#l_fasearch').show();
 		 $('#l_search').show();
+        
+    });
+
+     $("#mob_search").click(function(){
+        $("#mob_type").fadeIn();
+		 $("#mob_country").fadeIn();
+		
+         $('.mob-box').css('height', '300px');
+		 $('#mob_city input[name="learn-city"]').css('width', '100%');
+		 $('#mob_type').css('padding-right', '40px');
+		 $('#mob_fasearch').hide();
+		 $('#mob_search').hide();
+        
+    });
+	$("#mob_close").click(function(){
+        $("#mob_type").fadeOut();
+		 $("#mob_country").fadeOut();
+	
+         $('.mob-box').css('height', '175px');
+		 $('#mob_city input[name="learn-city"]').css('width', '88%');
+		 $('#mob_fasearch').show();
+		 $('#mob_search').show();
         
     });
 </script>
