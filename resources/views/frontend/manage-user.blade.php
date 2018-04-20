@@ -594,7 +594,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="col-md-3 control-label">@lang('home.country')</label>
                                 <div class="col-md-9">
-                                    <select class="form-control input-sm mc-field job-country" name="country">
+                                    <select class="form-control input-sm mc-field  job-country" name="country">
                                         @foreach(JobCallMe::getJobCountries() as $cntry)
                                             <option value="{{ $cntry->id }}" {{ $noti->country == $cntry->id ? 'selected="selected"' : ''}}>@lang('home.'.$cntry->name)</option>
                                         @endforeach

@@ -389,9 +389,17 @@ class Home extends Controller{
 		    	}
     		}
     	}else{
-	    	if($request->input('city') != ''){
-	    		$people->where('jcm_users.city','=',$request->input('city'));
+			if($request->input('city') != ''){
+				if($request->input('city') == '000'){
+	    			$people->where('jcm_users.country','!=','1');
+				}else{
+					$people->where('jcm_users.state','=',$request->input('city'));
+				}
 	    	}
+
+	    	//if($request->input('city') != ''){
+	    		//$people->where('jcm_users.city','=',$request->input('city'));
+	    	//}
 	    	if($request->input('industry') != ''){
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
 	    	}

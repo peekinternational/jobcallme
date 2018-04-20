@@ -20,7 +20,7 @@ return [
 	'logout' => '로그아웃',
 	'login' => '로그인',
 	'feedback_header' => '의견 보내기',
-	'feedback' => 'Feedback',
+	'feedback' => '피드백',
 	'enteremail' => '이메일 주소 입력',
 	'selecttype' => '유형 선택',
 	'bug' => '오류 신고',
@@ -113898,4 +113898,6 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'jobhomepageapply' => '홈페이지 지원',
 'Contest · Show' => '경연 · 공연',
 'leancostlist' => '참관비',
+
+'New and Career Recruitment' => '전체채용',
 ];

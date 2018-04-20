@@ -41,6 +41,14 @@
 						    {{ date('d F, Y',strtotime($record->startDate))}}
 						@endif </td>
                     </tr>
+					<tr>
+                        <td class="active">@lang('home.edate')</td>
+                        <td>@if(app()->getLocale() == "kr")
+						    {{ date('Y-m-d',strtotime($record->endDate))}}
+						@else
+						    {{ date('d F, Y',strtotime($record->endDate))}}
+						@endif  </td>
+                    </tr>
                     <tr>
                         <td class="active">@lang('home.duration')</td>
                         <td>{{ JobCallMe::timeDuration($record->startDate,$record->endDate )}}</td>
@@ -97,7 +105,16 @@
                         <td>{{ $record->address }} , @lang('home.'.JobCallMe::cityName($record->city))</td>
                     </tr>
                 </table>
-                <h3>@lang('home.schedule')</h3>
+				<h4>@lang('home.CostofDescription')</h4>
+                <table class="table">
+                   
+                           <tr>
+                               <th class="la-text">{!! nl2br($record->costdescription) !!}</th>
+                            
+                           </tr>
+                        
+                </table>
+                <h4>@lang('home.schedule')</h4>
                 <table class="table">
                     <?php
                     $opHour = @json_decode($record->timing,true);
@@ -115,7 +132,7 @@
 				<table class="table">
 					<tr>
 					  <td>
-                <h3><span style="padding-left:20px">@lang('home.details')</span></h3>
+                <h4><span style="padding-left:20px">@lang('home.details')</span></h4>
                 <p>{!! $record->description !!}</p></td></tr></table>
             </div>
         </div>

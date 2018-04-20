@@ -124,7 +124,8 @@
                             <div class="la-text">{{ substr(strip_tags($rec->description),0,200) }}</div>
                             <span><i class="fa fa-map-marker"></i> @lang('home.'.JobCallMe::cityName($rec->city)),@lang('home.'.JobCallMe::countryName($rec->country))</span>
                             <div>
-                                <p class="pull-right la-price">{{ $rec->currency.' '.number_format($rec->cost)}}/-</p>
+                                <!-- <p class="pull-right la-price">{{ $rec->currency.' '.number_format($rec->cost)}}/-</p> -->
+								<p class="pull-right la-price"><span style="font-size:12px">@lang('home.leancostlist') :</span> @if($rec->accommodation == "Yes") {{ $rec->currency.' '.number_format($rec->cost)}} @else @if($rec->accommodation == "on") @lang('home.free') @else @lang('home.Contact person') @endif @endif</p>
                             </div>
                        </div>
                    </div>

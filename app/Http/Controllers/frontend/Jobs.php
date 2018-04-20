@@ -144,6 +144,12 @@ class Jobs extends Controller{
 						$joblist_date2 = date('M d, Y',strtotime($rec->expiryDate));
 					}
 
+					if($rec->afterinterview != ""){
+						$Salary_money = trans('home.'.$rec->afterinterview);						
+					}else{
+						$Salary_money = number_format($rec->minSalary).' - '.number_format($rec->maxSalary).' '.$salarycurrency;						
+					}
+
 					if($rec->currency == "KRW" or $rec->currency == "KRW|대한민국 원"){
 						$salarycurrency = '원';
 					}else{
@@ -168,7 +174,7 @@ class Jobs extends Controller{
                         $vhtml .= '</li>';
                         $vhtml .= '<li style="border-right: 0px solid #cccccc;">';
                             $vhtml .= '<p class="js-title" style="color:#008000;">'.trans('home.salary').'</p>';
-                            $vhtml .= '<p>'.number_format($rec->minSalary).' - '.number_format($rec->maxSalary).' '.$salarycurrency.'</p>';
+                            $vhtml .= '<p>'.$Salary_money.'</p>';
                         $vhtml .= '</li>';
 						$vhtml .= '<li style="border-right: 0px solid #cccccc;">';
                             $vhtml .= '<p class="js-title" style="color:#0000ff;">'.trans('home.poston').'</p>';

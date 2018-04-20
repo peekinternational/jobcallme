@@ -131,8 +131,8 @@ curl_close ($ch);
 				'skills' => 'required|max:1024',
 				'qualification' => 'required',
 				'expiryDate' => 'required|date',
-				'minSalary' => 'required|numeric',
-				'maxSalary' => 'required|numeric',
+				'minSalary' => 'numeric',
+				'maxSalary' => 'numeric',
 				'state' => 'required',
 				'city' => 'required',
 				'Address' => 'required',
@@ -159,7 +159,7 @@ curl_close ($ch);
 	   $durations= $amount*$request->duration;
 
         $mul=$durations;
-        $am=$mul*1100;
+        $am=$mul*1000;
       //  dd($am);
 	    $request->session()->put('p_Category', $request->p_Category);
         $goodsname = Session::get('p_Category');
@@ -193,10 +193,35 @@ curl_close ($ch);
 		$request->session()->put('city', $request->city);
 		$request->session()->put('country', $request->country);
 		$request->session()->put('Address', $request->Address);
+		$request->session()->put('Address2', $request->Address2);
 		$request->session()->put('shift', $request->shift);
 		$request->session()->put('duration', $request->duration);
 		$request->session()->put('expiryDate', $request->expiryDate);
 		$request->session()->put('expiryAd', $request->expiryAd);
+		$request->session()->put('responsibilities', $request->responsibilities);   //밑에까지 전부
+		$request->session()->put('expptitle', $request->expptitle);
+		$request->session()->put('expposition', $request->expposition);
+		$request->session()->put('jobdayval', $request->jobdayval);
+		$request->session()->put('jobdayval_text', $request->jobdayval_text);
+		$request->session()->put('jobhoursval', $request->jobhoursval);
+		$request->session()->put('jobhoursval_text', $request->jobhoursval_text);
+		$request->session()->put('jobacademic', $request->jobacademic);
+		$request->session()->put('jobacademic_not', $request->jobacademic_not);
+		$request->session()->put('jobgraduate', $request->jobgraduate);
+		$request->session()->put('gender', $request->gender);
+		$request->session()->put('jobage1', $request->jobage1);
+		$request->session()->put('jobage2', $request->jobage2);
+		$request->session()->put('jobnoage', $request->jobnoage);
+		$request->session()->put('jobreceipt01', $request->jobreceipt01);
+		$request->session()->put('jobreceipt02', $request->jobreceipt02);
+		$request->session()->put('jobreceipt03', $request->jobreceipt03);
+		$request->session()->put('jobreceipt04', $request->jobreceipt04);
+		$request->session()->put('jobreceipt05', $request->jobreceipt05);
+		$request->session()->put('jobreceipt06', $request->jobreceipt06);
+		$request->session()->put('jobreceipt07', $request->jobreceipt07);
+		$request->session()->put('jobhomgpage', $request->jobhomgpage);
+		$request->session()->put('afterinterview', $request->afterinterview);
+
 		if($questionaire_id){
 		//	$input['questionaire_id'] = $questionaire_id;
 			$request->session()->put('questionaire_id', $questionaire_id);
@@ -224,7 +249,10 @@ curl_close ($ch);
 				$request->merge(['jType'=>'Paid']);
 				$app = $request->session()->get('jcmUser');
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'pckg_id' => $pckg_id, 'jobStatus' => 'Publish', 'paymentType' => '4', 'amount' => $price, 'p_Category' => $p_category, 'title' => $title, 'jType' => 'Paid','dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $dur, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiry, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'pckg_id' => $pckg_id, 'jobStatus' => 'Publish', 'paymentType' => '4', 'amount' => $price, 'p_Category' => $p_category, 'title' => $title, 'jType' => 'Paid','dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $dur, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2, 'expiryDate' => $expiryDate, 'expiryAd' => $expiry, 'createdTime' => date('Y-m-d H:i:s'));
+
+
+
 		//dd($input);
 		if($questionaire_id){
 			$input['questionaire_id'] = $questionaire_id;
@@ -261,7 +289,8 @@ curl_close ($ch);
 		//dd($request->all());
 
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1','jobStatus' => 'Publish', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1','jobStatus' => 'Publish', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
+
 		if($questionaire_id){
 			$input['questionaire_id'] = $questionaire_id;
 		}
@@ -409,10 +438,34 @@ curl_close ($ch);
 		$expiryAd = Session::get('expiryAd');
 		$state = Session::get('state');
 		$questionaire_id = Session::get('questionaire_id');
+		$Address2 = Session::get('Address2');
+		$responsibilities = Session::get('responsibilities');
+		$expptitle = Session::get('expptitle');
+		$expposition = Session::get('expposition');
+		$jobdayval = Session::get('jobdayval');
+		$jobdayval_text = Session::get('jobdayval_text');
+		$jobhoursval = Session::get('jobhoursval');
+		$jobhoursval_text = Session::get('jobhoursval_text');
+		$jobacademic = Session::get('jobacademic');
+		$jobacademic_not = Session::get('jobacademic_not');
+		$jobgraduate = Session::get('jobgraduate');
+		$gender = Session::get('gender');
+		$jobage1 = Session::get('jobage1');
+		$jobage2 = Session::get('jobage2');
+		$jobnoage = Session::get('jobnoage');
+		$jobreceipt01 = Session::get('jobreceipt01');
+		$jobreceipt02 = Session::get('jobreceipt02');
+		$jobreceipt03 = Session::get('jobreceipt03');
+		$jobreceipt04 = Session::get('jobreceipt04');
+		$jobreceipt05 = Session::get('jobreceipt05');
+		$jobreceipt06 = Session::get('jobreceipt06');
+		$jobreceipt07 = Session::get('jobreceipt07');
+		$jobhomgpage = Session::get('jobhomgpage');
+		$afterinterview = Session::get('afterinterview');
 		
 		extract($request->all());
 
-		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' =>'1', 'jobStatus' => 'Publish', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'dispatch' => $dispatch, 'head' => $head, 'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => @implode(',', $benefits),'process' => @implode(',', $process), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address, 'expiryDate' => $expiryDate,'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' =>'1', 'jobStatus' => 'Publish', 'pay_id' => $payment_id, 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType, 'dispatch' => $dispatch, 'head' => $head, 'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => @implode(',', $benefits),'process' => @implode(',', $process), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2, 'expiryDate' => $expiryDate,'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
 		$input['questionaire_id'] = $questionaire_id;
 		if($subCategory == ''){
 			$input['subCategory'] = '';
@@ -481,10 +534,34 @@ curl_close ($ch);
 			$expiryAds = Session::get('expiryAd');
 			$states = Session::get('state');
 			$questionaire_id = Session::get('questionaire_id');
+			$Address2 = Session::get('Address2');
+			$responsibilities = Session::get('responsibilities');
+			$expptitle = Session::get('expptitle');
+			$expposition = Session::get('expposition');
+			$jobdayval = Session::get('jobdayval');
+			$jobdayval_text = Session::get('jobdayval_text');
+			$jobhoursval = Session::get('jobhoursval');
+			$jobhoursval_text = Session::get('jobhoursval_text');
+			$jobacademic = Session::get('jobacademic');
+			$jobacademic_not = Session::get('jobacademic_not');
+			$jobgraduate = Session::get('jobgraduate');
+			$gender = Session::get('gender');
+			$jobage1 = Session::get('jobage1');
+			$jobage2 = Session::get('jobage2');
+			$jobnoage = Session::get('jobnoage');
+			$jobreceipt01 = Session::get('jobreceipt01');
+			$jobreceipt02 = Session::get('jobreceipt02');
+			$jobreceipt03 = Session::get('jobreceipt03');
+			$jobreceipt04 = Session::get('jobreceipt04');
+			$jobreceipt05 = Session::get('jobreceipt05');
+			$jobreceipt06 = Session::get('jobreceipt06');
+			$jobreceipt07 = Session::get('jobreceipt07');
+			$jobhomgpage = Session::get('jobhomgpage');
+			$afterinterview = Session::get('afterinterview');
 
 			extract($request->all());
 
-			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'jobStatus' => 'Publish', 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys,'duration' => $durations, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process),'country' => $countrys, 'state' => $states, 'city' => $citys,'Address' => $Addresss, 'expiryDate' => $expiryDates, 'expiryAd' => $expiryAds,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
+			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'jobStatus' => 'Publish', 'pay_id' => $payment, 'amount' => $amounts, 'p_Category' => $p_Categorys, 'title' => $titles, 'jType' => $jTypes, 'department' => $departments, 'category' => $categorys, 'subCategory' => $subCategorys, 'subCategory2' => $subCategorys2, 'careerLevel' => $careerLevels, 'experience' => $experiences, 'vacancies' => $vacancys,'duration' => $durations, 'description' => $descriptions, 'skills' => $skillss, 'qualification' => $qualifications, 'jobType' => $types, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shifts,'jobaddr' => $jobaddrs, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalarys, 'maxSalary' => $maxSalarys, 'afterinterview' => $afterinterview, 'currency' => $currencys, 'benefits' => @implode(',', $benefitss), 'process' => @implode(',', $process), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage,'country' => $countrys, 'state' => $states, 'city' => $citys,'Address' => $Addresss,'Address2' => $Address2, 'expiryDate' => $expiryDates, 'expiryAd' => $expiryAds,'paymentType'=>2, 'createdTime' => date('Y-m-d H:i:s'));
 			$inputs['questionaire_id'] = $questionaire_id;
 
 			if($subCategorys == ''){
@@ -1519,7 +1596,7 @@ public function mapOrganization(Request $request){
    
 			extract($request->all());
 
-			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'title' => $title, 'department' => $department, 'category' => $category, 'head' => $head,'dispatch' => $dispatch,'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'jobShift' => $shift, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','),'process' => rtrim(@implode(',', $request->input('process')),','), 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address);
+			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'title' => $title, 'department' => $department, 'category' => $category, 'head' => $head,'dispatch' => $dispatch,'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','),'process' => rtrim(@implode(',', $request->input('process')),','), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2);
 			if($subCategory == ''){
 				$input['subCategory'] = '';
 			}
@@ -1761,11 +1838,35 @@ public function mapOrganization(Request $request){
 			$statess = Session::get('state');
 			$durationss = Session::get('duration');
 			$questionaire_id = Session::get('questionaire_id');
+			$Address2 = Session::get('Address2');
+			$responsibilities = Session::get('responsibilities');
+			$expptitle = Session::get('expptitle');
+			$expposition = Session::get('expposition');
+			$jobdayval = Session::get('jobdayval');
+			$jobdayval_text = Session::get('jobdayval_text');
+			$jobhoursval = Session::get('jobhoursval');
+			$jobhoursval_text = Session::get('jobhoursval_text');
+			$jobacademic = Session::get('jobacademic');
+			$jobacademic_not = Session::get('jobacademic_not');
+			$jobgraduate = Session::get('jobgraduate');
+			$gender = Session::get('gender');
+			$jobage1 = Session::get('jobage1');
+			$jobage2 = Session::get('jobage2');
+			$jobnoage = Session::get('jobnoage');
+			$jobreceipt01 = Session::get('jobreceipt01');
+			$jobreceipt02 = Session::get('jobreceipt02');
+			$jobreceipt03 = Session::get('jobreceipt03');
+			$jobreceipt04 = Session::get('jobreceipt04');
+			$jobreceipt05 = Session::get('jobreceipt05');
+			$jobreceipt06 = Session::get('jobreceipt06');
+			$jobreceipt07 = Session::get('jobreceipt07');
+			$jobhomgpage = Session::get('jobhomgpage');
+			$afterinterview = Session::get('afterinterview');
 		
       //	dd($amounts);
 			extract($request->all());
 
-			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'jobStatus' => 'Draft', 'pay_id' => $payment, 'paymentType'=> '3','status'=> '2', 'amount' => $amountss,'duration' => $durationss, 'p_Category' => $p_Categoryss, 'title' => $titless, 'jType' => $jTypess, 'department' => $departmentss, 'category' => $categoryss, 'subCategory' => $subCategoryss, 'subCategory2' => $subCategorys2s, 'careerLevel' => $careerLevelss, 'experience' => $experiencess, 'vacancies' => $vacancyss, 'description' => $descriptionss, 'skills' => $skillsss, 'qualification' => $qualificationss, 'jobType' => $typess, 'jobShift' => $shiftss,'jobaddr' => $jobaddrss, 'minSalary' => $minSalaryss, 'maxSalary' => $maxSalaryss, 'currency' => $currencyss, 'benefits' => @implode(',', $benefitsss), 'process' => @implode(',', $processs),'country' => $countryss, 'state' => $statess, 'city' => $cityss,'Address' => $Addressss,'expiryDate' => $expiryDatess,'expiryAd' => $expiryAdss, 'createdTime' => date('Y-m-d H:i:s'));
+			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'jobStatus' => 'Draft', 'pay_id' => $payment, 'paymentType'=> '3','status'=> '2', 'amount' => $amountss,'duration' => $durationss, 'p_Category' => $p_Categoryss, 'title' => $titless, 'jType' => $jTypess, 'department' => $departmentss, 'category' => $categoryss, 'subCategory' => $subCategoryss, 'subCategory2' => $subCategorys2s, 'careerLevel' => $careerLevelss, 'experience' => $experiencess, 'vacancies' => $vacancyss, 'description' => $descriptionss, 'skills' => $skillsss, 'qualification' => $qualificationss, 'jobType' => $typess, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shiftss,'jobaddr' => $jobaddrss, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalaryss, 'maxSalary' => $maxSalaryss, 'afterinterview' => $afterinterview, 'currency' => $currencyss, 'benefits' => @implode(',', $benefitsss), 'process' => @implode(',', $processs), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage,'country' => $countryss, 'state' => $statess, 'city' => $cityss,'Address' => $Addressss,'Address2' => $Address2,'expiryDate' => $expiryDatess,'expiryAd' => $expiryAdss, 'createdTime' => date('Y-m-d H:i:s'));
 			if($subCategorys == ''){
 				$inputs['subCategory'] = '';
 			}

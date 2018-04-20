@@ -63,7 +63,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <div class=" pnj-form-field">
-                            <input type="text" class="form-control" name="city" placeholder="@lang('home.city')">
+                            <input type="text" class="form-control" name="city" placeholder="@lang('home.Cities')">
                           </div>
                         </div>
                       </div>
@@ -263,9 +263,9 @@
                 color: #ffffff;
                 font-size: 12px;
                 margin-bottom: 10px;
-                display: block; 
+                /* display: block; */ 
                 position: relative;
-                float: left;
+                /* float: left; */
                 margin-right: 0.5%;
                 overflow: hidden;
                 text-decoration: none;">
@@ -276,9 +276,9 @@
                 color: #ffffff;
                 font-size: 12px;
                 margin-bottom: 10px;
-                display: block; 
+                /* display: block; */
                 position: relative;
-                float: left;
+                /* float: left; */
                 margin-right: 0.5%;
                 overflow: hidden;
                 text-decoration: none;">
