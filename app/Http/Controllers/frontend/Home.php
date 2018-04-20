@@ -423,7 +423,7 @@ class Home extends Controller{
  public function peoples(Request $request){
     	/* peoples query */
     	$people = DB::table('jcm_users');
-    	$people->select('*');
+    	$people->select('*','privacy.profileImage as pImage');
     	$people->rightJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
         $people->rightJoin('jcm_resume','jcm_resume.userId','=','jcm_users.userId');
 		$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
@@ -480,7 +480,7 @@ class Home extends Controller{
 
 		$people->where('jcm_users_meta.userId','!=','');
     	$people->orderBy('jcm_users.userId','desc');
-         $people->distinct('jcm_users.firstName');
+         $people->groupBy('jcm_users.userId');
     	$peoples = $people->paginate(18);
         // dd($peoples);
 
