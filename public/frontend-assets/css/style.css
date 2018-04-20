@@ -1859,13 +1859,14 @@ ul.jd-rewards li i{
     padding: 20px;
     background: transparent;
     border: 1px solid #ffffff;
-    
+
 }
 
 .mob-box{
     padding: 20px;
     background: transparent;
     border: 1px solid #ffffff;
+    height: 180px;
 }
 .promote-learning-box{
     text-align: center;
