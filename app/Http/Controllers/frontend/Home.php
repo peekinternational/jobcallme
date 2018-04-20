@@ -413,6 +413,7 @@ class Home extends Controller{
     }
 
  public function peoples(Request $request){
+	//dd($request->all());
     	/* peoples query */
     	$people = DB::table('jcm_users');
     	$people->select('*','privacy.profileImage as pImage');
@@ -438,6 +439,15 @@ class Home extends Controller{
 			if($request->input('category') != ''){
     			$people->where('jcm_users_meta.industry','=',$request->input('category'));
     		}
+			if($request->input('country') != ''){
+    			$people->where('jcm_users.country','=',$request->input('country'));
+    		}
+			if($request->input('state') != '' && $request->input('state') != '0'){
+    			$people->where('jcm_users.state','=',$request->input('state'));
+    		}
+			if($request->input('citys') != '' && $request->input('citys') != '0'){
+    			$people->where('jcm_users.city','=',$request->input('citys'));
+    		}
 			if($request->input('degreeLevel') != ''){
     			$people->where('jcm_resume.resumeData','like','%'.$request->input('degreeLevel').'%');
     		}
@@ -460,8 +470,8 @@ class Home extends Controller{
                
                
     	}else{
-	    	if($request->input('citys') != ''){
-	    		$people->where('jcm_users.city','=',$request->input('citys'));
+	    	if($request->input('city') != ''){
+	    		$people->where('jcm_users.city','=',$request->input('city'));
 	    	}
 	    	if($request->input('industry') != ''){
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));

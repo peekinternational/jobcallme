@@ -319,13 +319,13 @@ curl_close ($ch);
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
                 return 'Connection timeout';
-               return back()->withInput();
+               return redirect('account/employer');
                 /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
                 /** $err_data = json_decode($ex->getData(), true); **/
                 /** exit; **/
             } else {
                 return 'Some error occur, sorry for inconvenient';
-                return back()->withInput();
+                return redirect('account/employer');
                 /** die('Some error occur, sorry for inconvenient'); **/
             }
         }
@@ -346,7 +346,7 @@ curl_close ($ch);
             return Redirect::away($redirect_url);
         }
        return 'Unknown error occurred';
-        return back()->withInput();
+        return redirect('account/employer');
     
 	}
     public function getPaymentStatus(Request $request)
@@ -359,7 +359,7 @@ curl_close ($ch);
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
             \Session::put('error','Payment failed');
-            return back()->withInput();
+            return redirect('account/employer');
         }
         $payment = Payment::get($payment_id, $this->_api_context);
         /** PaymentExecution object includes information necessary **/
@@ -427,7 +427,7 @@ curl_close ($ch);
             return Redirect::route('addmoney.account/employer/job/share');
         }
         \Session::put('error','Payment failed');
-        return back()->withInput();
+       return redirect('account/employer');
     }
 	
 	
@@ -1345,13 +1345,13 @@ public function mapOrganization(Request $request){
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
                 \Session::put('error','Connection timeout');
-                return Redirect::route('addmoney.frontend.employer.jobupdate');
+                return redirect('account/employer');
                 /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
                 /** $err_data = json_decode($ex->getData(), true); **/
                 /** exit; **/
             } else {
                 \Session::put('error','Some error occur, sorry for inconvenient');
-                return Redirect::route('addmoney.frontend.employer.jobupdate');
+                return redirect('account/employer');
                 /** die('Some error occur, sorry for inconvenient'); **/
             }
         }
@@ -1374,7 +1374,7 @@ public function mapOrganization(Request $request){
             return Redirect::away($redirect_url);
         }
         \Session::put('error','Unknown error occurred');
-        return Redirect::route('addmoney.frontend.employer.jobupdate');
+        return redirect('account/employer');
     }
 		
  public function updateStatus(Request $request)
@@ -1386,7 +1386,7 @@ public function mapOrganization(Request $request){
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
             \Session::put('error','Payment failed');
-            return Redirect::route('addmoney.frontend.employer.jobupdate');
+            return redirect('account/employer');
         }
         $payment = Payment::get($payment_id, $this->_api_context);
         /** PaymentExecution object includes information necessary **/
@@ -1421,7 +1421,7 @@ public function mapOrganization(Request $request){
             return Redirect::route('addmoney.account/employer/job/share');
         }
         \Session::put('error','Payment failed');
-        return Redirect::route('addmoney.frontend.employer.jobupdate');
+        return redirect('account/employer');
     }
 	public function deletejob($id){
 		
