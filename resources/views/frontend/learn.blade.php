@@ -61,7 +61,7 @@
 
 <!--- mobile -->
 
-                    <div class="mob-box hidden-sm hidden-md hidden-lg" style="height:180px" >
+                    <div class="mob-box hidden-sm hidden-md hidden-lg" >
                         <form role="form" action="{{ url('learn/search')}}" method="post">
                             {{ csrf_field() }}
                             <div class="input-fields">
