@@ -133,6 +133,7 @@
             @endforeach
         </div>
     </div>
+	<br><br><br>
 </section>
 @endsection
 @section('page-footer')

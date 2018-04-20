@@ -143,17 +143,18 @@ class Jobs extends Controller{
 						$joblist_date = date('M d, Y',strtotime($rec->createdTime));
 						$joblist_date2 = date('M d, Y',strtotime($rec->expiryDate));
 					}
-
-					if($rec->afterinterview != ""){
-						$Salary_money = trans('home.'.$rec->afterinterview);						
-					}else{
-						$Salary_money = number_format($rec->minSalary).' - '.number_format($rec->maxSalary).' '.$salarycurrency;						
-					}
+					
 
 					if($rec->currency == "KRW" or $rec->currency == "KRW|대한민국 원"){
 						$salarycurrency = '원';
 					}else{
 						$salarycurrency = $rec->currency;
+					}
+
+					if($rec->afterinterview != ""){
+						$Salary_money = trans('home.'.$rec->afterinterview);						
+					}else{
+						$Salary_money = number_format($rec->minSalary).' - '.number_format($rec->maxSalary).' '.$salarycurrency;						
 					}
 
 				$colorArr = array('purple','green','darkred','orangered','blueviolet');

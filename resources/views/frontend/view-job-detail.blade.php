@@ -264,9 +264,31 @@ $dispatch='';
                     </tr>
 					
                     <tr>
-                        <td class="active">@lang('home.qualification')</td>
-                        <td>{{ $job->qualification }}</td>
+                        <td class="active">@lang('home.jobacademic')</td>
+                        <td>@lang('home.'.$job->jobacademic)
+						@if($job->jobacademic_not == "yes")
+							  &nbsp;| @lang('home.Regardless Education')
+						@else							 
+						@endif
+						@if($job->jobgraduate == "yes")
+							  &nbsp;| @lang('home.jobgraduate')
+						@else							 
+						@endif</td>
                     </tr>
+
+					<tr>
+                        <td class="active">@lang('home.age')</td>
+                        <td>{{ $job->jobage1 }} {{ $job->jobage2 }} 
+						@if($job->jobnoage == "yes")
+							  &nbsp;| @lang('home.jobnoage')
+						@else							 
+						@endif</td>
+                    </tr>
+					<tr>
+                        <td class="active">@lang('home.gender')</td>
+                        <td>@lang('home.'.$job->gender)</td>
+                    </tr>
+
                     <tr>
                         <td class="active">@lang('home.poston')</td>
                         <td>@if(app()->getLocale() == "kr")
@@ -727,11 +749,11 @@ function saveJob(jobId,obj){
                 if($(obj).hasClass('btn-default')){
                     $(obj).removeClass('btn-default');
                     $(obj).addClass('btn-success');
-                    $(obj).text('Saved');
+                    $(obj).text('@lang("home.saved")');
                 }else{
                     $(obj).removeClass('btn-success');
                     $(obj).addClass('btn-default');
-                    $(obj).text('Save');
+                    $(obj).text('@lang("home.save")');
                 }
             }
         }
@@ -746,11 +768,11 @@ function followCompany(companyId,obj){
     if($(obj).hasClass('btn-primary')){
         $(obj).removeClass('btn-primary');
         $(obj).addClass('btn-success');
-        $(obj).text('Following');
+        $(obj).text('@lang("home.following")');
     }else{
         $(obj).removeClass('btn-success');
         $(obj).addClass('btn-primary');
-        $(obj).text('Follow');
+        $(obj).text('@lang("home.follow")');
     }
     $.ajax({
         url: "{{ url('account/jobseeker/company/action') }}?companyId="+companyId+"&type="+type,

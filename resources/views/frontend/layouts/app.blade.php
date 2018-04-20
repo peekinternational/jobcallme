@@ -504,11 +504,11 @@ function saveJob(jobId,obj){
                 if($(obj).hasClass('btn-default')){
                     $(obj).removeClass('btn-default');
                     $(obj).addClass('btn-success');
-                    $(obj).text('Saved');
+                    $(obj).text('@lang("home.saved")');
                 }else{
                     $(obj).removeClass('btn-success');
                     $(obj).addClass('btn-default');
-                    $(obj).text('Save');
+                    $(obj).text('@lang("home.save")');
                 }
             }
         }
