@@ -162,12 +162,17 @@
                         <div class="col-md-12">
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
                             <p>{{ $rec->organiser != '' ?  $rec->organiser : JobCallMe::userName($rec->userId) }}</p>
-                            <span>@lang('home.'.$rec->type)</span>
-                            <p><i class="fa fa-calendar"></i> @if(app()->getLocale() == "kr")
-						    {{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
-						@else
-						    {{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
-						@endif </p>
+                            <span>#@lang('home.'.$rec->type)</span>
+                            <p><i class="fa fa-calendar"></i> 
+							  @if($rec->startDate != "0000-00-00")
+								@if(app()->getLocale() == "kr")
+									{{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+								@else
+									{{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+								@endif 
+							  @endif 
+							
+							</p>
                             <div class="la-text">{{ substr(strip_tags($rec->description),0,200) }}</div>
                             <span><i class="fa fa-map-marker"></i> @lang('home.'.JobCallMe::cityName($rec->city)),@lang('home.'.JobCallMe::countryName($rec->country))</span>
                             <div>

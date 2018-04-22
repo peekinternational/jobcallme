@@ -75,7 +75,7 @@
                             </li>
 							@endforeach
                         </ul>
-                        <a id="nopckg" href="javascript:void(0)" style="float:right">Not Use Package Plan?</a>
+                        <a id="nopckg" href="javascript:void(0)" style="float:right">@lang('home.Not Use Package Plan?')</a>
                  
 
                     
@@ -995,7 +995,7 @@ $(document).ready(function(){
      var jArray = <?php echo json_encode($plan); ?>;
 
      for(var i=0;i<jArray.length;i++){
-     $('#class_text'+i).html('KRNW '+jArray[i].amount*1100+'.00')
+     $('#class_text'+i).html('￦ '+jArray[i].amount*1000+'')
         //alert(jArray[i].amount);
        }
      
@@ -1012,7 +1012,7 @@ $(document).ready(function(){
     $('#kr').click(function(){
     if ($(this).is(':checked')) {
     for(var i=0;i<jArray.length;i++){
-     $('#class_text'+i).html('KRNW '+jArray[i].amount*1100 +'.00')
+     $('#class_text'+i).html('￦ '+jArray[i].amount*1000 +'')
        // alert(jArray[i].amount*1100);
       }
     }
@@ -1025,7 +1025,7 @@ $(document).ready(function(){
      var simplearray = <?php echo json_encode($rec); ?>;
 
      for(var i=0;i<simplearray.length;i++){
-     $('#simple_text'+i).html('KRNW '+simplearray[i].price*1100+'.00')
+     $('#simple_text'+i).html('￦ '+simplearray[i].price*1000+'')
         //alert(jArray[i].amount);
        }
      
@@ -1042,7 +1042,7 @@ $(document).ready(function(){
     $('#kr').click(function(){
     if ($(this).is(':checked')) {
     for(var i=0;i<simplearray.length;i++){
-     $('#simple_text'+i).html('KRNW '+simplearray[i].price*1100 +'.00')
+     $('#simple_text'+i).html('￦ '+simplearray[i].price*1000 +'')
        // alert(jArray[i].amount*1100);
       }
     }
@@ -1161,7 +1161,7 @@ $('#secondDate').on('change', function() {
       $('#pas').val(to);
       
     if ($('#kr').is(':checked')) {
-	  $('#total').html("@lang('home.Total Amount') : "+total*1100+" ₩" );
+	  $('#total').html("@lang('home.Total Amount') : "+total*1000+" ₩" );
      // alert('kr');
     }
 

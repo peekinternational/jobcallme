@@ -141,7 +141,8 @@ class Jobseeker extends Controller{
 		}
 		$countryId = $request->segment(3);
 		$cities = JobCallMe::getJobStates($countryId);
-		echo @json_encode($cities);
+		return view('frontend.jobseeker.stateCatView',compact('cities'));
+		/*echo @json_encode($cities);*/
 	}
 
 	public function getCity(Request $request){
@@ -149,8 +150,10 @@ class Jobseeker extends Controller{
 			exit('Directory access is forbidden');
 		}
 		$stateId = $request->segment(3);
-		$cities = JobCallMe::getJobCities($stateId);
-		echo @json_encode($cities);
+		/*$cities = JobCallMe::getJobCities($stateId);*/
+		$cities2 = JobCallMe::getJobCities($stateId);
+		return view('frontend.jobseeker.cityCatView',compact('cities2'));
+		/*echo @json_encode($cities2);*/
 	}
 
 	public function getSubCategory(Request $request){
@@ -182,12 +185,12 @@ class Jobseeker extends Controller{
 				'firstName' => 'required|min:1|max:50',
 				'lastName' => 'required|min:1|max:50',
 				'fatherName' => 'required|min:1|max:50',
-				'cnicNumber' => 'required|max:15',
+				'cnicNumber' => 'required|max:20',
 				'gender' => 'required',
 				'maritalStatus' => 'required',
 				'dateOfBirth' => 'required|date',
 				'email' => 'required|email',
-				'phoneNumber' => 'required|numeric',
+				'phoneNumber' => 'required|max:20',
 				'address' => 'required|max:255',
 				'country' => 'required',
 				'city' => 'required',
@@ -241,10 +244,8 @@ class Jobseeker extends Controller{
 
 		$app = $request->session()->get('jcmUser');
 		$this->validate($request, [
-				'degreeLevel' => 'required',
-				'degree' => 'required|max:100',
-				'completionDate' => 'required|date',
-				'grade' => 'required|max:10',
+				'degreeLevel' => 'required',				
+				'completionDate' => 'required|date',				
 				'institution' => 'required|max:150',
 				'country' => 'required',
 			]);
@@ -754,7 +755,7 @@ class Jobseeker extends Controller{
 				'firstName' => 'required|max:50',
 				'lastName' => 'required|max:50',
 				'email' => 'required|max:255|email',
-				'phoneNumber' => 'required|numeric',
+				'phoneNumber' => 'required',
 				'city' => 'required',
 				'state' => 'required',
 				'address' => 'required',

@@ -255,7 +255,7 @@ if($company->companyLogo != ''){
 								   <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.formofbusiness')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <select class="form-control input-sm select job-country" name="formofbusiness">
+                                           <select class="form-control input-sm select" name="formofbusiness">
 												<option value="Small business" {{ $company->formofbussiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
 												<option value="Small and Medium-sized Businesses" {{ $company->formofbussiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
 												<option value="Major Company" {{ $company->formofbussiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
@@ -659,16 +659,17 @@ function getStates(countryId){
         url: "{{ url('account/get-state') }}/"+countryId,
         success: function(response){
             var currentState = $('.job-state').attr('data-state');
-            var obj = $.parseJSON(response);
-            $(".job-state").html('');
-            var newOption = new Option('Select State', '0', true, false);
-            $(".job-state").append(newOption);
-            $.each(obj,function(i,k){
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
+            $(".job-state").html('').trigger('change');
+           /* var newOption = new Option('Select State', '0', true, false);*/
+            $(".job-state").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = k.id == currentState ? true : false;
                 var newOption = new Option(k.name, k.id, true, vOption);
                 $(".job-state").append(newOption);
             })
-            $(".job-state").trigger('change');
+            $(".job-state").trigger('change');*/
         }
     })
 }
@@ -686,15 +687,16 @@ function getCities(stateId){
         url: "{{ url('account/get-city') }}/"+stateId,
         success: function(response){
             var currentCity = $('.job-city').attr('data-city');
-            var obj = $.parseJSON(response);
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
             $(".job-city").html('').trigger('change');
-            var newOption = new Option('Select City', '0', true, false);
-            $(".job-city").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
+            /*var newOption = new Option('Select City', '0', true, false);*/
+            $(".job-city").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = k.id == currentCity ? true : false;
                 var newOption = new Option(k.name, k.id, true, vOption);
                 $(".job-city").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }

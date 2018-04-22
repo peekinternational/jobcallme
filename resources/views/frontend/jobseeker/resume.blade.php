@@ -41,7 +41,7 @@ if($user->profilePhoto != ''){
                                             @lang('home.change') <i class="fa fa-camera"></i>
                                             <input type="file" class="upload profile-pic" name="image" />
                                         </div>
-                                        <span id="remove-re-image" style="margin-right: 42px;" onclick="removeResumePic()">@lang('home.remove') <i class="fa fa-remove"></i></span>
+                                        <span id="remove-re-image" style="margin-right: 42px;" onclick="removeResumePic('profile')">@lang('home.remove') <i class="fa fa-remove"></i></span>
                                         <p id="remove-re-image" style="margin-right: 71px;" onclick="editResumeProPic()">@lang('home.Edit') <i class="fa fa-edit"><input type="hidden" value="{{ session()->get('jcmUser')->userId }}" id="userID" ></i></p>
                                     </div>
                                 </div>
@@ -295,13 +295,13 @@ if($user->profilePhoto != ''){
                             </div>
                            
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.currentsalary') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.currentsalary') </label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control input-sm" name="currentSalary" value="{{ $meta->currentSalary }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.expectedsalary') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.expectedsalary') </label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control input-sm" name="expectedSalary" value="{{ $meta->expectedSalary }}">
                                 </div>
@@ -344,9 +344,9 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.expertise') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.expertise') </label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="expertise" value="{{ $meta->expertise }}" required>
+                                    <input type="text" class="form-control input-sm" name="expertise" value="{{ $meta->expertise }}">
                                     <p class="help-block">@lang('home.commaexpertise')</p>
                                 </div>
                             </div>
@@ -478,9 +478,9 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.degree') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.degree') </label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="degree" required>
+                                    <input type="text" class="form-control input-sm" name="degree">
                                 </div>
                             </div>
 
@@ -1775,6 +1775,20 @@ if($user->profilePhoto != ''){
                                     </select>
                                 </div>
                             </div>
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.language_file') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="languagefile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="language-file">
+                                   <a href="" target="_blank"></a>
+                                   <input type="hidden" name="old_languagefile" value="">
+                                </div>
+                            </div>
 							 
 							 
                             <div class="form-group">
@@ -1891,6 +1905,21 @@ if($user->profilePhoto != ''){
                                     </select>
                                 </div>
                             </div>
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.references_file') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="referencesfile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="references-file">
+                                   <a href="" target="_blank"></a>
+                                   <input type="hidden" name="old_referencesfile" value="">
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
@@ -2584,22 +2613,26 @@ if($user->profilePhoto != ''){
                     </form>
                 </div>
                  <div class="ja-content-item mc-item resume-listing-section">
-                    <h4>Video & Chat Image</h4>
+                    <h4>@lang('home.Video & Chat Image')</h4>
                     <div class="re-img-box" style="left: 50px;">
                         <img src="<?= ($user->chatImage != '') ? url('profile-photos/'.$user->chatImage) : asset('profile-photos/profile-logo.jpg') ?>" class="chat-img-target">
                         <div class="re-img-toolkit">
                             <div class="re-file-btn" style="left:35px">
-                                Change <i class="fa fa-camera"></i>
+                                @lang('home.change') <i class="fa fa-camera"></i>
                                 <input type="file" class="upload chatImage" name="image">
                             </div>
-                            <span id="remove-re-image" style="margin-left: 35px;" onclick="removeResumePic('chat')">Remove <i class="fa fa-remove"></i></span>
-                            <p id="remove-re-image" style="margin-left: 35px;" onclick="editResumeChatPic()">Edit <i class="fa fa-edit"><input type="hidden" value="1" id="userID"></i></p>
+                            <span id="remove-re-image" style="margin-left: 35px;" onclick="removeResumePic('chat')">@lang('home.remove') <i class="fa fa-remove"></i></span>
+                            <p id="remove-re-image" style="margin-left: 35px;" onclick="editResumeChatPic()">@lang('home.Edit') <i class="fa fa-edit"><input type="hidden" value="1" id="userID"></i></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="nickName" id="nickName" class="form-control" value="{{$user->nickName}}" placeholder="Enter your Nick Name">
+                        <input type="text" name="nickName" id="nickName" class="form-control" value="{{$user->nickName}}" placeholder="@lang('home.Enter your Nick Name')">
                     </div>
-                    <button type="button" id="chat-save" class="btn btn-primary">Save</button>
+                    <button type="button" id="chat-save" class="btn btn-primary">@lang('home.save')</button>
+					<div class="form-group" style="margin-top:10px">
+                        <span><img src="/frontend-assets/images/info-icon.png"> @lang('home.video-text')</span>
+                    </div>
+					
                 </div>
                 </div>
             </div>
@@ -2673,13 +2706,14 @@ function getStates(countryId){
         url: "{{ url('account/get-state') }}/"+countryId,
         success: function(response){
             var currentState = $('.job-state').attr('data-state');
-            var obj = $.parseJSON(response);
-            $(".job-state").html('');
-            var newOption = new Option('Select State', '0', true, false);
-            $(".job-state").append(newOption).trigger('change');
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
+            $(".job-state").html('').trigger('change');
+            /*var newOption = new Option('Select State', '0', true, false);*/
+            $(".job-state").append(response).trigger('change');
             var selected = "selected";
             
-            for (var i =0; i < obj.length; i++) {
+            /*for (var i =0; i < obj.length; i++) {
                 if(obj[i].id == currentState){
                     var option = "<option value='"+obj[i].id+"' selected='selected'>"+obj[i].name+"</option>";
                     $(".job-state").append(option);
@@ -2688,8 +2722,8 @@ function getStates(countryId){
                     $(".job-state").append(option);
                 }
                 
-            };
-            $(".job-state").trigger('change');
+            };*/
+            /*$(".job-state").trigger('change');*/
             /*$.each(obj,function(i,k){
                 var vOption = k.id == currentState ? true : false;
                 console.log(vOption);
@@ -2709,15 +2743,16 @@ function getCities(stateId){
         url: "{{ url('account/get-city') }}/"+stateId,
         success: function(response){
             var currentCity = $('.job-city').attr('data-city');
-            var obj = $.parseJSON(response);
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
             $(".job-city").html('').trigger('change');
-            var newOption = new Option('Select City', '0', true, false);
-            $(".job-city").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
+            /*var newOption = new Option('Select City', '0', true, false);*/
+            $(".job-city").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = k.id == currentCity ? true : false;
                 var newOption = new Option(k.name, k.id, true, vOption);
                 $(".job-city").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }
@@ -2873,7 +2908,7 @@ function getAcademic(resumeId){
             $('.form-academic #academic-file a').attr('href',jsUrl()+"/resume_images/"+obj.academicfile);
             $('.form-academic #academic-file a').text(obj.academicfile);
             $('.form-academic #academic-file input[name="old_academicfile"]').val(obj.academicfile);
-            $('#academic-edit h4 c').text('Edit Academics');
+            $('#academic-edit h4 c').text('@lang("home.Edit Academics")');
             $('#academic').hide();
             $('#academic-edit').fadeIn();
         }
@@ -2949,7 +2984,7 @@ function getCertification(resumeId){
             $('.form-certification #certificate-file a').attr('href',jsUrl()+"/resume_images/"+obj.certificatefile);
             $('.form-certification #certificate-file a').text(obj.certificatefile);
             $('.form-certification #certificate-file input[name="old_certificatefile"]').val(obj.certificatefile);
-            $('#certification-edit h4 c').text('Edit Certificate');
+            $('#certification-edit h4 c').text('@lang("home.Edit Certificate")');
             $('#certification').hide();
             $('#certification-edit').fadeIn();
         }
@@ -3027,7 +3062,7 @@ function getExperience(resumeId){
             $('.form-experience #experience-file a').attr('href',jsUrl()+"/resume_images/"+obj.experiencefile);
             $('.form-experience #experience-file a').text(obj.experiencefile);
             $('.form-experience #experience-file input[name="old_academicfile"]').val(obj.experiencefile);
-            $('#experience-edit h4 c').text('Edit Experience');
+            $('#experience-edit h4 c').text('@lang("home.Edit Experience")');
             $('#experience').hide();
             $('#experience-edit').fadeIn();
         }
@@ -3081,7 +3116,7 @@ function getSkills(resumeId){
             $('.form-skills input[name="resumeId"]').val(resumeId);
             $('.form-skills input[name="skill"]').val(obj.skill);
             $('.form-skills select[name="level"]').val(obj.level).trigger('change');
-            $('#skills-edit h4 c').text('Edit Skill');
+            $('#skills-edit h4 c').text('@lang("home.Edit Skill")');
             $('#skills').hide();
             $('#skills-edit').fadeIn();
         }
@@ -3100,7 +3135,10 @@ $('form.form-skill').submit(function(e){
     $('.form-skill .error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-skill').serialize(),
+        data: new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/refer/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -3143,7 +3181,12 @@ function getSkill(resumeId){
 			$('.form-skill select[name="state"]').val(obj.state).trigger('change');
 			$('.form-skill select[name="city"]').val(obj.city).trigger('change');
 			$('.form-skill select[name="type"]').val(obj.type).trigger('change');
-            $('#skill-edit h4 c').text('Edit Reference');
+
+			$('.form-ski #references-file a').attr('href',jsUrl()+"/resume_images/"+obj.referencesfile);
+            $('.form-ski #references-file a').text(obj.referencesfile);
+            $('.form-ski #references-file input[name="old_referencesfile"]').val(obj.referencesfile);
+
+            $('#skill-edit h4 c').text('@lang("home.Edit Reference")');
             $('#skill').hide();
             $('#skill-edit').fadeIn();
         }
@@ -3213,7 +3256,7 @@ function getSkil(resumeId){
             $('.form-skil #publication-file a').attr('href',jsUrl()+"/resume_images/"+obj.publicationfile);
             $('.form-skil #publication-file a').text(obj.publicationfile);
             $('.form-skil #publication-file input[name="old_publicationfile"]').val(obj.publicationfile);
-            $('#skil-edit h4 c').text('Edit Publisher');
+            $('#skil-edit h4 c').text('@lang("home.Edit Publisher")');
             $('#skil').hide();
             $('#skil-edit').fadeIn();
         }
@@ -3289,7 +3332,7 @@ function getProject(resumeId){
             $('.form-ski #project-file a').text(obj.projectfile);
             $('.form-ski #project-file input[name="old_projectfile"]').val(obj.projectfile);
 			$('.form-ski textarea[name="detail"]').val(obj.detail);
-            $('#ski-edit h4 c').text('Edit Project');
+            $('#ski-edit h4 c').text('@lang("home.Edit Project")');
             $('#ski').hide();
             $('#ski-edit').fadeIn();
         }
@@ -3370,7 +3413,7 @@ function getAffi(resumeId){
             $('.form-aff #affiliation-file input[name="old_affiliationfile"]').val(obj.affiliationfile);
 			
 			//$('.form-aff textarea[name="detail"]').val(obj.detail);
-            $('#aff-edit h4 c').text('Edit Affiliation');
+            $('#aff-edit h4 c').text('@lang("home.Edit Affiliation")');
             $('#aff').hide();
             $('#aff-edit').fadeIn();
         }
@@ -3439,7 +3482,7 @@ function getPreference(resumeId){
 			$('.form-preference select[name="militaryendmonth"]').val(obj.militaryendmonth).trigger('change');
 			$('.form-preference select[name="militarytype"]').val(obj.militarytype).trigger('change');
 			$('.form-preference select[name="militaryclasses"]').val(obj.militaryclasses).trigger('change');
-            $('#preference-edit h4 c').text('Edit Preference');
+            $('#preference-edit h4 c').text('@lang("home.Edit Preference")');
             $('#preference').hide();
             $('#preference-edit').fadeIn();
         }
@@ -3462,7 +3505,10 @@ $('form.form-sk').submit(function(e){
     $('.form-sk .error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-sk').serialize(),
+        data: new FormData(this),
+		cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/language/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -3503,7 +3549,11 @@ function getLanguage(resumeId){
 			$('.form-sk select[name="languageyear"]').val(obj.languageyear).trigger('change');
 			$('.form-sk select[name="languagemonth"]').val(obj.languagemonth).trigger('change');
 			
-            $('#sk-edit h4 c').text('Edit Award');
+            $('.form-ski #language-file a').attr('href',jsUrl()+"/resume_images/"+obj.languagefile);
+            $('.form-ski #language-file a').text(obj.languagefile);
+            $('.form-ski #language-file input[name="old_languagefile"]').val(obj.languagefile);
+
+			$('#sk-edit h4 c').text('@lang("home.Edit Language")');
             $('#sk').hide();
             $('#sk-edit').fadeIn();
         }
@@ -3570,7 +3620,7 @@ function getAward(resumeId){
             $('.form-s #award-file a').attr('href',jsUrl()+"/resume_images/"+obj.awardfile);
             $('.form-s #award-file a').text(obj.awardfile);
             $('.form-s #award-file input[name="old_awardfile"]').val(obj.awardfile);
-            $('#s-edit h4 c').text('Edit  Honours & Awards');
+            $('#s-edit h4 c').text('@lang("home.Edit Honours & Awards")');
             $('#s').hide();
             $('#s-edit').fadeIn();
         }
@@ -3636,7 +3686,7 @@ function getPortfolio(resumeId){
 			$('.form-port #portfolio-file a').attr('href',jsUrl()+"/resume_images/"+obj.portfoliofile);
             $('.form-port #portfolio-file a').text(obj.portfoliofile);
             $('.form-port #portfolio-file input[name="old_portfoliofile"]').val(obj.portfoliofile);
-            $('#port-edit h4 c').text('Edit Portfolio');
+            $('#port-edit h4 c').text('@lang("home.Edit Portfolio")');
             $('#port').hide();
             $('#port-edit').fadeIn();
         }
@@ -3698,7 +3748,7 @@ function getHopeworking(resumeId){
 			$('.form-hopeworking select[name="state"]').val(obj.state).trigger('change');
 			$('.form-hopeworking select[name="city"]').val(obj.city).trigger('change');
 
-            $('#hopeworking-edit h4 c').text('Edit Hope Working');
+            $('#hopeworking-edit h4 c').text('@lang("home.Edit Hope Working")');
             $('#hopeworking').hide();
             $('#hopeworking-edit').fadeIn();
         }

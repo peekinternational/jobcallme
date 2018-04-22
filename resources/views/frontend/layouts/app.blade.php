@@ -416,16 +416,17 @@ function getStates(countryId){
         url: "{{ url('account/get-state') }}/"+countryId,
         success: function(response){
             var currentState = $('.job-state').attr('data-state');
-            var obj = $.parseJSON(response);
-            $(".job-state").html('');
-            var newOption = new Option('@lang("home.s_state")', '0', true, false);
-            $(".job-state").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
+            $(".job-state").html('').trigger('change');
+            /*var newOption = new Option('@lang("home.s_state")', '0', true, false);*/
+            $(".job-state").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = k.id == currentState ? true : false;
                 var newOption = new Option(firstCapital(k.name), k.id, true, vOption);
                 $(".job-state").append(newOption);
             })
-            $(".job-state").trigger('change');
+            $(".job-state").trigger('change');*/
         }
     })
 }
@@ -436,7 +437,7 @@ $('.job-state').on('change',function(){
 function getCities(stateId){
     if(stateId == '0'){
         $(".job-city").html('').trigger('change');
-        var newOption = new Option('@lang("home.s_city")', '0', true, false);
+        /*var newOption = new Option('@lang("home.s_city")', '0', true, false);*/
         $(".job-city").append(newOption).trigger('change');
         return false;
     }
@@ -444,15 +445,16 @@ function getCities(stateId){
         url: "{{ url('account/get-city') }}/"+stateId,
         success: function(response){
             var currentCity = $('.job-city').attr('data-city');
-            var obj = $.parseJSON(response);
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
             $(".job-city").html('').trigger('change');
-            var newOption = new Option('@lang("home.s_city")', '0', true, false);
-            $(".job-city").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
+            /*var newOption = new Option('@lang("home.s_city")', '0', true, false);*/
+            $(".job-city").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = k.id == currentCity ? true : false;
                 var newOption = new Option(k.name, k.id, true, vOption);
                 $(".job-city").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }

@@ -329,11 +329,11 @@
         if($(obj).hasClass('btn-primary')){
           $(obj).removeClass('btn-primary');
           $(obj).addClass('btn-success');
-          $(obj).text('Following');
+          $(obj).text('@lang("home.following")');
         }else{
           $(obj).removeClass('btn-success');
           $(obj).addClass('btn-primary');
-          $(obj).text('Follow');
+          $(obj).text('@lang("home.follow")');
         }
         $.ajax({
           url: "{{ url('account/jobseeker/company/action') }}?companyId="+companyId+"&type="+type,

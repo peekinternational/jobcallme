@@ -6,7 +6,7 @@
 		<section id="company-box">
 
 			<div class="container">
-                <a href="{{ url('account/employer/addevaluation')}}" class="btn btn-primary pull-right">Go Back</a>
+                <a href="{{ url('account/employer/addevaluation')}}" class="btn btn-primary pull-right">@lang('home.goback')</a>
 			<div class="row">
 				<div class="col-md-12">
 				<section class="resume-box" id="academic">
@@ -17,10 +17,16 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="col-md-12">
-                                    <strong>Title:</strong> {{$evaluation->title}}
+                                    <strong>@lang('home.title'):</strong> {{$evaluation->title}}
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>Created on:</strong> <?= date('M d,Y',strtotime($evaluation->created_at))?>
+                                    <strong>@lang('home.Created on'):</strong> <?
+					  if(app()->getLocale() == "kr"){
+					  ?>
+						<?= date('Y-m-d',strtotime($evaluation->created_at))?>
+					  <?}else{?>
+						<?= date('M d,Y',strtotime($evaluation->created_at))?>
+					  <?}?>	
                                 </div>
                             </div>
                         </div>
@@ -32,14 +38,14 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="evaluation_id" value="{{ $evaluation->evaluation_id }}">
                           <div class="form-group">
-                            <label for="title">Title:</label>
+                            <label for="title">@lang('home.title'):</label>
                             <input type="text" name="title" value="{{$evaluation->title}}" class="form-control" id="title">
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 text-right">&nbsp;</label>
                             <div class="col-md-6">
                                 <button class="btn btn-primary" type="submit">@lang('home.save')</button>
-                                <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">Cancel</button>
+                                <button class="btn btn-default" type="button" onclick="$('#academic').fadeIn();$('#academic-edit').hide();$('html, body').animate({scrollTop:$('#academic').position().top}, 700);">@lang('home.Cancel')</button>
                             </div>
                           </div>
                         </form>
@@ -48,7 +54,7 @@
                 <!-- add question area start -->
                 <section class="resume-box" id="question">
                         <a class="btn btn-primary r-add-btn" onclick="addquestion()"><i class="fa fa-plus"></i> </a>
-                        <h4>Questions</h4>
+                        <h4>@lang('home.Questions')</h4>
                         
                         <div>
                             <ol type='1' style="margin-left:30px;">
@@ -57,8 +63,8 @@
                                 <input type="hidden" value="{{$key}}" id="index">
                                 <input type="hidden" value="{{$question->eva_ques_id}}" id="eva_ques_id">
                                     <ol type="1" style="margin-left:20px;">
-                                        <li>Weight: {{ $question->weight }}</li>
-                                        <li>Critical: {{ $question->is_critical }}</li>
+                                        <li>@lang('home.Weight'): {{ $question->weight }}</li>
+                                        <li>@lang('home.Critical'): {{ $question->is_critical }}</li>
                                     </ol>
                                     <span style="position:absolute;top:10px;right:10px;">
                                         <i class="fa fa-edit queseditbtn pointer"></i>
@@ -73,30 +79,30 @@
                 </section>
                 <!-- edit question area start -->
                 <section class="resume-box" id="aquestion-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.AddQuestionnaire')asdasd</c></h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.AddQuestionnaire')</c></h4>
                         <form method="post" action="{{ url('account/employer/evaluation/question/new') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="evaluation_id" value="{{ $evaluation->evaluation_id }}">
                         <input type="hidden" name="eva_ques_id" value="">
                           <div class="form-group">
-                            <label for="title">Evaluation factor:</label>
+                            <label for="title">@lang('home.Evaluation factor'):</label>
                             <input type="text" name="evaluation_factor" class="form-control" id="title">
                           </div>
                           
                           <div class="form-group">
-                            <label for="days">Weight:</label>
+                            <label for="days">@lang('home.Weight'):</label>
                             <input type="number" name="weight" class="form-control" id="days">
                           </div>
                           
                           
                           <div class="checkbox">
-                            <label><input name="is_critical" value="Yes" type="checkbox"> is Critical</label>
+                            <label><input name="is_critical" value="Yes" type="checkbox"> @lang('home.is Critical')</label>
                           </div>
                           
                           <div class="form-group">
                             <div class="col-md-6">
                                 <button class="btn btn-primary" type="submit">@lang('home.save')</button>
-                                <button class="btn btn-default" type="button" onclick="$('#question').fadeIn();$('#aquestion-edit').hide();$('html, body').animate({scrollTop:$('#question').position().top}, 700);">Cancel</button>
+                                <button class="btn btn-default" type="button" onclick="$('#question').fadeIn();$('#aquestion-edit').hide();$('html, body').animate({scrollTop:$('#question').position().top}, 700);">@lang('home.Cancel')</button>
                             </div>
                           </div>
                         </form>

@@ -131,8 +131,8 @@ curl_close ($ch);
 				'skills' => 'required|max:1024',
 				'qualification' => 'required',
 				'expiryDate' => 'required|date',
-				'minSalary' => 'numeric',
-				'maxSalary' => 'numeric',
+				//'minSalary' => 'numeric',
+				//'maxSalary' => 'numeric',
 				'state' => 'required',
 				'city' => 'required',
 				'Address' => 'required',
@@ -270,7 +270,7 @@ curl_close ($ch);
 		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_category,'companyModifiedTime'=>date('Y-m-d H:i:s')]);   
 
 		//dd($jobId);
-		\Session::put('success','Add Job Successfully');
+		\Session::put('success',trans('home.Add Job Successfully'));
 		return Redirect::route('addmoney.account/employer/job/share');	
 		}
 		
@@ -302,7 +302,7 @@ curl_close ($ch);
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
 		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 		//dd($jobId);
-		\Session::put('success','Add Job Successfully');
+		\Session::put('success',trans('home.Add Job Successfully'));
 		return Redirect::route('addmoney.account/employer/job/share');	
 		}	
 		else{
@@ -1086,8 +1086,8 @@ public function userResume($userId){
 				if($k[0] == ''){ $k[0] = 'Closed';}
 				if($k[1] == ''){ $k[1] = 'Closed';}
 			}else{
-				if($k[0] == ''){ $k[0] = '09:00 AM';}
-				if($k[1] == ''){ $k[1] = '06:00 PM';}
+				if($k[0] == ''){ $k[0] = '00:00 AM';}
+				if($k[1] == ''){ $k[1] = '00:00 PM';}
 			}
 			$opHoursArr[$i] = array('from' => $k[0], 'to' => $k[1]);
 		}
@@ -1588,8 +1588,8 @@ public function mapOrganization(Request $request){
 				'skills' => 'required|max:1024',
 				'qualification' => 'required',
 				'expiryDate' => 'required|date',
-				'minSalary' => 'required|numeric',
-				'maxSalary' => 'required|numeric',
+				//'minSalary' => 'required|numeric',
+				//'maxSalary' => 'required|numeric',
 				'state' => 'required',
 			]);
 	
@@ -1602,7 +1602,7 @@ public function mapOrganization(Request $request){
 			}
 			$jobId = DB::table('jcm_jobs')->where('jobId','=',$jobid)->update($input);
 			echo $jobId;
-			\Session::put('success','Job Update Successfully');
+			\Session::put('success',trans('home.Job Update Successfully'));
 			return Redirect::route('addmoney.account/employer/job/share');
 		//}	
 		//else{ 
@@ -2026,7 +2026,7 @@ public function mapOrganization(Request $request){
 			$info = $request->all();
 			
 			$app= session()->get('jcmUser');
-			$amount=$info['amount'] * 1100;
+			$amount=$info['amount'] * 1000;
 
 			//dd($amount);
 			

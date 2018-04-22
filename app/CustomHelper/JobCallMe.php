@@ -375,7 +375,7 @@ class JobCallMe{
 	}
 
 	public function getJobCountries(){
-		$jobCountries = DB::table('jcm_countries')->orderBy('name','asc')->get();
+		$jobCountries = DB::table('jcm_countries')->orderBy('id','asc')->get();
 		return $jobCountries;
 	}
 

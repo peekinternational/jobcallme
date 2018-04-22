@@ -8,13 +8,13 @@ return [
 	'jobs' => '채용정보',
 	'jobseeker' => '구직전용',
 	'peoples' => '인재정보',
-	'read' => '스킬공유',
-	'read_search' => '스킬공유',
+	'read' => '자료공유',
+	'read_search' => '자료공유',
 	'learn' => '지식정보',
 	'companies' => '기업정보',
 	'about' => '회사소개',	
 	'contact' => '고객문의',
-	'writing' => '스킬공유 등록',
+	'writing' => '자료공유 등록',
 	'upskill' => '지식등록',
 	'manage' => '정보관리 설정',
 	'logout' => '로그아웃',
@@ -50,7 +50,7 @@ return [
 
 	'lookingcompany' => '기업정보 검색...',
 	'lookingpeople' => '인재정보 검색...',
-	'lookingread' => '스킬공유 검색...',
+	'lookingread' => '자료공유 검색...',
 	'lookinglearn' => '지식정보 검색...',
 	
 	//Footer//
@@ -366,11 +366,11 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'address' => '주소',
 	
 	//Login & register Page//
-	'loginaccount' => '로그인 정보',
+	'loginaccount' => '잡콜미 로그인 정보',
 	'password' => '비밀번호',
-	'remember' => '자동저장',
+	'remember' => '로그인 자동저장',
 	'register' => '회원가입',
-	'createaccount' => '회원가입',
+	'createaccount' => '잡콜미 회원가입',
 	'fname' => '성',
 	'lname' => '이름',
 	's_state' => '시ㆍ도 선택',
@@ -586,7 +586,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
    'following' => '팔로윙',
    'follow' => '팔로워',
    'operationhours' => '근무시간',
-   'companiesin' => '근무지',
+   'companiesin' => '기업정보',
    'companiesindustry' => '산업별 기업찾기',
    
    //View Course//
@@ -743,7 +743,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	
 	//Update Job//
 	'jobupdate' => '채용 업데이트',
-	'updatejob' => '업이트 채용',
+	'updatejob' => '채용등록 수정',
 	
 	//Jobskeer Dashboard//
 	'suggested' => '관련 기업채용',
@@ -766,8 +766,8 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'numbervacancy' => '체용인원 (예시:3)',
 	'compensationbenefits' => '복지 및 헤택',
 	'naturejob' => '직무별',
-	'sharejob' => '채용 공유',
-	'Skip' => '제외',
+	'sharejob' => 'SNS 채용공고 공유',
+	'Skip' => '취소',
 	'editdepartment' => '부서편집',
 	'addDepartment' => '부서명 추가',
 	'Hot' => '핫',
@@ -809,7 +809,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'LEARN' => '지식정보',
 	'DOWNLOAD' => '다운로드',
 	'CAREER TAB' => '채용정보 탭',
-	'READ' => ' 스킬공유',
+	'READ' => ' 자료공유',
 	'NOTIFICATIONS' => '알림설정',
 	'UPGRADE' => '업그레이드',
 	'JOBS' => '채용정보',
@@ -1254,7 +1254,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'Subscribed' => '알림등록완료',
 	'Subscribeforjobnotifications' => '구인ㆍ구직 알림신청',
 	'MarketingㆍAdvertiseㆍPromotion' => '마케팅ㆍ광고ㆍ홍보',
-	'R & D' => '연구개발',
+	'R & D' => '연구개발ㆍ설계',
 
 	'TotalAmount' => '총 합계',
 
@@ -2504,7 +2504,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "PADS"=>"PADS",
 "Landscape design"=>"조경설계",
 "Automotive and shipbuilding design"=>"자동차·조선설계",
-"Civil engineering design"=>"토목설계",
+"Designing of civil construcion"=>"토목설계",
 "Mold design"=>"금형설계",
 "3D design"=>"3D설계",
 "Pro-e"=>"Pro-e",
@@ -3280,7 +3280,79 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Elderly · Silver employment"=>"고령자·실버취업",
 "Retirees"=>"퇴직자·실직자",
 
+"Marketing · Advertisement · Analysis"=>"마케팅·광고·분석",
+"PR · PR"=>"홍보 · PR",
+"Exhibition & Convention"=>"전시 · 컨벤션",
+"Marketing Planning"=>"마케팅기획",
+"Viral Marketing"=>"바이럴마케팅",
+"Market Analysis"=>"시장분석",
+"Branding"=>"브랜딩",
+"Publishing"=>"퍼블리싱",
+"BMI"=>"BMI",
 
+"Promote"=>"프로모션",
+"SNS operation"=>"SNS 운영",
+"Adevertisement Management"=>"광고관리",
+"Media Public Relation"=>"홍보기획",
+"Event"=>"이벤트",
+"Brand"=>"브랜드",
+"Company Newsletter"=>"사보기자",
+"Convention"=>"전시",
+"Reception"=>"리셉션",
+
+"production technology"=>"생산기술",
+"Instrument design"=>"기구설계",
+"researcher"=>"연구원",
+"Control"=>"제어",
+"Research Management"=>"기술연구소",
+"Shipbuilding"=>"조선",
+"Catia"=>"Catia",
+"Construction"=>"건설",
+"steel"=>"철강",
+"Semiconductor"=>"반도체",
+"Production Technology"=>"생산기술",
+"Instrument Design"=>"기구설계",
+"Control"=>"제어",
+"Researcher"=>"연구원",
+"Product Development"=>"제품개발",
+"Circuit Design"=>"회로설계",
+"Touch Screen"=>"터치스크린",
+"Research Management"=>"연구관리",
+"Experiment"=>"실험",
+"Cosmetics"=>"화장품",
+"Biotechnology"=>"생명공학",
+"Nuclear power"=>"원자력",
+"Electrical and Electronic Circuits"=>"전기ㆍ전자회로",
+"Circuit design"=>"회로설계",
+"hardware"=>"하드웨어",
+"Firmware"=>"펌웨어",
+"Embedded"=>"임베디드",
+"Test Engineer"=>"테스트 엔지니어",
+"Quality Engineer"=>"품질 엔지니어",
+"Micom"=>"Micom",
+"PADS"=>"PADS",
+"Analog"=>"아날로그",
+"FAE"=>"FAE",
+"PDA"=>"PDA",
+"VoIP"=>"VoIP",
+
+"Design of Building Facilities"=>"건축설비설계",
+"Pro-e"=>"Pro-e",
+"Architectural model"=>"건축모형",
+"Shipbuilding design"=>"조선설계",
+
+"HFC"=>"HFC",
+"Satellite communication"=>"위성통신",
+"ADSL"=>"ADSL",
+"GSM"=>"GSM",
+"Medical Services"=>"의료",
+"Food Processing and Development"=>"식품가공ㆍ개발",
+"Medicine"=>"의약품",
+"Clinical Development"=>"임상개발",
+"Microorganisms"=>"미생물",
+
+"Enzyme"=>"효소",
+"Pesticide Fertilizer"=>"농약비료",
 
 
 //countries
@@ -56000,7 +56072,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 'jcmjob' => 'Jcm 채용',
 
-'passwordway' => '비밀번호작성은 각각 한개이상의 영문 대문자, 숫자, 특수 문자가 있어야합니다.',
+'passwordway' => '비밀번호설정은 6-16자리의 영문,숫자,특수문자를 함께 입력해주세요.',
 
 'Outsourcingok' => '아웃소싱오케이',
 
@@ -56286,7 +56358,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'Rhaeto -Romance'=>'로에토-로맨스',
 'Romanian'=>'루마니아 어',
 'Romany'=>'집시',
-'Russian'=>'러시아인',
+'Russian'=>'러시아어',
 'Sami'=>'사미',
 'Sanskrit'=>'산스크리트',
 'Scots'=>'스코틀랜드 어',
@@ -56375,13 +56447,13 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'jobhoursval_text' => '',
 
 'How to register' => '접수방법',
-'jobreceipt01' => '잡콜미 온라인',
-'jobreceipt02' => '홈페이지',
-'jobreceipt03' => '우편',
-'jobreceipt04' => '방문',
-'jobreceipt05' => '전화',
-'jobreceipt06' => 'FAX',
-'jobreceipt07' => '이메일',
+'jobreceipt01' => '잡콜미 온라인 지원',
+'jobreceipt02' => '홈페이지 지원',
+'jobreceipt03' => '우편 지원',
+'jobreceipt04' => '방문 지원',
+'jobreceipt05' => '전화 지원',
+'jobreceipt06' => 'FAX 지원',
+'jobreceipt07' => '이메일 지원',
 'jobhomgpage' => 'http://www.example.com',
 
 'National pension' => '국민연금',
@@ -56454,7 +56526,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 'expleaving' => '퇴사이유',
 'selectCountry' => '국가 선택',
-'alphabetical order' => '대한민국을 제외한 국가는 영문 알파벳 순서이며 주ㆍ도는 영문으로 선택 바랍니다.',
+'alphabetical order' => '대한민국을 제외한 모든 국가는 영문 알파벳 순서로 지원합니다.',
 'memmobile' => "휴대폰 번호( ' - ' 제외하고 번호만 입력바랍니다.)",
 
 'A driving agent' => '운전 가능자',
@@ -113102,7 +113174,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 'jcmjob' => 'Jcm 채용',
 
-'passwordway' => '비밀번호작성은 각각 한개이상의 영문 대문자, 숫자, 특수 문자가 있어야합니다.',
+'passwordway' => '비밀번호설정은 6-16자리의 영문,숫자,특수문자를 함께 입력해주세요.',
 
 'Outsourcingok' => '아웃소싱오케이',
 
@@ -113396,7 +113468,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'Rhaeto -Romance'=>'로에토-로맨스',
 'Romanian'=>'루마니아 어',
 'Romany'=>'집시',
-'Russian'=>'러시아인',
+'Russian'=>'러시아어',
 'Sami'=>'사미',
 'Samoan'=>'사모아어',
 'Sanskrit'=>'산스크리트',
@@ -113491,13 +113563,13 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'jobhoursval_text' => '',
 
 'How to register' => '접수방법',
-'jobreceipt01' => '잡콜미 온라인',
-'jobreceipt02' => '홈페이지',
-'jobreceipt03' => '우편',
-'jobreceipt04' => '방문',
-'jobreceipt05' => '전화',
-'jobreceipt06' => 'FAX',
-'jobreceipt07' => '이메일',
+'jobreceipt01' => '잡콜미 온라인 지원',
+'jobreceipt02' => '홈페이지 지원',
+'jobreceipt03' => '우편 지원',
+'jobreceipt04' => '방문 지원',
+'jobreceipt05' => '전화 지원',
+'jobreceipt06' => 'FAX 지원',
+'jobreceipt07' => '이메일 지원',
 'jobhomgpage' => 'http://www.example.com',
 
 'National pension' => '국민연금',
@@ -113570,7 +113642,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 'expleaving' => '퇴사이유',
 'selectCountry' => '국가 선택',
-'alphabetical order' => '대한민국을 제외한 국가는 영문 알파벳 순서이며 주ㆍ도는 영문으로 선택 바랍니다.',
+'alphabetical order' => '대한민국을 제외한 모든 국가는 영문 알파벳 순서로 지원합니다.',
 'memmobile' => "휴대폰 번호( ' - ' 제외하고 번호만 입력바랍니다.)",
 
 'A driving agent' => '운전 가능자',
@@ -113664,15 +113736,15 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "QueType"=>"유형",
 "Submitted in"=>"제출 날짜",
 "Late Submission"=>"제출마감이후 제출",
-"Shuffle"=>"Shuffle",
+"Shuffle"=>"질문방법",
 "Actions"=>"실행",
 "QueYes"=>"가능",
-"AddQuestionnaire"=>"질문사항 등록",
+"AddQuestionnaire"=>"설문조사",
 "Are you sure want to delete!"=>"삭제 하시겠습니까?",
 "QueTitle"=>"제목",
 "Submission Days"=>"제출 날짜",
 "Accept Late Submission"=>"제출마감이후 제출가능",
-"Shuffle Questions"=>"질문 섞기 가능",
+"Shuffle Questions"=>"다양한 질문 가능",
 "Que Select type"=>"질문 유형 선택",
 "Duration"=>"기간",
 "Questions"=>"질문",
@@ -113728,7 +113800,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "empAPPLICATION"=>"입사 지원현황",
 "videochatimage"=>"화상 & 채팅 이미지",
 "Nick Name"=>"닉네임",
-"Please check your email to verify"=>"이메일을 확인하십시오",
+"Please check your email to verify"=>"회원가입 승인 이메일을 보냈습니다. 확인하시길 바랍니다",
 "Your account is Verified Please Login"=>"계정이 확인되었습니다.로그인 하십시오",
 
 "Have queries? We are here to help!"=>"고객 센터에 오신것을 환영 합니다!",
@@ -113757,7 +113829,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Cash Payment"=>"무통장 입금",
 "NicePay"=>"나이스페이 결제",
 
-"Article title"=>"스킬공유 제목",
+"Article title"=>"자료공유 제목",
 
 "interview Details"=>"인터뷰 정보",
 "Action perform successfully"=>"인터뷰장소 등록완료",
@@ -113782,7 +113854,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Use Package Plan?"=>"패키지 상품보기",
 "Following format allowed (PNG/JPG/JPEG)"=>"파일형식은 PNG / JPG / JPEG만 허용됩니다",
 "Profile Pic Remove"=>"삭제되었습니다",
-"Package Plan"=>"패키지",
+"Package Plan"=>"광고상품",
 "Set Job Filters"=>"채용정보 필터설정",
 "Evaluation Form"=>"제목",
 "No. of Criterion"=>"기준 갯수",
@@ -113816,9 +113888,9 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Submit"=>"제출",
 "Order Detail"=>"주문 정보",
 
-"Your order is pending payment clearance!"=>"주문이 결제 대기 중입니다!",
-"Thank you for shopping at jobcallme.com. Your order has been placed successfully."=>"잡콜미에서 이용해주셔서 감사합니다. 결제 완료되었습니다",
-"Your satisfaction is important to us, so if you have any questions or feedback please don't hesitate to contact us."=>"회원님께서 질문이나 의견이 있으시면 언제든지 보내주시면 답변드리겠습니다.",
+"Your order is pending payment clearance!"=>"주문하신 상품이 결제 대기 중입니다!",
+"Thank you for shopping at jobcallme.com. Your order has been placed successfully."=>"구매해주셔서 감사합니다. 결제 완료되었습니다",
+"Your satisfaction is important to us, so if you have any questions or feedback please don't hesitate to contact us."=>"회원님께서 질문이나 의견이 있으시면 언제든지 문의 바랍니다.",
 "After payment visiting Manage > After Payment page from top menu."=>"결제 후 상단 메뉴에서 정보관리 설정 > 결제 페이지로 이동하십시오.",
 "You can track your orders by visiting Manage > Orders Hisory from top menu."=>"상단 메뉴에서 정보관리 설정 > 주문 내역으로 이동하여 주문정보를 보실수 있습니다.",
 
@@ -113853,8 +113925,8 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Select Rate Management"=>"경영관리 선택",
 "Rate Organization Culture"=>"회사문화",
 "Select Rate Organization Culture"=>"회사문화 선택",
-"Recommend CEO"=>"CEO 추천",
-"Select Recommend CEO"=>"CEO 추천 선택",
+"Recommend CEO"=>"CEO 리뷰",
+"Select Recommend CEO"=>"CEO 리뷰 선택",
 "Expectations About Future"=>"회사전망",
 "Select Expectations About Future"=>"회사전망 선택",
 "Growing Up"=>"성장",
@@ -113864,7 +113936,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Post as Anonymous"=>"익명으로 등록",
 "View all Review"=>"리뷰 모두보기",
 "Career Growth"=>"경력 발전",
-"CEO Recommended"=>"CEO 추천",
+"CEO Recommended"=>"CEO 리뷰",
 "Not recommend"=>"추천하지 않음",
 "Recommend to a friend"=>"친구에게 추천",
 "Future Expectations"=>"회사전망",
@@ -113900,4 +113972,74 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'leancostlist' => '참관비',
 
 'New and Career Recruitment' => '전체채용',
+
+'Edit Department' => '부서 변경',
+
+'Edit Academics' => '최종학력 변경',
+'Edit Certificate' => '자격증 변경',
+'Edit Experience' => '경력사항 변경',
+'Edit Skill' => '전문기술사항 변경',
+'Edit Reference' => '추천인 정보 변경',
+'Edit Publisher' => '출판물 변경',
+'Edit Project' => '프로젝트 변경',
+'Edit Affiliation' => '소속부서 변경',
+'Edit Preference' => '취업우대 변경',
+'Edit Language' => '외국어 변경',
+'Edit Honours & Awards' => '수상내역 변경',
+'Edit Portfolio' => '포트폴리오 변경',
+'Edit Hope Working' => '희망근무 변경',
+
+'singupinfo' => '대한민국외에 모든 국가는 영문으로 지원합니다.',
+
+'Hello!' => '안녕하세요!',
+'You are receiving this email because we received a verify email request for your account.' => '본 이메일은 잡콜미 회원가입 승인 확인을 위한 이메일입니다.',
+'Click To Verify' => '승인 확인',
+
+'If you did not request a verify email, no further action is required.' => '본 이메일을 승인하지 않을경우 추가 조치가 필요하지 않습니다.',
+'Regards' => '감사합니다!',
+'JobCallMe' => '주식회사 잡콜미',
+'Account Verification' => '이메일 계정확인',
+'email-text' => '이메일 주소를 입력 바랍니다.',
+'Password-text' => '비밀번호를 입력 바랍니다.',
+'Re-enter Password-text' => '입력하신 비밀번호를 다시한번 입력 바랍니다.',
+'phonenumber-text' => '휴대폰번호를 입력 바랍니다.',
+'Please check your email to verify' => '인증메일을 보냈습니다. 이메일을 확인바랍니다!',
+'Your Account is Deactivated for activation contact Administration thanks' => '회원님의 회원탈퇴요청으로 계정이 중지 되었습니다.',
+'Your account is Verified Please Login' => '회원님의 가입이 확인되었습니다.로그인 바랍니다.',
+'please login to subscribe' => '로그인을 하시길 바랍니다.',
+'Check your email to reset password' => '비밀번호를 재설정하시려면 이메일을 확인하십시오.',
+
+'password-reset-text' => '비밀번호를 재설정하시길 바랍니다.',
+
+'Video & Chat Image' => '화상 & 채팅 이미지 등록',
+'Enter your Nick Name' => '닉네임을 입력 바랍니다',
+'video-text' => '이미지 선택과 닉네임 작성후 저장버튼을 클릭하시면 업로드 됩니다.',
+
+'Recommended' => '적극추천',
+'Natural' => '보통',
+'Not Recommended' => '비추천',
+
+'Worked' => '근무기간: ',
+
+'Recommend CEO' => 'CEO 리뷰',
+'Recommend to friend' => '친구에게 추천',
+'Company Future' => '회사 전망',
+'Advice to management' => '기업 평가',
+'Evaluation factor' => '평가항목',
+'Weight' => '평가반영비율',
+'is Critical' => '중요함',
+'Critical' => '평가 중요도',
+
+'Test' => '테스트',
+'Questionnaires' => '설문지',
+
+
+'On Homepage' => '잡콜미 광고기간',
+'Quantity' => '광고갯수',
+
+'Not Use Package Plan?' => '구매한 패키지 상품 사용안함',
+'Add Job Successfully' => '회원님의 채용공고가 등록되었습니다.',
+'Job Update Successfully' => '회원님의 채용공고가 수정되었습니다.',
+
+'videochat_text' => '화상채팅은 구글크롬과 MS엣지를 사용하시길 바랍니다.',
 ];

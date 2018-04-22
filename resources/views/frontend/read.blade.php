@@ -83,7 +83,7 @@
 								$cat_names = explode(",",$rec->cat_names);
 								
 							?>
-							<span><?for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i])<?}?></span>
+							<span>#<?for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i]) @if($cat_names[$i]!="")ㆍ@endif<?}?></span>
                             <div class="la-text">{!! $rec->citation !!}</div>
                             <div class="ra-author-box">
                                 <img src="{{ url('profile-photos/'.$rec->profilePhoto) }}" class="img-circle" alt="{{ $rec->firstName }}">

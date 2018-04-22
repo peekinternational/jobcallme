@@ -22,6 +22,8 @@ class Jobs extends Controller{
 		$_find = trim($request->input('_find'));
 		$keyword = trim($request->input('keyword'));
 		$categoryId = trim($request->input('categoryId'));
+		$htype = trim($request->input('htype'));
+		$dtype = trim($request->input('dtype'));
 		$jobType = trim($request->input('jobType'));
 		$jobShift = trim($request->input('jobShift'));
 		$careerLevel = trim($request->input('careerLevel'));
@@ -61,6 +63,8 @@ class Jobs extends Controller{
 		$city = JobCallMe::cityId($city);
 		if($country != '0' && $country != "") $jobs->where('jcm_jobs.country','=',$country);
 		if($categoryId != '') $jobs->where('jcm_jobs.category','=',$categoryId);
+		if($htype != '') $jobs->where('jcm_jobs.head','=',$htype);
+		if($dtype != '') $jobs->where('jcm_jobs.dispatch','=',$dtype);
 		if($jobType != '') $jobs->where('jcm_jobs.jobType','=',$jobType);
 		if($jobShift != '') $jobs->where('jcm_jobs.jobShift','=',$jobShift);
 		if($careerLevel != '') $jobs->where('jcm_jobs.careerLevel','=',$careerLevel);
