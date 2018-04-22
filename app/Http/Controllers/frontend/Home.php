@@ -12,6 +12,7 @@ date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
 	public function home(){
+		
 		$ip = \Request::ip();
 		$position = \Location::get($ip);
 		$currentCountry = $position->countryCode;

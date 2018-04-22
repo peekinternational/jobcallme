@@ -11,7 +11,7 @@
 <tbody><tr>
 <td class="m_1888394735623576276header" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;padding:25px 0;text-align:center;">
         <a href="https://jobcallme.com/" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#bbbfc3;font-size:19px;font-weight:bold;text-decoration:none" target="_blank">
-            JobCallMe
+           <img src="https://www.jobcallme.com/website/logo.png" class="logo-img">
         </a>
     </td>
 </tr>

@@ -65,6 +65,7 @@
 					<div class="job-search-box">
                     <div class="form-group">
                         <input type="text" class="form-control" name="minSalary" value="" placeholder="Minimum Salary ">
+                         <input type="hidden" class="form-control" name="head" value="{{ Request::input('head') }}">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="maxSalary" value="" placeholder="Maximum Salary">
