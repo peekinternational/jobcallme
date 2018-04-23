@@ -15,9 +15,13 @@
                                     <thead>
                                         <th>#</th>
                                         <th>Title</th>
+                                        <th>Organiser</th>
+                                        <th>Email</th>
+                                        <th>Mobile Number</th>
                                         <th>Description</th>
                                         <th>Type</th>
                                         <th>End Date</th>
+                                        <th>Created On</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </thead>
@@ -30,6 +34,10 @@
                                                     <input type="hidden" name="id" id="wid" value="{{$skill->skillId}}">
                                                 </td>
                                                 <td>{{$skill->title}}</td>
+                                                <td>{{$skill->organiser}}</td>
+                                                 <td>{{$skill->email}}</td>
+                                                  <td>{{$skill->mobile}}</td>
+                                                   
                                                 <td>
                                                     <?php 
                                                     $string = strip_tags($skill->description);
@@ -49,6 +57,7 @@
                                                 </td>
                                                 <td>{{$skill->type}}</td>
                                                 <td>{{$skill->endDate}}</td>
+                                                <td>{{$skill->createdTime}}</td>
                                                 <td>
                                                     <input type="checkbox" class="status" @if($skill->status == 'Active') Checked @endif>
                                                 </td>

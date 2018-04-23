@@ -77,7 +77,7 @@
                                             <p class="rd-title">{!! $academic->degree !!}</p>
                                             <p class="rd-organization">{!! $academic->institution !!}</p>
                                             <p class="rd-location">@lang('home.'.JobCallMe::cityName($academic->city)),@lang('home.'.JobCallMe::countryName($academic->country))</p>
-                                            <p class="rd-grade">@lang('home.GradeGPA') : {!! $academic->grade !!}</p>
+                                            <p class="rd-grade">@lang('home.GradeGPA') : {!! $academic->grade !!}/{!! $academic->grade2 !!}</p>
                                         </div>
                                     </li>
                                 @endforeach
@@ -212,6 +212,37 @@
                             @endif
                         </ul>
                     </section>
+
+					<section class="resume-box" id="sk">
+                        
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.preference')</h4>
+                        <ul class="resume-details">
+							@if(count($resume['preference']) > 0)
+                                @foreach($resume['preference'] as $resumeId => $preference)
+                            
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            
+                                            <p class="rd-location">@lang('home.Veteran') : @lang('home.'.$preference->veteran)</p>
+											<p class="rd-location">@lang('home.Job protection') : @lang('home.'.$preference->subsidy)</p>
+											<p class="rd-location">@lang('home.Employment subsidy') : @lang('home.'.$preference->disability)</p>
+											<p class="rd-location">@lang('home.Disability') : @lang('home.'.$preference->disability)</p>
+											<p class="rd-location">@lang('home.Disability grade') : {!! $preference->disabilitygrade !!}</p>
+											<p class="rd-location">@lang('home.Military service') : @lang('home.'.$preference->militaryservice)</p>
+											<p class="rd-location">@lang('home.Militarystartyear') : {!! $preference->militarystartyear !!}</p>
+											<p class="rd-location">@lang('home.Militarystartmonth') : @lang('home.'.$preference->militarystartmonth)</p>
+											<p class="rd-location">@lang('home.Militaryendyear') : {!! $preference->militaryendyear !!}</p>
+											<p class="rd-location">@lang('home.Militaryendmonth') : @lang('home.'.$preference->militaryendmonth)</p>
+											<p class="rd-location">@lang('home.Military type') : @lang('home.'.$preference->militarytype)</p>
+											<p class="rd-location">@lang('home.Military Classes') : @lang('home.'.$preference->militaryclasses)</p>
+											
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
 					
 					<section class="resume-box" id="sk">
                         
@@ -224,6 +255,13 @@
                                             
                                             <p class="rd-title">@lang('home.'.$skills->language)</p>
 											<p class="rd-location">@lang('home.'.$skills->level)</p>
+											<p class="rd-location">{!! $skills->certifiedexam !!}</p>
+											<p class="rd-location">{!! $skills->classscore !!}</p>
+											<p class="rd-location">@if(app()->getLocale() == "kr")
+						    {!! $skills->languageyear !!}년 @lang('home.'.$skills->languagemonth)
+						@else
+						   @lang('home.'.$skills->languagemonth), {!! $skills->languageyear !!}
+						@endif </p>
 											
 										  
                                         </div>
@@ -292,7 +330,7 @@
 						@else
 						    {!! $skills->startmonth !!} {!! $skills->startyear !!}
 						@endif</p>
-											<p class="rd-location"> {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+											<p class="rd-location"> {!! $skills->organization !!}<!-- {!! $skills->occupation !!} at {!! $skills->organization !!} --></p>
 											
                                            <p class="rd-location">{!! $skills->detail !!}</p>
 										  
@@ -330,6 +368,29 @@
                             @endif
                         </ul>
                     </section>
+
+
+					<!--hopeworking Section-->
+					<section class="resume-box" id="port">
+                        
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.hopeworking')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['hopeworking']) > 0)
+                                @foreach($resume['hopeworking'] as $resumeId => $hopeworking)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                           
+                                            <p class="rd-title">@lang('home.'.$hopeworking->hopejobtype)</p>
+                                            <p class="rd-location">@lang('home.'.JobCallMe::cityName($hopeworking->city)),@lang('home.'.JobCallMe::stateName($hopeworking->state)),@lang('home.'.JobCallMe::countryName($hopeworking->country))</p>	
+										  
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+
+
                 </div>
             @else 
                 <div class="col-md-9">

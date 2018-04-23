@@ -22,8 +22,10 @@ $email = $_POST['Email'];
 // $merchantID       = "nicepay00m";                           // 상점아이디
 
 // Real
-$merchantKey= "TMMkIBlPq1SeFjgHSYeUyt8Uw5EmsD9cB4s0Y51ij1yCnwNU+T0BdACyhvXJnyYd0ILO/3vOUGNfHsdsyiHoqQ==";
-$merchantID = "slink6412m";
+/*$merchantKey= "TMMkIBlPq1SeFjgHSYeUyt8Uw5EmsD9cB4s0Y51ij1yCnwNU+T0BdACyhvXJnyYd0ILO/3vOUGNfHsdsyiHoqQ==";
+$merchantID = "slink6412m";*/
+$merchantKey= "1XERnJL9H3pG1ON1BuMY1nifyQdjAqus6LXedY15t8r8ggVfHtgoc81eipnBsdS1/Jqv48E/1zF6o1fm8n6WPA==";
+$merchantID = "slink5709m";
 
 $goodsCnt         = $goods ;                                    // 결제상품개수
 $goodsName        = $name;                           // 결제상품명

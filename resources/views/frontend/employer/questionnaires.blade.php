@@ -49,8 +49,8 @@
                             <label for="type">@lang('home.QueType'):</label>
                             <select class="form-control" id="type" name="type">
                                 <option>@lang('home.Que Select type')</option>
-                                <option>Test</option>
-                                <option>Questionnaires</option>
+                                <option>@lang('home.Test')</option>
+                                <option>@lang('home.Questionnaires')</option>
                             </select>
                           </div>
                           <div class="form-group">

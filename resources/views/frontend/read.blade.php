@@ -6,7 +6,7 @@
 <section id="learn-section">
     <div class="container">
         <div class="col-md-12 learn-search-box" style="margin-top:20px">
-            <h2 class="text-center">@lang('home.read_heading')</h2>
+            <h2 class="text-center"><!-- @lang('home.read_heading') --></h2>
             <div class="row">
                 <div class="col-md-offset-2 col-md-8" style="margin-top:20px">
                     <div class="ls-box">
@@ -34,7 +34,8 @@
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2" style="margin-bottom:30px">
-                    <div class="job-locations-box">
+					<div class="job-schedule-box">
+                    <!-- <div class="job-locations-box"> -->
                         <?php 
                         $cArr = array('#0e8bcc','#94a5a5','#8d846e','#4e6c7c','#919090','#b0a48a','#8d7e8d','#a69b82','#6b91a7','#9b9b36');
                         $i = 0;
@@ -84,7 +85,11 @@
 								$cat_names = explode(",",$rec->cat_names);
 								
 							?>
+<<<<<<< HEAD
 							<span><?php for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i]) <?php } ?></span>
+=======
+							<span>#<?for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i]) @if($cat_names[$i]!="")ㆍ@endif<?}?></span>
+>>>>>>> 9748251ec2206e5250c4ea49f800d1bac01f8b63
                             <div class="la-text">{!! $rec->citation !!}</div>
                             <div class="ra-author-box">
                                 <img src="{{ url('profile-photos/'.$rec->profilePhoto) }}" class="img-circle" alt="{{ $rec->firstName }}">

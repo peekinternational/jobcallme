@@ -13,21 +13,27 @@
 		  
             <h3 class="text-center text-lg mb20">
                 
-                Job Posting that Deliver Results
+                @lang('home.Job Posting that Deliver Results')
             </h3>
-           
-              @foreach($plan as  $payment)
+			
+					<div style="padding-bottom:20px">
+						<span>@lang('home.selectcurrency'): &nbsp;</span>
+                        <input type="radio" name="gender" id="kr" value="kr" checked="checked"> korean
+                      &nbsp;&nbsp;<input type="radio" name="gender" id="us" value="us"> US$
+                    </div>
+
+              @foreach($plan as  $key=>$payment)
 			  
 				  <div class="col-md-4">
                         <div class="pricing-block mat-elevation-z6">
-                            <h5 class="title">Jobs {!!$payment->type !!}</h5>
+                            <h5 class="title">@lang('home.'.$payment->type)</h5>
                             <div class="desc">
                                 <!----><ul class="list-unstyled">
                                 @if($payment->type == 'Resume Download')
-                                  <li>Quantity: {!!$payment->quantity !!} resumes</li>
+                                  <li>@lang('home.Quantity'): {!!$payment->quantity !!} resumes</li>
                                 @else    
-                                    <li>On Homepage: {!!$payment->duration !!} days</li>
-                                    <li>Quantity: {!!$payment->quantity !!} jobs</li>
+                                    <li>@lang('home.On Homepage'): {!!$payment->duration !!} @lang('home.days')</li>
+                                    <li>@lang('home.Quantity'): {!!$payment->quantity !!} @lang('home.jobs')</li>
                                     @endif
                                     
                                 </ul>
@@ -36,7 +42,7 @@
                             <div class="price">
                                 <span class="text-success">
                                     <!---->
-                                    <span class="text-md b">${!!$payment->amount !!}</span>
+                                    <span class="text-md b"><span class="text-success" id="class_text{{$key}}"></span></span>
                                 </span>
                             </div>
 
@@ -50,9 +56,10 @@
                                 <input name="amount" type="hidden" value="{!! $payment->amount !!}"/>
                                 <input name="quantity" type="hidden" value="{!! $payment->quantity !!}"/>
                                 <input name="duration" type="hidden" value="{!! $payment->duration !!}"/>
+								<input name="currency" type="hidden"/>
                                 
                                 <div>
-                                    <button class="btn btn-primary" color="primary"  type="submit"><span class="mat-button-wrapper">Buy Now</span><div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div></button>
+                                    <button class="btn btn-primary" color="primary"  type="submit"><span class="mat-button-wrapper">@lang('home.Buy Now')</span><div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div></button>
                                 </div>
                             </form>
                         </div>
@@ -70,5 +77,70 @@
 		@endsection
 		@section('page-footer')
 		<script type="text/javascript">
+
+		   ////// FOR PLAN//////////
+     var jArray = <?php echo json_encode($plan); ?>;
+
+     for(var i=0;i<jArray.length;i++){
+     $('#class_text'+i).html('￦ '+jArray[i].amount*1100+'(부가세 포함)')
+        //alert(jArray[i].amount);
+	 //$('.ng-untouched input[name="amount"]').val(jArray[i].amount*1000);
+	 $('.ng-untouched input[name="currency"]').val('KRW');
+       }
+     
+    $('#us').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<jArray.length;i++){
+
+     $('#class_text'+i).html('US$ '+jArray[i].amount+'.00')
+        //alert(jArray[i].amount);
+	 //$('.ng-untouched input[name="amount"]').val(jArray[i].amount*1000);
+	 $('.ng-untouched input[name="currency"]').val('USD');
+         }
+        }
+    }) ;
+
+    $('#kr').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<jArray.length;i++){
+     $('#class_text'+i).html('￦ '+jArray[i].amount*1100 +'(부가세 포함)')
+       // alert(jArray[i].amount*1100);
+	 //$('.ng-untouched input[name="amount"]').val(jArray[i].amount*1000);
+	 $('.ng-untouched input[name="currency"]').val('KRW');
+      }
+    }
+}) ;
+    
+
+    ////// FOR PLAN//////////
+
+ ////// FOR Simle/////////
+     var simplearray = <?php echo json_encode($rec); ?>;
+
+     for(var i=0;i<simplearray.length;i++){
+     $('#simple_text'+i).html('￦ '+simplearray[i].price*1000+'')
+        //alert(jArray[i].amount);
+       }
+     
+    $('#us').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<simplearray.length;i++){
+
+     $('#simple_text'+i).html('US$ '+simplearray[i].price+'.00')
+        //alert(jArray[i].amount);
+         }
+        }
+    }) ;
+
+    $('#kr').click(function(){
+    if ($(this).is(':checked')) {
+    for(var i=0;i<simplearray.length;i++){
+     $('#simple_text'+i).html('￦ '+simplearray[i].price*1000 +'')
+       // alert(jArray[i].amount*1100);
+      }
+    }
+}) ;
+
+
 		</script>
 		@endsection

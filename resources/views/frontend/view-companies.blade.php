@@ -6,9 +6,9 @@
 <section id="companies-section">
     <div class="container">
         <div class="col-md-12 learn-search-box">
-            <h2 class="text-center">@lang('home.companiesin') @lang('home.'.JobCallMe::countryName(JobCallMe::getHomeCountry()))</h2>
+            <h2 class="text-center"><!-- @lang('home.companiesin') @lang('home.'.JobCallMe::countryName(JobCallMe::getHomeCountry())) --></h2>
             <div class="row">
-                <div class="col-md-offset-2 col-md-8">
+                <div class="col-md-offset-2 col-md-8" style="margin-top:20px">
                     <div class="ls-box">
                         <form role="form" action="{{ url('companies') }}" method="post">
                             {{ csrf_field() }}
@@ -17,7 +17,7 @@
                                     <input type="search" placeholder="@lang('home.key')" name="keyword">
                                 </div>
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="@lang('home.city')" name="city" style="width: 100%">
+                                    <input type="search" placeholder="@lang('home.Cities')" name="city" style="width: 100%">
                                 </div>
                                 <button type="submit" class="search-btn">
                                     <i class="fa fa-search"></i>
@@ -40,7 +40,8 @@
                     <?php 
                     $i = 1; 
                     foreach(JobCallMe::getCategories() as $cat){
-                        if($i == 10){
+                        //if($i == 10){
+						if($i == 7){
                             $i = 1; 
                             echo '</ul></div>';
                             echo '<div class="col-md-4">';
@@ -78,10 +79,31 @@
                         <div class="ih-item square effect8 scale_up">
                             <a href="{{ url('companies/company/'.$company->companyId) }}">
                             <div class="img"><img src="{{ $cLogo }}" alt="img" class="img-resposive"></div>
-                            <div class="info companies-mbl-info">
+                            <div class="info">
                                 <h3>{!! $company->companyName !!}</h3>
-                                <p>{!! substr(strip_tags($company->companyAbout),0,100) !!}</p>
+					<?
+					 $string = strip_tags($company->companyAbout);
+					 if (strlen($string) > 130) {
+
+								// truncate string
+									$stringCut = substr($string, 0, 130);
+									 $endPoint = strrpos($stringCut, ' ');
+
+								//if the string doesn't contain any space then it will cut without word basis.
+									//$string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+
+									$string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+									$string .= '... '.trans('home.Read More').'';
+									
+					}
+					?>
+
+                                <p>{!! $string !!}<!-- {!! substr(strip_tags($company->companyAbout),0,100) !!} --></p>
                             </div></a>
+							<div class="info companies-mbl-info">
+                                <h3>{!! $company->companyName !!}</h3>                               
+                            </div>
+
                         </div>
                         <!-- end normal -->
                     </div>

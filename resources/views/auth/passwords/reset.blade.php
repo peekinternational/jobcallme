@@ -15,6 +15,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
+						
+						<div class="alert alert-success">
+                            @lang('home.password-reset-text')
+                        </div>
 
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
                         {{ csrf_field() }}

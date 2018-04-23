@@ -72,7 +72,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('settings/paypal/save','admin\Setting@savePaypal');
 
 	/* user management */
-	Route::match(['get','post'],'users/view','admin\Users@viewUsers');
+	Route::match(['get','post'],'users/view','admin\Users@	');
 	Route::match(['get','post'],'users/add','admin\Users@addEditUser');
 	Route::match(['get','post'],'users/edit/{id}','admin\Users@addEditUser');
 	Route::get('users/view/{id}','admin\Users@viewSingleUser');
@@ -175,10 +175,12 @@ Route::get('learn/seminar/{id}','frontend\Home@viewUpskill');
 Route::get('learn/training/{id}','frontend\Home@viewUpskill');
 Route::get('learn/webinar/{id}','frontend\Home@viewUpskill');
 Route::get('learn/workshop/{id}','frontend\Home@viewUpskill');
+Route::get('learn/exhibition/{id}','frontend\Home@viewUpskill');
 Route::get('learn/seminar · exhibition · webinar/{id}','frontend\Home@viewUpskill');
 Route::get('learn/forum · conference/{id}','frontend\Home@viewUpskill');
 Route::get('learn/training · workshop/{id}','frontend\Home@viewUpskill');
 Route::get('learn/course · education · academy/{id}','frontend\Home@viewUpskill');
+Route::get('learn/contest · show/{id}','frontend\Home@viewUpskill');
 Route::match(['get','post'],'learn/search','frontend\Home@searchSkills');
 Route::match(['get','post'],'companies','frontend\Home@companies');
 Route::get('companies/company/{id}','frontend\Home@viewCompany');
@@ -239,6 +241,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::post('jobseeker/profile/picture','frontend\Jobseeker@profilePicture');
     Route::post('password/save','frontend\Jobseeker@savePassword');
     Route::post('profile/save','frontend\Jobseeker@saveProfile');
+	Route::post('jobseeker/resume/hopeworking/save','frontend\Jobseeker@savehopeworking');
+	Route::post('jobseeker/resume/preference/save','frontend\Jobseeker@savepreference');
     Route::get('jobseeker/job/action','frontend\Jobseeker@jobAction');
     Route::get('jobseeker/company/action','frontend\Jobseeker@followAction');
     Route::get('jobseeker/application','frontend\Jobseeker@application');

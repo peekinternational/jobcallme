@@ -44,7 +44,30 @@
                         <ul id="post-job-ad-types">
                          
 						 @foreach($plan as $key=>$pay)
-                         <!----><li style="position:relative">
+							
+								@if($pay->type == "Basic")
+                            <!----><li style="position:relative;background:#3a79d2;">
+								@endif
+								@if($pay->type == "Golden")
+                            <!----><li style="position:relative;background:#b0a48a;">
+								@endif
+								@if($pay->type == "Special")
+                            <!----><li style="position:relative;background:#4e6c7c;">
+								@endif
+								@if($pay->type == "Latest")
+                            <!----><li style="position:relative;background:#94a5a5;">
+								@endif
+								@if($pay->type == "Hot")
+                            <!----><li style="position:relative;background:#717171;">
+								@endif
+								@if($pay->type == "Top Job")
+                            <!----><li style="position:relative;background:#a8b3b9;">
+								@endif
+								@if($pay->type == "Premium")
+                            <!----><li style="position:relative;background:#a09d8e;">
+								@endif
+
+                         <!----><!-- <li style="position:relative"> -->
                                 <!---->
 								<span class="pay_blog">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $pay->id!!}" name="allarray" value="{!! $pay->cat_id!!}|{!! $pay->id!!}|{!! $pay->amount!!}|{!! $pay->duration!!}|{!! $pay->quantity!!}">
@@ -53,19 +76,21 @@
                                     <input class="checkplan"  type="hidden" name="plan"  value="plan">
 								</span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.'.$pay->type)</span></div>
+                             <span class="b" style="color:#fff;font-size: 17px;">@lang('home.'.$pay->type)</span></div>
                                 <div>
                                     <!----><label for="{!! $pay->id!!}">
-                                        <ul class="list-unstyled desc" >
-											<li>@lang('home.jobquentity') {{ $pay->quantity}}</li>
-                                            <li>@lang('home.Featuredonhomepage') ({{ $pay->duration}} days)</li>
+                                        <ul class="list-unstyled desc" style="font-size:12px">
+											<!-- <li>@lang('home.jobquentity') {{ $pay->quantity}}</li>
+                                            <li>@lang('home.Featuredonhomepage') ({{ $pay->duration}} days)</li> -->
+											<li>@lang('home.On Homepage'): {!!$pay->duration !!} @lang('home.days')</li>
+                                    <li>@lang('home.Quantity'): {!!$pay->quantity !!} @lang('home.jobs')</li>
                                             <!-- <li>{!! $payment->tag1!!}</li>
                                              <li>{!! $payment->tag2!!}</li> -->
                                         </ul>
 										
-                                        <div class="credits b">
-										<span class="text-success" id="class_text{{$key}}"></span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+                                        <div class="credits b" style="color:#fff;font-size: 15px;">
+										<span style="color:#fff" class="text-success" id="class_text{{$key}}"></span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:20px"></i>
 									</div>
                                     </label>
                                     <!---->
@@ -75,7 +100,7 @@
                             </li>
 							@endforeach
                         </ul>
-                        <a id="nopckg" href="javascript:void(0)" style="float:right">Not Use Package Plan?</a>
+                        <a id="nopckg" href="javascript:void(0)" style="float:right">@lang('home.Not Use Package Plan?')</a>
                  
 
                     
@@ -87,29 +112,51 @@
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types">
 						 @foreach($rec as $k=>$payment)
+
+								@if($payment->title == "Basic")
+                            <!----><li style="position:relative;background:#3a79d2;">
+								@endif
+								@if($payment->title == "Golden")
+                            <!----><li style="position:relative;background:#b0a48a;">
+								@endif
+								@if($payment->title == "Special")
+                            <!----><li style="position:relative;background:#4e6c7c;">
+								@endif
+								@if($payment->title == "Latest")
+                            <!----><li style="position:relative;background:#94a5a5;">
+								@endif
+								@if($payment->title == "Hot")
+                            <!----><li style="position:relative;background:#717171;">
+								@endif
+								@if($payment->title == "Top Job")
+                            <!----><li style="position:relative;background:#a8b3b9;">
+								@endif
+								@if($payment->title == "Premium")
+                            <!----><li style="position:relative;background:#a09d8e;">
+								@endif
 								
-                            <!----><li style="position:relative">
+                            <!----><!-- <li style="position:relative"> -->
                                 <!---->
 								<span class="pay_blog">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
 									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
 								</span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.'.$payment->title)</span></div>
+                             <span class="b" style="color:#fff;font-size: 17px;">@lang('home.'.$payment->title)</span></div>
                                 <div>
                                     <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
+                                        <ul class="list-unstyled desc" style="font-size:12px">
 											<li>@lang('home.'.$payment->tag1)</li>
                                             <li>@lang('home.adcost')</li>
                                             <!-- <li>{!! $payment->tag1!!}</li>
                                              <li>{!! $payment->tag2!!}</li> -->
                                         </ul>
 										
-                                        <div class="credits b">@if($payment->price ==0)
+                                        <div class="credits b" style="color:#fff;font-size: 15px;">@if($payment->price ==0)
 									<span class="free">	@lang('home.Free')</span>
 										@else
-										<span class="text-success" id="simple_text{{$k}}"></span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+										<span style="color:#fff" class="text-success" id="simple_text{{$k}}"></span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:20px"></i>
 									@endif</div>
                                     </label>
                                     <!---->
@@ -176,7 +223,7 @@
 									<span class="free">	@lang('home.Free')</span>
 										@else
 										<span style="color:#fff" class="text-success" id="simple_text{{$keys}}"></span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:20px"></i>
 									@endif</div>
                                     </label>
                                     <!---->
@@ -260,8 +307,9 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.careerlevel')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2" name="careerLevel" required>
-                                    @foreach(JobCallMe::getCareerLevel() as $career)
+                                <select class="form-control select2" name="careerLevel">
+                                    <option value=" ">@lang('home.s_career')</option>
+									@foreach(JobCallMe::getCareerLevel() as $career)
                                         <option value="{!! $career !!}">@lang('home.'.$career)</option>
                                     @endforeach
                                 </select>
@@ -337,13 +385,13 @@
                             </div>
                         </div>
                            <div class="form-group">
-                            <label class="control-label col-sm-3">Associate Evaluation Form</label>
+                            <label class="control-label col-sm-3">@lang('home.Associate Evaluation Form')</label>
                             <div class="col-sm-9">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <input id="evform" type="checkbox" class="cbx-field" name="evform" value="yes">                             
                                         <label class="cbx" for="evform"></label>
-                                        <label class="lbl" for="evform">Associate Evaluation Form</label>
+                                        <label class="lbl" for="evform">@lang('home.Associate Evaluation Form')</label>
                                     </div>
                                 </div>
                             </div>
@@ -354,7 +402,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                        <select class="form-control" name="evaluation_form" id="ev_form" disabled="disabled">
-                                           <option value=""> select evaluation</option>
+                                           <option value=""> @lang('home.select evaluation')</option>
                                            @foreach($evaluation as $form)
                                            <option value="{{ $form->id}}">{{$form->title}}</option>
 
@@ -392,6 +440,85 @@
                                </select>
                            </div>
                        </div>
+
+					   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.Responsibilities')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <!-- <input type="text" class="form-control" name="responsibilities" placeholder="@lang('home.Responsibilities')" required> -->
+								<textarea name="responsibilities" class="form-control" placeholder="@lang('home.Responsibilities')"></textarea>
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.expptitle')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control" name="expptitle">  
+										<option value=" ">@lang('home.expptitle')</option>
+                                        <option value="exp Employee" {{ $meta->expptitle == 'exp Employee' ? 'selected="selected"' : '' }}>@lang('home.exp Employee')</option>  
+										
+										<option value="exp Chief/Senior Staff" {{ $meta->expptitle == 'exp Chief/Senior Staff' ? 'selected="selected"' : '' }}>@lang('home.exp Chief/Senior Staff')</option>
+
+                                        <option value="exp Assistant Manager" {{ $meta->expptitle == 'exp Assistant Manager' ? 'selected="selected"' : '' }}>@lang('home.exp Assistant Manager')</option>
+
+                                        <option value="exp Manager" {{ $meta->expptitle == 'exp Manager' ? 'selected="selected"' : '' }}>@lang('home.exp Manager')</option>
+
+                                        <option value="exp Deputy General Manger" {{ $meta->expptitle == 'exp Deputy General Manger)' ? 'selected="selected"' : '' }}>@lang('home.exp Deputy General Manger')</option>
+
+										<option value="exp General Manger" {{ $meta->expptitle == 'exp General Manger' ? 'selected="selected"' : '' }}>@lang('home.exp General Manger')</option>
+
+										<option value="exp Board of Director" {{ $meta->expptitle == 'exp Board of Director' ? 'selected="selected"' : '' }}>@lang('home.exp Board of Director')</option>
+
+										<option value="exp Researcher" {{ $meta->expptitle == 'exp Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Researcher')</option>
+
+										<option value="exp Chief Researcher" {{ $meta->expptitle == 'exp Chief Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Chief Researcher')</option>
+
+										<option value="exp Senior Researcher" {{ $meta->expptitle == 'exp Senior Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Senior Researcher')</option>
+
+										<option value="exp Head Researcher" {{ $meta->expptitle == 'exp Head Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Head Researcher')</option>
+
+										<option value="exp Principal Researcher" {{ $meta->expptitle == 'exp Principal Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Principal Researcher')</option>
+
+										<option value="exp Director of Research" {{ $meta->expptitle == 'exp Director of Research' ? 'selected="selected"' : '' }}>@lang('home.exp Director of Research')</option>
+                                    
+									</select>
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.expposition')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control" name="expposition">  	
+										<option value=" ">@lang('home.s_career')</option>
+                                        <option value="expp Team members" {{ $meta->expposition == 'expp Team members' ? 'selected="selected"' : '' }}>@lang('home.expp Team members')</option>  
+										
+										<option value="expp Team Leader" {{ $meta->expposition == 'expp Team Leader' ? 'selected="selected"' : '' }}>@lang('home.expp Team Leader')</option>
+
+                                        <option value="expp Manager" {{ $meta->expposition == 'expp Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Manager')</option>
+
+                                        <option value="expp Part Manager" {{ $meta->expposition == 'expp Part Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Part Manager')</option>
+
+                                        <option value="expp General Manger" {{ $meta->expposition == 'expp General Manger)' ? 'selected="selected"' : '' }}>@lang('home.expp General Manger')</option>
+
+										<option value="expp Branch Manager" {{ $meta->expposition == 'expp Branch Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Branch Manager')</option>
+
+										<option value="expp Branch office President" {{ $meta->expposition == 'expp Branch office President' ? 'selected="selected"' : '' }}>@lang('home.expp Branch office President')</option>
+
+										<option value="expp Director" {{ $meta->expposition == 'expp Director' ? 'selected="selected"' : '' }}>@lang('home.expp Director')</option>
+
+										<option value="expp Director of a bureau" {{ $meta->expposition == 'expp Director of a bureau' ? 'selected="selected"' : '' }}>@lang('home.expp Director of a bureau')</option>
+
+										<option value="expp Head Director" {{ $meta->expposition == 'expp Head Director' ? 'selected="selected"' : '' }}>@lang('home.expp Head Director')</option>
+
+										<option value="expp Center Chief" {{ $meta->expposition == 'expp Center Chief' ? 'selected="selected"' : '' }}>@lang('home.expp Center Chief')</option>
+
+										<option value="expp Production Director" {{ $meta->expposition == 'expp Production Director' ? 'selected="selected"' : '' }}>@lang('home.expp Production Director')</option>
+
+										<option value="expp Group Head" {{ $meta->expposition == 'expp Group Head' ? 'selected="selected"' : '' }}>@lang('home.expp Group Head')</option>
+                                    
+									</select>
+                            </div>
+                        </div>
+
                        <div class="form-group">
                            <label class="control-label col-sm-3">@lang('home.shift')</label>
                            <div class="col-sm-9 pnj-form-field">
@@ -408,6 +535,51 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control" name="jobaddr" id="jobaddr" placeholder="@lang('home.jobaddrtext')"  required>
                             </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label col-md-3">@lang('home.Working day')</label>
+                                <div class="col-md-3 pnj-form-field">
+                                    <select class="form-control" name="jobdayval" required>
+										<option value="jobday01" {{ $meta->jobdayval == 'jobday01' ? 'selected="selected"' : '' }}>@lang('home.jobday01')</option>
+										<option value="jobday02" {{ $meta->jobdayval == 'jobday02' ? 'selected="selected"' : '' }}>@lang('home.jobday02')</option>
+										<option value="jobday03" {{ $meta->jobdayval == 'jobday03' ? 'selected="selected"' : '' }}>@lang('home.jobday03')</option>
+										<option value="jobday04" {{ $meta->jobdayval == 'jobday04' ? 'selected="selected"' : '' }}>@lang('home.jobday04')</option>
+										<option value="jobday05" {{ $meta->jobdayval == 'jobday05' ? 'selected="selected"' : '' }}>@lang('home.jobday05')</option>
+										<option value="jobday06" {{ $meta->jobdayval == 'jobday06' ? 'selected="selected"' : '' }}>@lang('home.jobday06')</option>
+										<option value="jobday07" {{ $meta->jobdayval == 'jobday07' ? 'selected="selected"' : '' }}>@lang('home.jobday07')</option>
+										<option value="jobday08" {{ $meta->jobdayval == 'jobday08' ? 'selected="selected"' : '' }}>@lang('home.jobday08')</option>
+										<option value="jobday09" {{ $meta->jobdayval == 'jobday09' ? 'selected="selected"' : '' }}>@lang('home.jobday09')</option>
+										<option value="jobday10" {{ $meta->jobdayval == 'jobday10' ? 'selected="selected"' : '' }}>@lang('home.jobday10')</option>
+                                        
+                                    </select>
+                                </div>
+
+								<div class="col-md-6 pnj-form-field">								
+								
+										<input type="text" class="form-control" name="jobdayval_text" placeholder="@lang('home.jobdayval_text')">
+									
+								</div>
+                        </div>
+
+						 <div class="form-group">
+                            <label class="control-label col-md-3">@lang('home.Working hours')</label>
+                                <div class="col-md-3 pnj-form-field"">
+                                    <select class="form-control" name="jobhoursval" required>
+										<option value="jobhours01" {{ $meta->jobhoursval == 'jobhours01' ? 'selected="selected"' : '' }}>@lang('home.jobhours01')</option>
+										<option value="jobhours02" {{ $meta->jobhoursval == 'jobhours02' ? 'selected="selected"' : '' }}>@lang('home.jobhours02')</option>
+										<option value="jobhours03" {{ $meta->jobhoursval == 'jobhours03' ? 'selected="selected"' : '' }}>@lang('home.jobhours03')</option>
+										<option value="jobhours04" {{ $meta->jobhoursval == 'jobhours04' ? 'selected="selected"' : '' }}>@lang('home.jobhours04')</option>
+										<option value="jobhours05" {{ $meta->jobhoursval == 'jobhours05' ? 'selected="selected"' : '' }}>@lang('home.jobhours05')</option>
+										<option value="jobhours06" {{ $meta->jobhoursval == 'jobhours06' ? 'selected="selected"' : '' }}>@lang('home.jobday06')</option>										
+                                    </select>
+                                </div>
+
+								<div class="col-md-6 pnj-form-field">								
+								
+										<input type="text" class="form-control" name="jobhoursval_text" placeholder="@lang('home.jobhoursval_text')">
+									
+								</div>
                         </div>
 
 					   <div class="form-group">
@@ -440,6 +612,80 @@
 
                    </div>
 
+
+				   <h3>@lang('home.Eligibility and preferential terms')</h3>
+                    <div class="pnj-form-section">
+                       <div class="form-group">
+                           <label class="control-label col-sm-3">@lang('home.jobacademic')</label>
+                           <div class="col-sm-9 pnj-form-field">
+                               <select class="form-control" name="jobacademic">  									
+                                        <option value="highschool" {{ $meta->jobacademic == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
+                                        <option value="college" {{ $meta->jobacademic == 'college' ? 'selected="selected"' : '' }}>@lang('home.college')</option>
+                                        <option value="university" {{ $meta->jobacademic == 'university' ? 'selected="selected"' : '' }}>@lang('home.university')</option>
+                                        <option value="graduateschool" {{ $meta->jobacademic == 'graduateschool' ? 'selected="selected"' : '' }}>@lang('home.graduateschool')</option>
+                                        <option value="Doctorate(phd)" {{ $meta->jobacademic == 'Doctorate(phd)' ? 'selected="selected"' : '' }}>@lang('home.Doctorate(phd)')</option>
+										<option value="Vocational" {{ $meta->jobacademic == 'Vocational' ? 'selected="selected"' : '' }}>@lang('home.Vocational')</option>
+										<option value="Associate Degree" {{ $meta->jobacademic == 'Associate Degree' ? 'selected="selected"' : '' }}>@lang('home.Associate Degree')</option>
+										<option value="Certification" {{ $meta->jobacademic == 'Certification' ? 'selected="selected"' : '' }}>@lang('home.Certification')</option>
+                                    
+									</select>
+
+									<div class="row" style="padding-top:20px">
+                                   
+                                        <div class="col-md-2 benefits-checks">
+                                            <input id="jobacademic_not" type="checkbox" class="cbx-field" name="jobacademic_not" value="yes">								
+											<label class="cbx" for="jobacademic_not"></label>
+											<label class="lbl" for="jobacademic_not">@lang('home.Regardless Education')</label>
+                                        </div>
+										<div class="col-md-2 benefits-checks">
+                                            <input id="jobgraduate" type="checkbox" class="cbx-field" name="jobgraduate" value="yes">								
+											<label class="cbx" for="jobgraduate"></label>
+											<label class="lbl" for="jobgraduate">@lang('home.jobgraduate')</label>
+                                        </div>
+
+										
+										
+                                </div>
+
+
+                           </div>
+                       </div>
+					    
+					   <div class="form-group">
+                            <label class="control-label col-md-3 text-right">@lang('home.gender')</label>
+                                <div class="col-md-9 pnj-form-field">
+                                    <select class="form-control" name="gender">
+										<option value="Nosex" {{ $meta->gender == 'Nosex' ? 'selected="selected"' : '' }}>@lang('home.Nosex')</option>
+                                        <option value="Man" {{ $meta->gender == 'Man' ? 'selected="selected"' : '' }}>@lang('home.Man')</option>
+                                        <option value="Female" {{ $meta->gender == 'Female' ? 'selected="selected"' : '' }}>@lang('home.female')</option>
+                                    </select>
+                                </div>
+                        </div>
+
+					
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.age')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                    
+									<div class="col-md-3 pnj-salary">
+                                        <input type="text" class="form-control" name="jobage1" placeholder="@lang('home.age-text')">
+                                    </div>
+                                    <div class="col-md-3 pnj-salary">
+                                        <input type="text" class="form-control" name="jobage2" placeholder="@lang('home.age-text')">
+                                    </div>  
+									<div class="col-md-2">
+                                        <input id="jobnoage" type="checkbox" class="cbx-field" name="jobnoage" value="yes">								
+											<label class="cbx" for="jobnoage"></label>
+											<label class="lbl" for="jobnoage">@lang('home.jobnoage')</label>
+                                    </div>
+                                </div>
+								
+                            </div>
+                        </div>
+					</div>
+
+
 				   <h3>@lang('home.admissionsprocess')</h3>
                     <div class="pnj-form-section">                        
                         <div class="form-group">
@@ -471,7 +717,61 @@
 
                             </div>							
                         </div>
+
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.How to register')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">                                    
+                                        <div class="col-md-12 benefits-checks">
+                                            <input id="jobreceipt01"  type="checkbox" class="cbx-field" name="jobreceipt01" value="yes">
+                                            <label class="cbx" for="jobreceipt01"></label>
+                                            <label class="lbl" for="jobreceipt01">@lang('home.jobreceipt01')</label>
+                                        </div>
+										<div class="col-md-2 benefits-checks">
+                                            <input id="jobreceipt02"  type="checkbox" class="cbx-field" name="jobreceipt02"  value="yes">
+                                            <label class="cbx" for="jobreceipt02"></label>
+                                            <label class="lbl" for="jobreceipt02">@lang('home.jobreceipt02')</label>
+                                        </div>
+										<div class="col-sm-5 pnj-form-field">
+											<input type="text" class="form-control" name="jobhomgpage" placeholder="@lang('home.jobhomgpage')">
+										</div>
+								</div>
+								<div class="row"> 
+										<div class="col-md-2 benefits-checks">
+                                            <input id="jobreceipt07"  type="checkbox" class="cbx-field" name="jobreceipt07"  value="yes">
+                                            <label class="cbx" for="jobreceipt07"></label>
+                                            <label class="lbl" for="jobreceipt07">@lang('home.jobreceipt07')</label>
+                                        </div>
+										<div class="col-md-2 benefits-checks">
+                                            <input id="jobreceipt03"  type="checkbox" class="cbx-field" name="jobreceipt03"  value="yes">
+                                            <label class="cbx" for="jobreceipt03"></label>
+                                            <label class="lbl" for="jobreceipt03">@lang('home.jobreceipt03')</label>
+                                        </div>
+										<div class="col-md-2 benefits-checks">
+                                            <input id="jobreceipt04"  type="checkbox" class="cbx-field" name="jobreceipt04"  value="yes">
+                                            <label class="cbx" for="jobreceipt04"></label>
+                                            <label class="lbl" for="jobreceipt04">@lang('home.jobreceipt04')</label>
+                                        </div>
+										<div class="col-md-2 benefits-checks">
+                                            <input id="jobreceipt05"  type="checkbox" class="cbx-field" name="jobreceipt05"  value="yes">
+                                            <label class="cbx" for="jobreceipt05"></label>
+                                            <label class="lbl" for="jobreceipt05">@lang('home.jobreceipt05')</label>
+                                        </div>
+										<div class="col-md-2 benefits-checks">
+                                            <input id="jobreceipt06"  type="checkbox" class="cbx-field" name="jobreceipt06"  value="yes">
+                                            <label class="cbx" for="jobreceipt06"></label>
+                                            <label class="lbl" for="jobreceipt06">@lang('home.jobreceipt06')</label>
+                                        </div>
+                                        				
+                                </div>
+                            </div>							
+                        </div>
+
+
                     </div>	
+
+
 
                     <h3>@lang('home.compensationbenefits')</h3>
                     <div class="pnj-form-section">
@@ -480,10 +780,10 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="number" class="form-control" name="minSalary" placeholder="@lang('home.minsalary') 20,000,000" required>
+                                        <input type="number" class="form-control" name="minSalary" placeholder="@lang('home.minsalary') 20,000,000">
                                     </div>
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="number" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary') 25,000,000" required>
+                                        <input type="number" class="form-control" name="maxSalary" placeholder="@lang('home.Maxsalary') 25,000,000">
                                     </div>
                                     <div class="col-md-4">
                                         <select class="form-control col-md-4 select2" name="currency" required>
@@ -493,8 +793,32 @@
                                         </select>
                                     </div>
                                 </div>
+
+								<div class="row" style="padding-top:20px">
+
+
+                                        <div class="col-md-4 benefits-checks">
+											<input class="mat-radio-input cdk-visually-hidden" type="radio" name="afterinterview" value="expectedSalary-check" @if($meta->afterinterview == "expectedSalary-check") checked @else @endif > @lang('home.expectedSalary-check')	
+
+                                            <!-- <input id="expectedSalary" type="checkbox" class="cbx-field" name="expectedSalary" value="yes">								
+											<label class="cbx" for="expectedSalary"></label>
+											<label class="lbl" for="expectedSalary">@lang('home.expectedSalary-check')</label> -->
+                                        </div>
+
+										<div class="col-md-4 benefits-checks">
+											<input class="mat-radio-input cdk-visually-hidden" type="radio" name="afterinterview" value="Decision after interview" @if($meta->afterinterview == "Decision after interview") checked @else @endif> @lang('home.Decision after interview')&nbsp;&nbsp;&nbsp;
+
+                                            <!-- <input id="afterinterview" type="checkbox" class="cbx-field" name="afterinterview" value="yes">								
+											<label class="cbx" for="afterinterview"></label>
+											<label class="lbl" for="afterinterview">@lang('home.Decision after interview')</label> -->
+                                        </div>										
+										
+                                </div>
+
                             </div>
                         </div>
+
+                            
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.benefits')</label>
                             <div class="col-sm-9 pnj-form-field">
@@ -579,6 +903,14 @@
                                 </div>
                             </div>
                         </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.address2')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <input type="text" class="form-control" name="Address2" id="Address2" placeholder="@lang('home.address2')"  required>
+                            </div>
+                        </div>
+
                     </div>
                     <!-- google map code html -->
                     <div id="map"></div>
@@ -603,11 +935,12 @@
                             </div>
                         </div>
                     </div>
-					<div class="col-md-offset-3 col-md-2  pnj-btns">
+					<div class="col-md-offset-3 col-md-3  pnj-btns">
                         <span style="font-size:17px;padding-right:50px;" id="total">@lang('home.Total Amount') : US$</span>						
                     </div>
                     <div class="col-md-6  pnj-btns">                        
 						<button type="submit" class="btn btn-primary" name="save">@lang('home.postjob')</button>
+                        <button type="submit" class="btn btn-default" name="draft" value="draft">@lang('home.draft')</button>
                         <button class="btn btn-default"><a href="{{ url('account/employer') }}">@lang('home.CANCEL')</a></button>
                     </div>
                 
@@ -713,7 +1046,7 @@ $(document).ready(function(){
      var jArray = <?php echo json_encode($plan); ?>;
 
      for(var i=0;i<jArray.length;i++){
-     $('#class_text'+i).html('KRNW '+jArray[i].amount*1100+'.00')
+     $('#class_text'+i).html('￦ '+jArray[i].amount*1000+'')
         //alert(jArray[i].amount);
        }
      
@@ -730,7 +1063,7 @@ $(document).ready(function(){
     $('#kr').click(function(){
     if ($(this).is(':checked')) {
     for(var i=0;i<jArray.length;i++){
-     $('#class_text'+i).html('KRNW '+jArray[i].amount*1100 +'.00')
+     $('#class_text'+i).html('￦ '+jArray[i].amount*1000 +'')
        // alert(jArray[i].amount*1100);
       }
     }
@@ -743,7 +1076,7 @@ $(document).ready(function(){
      var simplearray = <?php echo json_encode($rec); ?>;
 
      for(var i=0;i<simplearray.length;i++){
-     $('#simple_text'+i).html('KRNW '+simplearray[i].price*1100+'.00')
+     $('#simple_text'+i).html('￦ '+simplearray[i].price*1100+'(부가세 포함)')
         //alert(jArray[i].amount);
        }
      
@@ -760,7 +1093,7 @@ $(document).ready(function(){
     $('#kr').click(function(){
     if ($(this).is(':checked')) {
     for(var i=0;i<simplearray.length;i++){
-     $('#simple_text'+i).html('KRNW '+simplearray[i].price*1100 +'.00')
+     $('#simple_text'+i).html('￦ '+simplearray[i].price*1100 +'(부가세 포함)')
        // alert(jArray[i].amount*1100);
       }
     }
@@ -879,12 +1212,12 @@ $('#secondDate').on('change', function() {
       $('#pas').val(to);
       
     if ($('#kr').is(':checked')) {
-	  $('#total').html("@lang('home.Total Amount') : "+total*1100+" ₩" );
+	  $('#total').html("@lang('home.Total Amount') : ₩ "+total*1100 );
      // alert('kr');
     }
 
      if ($('#us').is(':checked')) {
-	  $('#total').html("@lang('home.Total Amount') : "+total+" $" );
+	  $('#total').html("@lang('home.Total Amount') : $ "+total );
       //alert('us');
     }
    

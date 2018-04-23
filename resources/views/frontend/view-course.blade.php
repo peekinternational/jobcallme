@@ -30,7 +30,7 @@
                 </div>
                 <table class="table table-bordered">
                     <tr>
-                        <td class="active" width="150px">@lang('home.organiser')</td>
+                        <td class="active" width="200px">@lang('home.organiser')</td>
                         <td>{{ $record->organiser != '' ?  $record->organiser : JobCallMe::userName($record->userId) }}</td>
                     </tr>
                     <tr>
@@ -40,6 +40,14 @@
 						@else
 						    {{ date('d F, Y',strtotime($record->startDate))}}
 						@endif </td>
+                    </tr>
+					<tr>
+                        <td class="active">@lang('home.edate')</td>
+                        <td>@if(app()->getLocale() == "kr")
+						    {{ date('Y-m-d',strtotime($record->endDate))}}
+						@else
+						    {{ date('d F, Y',strtotime($record->endDate))}}
+						@endif  </td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.duration')</td>
@@ -97,7 +105,16 @@
                         <td>{{ $record->address }} , @lang('home.'.JobCallMe::cityName($record->city))</td>
                     </tr>
                 </table>
-                <h3>@lang('home.schedule')</h3>
+				<h4>@lang('home.CostofDescription')</h4>
+                <table class="table">
+                   
+                           <tr>
+                               <th class="la-text">{!! nl2br($record->costdescription) !!}</th>
+                            
+                           </tr>
+                        
+                </table>
+                <h4>@lang('home.schedule')</h4>
                 <table class="table">
                     <?php
                     $opHour = @json_decode($record->timing,true);
@@ -115,9 +132,21 @@
 				<table class="table">
 					<tr>
 					  <td>
-                <h3><span style="padding-left:20px">@lang('home.details')</span></h3>
+                <h4><span style="padding-left:20px">@lang('home.details')</span></h4>
                 <p>{!! $record->description !!}</p></td></tr></table>
+                 <div class="ra-author-box">
+                                <img src="{{ url('compnay-logo/'.$record->companyLogo) }}" class="img-circle" alt="{{ $record->companyName }}">
+                                <div class="ra-author">
+                                    <a href="{{ url('companies/company/'.$record->companyId) }}">{{ $record->companyName}}</a><br>
+                                    <span>@if(app()->getLocale() == "kr")
+														{{ date('Y-m-d',strtotime($record->createdTime))}}
+													@else
+														{{ date('M d, Y',strtotime($record->createdTime))}}
+													@endif</span>
+                                </div>
+                            </div>
             </div>
+             
         </div>
         <div class="col-md-3">
             <div class="ld-right">

@@ -232,7 +232,7 @@ function editDepartment(departmentId){
         success: function(response){
             var obj = $.parseJSON(response);
 
-            $('.add-edit-department .panel-title').text('Edit Department');
+            $('.add-edit-department .panel-title').text('@lang("home.Edit Department")');
             $('.department-form .departmentId').val(departmentId);
             $('.department-form input[name="name"]').val(obj.name);
             $('.department-form select[name="city"]').attr('data-city',obj.city);

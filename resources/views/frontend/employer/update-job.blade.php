@@ -127,6 +127,7 @@
                             <label class="control-label col-sm-3">@lang('home.careerlevel')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="careerLevel">
+										<option value=" ">@lang('home.s_career')</option>
                                     @foreach(JobCallMe::getCareerLevel() as $career)
                                         <option value="{!! $career !!}" {{ $result->careerLevel == $career ? 'selected="selected"' : '' }}>@lang('home.'.$career)</option>
                                     @endforeach
@@ -178,7 +179,7 @@
                     <h3>@lang('home.naturejob')</h3>
                     <div class="pnj-form-section">
                        <div class="form-group">
-                           <label class="control-label col-sm-3">@lang('home.type')</label>
+                           <label class="control-label col-sm-3">@lang('home.jobinformationtype')</label>
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control select2" name="type">
                                     @foreach(JobCallMe::getJobType() as $jtype)
@@ -187,6 +188,80 @@
                                </select>
                            </div>
                        </div>
+
+					   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.Responsibilities')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <input type="text" class="form-control" value="{!! $result->responsibilities !!}" name="responsibilities" placeholder="@lang('home.Responsibilities')">
+                            </div>
+                       </div>
+					   <div class="form-group">
+                           <label class="control-label col-sm-3">@lang('home.expptitle')</label>
+                           <div class="col-sm-9 pnj-form-field">
+                               <select class="form-control" name="expptitle">
+										<option value=" ">@lang('home.expptitle')</option>
+                                    <option value="exp Employee" {{ $result->expptitle == 'exp Employee' ? 'selected="selected"' : '' }}>@lang('home.exp Employee')</option>  
+										
+										<option value="exp Chief/Senior Staff" {{ $result->expptitle == 'exp Chief/Senior Staff' ? 'selected="selected"' : '' }}>@lang('home.exp Chief/Senior Staff')</option>
+
+                                        <option value="exp Assistant Manager" {{ $result->expptitle == 'exp Assistant Manager' ? 'selected="selected"' : '' }}>@lang('home.exp Assistant Manager')</option>
+
+                                        <option value="exp Manager" {{ $result->expptitle == 'exp Manager' ? 'selected="selected"' : '' }}>@lang('home.exp Manager')</option>
+
+                                        <option value="exp Deputy General Manger" {{ $result->expptitle == 'exp Deputy General Manger)' ? 'selected="selected"' : '' }}>@lang('home.exp Deputy General Manger')</option>
+
+										<option value="exp General Manger" {{ $result->expptitle == 'exp General Manger' ? 'selected="selected"' : '' }}>@lang('home.exp General Manger')</option>
+
+										<option value="exp Board of Director" {{ $result->expptitle == 'exp Board of Director' ? 'selected="selected"' : '' }}>@lang('home.exp Board of Director')</option>
+
+										<option value="exp Researcher" {{ $result->expptitle == 'exp Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Researcher')</option>
+
+										<option value="exp Chief Researcher" {{ $result->expptitle == 'exp Chief Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Chief Researcher')</option>
+
+										<option value="exp Senior Researcher" {{ $result->expptitle == 'exp Senior Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Senior Researcher')</option>
+
+										<option value="exp Head Researcher" {{ $result->expptitle == 'exp Head Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Head Researcher')</option>
+
+										<option value="exp Principal Researcher" {{ $result->expptitle == 'exp Principal Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Principal Researcher')</option>
+
+										<option value="exp Director of Research" {{ $result->expptitle == 'exp Director of Research' ? 'selected="selected"' : '' }}>@lang('home.exp Director of Research')</option>
+                               </select>
+                           </div>
+                       </div>
+					   <div class="form-group">
+                           <label class="control-label col-sm-3">@lang('home.expposition')</label>
+                           <div class="col-sm-9 pnj-form-field">
+                               <select class="form-control" name="expposition">
+									<option value=" ">@lang('home.expposition')</option>
+                                    <option value="expp Team members" {{ $result->expposition == 'expp Team members' ? 'selected="selected"' : '' }}>@lang('home.expp Team members')</option>  
+										
+										<option value="expp Team Leader" {{ $result->expposition == 'expp Team Leader' ? 'selected="selected"' : '' }}>@lang('home.expp Team Leader')</option>
+
+                                        <option value="expp Manager" {{ $result->expposition == 'expp Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Manager')</option>
+
+                                        <option value="expp Part Manager" {{ $result->expposition == 'expp Part Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Part Manager')</option>
+
+                                        <option value="expp General Manger" {{ $result->expposition == 'expp General Manger)' ? 'selected="selected"' : '' }}>@lang('home.expp General Manger')</option>
+
+										<option value="expp Branch Manager" {{ $result->expposition == 'expp Branch Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Branch Manager')</option>
+
+										<option value="expp Branch office President" {{ $result->expposition == 'expp Branch office President' ? 'selected="selected"' : '' }}>@lang('home.expp Branch office President')</option>
+
+										<option value="expp Director" {{ $result->expposition == 'expp Director' ? 'selected="selected"' : '' }}>@lang('home.expp Director')</option>
+
+										<option value="expp Director of a bureau" {{ $result->expposition == 'expp Director of a bureau' ? 'selected="selected"' : '' }}>@lang('home.expp Director of a bureau')</option>
+
+										<option value="expp Head Director" {{ $result->expposition == 'expp Head Director' ? 'selected="selected"' : '' }}>@lang('home.expp Head Director')</option>
+
+										<option value="expp Center Chief" {{ $result->expposition == 'expp Center Chief' ? 'selected="selected"' : '' }}>@lang('home.expp Center Chief')</option>
+
+										<option value="expp Production Director" {{ $result->expposition == 'expp Production Director' ? 'selected="selected"' : '' }}>@lang('home.expp Production Director')</option>
+
+										<option value="expp Group Head" {{ $result->expposition == 'expp Group Head' ? 'selected="selected"' : '' }}>@lang('home.expp Group Head')</option>
+                               </select>
+                           </div>
+                       </div>
+
                        <div class="form-group">
                            <label class="control-label col-sm-3">@lang('home.shift')</label>
                            <div class="col-sm-9 pnj-form-field">
@@ -197,6 +272,62 @@
                                </select>
                            </div>
                        </div>
+
+					   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.jobaddr')</label>
+                            <div class="col-sm-9 pnj-form-field">
+								<input type="text" name="jobaddr" class="form-control" id="Address" value="<?php if ( isset($result->jobaddr) && $result->jobaddr != "" ){ print $result->jobaddr;}?>"  placeholder="@lang('home.jobaddrtext')" required />
+
+                                
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label col-md-3">@lang('home.Working day')</label>
+                                <div class="col-md-3 pnj-form-field">
+                                    <select class="form-control" name="jobdayval" required>
+										<option value="jobday01" {{ $result->jobdayval == 'jobday01' ? 'selected="selected"' : '' }}>@lang('home.jobday01')</option>
+										<option value="jobday02" {{ $result->jobdayval == 'jobday02' ? 'selected="selected"' : '' }}>@lang('home.jobday02')</option>
+										<option value="jobday03" {{ $result->jobdayval == 'jobday03' ? 'selected="selected"' : '' }}>@lang('home.jobday03')</option>
+										<option value="jobday04" {{ $result->jobdayval == 'jobday04' ? 'selected="selected"' : '' }}>@lang('home.jobday04')</option>
+										<option value="jobday05" {{ $result->jobdayval == 'jobday05' ? 'selected="selected"' : '' }}>@lang('home.jobday05')</option>
+										<option value="jobday06" {{ $result->jobdayval == 'jobday06' ? 'selected="selected"' : '' }}>@lang('home.jobday06')</option>
+										<option value="jobday07" {{ $result->jobdayval == 'jobday07' ? 'selected="selected"' : '' }}>@lang('home.jobday07')</option>
+										<option value="jobday08" {{ $result->jobdayval == 'jobday08' ? 'selected="selected"' : '' }}>@lang('home.jobday08')</option>
+										<option value="jobday09" {{ $result->jobdayval == 'jobday09' ? 'selected="selected"' : '' }}>@lang('home.jobday09')</option>
+										<option value="jobday10" {{ $result->jobdayval == 'jobday10' ? 'selected="selected"' : '' }}>@lang('home.jobday10')</option>
+                                        
+                                    </select>
+                                </div>
+
+								<div class="col-md-6 pnj-form-field">								
+								
+										<input type="text" class="form-control" name="jobdayval_text" value="{!! $result->jobdayval_text !!}" placeholder="@lang('home.jobdayval_text')">
+									
+								</div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label col-md-3">@lang('home.Working hours')</label>
+                                <div class="col-md-3 pnj-form-field"">
+                                    <select class="form-control" name="jobhoursval" required>
+										<option value="jobhours01" {{ $result->jobhoursval == 'jobhours01' ? 'selected="selected"' : '' }}>@lang('home.jobhours01')</option>
+										<option value="jobhours02" {{ $result->jobhoursval == 'jobhours02' ? 'selected="selected"' : '' }}>@lang('home.jobhours02')</option>
+										<option value="jobhours03" {{ $result->jobhoursval == 'jobhours03' ? 'selected="selected"' : '' }}>@lang('home.jobhours03')</option>
+										<option value="jobhours04" {{ $result->jobhoursval == 'jobhours04' ? 'selected="selected"' : '' }}>@lang('home.jobhours04')</option>
+										<option value="jobhours05" {{ $result->jobhoursval == 'jobhours05' ? 'selected="selected"' : '' }}>@lang('home.jobhours05')</option>
+										<option value="jobhours06" {{ $result->jobhoursval == 'jobhours06' ? 'selected="selected"' : '' }}>@lang('home.jobday06')</option>										
+                                    </select>
+                                </div>
+
+								<div class="col-md-6 pnj-form-field">								
+								
+										<input type="text" class="form-control" name="jobhoursval_text" value="{!! $result->jobhoursval_text !!}" placeholder="@lang('home.jobhoursval_text')">
+									
+								</div>
+                        </div>
+
+
 					     <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.postcate1')</label>
                             <div class="col-sm-9 pnj-form-field">
@@ -228,6 +359,199 @@
                             </div>
                         </div>
                    </div>
+
+
+				   <h3>@lang('home.Eligibility and preferential terms')</h3>
+                    <div class="pnj-form-section">
+                       <div class="form-group">
+                           <label class="control-label col-sm-3">@lang('home.jobacademic')</label>
+                           <div class="col-sm-9 pnj-form-field">
+                               <select class="form-control" name="jobacademic">  									
+                                        <option value="highschool" {{ $result->jobacademic == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
+                                        <option value="college" {{ $result->jobacademic == 'college' ? 'selected="selected"' : '' }}>@lang('home.college')</option>
+                                        <option value="university" {{ $result->jobacademic == 'university' ? 'selected="selected"' : '' }}>@lang('home.university')</option>
+                                        <option value="graduateschool" {{ $result->jobacademic == 'graduateschool' ? 'selected="selected"' : '' }}>@lang('home.graduateschool')</option>
+                                        <option value="Doctorate(phd)" {{ $result->jobacademic == 'Doctorate(phd)' ? 'selected="selected"' : '' }}>@lang('home.Doctorate(phd)')</option>
+										<option value="Vocational" {{ $result->jobacademic == 'Vocational' ? 'selected="selected"' : '' }}>@lang('home.Vocational')</option>
+										<option value="Associate Degree" {{ $result->jobacademic == 'Associate Degree' ? 'selected="selected"' : '' }}>@lang('home.Associate Degree')</option>
+										<option value="Certification" {{ $result->jobacademic == 'Certification' ? 'selected="selected"' : '' }}>@lang('home.Certification')</option>
+                                    
+									</select>
+
+									<div class="row" style="padding-top:20px">
+                                   
+                                        <div class="col-md-2 benefits-checks">
+                                            <input id="jobacademic_not" type="checkbox" class="cbx-field" name="jobacademic_not" value="yes" {{ $result->jobacademic_not == 'yes' ? 'checked=""' : '' }}>								
+											<label class="cbx" for="jobacademic_not"></label>
+											<label class="lbl" for="jobacademic_not">@lang('home.Regardless Education')</label>
+                                        </div>
+										<div class="col-md-2 benefits-checks">
+                                            <input id="jobgraduate" type="checkbox" class="cbx-field" name="jobgraduate" value="yes" {{ $result->jobgraduate == 'yes' ? 'checked=""' : '' }}>								
+											<label class="cbx" for="jobgraduate"></label>
+											<label class="lbl" for="jobgraduate">@lang('home.jobgraduate')</label>
+                                        </div>
+
+										
+										
+                                </div>
+
+
+                           </div>
+                       </div>
+					    
+					   <div class="form-group">
+                            <label class="control-label col-md-3 text-right">@lang('home.gender')</label>
+                                <div class="col-md-9 pnj-form-field">
+                                    <select class="form-control" name="gender">
+										<option value="Nosex" {{ $result->gender == 'Nosex' ? 'selected="selected"' : '' }}>@lang('home.Nosex')</option>
+                                        <option value="Male" {{ $result->gender == 'Male' ? 'selected="selected"' : '' }}>@lang('home.male')</option>
+                                        <option value="Female" {{ $result->gender == 'Female' ? 'selected="selected"' : '' }}>@lang('home.female')</option>
+                                    </select>
+                                </div>
+                        </div>
+
+					
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.age')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                    
+									<div class="col-md-3 pnj-salary">
+                                        <input type="text" class="form-control" name="jobage1" value="{!! $result->jobage1 !!}" placeholder="@lang('home.age-text')">
+                                    </div>
+                                    <div class="col-md-3 pnj-salary">
+                                        <input type="text" class="form-control" name="jobage2" value="{!! $result->jobage2 !!}" placeholder="@lang('home.age-text')">
+                                    </div>  
+									<div class="col-md-2">
+                                        <input id="jobnoage" type="checkbox" class="cbx-field" name="jobnoage" value="yes" {{ $result->jobnoage == 'yes' ? 'checked=""' : '' }}>								
+											<label class="cbx" for="jobnoage"></label>
+											<label class="lbl" for="jobnoage">@lang('home.jobnoage')</label>
+                                    </div>
+                                </div>
+								
+                            </div>
+                        </div>
+
+						<!--
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.expptitle')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control" name="expptitle">  									
+                                        <option value="exp Employee" {{ $meta->expptitle == 'exp Employee' ? 'selected="selected"' : '' }}>@lang('home.exp Employee')</option>  
+										
+										<option value="exp Chief/Senior Staff" {{ $meta->expptitle == 'exp Chief/Senior Staff' ? 'selected="selected"' : '' }}>@lang('home.exp Chief/Senior Staff')</option>
+
+                                        <option value="exp Assistant Manager" {{ $meta->expptitle == 'exp Assistant Manager' ? 'selected="selected"' : '' }}>@lang('home.exp Assistant Manager')</option>
+
+                                        <option value="exp Manager" {{ $meta->expptitle == 'exp Manager' ? 'selected="selected"' : '' }}>@lang('home.exp Manager')</option>
+
+                                        <option value="exp Deputy General Manger" {{ $meta->expptitle == 'exp Deputy General Manger)' ? 'selected="selected"' : '' }}>@lang('home.exp Deputy General Manger')</option>
+
+										<option value="exp General Manger" {{ $meta->expptitle == 'exp General Manger' ? 'selected="selected"' : '' }}>@lang('home.exp General Manger')</option>
+
+										<option value="exp Board of Director" {{ $meta->expptitle == 'exp Board of Director' ? 'selected="selected"' : '' }}>@lang('home.exp Board of Director')</option>
+
+										<option value="exp Researcher" {{ $meta->expptitle == 'exp Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Researcher')</option>
+
+										<option value="exp Chief Researcher" {{ $meta->expptitle == 'exp Chief Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Chief Researcher')</option>
+
+										<option value="exp Senior Researcher" {{ $meta->expptitle == 'exp Senior Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Senior Researcher')</option>
+
+										<option value="exp Head Researcher" {{ $meta->expptitle == 'exp Head Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Head Researcher')</option>
+
+										<option value="exp Principal Researcher" {{ $meta->expptitle == 'exp Principal Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Principal Researcher')</option>
+
+										<option value="exp Director of Research" {{ $meta->expptitle == 'exp Director of Research' ? 'selected="selected"' : '' }}>@lang('home.exp Director of Research')</option>
+                                    
+									</select>
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.expposition')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control" name="expptitle">  									
+                                        <option value="expp Team members" {{ $meta->expposition == 'expp Team members' ? 'selected="selected"' : '' }}>@lang('home.expp Team members')</option>  
+										
+										<option value="expp Team Leader" {{ $meta->expposition == 'expp Team Leader' ? 'selected="selected"' : '' }}>@lang('home.expp Team Leader')</option>
+
+                                        <option value="expp Manager" {{ $meta->expposition == 'expp Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Manager')</option>
+
+                                        <option value="expp Part Manager" {{ $meta->expposition == 'expp Part Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Part Manager')</option>
+
+                                        <option value="expp General Manger" {{ $meta->expposition == 'expp General Manger)' ? 'selected="selected"' : '' }}>@lang('home.expp General Manger')</option>
+
+										<option value="expp Branch Manager" {{ $meta->expposition == 'expp Branch Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Branch Manager')</option>
+
+										<option value="expp Branch office President" {{ $meta->expposition == 'expp Branch office President' ? 'selected="selected"' : '' }}>@lang('home.expp Branch office President')</option>
+
+										<option value="expp Director" {{ $meta->expposition == 'expp Director' ? 'selected="selected"' : '' }}>@lang('home.expp Director')</option>
+
+										<option value="expp Director of a bureau" {{ $meta->expposition == 'expp Director of a bureau' ? 'selected="selected"' : '' }}>@lang('home.expp Director of a bureau')</option>
+
+										<option value="expp Head Director" {{ $meta->expposition == 'expp Head Director' ? 'selected="selected"' : '' }}>@lang('home.expp Head Director')</option>
+
+										<option value="expp Center Chief" {{ $meta->expposition == 'expp Center Chief' ? 'selected="selected"' : '' }}>@lang('home.expp Center Chief')</option>
+
+										<option value="expp Production Director" {{ $meta->expposition == 'expp Production Director' ? 'selected="selected"' : '' }}>@lang('home.expp Production Director')</option>
+
+										<option value="expp Group Head" {{ $meta->expposition == 'expp Group Head' ? 'selected="selected"' : '' }}>@lang('home.expp Group Head')</option>
+                                    
+									</select>
+                            </div>
+                        </div>
+
+                       <div class="form-group">
+                           <label class="control-label col-sm-3">@lang('home.shift')</label>
+                           <div class="col-sm-9 pnj-form-field">
+                               <select class="form-control select2" name="shift">
+                                    @foreach(JobCallMe::getJobShifts() as $jshift)
+                                        <option value="{!! $jshift->name !!}">@lang('home.'.$jshift->name)</option>
+                                    @endforeach
+                               </select>
+                           </div>
+                       </div>
+
+					   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.jobaddr')</label>
+                            <div class="col-sm-9 pnj-form-field">
+								<input type="text" name="jobaddr" class="form-control" id="Address" value="<?php if ( isset($listing_step['jobaddr']) && $listing_step['jobaddr'] != "" ){ print $listing_step['jobaddr'];}?>"  placeholder="@lang('home.jobaddrtext')" required />
+
+                                
+                            </div>
+                        </div>
+
+					   <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.postcate1')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                    <div class="col-md-4 benefits-checks">
+                                        <input id="head" type="checkbox" class="cbx-field" name="head" value="yes">								
+										<label class="cbx" for="head"></label>
+                                        <label class="lbl" for="head">@lang('home.abouthead')</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.postcate2')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                
+                                        <div class="col-md-4 benefits-checks">                                        
+											<input id="dispatch" type="checkbox" class="cbx-field" name="dispatch" value="yes">
+											<label class="cbx" for="dispatch"></label>
+                                            <label class="lbl" for="dispatch">@lang('home.dispatchinformation')</label>
+                                        </div>
+                              
+                                </div>
+                            </div>
+                        </div>
+						 -->
+
+                   </div>
+
                    
                    <h3>@lang('home.admissionsprocess')</h3>
                     <div class="pnj-form-section">                        
@@ -264,7 +588,59 @@
 
                             </div>                          
                         </div>
-                    </div>  
+                    </div>
+					
+
+					<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.How to register')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">                                    
+                                        <div class="col-md-12 benefits-checks">
+                                            <input id="jobreceipt01"  type="checkbox" class="cbx-field" name="jobreceipt01" value="yes" {{ $result->jobreceipt01 == 'yes' ? 'checked=""' : '' }}>
+                                            <label class="cbx" for="jobreceipt01"></label>
+                                            <label class="lbl" for="jobreceipt01">@lang('home.jobreceipt01')</label>
+                                        </div>
+										<div class="col-md-2 benefits-checks">
+                                            <input id="jobreceipt02"  type="checkbox" class="cbx-field" name="jobreceipt02"  value="yes" {{ $result->jobreceipt02 == 'yes' ? 'checked=""' : '' }}>
+                                            <label class="cbx" for="jobreceipt02"></label>
+                                            <label class="lbl" for="jobreceipt02">@lang('home.jobreceipt02')</label>
+                                        </div>
+										<div class="col-sm-5 pnj-form-field">
+											<input type="text" class="form-control" name="jobhomgpage" value="{!! $result->jobhomgpage !!}" placeholder="@lang('home.jobhomgpage')">
+										</div>
+								</div>
+								<div class="row"> 
+										<div class="col-md-3 benefits-checks">
+                                            <input id="jobreceipt07"  type="checkbox" class="cbx-field" name="jobreceipt07"  value="yes" {{ $result->jobreceipt07 == 'yes' ? 'checked=""' : '' }}>
+                                            <label class="cbx" for="jobreceipt07"></label>
+                                            <label class="lbl" for="jobreceipt07">@lang('home.jobreceipt07')</label>
+                                        </div>
+										<div class="col-md-3 benefits-checks">
+                                            <input id="jobreceipt03"  type="checkbox" class="cbx-field" name="jobreceipt03"  value="yes" {{ $result->jobreceipt03 == 'yes' ? 'checked=""' : '' }}>
+                                            <label class="cbx" for="jobreceipt03"></label>
+                                            <label class="lbl" for="jobreceipt03">@lang('home.jobreceipt03')</label>
+                                        </div>
+										<div class="col-md-3 benefits-checks">
+                                            <input id="jobreceipt04"  type="checkbox" class="cbx-field" name="jobreceipt04"  value="yes" {{ $result->jobreceipt04 == 'yes' ? 'checked=""' : '' }}>
+                                            <label class="cbx" for="jobreceipt04"></label>
+                                            <label class="lbl" for="jobreceipt04">@lang('home.jobreceipt04')</label>
+                                        </div>
+										<div class="col-md-3 benefits-checks">
+                                            <input id="jobreceipt05"  type="checkbox" class="cbx-field" name="jobreceipt05"  value="yes" {{ $result->jobreceipt05 == 'yes' ? 'checked=""' : '' }}>
+                                            <label class="cbx" for="jobreceipt05"></label>
+                                            <label class="lbl" for="jobreceipt05">@lang('home.jobreceipt05')</label>
+                                        </div>
+										<div class="col-md-3 benefits-checks">
+                                            <input id="jobreceipt06"  type="checkbox" class="cbx-field" name="jobreceipt06"  value="yes" {{ $result->jobreceipt06 == 'yes' ? 'checked=""' : '' }}>
+                                            <label class="cbx" for="jobreceipt06"></label>
+                                            <label class="lbl" for="jobreceipt06">@lang('home.jobreceipt06')</label>
+                                        </div>
+                                        				
+                                </div>
+                            </div>							
+                        </div>
+
+
                     <h3>@lang('home.compensationbenefits')</h3>
                     <div class="pnj-form-section">
                         <div class="form-group">
@@ -272,10 +648,10 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <div class="row">
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="text" class="form-control" name="minSalary" value="{!! $result->minSalary !!}" required>
+                                        <input type="text" class="form-control" name="minSalary" value="{!! $result->minSalary !!}">
                                     </div>
                                     <div class="col-md-4 pnj-salary">
-                                        <input type="text" class="form-control" name="maxSalary" value="{!! $result->maxSalary !!}" required>
+                                        <input type="text" class="form-control" name="maxSalary" value="{!! $result->maxSalary !!}">
                                     </div>
                                     <div class="col-md-4">
                                         <select class="form-control col-md-4 select2" name="currency">
@@ -286,8 +662,33 @@
                                         </select>
                                     </div>
                                 </div>
+
+
+								<div class="row" style="padding-top:20px">
+
+
+                                        <div class="col-md-4 benefits-checks">
+											<input class="mat-radio-input cdk-visually-hidden" type="radio" name="afterinterview" value="expectedSalary-check" @if($result->afterinterview == "expectedSalary-check") checked @else @endif > @lang('home.expectedSalary-check')	
+
+                                            <!-- <input id="expectedSalary" type="checkbox" class="cbx-field" name="expectedSalary" value="yes">								
+											<label class="cbx" for="expectedSalary"></label>
+											<label class="lbl" for="expectedSalary">@lang('home.expectedSalary-check')</label> -->
+                                        </div>
+
+										<div class="col-md-4 benefits-checks">
+											<input class="mat-radio-input cdk-visually-hidden" type="radio" name="afterinterview" value="Decision after interview" @if($result->afterinterview == "Decision after interview") checked @else @endif> @lang('home.Decision after interview')&nbsp;&nbsp;&nbsp;
+
+                                            <!-- <input id="afterinterview" type="checkbox" class="cbx-field" name="afterinterview" value="yes">								
+											<label class="cbx" for="afterinterview"></label>
+											<label class="lbl" for="afterinterview">@lang('home.Decision after interview')</label> -->
+                                        </div>										
+										
+                                </div>
+
                             </div>
                         </div>
+
+                            
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.benefits')</label>
                             <div class="col-sm-9 pnj-form-field">
@@ -374,6 +775,14 @@
                                 </div>
                             </div>
                         </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.address2')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <input type="text" class="form-control" name="Address2" id="Address2" placeholder="@lang('home.address2')" value="{!! $result->Address2 !!}">
+                            </div>
+                        </div>
+
                     </div>
                     <!-- google map code html -->
                     <div id="map"></div>
@@ -390,7 +799,7 @@
                                 <p>@lang('home.pleasereadcarefully')</p>
                                 <ul>
                                     <li>@lang('home.postli1')</li>
-                                    <li>@lang('home.postl12')</li>
+                                    <li>@lang('home.postli2')</li>
                                     <li>@lang('home.postli3')</li>
                                     <li>@lang('home.postli4')</li>
                                 </ul>

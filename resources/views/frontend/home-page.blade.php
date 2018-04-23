@@ -103,7 +103,7 @@ $lToken = csrf_token();
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="search-field-box search-item">
                                                     <select class="form-control" id="home-cat" name="category" style="background: transparent;color: #fff">
-                                                        
+                                                        <option value="0">@lang('home.category')</option>
                                                         @foreach(JobCallMe::getReadCategories() as $cat)
                                                         <option value="{{$cat->id}}">@lang('home.'.$cat->name)</option>
                                                         @endforeach
@@ -142,7 +142,7 @@ $lToken = csrf_token();
     </section>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-     <button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> Open Quick View V  </button>
+     <button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> @lang('home.Open Quick View V')  </button>
 </div>
                                                
     <!--Slider Section End-->
@@ -204,7 +204,7 @@ $lToken = csrf_token();
     </section>
 
     <!--Premium Jobs Section Start-->
-    <section class="job-types-section" style="background:#fff;margin-top:-12px;">
+    <section class="job-types-section" style="background:#fff;margin-top:-12px;margin-bottom:-10px;">
         <div class="container">
 		<div>
             <p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.prjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
@@ -213,28 +213,68 @@ $lToken = csrf_token();
             <div class="row">
                 <!--Premium Job Single item Start-->
 				@foreach($premium as $job)
+				<?
+			 $string = $job->title;
+			 if (strlen($string) > 60) {
+
+                        // truncate string
+                            $stringCut = substr($string, 0, 60);
+                             $endPoint = strrpos($stringCut, ' ');
+
+                        //if the string doesn't contain any space then it will cut without word basis.
+                            $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+                            
+                        }
+			?>
                 <div class="col-sm-4">
                     <div class="ih-item square effect8 scale_up tc-box" style="background:#a09d8e">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img pj-type-job" style="background:#fff">
-                            <div class="" style="height: 90px; width:100%"> 
-                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:90px;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
+                            <div class="" style="height: 60px; width:100%"> 
+                                <img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
                                </div>
-                                <b class="pull-right" style="margin-top:5px;padding-right:5px;">{!! $job->companyName !!}</b>
+                                <b class="pull-right" style="margin-top:7px;padding-right:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
                                 <!-- <hr> -->
-                                <div class="pj-single-details" style="background:#a09d8e;padding-top:5px;padding-bottom:5px;margin-top:5px;">
-                                    <p style="padding-left:5px">{!! $job->title !!}</p>
-                                    <p style="padding-left:5px">ASK Development</p>
-                                    <p style="padding-left:5px">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>							
+                                <div class="lj-single-details" style="background:#a09d8e;padding-top:5px;padding-bottom:5px;margin-top:5px;">
+                                    <p style="padding-left:5px">{!! $string !!}</p>
+                                    <p style="padding-left:5px">
+										@if($job->jobreceipt01 == 'yes')
+											@lang('home.jobreceipt01')ㆍ
+										@endif
+										@if($job->jobreceipt02 == 'yes')
+											@lang('home.jobreceipt02')ㆍ
+										@endif
+										@if($job->jobreceipt07 == 'yes')
+											@lang('home.jobreceipt07')ㆍ
+										@endif
+										@if($job->jobreceipt03 == 'yes')
+											@lang('home.jobreceipt03')ㆍ
+										@endif
+										@if($job->jobreceipt04 == 'yes')
+											@lang('home.jobreceipt04')ㆍ
+										@endif
+										@if($job->jobreceipt05 == 'yes')
+											@lang('home.jobreceipt05')ㆍ
+										@endif
+										@if($job->jobreceipt06 == 'yes')
+											@lang('home.jobreceipt06')ㆍ
+										@endif								
+									</p>
+                                    <p style="padding-left:5px;padding-top:2px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>							
                                 </div>
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-								<p style="padding-top:50px">{!! $job->description !!}</p>
+								<p style="padding-top:10px">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]<br>@lang('home.lastdate') : @if(app()->getLocale() == "kr")
+							  [{{ date('Y-m-d',strtotime($job->expiryDate))}}]
+						@else
+							  [{{ date('M d, Y',strtotime($job->expiryDate))}}]
+						@endif<!-- {!! $job->description !!} --></p>
+								
                                 
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                                 </div>
                                 <div class="job-status days-left">
                                     <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
@@ -253,33 +293,80 @@ $lToken = csrf_token();
 
     <!--Top Companies Section Start-->
     <section class="feature-companies">
-        <div class="container" style="padding-top:50px;padding-bottom:50px;">
+        <div class="container" style="padding-top:10px;padding-bottom:10px;">
 		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.topcompanies')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
             
             <!--<p class="text-center" id="feature-companies-caption">Sigh ever way now many. Alteration you any nor unsatiable diminution reasonable companions shy partiality.</p>-->
             <!-- Scale up-->
             <div class="row">
 			@foreach($top_jobs as $comp)
-                <div class="col-md-5ths">
+				<?
+			 $string = $comp->title;
+			 if (strlen($string) > 46) {
+
+                        // truncate string
+                            $stringCut = substr($string, 0, 46);
+                             $endPoint = strrpos($stringCut, ' ');
+
+                        //if the string doesn't contain any space then it will cut without word basis.
+                            $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+                            
+                        }
+			?>
+                <div class="col-sm-4">
                     <!-- colored -->
-                    <div class="ih-item square effect8 scale_up tc-box" style="background:#a8b3b9">
+                    <div class="ih-item square effect8 scale_up tc-box" style="background:#a09d8e">
                         <a href="{{ url('jobs/'.$comp->jobId) }}">
 						  <div style="background:#fff">
-                            <div class="" style="height: 70px; width:100%;background:#fff"">
-                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;padding-top:5px;"  alt="img">
+                            <div class="" style="height: 50px; width:100%;background:#fff">
+                                <img class="img-responsive img-inner" src="{!! $comp->companyLogo != '' ? url('/compnay-logo/'.$comp->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:60px !important;margin: 0 auto;width: auto !important;padding-top:5px;"  alt="img">
                             </div>
-                            <b class="pull-right" style="background:#fff;margin-top:10px;padding-right:5px;margin-bottom:10px;">{!! $comp->companyName !!}</b>
+                            <b class="pull-right" style="background:#fff;margin-top:10px;padding-right:5px;margin-bottom:5px;">{!! $comp->companyName !!}</b>
                             <div class="clearfix"></div>
 						  </div>
                                 <!-- <hr> -->
-							<span class="pj-single-details">
-								<p style="padding-left:5px">{!! $comp->title !!}</p>
-                                <p style="padding-left:5px">ASK Development</p>
+							<span class="lj-single-details">
+								<p style="padding-left:5px">{!! $string !!}<!-- {!! $comp->title !!} --></p>
+                                <p style="padding-left:5px">
+										@if($comp->jobreceipt01 == 'yes')
+											@lang('home.jobreceipt01')ㆍ
+										@endif
+										@if($comp->jobreceipt02 == 'yes')
+											@lang('home.jobreceipt02')ㆍ
+										@endif
+										@if($comp->jobreceipt07 == 'yes')
+											@lang('home.jobreceipt07')ㆍ
+										@endif
+										@if($comp->jobreceipt03 == 'yes')
+											@lang('home.jobreceipt03')ㆍ
+										@endif
+										@if($comp->jobreceipt04 == 'yes')
+											@lang('home.jobreceipt04')ㆍ
+										@endif
+										@if($comp->jobreceipt05 == 'yes')
+											@lang('home.jobreceipt05')ㆍ
+										@endif
+										@if($comp->jobreceipt06 == 'yes')
+											@lang('home.jobreceipt06')
+										@endif					
+								</p>
                                 <p style="padding-left:5px">@lang('home.'.JobCallMe::cityName($comp->city)), @lang('home.'.JobCallMe::countryName($comp->country))</p>
 							</span>
                             <div class="info">
                                 <h3>{!! $comp->companyName !!}</h3>
-                                <p>{!! $comp->description !!}</p>
+                                <p>{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$comp->jobType)]<br>@lang('home.experience') : [@lang('home.'.$comp->experience)]<br>@lang('home.lastdate') : @if(app()->getLocale() == "kr")
+							  [{{ date('Y-m-d',strtotime($comp->expiryDate))}}]
+						@else
+							  [{{ date('M d, Y',strtotime($comp->expiryDate))}}]
+						@endif</p>
+
+
+								<div class="job-status eye-icon">
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $comp->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($comp->expiryDate) }}
+                                </div>
+                                <div class="job-status days-left">
+                                    <span><!-- {{ JobCallMe::timeInDays($comp->expiryAd) }}@lang('home.days left') --></span>
+                                </div>
                               
                             </div>
 							  
@@ -297,39 +384,79 @@ $lToken = csrf_token();
 
     <!--Hot Jobs Section Start-->
     <section class="job-types-section" id="latest-jobs">
-        <div class="container" style="padding-top:50px;padding-bottom:50px;">
+        <div class="container" style="padding-top:0px;padding-bottom:0px;">
 			<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.hotjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
           
             <div class="row">
                 <!--Hot Job Single item Start-->
 				 @foreach($hot as $job)
+				 <?
+			 $string = $job->title;
+			 if (strlen($string) > 46) {
+
+                        // truncate string
+                            $stringCut = substr($string, 0, 46);
+                             $endPoint = strrpos($stringCut, ' ');
+
+                        //if the string doesn't contain any space then it will cut without word basis.
+                            $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+                            
+                        }
+			?>
+
                 <div class="col-sm-4">
-                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#717171;">
+                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#7c98a7;">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img hj-type-job">
 							<div style="background:#fff">
-								<div class="" style="height: 70px; width:100%;background:#fff">
-									<img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img"> 
+								<div class="" style="height: 50px; width:100%;background:#fff">
+									<img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:50px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img"> 
                                 </div>
-                                <b class="pull-right" style="background:#fff;padding-right:5px;">{!! $job->companyName !!}</b>
+                                <b class="pull-right" style="background:#fff;padding-right:5px;margin-bottom:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
 							</div>
                                 <!-- <hr> -->
                                 
                                 <div class="pj-single-details">
-                                    <p style="padding-left:5px">{!! $job->title !!}</p>
-                                    <p style="padding-left:5px">ASK Development</p>
-                                    <p style="padding-left:5px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
+                                    <p style="padding-left:5px">{!! $string !!}</p>
+                                    <p style="padding-left:5px">
+										@if($job->jobreceipt01 == 'yes')
+											@lang('home.jobreceipt01')ㆍ
+										@endif
+										@if($job->jobreceipt02 == 'yes')
+											@lang('home.jobreceipt02')ㆍ
+										@endif
+										@if($job->jobreceipt07 == 'yes')
+											@lang('home.jobreceipt07')ㆍ
+										@endif
+										@if($job->jobreceipt03 == 'yes')
+											@lang('home.jobreceipt03')ㆍ
+										@endif
+										@if($job->jobreceipt04 == 'yes')
+											@lang('home.jobreceipt04')ㆍ
+										@endif
+										@if($job->jobreceipt05 == 'yes')
+											@lang('home.jobreceipt05')ㆍ
+										@endif
+										@if($job->jobreceipt06 == 'yes')
+											@lang('home.jobreceipt06')
+										@endif
+									</p>
+                                    <p style="padding-left:5px;padding-top:2px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p>{!! $job->description !!}</p>
+                                <p style="padding-top:5px;">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]<br><!-- @lang('home.lastdate') : @if(app()->getLocale() == "kr")
+							  [{{ date('Y-m-d',strtotime($job->expiryDate))}}]
+						@else
+							  [{{ date('M d, Y',strtotime($job->expiryDate))}}]
+						@endif --></p>
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }} days left</span>
+                                    <span><!-- {{ JobCallMe::timeInDays($job->expiryAd) }} @lang('home.days left') --></span>
                                 </div>
                             </div>
                         </a>
@@ -345,38 +472,73 @@ $lToken = csrf_token();
 
     <!--Latest Jobs Section Start-->
     <section class="job-types-section">
-        <div class="container" style="padding-top:50px;padding-bottom:50px;">
+        <div class="container" style="padding-top:0px;padding-bottom:0px;">
 		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.latestjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
           
             <div class="row">
                 <!--Latest Job Single item Start-->
 				@foreach($latest as $job)
+				<?
+			 $string = $job->title;
+			 if (strlen($string) > 46) {
+
+                        // truncate string
+                            $stringCut = substr($string, 0, 46);
+                             $endPoint = strrpos($stringCut, ' ');
+
+                        //if the string doesn't contain any space then it will cut without word basis.
+                            $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+                            
+                        }
+			?>
                 <div class="col-sm-4">
-                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#94a5a5;">
+                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#7c98a7;">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img lj-type-job">
 							<div style="background:#fff">
-                            <div class="" style="height: 60px; width:100%">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:60px !important;margin: 0 auto;width: auto !important;" alt="img">
+                            <div class="" style="height: 45px; width:100%">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:45px !important;margin: 0 auto;width: auto !important;" alt="img">
                                </div>
-                                <b class="pull-right">{!! $job->companyName !!}</b>
+                                <b class="pull-right" style="background:#fff;padding-right:5px;padding-bottom:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
 							</div>
                                 <!-- <hr> -->
                                 <div class="lj-single-details">
-                                    <p style="padding-left:5px;padding-top:5px">{!! $job->title !!}</p>
-                                    <p style="padding-left:5px">ASK Development</p>
-                                    <p style="padding-left:5px;color:#fff">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
+                                    <p style="padding-left:5px;padding-top:5px;">{!! $string !!}</p>
+                                    <p style="padding-left:5px;padding-top:2px;">
+										@if($job->jobreceipt01 == 'yes')
+											@lang('home.jobreceipt01')ㆍ
+										@endif
+										@if($job->jobreceipt02 == 'yes')
+											@lang('home.jobreceipt02')ㆍ
+										@endif
+										@if($job->jobreceipt07 == 'yes')
+											@lang('home.jobreceipt07')ㆍ
+										@endif
+										@if($job->jobreceipt03 == 'yes')
+											@lang('home.jobreceipt03')ㆍ
+										@endif
+										@if($job->jobreceipt04 == 'yes')
+											@lang('home.jobreceipt04')ㆍ
+										@endif
+										@if($job->jobreceipt05 == 'yes')
+											@lang('home.jobreceipt05')ㆍ
+										@endif
+										@if($job->jobreceipt06 == 'yes')
+											@lang('home.jobreceipt06')
+										@endif										
+									</p>
+                                    <p style="padding-left:5px;color:#fff;padding-top:2px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p style="padding-top:10px">{!! $job->description !!}</p>
+                                <p style="padding-top:5px">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]</p>
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+                                    <span><!-- {{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left') --></span>
                                 </div>
                             </div>
                         </a>
@@ -393,38 +555,73 @@ $lToken = csrf_token();
 
     <!--Special Jobs Section Start-->
     <section class="job-types-section" id="latest-jobs">
-        <div class="container" style="padding-top:50px;padding-bottom:50px;">
+        <div class="container" style="padding-top:0px;padding-bottom:0px;">
 		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.specialjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
 
             <div class="row">
 			@foreach($special as $job)
+			<?
+			 $string = $job->title;
+			 if (strlen($string) > 46) {
+
+                        // truncate string
+                            $stringCut = substr($string, 0, 46);
+                             $endPoint = strrpos($stringCut, ' ');
+
+                        //if the string doesn't contain any space then it will cut without word basis.
+                            $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+                            
+                        }
+			?>
                 <!--Special Job Single item Start-->
-                <div class="col-md-3">
-                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#4e6c7c">
+                <div class="col-sm-4">
+                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#7c98a7">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                         <div class="img sj-job-type">
 						<div style="background:#fff">
-                        <div class="" style="height: 50px; width:100%">
-                            <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:60px !important;margin: 0 auto;width: auto !important;"  alt="img">
+                        <div class="" style="height: 35px; width:100%">
+                            <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:35px !important;margin: 0 auto;width: auto !important;"  alt="img">
                           </div>
-                            <b class="pull-right" style="padding-top:5px;padding-right:5px;">{!! $job->companyName !!}</b>
+                            <b class="pull-right" style="padding-top:5px;padding-right:5px;padding-bottom:5px;">{!! $job->companyName !!}</b>
                             <div class="clearfix"></div>
 						</div>
                             <!-- <hr> -->
                             <div class="lj-single-details">
-                                <p style="padding-left:5px;padding-top:5px">{!! $job->title !!}</p>
-                                <p style="padding-left:5px">ASK Development</p>
+                                <p style="padding-left:5px;padding-top:5px">{!! $string !!}</p>
+                                <p style="padding-left:5px">
+										@if($job->jobreceipt01 == 'yes')
+											@lang('home.jobreceipt01')ㆍ
+										@endif
+										@if($job->jobreceipt02 == 'yes')
+											@lang('home.jobreceipt02')ㆍ
+										@endif
+										@if($job->jobreceipt07 == 'yes')
+											@lang('home.jobreceipt07')ㆍ
+										@endif
+										@if($job->jobreceipt03 == 'yes')
+											@lang('home.jobreceipt03')ㆍ
+										@endif
+										@if($job->jobreceipt04 == 'yes')
+											@lang('home.jobreceipt04')ㆍ
+										@endif
+										@if($job->jobreceipt05 == 'yes')
+											@lang('home.jobreceipt05')ㆍ
+										@endif
+										@if($job->jobreceipt06 == 'yes')
+											@lang('home.jobreceipt06')
+										@endif			
+								</p>
                                 <p style="padding-left:5px;color:#fff">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                             </div>
                         </div>
                         <div class="info">
                             <h3>{!! $job->companyName !!}</h3>
-                            <p>{!! $job->description !!}</p>
+                            <p style="padding-top:5px;font-size:11px;">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]</p>
                             <div class="job-status eye-icon">
-                                <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
+                                <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                             </div>
                             <div class="job-status days-left">
-                                <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+                                <span><!-- {{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left') --></span>
                             </div>
                         </div>
                         </a>
@@ -442,39 +639,74 @@ $lToken = csrf_token();
 
     <!--Golden Jobs Section Start-->
     <section class="job-types-section">
-        <div class="container" style="padding-top:50px;padding-bottom:50px;">
+        <div class="container" style="padding-top:0px;padding-bottom:0px;">
 		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.goldjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
 
             <div class="row">
                 <div id="check"></div>
                 <!--Golden Job Single item Start-->
 					@foreach($golden as $job)
-                <div class="col-md-5ths">
-                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#b0a48a">
+					<?
+			 $string = $job->title;
+			 if (strlen($string) > 46) {
+
+                        // truncate string
+                            $stringCut = substr($string, 0, 46);
+                             $endPoint = strrpos($stringCut, ' ');
+
+                        //if the string doesn't contain any space then it will cut without word basis.
+                            $string = $endPoint? substr($stringCut, 0, $endPoint):substr($stringCut, 0);
+                            
+                        }
+			?>
+                <div class="col-sm-4">
+                    <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#a09d8e;">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img sj-job-type">
 							  <div style="background:#fff">
-                               <div class="" style="height: 40px; width:100%">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:50px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
+                               <div class="" style="height: 30px; width:100%">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:30px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
                                </div>
-                                <b class="pull-right" style="padding-top:5px;padding-right:5px;">{!! $job->companyName !!}</b>
+                                <b class="pull-right" style="padding-top:8px;padding-right:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
 							  </div>
                                 <!-- <hr> -->
                                 <div class="lj-single-details">
-                                    <p style="padding-left:5px;padding-top:5px">{!! $job->title !!}</p>
-                                    <p style="padding-left:5px">ASK Development</p>
-                                    <p style="padding-left:5px;color:#fff;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
+                                    <p style="padding-left:5px;padding-top:5px">{!! $string !!}</p>
+                                    <p style="padding-left:5px;padding-top:2px;">
+										@if($job->jobreceipt01 == 'yes')
+											@lang('home.jobreceipt01')ㆍ
+										@endif
+										@if($job->jobreceipt02 == 'yes')
+											@lang('home.jobreceipt02')ㆍ
+										@endif
+										@if($job->jobreceipt07 == 'yes')
+											@lang('home.jobreceipt07')ㆍ
+										@endif
+										@if($job->jobreceipt03 == 'yes')
+											@lang('home.jobreceipt03')ㆍ
+										@endif
+										@if($job->jobreceipt04 == 'yes')
+											@lang('home.jobreceipt04')ㆍ
+										@endif
+										@if($job->jobreceipt05 == 'yes')
+											@lang('home.jobreceipt05')ㆍ
+										@endif
+										@if($job->jobreceipt06 == 'yes')
+											@lang('home.jobreceipt06')
+										@endif
+									</p>
+                                    <p style="padding-left:5px;color:#fff;padding-top:2px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p>{!! $job->description !!}</p>
+                                <p style="padding-top:5px;font-size:11px;">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]</p>
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+                                    <span><!-- {{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left') --></span>
                                 </div>
                             </div>
                         </a>
@@ -519,16 +751,16 @@ $lToken = csrf_token();
 });
 function myFunction() {
     var x = document.getElementById("Quickbutton");
-    if (x.innerHTML === "Close Quick View V") {
-        x.innerHTML = "Open Quick View V";
+    if (x.innerHTML === "@lang('home.Close Quick View V')") {
+        x.innerHTML = "@lang('home.Open Quick View V')";
     } else {
-        x.innerHTML = "Close Quick View V";
+        x.innerHTML = "@lang('home.Close Quick View V')";
     }
 }
 </script>
 @endsection
 <style type="text/css">
     select option{
-        color:#fff;
+        color:#000;
     }
 </style>

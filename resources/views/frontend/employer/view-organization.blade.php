@@ -61,7 +61,7 @@ if($company->companyLogo != ''){
                                <span>@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryName($company->category))
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.address'):</span> @lang('home.'.$company->companyAddress), @lang('home.'.JobCallMe::cityName($company->companyCity)), @lang('home.'.JobCallMe::countryName($company->companyCountry))
+                               <span>@lang('home.address'):</span> {{ $company->companyAddress }}, @lang('home.'.JobCallMe::cityName($company->companyCity)), @lang('home.'.JobCallMe::countryName($company->companyCountry))
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.email'):</span> {{ $company->companyEmail }}
@@ -150,6 +150,7 @@ if($company->companyLogo != ''){
                                                 <option value="Joint Venture">@lang('home.Joint Venture')</option>
                                                 <option value="Inc Incorporated">@lang('home.Inc Incorporated')</option>  
                                                 <option value="LLC Limited Liability Company">@lang('home.LLC Limited Liability Company')</option>
+												<option value="Government·Pblic·Institutions·Public Corporations">@lang('home.Government·Pblic·Institutions·Public Corporations')</option>
                                                  
                                            </select>
                                        </div>
@@ -204,7 +205,7 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.email')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="email" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}" required>
+                                           <input type="email" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
@@ -255,12 +256,14 @@ if($company->companyLogo != ''){
 								   <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.formofbusiness')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <select class="form-control input-sm select job-country" name="formofbusiness">
+                                           <select class="form-control input-sm select" name="formofbusiness">
 												<option value="Small business" {{ $company->formofbussiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
 												<option value="Small and Medium-sized Businesses" {{ $company->formofbussiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
 												<option value="Major Company" {{ $company->formofbussiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
 												<option value="Listed Company" {{ $company->formofbussiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
+												<option value="Government·Pblic·Institutions·Public Corporations" {{ $company->formofbussiness == 'Government·Pblic·Institutions·Public Corporations' ? 'selected="selected"' : '' }}>@lang('home.Government·Pblic·Institutions·Public Corporations')</option>
 												<option value="Etc" {{ $company->formofbussiness == 'Etc' ? 'selected="selected"' : '' }}>@lang('home.Etc')</option>
+												
 
                                            </select>
                                        </div>
@@ -444,13 +447,13 @@ if($company->companyLogo != ''){
         <div class="eo-box eo-about">
             <a class="btn btn-primary r-add-btn hideThis" onClick="$('.eo-about-org').hide(); $('.hideThis').hide();$('.eo-about-editor').show(); "><i class="fa fa-edit"></i> </a>
             <h3 class="eo-about-heading">@lang('home.aboutorganization')</h3>
-            <div class="eo-about-org">
-                <p>{!! $company->companyAbout !!}</p>
+            <div class="eo-about-org" style="padding-left:30px">
+                <p><span>{!! $company->companyAbout !!}</p></span>
             </div>
              <div class="eo-about-editor">
                 <form action="" id="pnj-form" method="post" class="organization-desc-form">
                     <input type="hidden" name="_token" class="token">
-                    <div class="form-group">
+                    <div class="form-group" style="padding-left:20px">
                         <label class="control-label col-sm-3">&nbsp;</label>
                         <div class="col-sm-7 pnj-form-field">
                             <textarea class="form-control tex-editor" name="companyAbout" rows="10" style="resize: vertical;">{!! $company->companyAbout !!}</textarea>
@@ -531,6 +534,78 @@ if($company->companyLogo != ''){
 <style type="text/css">
 .input-error{color: red;}
 </style>
+
+
+<style type="text/css">
+     #map {
+        height: 0px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      
+      #description {
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      #infowindow-content .title {
+        font-weight: bold;
+      }
+
+      #infowindow-content {
+        display: none;
+      }
+
+      #map #infowindow-content {
+        display: inline;
+      }
+
+      .pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+      }
+
+      #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+
+      .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      /*#pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        
+      }*/
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      
+</style>
+
+
 <script type="text/javascript">
     $('.date-pickers').datetimepicker({
                 format:'yyyy-mm-dd',
@@ -587,16 +662,17 @@ function getStates(countryId){
         url: "{{ url('account/get-state') }}/"+countryId,
         success: function(response){
             var currentState = $('.job-state').attr('data-state');
-            var obj = $.parseJSON(response);
-            $(".job-state").html('');
-            var newOption = new Option('Select State', '0', true, false);
-            $(".job-state").append(newOption);
-            $.each(obj,function(i,k){
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
+            $(".job-state").html('').trigger('change');
+           /* var newOption = new Option('Select State', '0', true, false);*/
+            $(".job-state").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = k.id == currentState ? true : false;
                 var newOption = new Option(k.name, k.id, true, vOption);
                 $(".job-state").append(newOption);
             })
-            $(".job-state").trigger('change');
+            $(".job-state").trigger('change');*/
         }
     })
 }
@@ -614,15 +690,16 @@ function getCities(stateId){
         url: "{{ url('account/get-city') }}/"+stateId,
         success: function(response){
             var currentCity = $('.job-city').attr('data-city');
-            var obj = $.parseJSON(response);
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
             $(".job-city").html('').trigger('change');
-            var newOption = new Option('Select City', '0', true, false);
-            $(".job-city").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
+            /*var newOption = new Option('Select City', '0', true, false);*/
+            $(".job-city").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = k.id == currentCity ? true : false;
                 var newOption = new Option(k.name, k.id, true, vOption);
                 $(".job-city").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }

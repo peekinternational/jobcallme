@@ -43,11 +43,11 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 {{ csrf_field() }}
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input id="login-username" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')">
+                    <input id="login-username" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email-text')">
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="login-password" type="password" class="form-control" name="password" placeholder="@lang('home.password')">
+                    <input id="login-password" type="password" class="form-control" name="password" placeholder="@lang('home.Password-text')">
                  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon " id="toggle-passwords"></span>
                 </div>
 				<div class="">
@@ -82,7 +82,11 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <a style="color:white" href="{{url('/lnApi')}}">LINKEDIN</a>
                 </button>
             </div>
-        </div> 
+			<div>
+				<p class="text-center show-loginBox" style="color:#2e6da4">※ @lang('home.singupinfo')</p>
+			</div>
+        </div> 		
+
         <div id="signupBox" class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
             <h3>@lang('home.createaccount')</h3>
             <form id="signUpForm" action="{{ url('account/register') }}" method="post">
@@ -114,16 +118,16 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 {{ csrf_field() }}
                 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email')" requried>
+                    <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email-text')" requried>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="pwd" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="@lang('home.Password')">
+                    <input type="password" class="form-control" id="pwd" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="@lang('home.Password-text')">
                     <!-- <span toggle="#password-field" class="fa fa-fw fa-eye field-icon " id="toggle-password"></span> -->
-                    <p style="color:red" id="errorpass"></p>
+                    <p style="color:#2e6da4;font-size:12px;" id="errorpass"></p>
                 </div>
                     <div class="form-group">
-                    <input type="password" class="form-control" id="confirm_password"   value="{{ old('password') }}" placeholder="@lang('home.Re-enter Password')">
-                     <span id='message'></span>
+                    <input type="password" class="form-control" id="confirm_password"   value="{{ old('password') }}" placeholder="@lang('home.Re-enter Password-text')">
+                     <span id='message' style="font-size:12px;"></span>
                 </div>
 
                 <div class="form-group">
@@ -143,7 +147,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                             <option value="{{ $country->id }}">@lang('home.'.$country->name)</option>
                         @endforeach
                     </select>
-					<p class="terms-condition" style="padding-top:5px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.alphabetical order')</p>
+					<p class="terms-condition" style="padding-top:5px;color:#2e6da4;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.alphabetical order')</p>
                 </div>
                 <div class="form-group">
                     <select class="form-control select2 job-state" name="state"><option value="">@lang('home.s_state')</option></select>
@@ -152,7 +156,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <select class="form-control select2 job-city" name="city"><option value="">@lang('home.s_city')</option></select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber')" requried>
+                    <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber-text')" requried>
                 </div>
                 <div class="input-group">
                     <div class="checkbox">
@@ -181,9 +185,16 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <button class="in-btn">
                         <a style="color:white" href="{{url('/lnApi')}}">LINKEDIN</a>
                     </button>
+					 
                 </div>
+				<div style="padding-top:20px">
+				   <p class="text-center show-loginBox" style="color:#2e6da4"><img src="../frontend-assets/images/info-icon.png">@lang('home.singupinfo')</p>
+				</div>
             </form>
         </div>
+		<div class="col-md-12" style="padding-top:20px">
+				<p class="text-center show-loginBox" style="color:#2e6da4"><img src="../frontend-assets/images/info-icon.png"> @lang('home.videochat_text')</p>
+			</div>
     </div>
 </section>
 @endsection
@@ -249,9 +260,14 @@ $('#pwd, #confirm_password').on('keyup', function () {
     if ($('#pwd').val() == $('#confirm_password').val()) {
         $('#message').html('@lang("home.Password Matching")').css('color', 'green');
     } else 
-        $('#message').html('@lang("home.Not Matching")').css('color', 'red');
+        $('#message').html('@lang("home.Not Matching")').css('color', '#2e6da4');
 });
 
+    setTimeout(function(){
+        getStates($('.job-country option:selected:selected').val());
+    },700);
+})
+$(document).ready(function(){
     setTimeout(function(){
         getStates($('.job-country option:selected:selected').val());
     },700);
@@ -264,15 +280,16 @@ function getStates(countryId){
     $.ajax({
         url: "{{ url('account/get-state') }}/"+countryId,
         success: function(response){
-            var obj = $.parseJSON(response);
-            $(".job-state").html('');
-            var newOption = new Option('Select State', '0', true, false);
-            $(".job-state").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
+            $(".job-state").html('').trigger('change');
+            /*var newOption = new Option('Select State', '0', true, false);*/
+            $(".job-state").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var newOption = new Option(k.name, k.id, true, false);
                 $(".job-state").append(newOption);
             })
-            $(".job-state").trigger('change');
+            $(".job-state").trigger('change');*/
         }
     })
 }
@@ -284,14 +301,15 @@ function getCities(countryId){
     $.ajax({
         url: "{{ url('account/get-city') }}/"+countryId,
         success: function(response){
-            var obj = $.parseJSON(response);
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
             $(".job-city").html('').trigger('change');
-            var newOption = new Option('Select City', '0', true, false);
-            $(".job-city").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
+            /*var newOption = new Option('Select City', '0', true, false);*/
+            $(".job-city").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var newOption = new Option(k.name, k.id, true, false);
                 $(".job-city").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }

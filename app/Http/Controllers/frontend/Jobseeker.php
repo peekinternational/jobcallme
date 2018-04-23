@@ -141,7 +141,8 @@ class Jobseeker extends Controller{
 		}
 		$countryId = $request->segment(3);
 		$cities = JobCallMe::getJobStates($countryId);
-		echo @json_encode($cities);
+		return view('frontend.jobseeker.stateCatView',compact('cities'));
+		/*echo @json_encode($cities);*/
 	}
 
 	public function getCity(Request $request){
@@ -149,8 +150,10 @@ class Jobseeker extends Controller{
 			exit('Directory access is forbidden');
 		}
 		$stateId = $request->segment(3);
-		$cities = JobCallMe::getJobCities($stateId);
-		echo @json_encode($cities);
+		/*$cities = JobCallMe::getJobCities($stateId);*/
+		$cities2 = JobCallMe::getJobCities($stateId);
+		return view('frontend.jobseeker.cityCatView',compact('cities2'));
+		/*echo @json_encode($cities2);*/
 	}
 
 	public function getSubCategory(Request $request){
@@ -182,12 +185,12 @@ class Jobseeker extends Controller{
 				'firstName' => 'required|min:1|max:50',
 				'lastName' => 'required|min:1|max:50',
 				'fatherName' => 'required|min:1|max:50',
-				'cnicNumber' => 'required|max:15',
+				'cnicNumber' => 'required|max:20',
 				'gender' => 'required',
 				'maritalStatus' => 'required',
 				'dateOfBirth' => 'required|date',
 				'email' => 'required|email',
-				'phoneNumber' => 'required|numeric',
+				'phoneNumber' => 'required|max:20',
 				'address' => 'required|max:255',
 				'country' => 'required',
 				'city' => 'required',
@@ -195,8 +198,8 @@ class Jobseeker extends Controller{
 				'education' => 'required',
 				'industry' => 'required',
 				'experiance' => 'required',
-				'currentSalary' => 'required|numeric',
-				'expectedSalary' => 'required|numeric',
+				//'currentSalary' => 'required|numeric',
+				//'expectedSalary' => 'required|numeric',
 				'currency' => 'required',
 				'expertise' => 'required',
 				'about' => 'required',
@@ -216,7 +219,7 @@ class Jobseeker extends Controller{
 		$userQry = array('firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'phoneNumber' => $phoneNumber, 'country' => $country, 'state' => $state, 'city' => $city, 'about' => $about);
 		DB::table('jcm_users')->where('userId',$app->userId)->update($userQry);
 
-		$metaQry = array('fatherName' => $fatherName, 'dateOfBirth' => $dateOfBirth, 'gender' => $gender, 'maritalStatus' => $maritalStatus, 'experiance' => $experiance, 'education' => $education, 'industry' => $industry, 'subCategoryId' => $subCategoryId, 'subCategoryId2' => $subCategoryId2, 'shift' => $shift, 'currency' => $currency, 'currentSalary' => $currentSalary, 'expectedSalary' => $expectedSalary, 'cnicNumber' => $cnicNumber, 'address' => $address, 'expertise' => $expertise, 'facebook' => '', 'linkedin' => '', 'twitter' => '', 'website' => '');
+		$metaQry = array('fatherName' => $fatherName, 'dateOfBirth' => $dateOfBirth, 'gender' => $gender, 'maritalStatus' => $maritalStatus, 'experiance' => $experiance, 'education' => $education, 'industry' => $industry, 'subCategoryId' => $subCategoryId, 'subCategoryId2' => $subCategoryId2, 'shift' => $shift, 'currency' => $currency, 'currentSalary' => $currentSalary, 'expectedSalary' => $expectedSalary, 'expectedSalary2' => $expectedSalary2,  'cnicNumber' => $cnicNumber, 'address' => $address, 'address2' => $address2, 'expertise' => $expertise, 'facebook' => '', 'linkedin' => '', 'twitter' => '', 'website' => '');
 		if($facebook != '') $metaQry['facebook'] = $facebook;
 		if($linkedin != '') $metaQry['linkedin'] = $linkedin;
 		if($twitter != '') $metaQry['twitter'] = $twitter;
@@ -241,10 +244,8 @@ class Jobseeker extends Controller{
 
 		$app = $request->session()->get('jcmUser');
 		$this->validate($request, [
-				'degreeLevel' => 'required',
-				'degree' => 'required|max:100',
-				'completionDate' => 'required|date',
-				'grade' => 'required|max:10',
+				'degreeLevel' => 'required',				
+				'completionDate' => 'required|date',				
 				'institution' => 'required|max:150',
 				'country' => 'required',
 			]);
@@ -261,7 +262,7 @@ class Jobseeker extends Controller{
 			$imagename = $old_academicfile;
 		}
 	    
-		$academicQry = array('academicfile'=>$imagename,'degreeLevel' => $degreeLevel, 'degree' => $degree, 'enterDate' => $enterDate,'completionDate' => $completionDate, 'grade' => $grade, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
+		$academicQry = array('academicfile'=>$imagename,'degreeLevel' => $degreeLevel, 'graduationstatus' => $graduationstatus, 'transferstatus' => $transferstatus, 'degree' => $degree, 'minor' => $minor, 'enterDate' => $enterDate,'completionDate' => $completionDate, 'grade' => $grade, 'grade2' => $grade2, 'institution' => $institution, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
 
 		$input = array('type' => 'academic', 'resumeData' => @json_encode($academicQry));
 
@@ -302,7 +303,7 @@ class Jobseeker extends Controller{
 				'completionDate' => 'required|date',
 				'score' => 'required|max:10',
 				'institution' => 'required|max:150',
-				'country' => 'required'
+				//'country' => 'required'
 			]);
 
 		extract(array_map('trim', $request->all()));
@@ -361,7 +362,7 @@ class Jobseeker extends Controller{
 			$currently = 'no';
 		}
 
-		$experienceQry = array('experiencefile'=>$imagename,'jobTitle' => $jobTitle, 'organization' => $organization, 'currently' => $currently, 'startDate' => $startDate, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
+		$experienceQry = array('experiencefile'=>$imagename,'jobTitle' => $jobTitle, 'organization' => $organization, 'currently' => $currently, 'startDate' => $startDate, 'expptitle' => $expptitle, 'reasonleaving' => $reasonleaving, 'expposition' => $expposition, 'responsibilities' => $responsibilities, 'country' => $country,'state' => $state,'city' => $city, 'details' => $details);
 		if($currently == 'no'){
 			$experienceQry['endDate'] = $endDate;
 		}
@@ -516,6 +517,13 @@ class Jobseeker extends Controller{
 			]);
 
 		extract(array_map('trim', $request->all()));
+
+		if($currently != 'yes'){
+			$this->validate($request, ['enyear' => 'required']);
+			$this->validate($request, ['enmonth' => 'required']);
+			$currently = 'no';
+		}
+
 		if($request->file('affiliationfile') != ''){
 			$image = $request->file('affiliationfile');
 
@@ -527,7 +535,7 @@ class Jobseeker extends Controller{
 		}else{
 			$imagename = $old_affiliationfile;
 		}
-		$skillsQry = array('affiliationfile'=>$imagename,'org' => $org,'pos' => $pos,'stayear' => $stayear, 'stamonth' => $stamonth,'enyear' => $enyear, 'enmonth' => $enmonth, 'country' => $country, 'state' => $state, 'city' => $city);
+		$skillsQry = array('affiliationfile'=>$imagename,'org' => $org,'pos' => $pos,'stayear' => $stayear, 'stamonth' => $stamonth,'enyear' => $enyear, 'enmonth' => $enmonth, 'currently' => $currently, 'country' => $country, 'state' => $state, 'city' => $city);
 
 		$input = array('type' => 'affiliation', 'resumeData' => @json_encode($skillsQry));
 
@@ -554,7 +562,7 @@ class Jobseeker extends Controller{
 
 		extract(array_map('trim', $request->all()));
 
-		$skillsQry = array('language' => $language, 'level' => $level);
+		$skillsQry = array('language' => $language, 'level' => $level, 'certifiedexam' => $certifiedexam, 'classscore' => $classscore, 'languageyear' => $languageyear, 'languagemonth' => $languagemonth);
 
 		$input = array('type' => 'language', 'resumeData' => @json_encode($skillsQry));
 
@@ -567,6 +575,53 @@ class Jobseeker extends Controller{
 		}
 		exit('1');
 	}
+
+	public function savepreference(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$this->validate($request, [
+				'veteran' => 'required|max:255',
+				'jobprotection' => 'required'
+			]);
+
+
+			//if($request->hasFile('references_file')){
+                //$this->validate($request, [
+                    //'references_file' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                //]);
+            //}
+            //if($request->hasFile('references_file')){
+                //$image = $request->file('references_file');
+
+                //$references_file = 'references-'.time().'-'.rand(000000,999999).'.'.$image->getClientOriginalExtension();
+				//$references_file_name = $references_file;
+                //$destinationPath = public_path('/resume-images');
+                //$image->move($destinationPath, $references_file);
+
+                //if($request->input('prevreferences') != ''){
+                    //@unlink(public_path('/resume-images/'.$request->input('prevreferences')));
+                //}
+            //}
+
+
+		extract(array_map('trim', $request->all()));
+
+		$skillsQry = array('veteran' => $veteran,'jobprotection' => $jobprotection, 'subsidy' => $subsidy, 'disability' => $disability, 'disabilitygrade' => $disabilitygrade, 'militaryservice' => $militaryservice, 'militarystartyear' => $militarystartyear, 'militarystartmonth' => $militarystartmonth, 'militaryendyear' => $militaryendyear, 'militaryendmonth' => $militaryendmonth, 'militarytype' => $militarytype, 'militaryclasses' => $militaryclasses);
+
+		$input = array('type' => 'preference', 'resumeData' => @json_encode($skillsQry));
+
+		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
+			DB::table('jcm_resume')->where('resumeId','=',$resumeId)->update($input);
+		}else{
+			$input['userId'] = $app->userId;
+			$input['createdTime'] = date('Y-m-d H:i:s');
+			
+			DB::table('jcm_resume')->insert($input);
+		}
+		exit('1');
+	}
 	
 	public function saveaward(Request $request){
 		if(!$request->ajax()){
@@ -574,7 +629,7 @@ class Jobseeker extends Controller{
 		}
 		$app = $request->session()->get('jcmUser');
 		$this->validate($request, [
-				'type' => 'required|max:255',
+				//'type' => 'required|max:255',
 				'title' => 'required'
 			]);
 
@@ -641,6 +696,33 @@ class Jobseeker extends Controller{
 		exit('1');
 	}
 
+	public function savehopeworking(Request $request){
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$app = $request->session()->get('jcmUser');
+		$this->validate($request, [
+				'hopejobtype' => 'required|max:255',
+				'country' => 'required'
+			]);
+
+		extract(array_map('trim', $request->all()));
+
+		$skillsQry = array('hopejobtype' => $hopejobtype,'country' => $country, 'state' => $state, 'city' => $city);
+
+		$input = array('type' => 'hopeworking', 'resumeData' => @json_encode($skillsQry));
+
+		if($resumeId != '' && $resumeId != '0' && $resumeId != NULL){
+			DB::table('jcm_resume')->where('resumeId','=',$resumeId)->update($input);
+		}else{
+			$input['userId'] = $app->userId;
+			$input['createdTime'] = date('Y-m-d H:i:s');
+			DB::table('jcm_resume')->insert($input);
+		}
+		exit('1');
+	}
+
+
 	public function savePassword(Request $request){
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
@@ -673,7 +755,7 @@ class Jobseeker extends Controller{
 				'firstName' => 'required|max:50',
 				'lastName' => 'required|max:50',
 				'email' => 'required|max:255|email',
-				'phoneNumber' => 'required|numeric',
+				'phoneNumber' => 'required',
 				'city' => 'required',
 				'state' => 'required',
 				'address' => 'required',

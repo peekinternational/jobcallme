@@ -25,6 +25,8 @@ class Jobs extends Controller{
 		$_find = trim($request->input('_find'));
 		$keyword = trim($request->input('keyword'));
 		$categoryId = trim($request->input('categoryId'));
+		$htype = trim($request->input('htype'));
+		$dtype = trim($request->input('dtype'));
 		$jobType = trim($request->input('jobType'));
 		$jobShift = trim($request->input('jobShift'));
 		$head = trim($request->input('head'));
@@ -66,6 +68,8 @@ class Jobs extends Controller{
 		$city = JobCallMe::cityId($city);
 		if($country != '0' && $country != "") $jobs->where('jcm_jobs.country','=',$country);
 		if($categoryId != '') $jobs->where('jcm_jobs.category','=',$categoryId);
+		if($htype != '') $jobs->where('jcm_jobs.head','=',$htype);
+		if($dtype != '') $jobs->where('jcm_jobs.dispatch','=',$dtype);
 		if($jobType != '') $jobs->where('jcm_jobs.jobType','=',$jobType);
 		if($jobShift != '') $jobs->where('jcm_jobs.jobShift','=',$jobShift);
 		if($careerLevel != '') $jobs->where('jcm_jobs.careerLevel','=',$careerLevel);
@@ -150,11 +154,18 @@ class Jobs extends Controller{
 						$joblist_date = date('M d, Y',strtotime($rec->createdTime));
 						$joblist_date2 = date('M d, Y',strtotime($rec->expiryDate));
 					}
+					
 
 					if($rec->currency == "KRW" or $rec->currency == "KRW|대한민국 원"){
 						$salarycurrency = '원';
 					}else{
 						$salarycurrency = $rec->currency;
+					}
+
+					if($rec->afterinterview != ""){
+						$Salary_money = trans('home.'.$rec->afterinterview);						
+					}else{
+						$Salary_money = number_format($rec->minSalary).' - '.number_format($rec->maxSalary).' '.$salarycurrency;						
 					}
 
 				$colorArr = array('purple','green','darkred','orangered','blueviolet');
@@ -175,7 +186,7 @@ class Jobs extends Controller{
                         $vhtml .= '</li>';
                         $vhtml .= '<li style="border-right: 0px solid #cccccc;">';
                             $vhtml .= '<p class="js-title" style="color:#008000;">'.trans('home.salary').'</p>';
-                            $vhtml .= '<p>'.number_format($rec->minSalary).' - '.number_format($rec->maxSalary).' '.$salarycurrency.'</p>';
+                            $vhtml .= '<p>'.$Salary_money.'</p>';
                         $vhtml .= '</li>';
 						$vhtml .= '<li style="border-right: 0px solid #cccccc;">';
                             $vhtml .= '<p class="js-title" style="color:#0000ff;">'.trans('home.poston').'</p>';
@@ -206,7 +217,7 @@ class Jobs extends Controller{
 
                    
                     $vhtml .= '<p class="js-note">'.$string.'<img style="padding-top: 17px;" src="'.$cLogo.'" width="100"></p>';
-                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 28px;">'.$joblist_date.'</span></p>';
+                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 35px;">'.$joblist_date.'</span></p>';
 				
 				$job = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
 				$job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');

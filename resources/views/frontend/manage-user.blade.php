@@ -88,19 +88,19 @@ if($user->profilePhoto != ''){
             <a href="{{ url('account/employer/departments') }}" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon7.png" style="padding-top:0px"> @lang('home.departments')</a>
             <a href="{{ url('account/employer/organization') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon8.png" style="padding-top:0px"> @lang('home.editorganization')</a>
             <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon9.png" style="padding-top:0px"> @lang('home.interviewvenues')</a>
-			<a href="{{ url('account/employer/users/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.users')</a>
-			<a href="{{ url('account/employer/addevaluation/') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.evaluationforms')</a>
-			<a href="{{ url('account/employer/questionnaires') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.questionnaires')</a>
+			<a href="{{ url('account/employer/users/') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon10.png" style="padding-top:0px">@lang('home.users')</a>
+			<a href="{{ url('account/employer/addevaluation/') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon11.png" style="padding-top:0px">@lang('home.evaluationforms')</a>
+			<a href="{{ url('account/employer/questionnaires') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon12.png" style="padding-top:0px">@lang('home.questionnaires')</a>
             <!-- <a class="btn btn-block jaTabBtn">Users</a>
             <a class="btn btn-block jaTabBtn">Evaluation Form</a>
             <a class="btn btn-block jaTabBtn">Questionnaires</a> -->
-			<h5 class="mtab-heading">@lang('home.subscription')</h5>
-			<a id="credit" class="btn btn-block jaTabBtn ">@lang('home.credits')</a>
-			<a href="{{ url('account/employer/orders') }}" class="btn btn-block jaTabBtn ext-link">@lang('home.orders')</a>
+			<h5 class="mtab-heading"><img src="/frontend-assets/images/manage_icon13.png" style="padding-top:0px">@lang('home.subscription')</h5>
+			<a id="credit" class="btn btn-block jaTabBtn "><img src="/frontend-assets/images/manage_icon14.png" style="padding-top:0px">@lang('home.credits')</a>
+			<a href="{{ url('account/employer/orders') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon15.png" style="padding-top:0px">@lang('home.orders')</a>
 			
 			
-            <h5 class="mtab-heading">@lang('home.deactivation')</h5>
-            <a class="btn btn-block" data-popup-open="popup-1" style="margin-bottom:10px">@lang('home.deactivateaccount')</a>
+            <h5 class="mtab-heading"><img src="/frontend-assets/images/manage_icon16.png" style="padding-top:0px">@lang('home.deactivation')</h5>
+            <a class="btn btn-block" data-popup-open="popup-1" style="margin-bottom:10px"><img src="/frontend-assets/images/manage_icon17.png" style="padding-top:0px">@lang('home.deactivateaccount')</a>
         </div>
         <div class="col-md-10">
             <div class="tab-content">
@@ -119,7 +119,8 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.newpassword')</label>
                                 <div class="col-md-6">
-                                    <input type="password" name="password" class="form-control input-sm" placeholder="@lang('home.newpassword')">
+                                    <input type="password" name="password" onblur="sendpassword(this.value)" class="form-control input-sm" placeholder="@lang('home.newpassword')">
+                                <p style="color:red" id="erpass"></p>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -131,7 +132,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary btn-block" type="submit" name="save">@lang('home.save')</button>
+                                    <button id="passbtn" class="btn btn-primary btn-block" type="submit" name="save">@lang('home.save')</button>
                                 </div>
                             </div>
                         </form>
@@ -247,7 +248,8 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6">
                                     <div class="col-md-6 mb-nmbr" style="padding-left: 0px; margin-bottom: 5px;">
                                         <select class="form-control">
-                                            <option>Afghanistan (+93)</option>
+                                            <option>South Korea (+82)</option>
+											<option>Afghanistan (+93)</option>
                                             <option>Albania (+355)</option>
                                             <option>Algeria (+213)</option>
                                             <option>American Samoa (+1684)</option>
@@ -358,9 +360,7 @@ if($user->profilePhoto != ''){
                                             <option>Jordan (+962)</option>
                                             <option>Kazakhstan (+7)</option>
                                             <option>Kenya (+254)</option>
-                                            <option>Kiribati (+686)</option>
-                                            <option>North Korea (+850)</option>
-                                            <option>South Korea (+82)</option>
+                                            <option>Kiribati (+686)</option>  
                                             <option>Kuwait (+965)</option>
                                             <option>Kyrgyzstan (+996)</option>
                                             <option>Lao Peoples Democratic Republic (+856)</option>
@@ -594,7 +594,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="col-md-3 control-label">@lang('home.country')</label>
                                 <div class="col-md-9">
-                                    <select class="form-control input-sm mc-field job-country" name="country">
+                                    <select class="form-control input-sm mc-field  job-country" name="country">
                                         @foreach(JobCallMe::getJobCountries() as $cntry)
                                             <option value="{{ $cntry->id }}" {{ $noti->country == $cntry->id ? 'selected="selected"' : ''}}>@lang('home.'.$cntry->name)</option>
                                         @endforeach
@@ -1092,6 +1092,24 @@ function deactive(id){
 
     });
     
+}
+function sendpassword(pass){
+    alert("hello");
+ $.ajax({
+    url:"{{ url('passwordValidate') }}",
+    data:{password:pass,_token:"{{ csrf_token() }}"},
+    type:"post",
+    success:function(res){
+        if(res == 1){
+            $('#erpass').text("@lang('home.passwordway')");
+            $('#passbtn').attr('disabled','disabled');
+        }else{
+            $('#erpass').text(" ");
+            $('#passbtn').removeAttr('disabled');
+        }
+       
+    }
+ });
 }
 </script>
 @endsection

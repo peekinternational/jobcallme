@@ -32,6 +32,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
        $schedule->call(function () {
+		    
             $comet=CometChat::whereNull('custom_data')->get()->toArray();
             $emailSent=[];
             if(count($comet)>0):
@@ -82,12 +83,12 @@ class Kernel extends ConsoleKernel
                         /*endif;*/
                     endif;
                 endforeach;
-            endif;
 
+            endif; 
+			
         })->everyMinute();
-       $schedule->call(function(){
-            \Log::info('sajid is here');
-       })->everyMinute();
+		
+
     }
 
     /**
