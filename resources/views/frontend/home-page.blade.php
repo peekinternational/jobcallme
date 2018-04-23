@@ -616,7 +616,7 @@ $lToken = csrf_token();
                         </div>
                         <div class="info">
                             <h3>{!! $job->companyName !!}</h3>
-                            <p style="padding-top:5px">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]</p>
+                            <p style="padding-top:5px;font-size:11px;">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]</p>
                             <div class="job-status eye-icon">
                                 <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                             </div>
@@ -701,7 +701,7 @@ $lToken = csrf_token();
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p style="padding-top:5px">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]</p>
+                                <p style="padding-top:5px;font-size:11px;">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]</p>
                                 <div class="job-status eye-icon">
                                     <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                                 </div>
