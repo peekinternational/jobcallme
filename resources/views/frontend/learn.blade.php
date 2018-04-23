@@ -159,6 +159,7 @@
                             <img src="{{ url('d-cover.jpg') }}">
                             @endif
                         </div>
+                        
                         <div class="col-md-12">
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
                             <p>{{ $rec->organiser != '' ?  $rec->organiser : JobCallMe::userName($rec->userId) }}</p>
@@ -172,6 +173,17 @@
                             <span><i class="fa fa-map-marker"></i> @lang('home.'.JobCallMe::cityName($rec->city)),@lang('home.'.JobCallMe::countryName($rec->country))</span>
                             <div>
                                 <p class="pull-right la-price">{{ $rec->currency.' '.number_format($rec->cost)}}/-</p>
+                            </div>
+                               <div class="ra-author-box">
+                                <img src="{{ url('compnay-logo/'.$rec->companyLogo) }}" class="img-circle" alt="{{ $rec->companyName }}">
+                                <div class="ra-author">
+                                    <a href="{{ url('companies/company/'.$rec->companyId) }}">{{ $rec->companyName}}</a><br>
+                                    <span>@if(app()->getLocale() == "kr")
+														{{ date('Y-m-d',strtotime($rec->createdTime))}}
+													@else
+														{{ date('M d, Y',strtotime($rec->createdTime))}}
+													@endif</span>
+                                </div>
                             </div>
                        </div>
                    </div>

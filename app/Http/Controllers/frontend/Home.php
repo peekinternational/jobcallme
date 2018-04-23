@@ -492,8 +492,8 @@ class Home extends Controller{
 
     public function learn(Request $request){
     	/* read query */
-    	$lear_record = DB::table('jcm_upskills')->where('status','=','Active')->where('adstartDate','<=',date('Y-m-d'))->where('adendDate','>=',date('Y-m-d'))->orderBy('skillId','desc')->limit(12)->get();
-
+    	$lear_record = DB::table('jcm_upskills')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_upskills.companyId')->where('status','=','Active')->where('adstartDate','<=',date('Y-m-d'))->where('adendDate','>=',date('Y-m-d'))->orderBy('skillId','desc')->limit(12)->get();
+//dd($lear_record );
     	return view('frontend.learn',compact('lear_record'));
     }
 
@@ -542,7 +542,7 @@ class Home extends Controller{
     public function viewUpskill(Request $request,$skillId){
     	$type = $request->segment(2);
     	/* upskill query */
-    	$learnQry = DB::table('jcm_upskills')->where('type','=',ucfirst($type));
+    	$learnQry = DB::table('jcm_upskills')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_upskills.companyId')->where('type','=',ucfirst($type));
     	$learnQry->where('skillId','=',$skillId);
     	$record = $learnQry->first();
 

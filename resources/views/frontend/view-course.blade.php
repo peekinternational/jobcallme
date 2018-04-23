@@ -117,7 +117,19 @@
 					  <td>
                 <h3><span style="padding-left:20px">@lang('home.details')</span></h3>
                 <p>{!! $record->description !!}</p></td></tr></table>
+                 <div class="ra-author-box">
+                                <img src="{{ url('compnay-logo/'.$record->companyLogo) }}" class="img-circle" alt="{{ $record->companyName }}">
+                                <div class="ra-author">
+                                    <a href="{{ url('companies/company/'.$record->companyId) }}">{{ $record->companyName}}</a><br>
+                                    <span>@if(app()->getLocale() == "kr")
+														{{ date('Y-m-d',strtotime($record->createdTime))}}
+													@else
+														{{ date('M d, Y',strtotime($record->createdTime))}}
+													@endif</span>
+                                </div>
+                            </div>
             </div>
+             
         </div>
         <div class="col-md-3">
             <div class="ld-right">
