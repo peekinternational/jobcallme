@@ -21,9 +21,6 @@ class Home extends Controller{
 				\Session::put('loadOne', 'yes');
 			}
 		}
-
-		
-		
 		//print_r($position->countryCode);die;
 		/* job shift query */
 		$jobShifts = DB::table('jcm_job_shift')->get();
@@ -827,6 +824,15 @@ public function savecompic(Request $request){
 		  return view('frontend.Completed');
 
     	
+    }
+    public function likes(Request $request,$type){
+    	$data = $request->input();
+    	unset($data['_token']);
+    	if($type == "like"){
+    		DB::table('jcm_likes')->insert($data);
+    	}else{
+    		DB::table('jcm_likes')->where('parent_table',$data['parent_table'])->where('post_id',$data['post_id'])->where('user_id',$data['user_id'])->delete();
+    	}
     }
 
 }

@@ -62,6 +62,9 @@
 .font-16{
   font-size: 16px;
 }
+.fa-red{
+  color: red;
+}
 /* cssss*/
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 @keyframes ripple {

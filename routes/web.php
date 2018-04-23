@@ -10,7 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/* service Container */
+App::bind("App\SocialMedia\Facebook",function(){
+	return new App\SocialMedia\Facebook(config('services.facbook'));
+});
+$facbook = App::make("App\SocialMedia\Facebook");
+//dd($facbook->getClientId());
 /* admin panel */
 if (version_compare(PHP_VERSION, '7.2.0', '>=')) {    // Ignores notices and reports all other kinds... and warnings    
 error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);    // error_reporting(E_ALL ^ E_WARNING); // Maybe this is enough
@@ -30,6 +35,7 @@ Route::get('pdfview',function() {
 
 });
 
+Route::post('read/likes/{type}','frontend\Home@likes');
 Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');
 Route::post('addreadCat','frontend\Home@addreadCat');

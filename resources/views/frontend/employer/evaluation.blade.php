@@ -12,6 +12,9 @@
 		                    <h3 style="margin-left: 15px">Job Evaluation Matrix</h3>
 					</div>
 		            <div class="col-md-12" style="padding-bottom: 36px;">
+		            	@if(sizeof($all_eva_cand) == 0)
+		            	<h3>No evaluation for this job</h3>
+		            	@endif
 						<table class="table">
 							@foreach($all_eva_cand as $cand)
 							<tr>

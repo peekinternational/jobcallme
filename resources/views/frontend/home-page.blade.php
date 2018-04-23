@@ -213,7 +213,7 @@ $lToken = csrf_token();
             <div class="row">
                 <!--Premium Job Single item Start-->
 				@foreach($premium as $job)
-				<?
+				<?php
 			 $string = $job->title;
 			 if (strlen($string) > 60) {
 
@@ -300,7 +300,7 @@ $lToken = csrf_token();
             <!-- Scale up-->
             <div class="row">
 			@foreach($top_jobs as $comp)
-				<?
+				<?php
 			 $string = $comp->title;
 			 if (strlen($string) > 46) {
 
@@ -390,7 +390,7 @@ $lToken = csrf_token();
             <div class="row">
                 <!--Hot Job Single item Start-->
 				 @foreach($hot as $job)
-				 <?
+				 <?php
 			 $string = $job->title;
 			 if (strlen($string) > 46) {
 
@@ -478,7 +478,7 @@ $lToken = csrf_token();
             <div class="row">
                 <!--Latest Job Single item Start-->
 				@foreach($latest as $job)
-				<?
+				<?php
 			 $string = $job->title;
 			 if (strlen($string) > 46) {
 
@@ -560,7 +560,7 @@ $lToken = csrf_token();
 
             <div class="row">
 			@foreach($special as $job)
-			<?
+			<?php
 			 $string = $job->title;
 			 if (strlen($string) > 46) {
 
@@ -646,7 +646,7 @@ $lToken = csrf_token();
                 <div id="check"></div>
                 <!--Golden Job Single item Start-->
 					@foreach($golden as $job)
-					<?
+					<?php
 			 $string = $job->title;
 			 if (strlen($string) > 46) {
 
