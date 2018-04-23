@@ -21,6 +21,8 @@ class Home extends Controller{
 				\Session::put('loadOne', 'yes');
 			}
 		}
+
+		
 		
 		//print_r($position->countryCode);die;
 		/* job shift query */
