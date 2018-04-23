@@ -100,10 +100,9 @@
 											{{ date('M d, Y',strtotime($rec->createdTime))}}
 										@endif
                                     </span>
-                                    <span class="pull-right"><i class="like fa fa-heart <?php echo JOBCALLME::getUserLikes( $rec->writingId,Session::get('jcmUser')->userId ) ?>"></i> <i class="total-likes"><?= JOBCALLME::getReadlikes($rec->writingId)?></i></span>
+                                    <span class="pull-right"><i class="like fa fa-heart <?php echo JOBCALLME::getUserLikes( $rec->writingId,Session::get('jcmUser')->userId ) ?>"></i> <i class="total-likes"><?php echo JOBCALLME::getReadlikes($rec->writingId)?></i></span>
                                     <input type="hidden" class="post_id" value="{{ $rec->writingId}}">
                                     <input type="hidden" class="userId" value="{{  Session::get('jcmUser')->userId }}">
-
                                 </div>
                             </div>
                         </div>
@@ -113,7 +112,7 @@
             @endforeach
 		
         </div>
-			<div style="text-align:center"><?php	echo $read_record->render(); ?></div>
+			<div style="text-align:center"><?php echo $read_record->render(); ?></div>
     </div>
 </section>
 @endsection
