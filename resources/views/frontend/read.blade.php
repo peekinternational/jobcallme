@@ -85,11 +85,9 @@
 								$cat_names = explode(",",$rec->cat_names);
 								
 							?>
-<<<<<<< HEAD
-							<span><?php for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i]) <?php } ?></span>
-=======
-							<span>#<?for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i]) @if($cat_names[$i]!="")ㆍ@endif<?}?></span>
->>>>>>> 9748251ec2206e5250c4ea49f800d1bac01f8b63
+
+							<span>#<?php for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i]) @if($cat_names[$i]!="")ㆍ@endif <?php } ?></span>
+
                             <div class="la-text">{!! $rec->citation !!}</div>
                             <div class="ra-author-box">
                                 <img src="{{ url('profile-photos/'.$rec->profilePhoto) }}" class="img-circle" alt="{{ $rec->firstName }}">
@@ -104,7 +102,7 @@
                                     </span>
                                     <span class="pull-right"><i class="like fa fa-heart <?=JOBCALLME::getUserLikes( $rec->writingId,Session::get('jcmUser')->userId ) ?>"></i> <i class="total-likes"><?= JOBCALLME::getReadlikes($rec->writingId)?></i></span>
                                     <input type="hidden" class="post_id" value="{{ $rec->writingId}}">
-                                    <input type="hidden" class="userId" value="{{ $rec->userId}}">
+                                    <input type="hidden" class="userId" value="{{ Session::get('jcmUser')->userId }}">
 
                                 </div>
                             </div>

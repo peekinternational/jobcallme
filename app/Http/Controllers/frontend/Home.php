@@ -12,10 +12,6 @@ date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
 	public function home(){
-<<<<<<< HEAD
-
-=======
->>>>>>> 9748251ec2206e5250c4ea49f800d1bac01f8b63
 		if(!\Session::has('loadOne')){
 			$ip = \Request::ip();
 			$position = \Location::get($ip);
@@ -25,13 +21,6 @@ class Home extends Controller{
 				\Session::put('loadOne', 'yes');
 			}
 		}
-<<<<<<< HEAD
-=======
-
-		
-		
->>>>>>> 9748251ec2206e5250c4ea49f800d1bac01f8b63
-		//print_r($position->countryCode);die;
 		/* job shift query */
 		$jobShifts = DB::table('jcm_job_shift')->get();
 
