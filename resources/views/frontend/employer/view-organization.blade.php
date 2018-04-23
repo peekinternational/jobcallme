@@ -61,7 +61,7 @@ if($company->companyLogo != ''){
                                <span>@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryName($company->category))
                            </div>
                            <div class="eo-details">
-                               <span>@lang('home.address'):</span> @lang('home.'.$company->companyAddress), @lang('home.'.JobCallMe::cityName($company->companyCity)), @lang('home.'.JobCallMe::countryName($company->companyCountry))
+                               <span>@lang('home.address'):</span> {{ $company->companyAddress }}, @lang('home.'.JobCallMe::cityName($company->companyCity)), @lang('home.'.JobCallMe::countryName($company->companyCountry))
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.email'):</span> {{ $company->companyEmail }}
@@ -150,6 +150,7 @@ if($company->companyLogo != ''){
                                                 <option value="Joint Venture">@lang('home.Joint Venture')</option>
                                                 <option value="Inc Incorporated">@lang('home.Inc Incorporated')</option>  
                                                 <option value="LLC Limited Liability Company">@lang('home.LLC Limited Liability Company')</option>
+												<option value="Government·Pblic·Institutions·Public Corporations">@lang('home.Government·Pblic·Institutions·Public Corporations')</option>
                                                  
                                            </select>
                                        </div>
@@ -204,7 +205,7 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.email')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="email" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}" required>
+                                           <input type="email" class="form-control companyEmail" name="companyEmail" id="companyEmail" placeholder="Email" value="{{ $company->companyEmail }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
@@ -260,7 +261,9 @@ if($company->companyLogo != ''){
 												<option value="Small and Medium-sized Businesses" {{ $company->formofbussiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
 												<option value="Major Company" {{ $company->formofbussiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
 												<option value="Listed Company" {{ $company->formofbussiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
+												<option value="Government·Pblic·Institutions·Public Corporations" {{ $company->formofbussiness == 'Government·Pblic·Institutions·Public Corporations' ? 'selected="selected"' : '' }}>@lang('home.Government·Pblic·Institutions·Public Corporations')</option>
 												<option value="Etc" {{ $company->formofbussiness == 'Etc' ? 'selected="selected"' : '' }}>@lang('home.Etc')</option>
+												
 
                                            </select>
                                        </div>
@@ -444,13 +447,13 @@ if($company->companyLogo != ''){
         <div class="eo-box eo-about">
             <a class="btn btn-primary r-add-btn hideThis" onClick="$('.eo-about-org').hide(); $('.hideThis').hide();$('.eo-about-editor').show(); "><i class="fa fa-edit"></i> </a>
             <h3 class="eo-about-heading">@lang('home.aboutorganization')</h3>
-            <div class="eo-about-org">
-                <p>{!! $company->companyAbout !!}</p>
+            <div class="eo-about-org" style="padding-left:30px">
+                <p><span>{!! $company->companyAbout !!}</p></span>
             </div>
              <div class="eo-about-editor">
                 <form action="" id="pnj-form" method="post" class="organization-desc-form">
                     <input type="hidden" name="_token" class="token">
-                    <div class="form-group">
+                    <div class="form-group" style="padding-left:20px">
                         <label class="control-label col-sm-3">&nbsp;</label>
                         <div class="col-sm-7 pnj-form-field">
                             <textarea class="form-control tex-editor" name="companyAbout" rows="10" style="resize: vertical;">{!! $company->companyAbout !!}</textarea>

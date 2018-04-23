@@ -325,14 +325,15 @@ ul.nav li.active{
     border: 2px solid #e6b706;
     color: #ffffff;
     height: 33px;
-    width: 6%;
+	padding:0 15px;
+    
 
 }
 .search-btn:hover{
     background: #e6b706;
     color: #ffffff;
     height: 33px;
-    width: 6%;
+    
 }
 
 .login-type{
@@ -642,7 +643,7 @@ a.job-location:hover span.shine {
     height: auto;
 }
 .hj-type-job{   
-    height: 155px;    
+    height: 130px;    
 }
 .hj-type-job img{
     width: 118px !important;
@@ -663,7 +664,7 @@ a.job-location:hover span.shine {
     background: rgba(0,0,0,0.8) !important;
 }
 .lj-type-job{   
-    height: 145px;    
+    height: 125px;    
 }
 .lj-type-job img{
     width: 82px !important;
@@ -681,7 +682,7 @@ a.job-location:hover span.shine {
     height: auto;
 }
 .sj-job-type{   
-    height: 130px;    
+    height: 115px;    
 }
 .sj-job-type img{
     width: 82px !important;
@@ -1304,7 +1305,7 @@ ul.jd-rewards li i{
 }
 
 .jd-about-organization{
-    border-left: 3px solid #999;
+    border-left: 3px dashed #999;
     color: #999;
     padding-left: 10px;
 }

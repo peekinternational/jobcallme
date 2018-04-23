@@ -182,13 +182,14 @@ $dispatch='';
                         <td class="active">@lang('home.Working hours')</td>
                         <td>@lang('home.'.$job->jobhoursval) {{ $job->jobhoursval_text }}</td>
                         <td class="active">@lang('home.jobacademic')</td>
-                        <td>@lang('home.'.$job->jobacademic)
+                        <td>
 						@if($job->jobacademic_not == "yes")
-							  &nbsp;| @lang('home.Regardless Education')
-						@else							 
+							  @lang('home.Regardless Education')
+						@else	
+							  @lang('home.'.$job->jobacademic)
 						@endif
 						@if($job->jobgraduate == "yes")
-							  &nbsp;| @lang('home.jobgraduate')
+							  @lang('home.jobgraduate')
 						@else							 
 						@endif</td>
                     </tr>
@@ -373,7 +374,28 @@ $dispatch='';
 	                <ul class="jd-rewards">
 	                	@foreach( $benefits as $benefit)
 						
-	                		<li><i class="fa fa-check-circle"></i> @lang('home.'.$benefit)</li>
+	                		<li>
+							@if($benefit == 'National pension')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)							
+							@elseif($benefit == 'Employment Insurance')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
+							@elseif($benefit == 'Industrial accident insurance')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
+							@elseif($benefit == 'Health Insurance')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
+							@elseif($benefit == 'Severance Pay')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
+							@elseif($benefit == 'Lunch offer')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
+							@elseif($benefit == 'Vehicle oil subsidy')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
+							@elseif($benefit == 'Overtime pay')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
+							@else
+								<i class="fa fa-check-circle"></i> {{ $benefit }}
+							@endif
+						
+	                		</li>
 	                	@endforeach
 	                </ul>
                 @endif

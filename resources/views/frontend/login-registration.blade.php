@@ -85,8 +85,8 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
 			<div>
 				<p class="text-center show-loginBox" style="color:#2e6da4">※ @lang('home.singupinfo')</p>
 			</div>
-        </div> 
-<p class="text-center show-loginBox" style="color:#2e6da4"><img src="../frontend-assets/images/info-icon.png"> @lang('home.videochat_text')</p>
+        </div> 		
+
         <div id="signupBox" class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
             <h3>@lang('home.createaccount')</h3>
             <form id="signUpForm" action="{{ url('account/register') }}" method="post">
@@ -192,6 +192,9 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
 				</div>
             </form>
         </div>
+		<div class="col-md-12" style="padding-top:20px">
+				<p class="text-center show-loginBox" style="color:#2e6da4"><img src="../frontend-assets/images/info-icon.png"> @lang('home.videochat_text')</p>
+			</div>
     </div>
 </section>
 @endsection

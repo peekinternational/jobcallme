@@ -56,6 +56,7 @@
                                 <input name="amount" type="hidden" value="{!! $payment->amount !!}"/>
                                 <input name="quantity" type="hidden" value="{!! $payment->quantity !!}"/>
                                 <input name="duration" type="hidden" value="{!! $payment->duration !!}"/>
+								<input name="currency" type="hidden"/>
                                 
                                 <div>
                                     <button class="btn btn-primary" color="primary"  type="submit"><span class="mat-button-wrapper">@lang('home.Buy Now')</span><div class="mat-button-ripple mat-ripple" md-ripple=""></div><div class="mat-button-focus-overlay"></div></button>
@@ -81,8 +82,10 @@
      var jArray = <?php echo json_encode($plan); ?>;
 
      for(var i=0;i<jArray.length;i++){
-     $('#class_text'+i).html('￦ '+jArray[i].amount*1000+'')
+     $('#class_text'+i).html('￦ '+jArray[i].amount*1100+'(부가세 포함)')
         //alert(jArray[i].amount);
+	 //$('.ng-untouched input[name="amount"]').val(jArray[i].amount*1000);
+	 $('.ng-untouched input[name="currency"]').val('KRW');
        }
      
     $('#us').click(function(){
@@ -91,6 +94,8 @@
 
      $('#class_text'+i).html('US$ '+jArray[i].amount+'.00')
         //alert(jArray[i].amount);
+	 //$('.ng-untouched input[name="amount"]').val(jArray[i].amount*1000);
+	 $('.ng-untouched input[name="currency"]').val('USD');
          }
         }
     }) ;
@@ -98,8 +103,10 @@
     $('#kr').click(function(){
     if ($(this).is(':checked')) {
     for(var i=0;i<jArray.length;i++){
-     $('#class_text'+i).html('￦ '+jArray[i].amount*1000 +'')
+     $('#class_text'+i).html('￦ '+jArray[i].amount*1100 +'(부가세 포함)')
        // alert(jArray[i].amount*1100);
+	 //$('.ng-untouched input[name="amount"]').val(jArray[i].amount*1000);
+	 $('.ng-untouched input[name="currency"]').val('KRW');
       }
     }
 }) ;

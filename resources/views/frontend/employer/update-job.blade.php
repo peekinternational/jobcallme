@@ -127,6 +127,7 @@
                             <label class="control-label col-sm-3">@lang('home.careerlevel')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <select class="form-control select2" name="careerLevel">
+										<option value=" ">@lang('home.s_career')</option>
                                     @foreach(JobCallMe::getCareerLevel() as $career)
                                         <option value="{!! $career !!}" {{ $result->careerLevel == $career ? 'selected="selected"' : '' }}>@lang('home.'.$career)</option>
                                     @endforeach
@@ -191,13 +192,14 @@
 					   <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.Responsibilities')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" value="{!! $result->responsibilities !!}" name="responsibilities" placeholder="@lang('home.Responsibilities')" required>
+                                <input type="text" class="form-control" value="{!! $result->responsibilities !!}" name="responsibilities" placeholder="@lang('home.Responsibilities')">
                             </div>
                        </div>
 					   <div class="form-group">
                            <label class="control-label col-sm-3">@lang('home.expptitle')</label>
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control" name="expptitle">
+										<option value=" ">@lang('home.expptitle')</option>
                                     <option value="exp Employee" {{ $result->expptitle == 'exp Employee' ? 'selected="selected"' : '' }}>@lang('home.exp Employee')</option>  
 										
 										<option value="exp Chief/Senior Staff" {{ $result->expptitle == 'exp Chief/Senior Staff' ? 'selected="selected"' : '' }}>@lang('home.exp Chief/Senior Staff')</option>
@@ -230,6 +232,7 @@
                            <label class="control-label col-sm-3">@lang('home.expposition')</label>
                            <div class="col-sm-9 pnj-form-field">
                                <select class="form-control" name="expposition">
+									<option value=" ">@lang('home.expposition')</option>
                                     <option value="expp Team members" {{ $result->expposition == 'expp Team members' ? 'selected="selected"' : '' }}>@lang('home.expp Team members')</option>  
 										
 										<option value="expp Team Leader" {{ $result->expposition == 'expp Team Leader' ? 'selected="selected"' : '' }}>@lang('home.expp Team Leader')</option>

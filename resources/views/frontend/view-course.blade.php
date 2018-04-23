@@ -30,7 +30,7 @@
                 </div>
                 <table class="table table-bordered">
                     <tr>
-                        <td class="active" width="150px">@lang('home.organiser')</td>
+                        <td class="active" width="200px">@lang('home.organiser')</td>
                         <td>{{ $record->organiser != '' ?  $record->organiser : JobCallMe::userName($record->userId) }}</td>
                     </tr>
                     <tr>

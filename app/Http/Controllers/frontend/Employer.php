@@ -124,7 +124,7 @@ curl_close ($ch);
 				'title' => 'required|max:255',
 				'department' => 'required',
 				'category' => 'required',
-				'careerLevel' => 'required',
+				//'careerLevel' => 'required',
 				'experience' => 'required',
 				'vacancy' => 'required|numeric',
 				'description' => 'required',
@@ -749,7 +749,7 @@ curl_close ($ch);
 				'title' => 'required|max:255',
 				'department' => 'required',
 				'category' => 'required',
-				'careerLevel' => 'required',
+				//'careerLevel' => 'required',
 				'experience' => 'required',
 				'vacancy' => 'required|numeric',
 				'description' => 'required|max:1024',
@@ -1581,7 +1581,7 @@ public function mapOrganization(Request $request){
 				'title' => 'required|max:255',
 				'department' => 'required',
 				'category' => 'required',
-				'careerLevel' => 'required',
+				//'careerLevel' => 'required',
 				'experience' => 'required',
 				'vacancy' => 'required|numeric',
 				'description' => 'required',
@@ -2172,6 +2172,13 @@ public function mapOrganization(Request $request){
 			$input['paymentMode']='Cash Payment';
 			$input['status']=2;
 
+			if($input['currency'] == 'KRW'){
+				$input['amount']=$input['amount']*1100;
+			}else{
+				$input['amount']=$input['amount'];
+			}
+
+
 	       $pckg_id=DB::table('jcm_save_packeges')->insertGetId($input);
 
 			$order['user_id']=$id;
@@ -2182,6 +2189,7 @@ public function mapOrganization(Request $request){
 			$order['status']='Pending';
 			$order['category']='Package Plan';
 			$order['date']= date('Y-m-d');
+			$order['currency']=$input['currency'];
 
             DB::table('jcm_orders')->insert($order);
 			 return view('frontend.employer.writecashpayment_detail',compact('input'));

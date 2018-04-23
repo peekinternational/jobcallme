@@ -44,7 +44,30 @@
                         <ul id="post-job-ad-types">
                          
 						 @foreach($plan as $key=>$pay)
-                         <!----><li style="position:relative">
+							
+								@if($pay->type == "Basic")
+                            <!----><li style="position:relative;background:#3a79d2;">
+								@endif
+								@if($pay->type == "Golden")
+                            <!----><li style="position:relative;background:#b0a48a;">
+								@endif
+								@if($pay->type == "Special")
+                            <!----><li style="position:relative;background:#4e6c7c;">
+								@endif
+								@if($pay->type == "Latest")
+                            <!----><li style="position:relative;background:#94a5a5;">
+								@endif
+								@if($pay->type == "Hot")
+                            <!----><li style="position:relative;background:#717171;">
+								@endif
+								@if($pay->type == "Top Job")
+                            <!----><li style="position:relative;background:#a8b3b9;">
+								@endif
+								@if($pay->type == "Premium")
+                            <!----><li style="position:relative;background:#a09d8e;">
+								@endif
+
+                         <!----><!-- <li style="position:relative"> -->
                                 <!---->
 								<span class="pay_blog">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $pay->id!!}" name="allarray" value="{!! $pay->cat_id!!}|{!! $pay->id!!}|{!! $pay->amount!!}|{!! $pay->duration!!}|{!! $pay->quantity!!}">
@@ -53,19 +76,21 @@
                                     <input class="checkplan"  type="hidden" name="plan"  value="plan">
 								</span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.'.$pay->type)</span></div>
+                             <span class="b" style="color:#fff;font-size: 17px;">@lang('home.'.$pay->type)</span></div>
                                 <div>
                                     <!----><label for="{!! $pay->id!!}">
-                                        <ul class="list-unstyled desc" >
-											<li>@lang('home.jobquentity') {{ $pay->quantity}}</li>
-                                            <li>@lang('home.Featuredonhomepage') ({{ $pay->duration}} days)</li>
+                                        <ul class="list-unstyled desc" style="font-size:12px">
+											<!-- <li>@lang('home.jobquentity') {{ $pay->quantity}}</li>
+                                            <li>@lang('home.Featuredonhomepage') ({{ $pay->duration}} days)</li> -->
+											<li>@lang('home.On Homepage'): {!!$pay->duration !!} @lang('home.days')</li>
+                                    <li>@lang('home.Quantity'): {!!$pay->quantity !!} @lang('home.jobs')</li>
                                             <!-- <li>{!! $payment->tag1!!}</li>
                                              <li>{!! $payment->tag2!!}</li> -->
                                         </ul>
 										
-                                        <div class="credits b">
-										<span class="text-success" id="class_text{{$key}}"></span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+                                        <div class="credits b" style="color:#fff;font-size: 15px;">
+										<span style="color:#fff" class="text-success" id="class_text{{$key}}"></span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:20px"></i>
 									</div>
                                     </label>
                                     <!---->
@@ -87,29 +112,51 @@
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types">
 						 @foreach($rec as $k=>$payment)
+
+								@if($payment->title == "Basic")
+                            <!----><li style="position:relative;background:#3a79d2;">
+								@endif
+								@if($payment->title == "Golden")
+                            <!----><li style="position:relative;background:#b0a48a;">
+								@endif
+								@if($payment->title == "Special")
+                            <!----><li style="position:relative;background:#4e6c7c;">
+								@endif
+								@if($payment->title == "Latest")
+                            <!----><li style="position:relative;background:#94a5a5;">
+								@endif
+								@if($payment->title == "Hot")
+                            <!----><li style="position:relative;background:#717171;">
+								@endif
+								@if($payment->title == "Top Job")
+                            <!----><li style="position:relative;background:#a8b3b9;">
+								@endif
+								@if($payment->title == "Premium")
+                            <!----><li style="position:relative;background:#a09d8e;">
+								@endif
 								
-                            <!----><li style="position:relative">
+                            <!----><!-- <li style="position:relative"> -->
                                 <!---->
 								<span class="pay_blog">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}">
 									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
 								</span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b">@lang('home.'.$payment->title)</span></div>
+                             <span class="b" style="color:#fff;font-size: 17px;">@lang('home.'.$payment->title)</span></div>
                                 <div>
                                     <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
+                                        <ul class="list-unstyled desc" style="font-size:12px">
 											<li>@lang('home.'.$payment->tag1)</li>
                                             <li>@lang('home.adcost')</li>
                                             <!-- <li>{!! $payment->tag1!!}</li>
                                              <li>{!! $payment->tag2!!}</li> -->
                                         </ul>
 										
-                                        <div class="credits b">@if($payment->price ==0)
+                                        <div class="credits b" style="color:#fff;font-size: 15px;">@if($payment->price ==0)
 									<span class="free">	@lang('home.Free')</span>
 										@else
-										<span class="text-success" id="simple_text{{$k}}"></span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+										<span style="color:#fff" class="text-success" id="simple_text{{$k}}"></span>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:20px"></i>
 									@endif</div>
                                     </label>
                                     <!---->
@@ -176,7 +223,7 @@
 									<span class="free">	@lang('home.Free')</span>
 										@else
 										<span style="color:#fff" class="text-success" id="simple_text{{$keys}}"></span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="float: right;"></i>
+									<i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:20px"></i>
 									@endif</div>
                                     </label>
                                     <!---->
@@ -260,8 +307,9 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.careerlevel')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2" name="careerLevel" required>
-                                    @foreach(JobCallMe::getCareerLevel() as $career)
+                                <select class="form-control select2" name="careerLevel">
+                                    <option value=" ">@lang('home.s_career')</option>
+									@foreach(JobCallMe::getCareerLevel() as $career)
                                         <option value="{!! $career !!}">@lang('home.'.$career)</option>
                                     @endforeach
                                 </select>
@@ -337,13 +385,13 @@
                             </div>
                         </div>
                            <div class="form-group">
-                            <label class="control-label col-sm-3">Associate Evaluation Form</label>
+                            <label class="control-label col-sm-3">@lang('home.Associate Evaluation Form')</label>
                             <div class="col-sm-9">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <input id="evform" type="checkbox" class="cbx-field" name="evform" value="yes">                             
                                         <label class="cbx" for="evform"></label>
-                                        <label class="lbl" for="evform">Associate Evaluation Form</label>
+                                        <label class="lbl" for="evform">@lang('home.Associate Evaluation Form')</label>
                                     </div>
                                 </div>
                             </div>
@@ -354,7 +402,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                        <select class="form-control" name="evaluation_form" id="ev_form" disabled="disabled">
-                                           <option value=""> select evaluation</option>
+                                           <option value=""> @lang('home.select evaluation')</option>
                                            @foreach($evaluation as $form)
                                            <option value="{{ $form->id}}">{{$form->title}}</option>
 
@@ -404,7 +452,8 @@
 						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.expptitle')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control" name="expptitle">  									
+                                <select class="form-control" name="expptitle">  
+										<option value=" ">@lang('home.expptitle')</option>
                                         <option value="exp Employee" {{ $meta->expptitle == 'exp Employee' ? 'selected="selected"' : '' }}>@lang('home.exp Employee')</option>  
 										
 										<option value="exp Chief/Senior Staff" {{ $meta->expptitle == 'exp Chief/Senior Staff' ? 'selected="selected"' : '' }}>@lang('home.exp Chief/Senior Staff')</option>
@@ -438,7 +487,8 @@
 						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.expposition')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control" name="expposition">  									
+                                <select class="form-control" name="expposition">  	
+										<option value=" ">@lang('home.s_career')</option>
                                         <option value="expp Team members" {{ $meta->expposition == 'expp Team members' ? 'selected="selected"' : '' }}>@lang('home.expp Team members')</option>  
 										
 										<option value="expp Team Leader" {{ $meta->expposition == 'expp Team Leader' ? 'selected="selected"' : '' }}>@lang('home.expp Team Leader')</option>
@@ -885,7 +935,7 @@
                             </div>
                         </div>
                     </div>
-					<div class="col-md-offset-3 col-md-2  pnj-btns">
+					<div class="col-md-offset-3 col-md-3  pnj-btns">
                         <span style="font-size:17px;padding-right:50px;" id="total">@lang('home.Total Amount') : US$</span>						
                     </div>
                     <div class="col-md-6  pnj-btns">                        
@@ -1025,7 +1075,7 @@ $(document).ready(function(){
      var simplearray = <?php echo json_encode($rec); ?>;
 
      for(var i=0;i<simplearray.length;i++){
-     $('#simple_text'+i).html('￦ '+simplearray[i].price*1000+'')
+     $('#simple_text'+i).html('￦ '+simplearray[i].price*1100+'(부가세 포함)')
         //alert(jArray[i].amount);
        }
      
@@ -1042,7 +1092,7 @@ $(document).ready(function(){
     $('#kr').click(function(){
     if ($(this).is(':checked')) {
     for(var i=0;i<simplearray.length;i++){
-     $('#simple_text'+i).html('￦ '+simplearray[i].price*1000 +'')
+     $('#simple_text'+i).html('￦ '+simplearray[i].price*1100 +'(부가세 포함)')
        // alert(jArray[i].amount*1100);
       }
     }
@@ -1161,12 +1211,12 @@ $('#secondDate').on('change', function() {
       $('#pas').val(to);
       
     if ($('#kr').is(':checked')) {
-	  $('#total').html("@lang('home.Total Amount') : "+total*1000+" ₩" );
+	  $('#total').html("@lang('home.Total Amount') : ₩ "+total*1100 );
      // alert('kr');
     }
 
      if ($('#us').is(':checked')) {
-	  $('#total').html("@lang('home.Total Amount') : "+total+" $" );
+	  $('#total').html("@lang('home.Total Amount') : $ "+total );
       //alert('us');
     }
    

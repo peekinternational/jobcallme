@@ -142,7 +142,7 @@ $lToken = csrf_token();
     </section>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-     <button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> Open Quick View V  </button>
+     <button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> @lang('home.Open Quick View V')  </button>
 </div>
                                                
     <!--Slider Section End-->
@@ -266,10 +266,15 @@ $lToken = csrf_token();
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-								<p style="padding-top:50px">{!! $job->description !!}</p>
+								<p style="padding-top:10px">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]<br>@lang('home.lastdate') : @if(app()->getLocale() == "kr")
+							  [{{ date('Y-m-d',strtotime($job->expiryDate))}}]
+						@else
+							  [{{ date('M d, Y',strtotime($job->expiryDate))}}]
+						@endif<!-- {!! $job->description !!} --></p>
+								
                                 
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                                 </div>
                                 <div class="job-status days-left">
                                     <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
@@ -308,7 +313,7 @@ $lToken = csrf_token();
                             
                         }
 			?>
-                <div class="col-md-3">
+                <div class="col-sm-4">
                     <!-- colored -->
                     <div class="ih-item square effect8 scale_up tc-box" style="background:#a09d8e">
                         <a href="{{ url('jobs/'.$comp->jobId) }}">
@@ -349,7 +354,19 @@ $lToken = csrf_token();
 							</span>
                             <div class="info">
                                 <h3>{!! $comp->companyName !!}</h3>
-                                <p>{!! $comp->description !!}</p>
+                                <p>{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$comp->jobType)]<br>@lang('home.experience') : [@lang('home.'.$comp->experience)]<br>@lang('home.lastdate') : @if(app()->getLocale() == "kr")
+							  [{{ date('Y-m-d',strtotime($comp->expiryDate))}}]
+						@else
+							  [{{ date('M d, Y',strtotime($comp->expiryDate))}}]
+						@endif</p>
+
+
+								<div class="job-status eye-icon">
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $comp->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($comp->expiryDate) }}
+                                </div>
+                                <div class="job-status days-left">
+                                    <span><!-- {{ JobCallMe::timeInDays($comp->expiryAd) }}@lang('home.days left') --></span>
+                                </div>
                               
                             </div>
 							  
@@ -387,13 +404,13 @@ $lToken = csrf_token();
                         }
 			?>
 
-                <div class="col-md-5ths">
+                <div class="col-sm-4">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#7c98a7;">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img hj-type-job">
 							<div style="background:#fff">
-								<div class="" style="height: 70px; width:100%;background:#fff">
-									<img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:70px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img"> 
+								<div class="" style="height: 50px; width:100%;background:#fff">
+									<img class="img-responsive" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:50px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img"> 
                                 </div>
                                 <b class="pull-right" style="background:#fff;padding-right:5px;margin-bottom:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
@@ -430,12 +447,16 @@ $lToken = csrf_token();
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p>{!! $job->description !!}</p>
+                                <p style="padding-top:5px;">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]<br><!-- @lang('home.lastdate') : @if(app()->getLocale() == "kr")
+							  [{{ date('Y-m-d',strtotime($job->expiryDate))}}]
+						@else
+							  [{{ date('M d, Y',strtotime($job->expiryDate))}}]
+						@endif --></p>
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }} @lang('home.days left')</span>
+                                    <span><!-- {{ JobCallMe::timeInDays($job->expiryAd) }} @lang('home.days left') --></span>
                                 </div>
                             </div>
                         </a>
@@ -470,13 +491,13 @@ $lToken = csrf_token();
                             
                         }
 			?>
-                <div class="col-md-5ths">
+                <div class="col-sm-4">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#7c98a7;">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img lj-type-job">
 							<div style="background:#fff">
-                            <div class="" style="height: 60px; width:100%">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:60px !important;margin: 0 auto;width: auto !important;" alt="img">
+                            <div class="" style="height: 45px; width:100%">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:45px !important;margin: 0 auto;width: auto !important;" alt="img">
                                </div>
                                 <b class="pull-right" style="background:#fff;padding-right:5px;padding-bottom:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
@@ -512,12 +533,12 @@ $lToken = csrf_token();
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p style="padding-top:10px">{!! $job->description !!}</p>
+                                <p style="padding-top:5px">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]</p>
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+                                    <span><!-- {{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left') --></span>
                                 </div>
                             </div>
                         </a>
@@ -553,13 +574,13 @@ $lToken = csrf_token();
                         }
 			?>
                 <!--Special Job Single item Start-->
-                <div class="col-md-5ths">
+                <div class="col-sm-4">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#7c98a7">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                         <div class="img sj-job-type">
 						<div style="background:#fff">
-                        <div class="" style="height: 50px; width:100%">
-                            <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:50px !important;margin: 0 auto;width: auto !important;"  alt="img">
+                        <div class="" style="height: 35px; width:100%">
+                            <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:35px !important;margin: 0 auto;width: auto !important;"  alt="img">
                           </div>
                             <b class="pull-right" style="padding-top:5px;padding-right:5px;padding-bottom:5px;">{!! $job->companyName !!}</b>
                             <div class="clearfix"></div>
@@ -595,12 +616,12 @@ $lToken = csrf_token();
                         </div>
                         <div class="info">
                             <h3>{!! $job->companyName !!}</h3>
-                            <p>{!! $job->description !!}</p>
+                            <p style="padding-top:5px">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]</p>
                             <div class="job-status eye-icon">
-                                <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
+                                <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                             </div>
                             <div class="job-status days-left">
-                                <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+                                <span><!-- {{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left') --></span>
                             </div>
                         </div>
                         </a>
@@ -638,15 +659,15 @@ $lToken = csrf_token();
                             
                         }
 			?>
-                <div class="col-md-2">
+                <div class="col-sm-4">
                     <div class="ih-item square effect8 scale_up tc-box" style="height:auto;background:#a09d8e;">
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img sj-job-type">
 							  <div style="background:#fff">
-                               <div class="" style="height: 40px; width:100%">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:50px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
+                               <div class="" style="height: 30px; width:100%">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:30px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
                                </div>
-                                <b class="pull-right" style="padding-top:7px;padding-right:5px;">{!! $job->companyName !!}</b>
+                                <b class="pull-right" style="padding-top:8px;padding-right:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
 							  </div>
                                 <!-- <hr> -->
@@ -680,12 +701,12 @@ $lToken = csrf_token();
                             </div>
                             <div class="info">
                                 <h3>{!! $job->companyName !!}</h3>
-                                <p>{!! $job->description !!}</p>
+                                <p style="padding-top:5px">{!! $string !!}<br>@lang('home.jobtype') : [@lang('home.'.$job->jobType)]<br>@lang('home.experience') : [@lang('home.'.$job->experience)]</p>
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+                                    <span><!-- {{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left') --></span>
                                 </div>
                             </div>
                         </a>
@@ -730,10 +751,10 @@ $lToken = csrf_token();
 });
 function myFunction() {
     var x = document.getElementById("Quickbutton");
-    if (x.innerHTML === "Close Quick View V") {
-        x.innerHTML = "Open Quick View V";
+    if (x.innerHTML === "@lang('home.Close Quick View V')") {
+        x.innerHTML = "@lang('home.Open Quick View V')";
     } else {
-        x.innerHTML = "Close Quick View V";
+        x.innerHTML = "@lang('home.Close Quick View V')";
     }
 }
 </script>

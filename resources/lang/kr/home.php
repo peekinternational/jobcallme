@@ -519,8 +519,8 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'questionnaires' => '인터뷰 질의',
 	'projectVisible' => '프로젝트 보이기',
 	'subscription' => '구독',
-	'credits' => '결제',
-	'orders' => '주문',
+	'credits' => '상품결제',
+	'orders' => '결제내역 현황',
 	'deactivation' => '계정탈퇴',
 	'deactivateaccount' => '회원계정탈퇴',
 	'oldpassword' => '이전 비밀번호',
@@ -667,7 +667,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'sendmessageapplicant' => '지원자에게 메세지보내기',
 	'scheduleinterview' => '지원자 면접일자',
 	'exportselected' => '선택항목보내기',
-	'alljobs' => '전체채용',
+	'alljobs' => '전체 공개채용',
 	'applicants' => '지원자',
 	'timeinterview' => '면접 시간일정',
 	'resume' => '이력서',
@@ -1226,7 +1226,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 	'capital' => '자본금',
 	'capitaltext' => '자본금을 기입바랍니다.',
-	'sales' => '매출액',
+	'sales' => '매출액(단위:백만원)',
 	'salestext' => '매출액을 기입바랍니다.',
 	'formofbusiness' => '기업형태',
 	'formofbusinesstext' => '기업형태를 선택바랍니다.',
@@ -1243,7 +1243,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'Video & Chat' => '화상 & 채팅',
 	'First Interview' => '1차면접',
 	'Second Interview' => '2차면접',
-	'Examination for Employment' => '채용검긴',
+	'Examination for Employment' => '채용검진',
 	'Final Pass' => '최종합격',	
 	'Add' => '추가',	
 
@@ -55812,7 +55812,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Deogyang-gu, Goyang-si"=>"고양시 덕양구",
 "Ilsandong-gu, Goyang-si"=>"고양시 일산동구",
 "Ilsanseo-gu, Goyang-si"=>"고양시 일산 서구",
-"Gwacheon-si"=>"과천",
+"Gwacheon-si"=>"과천시",
 "Gwangmyeong-si"=>"광명시",
 "Gwangju-si"=>"광주시",
 "Guri-si"=>"구리시",
@@ -113886,7 +113886,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Questionaires/Test"=>"인터뷰 질의사항",
 "Start Now"=>"시작하기",
 "Submit"=>"제출",
-"Order Detail"=>"주문 정보",
+"Order Detail"=>"구매 내역",
 
 "Your order is pending payment clearance!"=>"주문하신 상품이 결제 대기 중입니다!",
 "Thank you for shopping at jobcallme.com. Your order has been placed successfully."=>"구매해주셔서 감사합니다. 결제 완료되었습니다",
@@ -113971,7 +113971,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'Contest · Show' => '경연 · 공연',
 'leancostlist' => '참관비',
 
-'New and Career Recruitment' => '전체채용',
+'New and Career Recruitment' => '전체 공개채용',
 
 'Edit Department' => '부서 변경',
 
@@ -114041,5 +114041,11 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'Add Job Successfully' => '회원님의 채용공고가 등록되었습니다.',
 'Job Update Successfully' => '회원님의 채용공고가 수정되었습니다.',
 
-'videochat_text' => '화상채팅은 구글크롬과 MS엣지를 사용하시길 바랍니다.',
+'videochat_text' => '화상채팅 브라우저는 구글크롬과 MS엣지에서 가능합니다.',
+'Open Quick View V' => '빠른 검색보기',
+'Close Quick View V' => '빠른 검색닫기',
+'learn-search-text' => '상세검색',
+'Government·Pblic·Institutions·Public Corporations' => '정부·공공기관·공기업',
+'Associate Evaluation Form' => '평가표',
+'select evaluation' => '평가표 선택',
 ];
