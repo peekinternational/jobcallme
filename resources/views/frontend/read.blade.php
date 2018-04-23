@@ -102,7 +102,7 @@
                                     </span>
                                     <span class="pull-right"><i class="like fa fa-heart <?php echo JOBCALLME::getUserLikes( $rec->writingId,Session::get('jcmUser')->userId ) ?>"></i> <i class="total-likes"><?= JOBCALLME::getReadlikes($rec->writingId)?></i></span>
                                     <input type="hidden" class="post_id" value="{{ $rec->writingId}}">
-                                    <input type="hidden" class="userId" value="{{ Session::get('jcmUser')->userId }}">
+                                    <input type="hidden" class="userId" value="{{  Session::get('jcmUser')->userId }}">
 
                                 </div>
                             </div>
