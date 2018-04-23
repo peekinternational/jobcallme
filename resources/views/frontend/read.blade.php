@@ -80,11 +80,11 @@
                         </div>
                         <div class="col-md-12">
                             <p> <a href="{{ url('read/article/'.$rec->writingId ) }}" class="la-title">{!! $rec->title !!}</a></p>
-                            <?
+                            <?php
 								$cat_names = explode(",",$rec->cat_names);
 								
 							?>
-							<span>#<?for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i]) @if($cat_names[$i]!="")ㆍ@endif<?}?></span>
+							<span>#<?php for($i=0; $i < count($cat_names); $i++){ ?>@lang('home.'.$cat_names[$i]) @if($cat_names[$i]!="")ㆍ@endif <?php } ?></span>
                             <div class="la-text">{!! $rec->citation !!}</div>
                             <div class="ra-author-box">
                                 <img src="{{ url('profile-photos/'.$rec->profilePhoto) }}" class="img-circle" alt="{{ $rec->firstName }}">

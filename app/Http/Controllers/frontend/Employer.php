@@ -119,7 +119,7 @@ curl_close ($ch);
 	 
     public function postPaymentWithpaypals(Request $request)
     {
-	//dd($request->all());
+	//dd($request->draft);
 	$this->validate($request,[
 				'title' => 'required|max:255',
 				'department' => 'required',
@@ -230,6 +230,104 @@ curl_close ($ch);
 		
 		 $goodsname = Session::get('p_Category');
 		 $plan=$request->plan;
+if($request->draft){
+	if($plan != null && $plan != '')
+		{       
+			$name =$request->allarray;
+			    $result_explode = explode('|', $name);
+				
+				$p_category = $result_explode[0];
+				$pckg_id = $result_explode[1];
+				$price= $result_explode[2];
+				$dur= $result_explode[3];
+				$quantity= $result_explode[4];
+				//dd($duration);
+
+				$date = strtotime('+'.$dur.' day');
+                $expiry= date('Y-m-d', $date);
+			
+				$request->merge(['jType'=>'Paid']);
+				$app = $request->session()->get('jcmUser');
+
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1', 'pckg_id' => $pckg_id, 'jobStatus' => 'Draft', 'paymentType' => '4', 'amount' => $price, 'p_Category' => $p_category, 'title' => $title, 'jType' => 'Paid','dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $dur, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2, 'expiryDate' => $expiryDate, 'expiryAd' => $expiry, 'createdTime' => date('Y-m-d H:i:s'));
+
+
+
+		//dd($input);
+		if($questionaire_id){
+			$input['questionaire_id'] = $questionaire_id;
+		}
+		if($subCategory == ''){
+			$input['subCategory'] = '';
+		}
+		$jobId = DB::table('jcm_jobs')->insertGetId($input);
+		 
+		 $remain =$quantity-1;
+		 $inputs['quantity']=$remain;
+
+		DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
+        
+	//	DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_category,'companyModifiedTime'=>date('Y-m-d H:i:s')]);   
+
+		//dd($jobId);
+		\Session::put('success',trans('home.Add Job Successfully To Draft'));
+		return Redirect::route('addmoney.account/employer/job/share');	
+		}
+		
+		elseif($amount!='0')
+		{
+			$request->merge(['jType'=>'Paid']);
+		}
+		if($amount=='0')
+		{
+			$request->merge(['jType'=>'Free']);
+				$app = $request->session()->get('jcmUser');
+
+	
+   
+		extract($request->all());
+		//dd($request->all());
+
+
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1','jobStatus' => 'Draft', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
+
+		if($questionaire_id){
+			$input['questionaire_id'] = $questionaire_id;
+		}
+
+
+		if($subCategory == ''){
+			$input['subCategory'] = '';
+		}
+		$jobId = DB::table('jcm_jobs')->insertGetId($input);
+		//DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
+		//dd($jobId);
+		\Session::put('success',trans('home.Add Job Successfully To Draft'));
+		return Redirect::route('addmoney.account/employer/job/share');	
+		}	
+		else{
+		
+
+		$input = array('userId' => $app->userId, 'companyId' => $app->companyId, 'status' => '1','jobStatus' => 'Draft', 'paymentType' => '0', 'amount' => $amount, 'p_Category' => $p_Category, 'title' => $title, 'jType' => $jType,'dispatch' => $dispatch,'head' => $head,'department' => $department,'duration' => $duration, 'category' => $category, 'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','), 'process' => rtrim(@implode(',', $request->input('process')),','), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2, 'expiryDate' => $expiryDate, 'expiryAd' => $expiryAd, 'createdTime' => date('Y-m-d H:i:s'));
+
+		if($questionaire_id){
+			$input['questionaire_id'] = $questionaire_id;
+		}
+
+
+		if($subCategory == ''){
+			$input['subCategory'] = '';
+		}
+		$jobId = DB::table('jcm_jobs')->insertGetId($input);
+		//DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
+		//dd($jobId);
+		\Session::put('success',trans('home.Add Job Successfully To Draft'));
+		return Redirect::route('addmoney.account/employer/job/share');	
+	//	return Redirect::route('addmoney.account/employer/payment',compact('am','app','goodsname'));
+		}
+}
+
+else{
 
 		if($plan != null && $plan != '')
 		{       
@@ -310,6 +408,7 @@ curl_close ($ch);
 		 return view('frontend.employer.payment',compact('am','app','goodsname'));
 	//	return Redirect::route('addmoney.account/employer/payment',compact('am','app','goodsname'));
 		}
+}
 	}
 	
 	
@@ -1604,7 +1703,7 @@ public function mapOrganization(Request $request){
    
 			extract($request->all());
 
-			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'title' => $title, 'department' => $department, 'category' => $category, 'head' => $head,'dispatch' => $dispatch,'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','),'process' => rtrim(@implode(',', $request->input('process')),','), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2);
+			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'title' => $title, 'jobStatus' => 'Publish', 'department' => $department, 'category' => $category, 'head' => $head,'dispatch' => $dispatch,'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','),'process' => rtrim(@implode(',', $request->input('process')),','), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2);
 			if($subCategory == ''){
 				$input['subCategory'] = '';
 			}
