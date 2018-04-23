@@ -341,7 +341,11 @@ class JobCallMe{
 		return $categories;
 	}
 	public function getReadCategories(){
-		$readcategories = DB::table('jcm_read_category')->get();
+		if(app()->getLocale() == "kr"){
+			$readcategories = DB::table('jcm_read_category')->orderBy('name_ko','asc')->get();
+		}else{
+			$readcategories = DB::table('jcm_read_category')->orderBy('name','asc')->get();
+		}
 		return $readcategories;
 	}
 
@@ -371,7 +375,7 @@ class JobCallMe{
 	}
 
 	public function getJobCountries(){
-		$jobCountries = DB::table('jcm_countries')->orderBy('name','asc')->get();
+		$jobCountries = DB::table('jcm_countries')->orderBy('id','asc')->get();
 		return $jobCountries;
 	}
 
@@ -475,6 +479,14 @@ class JobCallMe{
 		return DB::table('jcm_categories')->where('categoryId',$id)->first()->name;
 	}
 
+	public function subcategoryTitle($id){
+		return DB::table('jcm_sub_categories')->where('subCategoryId',$id)->first()->subName;
+	}
+
+	public function subcategoryTitle2($id){
+		return DB::table('jcm_sub_categories2')->where('subCategoryId2',$id)->first()->subName;
+	}
+
 	public function doArrayAction($type,$id,$array){
 		if($type == 'remove'){
 			foreach($array as $i => $k){
@@ -550,10 +562,12 @@ class JobCallMe{
 		}else{
 			//166
 			
-			$array = array('48316','48317','48318','48319','48320','48321','48322','48323','48324','48334','48325','48326','48327','48328','48329','48330','48331','48332','48333');
+			$array = array('2047','2048','2049','2050','2051','2052','2053','2054','2055','2056','2057','2058','2059','2060','2061','2062','2063');
+			//$array = array('48316','48317','48318','48319','48320','48321','48322','48323','48324','48334','48325','48326','48327','48328','48329','48330','48331','48332','48333');
 		}
-
-		$cities = DB::table('jcm_cities')->whereIn('id',$array)->get();
+		
+		$cities = DB::table('jcm_states')->whereIn('id',$array)->get();
+		//$cities = DB::table('jcm_cities')->whereIn('id',$array)->get();
 		return $cities;
 	}
 

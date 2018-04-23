@@ -56,6 +56,9 @@ if($upskill->country != 0){
 								@if($payment->title == "Course · Education · Academy")
                             <!----><li style="position:relative;background:#94a5a5;">
 								@endif
+								@if($payment->title == "Contest · Show")
+                            <!----><li style="position:relative;background:#a09d8e;">
+								@endif
 
                           <span class="pay_skill">
                                <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="cat_id" value="{!! $payment->cat_id!!}">
@@ -89,7 +92,7 @@ if($upskill->country != 0){
 
               @endif
 
-                    <div class="pnj-form-section">
+                    <div class="pnj-form-section" style="padding-top:30px">
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
@@ -137,7 +140,7 @@ if($upskill->country != 0){
                                 <div class="row">                                    
                                     <div class="col-md-10 pnj-salary">
                                         <div class=" benefits-checks">
-											<input type="radio" name="accommodation" id="cost_method1" value="Free" {{ $upskill->accommodation == 'Free' ? 'checked=""' : '' }}> @lang('home.free')&nbsp;&nbsp;
+											<input type="radio" name="accommodation" id="cost_method1" value="on" {{ $upskill->accommodation == 'on' ? 'checked=""' : '' }}> @lang('home.free')&nbsp;&nbsp;
 											<input type="radio" name="accommodation" id="cost_method2" value="Contact" {{ $upskill->accommodation == 'Contact' ? 'checked=""' : '' }}> @lang('home.Contact person')&nbsp;&nbsp;
 											<input type="radio" name="accommodation" id="cost_method3" value="Yes" {{ $upskill->accommodation == 'Yes' ? 'checked=""' : '' }}> @lang('home.notfree')&nbsp;&nbsp;
                                             <!-- <input id="free" type="checkbox" class="cbx-field" name="accommodation" {{ $upskill->cost == '0' ? 'checked=""' : '' }}>
@@ -270,6 +273,12 @@ if($upskill->country != 0){
                             <label class="control-label col-sm-3">@lang('home.mobile')</label>
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" name="mobile" class="form-control" placeholder="@lang('home.mobile')" value="{{ $upskill->mobile }}">
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.fax')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <input type="text" name="fax" class="form-control" placeholder="@lang('home.fax')" value="{{ $upskill->mobile }}">
                             </div>
                         </div>
                     </div>

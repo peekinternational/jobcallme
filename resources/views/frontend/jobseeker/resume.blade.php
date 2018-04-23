@@ -41,7 +41,7 @@ if($user->profilePhoto != ''){
                                             @lang('home.change') <i class="fa fa-camera"></i>
                                             <input type="file" class="upload profile-pic" name="image" />
                                         </div>
-                                        <span id="remove-re-image" style="margin-right: 42px;" onclick="removeResumePic()">@lang('home.remove') <i class="fa fa-remove"></i></span>
+                                        <span id="remove-re-image" style="margin-right: 42px;" onclick="removeResumePic('profile')">@lang('home.remove') <i class="fa fa-remove"></i></span>
                                         <p id="remove-re-image" style="margin-right: 71px;" onclick="editResumeProPic()">@lang('home.Edit') <i class="fa fa-edit"><input type="hidden" value="{{ session()->get('jcmUser')->userId }}" id="userID" ></i></p>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@ if($user->profilePhoto != ''){
                                 <p><span class="pi-title">@lang('home.experiance'):</span>  @lang('home.'.$meta->experiance)</p>
                                 <p><span class="pi-title">@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryTitle($meta->industry))</p>
                                 <p><span class="pi-title">@lang('home.currentsalary'):</span> @if($meta->currency == 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',0).' '.$meta->currency }}@endif @if($meta->currency != 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}@endif</p>
-								<p><span class="pi-title">@lang('home.expectedsalary'):</span>  @if($meta->currency == 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->expectedSalary : '0',0).' '.$meta->currency }}@endif @if($meta->currency != 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->expectedSalary : '0',2).' '.$meta->currency }}@endif </p>
+								<p><span class="pi-title">@lang('home.expectedsalary'):</span>  @if($meta->expectedSalary == "") @lang('home.'.$meta->expectedSalary2) @else @if($meta->currency == 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->expectedSalary : '0',0).' '.$meta->currency }}@endif			 @if($meta->currency != 'KRW'){{ number_format($meta->currentSalary != '' ? $meta->expectedSalary : '0',2).' '.$meta->currency }}@endif @endif </p>
                                 <div class="professional-summary">
                                     <h4>@lang('home.p_summary')</h4>
                                     <p>{!! $user->about !!}</p>
@@ -159,7 +159,14 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.address') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control input-sm" name="address">{{ $meta->address }} </textarea>
+                                    <input type="text" name="address" class="form-control" id="Address" value="<?php if ( isset($meta->address) != "" ){ print $meta->address;}?>"  placeholder="주소, 우편 번호, 경계표, 면적 입력" required />
+                                    <!-- <textarea class="form-control input-sm" name="address">{{ $meta->address }} </textarea> -->
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.address2') <span style="color:red">*</span></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="address2" value="{{ $meta->address2 }}"  placeholder="@lang('home.address2')">
                                 </div>
                             </div>
                            <div class="form-group">
@@ -188,12 +195,17 @@ if($user->profilePhoto != ''){
                             </div>
                         </div>
                         <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.experiancelevel') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.experiences') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
 									<select class="form-control select2" name="experiance">
-										@foreach(JobCallMe::getCareerLevel() as $career)
-											<option value="{!! $career !!}" {{ $meta->experiance == $career ? 'selected="selected"' : '' }}>@lang('home.'.$career)</option>
-										@endforeach
+										@foreach(JobCallMe::getExperienceLevel() as $el)
+											@if($el == "No Need Career")
+												
+											@else
+												<option value="{{ $el }}" {{ $meta->experiance == $el ? 'selected="selected"' : '' }}>@lang('home.'.$el)</option>
+											
+											@endif
+                                        @endforeach
 									</select>
 
                               <!--    <select class="form-control input-sm select2" name="experiance">
@@ -287,16 +299,43 @@ if($user->profilePhoto != ''){
                             </div>
                            
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.currentsalary') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.currentsalary') </label>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control input-sm" name="currentSalary" value="{{ $meta->currentSalary }}" required>
+                                    <input type="number" class="form-control input-sm" name="currentSalary" value="{{ $meta->currentSalary }}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.expectedsalary') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.expectedsalary') </label>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control input-sm" name="expectedSalary" value="{{ $meta->expectedSalary }}" required>
+                                    <input type="number" class="form-control input-sm" name="expectedSalary" value="{{ $meta->expectedSalary }}">
                                 </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right"></label>      
+								
+								<div class="col-md-4">
+										<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="expectedSalary2" value="expectedSalary-check" @if($meta->expectedSalary2 == "expectedSalary-check") checked @else @endif>@lang('home.expectedSalary-check')&nbsp;&nbsp;&nbsp;
+
+										<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="expectedSalary2" value="Decision after interview" @if($meta->expectedSalary2 == "Decision after interview") checked @else @endif >@lang('home.Decision after interview')									
+
+										
+                                </div>
+								
+								<!-- 
+								<div class="col-md-2">
+										<input id="expectedSalary" type="checkbox" class="cbx-field" name="expectedSalary" value="yes">
+                                        <label class="cbx" for="expectedSalary"></label>
+                                        <label class="lbl" for="expectedSalary">@lang('home.expectedSalary-check')</label>
+
+										
+                                </div>
+								<div class="col-md-2">									
+
+										<input id="expectedSalary2" type="checkbox" class="cbx-field" name="expectedSalary2" value="yes">
+                                        <label class="cbx" for="expectedSalary2"></label>
+                                        <label class="lbl" for="expectedSalary2">@lang('home.Decision after interview')</label>
+                                </div>
+								-->
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.currency') <span style="color:red">*</span></label>
@@ -309,9 +348,9 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.expertise') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.expertise') </label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="expertise" value="{{ $meta->expertise }}" required>
+                                    <input type="text" class="form-control input-sm" name="expertise" value="{{ $meta->expertise }}">
                                     <p class="help-block">@lang('home.commaexpertise')</p>
                                 </div>
                             </div>
@@ -372,10 +411,10 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getAcademic('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getAcademic('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
@@ -443,11 +482,19 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.degree') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.degree') </label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="degree" required>
+                                    <input type="text" class="form-control input-sm" name="degree">
                                 </div>
                             </div>
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.minor')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="minor">
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.Entrance date') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
@@ -463,8 +510,20 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.GradeGPA')</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="grade" required>
+                                    <div class="col-md-6">
+										<input type="text" class="form-control input-sm" name="grade">
+									</div>
+									<div class="col-md-6">
+									<select class="form-control input-sm" name="grade2">
+										<option value="">@lang('home.grade2')</option> 
+                                        <option value="4.5">4.5</option>
+                                        <option value="4.3">4.3</option>
+                                        <option value="4.0">4.0</option>
+                                        <option value="100">100</option>                                        
+                                    </select>
+									</div>
                                 </div>
+								
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.institution') <span style="color:red">*</span></label>
@@ -538,10 +597,10 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getCertification('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getCertification('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
@@ -571,13 +630,13 @@ if($user->profilePhoto != ''){
                                 <div class="col-md-6"><div class="alert alert-danger"></div></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.certification') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.certificationtitle') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm" name="certificate" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.completiondate') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.cercompletiondate') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control input-sm date-picker" name="completionDate" required>
                                 </div>
@@ -623,6 +682,7 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm tex-editor" name="details"></textarea>
+									<div>@lang('home.certification_text')</div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -659,10 +719,10 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getExperience('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getExperience('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
@@ -714,6 +774,12 @@ if($user->profilePhoto != ''){
                                     <input type="text" class="form-control input-sm date-picker" name="endDate" >
                                 </div>
                             </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.expleaving') </label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="reasonleaving">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
@@ -724,6 +790,81 @@ if($user->profilePhoto != ''){
                                     </div>
                                 </div>
                             </div>
+
+							<div class="form-group" id="enddate">
+                                <label class="control-label col-md-3 text-right">@lang('home.expptitle')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control" name="expptitle">  									
+                                        <option value="exp Employee" {{ $meta->expptitle == 'exp Employee' ? 'selected="selected"' : '' }}>@lang('home.exp Employee')</option>  
+										
+										<option value="exp Chief/Senior Staff" {{ $meta->expptitle == 'exp Chief/Senior Staff' ? 'selected="selected"' : '' }}>@lang('home.exp Chief/Senior Staff')</option>
+
+                                        <option value="exp Assistant Manager" {{ $meta->expptitle == 'exp Assistant Manager' ? 'selected="selected"' : '' }}>@lang('home.exp Assistant Manager')</option>
+
+                                        <option value="exp Manager" {{ $meta->expptitle == 'exp Manager' ? 'selected="selected"' : '' }}>@lang('home.exp Manager')</option>
+
+                                        <option value="exp Deputy General Manger" {{ $meta->expptitle == 'exp Deputy General Manger)' ? 'selected="selected"' : '' }}>@lang('home.exp Deputy General Manger')</option>
+
+										<option value="exp General Manger" {{ $meta->expptitle == 'exp General Manger' ? 'selected="selected"' : '' }}>@lang('home.exp General Manger')</option>
+
+										<option value="exp Board of Director" {{ $meta->expptitle == 'exp Board of Director' ? 'selected="selected"' : '' }}>@lang('home.exp Board of Director')</option>
+
+										<option value="exp Researcher" {{ $meta->expptitle == 'exp Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Researcher')</option>
+
+										<option value="exp Chief Researcher" {{ $meta->expptitle == 'exp Chief Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Chief Researcher')</option>
+
+										<option value="exp Senior Researcher" {{ $meta->expptitle == 'exp Senior Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Senior Researcher')</option>
+
+										<option value="exp Head Researcher" {{ $meta->expptitle == 'exp Head Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Head Researcher')</option>
+
+										<option value="exp Principal Researcher" {{ $meta->expptitle == 'exp Principal Researcher' ? 'selected="selected"' : '' }}>@lang('home.exp Principal Researcher')</option>
+
+										<option value="exp Director of Research" {{ $meta->expptitle == 'exp Director of Research' ? 'selected="selected"' : '' }}>@lang('home.exp Director of Research')</option>
+                                    
+									</select>
+                                </div>
+                            </div>							
+							<div class="form-group" id="enddate">
+                                <label class="control-label col-md-3 text-right">@lang('home.expposition')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control" name="expposition">  									
+                                        <option value="expp Team members" {{ $meta->expposition == 'expp Team members' ? 'selected="selected"' : '' }}>@lang('home.expp Team members')</option>  
+										
+										<option value="expp Team Leader" {{ $meta->expposition == 'expp Team Leader' ? 'selected="selected"' : '' }}>@lang('home.expp Team Leader')</option>
+
+                                        <option value="expp Manager" {{ $meta->expposition == 'expp Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Manager')</option>
+
+                                        <option value="expp Part Manager" {{ $meta->expposition == 'expp Part Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Part Manager')</option>
+
+                                        <option value="expp General Manger" {{ $meta->expposition == 'expp General Manger)' ? 'selected="selected"' : '' }}>@lang('home.expp General Manger')</option>
+
+										<option value="expp Branch Manager" {{ $meta->expposition == 'expp Branch Manager' ? 'selected="selected"' : '' }}>@lang('home.expp Branch Manager')</option>
+
+										<option value="expp Branch office President" {{ $meta->expposition == 'expp Branch office President' ? 'selected="selected"' : '' }}>@lang('home.expp Branch office President')</option>
+
+										<option value="expp Director" {{ $meta->expposition == 'expp Director' ? 'selected="selected"' : '' }}>@lang('home.expp Director')</option>
+
+										<option value="expp Director of a bureau" {{ $meta->expposition == 'expp Director of a bureau' ? 'selected="selected"' : '' }}>@lang('home.expp Director of a bureau')</option>
+
+										<option value="expp Head Director" {{ $meta->expposition == 'expp Head Director' ? 'selected="selected"' : '' }}>@lang('home.expp Head Director')</option>
+
+										<option value="expp Center Chief" {{ $meta->expposition == 'expp Center Chief' ? 'selected="selected"' : '' }}>@lang('home.expp Center Chief')</option>
+
+										<option value="expp Production Director" {{ $meta->expposition == 'expp Production Director' ? 'selected="selected"' : '' }}>@lang('home.expp Production Director')</option>
+
+										<option value="expp Group Head" {{ $meta->expposition == 'expp Group Head' ? 'selected="selected"' : '' }}>@lang('home.expp Group Head')</option>
+                                    
+									</select>
+                                </div>
+                            </div>
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Responsibilities')</label>
+                                <div class="col-md-6">
+                                    <textarea class="form-control input-sm" name="responsibilities"></textarea>
+                                </div>
+							</div>
+
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.country') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
@@ -789,10 +930,10 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getSkills('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getSkills('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
@@ -848,10 +989,10 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getProject('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getProject('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
@@ -861,7 +1002,11 @@ if($user->profilePhoto != ''){
 						@else
 						    {!! $skills->startmonth !!} {!! $skills->startyear !!} - {{ $skills->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($skills->endDate)) }}
 						@endif</p>
-											<p class="rd-location"> As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+											<p class="rd-location"> @if(app()->getLocale() == "kr")
+						    @lang('home.projectposition') : {!! $skills->position !!}, @lang('home.occupation') : {!! $skills->occupation !!}, @lang('home.projectorganization') : {!! $skills->organization !!}
+						@else
+						    @lang('home.projectposition') :  {!! $skills->position !!}, @lang('home.occupation') : {!! $skills->occupation !!}, @lang('home.projectorganization') : {!! $skills->organization !!}
+						@endif<!-- As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!} --></p>
 											
                                            <p class="rd-location">{!! $skills->detail !!}</p>
                                             <a href="{{ url('/resume_images/'.$skills->academicfile)}}">{!! $skills->academicfile !!}</a>
@@ -1029,10 +1174,10 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getAffi('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getAffi('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
@@ -1088,7 +1233,7 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.startmonth') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="startmonth" name="stamonth" required>
-									<option value=''>Select Month</option>
+									<option value=''>@lang('home.Select Month')</option>
 										<option value='Jan'>@lang('home.Jan')</option>
 										<option value='Feb'>@lang('home.Feb')</option>
 										<option value='Mar'>@lang('home.Mar')</option>
@@ -1119,7 +1264,7 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.endmonth') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" id="endmonth" name="enmonth">
-									<option value=''>Select Month</option>
+									<option value=''>@lang('home.Select Month')</option>
 										<option value='Jan'>@lang('home.Jan')</option>
 										<option value='Feb'>@lang('home.Feb')</option>
 										<option value='Mar'>@lang('home.Mar')</option>
@@ -1133,6 +1278,17 @@ if($user->profilePhoto != ''){
 										<option value='Nov'>@lang('home.Nov')</option>
 										<option value='Dec'>@lang('home.Dec')</option>
                                     </select>
+                                </div>
+                            </div>
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <div class="cntr">
+                                        <input id="affcurrently" type="checkbox" class="cbx-field" name="currently" value="yes">
+                                        <label class="cbx" for="affcurrently"></label>
+                                        <label class="lbl" for="affcurrently">@lang('home.currentlyworking')</label>
+                                    </div>
                                 </div>
                             </div>
 							
@@ -1183,6 +1339,267 @@ if($user->profilePhoto != ''){
                         </form>
                     </section>
                     <!--Affilation Section End-->
+
+
+					<!--Preference Section Start-->
+                    <section class="resume-box" id="preference">
+                        <a class="btn btn-primary r-add-btn" onclick="addPreference()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-graduation-cap r-icon bg-primary"></i> @lang('home.preference')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['preference']) > 0)
+                                @foreach($resume['preference'] as $resumeId => $preference)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getPreference('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">@lang('home.Veteran') : @lang('home.'.$preference->veteran)</p>
+											<p class="rd-title">@lang('home.Job protection') : @lang('home.'.$preference->subsidy)</p>
+											<p class="rd-title">@lang('home.Employment subsidy') : @lang('home.'.$preference->disability)</p>
+											<p class="rd-title">@lang('home.Disability') : @lang('home.'.$preference->disability)</p>
+											<p class="rd-title">@lang('home.Disability grade') : {!! $preference->disabilitygrade !!}</p>
+											<p class="rd-title">@lang('home.Military service') : @lang('home.'.$preference->militaryservice)</p>
+											<p class="rd-title">@lang('home.Militarystartyear') : {!! $preference->militarystartyear !!}</p>
+											<p class="rd-title">@lang('home.Militarystartmonth') : @lang('home.'.$preference->militarystartmonth)</p>
+											<p class="rd-title">@lang('home.Militaryendyear') : {!! $preference->militaryendyear !!}</p>
+											<p class="rd-title">@lang('home.Militaryendmonth') : @lang('home.'.$preference->militaryendmonth)</p>
+											<p class="rd-title">@lang('home.Military type') : @lang('home.'.$preference->militarytype)</p>
+											<p class="rd-title">{!! $resumeId !!}</p>
+
+                                            
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    <section class="resume-box" id="preference-edit" style="display: none;">
+                        <h4><i class="fa fa-graduation-cap r-icon bg-primary"></i>  <c>@lang('home.addPreference')</c></h4>
+                        <form class="form-horizontal form-preference" method="post" action="">
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="resumeId" value="">
+                            <div class="form-group error-group" style="display: none;">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6"><div class="alert alert-danger"></div></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Veteran')</label>
+                                <div class="col-md-6">
+									<select class="form-control" name="veteran">  		
+										<option value="Veteran yes" {{ $meta->Veteran == 'Veteran yes' ? 'selected="selected"' : '' }}>@lang('home.Veteran yes')</option>
+
+                                        <option value="Veteran no" {{ $meta->Veteran == 'Veteran no' ? 'selected="selected"' : '' }}>@lang('home.Veteran no')</option>
+									</select>
+                                        
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Job protection')</label>
+                                <div class="col-md-6">
+									<select class="form-control" name="jobprotection">  		
+										<option value="Job protection yes" {{ $meta->education == 'Job protection yes' ? 'selected="selected"' : '' }}>@lang('home.Job protection yes')</option>
+
+                                        <option value="Job protection no" {{ $meta->education == 'Job protection no' ? 'selected="selected"' : '' }}>@lang('home.Job protection no')</option>
+									</select>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Employment subsidy')</label>
+                                <div class="col-md-6">
+									<select class="form-control" name="subsidy">  		
+										<option value="subsidy yes" {{ $meta->subsidy == 'subsidy yes' ? 'selected="selected"' : '' }}>@lang('home.subsidy yes')</option>
+
+                                        <option value="subsidy no" {{ $meta->subsidy == 'subsidy no' ? 'selected="selected"' : '' }}>@lang('home.subsidy no')</option>
+									</select>
+                                        
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Disability')</label>
+                                <div class="col-md-6">
+									<select class="form-control" name="disability">  		
+										<option value="disability yes" {{ $meta->Veteran == 'disability yes' ? 'selected="selected"' : '' }}>@lang('home.disability yes')</option>
+
+                                        <option value="disability no" {{ $meta->Veteran == 'disability no' ? 'selected="selected"' : '' }}>@lang('home.disability no')</option>
+									</select>
+                                        
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Disability grade')</label>
+                                <div class="col-md-6">
+									<select class="form-control" name="disabilitygrade">  		
+										<option value="">@lang('home.disabilitygrade-text')</option>
+										<option value="1" {{ $meta->disabilitygrade == '1' ? 'selected="selected"' : '' }}>1</option>
+                                        <option value="2" {{ $meta->disabilitygrade == '2' ? 'selected="selected"' : '' }}>2</option>
+										<option value="3" {{ $meta->disabilitygrade == '3' ? 'selected="selected"' : '' }}>3</option>
+										<option value="4" {{ $meta->disabilitygrade == '4' ? 'selected="selected"' : '' }}>4</option>
+										<option value="5" {{ $meta->disabilitygrade == '5' ? 'selected="selected"' : '' }}>5</option>
+										<option value="6" {{ $meta->disabilitygrade == '6' ? 'selected="selected"' : '' }}>6</option>
+									</select>
+                                        
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Military service')</label>
+                                <div class="col-md-6">
+									<select class="form-control" name="militaryservice">  		
+										<option value="militaryservice yes" {{ $meta->militaryservice == 'militaryservice yes' ? 'selected="selected"' : '' }}>@lang('home.militaryservice yes')</option>
+                                        <option value="militaryservice no" {{ $meta->militaryservice == 'militaryservice no' ? 'selected="selected"' : '' }}>@lang('home.militaryservice no')</option>
+										<option value="militaryservice exemption" {{ $meta->militaryservice == 'militaryservice exemption' ? 'selected="selected"' : '' }}>@lang('home.militaryservice exemption')</option>
+										<option value="militaryservice Not" {{ $meta->militaryservice == 'militaryservice Not' ? 'selected="selected"' : '' }}>@lang('home.militaryservice Not')</option>
+									</select>
+                                        
+                                </div>
+                            </div>
+							<div class="form-group" id="projectendyear">
+                                <label class="control-label col-md-3 text-right">@lang('home.Militarystartyear')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="Militarysyear" name="militarystartyear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							 <div class="form-group" id="projectendmonth">
+                                <label class="control-label col-md-3 text-right">@lang('home.Militarystartmonth')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="emonth" name="militarystartmonth">
+									<option value=''>@lang('home.Select Month')</option>
+										<option value='Jan'>@lang('home.Jan')</option>
+										<option value='Feb'>@lang('home.Feb')</option>
+										<option value='Mar'>@lang('home.Mar')</option>
+										<option value='Apr'>@lang('home.Apr')</option>
+										<option value='May'>@lang('home.May')</option>
+										<option value='Jun'>@lang('home.Jun')</option>
+										<option value='Jul'>@lang('home.Jul')</option>
+										<option value='Aug'>@lang('home.Aug')</option>
+										<option value='Sep'>@lang('home.Sep')</option>
+										<option value='Oct'>@lang('home.Oct')</option>
+										<option value='Nov'>@lang('home.Nov')</option>
+										<option value='Dec'>@lang('home.Dec')</option>
+                                    </select>
+                                </div>
+                            </div>
+							<div class="form-group" id="projectendyear">
+                                <label class="control-label col-md-3 text-right">@lang('home.Militaryendyear')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="Militaryeyear" name="militaryendyear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							 <div class="form-group" id="projectendmonth">
+                                <label class="control-label col-md-3 text-right">@lang('home.Militaryendmonth')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="emonth" name="militaryendmonth">
+									<option value=''>@lang('home.Select Month')</option>
+										<option value='Jan'>@lang('home.Jan')</option>
+										<option value='Feb'>@lang('home.Feb')</option>
+										<option value='Mar'>@lang('home.Mar')</option>
+										<option value='Apr'>@lang('home.Apr')</option>
+										<option value='May'>@lang('home.May')</option>
+										<option value='Jun'>@lang('home.Jun')</option>
+										<option value='Jul'>@lang('home.Jul')</option>
+										<option value='Aug'>@lang('home.Aug')</option>
+										<option value='Sep'>@lang('home.Sep')</option>
+										<option value='Oct'>@lang('home.Oct')</option>
+										<option value='Nov'>@lang('home.Nov')</option>
+										<option value='Dec'>@lang('home.Dec')</option>
+                                    </select>
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Military type')</label>
+                                <div class="col-md-6">
+									<select class="form-control" name="militarytype">  		
+										<option value=''>@lang('home.militarytype-text')</option>
+										<option value="Army" {{ $meta->militarytype == 'Army' ? 'selected="selected"' : '' }}>@lang('home.Army')</option>
+
+                                        <option value="Navy" {{ $meta->militarytype == 'Navy' ? 'selected="selected"' : '' }}>@lang('home.Navy')</option>
+
+										<option value="Air Force" {{ $meta->militarytype == 'Air Force' ? 'selected="selected"' : '' }}>@lang('home.Air Force')</option>
+
+										<option value="Marine" {{ $meta->militarytype == 'Marine' ? 'selected="selected"' : '' }}>@lang('home.Marine')</option>
+
+										<option value="Police" {{ $meta->militarytype == 'Police' ? 'selected="selected"' : '' }}>@lang('home.Police')</option>
+
+										<option value="conscripted policeman" {{ $meta->militarytype == 'conscripted policeman' ? 'selected="selected"' : '' }}>@lang('home.conscripted policeman')</option>
+
+										<option value="public service worker" {{ $meta->militarytype == 'public service worker' ? 'selected="selected"' : '' }}>@lang('home.public service worker')</option>
+
+										<option value="Military etc" {{ $meta->militarytype == 'Military etc' ? 'selected="selected"' : '' }}>@lang('home.Military etc')</option>
+									</select>
+                                        
+                                </div>
+                            </div>
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Military Classes')</label>
+                                <div class="col-md-6">
+									<select class="form-control" name="militaryclasses">  		
+										<option value=''>@lang('home.militaryclasses-text')</option>
+										<option value="Private" {{ $meta->militaryclasses == 'Private' ? 'selected="selected"' : '' }}>@lang('home.Private')</option>										
+
+										<option value="Private First Class" {{ $meta->militaryclasses == 'Private First Class' ? 'selected="selected"' : '' }}>@lang('home.Private First Class')</option>
+
+										<option value="Corporal" {{ $meta->militaryclasses == 'Corporal' ? 'selected="selected"' : '' }}>@lang('home.Corporal')</option>
+
+										<option value="Sergeant" {{ $meta->militaryclasses == 'Sergeant' ? 'selected="selected"' : '' }}>@lang('home.Sergeant')</option>
+
+										<option value="Staff Sergeant" {{ $meta->militaryclasses == 'Staff Sergeant' ? 'selected="selected"' : '' }}>@lang('home.Staff Sergeant')</option>
+
+										<option value="Sergeant First Class" {{ $meta->militaryclasses == 'Sergeant First Class' ? 'selected="selected"' : '' }}>@lang('home.Sergeant First Class')</option>
+
+										<option value="Master Sergeant" {{ $meta->militaryclasses == 'Master Sergeant' ? 'selected="selected"' : '' }}>@lang('home.Master Sergeant')</option>
+
+										<option value="Sergeant Major" {{ $meta->militaryclasses == 'Sergeant Major' ? 'selected="selected"' : '' }}>@lang('home.Sergeant Major')</option>
+
+										<option value="Warrant Officer" {{ $meta->militaryclasses == 'Warrant Officer' ? 'selected="selected"' : '' }}>@lang('home.Warrant Officer')</option>
+
+										<option value="2nd Lieutenant" {{ $meta->militaryclasses == '2nd Lieutenant' ? 'selected="selected"' : '' }}>@lang('home.2nd Lieutenant')</option>
+
+										<option value="1st Lieutenant" {{ $meta->militaryclasses == '1st Lieutenant' ? 'selected="selected"' : '' }}>@lang('home.1st Lieutenant')</option>
+
+										<option value="Captain" {{ $meta->militaryclasses == 'Captain' ? 'selected="selected"' : '' }}>@lang('home.Captain')</option>
+
+										<option value="Major" {{ $meta->militaryclasses == 'Major' ? 'selected="selected"' : '' }}>@lang('home.Major')</option>
+
+										<option value="Lieutenant Colonel" {{ $meta->militaryclasses == 'Lieutenant Colonel' ? 'selected="selected"' : '' }}>@lang('home.Lieutenant Colonel')</option>
+
+										<option value="Colonel" {{ $meta->militaryclasses == 'Colonel' ? 'selected="selected"' : '' }}>@lang('home.Colonel')</option>
+
+										<option value="Brigadier General" {{ $meta->militaryclasses == 'Brigadier General' ? 'selected="selected"' : '' }}>@lang('home.Brigadier General')</option>
+
+										<option value="Major General" {{ $meta->militaryclasses == 'Major General' ? 'selected="selected"' : '' }}>@lang('home.Major General')</option>
+
+										<option value="Lieutenant General" {{ $meta->militaryclasses == 'Lieutenant General' ? 'selected="selected"' : '' }}>@lang('home.Lieutenant General')</option>
+
+										<option value="General" {{ $meta->militaryclasses == 'General' ? 'selected="selected"' : '' }}>@lang('home.General')</option>
+
+										<option value="General of the Army" {{ $meta->militaryclasses == 'General of the Army' ? 'selected="selected"' : '' }}>@lang('home.General of the Army')</option>
+									</select>
+                                        
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#preference').fadeIn();$('#preference-edit').hide();$('html, body').animate({scrollTop:$('#skills').position().top}, 700);">@lang('home.cancel')</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+					<!--Preference Section End -->
+
 					
 					<!---Project -->
 					   <section class="resume-box" id="sk">
@@ -1194,15 +1611,22 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getLanguage('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getLanguage('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
                                             <p class="rd-title">@lang('home.'.$skills->language)</p>
 											<p class="rd-location">@lang('home.'.$skills->level)</p>
+											<p class="rd-location">{!! $skills->certifiedexam !!}</p>
+											<p class="rd-location">{!! $skills->classscore !!}</p>
+											<p class="rd-location">@if(app()->getLocale() == "kr")
+						    {!! $skills->languageyear !!}년 @lang('home.'.$skills->languagemonth)
+						@else
+						   @lang('home.'.$skills->languagemonth), {!! $skills->languageyear !!}
+						@endif </p>
 											
 										  
                                         </div>
@@ -1313,6 +1737,62 @@ if($user->profilePhoto != ''){
                                     </select>
                                 </div>
                             </div>
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.Certified Examination')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="certifiedexam">
+                                </div>
+                            </div>
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.classscore')</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-sm" name="classscore">
+                                </div>
+                            </div>
+							<div class="form-group" id="projectendyear">
+                                <label class="control-label col-md-3 text-right">@lang('home.languageyear')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="languageyear" name="languageyear">
+                                       
+										
+                                    </select>
+                                </div>
+                            </div>
+							 <div class="form-group" id="projectendmonth">
+                                <label class="control-label col-md-3 text-right">@lang('home.languagemonth')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm select2" id="languagemonth" name="languagemonth">
+										<option value=''>@lang('home.Select Month')</option>
+										<option value='Jan'>@lang('home.Jan')</option>
+										<option value='Feb'>@lang('home.Feb')</option>
+										<option value='Mar'>@lang('home.Mar')</option>
+										<option value='Apr'>@lang('home.Apr')</option>
+										<option value='May'>@lang('home.May')</option>
+										<option value='Jun'>@lang('home.Jun')</option>
+										<option value='Jul'>@lang('home.Jul')</option>
+										<option value='Aug'>@lang('home.Aug')</option>
+										<option value='Sep'>@lang('home.Sep')</option>
+										<option value='Oct'>@lang('home.Oct')</option>
+										<option value='Nov'>@lang('home.Nov')</option>
+										<option value='Dec'>@lang('home.Dec')</option>
+                                    </select>
+                                </div>
+                            </div>
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.language_file') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="languagefile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="language-file">
+                                   <a href="" target="_blank"></a>
+                                   <input type="hidden" name="old_languagefile" value="">
+                                </div>
+                            </div>
 							 
 							 
                             <div class="form-group">
@@ -1333,10 +1813,10 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getSkill('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getSkill('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
@@ -1429,6 +1909,21 @@ if($user->profilePhoto != ''){
                                     </select>
                                 </div>
                             </div>
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.references_file') </label>
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" name="referencesfile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.uploadedFile') </label>
+                                <div class="col-md-6" id="references-file">
+                                   <a href="" target="_blank"></a>
+                                   <input type="hidden" name="old_referencesfile" value="">
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
@@ -1448,10 +1943,10 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getSkil('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getSkil('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
@@ -1535,17 +2030,32 @@ if($user->profilePhoto != ''){
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.year') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="year" required>
+                                    <input type="text" class="form-control input-sm" name="year">
                                 </div>
                             </div>
 							  <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.month') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="month" required>
+                                    <!-- <input type="text" class="form-control input-sm" name="month" required> -->
+									<select class="form-control input-sm select2" id="month" name="month">
+										<option value=''>@lang('home.Select Month')</option>
+										<option value='Jan'>@lang('home.Jan')</option>
+										<option value='Feb'>@lang('home.Feb')</option>
+										<option value='Mar'>@lang('home.Mar')</option>
+										<option value='Apr'>@lang('home.Apr')</option>
+										<option value='May'>@lang('home.May')</option>
+										<option value='Jun'>@lang('home.Jun')</option>
+										<option value='Jul'>@lang('home.Jul')</option>
+										<option value='Aug'>@lang('home.Aug')</option>
+										<option value='Sep'>@lang('home.Sep')</option>
+										<option value='Oct'>@lang('home.Oct')</option>
+										<option value='Nov'>@lang('home.Nov')</option>
+										<option value='Dec'>@lang('home.Dec')</option>
+                                    </select>
                                 </div>
                             </div>
 							<div class="form-group">
-                            <label class="control-label col-sm-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
+                            <label class="control-label col-sm-3 text-right">@lang('home.publishdtails') <span style="color:red">*</span></label>
                             <div class="col-md-6">
                                 <textarea name="detail" class="form-control tex-editor"></textarea>
 								<div>@lang('home.publishdtails_text')</div>
@@ -1583,10 +2093,10 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getAward('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getAward('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
@@ -1596,7 +2106,7 @@ if($user->profilePhoto != ''){
 						@else
 						    {!! $skills->startmonth !!} {!! $skills->startyear !!}
 						@endif</p>
-											<p class="rd-location"> {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+											<p class="rd-location"> <!-- {!! $skills->occupation !!} at --> {!! $skills->organization !!}</p>
 											
                                            <p class="rd-location">{!! $skills->detail !!}</p>
 										  
@@ -1621,7 +2131,7 @@ if($user->profilePhoto != ''){
                                     <input type="text" class="form-control input-sm" name="title" required>
                                 </div>
                             </div>
-							
+							<!-- 
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.type') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
@@ -1640,6 +2150,7 @@ if($user->profilePhoto != ''){
                                     <input type="text" class="form-control input-sm" name="occupation" required>
                                 </div>
                             </div>
+							-->
 							 <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.awardorganization') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
@@ -1718,10 +2229,10 @@ if($user->profilePhoto != ''){
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
-                                                <a href="javascript:;" title="Edit" onclick="getPortfolio('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Edit')" onclick="getPortfolio('{{ $resumeId }}')">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>&nbsp;
-                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                <a href="javascript:;" title="@lang('home.Delete')" onclick="deleteElement('{{ $resumeId }}')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>&nbsp;
                                             </span>
@@ -1844,6 +2355,104 @@ if($user->profilePhoto != ''){
                         </form>
                     </section>
                     <!--Project Section End-->
+
+
+					<!--Hope Working Section Start-->
+                    <section class="resume-box" id="hopeworking">
+                        <a class="btn btn-primary r-add-btn" onclick="addHopeworking()"><i class="fa fa-plus"></i> </a>
+                        <h4><i class="fa fa-graduation-cap r-icon bg-primary"></i> @lang('home.hopeworking')</h4>
+                        <ul class="resume-details">
+                            @if(count($resume['hopeworking']) > 0)
+                                @foreach($resume['hopeworking'] as $resumeId => $hopeworking)
+                                    <li id="resume-{{ $resumeId }}">
+                                        <div class="col-md-12">
+                                            <span class="pull-right li-option">
+                                                <a href="javascript:;" title="Edit" onclick="getHopeworking('{{ $resumeId }}')">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>&nbsp;
+                                                <a href="javascript:;" title="Delete" onclick="deleteElement('{{ $resumeId }}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>&nbsp;
+                                            </span>
+                                            <p class="rd-title">@lang('home.'.$hopeworking->hopejobtype)</p>
+                                            <p class="rd-location">@lang('home.'.JobCallMe::cityName($hopeworking->city)),@lang('home.'.JobCallMe::stateName($hopeworking->state)),@lang('home.'.JobCallMe::countryName($hopeworking->country))</p>										
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </section>
+                    <section class="resume-box" id="hopeworking-edit" style="display: none;">
+                        <h4><i class="fa fa-graduation-cap r-icon bg-primary"></i>  <c>@lang('home.addHopeworking')</c></h4>
+                        <form class="form-horizontal form-hopeworking" method="post" action="">
+                            <input type="hidden" name="_token" value="">
+                            <input type="hidden" name="resumeId" value="">
+                            <div class="form-group error-group" style="display: none;">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6"><div class="alert alert-danger"></div></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.hopejobtype')</label>
+                                <div class="col-md-6">
+									<select class="form-control select2" name="hopejobtype">
+										@foreach(JobCallMe::getJobType() as $hopejtype)
+										  
+										  @if($hopejtype->name == 'Disabled' or $hopejtype->name == 'Full Time Three Months Later')											
+										  @else
+											<option value="{!! $hopejtype->name !!}">@lang('home.'.$hopejtype->name)</option>
+										  @endif
+										@endforeach
+								   </select>
+                                        
+                                </div>
+                            </div>
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.hopecountry')</label>
+                                <div class="col-md-6">
+                                    <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)<!-- {{ $cntry->name }} --></option>
+                                    @endforeach
+                                </select>
+                                </div>
+                            </div>
+							<div class="form-group">
+								<label class="control-label col-sm-3">@lang('home.hopestate')</label>
+								<div class="col-sm-6">
+									<select class="form-control select2 job-state" name="state">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-3">@lang('home.hopecity')</label>
+								<div class="col-sm-6">
+									<select class="form-control select2 job-city" name="city">
+									</select>
+								</div>
+							</div>
+
+
+							<!-- <div class="form-group">
+                                <label class="control-label col-md-3 text-right">@lang('home.hoperegion')</label>
+                                <div class="col-md-6">
+									<input type="text" class="form-control input-sm" name="hoperegion">
+                                </div>
+                            </div> -->
+
+							<div class="form-group">
+                                <label class="control-label col-md-3 text-right">&nbsp;</label>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="save">@lang('home.save')</button>
+                                    <button class="btn btn-default" type="button" onclick="$('#hopeworking').fadeIn();$('#hopeworking-edit').hide();$('html, body').animate({scrollTop:$('#hopeworking').position().top}, 700);">@lang('home.cancel')</button>
+                                </div>
+                            </div>
+							
+                        </form>
+                    </section>
+
+					<!--Hope Working Section End -->
+
 					
                 </div>
                 <div class="col-md-3 hidden-xs">
@@ -1929,8 +2538,16 @@ if($user->profilePhoto != ''){
                                 <a id="#" onclick="addAffi();$('html, body').animate({scrollTop:$('#aff-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
                             </li>
 							<li>
+                                <a id="#" onclick="$('#preference').fadeIn();$('#preference-edit').hide();$('html, body').animate({scrollTop:$('#preference').position().top}, 700);">@lang('home.preference')</a> 
+                                <a id="#" onclick="addPreference();$('html, body').animate({scrollTop:$('#preference-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
+                            </li>
+							<li>
                                 <a id="#" onclick="$('#port').fadeIn();$('#port-edit').hide();$('html, body').animate({scrollTop:$('#port').position().top}, 700);">@lang('home.Portfolio')</a> 
                                 <a id="#" onclick="addPortfolio();$('html, body').animate({scrollTop:$('#port-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
+                            </li>
+							<li>
+                                <a id="#" onclick="$('#hopeworking').fadeIn();$('#hopeworking-edit').hide();$('html, body').animate({scrollTop:$('#port').position().top}, 700);">@lang('home.hopeworking')</a> 
+                                <a id="#" onclick="addHopeworking();$('html, body').animate({scrollTop:$('#hopeworking-edit').position().top}, 700);"><i class="fa fa-plus pull-right"></i> </a> 
                             </li>
                         </ul>
                     </div>
@@ -2000,22 +2617,26 @@ if($user->profilePhoto != ''){
                     </form>
                 </div>
                  <div class="ja-content-item mc-item resume-listing-section">
-                    <h4>Vedio & Chat Image</h4>
+                    <h4>@lang('home.Video & Chat Image')</h4>
                     <div class="re-img-box" style="left: 50px;">
                         <img src="<?= ($user->chatImage != '') ? url('profile-photos/'.$user->chatImage) : asset('profile-photos/profile-logo.jpg') ?>" class="chat-img-target">
                         <div class="re-img-toolkit">
                             <div class="re-file-btn" style="left:35px">
-                                Change <i class="fa fa-camera"></i>
+                                @lang('home.change') <i class="fa fa-camera"></i>
                                 <input type="file" class="upload chatImage" name="image">
                             </div>
-                            <span id="remove-re-image" style="margin-left: 35px;" onclick="removeResumePic('chat')">Remove <i class="fa fa-remove"></i></span>
-                            <p id="remove-re-image" style="margin-left: 35px;" onclick="editResumeChatPic()">Edit <i class="fa fa-edit"><input type="hidden" value="1" id="userID"></i></p>
+                            <span id="remove-re-image" style="margin-left: 35px;" onclick="removeResumePic('chat')">@lang('home.remove') <i class="fa fa-remove"></i></span>
+                            <p id="remove-re-image" style="margin-left: 35px;" onclick="editResumeChatPic()">@lang('home.Edit') <i class="fa fa-edit"><input type="hidden" value="1" id="userID"></i></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="nickName" id="nickName" class="form-control" value="{{$user->nickName}}" placeholder="Enter your Nick Name">
+                        <input type="text" name="nickName" id="nickName" class="form-control" value="{{$user->nickName}}" placeholder="@lang('home.Enter your Nick Name')">
                     </div>
-                    <button type="button" id="chat-save" class="btn btn-primary">Save</button>
+                    <button type="button" id="chat-save" class="btn btn-primary">@lang('home.save')</button>
+					<div class="form-group" style="margin-top:10px">
+                        <span><img src="/frontend-assets/images/info-icon.png"> @lang('home.video-text')</span>
+                    </div>
+					
                 </div>
                 </div>
             </div>
@@ -2089,13 +2710,14 @@ function getStates(countryId){
         url: "{{ url('account/get-state') }}/"+countryId,
         success: function(response){
             var currentState = $('.job-state').attr('data-state');
-            var obj = $.parseJSON(response);
-            $(".job-state").html('');
-            var newOption = new Option('Select State', '0', true, false);
-            $(".job-state").append(newOption).trigger('change');
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
+            $(".job-state").html('').trigger('change');
+            /*var newOption = new Option('Select State', '0', true, false);*/
+            $(".job-state").append(response).trigger('change');
             var selected = "selected";
             
-            for (var i =0; i < obj.length; i++) {
+            /*for (var i =0; i < obj.length; i++) {
                 if(obj[i].id == currentState){
                     var option = "<option value='"+obj[i].id+"' selected='selected'>"+obj[i].name+"</option>";
                     $(".job-state").append(option);
@@ -2104,8 +2726,8 @@ function getStates(countryId){
                     $(".job-state").append(option);
                 }
                 
-            };
-            $(".job-state").trigger('change');
+            };*/
+            /*$(".job-state").trigger('change');*/
             /*$.each(obj,function(i,k){
                 var vOption = k.id == currentState ? true : false;
                 console.log(vOption);
@@ -2125,15 +2747,16 @@ function getCities(stateId){
         url: "{{ url('account/get-city') }}/"+stateId,
         success: function(response){
             var currentCity = $('.job-city').attr('data-city');
-            var obj = $.parseJSON(response);
+            console.log(response);
+            /*var obj = $.parseJSON(response);*/
             $(".job-city").html('').trigger('change');
-            var newOption = new Option('Select City', '0', true, false);
-            $(".job-city").append(newOption).trigger('change');
-            $.each(obj,function(i,k){
+            /*var newOption = new Option('Select City', '0', true, false);*/
+            $(".job-city").append(response).trigger('change');
+            /*$.each(obj,function(i,k){
                 var vOption = k.id == currentCity ? true : false;
                 var newOption = new Option(k.name, k.id, true, vOption);
                 $(".job-city").append(newOption).trigger('change');
-            })
+            })*/
         }
     })
 }
@@ -2272,11 +2895,15 @@ function getAcademic(resumeId){
 
             $('.form-academic input[name="resumeId"]').val(resumeId);
             $('.form-academic select[name="degreeLevel"] option[value='+obj.degreeLevel+']').attr('selected','selected').trigger('change.select2');
+			$('.form-academic select[name="graduationstatus"]').val(obj.graduationstatus).trigger('change');
+			$('.form-academic select[name="transferstatus"]').val(obj.transferstatus).trigger('change');
             $('.form-academic input[name="degree"]').val(obj.degree);
+			$('.form-academic input[name="minor"]').val(obj.minor);
             $('.form-academic input[name="old_academicfile"]').val(obj.academicfile);
             $('.form-academic input[name="enterDate"]').val(obj.enterDate);
             $('.form-academic input[name="completionDate"]').val(obj.completionDate);
             $('.form-academic input[name="grade"]').val(obj.grade);
+			$('.form-academic select[name="grade2"]').val(obj.grade2).trigger('change');
             $('.form-academic input[name="institution"]').val(obj.institution);
             $('.form-academic select[name="country"]').val(obj.country).trigger('change');
 			$('.form-academic select[name="state"]').val(obj.state).trigger('change');
@@ -2285,14 +2912,14 @@ function getAcademic(resumeId){
             $('.form-academic #academic-file a').attr('href',jsUrl()+"/resume_images/"+obj.academicfile);
             $('.form-academic #academic-file a').text(obj.academicfile);
             $('.form-academic #academic-file input[name="old_academicfile"]').val(obj.academicfile);
-            $('#academic-edit h4 c').text('Edit Academics');
+            $('#academic-edit h4 c').text('@lang("home.Edit Academics")');
             $('#academic').hide();
             $('#academic-edit').fadeIn();
         }
     })
 }
 function deleteElement(resumeId){
-    if(confirm('Are you sure to delete this?')){
+    if(confirm('@lang("home.Are you sure to delete this?")')){
         $.ajax({
             url: "{{ url('account/jobseeker/resume/delete') }}/"+resumeId,
             success: function(response){
@@ -2361,7 +2988,7 @@ function getCertification(resumeId){
             $('.form-certification #certificate-file a').attr('href',jsUrl()+"/resume_images/"+obj.certificatefile);
             $('.form-certification #certificate-file a').text(obj.certificatefile);
             $('.form-certification #certificate-file input[name="old_certificatefile"]').val(obj.certificatefile);
-            $('#certification-edit h4 c').text('Edit Certificate');
+            $('#certification-edit h4 c').text('@lang("home.Edit Certificate")');
             $('#certification').hide();
             $('#certification-edit').fadeIn();
         }
@@ -2425,7 +3052,11 @@ function getExperience(resumeId){
             if(obj.currently == 'no'){
                 $('.form-experience input[name="endDate"]').val(obj.endDate);
                 $('.form-experience input[name="currently"]').prop('checked',false);
-            }            
+				$('.form-experience input[name="reasonleaving"]').val(obj.reasonleaving);
+            }
+			$('.form-experience select[name="expptitle"]').val(obj.expptitle).trigger('change');
+			$('.form-experience select[name="expptitle"]').val(obj.expptitle).trigger('change');
+			$('.form-experience textarea[name="responsibilities"]').val(obj.responsibilities);
             $('.form-experience select[name="country"]').val(obj.country).trigger('change');
 			$('.form-experience select[name="state"]').val(obj.state).trigger('change');
 			$('.form-experience select[name="city"]').val(obj.city).trigger('change');
@@ -2435,7 +3066,7 @@ function getExperience(resumeId){
             $('.form-experience #experience-file a').attr('href',jsUrl()+"/resume_images/"+obj.experiencefile);
             $('.form-experience #experience-file a').text(obj.experiencefile);
             $('.form-experience #experience-file input[name="old_academicfile"]').val(obj.experiencefile);
-            $('#experience-edit h4 c').text('Edit Experience');
+            $('#experience-edit h4 c').text('@lang("home.Edit Experience")');
             $('#experience').hide();
             $('#experience-edit').fadeIn();
         }
@@ -2489,7 +3120,7 @@ function getSkills(resumeId){
             $('.form-skills input[name="resumeId"]').val(resumeId);
             $('.form-skills input[name="skill"]').val(obj.skill);
             $('.form-skills select[name="level"]').val(obj.level).trigger('change');
-            $('#skills-edit h4 c').text('Edit Skill');
+            $('#skills-edit h4 c').text('@lang("home.Edit Skill")');
             $('#skills').hide();
             $('#skills-edit').fadeIn();
         }
@@ -2508,7 +3139,10 @@ $('form.form-skill').submit(function(e){
     $('.form-skill .error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-skill').serialize(),
+        data: new FormData(this),
+        cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/refer/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -2551,7 +3185,12 @@ function getSkill(resumeId){
 			$('.form-skill select[name="state"]').val(obj.state).trigger('change');
 			$('.form-skill select[name="city"]').val(obj.city).trigger('change');
 			$('.form-skill select[name="type"]').val(obj.type).trigger('change');
-            $('#skill-edit h4 c').text('Edit Reference');
+
+			$('.form-ski #references-file a').attr('href',jsUrl()+"/resume_images/"+obj.referencesfile);
+            $('.form-ski #references-file a').text(obj.referencesfile);
+            $('.form-ski #references-file input[name="old_referencesfile"]').val(obj.referencesfile);
+
+            $('#skill-edit h4 c').text('@lang("home.Edit Reference")');
             $('#skill').hide();
             $('#skill-edit').fadeIn();
         }
@@ -2621,7 +3260,7 @@ function getSkil(resumeId){
             $('.form-skil #publication-file a').attr('href',jsUrl()+"/resume_images/"+obj.publicationfile);
             $('.form-skil #publication-file a').text(obj.publicationfile);
             $('.form-skil #publication-file input[name="old_publicationfile"]').val(obj.publicationfile);
-            $('#skil-edit h4 c').text('Edit Publisher');
+            $('#skil-edit h4 c').text('@lang("home.Edit Publisher")');
             $('#skil').hide();
             $('#skil-edit').fadeIn();
         }
@@ -2682,7 +3321,7 @@ function getProject(resumeId){
             $('.form-ski input[name="resumeId"]').val(resumeId);
 			$('.form-ski input[name="title"]').val(obj.title);
 			$('.form-ski input[name="position"]').val(obj.position);
-            //$('.form-ski select[name="type"]').val(obj.type).trigger('change');
+            $('.form-ski select[name="type"]').val(obj.type).trigger('change');
 			$('.form-ski input[name="occupation"]').val(obj.occupation);
 			$('.form-ski input[name="organization"]').val(obj.organization);
 			$('.form-ski select[name="startyear"]').val(obj.startyear).trigger('change');
@@ -2697,7 +3336,7 @@ function getProject(resumeId){
             $('.form-ski #project-file a').text(obj.projectfile);
             $('.form-ski #project-file input[name="old_projectfile"]').val(obj.projectfile);
 			$('.form-ski textarea[name="detail"]').val(obj.detail);
-            $('#ski-edit h4 c').text('Edit Project');
+            $('#ski-edit h4 c').text('@lang("home.Edit Project")');
             $('#ski').hide();
             $('#ski-edit').fadeIn();
         }
@@ -2708,6 +3347,7 @@ function getProject(resumeId){
 //Affilation
 function addAffi(){
     $('.form-aff input').val('');
+	$('.form-aff input[name="currently"]').val('yes');
     $('#aff-edit h4 c').text('@lang("home.Add Affiliation")');
     $('#aff').hide();
     $('#aff-edit').fadeIn();
@@ -2755,27 +3395,105 @@ function getAffi(resumeId){
         success: function(response){
             var obj = $.parseJSON(response);
             $('.form-aff input[name="resumeId"]').val(resumeId);
-			$('.form-aff input[name="title"]').val(obj.title);
+			//$('.form-aff input[name="title"]').val(obj.title);
 			$('.form-aff input[name="pos"]').val(obj.pos);
-            $('.form-aff select[name="type"]').val(obj.type).trigger('change');
-			$('.form-aff input[name="occupation"]').val(obj.occupation);
+            //$('.form-aff select[name="type"]').val(obj.type).trigger('change');
+			//$('.form-aff input[name="occupation"]').val(obj.occupation);
 			$('.form-aff input[name="org"]').val(obj.org);
 			$('.form-aff select[name="stayear"]').val(obj.stayear).trigger('change');
             $('.form-aff select[name="stamonth"]').val(obj.stamonth).trigger('change');
 			$('.form-aff select[name="enyear"]').val(obj.enyear).trigger('change');
 			$('.form-aff select[name="enmonth"]').val(obj.enmonth).trigger('change');
+			$('.form-aff input[name="currently"]').prop('checked',true);
+			if(obj.currently == 'no'){                
+                $('.form-aff input[name="currently"]').prop('checked',false);
+            }
+			$('.form-aff select[name="country"]').val(obj.country).trigger('change');
+			$('.form-aff select[name="state"]').val(obj.state).trigger('change');
+			$('.form-aff select[name="city"]').val(obj.city).trigger('change');
+
 			$('.form-aff #affiliation-file a').attr('href',jsUrl()+"/resume_images/"+obj.affiliationfile);
             $('.form-aff #affiliation-file a').text(obj.affiliationfile);
             $('.form-aff #affiliation-file input[name="old_affiliationfile"]').val(obj.affiliationfile);
 			
 			//$('.form-aff textarea[name="detail"]').val(obj.detail);
-            $('#aff-edit h4 c').text('Edit Affiliation');
+            $('#aff-edit h4 c').text('@lang("home.Edit Affiliation")');
             $('#aff').hide();
             $('#aff-edit').fadeIn();
         }
     })
 }
 //Affilation end
+
+
+
+//Preference start
+function addPreference(){
+    $('.form-preference input').val('');
+    $('#preference-edit h4 c').text('@lang("home.Add Preference")');
+    $('#preference').hide();
+    $('#preference-edit').fadeIn();
+}
+$('form.form-preference').submit(function(e){
+    $('.form-preference input[name="_token"]').val(pageToken);
+    $('.form-preference button[name="save"]').prop('disabled',true);
+    $('.form-preference .error-group').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.form-preference').serialize(),
+        url: "{{ url('account/jobseeker/resume/preference/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.form-preference .error-group').show();
+                $('.form-preference .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
+                $('html, body').animate({scrollTop:$('#preference-edit').position().top}, 1000);
+                $('.form-preference button[name="save"]').prop('disabled',false);
+            }else{
+                window.location.href = "{{ url('account/jobseeker/resume') }}";
+            }
+            Pace.stop;
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            var vErrors = '';
+            $.each(errors, function(i,k){
+                vErrors += '<li>'+k+'</li>';
+            })
+            $('.form-preference .error-group').show();
+            $('.form-preference .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
+            $('.form-preference button[name="save"]').prop('disabled',false);
+            Pace.stop;
+            $('html, body').animate({scrollTop:$('#preference-edit').position().top}, 1000);
+        }
+    })
+    e.preventDefault();
+})
+function getPreference(resumeId){
+    $.ajax({
+        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.form-preference input[name="resumeId"]').val(resumeId);
+            $('.form-preference select[name="veteran"]').val(obj.veteran).trigger('change');
+            $('.form-preference select[name="jobprotection"]').val(obj.jobprotection).trigger('change');
+			$('.form-preference select[name="subsidy"]').val(obj.subsidy).trigger('change');
+			$('.form-preference select[name="disability"]').val(obj.disability).trigger('change');
+			$('.form-preference select[name="disabilitygrade"]').val(obj.disabilitygrade).trigger('change');
+			$('.form-preference select[name="militaryservice"]').val(obj.militaryservice).trigger('change');
+			$('.form-preference select[name="militarystartyear"]').val(obj.militarystartyear).trigger('change');
+			$('.form-preference select[name="militarystartmonth"]').val(obj.militarystartmonth).trigger('change');
+			$('.form-preference select[name="militaryendyear"]').val(obj.militaryendyear).trigger('change');
+			$('.form-preference select[name="militaryendmonth"]').val(obj.militaryendmonth).trigger('change');
+			$('.form-preference select[name="militarytype"]').val(obj.militarytype).trigger('change');
+			$('.form-preference select[name="militaryclasses"]').val(obj.militaryclasses).trigger('change');
+            $('#preference-edit h4 c').text('@lang("home.Edit Preference")');
+            $('#preference').hide();
+            $('#preference-edit').fadeIn();
+        }
+    })
+}
+//Preference End
+
 
 
 
@@ -2791,7 +3509,10 @@ $('form.form-sk').submit(function(e){
     $('.form-sk .error-group').hide();
     $.ajax({
         type: 'post',
-        data: $('.form-sk').serialize(),
+        data: new FormData(this),
+		cache:false,
+        contentType: false,
+        processData: false,
         url: "{{ url('account/jobseeker/resume/language/save') }}",
         success: function(response){
             if($.trim(response) != '1'){
@@ -2827,8 +3548,16 @@ function getLanguage(resumeId){
             $('.form-sk input[name="resumeId"]').val(resumeId);
 			$('.form-sk select[name="language"]').val(obj.language).trigger('change');
 			$('.form-sk select[name="level"]').val(obj.level).trigger('change');
+			$('.form-sk input[name="certifiedexam"]').val(obj.certifiedexam);
+			$('.form-sk input[name="classscore"]').val(obj.classscore);
+			$('.form-sk select[name="languageyear"]').val(obj.languageyear).trigger('change');
+			$('.form-sk select[name="languagemonth"]').val(obj.languagemonth).trigger('change');
 			
-            $('#sk-edit h4 c').text('Edit Award');
+            $('.form-ski #language-file a').attr('href',jsUrl()+"/resume_images/"+obj.languagefile);
+            $('.form-ski #language-file a').text(obj.languagefile);
+            $('.form-ski #language-file input[name="old_languagefile"]').val(obj.languagefile);
+
+			$('#sk-edit h4 c').text('@lang("home.Edit Language")');
             $('#sk').hide();
             $('#sk-edit').fadeIn();
         }
@@ -2895,7 +3624,7 @@ function getAward(resumeId){
             $('.form-s #award-file a').attr('href',jsUrl()+"/resume_images/"+obj.awardfile);
             $('.form-s #award-file a').text(obj.awardfile);
             $('.form-s #award-file input[name="old_awardfile"]').val(obj.awardfile);
-            $('#s-edit h4 c').text('Edit  Honours & Awards');
+            $('#s-edit h4 c').text('@lang("home.Edit Honours & Awards")');
             $('#s').hide();
             $('#s-edit').fadeIn();
         }
@@ -2961,13 +3690,77 @@ function getPortfolio(resumeId){
 			$('.form-port #portfolio-file a').attr('href',jsUrl()+"/resume_images/"+obj.portfoliofile);
             $('.form-port #portfolio-file a').text(obj.portfoliofile);
             $('.form-port #portfolio-file input[name="old_portfoliofile"]').val(obj.portfoliofile);
-            $('#port-edit h4 c').text('Edit Portfolio');
+            $('#port-edit h4 c').text('@lang("home.Edit Portfolio")');
             $('#port').hide();
             $('#port-edit').fadeIn();
         }
     })
 }
 //
+
+
+
+//Hopeworking start
+function addHopeworking(){
+    $('.form-hopeworking input').val('');
+    $('#hopeworking-edit h4 c').text('@lang("home.Add Hopeworking")');
+    $('#hopeworking').hide();
+    $('#hopeworking-edit').fadeIn();
+}
+$('form.form-hopeworking').submit(function(e){
+    $('.form-hopeworking input[name="_token"]').val(pageToken);
+    $('.form-hopeworking button[name="save"]').prop('disabled',true);
+    $('.form-hopeworking .error-group').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.form-hopeworking').serialize(),
+        url: "{{ url('account/jobseeker/resume/hopeworking/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.form-hopeworking .error-group').show();
+                $('.form-hopeworking .error-group .col-md-6 .alert-danger').html('<ul><li>'+response+'</li></ul>');
+                $('html, body').animate({scrollTop:$('#hopeworking-edit').position().top}, 1000);
+                $('.form-hopeworking button[name="save"]').prop('disabled',false);
+            }else{
+                window.location.href = "{{ url('account/jobseeker/resume') }}";
+            }
+            Pace.stop;
+        },
+        error: function(data){
+            var errors = data.responseJSON;
+            var vErrors = '';
+            $.each(errors, function(i,k){
+                vErrors += '<li>'+k+'</li>';
+            })
+            $('.form-hopeworking .error-group').show();
+            $('.form-hopeworking .error-group .col-md-6 .alert-danger').html('<ul>'+vErrors+'</ul>');
+            $('.form-hopeworking button[name="save"]').prop('disabled',false);
+            Pace.stop;
+            $('html, body').animate({scrollTop:$('#hopeworking-edit').position().top}, 1000);
+        }
+    })
+    e.preventDefault();
+})
+function getHopeworking(resumeId){
+    $.ajax({
+        url: "{{ url('account/jobseeker/resume/get') }}/"+resumeId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.form-hopeworking input[name="resumeId"]').val(resumeId);
+            $('.form-hopeworking select[name="hopejobtype"]').val(obj.hopejobtype).trigger('change');
+            $('.form-hopeworking select[name="country"]').val(obj.country).trigger('change');
+			$('.form-hopeworking select[name="state"]').val(obj.state).trigger('change');
+			$('.form-hopeworking select[name="city"]').val(obj.city).trigger('change');
+
+            $('#hopeworking-edit h4 c').text('@lang("home.Edit Hope Working")');
+            $('#hopeworking').hide();
+            $('#hopeworking-edit').fadeIn();
+        }
+    })
+}
+//hopeworking End
+
+
 
 $('.profile-pic').on('change',function(){
     var formData = new FormData();
@@ -3080,6 +3873,26 @@ for(var eyear = eend ; eyear >=estart; eyear--){
 document.getElementById("eyear").innerHTML = eoptions;
 //
 
+var estart = 1950;
+var eend = new Date().getFullYear();
+var eoptions = "";
+eoptions += "<option value=''>@lang('home.militarysyear-text')</option>";
+for(var eyear = eend ; eyear >=estart; eyear--){
+  eoptions += "<option value="+eyear+">"+ eyear +"</option>";
+}
+document.getElementById("Militarysyear").innerHTML = eoptions;
+//
+
+var estart = 1950;
+var eend = new Date().getFullYear();
+var eoptions = "";
+eoptions += "<option value=''>@lang('home.militaryeyear-text')</option>";
+for(var eyear = eend ; eyear >=estart; eyear--){
+  eoptions += "<option value="+eyear+">"+ eyear +"</option>";
+}
+document.getElementById("Militaryeyear").innerHTML = eoptions;
+//
+
 var starts = 1950;
 var ends = new Date().getFullYear();
 var option = "";
@@ -3106,6 +3919,23 @@ for(var ye= en ; ye >=sta; ye--){
 /*document.getElementById("stayear").innerHTML = op;*/
 
 
+var estart = 1950;
+var eend = new Date().getFullYear();
+var eoptions = "";
+for(var eyear = eend ; eyear >=estart; eyear--){
+  eoptions += "<option value="+eyear+">"+ eyear +"</option>";
+}
+document.getElementById("languageyear").innerHTML = eoptions;
+//
+
+var estart = 1950;
+var eend = new Date().getFullYear();
+var eoptions = "";
+for(var eyear = eend ; eyear >=estart; eyear--){
+  eoptions += "<option value="+eyear+">"+ eyear +"</option>";
+}
+document.getElementById("year").innerHTML = eoptions;
+//
 
 function getSubCategories(categoryId){
     $.ajax({
@@ -3317,4 +4147,26 @@ function getSubCategories2(categoryId2){
        });
     }
 </script>
+
+
+
+<script src="{{ asset('frontend-assets/js/jquery-address.min.js') }}"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAE8bSbiIU4MWVBb9f9de-tzX5qg7YPw6g"></script>
+<script src="{{ asset('frontend-assets/js/jquery.ui.addresspicker.js') }}"></script>
+<script>
+jQuery(function() {
+	var addresspicker = jQuery( "#Address" ).addresspicker({
+		
+	});
+	jQuery('#reverseGeocode').change(function(){
+	  jQuery("#addresspicker_map").addresspicker("option", "reverseGeocode", (jQuery(this).val() === 'true'));
+	});
+	function showCallback(geocodeResult, parsedGeocodeResult){
+	  jQuery('#callback_result').text(JSON.stringify(parsedGeocodeResult, null, 4));
+	}
+});
+</script>
+
+
+
 @endsection

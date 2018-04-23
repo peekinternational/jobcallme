@@ -325,14 +325,15 @@ ul.nav li.active{
     border: 2px solid #e6b706;
     color: #ffffff;
     height: 33px;
-    width: 6%;
+	padding:0 15px;
+    
 
 }
 .search-btn:hover{
     background: #e6b706;
     color: #ffffff;
     height: 33px;
-    width: 6%;
+    
 }
 
 .login-type{
@@ -504,19 +505,26 @@ a.job-location:hover span.shine {
 
 /*Premium Job Section*/
 .job-types-section{
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.pj-single-details{
+    font-size: 12px;
+    width: 100%;
 }
 
 .pj-single-details p:nth-child(1){
     margin-bottom: 2px;
     font-weight: 600;
-    color: #337ab7;
+    /*color: #337ab7;*/
+	color: #fff;
 	padding-top:-5px;
 }
 .pj-single-details  p:nth-child(2){
     margin-bottom: 2px;
-	font-size: 12px;
+	font-size: 11px;
 	padding-top:-5px;
+	color: #16466f;
 }
 .pj-single-details  p:nth-child(3){
     margin-bottom: 2px;
@@ -557,18 +565,19 @@ a.job-location:hover span.shine {
 .lj-single-details p:nth-child(1){
     margin-bottom: 0;
     font-weight: 600;
-    color: #337ab7;
+    color: #fff;
 	padding-top:-5px;
 }
 .lj-single-details p:nth-child(2){
     margin-bottom: 0;
     font-size: 11px;
 	padding-top:-5px;
+	color: #16466f;
 }
 .lj-single-details p:nth-child(3){
     margin-bottom: 2px;
     font-size: 10px;
-    color: #999999;
+    color: #fff;
 	padding-top:-5px;
 }
 
@@ -634,7 +643,7 @@ a.job-location:hover span.shine {
     height: auto;
 }
 .hj-type-job{   
-    height: 155px;    
+    height: 130px;    
 }
 .hj-type-job img{
     width: 118px !important;
@@ -655,7 +664,7 @@ a.job-location:hover span.shine {
     background: rgba(0,0,0,0.8) !important;
 }
 .lj-type-job{   
-    height: 145px;    
+    height: 125px;    
 }
 .lj-type-job img{
     width: 82px !important;
@@ -673,7 +682,7 @@ a.job-location:hover span.shine {
     height: auto;
 }
 .sj-job-type{   
-    height: 130px;    
+    height: 115px;    
 }
 .sj-job-type img{
     width: 82px !important;
@@ -1296,7 +1305,7 @@ ul.jd-rewards li i{
 }
 
 .jd-about-organization{
-    border-left: 3px solid #999;
+    border-left: 3px dashed #999;
     color: #999;
     padding-left: 10px;
 }
@@ -3088,7 +3097,8 @@ img.profile-photo-xs{
 */
 .back-to-top {
     text-align: center;
-    background-color: rgba(0,0,0,.12);
+    background-color: rgba(0,0,0);
+	/*background-color: rgba(0,0,0,12);*/
     border-radius: 50%;
     margin: 0;
     position: fixed;
@@ -3102,7 +3112,7 @@ img.profile-photo-xs{
     color: #ffffff;
 }
 .back-to-top:hover{
-    background: #999999;
+    background: #2e6da4;
 }
 .back-to-top i {
     font-size: 25px;
@@ -3296,7 +3306,7 @@ img.profile-photo-xs{
     border: 1px solid #cccccc;
     background: #ffffff;
     margin-bottom: 20px;
-    height: 130px;  /* 수정 */
+    height: 150px;  /* 수정 */
 }
 .sc-thumbnail{
     width: 18%;

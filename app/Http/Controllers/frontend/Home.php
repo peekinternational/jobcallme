@@ -332,9 +332,9 @@ class Home extends Controller{
 			DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
 			/* end */
 			$toemail = $input['email'];
-			$secidtoview = array('id' => $input['secretId'],'Name' => $input['firstName']);
+			$secidtoview = array('id' => $input['secretId'],'Name' => $input['firstName'],'lastName' => $input['lastName']);
 			Mail::send('emails.reg',$secidtoview,function($message) use ($toemail) {
-				$message->to($toemail)->subject('Account Verification');
+				$message->to($toemail)->subject(trans('home.Account Verification'));
 			});
 			/*$user = $this->doLogin($request->input('email'),$request->input('password'));
 			$request->session()->put('jcmUser', $user);*/
@@ -389,9 +389,17 @@ class Home extends Controller{
 		    	}
     		}
     	}else{
-	    	if($request->input('city') != ''){
-	    		$people->where('jcm_users.city','=',$request->input('city'));
+			if($request->input('city') != ''){
+				if($request->input('city') == '000'){
+	    			$people->where('jcm_users.country','!=','1');
+				}else{
+					$people->where('jcm_users.state','=',$request->input('city'));
+				}
 	    	}
+
+	    	//if($request->input('city') != ''){
+	    		//$people->where('jcm_users.city','=',$request->input('city'));
+	    	//}
 	    	if($request->input('industry') != ''){
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
 	    	}
@@ -647,7 +655,7 @@ class Home extends Controller{
 	  	/*here after updating the database redirect to home page*/
 	  	return redirect('/');
 	  }else{
-	  	$request->session()->flash('subscribeAlert', 'please login to subscribe');
+	  	$request->session()->flash('subscribeAlert', trans('home.please login to subscribe'));
 	  	return redirect('account/login');
 	  }
 }
@@ -730,7 +738,7 @@ public function verifyUser(Request $request){
 	if($data > 0){
 		
 		DB::table('jcm_users')->where('secretId',$secretId)->update(['user_status' => 'Y']);
-		$request->session()->flash('emailAlert', 'Your account is Verified Please Login');
+		$request->session()->flash('emailAlert', trans('home.Your account is Verified Please Login'));
 		return redirect('account/login');
 	}else{
 		echo "There is a issue in your secret code kindly contact with administration thanks";
@@ -776,7 +784,7 @@ public function deactiveUser(Request $request){
 		DB::table('jcm_companies')->where('companyId','=',$data->companyId)->update(['companyStatus'=>'Inactive']);
 
 		$request->session()->flush('jcmUser');
-		$request->session()->flash('loginAlert', 'Your Account is Deactivated for activation contact Administration thanks');
+		$request->session()->flash('loginAlert', trans('home.Your Account is Deactivated for activation contact Administration thanks'));
 		   echo 1;
 	}else{
 		echo 'error in home controller line number 598';

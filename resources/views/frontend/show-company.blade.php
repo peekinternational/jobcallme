@@ -221,7 +221,7 @@ $opHour = json_decode($company->companyOperationalHour,true);
                         <p>{!! $job->companyAbout !!}</p>
                     </div>
                     <p align="center">
-                        <?php echo checkreview($star) ?><br>
+                        <span  style="color:#d6a707"><?php echo checkreview($star) ?></span><br>
                         @lang('home.Total reviews') <span class="badge">{{ count($companyReview) }} </span>
                     </p>
                     <hr>
@@ -230,35 +230,35 @@ $opHour = json_decode($company->companyOperationalHour,true);
                             <tr>
                                 <td>@lang('home.Career Growth')</td>
                                 <td>&nbsp;&nbsp;</td>
-                                <td>
+                                <td style="color:#d6a707">
                                 <?php echo checkreview($career_star) ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>@lang('home.Compensation & Benefits')</td>
                                 <td>&nbsp;&nbsp;</td>
-                                <td>
+                                <td style="color:#d6a707">
                                <?php echo checkreview($benefit_star) ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>@lang('home.Work/Life Balance')</td>
                                 <td>&nbsp;&nbsp;</td>
-                                <td>
+                                <td style="color:#d6a707">
                                 <?php echo checkreview($lifebalance_star) ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>@lang('home.Management')</td>
                                 <td>&nbsp;&nbsp;</td>
-                                <td>
+                                <td style="color:#d6a707">
                                 <?php echo checkreview($management_star) ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>@lang('home.Culture')</td>
                                 <td>&nbsp;&nbsp;</td>
-                                <td>
+                                <td style="color:#d6a707">
                                 <?php echo checkreview($culture_star) ?>
                                 </td>
                             </tr>
@@ -268,15 +268,15 @@ $opHour = json_decode($company->companyOperationalHour,true);
                         <div class="col-md-8 col-md-offset-4">
                             <div class="row" align="center">
                                 <div class="col-md-4">
-                                    <span style="font-size:12px">{{$ceo_recommend_star}}</span>
+                                    <span style="font-size:12px;color:#0d3f6b;">@lang('home.'.$ceo_recommend_star)</span>
                                     <p>@lang('home.CEO Recommended')</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <span style="font-size:12px">@if($recommend_star == 'on') Yes @else @lang('home.Not recommend') @endif</span>
+                                    <span style="font-size:12px;color:#0d3f6b;">@if($recommend_star == 'on') Yes @else @lang('home.Not recommend') @endif</span>
                                     <p>@lang('home.Recommend to a friend')</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <span style="font-size:12px">{{$future_star}}</span>
+                                    <span style="font-size:12px;color:#0d3f6b;">@lang('home.'.$future_star)</span>
                                     <p>@lang('home.Future Expectations')</p>
                                 </div>
                             </div>
@@ -297,38 +297,61 @@ $opHour = json_decode($company->companyOperationalHour,true);
                     </div>
                     <div class="col-md-11">
                       <h4>{{ $userreview->review_title }}</h4>
-                      <?php echo checkreview($userreview->overall_review) ?>
-                      <span><?= date('d M, Y ', strtotime($userreview->created_date))?></span>
-                      <p>{{ $userreview->job_type}}, Worked from <?= date('M d, Y ', strtotime($userreview->employee_sience))?> to <?= ($userreview->current_working != 'Yes') ? date('M d, Y ', strtotime($userreview->employer_upto)) : "Currently working"?> as {{ $userreview->designation }}</p>
+                      <span style="color:#d6a707"><?php echo checkreview($userreview->overall_review) ?></span>
+                      <span><?
+					  if(app()->getLocale() == "kr"){
+					  ?>
+						<?= date('Y-m-d ', strtotime($userreview->created_date))?>
+					  <?}else{?>
+						<?= date('d M, Y ', strtotime($userreview->created_date))?>
+					  <?}?>	</span>
+                      <p>@lang('home.'.$userreview->job_type), @lang('home.Worked')  
+					  <?
+					  if(app()->getLocale() == "kr"){
+					  ?>
+						<?= date('Y-m-d ', strtotime($userreview->employee_sience))?>
+					  <?}else{?>
+						from <?= date('M d, Y ', strtotime($userreview->employee_sience))?>
+					  <?}?>					
+					  
+					    <?
+					  if(app()->getLocale() == "kr"){
+					  ?>
+						<?= ($userreview->current_working != 'Yes') ? date('Y-m-d ', strtotime($userreview->employer_upto)) : "현재 재직중"?>
+					  <?}else{?>
+						to <?= ($userreview->current_working != 'Yes') ? date('M d, Y ', strtotime($userreview->employer_upto)) : "Currently working"?> as
+					  <?}?>	
+
+					    {{ $userreview->designation }}</p>
                       <table style="width:100%">
                       <tr>
-                        <th>Recommend CEO:</th>
-                        <td><i class="<?php echo checkfont($userreview->recommend_ceo)?>"></i></td>
-                        <th>Recommend to friend:</th>
-                        <td><i class="<?php echo checkfont($userreview->recommend)?>"></i></td>
-                        <th>Company Future:</th>
-                        <td><i class="<?php echo checkfont($userreview->future)?>"></i></td>
+                        <th width="200">@lang('home.Recommend CEO'):</th>
+                        <td style="color:#2e6da4"><i class="<?php echo checkfont($userreview->recommend_ceo)?>"></i></td>
+                        <th width="200">@lang('home.Recommend to friend'):</th>
+                        <td style="color:#2e6da4"><i class="<?php echo checkfont($userreview->recommend)?>"></i></td>
+                        <th width="200">@lang('home.Company Future'):</th>
+                        <td style="color:#2e6da4"><i class="<?php echo checkfont($userreview->future)?>"></i></td>
                       </tr>
                       </table>
-                      <strong class="font-16">Pros:</strong>
+                      <strong class="font-16">@lang('home.Pros'):</strong>
                       <p>{{ $userreview->pros }}</p>
-                      <strong class="font-16">Cons:</strong>
+                      <strong class="font-16">@lang('home.Cons'):</strong>
                       <p>{{ $userreview->cons }}</p>
-                      <strong class="font-16">Advice to management</strong>
-                      <div>Career Growth 
-                        <?php echo checkreview($userreview->career_opportunity) ?>
+                      <strong class="font-16">@lang('home.Advice to management')</strong>
+                      <div>@lang('home.Career Growth') 
+                        <span style="color:#d6a707"><?php echo checkreview($userreview->career_opportunity) ?></span>
                       </div>
-                      <div>Compensation & Benefits
-                       <?php echo checkreview($userreview->benefits) ?>
+                      <div>@lang('home.Compensation & Benefits')
+                       <span style="color:#d6a707"><?php echo checkreview($userreview->benefits) ?></span>
                       </div>
-                      <div>Work/Life Balance
-                        <?php echo checkreview($userreview->work_lifebalance) ?>
+                      <div>@lang('home.Work/Life Balance')
+                        <span style="color:#d6a707"><?php echo checkreview($userreview->work_lifebalance) ?></span>
                       </div>
-                      <div>Management
-                        <?php echo checkreview($userreview->rate_management) ?>
+                      <div>@lang('home.Management')
+                        <span style="color:#d6a707"><?php echo checkreview($userreview->rate_management) ?></span>
                       </div>
-                      <div>Culture
-                        <?php echo checkreview($userreview->rate_culture) ?>
+                      <div>@lang('home.Culture')
+                        <span style="color:#d6a707"><?php echo checkreview($userreview->rate_culture) ?></span>
                       </div>
                     </div>
                   </div>
@@ -439,11 +462,11 @@ function followCompany(companyId,obj){
     if($(obj).hasClass('btn-primary')){
         $(obj).removeClass('btn-primary');
         $(obj).addClass('btn-success');
-        $(obj).text('Following');
+        $(obj).text('@lang("home.following")');
     }else{
         $(obj).removeClass('btn-success');
         $(obj).addClass('btn-primary');
-        $(obj).text('Follow');
+        $(obj).text('@lang("home.follow")');
     }
     $.ajax({
         url: "{{ url('account/jobseeker/company/action') }}?companyId="+companyId+"&type="+type,

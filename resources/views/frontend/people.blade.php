@@ -6,10 +6,10 @@
 <section id="learn-section">
   <div class="container">
     <div class="col-md-12 learn-search-box">
-      <h2 class="text-center">@lang('home.searchpeople') <!--  {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }} --></h2>
+      <h2 class="text-center"><!-- @lang('home.searchpeople') --> <!--  {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }} --></h2>
       <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-          <div class="ls-box">
+        <div class="col-md-offset-2 col-md-8" style="padding-top:20px">
+          <div class="ls-box hidden-xs">
             <form role="form" action="{{ url('account/people') }}" method="post">
               {{ csrf_field() }}
               <div class="input-fields">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="search-field-box search-item" id="p_city">
                   <input type="search" placeholder="@lang('home.Cities')" name="city">
-                  <button type="submit" class="search-btn" style="width:9% !important">
+                  <button type="submit" class="search-btn" style="width:10% !important">
                     <i class="fa fa-search"></i>
                   </button>
                   <button  type="button" data-toggle="modal" data-target="#myModal" class="hidden-sm hidden-md hidden-lg" style="margin-left: 9px;width: 4%;height: 33px;background: transparent; border: 2px solid white;">
@@ -30,6 +30,30 @@
                   </div>
                 </form>
               </div>
+
+			  <div class="ls-box hidden-sm hidden-md hidden-lg">
+            <form role="form" action="{{ url('account/people') }}" method="post">
+              {{ csrf_field() }}
+              <div class="input-fields">
+                <div class="search-field-box search-item">
+                  <input type="search" placeholder="@lang('home.lookingpeople')" name="keyword">
+                </div>
+                <div class="search-field-box search-item" id="mod_city">
+                  <input type="search" placeholder="@lang('home.Cities')" name="city" style="margin-bottom: 12px;">
+				
+                  <button type="submit" class="search-btn" style="width:50% !important">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <button  type="button" data-toggle="modal" data-target="#myModal" class="hidden-sm hidden-md hidden-lg" style="margin-left: 9px;width: 45%;height: 33px;background: transparent; border: 2px solid white;"><span style="color:#fff">@lang('home.learn-search-text')</span>
+                    <span class="caret" style="color:white"></span></button>
+                 </div> 
+
+                  
+                  </div>
+                </form>
+              </div>
+
+
             </div>
           </div>
 
@@ -63,7 +87,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <div class=" pnj-form-field">
-                            <input type="text" class="form-control" name="city" placeholder="@lang('home.city')">
+                            <input type="text" class="form-control" name="city" placeholder="@lang('home.Cities')">
                           </div>
                         </div>
                       </div>
@@ -263,9 +287,9 @@
                 color: #ffffff;
                 font-size: 12px;
                 margin-bottom: 10px;
-                display: block; 
+                /* display: block; */ 
                 position: relative;
-                float: left;
+                /* float: left; */
                 margin-right: 0.5%;
                 overflow: hidden;
                 text-decoration: none;">
@@ -276,9 +300,9 @@
                 color: #ffffff;
                 font-size: 12px;
                 margin-bottom: 10px;
-                display: block; 
+                /* display: block; */
                 position: relative;
-                float: left;
+                /* float: left; */
                 margin-right: 0.5%;
                 overflow: hidden;
                 text-decoration: none;">

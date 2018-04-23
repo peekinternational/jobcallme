@@ -6,9 +6,9 @@
 <section id="learn-section">
     <div class="container">
         <div class="col-md-12 learn-search-box">
-            <h2 class="text-center">@lang('home.l_heading')</h2>
+            <h2 class="text-center"><!-- # @lang('home.learn') --><!-- @lang('home.l_heading') --></h2>
             <div class="row">
-                <div class="col-md-offset-2 col-md-8">
+                <div class="col-md-offset-2 col-md-8" style="margin-top:20px">
                   <div class="ls-box hidden-xs">
                         <form role="form" action="{{ url('learn/search')}}" method="post">
                             {{ csrf_field() }}
@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="search-field-box search-item" id="l_city">
                                     <input type="search" placeholder="@lang('home.Cities')" name="city">
-										<button type="submit" id="l_fasearch" style="width:9% !important" class="search-btn">
+										<button type="submit" id="l_fasearch" style="width:11% !important;padding-left:-5px;" class="search-btn">
                                     <i class="fa fa-search"></i>
                                 </button> 
 
@@ -70,10 +70,10 @@
                                 </div>
                                 <div class="search-field-box search-item" id="mob_city">
                                     <input type="search" placeholder="@lang('home.Cities')" name="city" style="margin-bottom: 12px;">
-                                    <button type="submit" id="mob_fasearch" style="width:10% !important" class="search-btn">
+                                    <button type="submit" id="mob_fasearch" style="width:50% !important" class="search-btn">
                                     <i class="fa fa-search"></i>
                                     </button>
-								<button  type="button" class="" id="mob_search" style="margin-left: 9px;width: 10%;height: 33px;background: transparent;border: 2px solid #cecdcd;">
+								<button  type="button" class="" id="mob_search" style="margin-left: 9px;width: 45%;height: 33px;background: transparent;border: 2px solid #cecdcd;"><span style="color:#fff">@lang('home.learn-search-text')</span>
                                 <span class="caret" style="color:white"></span></button>
                                 </div>
 								<div class="search-field-box search-item" id="mob_type" style="display:none;padding-top: 14px;">
@@ -163,16 +163,22 @@
                         <div class="col-md-12">
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
                             <p>{{ $rec->organiser != '' ?  $rec->organiser : JobCallMe::userName($rec->userId) }}</p>
-                            <span>@lang('home.'.$rec->type)</span>
-                            <p><i class="fa fa-calendar"></i> @if(app()->getLocale() == "kr")
-						    {{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
-						@else
-						    {{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
-						@endif </p>
+                            <span>#@lang('home.'.$rec->type)</span>
+                            <p><i class="fa fa-calendar"></i> 
+							  @if($rec->startDate != "0000-00-00")
+								@if(app()->getLocale() == "kr")
+									{{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+								@else
+									{{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+								@endif 
+							  @endif 
+							
+							</p>
                             <div class="la-text">{{ substr(strip_tags($rec->description),0,200) }}</div>
                             <span><i class="fa fa-map-marker"></i> @lang('home.'.JobCallMe::cityName($rec->city)),@lang('home.'.JobCallMe::countryName($rec->country))</span>
                             <div>
-                                <p class="pull-right la-price">{{ $rec->currency.' '.number_format($rec->cost)}}/-</p>
+                                <!-- <p class="pull-right la-price">{{ $rec->currency.' '.number_format($rec->cost)}}/-</p> -->
+								<!-- <p class="pull-left la-price"> --><p class="pull-left la-price"><span style="font-size:12px">@lang('home.leancostlist') :</span> @if($rec->accommodation == "Yes") {{ $rec->currency.' '.number_format($rec->cost)}} @else @if($rec->accommodation == "on") @lang('home.free') @else @lang('home.Contact person') @endif @endif</p>
                             </div>
                                <div class="ra-author-box">
                                 <img src="{{ url('compnay-logo/'.$rec->companyLogo) }}" class="img-circle" alt="{{ $rec->companyName }}">
@@ -191,6 +197,7 @@
             @endforeach
         </div>
     </div>
+	<br><br><br>
 </section>
 @endsection
 @section('page-footer')

@@ -372,15 +372,15 @@ class ExtraSkills extends Controller{
                     'state' => 'required',
                     'city' => 'required',
                     'contact' => 'required',                  
-                    'phone' => 'required',
+                    //'phone' => 'required',
                     'mobile' => 'nullable',
                     'website' => 'nullable|url',
                     'facebook' => 'nullable|url',
                     'linkedin' => 'nullable|url',
                     'twitter' => 'nullable|url',
                     'google' => 'nullable|url',
-                    'startDate' => 'required|date',
-                    'endDate' => 'required|date',
+                    //'startDate' => 'required|date',
+                    //'endDate' => 'required|date',
                 ],[				
 					'description.required' => trans('home.Enter description'),				
 				]);
@@ -434,6 +434,7 @@ class ExtraSkills extends Controller{
             $input['email'] = trim($request->input('email'));
             $input['phone'] = trim($request->input('phone'));
             $input['mobile'] = trim($request->input('mobile'));
+			$input['fax'] = trim($request->input('fax'));
             $input['website'] = trim($request->input('website'));
             $input['facebook'] = trim($request->input('facebook'));
             $input['linkedin'] = trim($request->input('linkedin'));
