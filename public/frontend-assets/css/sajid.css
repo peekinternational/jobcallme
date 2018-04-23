@@ -5,6 +5,14 @@
 .color-red{
 	color:red;
 }
+.bold{
+  font-size: 14px;
+  font-weight: bold;
+  color: #3f535c;
+}
+.margin-right{
+  margin-right: 20px; 
+}
 .margintop{
   margin-top: 80px;
 }

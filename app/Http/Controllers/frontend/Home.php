@@ -12,15 +12,16 @@ date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
 	public function home(){
-		$ip = \Request::ip();
-		$position = \Location::get($ip);
-		$currentCountry = $position->countryCode;
-		$currentCity    = $position->cityName;
-		
-		if($position->countryCode != 'KR'){
-			App::setLocale('en');
-			\Session::put('locale', 'en');
+		if(!\Session::has('loadOne')){
+			$ip = \Request::ip();
+			$position = \Location::get($ip);
+			if($position->countryCode != 'KR'){
+				App::setLocale('en');
+				\Session::put('locale', 'en');
+				\Session::put('loadOne', 'yes');
+			}
 		}
+		
 		//print_r($position->countryCode);die;
 		/* job shift query */
 		$jobShifts = DB::table('jcm_job_shift')->get();
