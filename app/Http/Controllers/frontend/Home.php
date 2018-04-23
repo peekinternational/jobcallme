@@ -12,6 +12,7 @@ date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
 	public function home(){
+<<<<<<< HEAD
 		if(!\Session::has('loadOne')){
 			$ip = \Request::ip();
 			$position = \Location::get($ip);
@@ -20,6 +21,17 @@ class Home extends Controller{
 				\Session::put('locale', 'en');
 				\Session::put('loadOne', 'yes');
 			}
+=======
+		
+		$ip = \Request::ip();
+		$position = \Location::get($ip);
+		$currentCountry = $position->countryCode;
+		$currentCity    = $position->cityName;
+		
+		if($position->countryCode != 'KR'){
+			App::setLocale('en');
+			\Session::put('locale', 'en');
+>>>>>>> ae93cd90283f4f12e1a0c1971f455b58bdcbe8ff
 		}
 		
 		//print_r($position->countryCode);die;
@@ -413,9 +425,10 @@ class Home extends Controller{
     }
 
  public function peoples(Request $request){
+	//dd($request->all());
     	/* peoples query */
     	$people = DB::table('jcm_users');
-    	$people->select('*');
+    	$people->select('*','privacy.profileImage as pImage');
     	$people->rightJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
         $people->rightJoin('jcm_resume','jcm_resume.userId','=','jcm_users.userId');
 		$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
@@ -437,6 +450,15 @@ class Home extends Controller{
     		}
 			if($request->input('category') != ''){
     			$people->where('jcm_users_meta.industry','=',$request->input('category'));
+    		}
+			if($request->input('country') != ''){
+    			$people->where('jcm_users.country','=',$request->input('country'));
+    		}
+			if($request->input('state') != '' && $request->input('state') != '0'){
+    			$people->where('jcm_users.state','=',$request->input('state'));
+    		}
+			if($request->input('citys') != '' && $request->input('citys') != '0'){
+    			$people->where('jcm_users.city','=',$request->input('citys'));
     		}
 			if($request->input('degreeLevel') != ''){
     			$people->where('jcm_resume.resumeData','like','%'.$request->input('degreeLevel').'%');
@@ -460,8 +482,8 @@ class Home extends Controller{
                
                
     	}else{
-	    	if($request->input('citys') != ''){
-	    		$people->where('jcm_users.city','=',$request->input('citys'));
+	    	if($request->input('city') != ''){
+	    		$people->where('jcm_users.city','=',$request->input('city'));
 	    	}
 	    	if($request->input('industry') != ''){
 	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
@@ -472,7 +494,7 @@ class Home extends Controller{
 
 		$people->where('jcm_users_meta.userId','!=','');
     	$people->orderBy('jcm_users.userId','desc');
-         $people->distinct('jcm_users.firstName');
+         $people->groupBy('jcm_users.userId');
     	$peoples = $people->paginate(18);
         // dd($peoples);
 

@@ -65,10 +65,10 @@
         <div class="col-md-8">
 <!--Search Item-->
             @foreach($record as $rec)
-                <div class="sc-item">
+                <div class="sc-item" style="overflow: hidden;">
                     <div class="sc-thumbnail">
                         @if($rec->upskillImage != '')
-                            <img src="{{ url('upskill-images/'.$rec->upskillImage) }}">
+                            <img src="{{ url('upskill-images/'.$rec->upskillImage) }}" style="height: auto !important;">
                         @else
                             <img src="{{ url('d-cover.jpg') }}">
                         @endif

@@ -84,7 +84,7 @@
                         <select class="form-control select3" name="career" onchange="location.href=this.value" style="width:200px;overflow: visible;">
                             <option value="">@lang('home.abouthead')</option>
                             @foreach(JobCallMe::getCategories() as $fCat)
-                            <option value="{{ url('jobs?category='.$fCat->categoryId) }}">@lang('home.'.ucfirst($fCat->name))<!-- {!! $cat->name !!} --></option>
+                            <option value="{{ url('jobs?category='.$fCat->categoryId.'&head=yes') }}">@lang('home.'.ucfirst($fCat->name))<!-- {!! $cat->name !!} --></option>
                             @endforeach
                         </select>
                     </div>
@@ -94,7 +94,7 @@
                         <select class="form-control select3" name="career" onchange="location.href=this.value" style="width:200px;overflow: visible;">
                             <option value="">@lang('home.dispatchinformation')</option>
                             @foreach(JobCallMe::getCategories() as $fCat)
-                            <option value="{{ url('jobs?category='.$fCat->categoryId) }}">@lang('home.'.ucfirst($fCat->name))<!-- {!! $cat->name !!} --></option>
+                            <option value="{{ url('jobs?category='.$fCat->categoryId.'&dispatch=yes') }}">@lang('home.'.ucfirst($fCat->name))<!-- {!! $cat->name !!} --></option>
                             @endforeach
                         </select>
                     </div>

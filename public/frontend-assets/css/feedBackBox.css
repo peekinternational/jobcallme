@@ -10,8 +10,9 @@
 }
 
 #fpi_title {
+    
     position: absolute;
-    left: 0;
+    left: -16px;
     top: 80px;
     padding-top: 4px;
     border-top-left-radius: 5px;
@@ -19,6 +20,8 @@
     cursor: pointer;
     border-top-right-radius: 5px;
     border: 1px solid #ffffff;
+
+   
 }
 
     #fpi_title h2 {

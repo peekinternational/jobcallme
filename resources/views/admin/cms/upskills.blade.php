@@ -61,6 +61,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                 {!! $upskills->render() !!}
                             </div>
                             
                         </div>

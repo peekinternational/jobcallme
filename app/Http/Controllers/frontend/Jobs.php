@@ -9,12 +9,15 @@ use DB;
 use Illuminate\Support\Facades\Lang;
 
 class Jobs extends Controller{
-    public function home(){
+    public function home(Request $request){
+			if(!$request->session()->has('jcmUser')){
+    		return redirect('account/login?next='.$request->route()->uri);
+    	}
 		return view('frontend.view-jobs');
 	}
 
 	public function searchJobs(Request $request){
-		
+		//dd($request->all());
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}
@@ -24,6 +27,8 @@ class Jobs extends Controller{
 		$categoryId = trim($request->input('categoryId'));
 		$jobType = trim($request->input('jobType'));
 		$jobShift = trim($request->input('jobShift'));
+		$head = trim($request->input('head'));
+		$dispatch = trim($request->input('dispatch'));
 		$careerLevel = trim($request->input('careerLevel'));
 		$experience = trim($request->input('experience'));
 		$minSalary = trim($request->input('minSalary'));
@@ -65,6 +70,8 @@ class Jobs extends Controller{
 		if($jobShift != '') $jobs->where('jcm_jobs.jobShift','=',$jobShift);
 		if($careerLevel != '') $jobs->where('jcm_jobs.careerLevel','=',$careerLevel);
 		if($experience != '') $jobs->where('jcm_jobs.experience','=',$experience);
+		if($head != '') $jobs->where('jcm_jobs.head','=',$head);
+		if($dispatch != '') $jobs->where('jcm_jobs.dispatch','=',$dispatch);
 		if($minSalary != '') $jobs->where('jcm_jobs.minSalary','<=',$minSalary);
 		if($maxSalary != '') $jobs->where('jcm_jobs.maxSalary','>=',$maxSalary);
 		if($state != '0' && $state != "") $jobs->where('jcm_jobs.state','=',$state);
@@ -392,6 +399,9 @@ class Jobs extends Controller{
 
 
 	public function viewJob(Request $request){
+		if(!$request->session()->has('jcmUser')){
+    		return redirect('account/login?next='.$request->route()->uri);
+    	}
 		
 		$jobId = $request->segment(2);
 

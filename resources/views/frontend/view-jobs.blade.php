@@ -70,6 +70,8 @@
                         </select>
                     </div>
                     <div class="form-group hidden-xs">
+                    <input type="hidden" class="form-control" name="dispatch" value="{{ Request::input('dispatch') }}">
+                            <input type="hidden" class="form-control" name="head" value="{{ Request::input('head') }}">
                         <input type="text" class="form-control" name="minSalary" value="" placeholder="@lang('home.minsalary') ">
                     </div>
                     <div class="form-group hidden-xs">

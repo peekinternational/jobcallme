@@ -140,9 +140,14 @@ $lToken = csrf_token();
             </div>
         </div>
     </section>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+     <button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> Open Quick View V  </button>
+</div>
+                                               
     <!--Slider Section End-->
 
-    <section class="login-type-section">
+    <section class="login-type-section" id="QuickView" style="display:none;">
         <div class="container">
             <div class="col-md-8 col-md-offset-2">
                 <div class="col-md-6 login-type ">
@@ -509,7 +514,17 @@ $lToken = csrf_token();
             });*/
         });  
     });
-  
+  $("#Quickbutton").click(function(){
+    $("#QuickView").toggle();
+});
+function myFunction() {
+    var x = document.getElementById("Quickbutton");
+    if (x.innerHTML === "Close Quick View V") {
+        x.innerHTML = "Open Quick View V";
+    } else {
+        x.innerHTML = "Close Quick View V";
+    }
+}
 </script>
 @endsection
 <style type="text/css">

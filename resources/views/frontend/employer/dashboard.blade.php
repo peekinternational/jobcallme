@@ -18,7 +18,7 @@
             <div class="col-md-4">
                 <div class="eg-job-response">
                     <h4>@lang('home.jobresponse')</h4>
-                    <canvas id="job-response" style="margin-top: 54px;"></canvas>
+                    <canvas id="job-response" style="margin-top: 79px;"></canvas>
                 </div>
             </div>
             <div class="col-md-4">
@@ -30,7 +30,7 @@
             <div class="col-md-4">
                 <div class="eg-job-response">
                     <h4>@lang('home.recruitmentactivity')</h4>
-                    <canvas id="recruitment-activity" style="margin-top: 54px;"></canvas>
+                    <canvas id="recruitment-activity" style="margin-top: 79px;"></canvas>
                 </div>
             </div>
         </div>
