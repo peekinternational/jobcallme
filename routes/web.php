@@ -66,7 +66,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('settings/paypal/save','admin\Setting@savePaypal');
 
 	/* user management */
-	Route::match(['get','post'],'users/view','admin\Users@viewUsers');
+	Route::match(['get','post'],'users/view','admin\Users@	');
 	Route::match(['get','post'],'users/add','admin\Users@addEditUser');
 	Route::match(['get','post'],'users/edit/{id}','admin\Users@addEditUser');
 	Route::get('users/view/{id}','admin\Users@viewSingleUser');
@@ -312,9 +312,7 @@ Route::get('employer/job_update/{id}','frontend\Employer@updatejob');
 Route::get('employer/advance_serach', function () {
     return view('frontend.advance-job');
 });
-Route::get('employer/evalution', function () {
-    return view('frontend.employer.evalution');
-});
+Route::get('employer/evalution/{id}','frontend\Employer@viewCandidateEvaluation');
 
 
 Route::get('employer/nicerequest', function () {
@@ -444,3 +442,4 @@ Route::get('account/employeer/companies/company/review', 'frontend\Employer@comp
 Route::post('account/employer/company/addreview', 'frontend\Employer@addreview');
 Route::post('sajid', 'frontend\Jobseeker@downloadmulticv');
 Route::post('delcv', 'frontend\Jobseeker@deletedownloadedcv');
+Route::post('evaluation/candidate/save','frontend\Employer@candidateEvaluation');

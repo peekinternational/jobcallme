@@ -509,6 +509,7 @@ class Cms extends Controller{
     /* Approve upskills*/
     public function upskills(Request $request){
         $upskills = DB::table('jcm_upskills')->orderBy('skillId','desc')->paginate(10);
+     //   dd($upskills);
         return view('admin.cms.upskills',compact('upskills'));
     }
     public function viewskill(Request $request){

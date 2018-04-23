@@ -447,6 +447,7 @@ class ExtraSkills extends Controller{
 			$input['duration'] = trim($request->input('duration'));
             $input['timing'] = @json_encode($timing);
 			$input['userId'] = $app->userId;
+            $input['companyId'] = $app->companyId;
             $input['paymentMode'] = 'Paypal';
             $input['createdTime'] = date('Y-m-d H:i:s');
 			$request->session()->put('input', $input);

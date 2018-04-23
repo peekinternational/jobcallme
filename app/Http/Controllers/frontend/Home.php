@@ -12,6 +12,16 @@ date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
 	public function home(){
+<<<<<<< HEAD
+		if(!\Session::has('loadOne')){
+			$ip = \Request::ip();
+			$position = \Location::get($ip);
+			if($position->countryCode != 'KR'){
+				App::setLocale('en');
+				\Session::put('locale', 'en');
+				\Session::put('loadOne', 'yes');
+			}
+=======
 		
 		$ip = \Request::ip();
 		$position = \Location::get($ip);
@@ -21,6 +31,7 @@ class Home extends Controller{
 		if($position->countryCode != 'KR'){
 			App::setLocale('en');
 			\Session::put('locale', 'en');
+>>>>>>> ae93cd90283f4f12e1a0c1971f455b58bdcbe8ff
 		}
 		
 		//print_r($position->countryCode);die;
@@ -500,8 +511,8 @@ class Home extends Controller{
 
     public function learn(Request $request){
     	/* read query */
-    	$lear_record = DB::table('jcm_upskills')->where('status','=','Active')->where('adstartDate','<=',date('Y-m-d'))->where('adendDate','>=',date('Y-m-d'))->orderBy('skillId','desc')->limit(12)->get();
-
+    	$lear_record = DB::table('jcm_upskills')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_upskills.companyId')->where('status','=','Active')->where('adstartDate','<=',date('Y-m-d'))->where('adendDate','>=',date('Y-m-d'))->orderBy('skillId','desc')->limit(12)->get();
+//dd($lear_record );
     	return view('frontend.learn',compact('lear_record'));
     }
 
@@ -550,7 +561,7 @@ class Home extends Controller{
     public function viewUpskill(Request $request,$skillId){
     	$type = $request->segment(2);
     	/* upskill query */
-    	$learnQry = DB::table('jcm_upskills')->where('type','=',ucfirst($type));
+    	$learnQry = DB::table('jcm_upskills')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_upskills.companyId')->where('type','=',ucfirst($type));
     	$learnQry->where('skillId','=',$skillId);
     	$record = $learnQry->first();
 

@@ -87,7 +87,7 @@
 										<a href="{{url('account/employer/setfilter/'.$pjobs->jobId)}}"><i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')</a>
 										<a href="{{url('account/employer/job/share/'.$pjobs->jobId)}}"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
 										<a href="{{url('account/employer/status/'.$pjobs->jobId)}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')</a>
-										<a href="{{url('account/employer/evalution')}}"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
+										<a href="{{url('account/employer/evalution/'.$pjobs->jobId)}}"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
                                         <a href="#" onclick="return false;" class="active_deactive{{$pjobs->jobId}}" id="active_deactive{{$key}}"><i class="fa fa-eye" aria-hidden="true"></i> @lang('home.Active')</a>
                                         <input type="hidden" class="JobId" value="{{$pjobs->jobId}}">
                                         <input type="hidden" class="check{{$pjobs->jobId}}" value="{{$pjobs->jobStatus}}">

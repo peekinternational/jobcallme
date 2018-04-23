@@ -870,7 +870,7 @@ curl_close ($ch);
 								$vhtml .= '<div class="col-md-4">';
 									$vhtml .= '<img src="'.$userImage.'" class="ea-image">';
 									$vhtml .= '<div class="rtj-details">';
-										$vhtml .= '<p><strong><a href="'.url('account/employer/application/candidate/'.$rec->userId).'">'.$rec->firstName.' '.$rec->lastName.'</a></strong> - <span class="ea-sm-date">'.date('d M',strtotime($rec->applyTime)).'</span></p>';
+										$vhtml .= '<p><strong><a href="'.url('account/employer/application/candidate/'.$rec->userId."?jobId=".$rec->jobId).'">'.$rec->firstName.' '.$rec->lastName.'</a></strong> - <span class="ea-sm-date">'.date('d M',strtotime($rec->applyTime)).'</span></p>';
 										$vhtml .= '<p>'.substr($rec->title,0,28).'</p>';
 										$expectedSalary = $rec->expectedSalary != '' ? $rec->expectedSalary : '0';
 										$vhtml .= '<p><strong>'.trans('home.expected').':</strong> '.number_format($expectedSalary).' '.$rec->currency.'</p>';
@@ -1044,10 +1044,18 @@ curl_close ($ch);
 		$people->inRandomOrder();
 		$Query=$people->get();
 		$jobId = $_GET['jobId'];
-		
+
+		/* questionaire tab data *muhammad sajid* */
+
 		$questionData = DB::table('jcm_ques_answer')->select('*')->leftJoin('jcm_questions','jcm_ques_answer.question_id','=','jcm_questions.q_id')->where('jobId',$jobId)->where('jobseeker_id',$userId)->get();
+
+		/* evaluation tab data *muhammad sajid 20/4/2018* */
+
+		$evaluationData = DB::table('jcm_evaluation as eva')->select('eva.*','eva_que.evaluation_factor','eva_que.weight')->leftJoin('jcm_evaluation_question as eva_que','eva.evaluation_id','=','eva_que.evaluation_id')->where('eva.job_id',$jobId)->where('eva.user_id',$app->userId)->get();
+
+		$eva_ans = DB::table('jcm_evaluation_answer as eva_ans')->where('job_id',$jobId)->where('candidate_id',$userId)->get();
 		
-		return view('frontend.employer.appcandidate',compact('applicant','resume','Query','userId','questionData'));
+		return view('frontend.employer.appcandidate',compact('evaluationData','applicant','resume','Query','userId','jobId','questionData','eva_ans'));
 	}
 public function userResume($userId){
 		$record = DB::table('jcm_resume')->where('userId','=',$userId)->orderBy('resumeId','asc')->get();
@@ -2351,4 +2359,41 @@ public function allform(Request $request){
             echo 2;
         }
     }
+   public function candidateEvaluation(Request $request){
+   		$evaluation_factors = $request->input('evaluation_factor');
+   		$points = $request->input('point');
+   		$candidate_id = $request->input('candidate_id');
+   		$job_id = $request->input('job_id');
+   		$evaluation_title = $request->input('evaluation_title');
+   		$total = $request->input('total');
+   		$qualification = $request->input('qualification');
+   		$eva_ans_id = $request->input('eva_ans_id');
+   		$html = "";
+   		foreach ($evaluation_factors as $key => $value) {
+   			$data['evaluation_factor'] = $value;
+   			$data['point'] = $points[$key];
+   			$data['candidate_id'] = $candidate_id;
+   			$data['job_id'] = $job_id;
+   			$data['evaluation_title'] = $evaluation_title;
+   			$data['total'] = $total;
+   			$data['qualification'] = $qualification;
+   			if($eva_ans_id[$key] != ''){
+   				DB::table('jcm_evaluation_answer')->where('candidate_id',$data['candidate_id'])->where('job_id',$data['job_id'])->where('eva_ans_id',$eva_ans_id[$key])->update($data);
+   			}else{
+   				$id = DB::table('jcm_evaluation_answer')->insertGetId($data);
+   				$html .= "<input type='hidden' name='eva_ans_id[]' value='".$id."'>";
+   			}
+   		}
+   		if($eva_ans_id[0] == ''){
+   			echo $html;
+   		}else{
+   			echo 1;
+   		}
+   		
+   }
+   public function viewCandidateEvaluation($jobId){
+
+   		$all_eva_cand = DB::table('jcm_evaluation_answer as ans')->select('*')->leftJoin('jcm_users as u','u.userId','=','ans.candidate_id')->where('ans.job_id',$jobId)->groupBy('candidate_id')->get();
+   		return view('frontend.employer.evaluation',compact('all_eva_cand'));
+   }
 }
