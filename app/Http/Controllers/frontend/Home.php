@@ -12,7 +12,7 @@ date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
 	public function home(){
-<<<<<<< HEAD
+
 		if(!\Session::has('loadOne')){
 			$ip = \Request::ip();
 			$position = \Location::get($ip);
@@ -21,19 +21,7 @@ class Home extends Controller{
 				\Session::put('locale', 'en');
 				\Session::put('loadOne', 'yes');
 			}
-=======
-		
-		$ip = \Request::ip();
-		$position = \Location::get($ip);
-		$currentCountry = $position->countryCode;
-		$currentCity    = $position->cityName;
-		
-		if($position->countryCode != 'KR'){
-			App::setLocale('en');
-			\Session::put('locale', 'en');
->>>>>>> ae93cd90283f4f12e1a0c1971f455b58bdcbe8ff
 		}
-		
 		//print_r($position->countryCode);die;
 		/* job shift query */
 		$jobShifts = DB::table('jcm_job_shift')->get();
@@ -829,6 +817,15 @@ public function savecompic(Request $request){
 		  return view('frontend.Completed');
 
     	
+    }
+    public function likes(Request $request,$type){
+    	$data = $request->input();
+    	unset($data['_token']);
+    	if($type == "like"){
+    		DB::table('jcm_likes')->insert($data);
+    	}else{
+    		DB::table('jcm_likes')->where('parent_table',$data['parent_table'])->where('post_id',$data['post_id'])->where('user_id',$data['user_id'])->delete();
+    	}
     }
 
 }

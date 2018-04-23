@@ -73,31 +73,39 @@
             <!--Article Item-->
             @foreach($read_record as $rec)
                 <div class="col-xs-12 col-sm-6 col-md-3 grid-item">
+                    <form id="{{ $rec->writingId }}">
                     <div class="la-item">
                         <div class="la-item-img">
                             <img class=" img-responsive" src="{{ url('article-images/'.$rec->wIcon) }}" alt="">
                         </div>
                         <div class="col-md-12">
                             <p> <a href="{{ url('read/article/'.$rec->writingId ) }}" class="la-title">{!! $rec->title !!}</a></p>
-                            <?
+                            <?php
 								$cat_names = explode(",",$rec->cat_names);
 								
 							?>
-							<span><?for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i])<?}?></span>
+							<span><?php for($i=0; $i < count($cat_names); $i++){?>@lang('home.'.$cat_names[$i]) <?php } ?></span>
                             <div class="la-text">{!! $rec->citation !!}</div>
                             <div class="ra-author-box">
                                 <img src="{{ url('profile-photos/'.$rec->profilePhoto) }}" class="img-circle" alt="{{ $rec->firstName }}">
                                 <div class="ra-author">
                                     <a href="{{ url('account/employer/application/applicant/'.$rec->userId) }}">{{ $rec->firstName.' '.$rec->lastName }}</a><br>
-                                    <span>@if(app()->getLocale() == "kr")
-														{{ date('Y-m-d',strtotime($rec->createdTime))}}
-													@else
-														{{ date('M d, Y',strtotime($rec->createdTime))}}
-													@endif</span>
+                                    <span>
+                                        @if(app()->getLocale() == "kr")
+											{{ date('Y-m-d',strtotime($rec->createdTime))}}
+										@else
+											{{ date('M d, Y',strtotime($rec->createdTime))}}
+										@endif
+                                    </span>
+                                    <span class="pull-right"><i class="like fa fa-heart <?=JOBCALLME::getUserLikes( $rec->writingId,Session::get('jcmUser')->userId ) ?>"></i> <i class="total-likes"><?= JOBCALLME::getReadlikes($rec->writingId)?></i></span>
+                                    <input type="hidden" class="post_id" value="{{ $rec->writingId}}">
+                                    <input type="hidden" class="userId" value="{{ $rec->userId}}">
+
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
             @endforeach
 		
@@ -109,6 +117,33 @@
 @section('page-footer')
 <script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
 <script type="text/javascript">
+$('.like').on('click',function(){
+    var id = '#'+$(this).closest('form').attr('id');
+    var type = "like";
+    if($(this).hasClass('fa-red')){
+        $(this).removeClass('fa-red');
+        var likes = $(id+' .total-likes').text();
+        likes = +likes - 1;
+        $(id+' .total-likes').text(likes);
+        type = "dislike";
+    }else{
+        $(this).addClass('fa-red');
+        var likes = $(id+' .total-likes').text();
+        likes = +likes + 1;
+        $(id+' .total-likes').text(likes);
+    }
+    var post_id = $(id+' .post_id').val();
+    var userId = $(id+' .userId').val();
+    
+    $.ajax({
+        url:"read/likes/"+type,
+        type:"post",
+        data:{parent_table:"read",post_id:post_id,user_id:userId,_token:"{{ csrf_token() }}"},
+        success:function(res){
+
+        }
+    });
+});
 //need this to deactivate lightbox on small screens
 $(document).ready(function () {
 
