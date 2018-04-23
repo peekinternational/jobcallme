@@ -22,11 +22,77 @@
             <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-user" aria-hidden="true"></i> @lang('home.resume')</a></li>
             <li><a data-toggle="tab" class='openConversation' href="#menu1" ><i class="fa fa-comments" aria-hidden="true"></i> @lang('home.conversation')</a></li>
             <li><a data-toggle="tab" href="#menu2"><i class="fa fa-clipboard" aria-hidden="true"></i> @lang('home.questionnaires')</a></li>
-            <li><a data-toggle="tab" href="#menu3"><i class="fa fa-calendar" aria-hidden="true"></i> @lang('home.interviews')</a></li>
+            <li><a data-toggle="tab" href="#evaluation"><i class="fa fa-star" aria-hidden="true"></i> @lang('home.evaluation')</a></li>
+            <li><a data-toggle="tab" href="#menu4"><i class="fa fa-calendar" aria-hidden="true"></i> @lang('home.interviews')</a></li>
         </ul>
         <div class="row">
             <div class="col-md-9">
                 <div class="tab-content">
+                    <!-- evaluation tab -->
+                    <div id="evaluation" class="tab-pane fade in">
+                        <form method="post" id="evaluation-form">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="candidate_id" value="{{$userId}}">
+                            <input type="hidden" name="job_id" value="{{ $jobId }}">
+                        <section class="personal-info-section">
+                           <p class="bold">{{$evaluationData[0]->title}}</p>
+                           <input type="hidden" name="evaluation_title" value="{{$evaluationData[0]->title}}">
+                           <?php $No = 2;?>
+                           <table class="table">
+                               <thead>
+                                   <tr>
+                                       <th>No</th>
+                                       <th>Factor</th>
+                                       <th>Rating</th>
+                                       <th>Score</th>
+                                   </tr>
+                               </thead>
+                               <tbody>
+                                   <tr>
+                                       <td>1</td>
+                                       <td>Does the candidate meet the minimum qualification required for this job</td>
+                                       <td>
+                                            <p style="margin-top: 4px">
+                                                <input type="checkbox" id="qualification" class="switch-field" value="Yes" name="qualification" onchange="restrict(this)" @if($eva_ans[0]->qualification == 'Yes') checked @endif>
+                                                <label for="qualification" class="switch-label">Yes</label>
+                                            </p>  
+                                        </td> 
+                                   </tr>
+                                   @foreach($evaluationData as $key => $evaluation)
+                                   <tr>
+                                        <td>{{ $No++ }} <input type="hidden" name="eva_ans_id[]" value="{{ $eva_ans[$key]->eva_ans_id}}"></td>
+                                        <td>
+                                            {{ $evaluation->evaluation_factor }}
+                                            <input type="hidden" name="evaluation_factor[]" value="{{ $evaluation->evaluation_factor }}">
+                                        </td>
+                                        <td>
+                                            <select class="form-control score">
+                                                <option value="<?= $evaluation->weight * 1 ?>">1</option>
+                                                <option value="<?= $evaluation->weight * 2 ?>">2</option>
+                                                <option value="<?= $evaluation->weight * 3 ?>">3</option>
+                                                <option value="<?= $evaluation->weight * 4 ?>">4</option>
+                                                <option value="<?= $evaluation->weight * 5 ?>">5</option>
+                                                <option value="<?= $evaluation->weight * 6 ?>">6</option>
+                                                <option value="<?= $evaluation->weight * 7 ?>">7</option>
+                                                <option value="<?= $evaluation->weight * 8 ?>">8</option>
+                                                <option value="<?= $evaluation->weight * 9 ?>">9</option>
+                                                <option value="<?= $evaluation->weight * 10 ?>">10</option>
+                                            </select>
+                                        </td>
+                                        <td class="point">{{ $eva_ans[$key]->point}}</td>
+                                        <input type="hidden" name="point[]" value="{{ $eva_ans[$key]->point}}">
+                                   </tr>
+                                   @endforeach
+                               </tbody>
+                           </table>
+                           <hr>
+                           <span class="pull-right margin-right"><strong>Total:<span id="total">{{ $eva_ans[0]->total}}</span></strong></span>
+                           <input type="hidden" name="total" value="{{ $eva_ans[0]->total}}">
+                           <button type="button" class="btn btn-info save" disabled="disabled">Save Changes</button>
+                        </section>
+                        </form>
+                    </div>
+                    <!-- main tab start resume -->
                     <div id="home" class="tab-pane fade in active">
         
                         <!--Personal Info Start-->
@@ -339,7 +405,7 @@
                             </div>
                         </section>
                     </div>
-					<div id="menu3" class="tab-pane fade">
+					<div id="menu4" class="tab-pane fade">
                         <!-- schedule interview -->
                         <div class="col-md-12 ea-scheduleInerview">
                             <div class="col-md-12" style="margin-top: 10px;">
@@ -437,6 +503,50 @@
 .input-error{color: red;}
 </style>
 <script type="text/javascript">
+    restrict($('#qualification'));
+    function restrict(el){
+        if($(el).is(':checked')){ 
+            $('.save').removeAttr('disabled')
+        }else{
+            $('.save').attr('disabled','disabled')
+        }
+    }
+    $('.score').on('change',function(){
+        var selectval = $(this).val();
+        $(this).closest('tr').find('td').eq(3).text(selectval);
+        $(this).closest('tr').find('input[name="point[]"]').val(selectval);
+        var total = $('#total').text();
+        var all = $('.point').toArray();
+        $('#total').text(disp(all));
+        $('input[name="total"]').val(disp(all));
+
+    })
+    function disp( divs ) {
+          var a = 0;
+          for ( var i = 0; i < divs.length; i++ ) {
+             a += +divs[ i ].innerHTML ;
+          }
+          return a;
+      }
+    $('.save').on('click',function(){
+        var formData = $('#evaluation-form').serialize();
+        $.ajax({
+            url:jsUrl()+"/evaluation/candidate/save",
+            type:"post",
+            data:formData,
+            success:function(res){
+               if(res != 1){
+                $('#evaluation-form').find('input[name="eva_ans_id[]"]').remove();
+                $('#evaluation-form').append(res);
+                toastr.success("evaluation Done");
+               }else{
+                toastr.success("evaluation Data Updated");
+               }
+            }
+        });
+
+    });
+    
     var token = "{{ csrf_token() }}";
     $(document).ready(function(){
         $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();

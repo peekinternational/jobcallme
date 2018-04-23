@@ -12,6 +12,16 @@ date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
 	public function home(){
+<<<<<<< HEAD
+		if(!\Session::has('loadOne')){
+			$ip = \Request::ip();
+			$position = \Location::get($ip);
+			if($position->countryCode != 'KR'){
+				App::setLocale('en');
+				\Session::put('locale', 'en');
+				\Session::put('loadOne', 'yes');
+			}
+=======
 		
 		$ip = \Request::ip();
 		$position = \Location::get($ip);
@@ -21,6 +31,7 @@ class Home extends Controller{
 		if($position->countryCode != 'KR'){
 			App::setLocale('en');
 			\Session::put('locale', 'en');
+>>>>>>> ae93cd90283f4f12e1a0c1971f455b58bdcbe8ff
 		}
 		
 		//print_r($position->countryCode);die;
