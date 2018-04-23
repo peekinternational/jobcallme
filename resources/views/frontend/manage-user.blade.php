@@ -119,7 +119,8 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.newpassword')</label>
                                 <div class="col-md-6">
-                                    <input type="password" name="password" class="form-control input-sm" placeholder="@lang('home.newpassword')">
+                                    <input type="password" name="password" onblur="sendpassword(this.value)" class="form-control input-sm" placeholder="@lang('home.newpassword')">
+                                <p style="color:red" id="erpass"></p>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -131,7 +132,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">&nbsp;</label>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary btn-block" type="submit" name="save">@lang('home.save')</button>
+                                    <button id="passbtn" class="btn btn-primary btn-block" type="submit" name="save">@lang('home.save')</button>
                                 </div>
                             </div>
                         </form>
@@ -1092,6 +1093,24 @@ function deactive(id){
 
     });
     
+}
+function sendpassword(pass){
+    alert("hello");
+ $.ajax({
+    url:"{{ url('passwordValidate') }}",
+    data:{password:pass,_token:"{{ csrf_token() }}"},
+    type:"post",
+    success:function(res){
+        if(res == 1){
+            $('#erpass').text("@lang('home.passwordway')");
+            $('#passbtn').attr('disabled','disabled');
+        }else{
+            $('#erpass').text(" ");
+            $('#passbtn').removeAttr('disabled');
+        }
+       
+    }
+ });
 }
 </script>
 @endsection

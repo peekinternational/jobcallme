@@ -1014,11 +1014,11 @@ public function userResume($userId){
 		$opHours = $request->input('opHours');
 		foreach($opHours as $i => $k){
 			if($i == 'sun' || $i == 'sat'){
-				if($k[0] == ''){ $k[0] = 'Closed';}
-				if($k[1] == ''){ $k[1] = 'Closed';}
+				if($k[0] == ''){ $k[0] = '00:00 AM';}
+				if($k[1] == ''){ $k[1] = '00:00 PM';}
 			}else{
-				if($k[0] == ''){ $k[0] = '09:00 AM';}
-				if($k[1] == ''){ $k[1] = '06:00 PM';}
+				if($k[0] == ''){ $k[0] = '00:00 AM';}
+				if($k[1] == ''){ $k[1] = '00:00 PM';}
 			}
 			$opHoursArr[$i] = array('from' => $k[0], 'to' => $k[1]);
 		}

@@ -608,6 +608,7 @@
                     </div>
                     <div class="col-md-6  pnj-btns">                        
 						<button type="submit" class="btn btn-primary" name="save">@lang('home.postjob')</button>
+                        <button type="submit" class="btn btn-default" name="draft" value="draft">@lang('home.draft')</button>
                         <button class="btn btn-default"><a href="{{ url('account/employer') }}">@lang('home.CANCEL')</a></button>
                     </div>
                 

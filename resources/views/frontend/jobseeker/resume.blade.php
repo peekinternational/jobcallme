@@ -243,7 +243,11 @@ if($user->profilePhoto != ''){
                             <div class="col-md-6">
                                 <select class="form-control select2 job-category" name="industry" onchange="getSubCategories(this.value)">
                                     @foreach(JobCallMe::getCategories() as $cat)
+                                    @if($cat->categoryId < 17)
+                                     
                                         <option value="{!! $cat->categoryId !!}" {{ $meta->industry == $cat->categoryId ? 'selected="selected"' : '' }}>@lang('home.'.$cat->name)</option>
+                                       
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
