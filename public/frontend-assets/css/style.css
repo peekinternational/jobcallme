@@ -1354,7 +1354,8 @@ ul.jd-rewards li i{
     text-align: left;
     margin-left: -15px;
     margin-right: -15px;
-    width: 100%;                 /* 수정 */
+    width: 115.2%;                 /* 수정 */
+	/*width: 115.2%;*/                 /* 수정 */
     border-radius: 0;
 	padding-top:15px;
 	padding-bottom:15px;
