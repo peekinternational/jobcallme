@@ -11,12 +11,12 @@
 				<div class="col-md-8 company-box-left">
 				<h4>@lang('home.Set Job Filters')</h4>
 				 <form role="form" action="{{ url('jobs') }}" method="get">
-						  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+						 
 							<div class="modal-body">
 							<div class="row">
 								<div class="col-md-12 pnj-form-field">
 								   <div class="form-group">
-                                    <select class="form-control" name="degreeLevel">
+                                    <select class="form-control" name="degree">
 									<option value="">@lang('home.degreeLevel-text')</option>
 										<option value="highschool" {{ $meta->education == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
                                         <option value="college" {{ $meta->education == 'college' ? 'selected="selected"' : '' }}>@lang('home.college')</option>
@@ -30,22 +30,24 @@
                                 </div>
                             </div>
 								 <div class="col-md-6 pnj-form-field">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                  <input type="number" class="form-control" name="exmin" placeholder="@lang('home.experiencemin')">
-                              </div>
-                           </div>
+								 <select class="form-control" name="experience">
+                            <option value="">@lang('home.s_experience')</option>
+                            @foreach(JobCallMe::getExperienceLevel() as $experience)
+                                <option value="{!! $experience !!}" {{ $experience == Request::input('experience') ? 'selected="selected"' : '' }}>@lang('home.'.$experience)</option>
+                            @endforeach
+                        </select>
 					   </div>
 					   	 <div class="col-md-6 pnj-form-field">
-								  <div class="form-group">
-                                   <div class=" pnj-form-field">
-                                  <input type="number" class="form-control" name="exmaz" placeholder="@lang('home.experiencemax')">
-                              </div>
-                           </div>
+								 <select class="form-control" name="career">
+                            <option value="">@lang('home.s_career')</option>
+                            @foreach(JobCallMe::getCareerLevel() as $career)
+                                <option value="{!! $career !!}" {{ $career == Request::input('career') ? 'selected="selected"' : '' }}>@lang('home.'.$career)</option>
+                            @endforeach
+                        </select>
 					   </div>
 			       <div class="col-md-12 pnj-form-field">
                           <div class="form-group">
-                                <select class="form-control select2 job-country" name="country">
+                                <select class="form-control select2 job-country" name="countrys">
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
                                         <option value="{{ $cntry->id }}">@lang('home.'.$cntry->name)</option>
                                     @endforeach
@@ -54,7 +56,7 @@
                         </div>
 						<div class="col-md-12 pnj-form-field">
                               <div class="form-group">
-                                <select class="form-control select2 job-state" name="state">
+                                <select class="form-control select2 job-state" name="states">
                                 <option value="">@lang('home.state')</option>
                                 </select>
                                  </div>
@@ -62,7 +64,7 @@
 						 
                             <div class="col-md-12 pnj-form-field">
                              <div class="form-group">
-                                <select class="form-control select2 job-city" name="city">
+                                <select class="form-control select2 job-city" name="cityss">
                                 <option value="">@lang('home.city')</option>
 
                                 </select>
@@ -72,14 +74,14 @@
                          <div class="col-md-12 pnj-form-field">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                  <input type="text" class="form-control" name="exmaz" placeholder="@lang('home.degress')">
+                                  <input type="text" class="form-control" name="keywords" placeholder="@lang('home.degress')">
                               </div>
                            </div>
 					   </div>
                         <div class="col-md-12 pnj-form-field">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                  <input type="text" class="form-control" name="exmaz" placeholder="@lang('home.workedas')">
+                                  <input type="text" class="form-control" name="mm" placeholder="@lang('home.workedas')">
                               </div>
                            </div>
 					   </div>
@@ -187,7 +189,7 @@
 		              	</div>
                     </div>
                     <div class="modal-footer">
-                    <button type="submit" style="float:left" class="btn btn-success" >@lang('home.save')</button>   <button type="button" style="float:left" class="btn btn-default" id="advance_click">@lang('home.Advancefilters')</button>   <button type="button" style="float:left" class="btn btn-default"><a href="{{url('account/employer')}}">@lang('home.filterskip')</a></button>
+                    <button type="submit"  style="float:left" class="btn btn-success" >@lang('home.save')</button>   <button type="button" style="float:left" class="btn btn-default" id="advance_click">@lang('home.Advancefilters')</button>   <button type="button" style="float:left" class="btn btn-default"><a href="{{url('account/employer')}}">@lang('home.filterskip')</a></button>
                     </div>
                 </form>	
 				</div>
