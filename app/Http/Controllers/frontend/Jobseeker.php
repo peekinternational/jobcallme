@@ -1082,6 +1082,23 @@ class Jobseeker extends Controller{
 		}
 		public function downloadmulticv(Request $request){
 			$ids = $request->input('id_array');
+			$array=count($ids);
+			//dd($array);
+				$app = $request->session()->get('jcmUser');
+		$userid = $request->session()->get('jcmUser')->userId;
+		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
+		//dd($plan);
+		$pckg_id= $plan[0]->id;
+		$quantity= $plan[0]->quantity;
+		$remain = $quantity - $array;
+		$inputs['quantity']=$remain;
+			if(count($plan) == 0)
+			{
+				return redirect('account/manage?plan');
+				//exit();
+			}
+				else{
+					  DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
 			$dirname = rand();
 			mkdir("resumefiles/".$dirname);
 			foreach ($ids as $id) {
@@ -1097,6 +1114,7 @@ class Jobseeker extends Controller{
 			$files = glob("resumefiles/".$dirname.'/*');
 			Zipper::make('resumeZip/'.$dirname.'/'.$dirname.'.zip')->add($files)->close();
 			echo 'resumeZip/'.$dirname.'/'.$dirname.'.zip';
+		}
 		}
 		public function deletedownloadedcv(Request $request){
 			$dirname = $request->input('dir');

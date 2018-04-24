@@ -376,10 +376,18 @@ $('.ea-record-selected').each(function(index,element){
     type:"post",
     data:{id_array:id_array,_token:"{{ csrf_token() }}"},
     success:function(res){
+        console.log(res);
         var url = res.split('/');
-        
+        var result = res.slice(0,9);
+       // alert(result);
+        if(result=='resumeZip'){
+       
         $('#myModal').modal('show');
         $('#myModal .modal-body').html('<a href="{{ url("")}}/'+res+'" onclick="delresume('+url[1]+')">@lang("home.click to download")</a>');
+    }
+    else{
+        window.location.href = "{{ url('account/manage?plan') }}";
+    }
     }
  })
 });
