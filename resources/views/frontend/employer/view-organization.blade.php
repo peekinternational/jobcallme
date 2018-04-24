@@ -259,6 +259,7 @@ if($company->companyLogo != ''){
                                            <select class="form-control input-sm select" name="formofbusiness">
 												<option value="Small business" {{ $company->formofbussiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
 												<option value="Small and Medium-sized Businesses" {{ $company->formofbussiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
+												<option value="Midsize Business" {{ $company->formofbussiness == 'Midsize Business' ? 'selected="selected"' : '' }}>@lang('home.Midsize Business')</option>
 												<option value="Major Company" {{ $company->formofbussiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
 												<option value="Listed Company" {{ $company->formofbussiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
 												<option value="Government·Pblic·Institutions·Public Corporations" {{ $company->formofbussiness == 'Government·Pblic·Institutions·Public Corporations' ? 'selected="selected"' : '' }}>@lang('home.Government·Pblic·Institutions·Public Corporations')</option>

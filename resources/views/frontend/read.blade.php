@@ -3,6 +3,13 @@
 @section('title', 'Read')
 
 @section('content')
+
+<style>
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #cccccc !important;
+    line-height: 28px; }
+</style>
+
 <section id="learn-section">
     <div class="container">
         <div class="col-md-12 learn-search-box" style="margin-top:20px">
@@ -205,3 +212,4 @@ function lightboxOnResize() {
 }
 </script>
 @endsection
+

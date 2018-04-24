@@ -15,10 +15,12 @@
                     <div class="alert alert-danger">
                         <ul style="list-style: none;">
                             @foreach ($errors->all() as $error)
-                            @if($error=='validation.max.string')
-                                <li>The maximum length for Description is 1024 characters.</li>
-                                @endif
-                               <li> {{ $error}}</li>
+								@if($error=='validation.max.string')
+									<li>@lang('home.The maximum length for Description is 1024 characters.')</li>
+									<li>@lang('home.validation.max.string')</li>
+								@else
+									<li> {{ $error}}</li>
+								@endif
                             @endforeach
                         </ul>
                     </div>
@@ -275,7 +277,7 @@
                                     @endforeach
                                 </select>
 							    <br>
-								<span style="padding-top:5px">@lang('home.addDepartment-text')</span>
+								<span style="padding-top:5px;font-size:12px;color:#3a79d2;">※@lang('home.addDepartment-text')</span>
                             </div>
                            <div class="col-md-2 pnj-form-field" style="margin-top:5px;"> <a href="{{ url('account/employer/departments') }}"><span style="background:#f0ad4e;padding:5px 10px;margin-top:5px;color:#fff;">@lang('home.addDepartment') ></span></a></div>
                         </div>

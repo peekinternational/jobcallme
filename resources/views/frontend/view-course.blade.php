@@ -164,9 +164,9 @@
 				            @foreach($Qry as $rec)
                    
                       <div class="la-item">
-				      <div class="col-md-4 sp-item">
+				      <div class="col-md-4 suggestedreading-img-mbl">
                         @if($rec->upskillImage != '')
-                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 180px;height:80px;">
+                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:auto !important;">
                         @else
                         <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 180px;height:80px;">
                         @endif

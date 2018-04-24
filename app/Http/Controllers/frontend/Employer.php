@@ -138,15 +138,15 @@ curl_close ($ch);
 				'Address' => 'required',
 			],[
 				
-				'description.required' => 'description is requried',
+				'description.required' => trans('home.description is requried'),
 				'skills.max:1024' => 'Skills Limit Across',
-				'skills.required' => 'Skills is requried',
+				'skills.required' => trans('home.Skills is requried'),
 				'title.required' => 'Title is requried',
 				'department.required' => 'department is requried',
 				'category.required' => 'category is requried',
 				'qualification.required' => 'qualification is requried',
 				'state.required' => 'state is requried',
-				'Address.required' => 'Address is required',
+				'Address.required' => trans('home.Address is required'),
 				
 			]);
 	

@@ -334,18 +334,41 @@ $dispatch='';
 
 
                 <br>
-                  <h4>@lang('home.admissionsprocess')</h4>
+				<div>
+                  <h4><b>@lang('home.admissionsprocess')</b></h4>
                 @if($process != '')
 	                <ul class="jd-rewards" style="margin-bottom: 32px;">
 	                	@foreach( $process as $pro)
-						
-	                		<li><i class="fa fa-check-circle"></i> @lang('home.'.$pro)</li>
+							<li>
+							@if($pro == 'Document Screening')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)						
+							@elseif($pro == 'human nature test')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'Chat')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'Video & Chat')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'First Interview')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'Second Interview')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'Examination for Employment')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'Final Pass')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@else
+								<i class="fa fa-check-circle"></i> {!! $pro !!}
+							@endif
+							
+							</li>
+	                		
 	                	@endforeach
 	                </ul>
                 @endif
-
+				</div>
 				<br><br>
-				<br><br><br>				
+				<br><br><br><br class="hidden-lg"><br class="hidden-lg"><br class="hidden-lg">	
+				<div>
                 <h4><b>@lang('home.How to register')<b></h4>
                
 	                <ul class="jd-rewards">
@@ -373,11 +396,11 @@ $dispatch='';
 	                	@endif
 
 	                </ul>
-
+				</div>
                 <br>
-                <br><br>
+                <br><br><br>
                 <div>
-                <h4>@lang('home.rewardsbenefits')</h4>
+                <h4><b>@lang('home.rewardsbenefits')</b></h4>
                 @if($benefits != '')
 	                <ul class="jd-rewards">
 	                	@foreach( $benefits as $benefit)

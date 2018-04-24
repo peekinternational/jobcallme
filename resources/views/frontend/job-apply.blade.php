@@ -8,7 +8,7 @@
         <div class="col-md-10">
             <div class="jobs-suggestions">
             	@include('frontend.includes.alerts')
-                <h4>{{ $job->title }}</h4>
+                <h4>@lang('home.jobtitle') : {{ $job->title }}</h4>
                 <p class="text-success">@lang('home.almostdone')</p>
                 <hr>
                 <form action="" method="post">
@@ -29,7 +29,8 @@
                             <input type="checkbox" id="experience" class="switch-field" name="experience" value="yes" />
                             <label for="experience" class="switch-label"><span class="ui"></span></label>
                         </div>
-                        <p class="ja-question">@lang('home.q2') {{ $job->experience }}?</p>
+                        <p class="ja-question">@lang('home.q2')</p>
+						<div class="ja-specification">@lang('home.'.$job->experience)?</div>
                     </div>
                     <div class="ja-question-box">
                         <div class="pull-right ja-check">
@@ -37,7 +38,7 @@
                             <label for="skills" class="switch-label"><span class="ui"></span></label>
                         </div>
                         <p class="ja-question">@lang('home.q3')</p>
-                        <p>{!! $job->skills !!}</p>
+                        <div class="ja-specification">{!! $job->skills !!}</div>
                     </div>
                     <div class="ja-question-box">
                         <div class="pull-right ja-check">

@@ -472,11 +472,11 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	
 	//Job Apply//
 	
-	'almostdone' => '이력서를 제출하기전에 몇가지 사항을 선택바랍니다.',
+	'almostdone' => '입사지원을 하기전에 몇가지 사항을 선택하셔야 합니다.',
 	'q1' => 'Q: 자격증 또는 이에 상응하는 자격을 보유하고 계십니까?',
-	'q2' => 'Q: 인턴 경험이 있나요? ',
+	'q2' => 'Q: 다음과 같은 경력조건에 해당 되나요? ',
 	'q3' => 'Q: 다음과 같은 기술을 가지고 있습니까?',
-	'q4' => 'Q: 다음 지역이외 거주지에 계십니까?',
+	'q4' => 'Q: 아래 지역 또는 회사내규에 따라 근무가 가능합니까?',
 	'hasbeenclose' => '인재채용 기간이 마감되었습니다',
 	'alreadyapply' => '회원님께서는 이미 이력서를 제출하셨습니다',
 	'apply' => '신청',
@@ -518,7 +518,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'evaluationforms' => '평가표',
 	'questionnaires' => '인터뷰 질의',
 	'projectVisible' => '프로젝트 보이기',
-	'subscription' => '구독',
+	'subscription' => '주문관리',
 	'credits' => '상품결제',
 	'orders' => '결제내역 현황',
 	'deactivation' => '계정탈퇴',
@@ -112906,7 +112906,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Deogyang-gu, Goyang-si"=>"고양시 덕양구",
 "Ilsandong-gu, Goyang-si"=>"고양시 일산동구",
 "Ilsanseo-gu, Goyang-si"=>"고양시 일산 서구",
-"Gwacheon-si"=>"과천",
+"Gwacheon-si"=>"과천시",
 "Gwangmyeong-si"=>"광명시",
 "Gwangju-si"=>"광주시",
 "Guri-si"=>"구리시",
@@ -114048,6 +114048,12 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'Government·Pblic·Institutions·Public Corporations' => '정부·공공기관·공기업',
 'Associate Evaluation Form' => '평가표',
 'select evaluation' => '평가표 선택',
-'addDepartment-text' => '원하는 부서명이 없을시 부서명 설정ㆍ추가에서 부서 등록 후 부서선택을 하시길 바랍니다.',
-
+'addDepartment-text' => '원하는 부서명이 없을시 부서명 설정ㆍ추가에서 부서 등록 후 부서선택을 하셔야합니다.',
+'The maximum length for Description is 1024 characters.' => '최대 글자수는 1024자 입니다.',
+'description is requried' => '내용을 입력바랍니다.',
+'Skills is requried' => '전문기술요구 입력바랍니다.',
+'Address is required' => '주소를 입력바랍니다.',
+'validation.max.string' => '글자수를 확인바랍니다.',
+'Midsize Business' => '중견기업',
+'All Location' => '전국',
 ];

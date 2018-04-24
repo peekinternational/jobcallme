@@ -216,8 +216,8 @@ class Jobs extends Controller{
                    
 
                    
-                    $vhtml .= '<p class="js-note">'.$string.'<img style="padding-top: 17px;" src="'.$cLogo.'" width="100"></p>';
-                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 35px;">'.$joblist_date.'</span></p>';
+                    $vhtml .= '<p class="js-note">'.$string.'<img style="padding-top: 17px;margin-top:10px;" src="'.$cLogo.'" width="100"></p>';
+                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 50px;">'.$joblist_date.'</span></p>';
 				
 				$job = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
 				$job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
