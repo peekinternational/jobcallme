@@ -100,7 +100,7 @@
                             </li>
 							@endforeach
                         </ul>
-                        <a id="nopckg" href="javascript:void(0)" style="float:right">@lang('home.Not Use Package Plan?')</a>
+                        <a id="nopckg" href="javascript:void(0)" style="float:right"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Not Use Package Plan?') ></span></a>
                  
 
                     
@@ -166,7 +166,7 @@
                             </li>
 							@endforeach
                         </ul>
-                   <a id="nonpckg" href="javascript:void(0)" style="float:right">@lang('home.Use Package Plan?')</a>
+                   <a id="nonpckg" href="javascript:void(0)" style="float:right"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Use Package Plan?') ></span></a>
 
                     
                 </div>
@@ -234,7 +234,7 @@
 							@endforeach
                         </ul>
                  
-                 <a id="nonpckg" href="{{ url('account/manage?plan')}}" style="float:right">@lang('home.Use Package Plan?')</a>
+                 <a id="nonpckg" href="{{ url('account/manage?plan')}}" style="float:right"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Use Package Plan?') ></span></a>
                     
                 </div>
             </div>
@@ -253,7 +253,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_department')</label>
-                            <div class="col-md-8 pnj-form-field">
+                            <div class="col-md-7 pnj-form-field">
                                 <select class="form-control select2" name="department" required>
                                     <option value="">@lang('home.s_department')</option>
                                     <option value="Accounting">@lang('home.Accounting')</option>
@@ -266,16 +266,18 @@
                                     <option value="Procurement">@lang('home.Procurement')</option>
                                     <option value="Production">@lang('home.Production')</option>
                                     <option value="Quality Control">@lang('home.Quality Control')</option>
-                                     <option value="Research & Development">@lang('home.Research & Development')</option>
-                                      <option value="Sales">@lang('home.Sales')</option>
+                                   <option value="Research & Development">@lang('home.Research & Development')</option>
+                                    <option value="Sales">@lang('home.Sales')</option>
                                     
 
                                     @foreach(JobCallMe::getDepartments() as $depart)
                                         <option value="{!! $depart->name !!}">{!! $depart->name !!}</option>
                                     @endforeach
                                 </select>
+							    <br>
+								<span style="padding-top:5px">@lang('home.addDepartment-text')</span>
                             </div>
-                           <div class="col-md-1 pnj-form-field"> <span><a href="{{ url('account/employer/departments') }}">@lang('home.addDepartment')</a></span></div>
+                           <div class="col-md-2 pnj-form-field" style="margin-top:5px;"> <a href="{{ url('account/employer/departments') }}"><span style="background:#f0ad4e;padding:5px 10px;margin-top:5px;color:#fff;">@lang('home.addDepartment') ></span></a></div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_category')</label>

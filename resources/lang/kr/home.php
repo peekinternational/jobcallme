@@ -769,7 +769,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'sharejob' => 'SNS 채용공고 공유',
 	'Skip' => '취소',
 	'editdepartment' => '부서편집',
-	'addDepartment' => '부서명 추가',
+	'addDepartment' => '부서명 설정ㆍ추가',
 	'Hot' => '핫',
 	'Basic' => '기본',
 	'Gallery' => '갤러리',
@@ -114037,7 +114037,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'On Homepage' => '잡콜미 광고기간',
 'Quantity' => '광고갯수',
 
-'Not Use Package Plan?' => '구매한 패키지 상품 사용안함',
+'Not Use Package Plan?' => '구매한 패키지 상품 추후 사용하기',
 'Add Job Successfully' => '회원님의 채용공고가 등록되었습니다.',
 'Job Update Successfully' => '회원님의 채용공고가 수정되었습니다.',
 
@@ -114048,4 +114048,6 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'Government·Pblic·Institutions·Public Corporations' => '정부·공공기관·공기업',
 'Associate Evaluation Form' => '평가표',
 'select evaluation' => '평가표 선택',
+'addDepartment-text' => '원하는 부서명이 없을시 부서명 설정ㆍ추가에서 부서 등록 후 부서선택을 하시길 바랍니다.',
+
 ];

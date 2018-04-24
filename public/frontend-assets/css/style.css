@@ -1305,7 +1305,7 @@ ul.jd-rewards li i{
 }
 
 .jd-about-organization{
-    border-left: 3px dashed #999;
+    border-left: 3px solid #999;
     color: #999;
     padding-left: 10px;
 }
