@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="search-field-box search-item" id="mob_city">
                                     <input type="search" placeholder="@lang('home.Cities')" name="city" style="margin-bottom: 12px;">
-                                    <button type="submit" id="mob_fasearch" style="width:50% !important" class="search-btn">
+                                    <button type="submit" id="mob_fasearch" style="width:45% !important" class="search-btn">
                                     <i class="fa fa-search"></i>
                                     </button>
 								<button  type="button" class="" id="mob_search" style="margin-left: 9px;width: 45%;height: 33px;background: transparent;border: 2px solid #cecdcd;"><span style="color:#fff">@lang('home.learn-search-text')</span>
@@ -164,12 +164,12 @@
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
                             <p>{{ $rec->organiser != '' ?  $rec->organiser : JobCallMe::userName($rec->userId) }}</p>
                             <span>#@lang('home.'.$rec->type)</span>
-                            <p><i class="fa fa-calendar"></i> 
+                            <p>
 							  @if($rec->startDate != "0000-00-00")
 								@if(app()->getLocale() == "kr")
-									{{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+									<i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
 								@else
-									{{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+									<i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
 								@endif 
 							  @endif 
 							

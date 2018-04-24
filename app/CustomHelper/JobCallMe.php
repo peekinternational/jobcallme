@@ -470,10 +470,25 @@ class JobCallMe{
 		$datetime1 = new \DateTime($date1);
 		$datetime2 = new \DateTime($date2);
 		$interval = $datetime1->diff($datetime2);
+		//if($min != ''){
+			//return $interval->format('%mm %dd');
+		//}else{
+			//return $interval->format('%m months %d days');
+		//}
 		if($min != ''){
-			return $interval->format('%mm %dd');
+			if(app()->getLocale() == "kr"){
+				return $interval->format('%m개월 %d일간');
+			}else{
+				return $interval->format('%mm %dd');
+			}
+			
 		}else{
-			return $interval->format('%m months %d days');
+			if(app()->getLocale() == "kr"){
+				return $interval->format('%m개월 %d일간');
+			}else{
+				return $interval->format('%m months %d days');
+			}
+			
 		}
 	}
 

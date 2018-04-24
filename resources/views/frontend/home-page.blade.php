@@ -142,7 +142,7 @@ $lToken = csrf_token();
     </section>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-     <button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> @lang('home.Open Quick View V')  </button>
+     <span style="padding-left:10px"><button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> @lang('home.Open Quick View V')</span>  </button>
 </div>
                                                
     <!--Slider Section End-->

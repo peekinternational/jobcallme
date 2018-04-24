@@ -170,7 +170,14 @@ $dispatch='';
                         <td class="active">@lang('home.Responsibilities')</td>
                         <td>{{ $job->responsibilities }}</td>
                         <td class="active">@lang('home.expptitle')</td>
-                        <td>@lang('home.'.$job->expptitle)|@lang('home.'.$job->expposition)</td>
+                        <td>@lang('home.'.$job->expptitle)
+							@if($job->expptitle == "")
+							  @lang('home.'.$job->expposition)
+							@else	
+							  &nbsp;|@lang('home.'.$job->expposition)
+							@endif
+						
+						</td>
                     </tr>
 					<tr>
 						<td class="active">@lang('home.careerlevel')</td>
@@ -198,9 +205,10 @@ $dispatch='';
                         <td>@lang('home.'.$job->gender)</td>
                         <td class="active">@lang('home.age')</td>
                         <td>{{ $job->jobage1 }} {{ $job->jobage2 }} 
-						@if($job->jobnoage == "yes")
+						@if($job->jobage1 != "" or $job->jobage2 != "")
 							  &nbsp;| @lang('home.jobnoage')
-						@else							 
+						@else		
+							  @lang('home.jobnoage')
 						@endif</td>
                     </tr>
 
@@ -497,7 +505,7 @@ $dispatch='';
                     <p>{!! $job->companyAbout !!}</p>
                 </div>
                 <p align="center">
-                   <?= checkreview($star)?><br>
+                   <span  style="color:#d6a707"><?= checkreview($star)?></span><br>
                    <span><a href="{{url('companies/company/'.$job->companyId)}}">@lang('home.View all Review')</a> <span class="badge"><?= count($companyReview)?></span></span>
                 </p>
                 <hr>
@@ -506,35 +514,35 @@ $dispatch='';
                         <tr>
                             <td>@lang('home.Career Growth')</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td>
+                            <td style="color:#d6a707">
                             <?= checkreview($career_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>@lang('home.Compensation & Benefits')</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td>
+                            <td style="color:#d6a707">
                             <?= checkreview($benefit_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>@lang('home.Work/Life Balance')</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td>
+                            <td style="color:#d6a707">
                             <?= checkreview($lifebalance_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>@lang('home.Management')</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td>
+                            <td style="color:#d6a707">
                             <?= checkreview($management_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>@lang('home.Culture')</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td>
+                            <td style="color:#d6a707">
                             <?= checkreview($culture_star)?>
                             </td>
                         </tr>

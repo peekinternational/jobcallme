@@ -734,7 +734,7 @@ if($user->profilePhoto != ''){
                                             <p class="rd-title">{!! $experience->jobTitle !!}</p>
                                             <p class="rd-organization">{!! $experience->organization !!}</p>
                                             <p class="rd-location">@lang('home.'.JobCallMe::cityName($experience->city)),@lang('home.'.JobCallMe::countryName($experience->country))</p>
-                                             <a href="{{ url('/resume_images/'.$experience->academicfile)}}">{!! $experience->academicfile !!}</a>
+                                             <a href="{{ url('/resume_images/'.$experience->experiencefile)}}">{!! $experience->experiencefile !!}</a>
                                         </div>
                                     </li>
                                 @endforeach
@@ -1009,7 +1009,7 @@ if($user->profilePhoto != ''){
 						@endif<!-- As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!} --></p>
 											
                                            <p class="rd-location">{!! $skills->detail !!}</p>
-                                            <a href="{{ url('/resume_images/'.$skills->academicfile)}}">{!! $skills->academicfile !!}</a>
+                                            <a href="{{ url('/resume_images/'.$skills->projectfile)}}">{!! $skills->projectfile !!}</a>
 										  
                                         </div>
                                     </li>
@@ -1188,7 +1188,7 @@ if($user->profilePhoto != ''){
 						    {!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}
 						@endif </p>
 											<p class="rd-location">{!! $afflls->org !!} , @lang('home.'.JobCallMe::cityName($afflls->city)),@lang('home.'.JobCallMe::countryName($afflls->country))
-											  <a href="{{ url('/resume_images/'.$afflls->academicfile)}}">{!! $afflls->academicfile !!}</a>
+											  <a href="{{ url('/resume_images/'.$afflls->affiliationfile)}}">{!! $afflls->affiliationfile !!}</a>
 										  
                                         </div>
                                     </li>
@@ -1627,7 +1627,7 @@ if($user->profilePhoto != ''){
 						@else
 						   @lang('home.'.$skills->languagemonth), {!! $skills->languageyear !!}
 						@endif </p>
-											
+											<a href="{{ url('/resume_images/'.$skills->languagefile)}}">{!! $skills->languagefile !!}</a>
 										  
                                         </div>
                                     </li>
@@ -1825,6 +1825,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-location">@lang('home.reforganization') : {!! $skills->organization !!}, @lang('home.'.JobCallMe::cityName($skills->city)),@lang('home.'.JobCallMe::countryName($skills->country))</p>
                                            <p class="rd-location">@lang('home.phone') : {!! $skills->phone !!}</p>
 										   <p class="rd-location">@lang('home.email') : {!! $skills->email !!}</p>
+										   <a href="{{ url('/resume_images/'.$skills->referencesfile)}}">{!! $skills->referencesfile !!}</a>
                                         </div>
                                     </li>
                                 @endforeach
@@ -1955,7 +1956,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-location"> @lang('home.Author') : {!! $skills->author !!}</p>
 											<p class="rd-location">@lang('home.publisher') : {!! $skills->publisher !!}, @lang('home.'.JobCallMe::cityName($skills->city)),@lang('home.'.JobCallMe::countryName($skills->country))</p>
                                            <p class="rd-location">{!! $skills->detail !!}</p>
-										  
+										   <a href="{{ url('/resume_images/'.$skills->publicationfile)}}">{!! $skills->publicationfile !!}</a>
                                         </div>
                                     </li>
                                 @endforeach
@@ -2109,7 +2110,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-location"> <!-- {!! $skills->occupation !!} at --> {!! $skills->organization !!}</p>
 											
                                            <p class="rd-location">{!! $skills->detail !!}</p>
-										  
+										   <a href="{{ url('/resume_images/'.$skills->awardfile)}}">{!! $skills->awardfile !!}</a>
                                         </div>
                                     </li>
                                 @endforeach
@@ -2246,6 +2247,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-location"> {!! $skills->occupation !!}</p>
 											
                                            <p class="rd-location">{!! $skills->detail !!}</p>
+										   <a href="{{ url('/resume_images/'.$skills->portfoliofile)}}">{!! $skills->portfoliofile !!}</a>
 										  
                                         </div>
                                     </li>

@@ -65,7 +65,7 @@
 						 <div class="col-md-8" style="padding-top:10px">
                         <div class="sr-details">
                             <p class="sr-title"><a href="{{ url('read/article/'.$rec->writingId ) }}">{!! $rec->title !!} </a> </p>
-                            <p class="sr-author"><a href="#"><span class="glyphicon glyphicon-user"></span> @lang('home.'.$rec->name)</a> </p>
+                            <p class="sr-author"><a href="{{ url('read/article/'.$rec->writingId ) }}"><span class="glyphicon glyphicon-user"></span>@lang('home.read_writer') <span style="color:#337ab7">{{ $rec->firstName.' '.$rec->lastName }}</a> </p>
                         </div>
 						</div>
                     </div>
