@@ -3679,6 +3679,19 @@ img.profile-photo-xs{
     .eo-dp-box {
         width: 44%;
         left: 27%;
+        height: 100px;
+    }
+    .eo-timeline {
+    width: 100%;
+    height: 98px;
+    }
+    .eo-timeline-cover {
+        object-fit: cover;
+        width: 100%;
+        height: auto;
+    }
+    .rtj-box .tab-pane img{
+        width: 100%;
     }
     .follow-companies4{
         margin-right: 13px;

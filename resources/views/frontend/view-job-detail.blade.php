@@ -559,23 +559,19 @@ $dispatch='';
                     </div>
                 </div>
             </div>
-                
-                    <div class="jobs-suggestions">
-                      
-                       <input id="pac-input" class="controls" type="hidden" value="{!! $job->Address !!}" >
-                       
-                              
-                    <!-- google map code html -->
-                    <div id="map"></div>
-                    <div id="infowindow-content">
-                      <img src="" width="16" height="16" id="place-icon">
-                      <span id="place-name"  class="title"></span><br>
-                      <span id="place-address"></span>
-                      </div>
-                      
 
+                     <div style="position: relative;
+                                    overflow: auto;
+                                    padding: 10px 20px;
+                                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                                    border: 1px solid #cccccc;
+                                    margin-bottom: 20px;
+                                    background: #ffffff;">
+                      <input id="pac-input" class="controls" type="hidden" value="{!! $job->Address !!}" >
+                    <!-- google map code html -->
+                    <div id="map" style="width: 100%; height: 500px;"></div>
                     </div>
-                     </div>
+                    </div>
         
 		<div class="col-md-3">
 		    <!--Follow Companies - Start -->
@@ -673,9 +669,7 @@ $dispatch='';
     }
     ?>
     <style type="text/css">
-      #map {
-        height: 300px;
-      }
+      
       /* Optional: Makes the sample page fill the window. */
       
        #description {
