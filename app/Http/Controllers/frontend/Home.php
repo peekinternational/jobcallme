@@ -16,7 +16,7 @@ class Home extends Controller{
 			$ip = \Request::ip();
 			$position = \Location::get($ip);
 			if($position->countryCode != 'KR'){
-				App::setLocale('en');
+				\App::setLocale('en');
 				\Session::put('locale', 'en');
 				\Session::put('loadOne', 'yes');
 			}
