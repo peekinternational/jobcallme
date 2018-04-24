@@ -323,7 +323,7 @@ $dispatch='';
                 </table>
                 <h4>@lang('home.description')</h4>
                 <p><strong>@lang('home.We are conveniently located in') {{ JobCallMe::getCompany($job->companyId)->companyAddress }}.</strong></p>
-                <p>{!! $job->description !!}</p>
+                <p class="job-descrptn-img">{!! $job->description !!}</p>
 				<br>
                 <h4>@lang('home.skills')</h4>
                 <p>{!! $job->skills !!}</p>				

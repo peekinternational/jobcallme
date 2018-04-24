@@ -3681,9 +3681,15 @@ img.profile-photo-xs{
         left: 27%;
         height: 100px;
     }
+    #jobs .jd-job-details img{
+        width: 100%;
+    }
     .eo-timeline {
     width: 100%;
     height: 98px;
+    }
+    .jd-about-organization img{
+        width: 100% !important;
     }
     .eo-timeline-cover {
         object-fit: cover;
