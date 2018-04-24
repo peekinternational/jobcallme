@@ -11,6 +11,7 @@ if(Request::input('show') != ''){
     $$showTab = 'ja-tab-active';
     $inbox = '';
 }
+print_r($jobs);
 ?>
 <section id="jobs" style="margin-bottom:70px">
     <div class="container">
@@ -96,7 +97,7 @@ if(Request::input('show') != ''){
                           <a href="{{url('account/employer/job/share/'.$job->jobId)}}" style="color: black;"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="offer">
-                           <a href="{{url('account/employer/evalution')}}" style="color: black;"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
+                           <a href="{{url('account/employer/evalution/'.$job->jobId)}}" style="color: black;"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
                         </button>
                         <button type="button" class="ea-panel-btn ea-npm-click" >
                             <a href="{{url('account/employer/job_update/'.$job->jobId )}}" style="color: black;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')</a>
