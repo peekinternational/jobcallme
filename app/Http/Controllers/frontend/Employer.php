@@ -1611,7 +1611,7 @@ public function mapOrganization(Request $request){
 		
 			DB::table('jcm_jobs')->where('jobId','=',$id)->delete();
 			Session::flash('message', "Successfully Delete Job");
-			return redirect(url()->previous());
+			return redirect('account/employer');
 		}
 		
 		public function updatejob($id){
