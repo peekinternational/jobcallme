@@ -146,10 +146,12 @@
        getArticles(page)
     });
      function getArticles(page) {
+         location.hash=page;
         $.ajax({
             url : '/ajex/products?page='+page 
         }).done(function (data) {
             $('.show-jobs').html(data); 
+            
         }).fail(function () {
             alert('Articles could not be loaded.');
         });
