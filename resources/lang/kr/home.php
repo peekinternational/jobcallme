@@ -395,10 +395,10 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	's_type' => '유형 선택',
 	'organiser' => '주최주관사',
 	'description' => '내용',
-	'cost' => '참석비용',
-	'free' => '참석비용 무료',
+	'cost' => '참석ㆍ참가비용',
+	'free' => '참석ㆍ참가비용 무료',
 	'Contact person' => '상담센터 문의',
-	'notfree' => '참석비용 유료',
+	'notfree' => '참석ㆍ참가비용 유료',
 	'venue' => '장소',
 	//'Country' => '',
 	'country' => '국가',
@@ -653,7 +653,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'junks' => '지원자삭제 리스트',
 	'shortlists' => '채용선정 리스트',
 	'screened' => '통화한 지원자 리스트',
-	'offered' => '지원자 채용제의 리스트',
+	'empoffered' => '면접ㆍ입사제의 후보',
 	'hire' => '채용 리스트',
 	'reject' => '거절 리스트',
 	'interviews' => '기업 면접일정',
@@ -1260,7 +1260,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 	'advertisecourses' => '세미나ㆍ전시회ㆍ웹세미나ㆍ회의ㆍ교육연수ㆍ워크샵ㆍ강좌ㆍ교육ㆍ학원에 관련된 홍보를 지금 하십시오!',
 
-	'CostofDescription' => '참석비 상세설명',
+	'CostofDescription' => '참석ㆍ참가비용 상세설명',
 	'typeonyourdetailsofcost' => '참가ㆍ참석비용에 관한여 간단히 작성바랍니다.(예시:시간당,입회비,참석 등)',
 
 	'AddNewInterviewVenue' => '인터뷰 장소 등록',
@@ -113731,20 +113731,20 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 "selectmaritalStatus"=>"결혼여부",
 
-"Test/Questionnaires"=>"인터뷰 질의",
+"Test/Questionnaires"=>"직무테스트ㆍ질의",
 "Questionnaire"=>"제목",
 "QueType"=>"유형",
-"Submitted in"=>"제출 날짜",
-"Late Submission"=>"제출마감이후 제출",
-"Shuffle"=>"질문방법",
+"Submitted in"=>"시간",
+"Late Submission"=>"마감 후",
+"Shuffle"=>"다양한 분야",
 "Actions"=>"실행",
 "QueYes"=>"가능",
-"AddQuestionnaire"=>"설문조사",
+"AddQuestionnaire"=>"추가 질의사항",
 "Are you sure want to delete!"=>"삭제 하시겠습니까?",
 "QueTitle"=>"제목",
-"Submission Days"=>"제출 날짜",
-"Accept Late Submission"=>"제출마감이후 제출가능",
-"Shuffle Questions"=>"다양한 질문 가능",
+"Submission Days"=>"제한 시간",
+"Accept Late Submission"=>"지원 마감후 제출가능",
+"Shuffle Questions"=>"다양한 분야 질의 가능",
 "Que Select type"=>"질문 유형 선택",
 "Duration"=>"기간",
 "Questions"=>"질문",
@@ -113857,7 +113857,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "Package Plan"=>"광고상품",
 "Set Job Filters"=>"채용정보 필터설정",
 "Evaluation Form"=>"제목",
-"No. of Criterion"=>"기준 갯수",
+"No. of Criterion"=>"평가순위",
 "Created on"=>"등록날짜",
 "Action"=>"실행",
 "Email"=>"이메일",
@@ -114031,7 +114031,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'Critical' => '평가 중요도',
 
 'Test' => '테스트',
-'Questionnaires' => '설문지',
+'Questionnaires' => '질문',
 
 
 'On Homepage' => '잡콜미 광고기간',
@@ -114062,5 +114062,10 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 'Upskill' => '지식정보',
 'Job' => '채용',
+'jobviewall' => '채용정보 전체보기',
+'applyviewall' => '지원자 전체보기',
+'interviewall' => '인터뷰 전체보기',
 
+'writingheaderHeading' => '지식정보는 사업성공의 키워드입니다!',
+'upskillheaderHeading' => '회원님의 자료는 전세계 회원들이 실시간으로 보고있습니다!',
 ];

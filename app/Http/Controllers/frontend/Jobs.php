@@ -129,12 +129,17 @@ class Jobs extends Controller{
                     $vhtml .= '</div>';
 				}
 				else{
-					$vhtml .= '<div class="js-action">';
-					if($jobApplied == true){
-                        $vhtml .= '<a href="javascript:void();" class="btn btn-success btn-xs" disabled>'.trans('home.applied').'</a>';
+					$vhtml .= '<div class="js-action" style="padding-top:30px">';
+					if($rec->jobreceipt02 != "" and $rec->jobhomgpage != ""){
+                        $vhtml .= '<a href="'.$rec->jobhomgpage.'" class="btn btn-primary btn-xs" style="margin-right: 10px;" target="_blank">'.trans('home.jobhomepageapply').'</a>';
 					}
-					else{
-						$vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">'.trans('home.apply').'</a>';
+					if($rec->jobreceipt01 != ""){
+						if($jobApplied == true){
+							$vhtml .= '<a href="javascript:void();" class="btn btn-success btn-xs" disabled>'.trans('home.applied').'</a>';
+						}
+						else{
+							$vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">'.trans('home.apply').'</a>';
+						}
 					}
                         if(in_array($rec->jobId, $savedJobArr)){
 	                        $vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-success btn-xs" style="margin-left: 10px;" disabled >'.trans('home.saved').'</a>';

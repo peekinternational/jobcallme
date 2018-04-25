@@ -7,6 +7,8 @@
 <section id="postNewJob" style="margin-bottom:70px">
  <form action='{{ url("paypals") }}' method='post' class='form-horizontal' enctype='multipart/form-data'>
                         {{ csrf_field() }}
+<input name="paycurrency" type="hidden">
+
     <div class="container">
 
 	  <div class="row">
@@ -575,7 +577,7 @@
 										<option value="jobhours03" {{ $meta->jobhoursval == 'jobhours03' ? 'selected="selected"' : '' }}>@lang('home.jobhours03')</option>
 										<option value="jobhours04" {{ $meta->jobhoursval == 'jobhours04' ? 'selected="selected"' : '' }}>@lang('home.jobhours04')</option>
 										<option value="jobhours05" {{ $meta->jobhoursval == 'jobhours05' ? 'selected="selected"' : '' }}>@lang('home.jobhours05')</option>
-										<option value="jobhours06" {{ $meta->jobhoursval == 'jobhours06' ? 'selected="selected"' : '' }}>@lang('home.jobday06')</option>										
+																			
                                     </select>
                                 </div>
 
@@ -1082,6 +1084,7 @@ $(document).ready(function(){
      for(var i=0;i<simplearray.length;i++){
      $('#simple_text'+i).html('￦ '+simplearray[i].price*1100+'(부가세 포함)')
         //alert(jArray[i].amount);
+	 $('.form-horizontal input[name="paycurrency"]').val('KRW');
        }
      
     $('#us').click(function(){
@@ -1090,6 +1093,7 @@ $(document).ready(function(){
 
      $('#simple_text'+i).html('US$ '+simplearray[i].price+'.00')
         //alert(jArray[i].amount);
+	 $('.form-horizontal input[name="paycurrency"]').val('USD');
          }
         }
     }) ;
@@ -1099,6 +1103,7 @@ $(document).ready(function(){
     for(var i=0;i<simplearray.length;i++){
      $('#simple_text'+i).html('￦ '+simplearray[i].price*1100 +'(부가세 포함)')
        // alert(jArray[i].amount*1100);
+	 $('.form-horizontal input[name="paycurrency"]').val('KRW');
       }
     }
 }) ;

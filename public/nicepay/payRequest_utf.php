@@ -5,6 +5,7 @@
 @section('content')
 
 <?php 
+date_default_timezone_set("Asia/Seoul");
 header("Content-Type:text/html; charset=utf-8;"); 
 /*
 *******************************************************
@@ -14,15 +15,15 @@ header("Content-Type:text/html; charset=utf-8;");
 * 추가 가능한 옵션 파라미터는 연동메뉴얼을 참고하세요.
 *******************************************************
 */
-$merchantKey      = "EYzu8jGGMfqaDEp76gSckuvnaHHu+bC4opsSN6lHv3b2lurNYkVXrZ7Z1AoqQnXI3eLuaUFyoRNC6FkrzVjceg==";   // 상점키
-$merchantID       = "nicepay00m";                           // 상점아이디
+$merchantKey      = "1XERnJL9H3pG1ON1BuMY1nifyQdjAqus6LXedY15t8r8ggVfHtgoc81eipnBsdS1/Jqv48E/1zF6o1fm8n6WPA==";   // 상점키
+$merchantID       = "slink5709m";                           // 상점아이디
 $goodsCnt         = "1";                                    // 결제상품개수
 $goodsName        = $_POST['goodsName'];                           // 결제상품명
 $price            = $_POST['price'];                                 // 결제상품금액	
 $buyerName        = $_POST['buyerName'];                               // 구매자명
 $buyerTel         = $_POST['tel'];                          // 구매자연락처
 $buyerEmail       = $_POST['Email'];                      // 구매자메일주소
-$moid             = "mnoid1234567890";                      // 상품주문번호
+$moid             = date("ymdHis").rand(100,999);                      // 상품주문번호
 
 /*
 *******************************************************

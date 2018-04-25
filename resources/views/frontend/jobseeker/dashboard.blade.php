@@ -16,16 +16,16 @@
           <!-- <ul class="nav nav-tabs"> -->
             <ul class="nav jobseeker-mbl-nav">
               <li class="active col-md-3 col-xs-7">
-                <a href="#rtj_tab_suggested" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-info-circle"></i>@lang('home.suggested')</a>
+                <a href="#rtj_tab_suggested" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-info-circle"></i><span style="font-size:13px"> @lang('home.suggested')</span></a>
               </li>
               <li class="col-md-3 col-xs-5">
-                <a href="#rtj_tab_saved" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-heart"></i> @lang('home.savedjobs') </a>
+                <a href="#rtj_tab_saved" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-heart"></i><span style="font-size:13px"> @lang('home.savedjobs')</span> </a>
               </li>
               <li class="col-md-3 col-xs-7">
-                <a href="#rtj_tab_application" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-file-text"></i> @lang('home.APPLICATION_DASH') </a>
+                <a href="#rtj_tab_application" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-file-text"></i><span style="font-size:13px"> @lang('home.APPLICATION_DASH')</span> </a>
               </li>
               <li class="col-md-3 col-xs-5">
-                <a href="#rtj_tab_interview" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-calendar"></i> @lang('home.interviews') </a>
+                <a href="#rtj_tab_interview" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-calendar"></i><span style="font-size:13px"> @lang('home.interviews')</span> </a>
               </li>
             </ul>
           </div>

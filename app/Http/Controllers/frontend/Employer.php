@@ -159,7 +159,7 @@ curl_close ($ch);
 	   $durations= $amount*$request->duration;
 
         $mul=$durations;
-        $am=$mul*1000;
+        $am=$mul*1100;
       //  dd($am);
 	    $request->session()->put('p_Category', $request->p_Category);
         $goodsname = Session::get('p_Category');
@@ -762,7 +762,7 @@ else{
 		for($i = 1; $i <= $startFrom; $i++){
 			$k = $i < 10 ? '0'.$i : $i;
 			$dDate = date('Y').'-'.$k;
-			$monthArr[] = '"'.date('F',strtotime($dDate)).'"';
+			$monthArr[] = '"'.trans('home.'.date('F',strtotime($dDate))).'"';
 			$rec = DB::table('jcm_job_applied')->select(DB::raw('count(jcm_job_applied.applyId) as totalApplied'))->join('jcm_jobs','jcm_jobs.jobId','=','jcm_job_applied.jobId')->where('jcm_jobs.userId','=',$app->userId)->where('jcm_job_applied.applyTime','like','%'.$dDate.'%')->first();
 			$dataArr[] = $rec->totalApplied;
 		}
@@ -775,7 +775,7 @@ else{
 		$exprArr = array();
 		$i=1;
 		foreach(JobCallMe::getExperienceLevel() as $exp){
-			$exprArr[] = '"'.$exp.'"';
+			$exprArr[] = '"'.trans('home.'.$exp).'"';
 			$rec = DB::table('jcm_jobs')->select(DB::raw('count(jobId) as totalApplied'))->where('userId','=',$app->userId)->where('experience','like','%'.$exp.'%')->first();
 			$dataArr[] = $rec->totalApplied;
 			if(++$i == 10){break;}
@@ -791,7 +791,7 @@ else{
 		for($i = 1; $i <= $startFrom; $i++){
 			$k = $i < 10 ? '0'.$i : $i;
 			$dDate = date('Y').'-'.$k;
-			$monthArr[] = '"'.date('F',strtotime($dDate)).'"';
+			$monthArr[] = '"'.trans('home.'.date('F',strtotime($dDate))).'"';
 			$rec = DB::table('jcm_jobs')->select(DB::raw('count(jobId) as totalApplied'))->where('userId','=',$app->userId)->where('createdTime','like','%'.$dDate.'%')->first();
 			$dataArr[] = $rec->totalApplied;
 		}
@@ -1985,10 +1985,17 @@ public function mapOrganization(Request $request){
 			$order['user_id']=$apps->userId;
             $order['payment_mode']='Cash Payment';
             $order['orderBy']=$inputs['title'];
-            $order['amount']=$inputs['amount'];
+			if($input['currency'] == 'KRW'){
+				$order['amount']=$inputs['amount']*1100;
+			}else{
+				$order['amount']=$inputs['amount'];
+			}
+            
             $order['status']='Pending';
             $order['category']='Job';
             $order['date']= date('Y-m-d');
+			$order['currency']=$inputs['paycurrency'];
+
 
             DB::table('jcm_orders')->insert($order);
 			//dd($inputs);
@@ -2133,7 +2140,7 @@ public function mapOrganization(Request $request){
 			$info = $request->all();
 			
 			$app= session()->get('jcmUser');
-			$amount=$info['amount'] * 1000;
+			$amount=$info['amount'] * 1100;
 
 			//dd($amount);
 			
@@ -2316,10 +2323,11 @@ public function mapOrganization(Request $request){
 			$order['user_id']=$id;
 			$order['payment_mode']='Nice Pay';
 			$order['orderBy']=$input['type'];
-			$order['amount']=$input['amount'];
+			$order['amount']=$input['amount']*1100;
 			$order['status']='Pending';
 			$order['category']='Package Plan';
 			$order['date']= date('Y-m-d');
+			$order['currency']=$input['currency'];
 
             DB::table('jcm_orders')->insert($order);
 			echo $pk_id.'-package';

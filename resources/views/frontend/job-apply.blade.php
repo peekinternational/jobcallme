@@ -21,7 +21,7 @@
                         </div>
                         <p class="ja-question">@lang('home.q1')</p>
                         <div class="ja-specification">
-                            {{ $job->qualification }}
+                            <span style="color:#e2ae0c"><b>A.</b></span> {{ $job->qualification }}
                         </div>
                     </div>
                     <div class="ja-question-box">
@@ -30,7 +30,7 @@
                             <label for="experience" class="switch-label"><span class="ui"></span></label>
                         </div>
                         <p class="ja-question">@lang('home.q2')</p>
-						<div class="ja-specification">@lang('home.'.$job->experience)?</div>
+						<div class="ja-specification"><span style="color:#e2ae0c"><b>A.</b></span> @lang('home.'.$job->experience)</div>
                     </div>
                     <div class="ja-question-box">
                         <div class="pull-right ja-check">
@@ -38,7 +38,7 @@
                             <label for="skills" class="switch-label"><span class="ui"></span></label>
                         </div>
                         <p class="ja-question">@lang('home.q3')</p>
-                        <div class="ja-specification">{!! $job->skills !!}</div>
+                        <div class="ja-specification"><span style="color:#e2ae0c"><b>A.</b></span> {!! $job->skills !!}</div>
                     </div>
                     <div class="ja-question-box">
                         <div class="pull-right ja-check">
@@ -47,7 +47,7 @@
                         </div>
                         <p class="ja-question">@lang('home.q4')</p>
                         <div class="ja-specification">
-                            @lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))
+                            <span style="color:#e2ae0c"><b>A.</b></span> @lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))
                         </div>
                     </div>
                     @if(strtotime($job->expiryDate) < strtotime(date('Y-m-d')))

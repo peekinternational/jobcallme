@@ -96,7 +96,7 @@
 									</div></div>
                             @endforeach
 							 <div class="col-md-12">
-                                <a href="{{ url('jobs')}}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                                <a href="{{ url('jobs')}}" class="pull-right" style="padding-top: 5px">@lang('home.jobviewall')</a>
                             </div>
 						<div style="text-align:center"><?php	echo $postedJobs->render(); ?></div>
                         </div>
@@ -113,7 +113,7 @@
                                 </div>
                             @endforeach
 							 <div class="col-md-12">
-                                <a href="{{ url('account/employer/application')}}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                                <a href="{{ url('account/employer/application')}}" class="pull-right" style="padding-top: 5px">@lang('home.applyviewall')</a>
                             </div>
 							<div style="text-align:center"><?php	echo $postedJobs->render(); ?></div>
                         </div>
@@ -134,7 +134,7 @@
                             </div>
                              @endforeach
                             <div class="col-md-12">
-                                <a href="{{ url('account/employer/application?show=interview')}}" class="pull-right" style="padding-top: 5px">@lang('home.viewall')</a>
+                                <a href="{{ url('account/employer/application?show=interview')}}" class="pull-right" style="padding-top: 5px">@lang('home.interviewall')</a>
                             </div>
                         </div>
                        
@@ -364,7 +364,7 @@ $('#active_deactive'+i).click(function(e){
         data: {
             labels: [{!! implode(',',$response[0]) !!}],
             datasets: [{
-                label: "Job response",
+                label: "@lang('home.jobresponse')",
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: [{!! implode(',',$response[1]) !!}],
