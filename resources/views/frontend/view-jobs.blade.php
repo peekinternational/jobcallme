@@ -135,6 +135,25 @@
 }
 </style>
 <script type="text/javascript">
+    $('body').on('click', '.pagination a', function(e) {
+        e.preventDefault();
+
+        $('#load a').css('color', '#dfecf6');
+        $('#load').append('<img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="/images/loading.gif" />');
+
+        var page = $(this).attr('href').split('page=')[1];  
+       //alert(page);
+       getArticles(page)
+    });
+     function getArticles(page) {
+        $.ajax({
+            url : '/ajex/products?page='+page 
+        }).done(function (data) {
+            $('.show-jobs').html(data); 
+        }).fail(function () {
+            alert('Articles could not be loaded.');
+        });
+    }
 var isFirst = 0;
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){

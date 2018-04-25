@@ -323,6 +323,7 @@ Route::get('employer/niceresult', function () {
 
 /* jobs */
 Route::get('jobs','frontend\Jobs@home');
+Route::get('/ajex/products','frontend\Jobs@ajexhome');
 Route::post('jobs/search','frontend\Jobs@searchJobs');
 
 Route::match(['get','post'],'jobs/homeJobSearch','frontend\Jobs@homePageJobSerach');
