@@ -108,7 +108,8 @@
                                     <div class="rtj-details">
                                         <p><strong><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}?jobId={{$appl->jobId}}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
                                         <p>{!! $appl->title !!}</p>
-                                        <p>{{ date('d M',strtotime($appl->applyTime)) }}</p>
+                                        <p class="hidden-xs">{{ date('d M',strtotime($appl->applyTime)) }}</p>
+                                        <p class="hidden-sm hidden-md hidden-lg">{{ $appl->applyTime }}</p>
                                     </div>
                                 </div>
                             @endforeach
