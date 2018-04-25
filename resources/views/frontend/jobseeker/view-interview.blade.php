@@ -7,7 +7,7 @@
     <div class="container">
         <div class="col-md-12 view-venue">
             <div class="panel panel-default">
-                <div class="panel-heading">@lang('home.jobinterview')</div>
+                <div class="panel-heading">@lang('home.Interview')<!-- @lang('home.jobinterview') --></div>
                 <div class="panel-body">
                     <?php
                     $venue = JobCallMe::getVeneue($interview->venueId);

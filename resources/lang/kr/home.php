@@ -472,11 +472,11 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	
 	//Job Apply//
 	
-	'almostdone' => '입사지원을 하기전에 몇가지 사항을 선택하셔야 합니다.',
+	'almostdone' => '지원하는 기업에서 아래와같은 자격조건에 적합해야 지원 가능합니다.',
 	'q1' => 'Q: 자격증 또는 이에 상응하는 자격을 보유하고 계십니까?',
 	'q2' => 'Q: 다음과 같은 경력조건에 해당 되나요? ',
 	'q3' => 'Q: 다음과 같은 기술을 가지고 있습니까?',
-	'q4' => 'Q: 아래 지역 또는 회사내규에 따라 근무가 가능합니까?',
+	'q4' => 'Q: 아래 지역 또는 회사내규에 따라 근무 가능합니까?',
 	'hasbeenclose' => '인재채용 기간이 마감되었습니다',
 	'alreadyapply' => '회원님께서는 이미 이력서를 제출하셨습니다',
 	'apply' => '신청',
@@ -656,7 +656,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'empoffered' => '면접ㆍ입사제의 후보',
 	'hire' => '채용 리스트',
 	'reject' => '거절 리스트',
-	'interviews' => '기업 면접일정',
+	'interviews' => '면접일정 알림',
 	'togglescreen' => '전체화면 보기',
 	'shortlistapplicant' => '채용후보',
 	'rejectapplicant' => '채용후보 거절',
@@ -114068,4 +114068,10 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 
 'writingheaderHeading' => '지식정보는 사업성공의 키워드입니다!',
 'upskillheaderHeading' => '회원님의 자료는 전세계 회원들이 실시간으로 보고있습니다!',
+
+'Job Evaluation Matrix' => '평가지표',
+'No evaluation for this job' => '평가가 없습니다.',
+
+'Interview' => '면접일정',
+'job' => '채용제목',
 ];

@@ -143,17 +143,25 @@
 					  <td>
                 <h4><span style="padding-left:20px">@lang('home.details')</span></h4>
                 <p>{!! $record->description !!}</p></td></tr></table>
-                 <div class="ra-author-box">
-                                <img src="{{ url('compnay-logo/'.$record->companyLogo) }}" class="img-circle" alt="{{ $record->companyName }}">
-                                <div class="ra-author">
-                                    <a href="{{ url('companies/company/'.$record->companyId) }}">{{ $record->companyName}}</a><br>
-                                    <span>@if(app()->getLocale() == "kr")
-														{{ date('Y-m-d',strtotime($record->createdTime))}}
-													@else
-														{{ date('M d, Y',strtotime($record->createdTime))}}
-													@endif</span>
-                                </div>
-                            </div>
+                <div class="ra-author-box">
+                    <form id="{{ $record->skillId }}">
+                    <img src="{{ url('compnay-logo/'.$record->companyLogo) }}" class="img-circle" alt="{{ $record->companyName }}">
+                    <div class="ra-author">
+                        <a href="{{ url('companies/company/'.$record->companyId) }}">{{ $record->companyName}}</a><br>
+                        <span>
+                            @if(app()->getLocale() == "kr")
+								{{ date('Y-m-d',strtotime($record->createdTime))}}
+							@else
+								{{ date('M d, Y',strtotime($record->createdTime))}}
+							@endif
+                        </span>
+                        <span class="pull-right"><i class="like fa fa-heart <?php echo JOBCALLME::getUserLikes( $record->skillId,Session::get('jcmUser')->userId,'jcm_upskills' ) ?>"></i> <i class="total-likes"><?php echo JOBCALLME::getReadlikes($record->skillId,'jcm_upskills')?></i>
+                        </span>
+                    </div>
+                    <input type="hidden" class="post_id" value="{{ $record->skillId }}">
+                    <input type="hidden" class="userId" value="{{  Session::get('jcmUser')->userId }}">
+                </form>
+                </div>
             </div>
              
         </div>
@@ -197,5 +205,32 @@ $('i.fa').hover(function () {
         $(this).removeClass('animated bounceIn');
     });
 });
+$('.like').on('click',function(){
+        var id = '#'+$(this).closest('form').attr('id');
+        var type = "like";
+        if($(this).hasClass('fa-red')){
+            $(this).removeClass('fa-red');
+            var likes = $(id+' .total-likes').text();
+            likes = +likes - 1;
+            $(id+' .total-likes').text(likes);
+            type = "dislike";
+        }else{
+            $(this).addClass('fa-red');
+            var likes = $(id+' .total-likes').text();
+            likes = +likes + 1;
+            $(id+' .total-likes').text(likes);
+        }
+        var post_id = $(id+' .post_id').val();
+        var userId = $(id+' .userId').val();
+        
+        $.ajax({
+            url:jsUrl()+"/read/likes/"+type,
+            type:"post",
+            data:{parent_table:"jcm_upskills",post_id:post_id,user_id:userId,_token:"{{ csrf_token() }}"},
+            success:function(res){
+
+            }
+        });
+    });
 </script>
 @endsection

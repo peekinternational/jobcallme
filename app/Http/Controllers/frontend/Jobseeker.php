@@ -978,7 +978,7 @@ class Jobseeker extends Controller{
 						if($type == 'interview'){
 							$getInterview = JobCallMe::getJobInterview($rec->jobId,$rec->userId);
 							$interviewUrl = url('account/jobseeker/interview/'.$getInterview->interviewId);
-							$vhtml .= '<p class="ja-item-status"><a href="'.$interviewUrl.'"><i class="fa fa-'.$fontIcon.'"></i> '.ucfirst($appType).'</a></p>';
+							$vhtml .= '<p class="ja-item-status"><a href="'.$interviewUrl.'"><i class="fa fa-'.$fontIcon.'"></i> '.trans('home.'.ucfirst($appType)).'</a></p>';
 						}else{
 							$vhtml .= '<p class="ja-item-status"><i class="fa fa-'.$fontIcon.'"></i> '.ucfirst($appType).'</p>';
 						}

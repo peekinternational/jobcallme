@@ -107,7 +107,8 @@
 											{{ date('M d, Y',strtotime($rec->createdTime))}}
 										@endif
                                     </span>
-                                    <span class="pull-right"><i class="like fa fa-heart <?php echo JOBCALLME::getUserLikes( $rec->writingId,Session::get('jcmUser')->userId ) ?>"></i> <i class="total-likes"><?php echo JOBCALLME::getReadlikes($rec->writingId)?></i></span>
+                                    <span class="pull-right"><i class="like fa fa-heart <?php echo JobCallMe::getUserLikes( $rec->writingId,Session::get('jcmUser')->userId,'read' ) ?>"></i> <i class="total-likes"><?php echo JobCallMe::getReadlikes($rec->writingId,'read')?></i>
+                                    </span>
                                     <input type="hidden" class="post_id" value="{{ $rec->writingId}}">
                                     <input type="hidden" class="userId" value="{{  Session::get('jcmUser')->userId }}">
                                 </div>
@@ -126,33 +127,7 @@
 @section('page-footer')
 <script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
 <script type="text/javascript">
-$('.like').on('click',function(){
-    var id = '#'+$(this).closest('form').attr('id');
-    var type = "like";
-    if($(this).hasClass('fa-red')){
-        $(this).removeClass('fa-red');
-        var likes = $(id+' .total-likes').text();
-        likes = +likes - 1;
-        $(id+' .total-likes').text(likes);
-        type = "dislike";
-    }else{
-        $(this).addClass('fa-red');
-        var likes = $(id+' .total-likes').text();
-        likes = +likes + 1;
-        $(id+' .total-likes').text(likes);
-    }
-    var post_id = $(id+' .post_id').val();
-    var userId = $(id+' .userId').val();
-    
-    $.ajax({
-        url:"read/likes/"+type,
-        type:"post",
-        data:{parent_table:"read",post_id:post_id,user_id:userId,_token:"{{ csrf_token() }}"},
-        success:function(res){
 
-        }
-    });
-});
 //need this to deactivate lightbox on small screens
 $(document).ready(function () {
 

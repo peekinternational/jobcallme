@@ -11,7 +11,7 @@
                         <a class="btn btn-primary r-add-btn" onclick="addAcademic()"><i class="fa fa-plus"></i> </a>
                         <h4> @lang('home.Test/Questionnaires')</h4>
                         <?php //print_r($resume); ?>
-                        <table class="table">
+                        <table class="table questionr-table">
                             <thead>
                                 <tr>
                                     <th>@lang('home.Questionnaire')</th>

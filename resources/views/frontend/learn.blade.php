@@ -151,6 +151,7 @@
             <!--Article Item-->
             @foreach($lear_record as $rec)
                 <div class="col-xs-12 col-sm-6 col-md-3 grid-item">
+                    <form id="{{ $rec->skillId }}">
                    <div class="la-item">
                         <div class="la-item-img">
                             @if($rec->upskillImage != '')
@@ -182,17 +183,23 @@
                             </div>
                                <div class="ra-author-box">
                                 <img src="{{ url('compnay-logo/'.$rec->companyLogo) }}" class="img-circle" alt="{{ $rec->companyName }}">
-                                <div class="ra-author">
+                                <div class="ra-author" style="width: 100%;">
                                     <a href="{{ url('companies/company/'.$rec->companyId) }}">{{ $rec->companyName}}</a><br>
                                     <span>@if(app()->getLocale() == "kr")
-														{{ date('Y-m-d',strtotime($rec->createdTime))}}
-													@else
-														{{ date('M d, Y',strtotime($rec->createdTime))}}
-													@endif</span>
+											{{ date('Y-m-d',strtotime($rec->createdTime))}}
+										@else      
+											{{ date('M d, Y',strtotime($rec->createdTime))}}
+										@endif
+                                    </span>
+                                    <span class="pull-right"><i class="like fa fa-heart <?php echo JOBCALLME::getUserLikes( $rec->skillId,Session::get('jcmUser')->userId,'jcm_upskills' ) ?>"></i> <i class="total-likes"><?php echo JOBCALLME::getReadlikes($rec->skillId,'jcm_upskills')?></i>
+                                    </span>
+                                    <input type="hidden" class="post_id" value="{{ $rec->skillId }}">
+                                    <input type="hidden" class="userId" value="{{  Session::get('jcmUser')->userId }}">
                                 </div>
                             </div>
                        </div>
                    </div>
+                   </form>
                 </div>
             @endforeach
         </div>
@@ -203,6 +210,7 @@
 @section('page-footer')
 <script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
 <script type="text/javascript">
+    
 $(document).ready(function () {
 
     lightboxOnResize();

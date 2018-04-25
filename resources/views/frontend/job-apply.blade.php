@@ -8,7 +8,7 @@
         <div class="col-md-10">
             <div class="jobs-suggestions">
             	@include('frontend.includes.alerts')
-                <h4>@lang('home.jobtitle') : {{ $job->title }}</h4>
+                <h4><span style="color:#e2ae0c"><b>@lang('home.jobtitle')</b></span> : {{ $job->title }}</h4>
                 <p class="text-success">@lang('home.almostdone')</p>
                 <hr>
                 <form action="" method="post">

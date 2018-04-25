@@ -3590,6 +3590,13 @@ img.profile-photo-xs{
         margin-bottom: 10px;
     }
     /*Zeeshan Css Chnges*/
+    #jobs .follow-companies4{
+        margin-top: 0 !important;
+        margin-bottom: 10px !important;
+    }
+    .questionr-table{
+        width: 500px;
+    }
     .job-search{
         padding-top: 100px;
     }
@@ -3682,6 +3689,15 @@ img.profile-photo-xs{
         left: 27%;
         height: 100px;
     }
+
+   /* #jobs .jd-job-details img{
+        width: 100%;
+    }*/
+    .pull-right.ja-check {
+        margin-top: 19px;
+        margin-right: -26px;
+    }
+
     .eo-timeline {
     width: 100%;
     height: 98px;

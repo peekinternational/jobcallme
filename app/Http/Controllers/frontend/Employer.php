@@ -979,7 +979,7 @@ else{
 								$vhtml .= '<div class="col-md-3 ea-details"><span style="color: #999">'.trans('home.'.$rec->experiance).' </span></div>';
 								$vhtml .= '<div class="col-md-2 ea-details">'.trans('home.'.JobCallMe::cityName($rec->city)).'</div>';
 							$vhtml .= '</div>';
-						$vhtml .= '</td>';
+						
 
 						$vhtml .= '<div class="row hidden-md hidden-lg">';
 							$vhtml .= '<img src="'.$userImage.'" class="img-circle ea-image">';
@@ -993,6 +993,7 @@ else{
                                 $vhtml .= '<p><strong>'.trans('home.location').':</strong> '.trans('home.'.JobCallMe::cityName($rec->city)).'</p>';
 							$vhtml .= '</div>';
 						$vhtml .= '</div>';
+						$vhtml .= '</td>';
 					$vhtml .= '</tr>';
 				}
 				$vhtml .= '</tbody>';
