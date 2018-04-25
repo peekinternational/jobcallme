@@ -148,15 +148,20 @@ if(Request::input('show') != ''){
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">@lang('home.from')</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.date')</label>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control date-picker" name="fromDate" value="{{ date('Y-m-d',strtotime('+1 Day')) }}" onkeypress="return false">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">@lang('home.to')</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.time')</label>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control date-picker" name="toDate" value="{{ date('Y-m-d',strtotime('+2 Day')) }}" onkeypress="return false">
+                                      
+                                        <select name="toDate" class="form-control">
+                                                @foreach(JobCallMe::timeArray() as $time)
+                                                    <option value="{!! $time !!}">{!! $time !!}</option>
+                                                @endforeach
+                                           </select>
                                     </div>
                                 </div>
                                 <div class="form-group">

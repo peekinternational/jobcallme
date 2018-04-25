@@ -108,8 +108,7 @@
                                     <div class="rtj-details">
                                         <p><strong><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}?jobId={{$appl->jobId}}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
                                         <p>{!! $appl->title !!}</p>
-                                        <p class="hidden-xs">{{ date('d M',strtotime($appl->applyTime)) }}</p>
-                                        <p class="hidden-sm hidden-md hidden-lg">{{ $appl->applyTime }}</p>
+                                        <p>{{ $appl->applyTime }}</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -130,7 +129,7 @@
                                 <div class="rtj-details">
                                     <p><strong><a href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">{{ $interview->firstName." ".$interview->lastName}}</a></strong></p>
                                     <p><a href="{{ url('jobs/'.$interview->jobId) }}">{{ $interview->title }}</a> <span class="label" style="background-color:{{ $colorArr[array_rand($colorArr)] }}"><a style="color:#fff" href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">@lang('home.interview Details')</a></span></p>
-                                    <p><i class="fa fa-clock-o"></i>  {{ $interview->fromDate }} to {{ $interview->toDate }}   <i class="fa fa-map-marker"></i> @lang('home.'.$interview->country), @lang('home.'.$interview->state), @lang('home.'.$interview->city)</p>
+                                    <p><i class="fa fa-clock-o"></i> Date {{ $interview->fromDate }} Time {{ $interview->toDate }}   <i class="fa fa-map-marker"></i> @lang('home.'.$interview->country), @lang('home.'.$interview->state), @lang('home.'.$interview->city)</p>
                                 </div>
                             </div>
                              @endforeach
