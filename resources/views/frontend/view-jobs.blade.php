@@ -72,6 +72,10 @@
                     <div class="form-group hidden-xs">
                     <input type="hidden" class="form-control" name="dispatch" value="{{ Request::input('dispatch') }}">
                             <input type="hidden" class="form-control" name="head" value="{{ Request::input('head') }}">
+                            <input type="hidden" class="form-control" name="degree" value="{{ Request::input('degree') }}">
+                            <input type="hidden" class="form-control" name="countrys" value="{{ Request::input('countrys') }}">
+                             <input type="hidden" class="form-control" name="cityss" value="{{ Request::input('cityss') }}">
+                              <input type="hidden" class="form-control" name="states" value="{{ Request::input('states') }}">
                         <input type="text" class="form-control" name="minSalary" value="" placeholder="@lang('home.minsalary') ">
                     </div>
                     <div class="form-group hidden-xs">

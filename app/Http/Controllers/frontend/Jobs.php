@@ -38,8 +38,12 @@ class Jobs extends Controller{
 		$country = trim($request->input('country'));
 		$state = trim($request->input('state'));
 		$city = trim($request->input('city'));
+		$countrys = trim($request->input('countrys'));
+		$states = trim($request->input('states'));
+		$cityss = trim($request->input('cityss'));
 		$currency = trim($request->input('currency'));
 		$userinfo=$request->session()->get('jcmUser')->userId;
+		
 		$savedJobArr = array();
 		if($request->session()->has('jcmUser')){
 			$meta = JobCallMe::getUserMeta($request->session()->get('jcmUser')->userId);
@@ -65,8 +69,13 @@ class Jobs extends Controller{
 		if($city == ''){
 			$city = 0;
 		}
+		if($cityss == ''){
+			$cityss= 0;
+		}
 		$city = JobCallMe::cityId($city);
+		$cityss = JobCallMe::cityId($cityss);
 		if($country != '0' && $country != "") $jobs->where('jcm_jobs.country','=',$country);
+		if($countrys != '0' && $countrys != "") $jobs->where('jcm_jobs.country','=',$countrys);
 		if($categoryId != '') $jobs->where('jcm_jobs.category','=',$categoryId);
 		if($htype != '') $jobs->where('jcm_jobs.head','=',$htype);
 		if($dtype != '') $jobs->where('jcm_jobs.dispatch','=',$dtype);
@@ -80,6 +89,8 @@ class Jobs extends Controller{
 		if($maxSalary != '') $jobs->where('jcm_jobs.maxSalary','>=',$maxSalary);
 		if($state != '0' && $state != "") $jobs->where('jcm_jobs.state','=',$state);
 		if($city != '0') $jobs->where('jcm_jobs.city','=',$city);
+		if($states != '0' && $states != "") $jobs->where('jcm_jobs.state','=',$states);
+		if($cityss != '0') $jobs->where('jcm_jobs.city','=',$cityss);
 		if($currency != '') $jobs->where('jcm_jobs.currency','=',$currency);
 		$jobs->where('jcm_jobs.jobStatus','=','Publish');
 		if($keyword != ''){

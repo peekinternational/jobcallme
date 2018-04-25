@@ -60,7 +60,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('settings/paypal/save','admin\Setting@savePaypal');
 
 	/* user management */
-	Route::match(['get','post'],'users/view','admin\Users@	');
+	Route::match(['get','post'],'users/view','admin\Users@viewUsers');
 	Route::match(['get','post'],'users/add','admin\Users@addEditUser');
 	Route::match(['get','post'],'users/edit/{id}','admin\Users@addEditUser');
 	Route::get('users/view/{id}','admin\Users@viewSingleUser');
@@ -427,7 +427,7 @@ Route::get('locale', function () {
     return \App::getLocale();
 });
 
-Route::get('locale/{locale}', function ($locale) {
+Route::get('/locale/{locale}', function ($locale) {
     \Session::put('locale', $locale);
     return redirect()->back();
 });
