@@ -179,7 +179,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\SajidServiceProvider::class,
+        
         /* custom service provider s*/ 
         App\Providers\JobCallMeServiceProvider::class,
 		/*generate pdf*/
@@ -246,7 +247,8 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
 		'Location' => Stevebauman\Location\Facades\Location::class,
         'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class, 
-        'Zipper' => Chumper\Zipper\Zipper::class
+        'Zipper' => Chumper\Zipper\Zipper::class,
+        'Sajid' => App\SajidHelper\Facade\Sajid::class,
     ],
 
 ];

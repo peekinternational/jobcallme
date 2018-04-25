@@ -5,11 +5,11 @@ class JobCallMe{
 	public function getUser($userId){
 		return DB::table('jcm_users')->where('userId','=',$userId)->first();
 	}
-	public function getReadlikes($post_id){
-		return count(DB::table('jcm_likes')->where('parent_table','read')->where('post_id',$post_id)->get());
+	public function getReadlikes($post_id,$tablename){
+		return count(DB::table('jcm_likes')->where('parent_table',$tablename)->where('post_id',$post_id)->get());
 	}
-	public function getUserLikes($post_id,$user_id){
-		$count = count(DB::table('jcm_likes')->where('parent_table','read')->where('post_id',$post_id)->where('user_id',$user_id)->get());
+	public function getUserLikes($post_id,$user_id,$tablename){
+		$count = count(DB::table('jcm_likes')->where('parent_table',$tablename)->where('post_id',$post_id)->where('user_id',$user_id)->get());
 		if($count > 0){
 			return "fa-red";
 		}

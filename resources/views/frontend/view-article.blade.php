@@ -33,15 +33,21 @@
                 </div>
                 <div>{!! $record->description !!}</div>
                 <div class="rd-author">
-                    <img src="{{ url('profile-photos/'.$record->profilePhoto) }}" class="img-circle" alt="{{ $record->firstName }}">
-                    <div class="rd-author-details">
-                        <h5><a href="{{ url('account/employer/application/applicant/'.$record->userId) }}">{{ $record->firstName.' '.$record->lastName }}</a><h5>
-                        <span>@if(app()->getLocale() == "kr")
-						    {{ date('Y-m-d',strtotime($record->createdTime))}}
-						@else
-						    {{ date('M d, Y',strtotime($record->createdTime))}}
-						@endif</span>
-                    </div>
+                    <form id="{{ $record->writingId }}">
+                        <img src="{{ url('profile-photos/'.$record->profilePhoto) }}" class="img-circle" alt="{{ $record->firstName }}">
+                        <div class="rd-author-details" style="width: 90%">
+                            <h5><a href="{{ url('account/employer/application/applicant/'.$record->userId) }}">{{ $record->firstName.' '.$record->lastName }}</a></h5>
+                            <span>@if(app()->getLocale() == "kr")
+    						    {{ date('Y-m-d',strtotime($record->createdTime))}}
+    						@else
+    						    {{ date('M d, Y',strtotime($record->createdTime))}}
+    						@endif</span>
+                            <span class="pull-right"><i class="like fa fa-heart <?php echo JobCallMe::getUserLikes( $record->writingId,Session::get('jcmUser')->userId,'read' ) ?>"></i> <i class="total-likes"><?php echo JobCallMe::getReadlikes($record->writingId,'read')?></i>
+                            </span>
+                        </div>
+                        <input type="hidden" class="post_id" value="{{ $record->writingId}}">
+                        <input type="hidden" class="userId" value="{{  Session::get('jcmUser')->userId }}">
+                    </form>
                 </div>
             </div>
         </div>
@@ -82,6 +88,33 @@ $('i.fa').hover(function () {
     $(this).addClass('animated bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
     function () {
         $(this).removeClass('animated bounceIn');
+    });
+});
+$('.like').on('click',function(){
+    var id = '#'+$(this).closest('form').attr('id');
+    var type = "like";
+    if($(this).hasClass('fa-red')){
+        $(this).removeClass('fa-red');
+        var likes = $(id+' .total-likes').text();
+        likes = +likes - 1;
+        $(id+' .total-likes').text(likes);
+        type = "dislike";
+    }else{
+        $(this).addClass('fa-red');
+        var likes = $(id+' .total-likes').text();
+        likes = +likes + 1;
+        $(id+' .total-likes').text(likes);
+    }
+    var post_id = $(id+' .post_id').val();
+    var userId = $(id+' .userId').val();
+    
+    $.ajax({
+        url:jsUrl()+"/read/likes/"+type,
+        type:"post",
+        data:{parent_table:"read",post_id:post_id,user_id:userId,_token:"{{ csrf_token() }}"},
+        success:function(res){
+
+        }
     });
 });
 </script>

@@ -11,11 +11,7 @@
 |
 */
 /* service Container */
-App::bind("App\SocialMedia\Facebook",function(){
-	return new App\SocialMedia\Facebook(config('services.facbook'));
-});
-$facbook = App::make("App\SocialMedia\Facebook");
-//dd($facbook->getClientId());
+
 /* admin panel */
 if (version_compare(PHP_VERSION, '7.2.0', '>=')) {    // Ignores notices and reports all other kinds... and warnings    
 error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);    // error_reporting(E_ALL ^ E_WARNING); // Maybe this is enough
@@ -25,14 +21,6 @@ Route::get('get-location-from-ip',function(){
     $ip= \Request::ip();
     $data = \Location::get($ip);
     dd($data);
-});
-
-Route::get('pdfview',function() {
-    return view('frontend.cv');
-
-//Route::get('pdf',function(){
-   //	return view('frontend.cv');
-
 });
 
 Route::post('read/likes/{type}','frontend\Home@likes');
@@ -169,7 +157,7 @@ Route::match(['get','post'],'account/peoples','frontend\Home@peoples');
 Route::match(['get','post'],'learn','frontend\Home@learn');
 Route::match(['get','post'],'read','frontend\Home@read');
 Route::get('read/article/{id}','frontend\Home@viewArticle');
-Route::get('learn/conference/{id}','frontend\Home@viewUpskill');
+Route::get('learn/{id}','frontend\Home@viewUpskill');
 Route::get('learn/course/{id}','frontend\Home@viewUpskill');
 Route::get('learn/seminar/{id}','frontend\Home@viewUpskill');
 Route::get('learn/training/{id}','frontend\Home@viewUpskill');

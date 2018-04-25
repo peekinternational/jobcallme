@@ -1,7 +1,7 @@
 <?php
-namespace App\SocialMedia;
+namespace App\SajidHelper;
 
-Class Facebook {
+Class SajidHelper {
 	private $client_id;
 	private $client_secret;
 	private $redirect_url;
@@ -20,5 +20,16 @@ Class Facebook {
 	}
 	public function redirect(){
 		return $this->redirect_url;
+	}
+	public function IpBaseLang(){
+		if(!\Session::has('loadOne')){
+			$ip = \Request::ip();
+			$position = \Location::get($ip);
+			if($position->countryCode != 'KR'){
+				\App::setLocale('en');
+				\Session::put('locale', 'en');
+				\Session::put('loadOne', 'yes');
+			}
+		}	
 	}
 }

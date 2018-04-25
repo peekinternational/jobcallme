@@ -6,21 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
+use Sajid;
 use Mail;
 use App;
 date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
 	public function home(){
-		if(!\Session::has('loadOne')){
-			$ip = \Request::ip();
-			$position = \Location::get($ip);
-			if($position->countryCode != 'KR'){
-				App::setLocale('en');
-				\Session::put('locale', 'en');
-				\Session::put('loadOne', 'yes');
-			}
-		}
+		Sajid::IpBaseLang();		
 		//print_r($position->countryCode);die;
 		/* job shift query */
 		$jobShifts = DB::table('jcm_job_shift')->get();
@@ -499,7 +492,7 @@ class Home extends Controller{
     public function learn(Request $request){
     	/* read query */
     	$lear_record = DB::table('jcm_upskills')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_upskills.companyId')->where('status','=','Active')->where('adstartDate','<=',date('Y-m-d'))->where('adendDate','>=',date('Y-m-d'))->orderBy('skillId','desc')->limit(12)->get();
-//dd($lear_record );
+
     	return view('frontend.learn',compact('lear_record'));
     }
 

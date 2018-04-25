@@ -12,5 +12,6 @@ $('#head').on('click',function(){
 $('#dispatch').on('click',function(){
 	$('#head').prop('checked', false); // Unchecks it
 })
+/* likes functionality js code*/
 
 
