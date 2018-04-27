@@ -140,17 +140,17 @@ if($company->companyLogo != ''){
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.businesstype')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <select class="form-control select2" name="businessType" required>
-                                                <option value="Sole Proprietorship">@lang('home.Sole Proprietorship')</option>
-                                                <option value="Partnership">@lang('home.Partnership')</option>
-                                                <option value="SME Pvt. Ltd">@lang('home.SME Pvt Ltd')</option>
-                                                <option value="Private Limited Company Pvt Ltd">@lang('home.Private Limited Company Pvt Ltd')</option>
-                                                <option value="Human Public Limited Company Listed">@lang('home.Public Limited Company Listed')</option>
-                                                <option value="Public Limited Company Unlisted">@lang('home.Public Limited Company Unlisted')</option>
-                                                <option value="Nonprofits">@lang('home.Nonprofits')</option>
-                                                <option value="Joint Venture">@lang('home.Joint Venture')</option>
-                                                <option value="Inc Incorporated">@lang('home.Inc Incorporated')</option>  
-                                                <option value="LLC Limited Liability Company">@lang('home.LLC Limited Liability Company')</option>
-												<option value="Government·Pblic·Institutions·Public Corporations">@lang('home.Government·Pblic·Institutions·Public Corporations')</option>
+                                                <option value="Sole Proprietorship" {{ $company->businessType == 'Sole Proprietorship' ? 'selected="selected"' : '' }}>@lang('home.Sole Proprietorship')</option>
+                                                <option value="Partnership" {{ $company->businessType == 'Partnership' ? 'selected="selected"' : '' }}>@lang('home.Partnership')</option>
+                                                <option value="SME Pvt. Ltd" {{ $company->businessType == 'SME Pvt. Ltd' ? 'selected="selected"' : '' }}>@lang('home.SME Pvt Ltd')</option>
+                                                <option value="Private Limited Company Pvt Ltd" {{ $company->businessType == 'Private Limited Company Pvt Ltd' ? 'selected="selected"' : '' }}>@lang('home.Private Limited Company Pvt Ltd')</option>
+                                                <option value="Human Public Limited Company Listed" {{ $company->businessType == 'Human Public Limited Company Listed' ? 'selected="selected"' : '' }}>@lang('home.Public Limited Company Listed')</option>
+                                                <option value="Public Limited Company Unlisted" {{ $company->businessType == 'Public Limited Company Unlisted' ? 'selected="selected"' : '' }}>@lang('home.Public Limited Company Unlisted')</option>
+                                                <option value="Nonprofits" {{ $company->businessType == 'Nonprofits' ? 'selected="selected"' : '' }}>@lang('home.Nonprofits')</option>
+                                                <option value="Joint Venture" {{ $company->businessType == 'Joint Venture' ? 'selected="selected"' : '' }}>@lang('home.Joint Venture')</option>
+                                                <option value="Inc Incorporated" {{ $company->businessType == 'Inc Incorporated' ? 'selected="selected"' : '' }}>@lang('home.Inc Incorporated')</option>  
+                                                <option value="LLC Limited Liability Company" {{ $company->businessType == 'LLC Limited Liability Company' ? 'selected="selected"' : '' }}>@lang('home.LLC Limited Liability Company')</option>
+												<option value="Government·Pblic·Institutions·Public Corporations" {{ $company->businessType == 'Government·Pblic·Institutions·Public Corporations' ? 'selected="selected"' : '' }}>@lang('home.Government·Pblic·Institutions·Public Corporations')</option>
                                                  
                                            </select>
                                        </div>

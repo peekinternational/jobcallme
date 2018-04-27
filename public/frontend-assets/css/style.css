@@ -3911,10 +3911,47 @@ curveIn {  0% {
 
 #post-job-ad-types>li {
     display: inline-block;
-    width: 260px;
-    min-height: 120px;
+    width: 175px;
+    min-height: 300px;
     cursor: pointer;
-    padding: 3px 13px 10px 13px;
+     padding: 0px 0px 0px 0px;
+    border: 1px solid #cfd8dc;
+	margin-top:10px;
+    transition: all .2s ease-in-out;
+	    background-color: white;
+}
+
+
+#post-job-ad-types2>li:not(:last-child) {
+    margin-right: 4px;
+	    background-color: white;
+}
+
+#post-job-ad-types2>li {
+    display: inline-block;
+    width: 170px;
+    min-height: 70px;
+    cursor: pointer;
+    padding: 0px 0px 0px 0px;
+    border-bottom: 1px solid #cfd8dc;
+	margin-bottom:20px;
+    transition: all .2s ease-in-out;
+	    background-color: white;
+}
+
+#post-job-ad-types3>li:not(:last-child) {
+    margin-right: 4px;
+	    background-color: white;
+}
+
+#post-job-ad-types3>li {
+    display: inline-block;
+    /*width: 175px;
+    min-height: 280px;*/
+	width: 100%;
+  
+    cursor: pointer;
+    padding: 0px 0px 0px 0px;
     border: 1px solid #cfd8dc;
 	margin-top:10px;
     transition: all .2s ease-in-out;
@@ -3931,6 +3968,14 @@ curveIn {  0% {
     margin: 0 -1px;
     padding: 0;
 }
+
+#post-job-ad-types2 {
+    list-style: none;
+    margin: 0 -1px;
+    padding: 0;
+}
+
+
 .mat-radio-group .mat-radio-button .mat-radio-container .mat-radio-inner-circle {
     background-color: #3f51b5!important;
 }

@@ -14,7 +14,7 @@ $nicepayWEB = new NicePayWEB();
 $httpRequestWrapper = new NicePayHttpServletRequestWrapper($_REQUEST);
 $_REQUEST = $httpRequestWrapper->getHttpRequestMap();
 $payMethod = $_REQUEST['PayMethod'];
-$merchantKey = "EYzu8jGGMfqaDEp76gSckuvnaHHu+bC4opsSN6lHv3b2lurNYkVXrZ7Z1AoqQnXI3eLuaUFyoRNC6FkrzVjceg==";
+$merchantKey = "1XERnJL9H3pG1ON1BuMY1nifyQdjAqus6LXedY15t8r8ggVfHtgoc81eipnBsdS1/Jqv48E/1zF6o1fm8n6WPA==";
 
 $nicepayWEB->setParam("NICEPAY_LOG_HOME","C:/log");             // 로그 디렉토리 설정
 $nicepayWEB->setParam("APP_LOG","1");                           // 어플리케이션로그 모드 설정(0: DISABLE, 1: ENABLE)

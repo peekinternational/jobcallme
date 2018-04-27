@@ -502,9 +502,20 @@ class Home extends Controller{
     }
 
     public function learn(Request $request){
+		  //dd($request->all());  
     	/* read query */
-    	$lear_record = DB::table('jcm_upskills')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_upskills.companyId')->where('status','=','Active')->where('adstartDate','<=',date('Y-m-d'))->where('adendDate','>=',date('Y-m-d'))->orderBy('skillId','desc')->limit(12)->get();
-
+    	$readQry = DB::table('jcm_upskills');
+		$readQry->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_upskills.companyId');
+		if($request->input('type') != ''){      
+    	$readQry->where('jcm_upskills.type','=',ucfirst($request->input('type')));
+    	}  
+		$readQry->where('jcm_upskills.status','=','Active');
+		$readQry->where('jcm_upskills.adstartDate','<=',date('Y-m-d'));
+		$readQry->where('jcm_upskills.adendDate','>=',date('Y-m-d'));
+		$readQry->orderBy('jcm_upskills.skillId','desc');
+		$readQry->limit(12);
+		$lear_record=$readQry->get();
+//dd($lear_record);
     	return view('frontend.learn',compact('lear_record'));
     }
 
@@ -567,7 +578,7 @@ class Home extends Controller{
 
     public function searchSkills(Request $request){  
     //dd($request->input('country'));     / search upskills /  
-    //dd($request->all());     
+     
     $learnQry = DB::table('jcm_upskills'); 
 
     if($request->input('type') != ''){      

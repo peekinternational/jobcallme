@@ -41,16 +41,16 @@
                            <table class="table">
                                <thead>
                                    <tr>
-                                       <th>No</th>
-                                       <th>Factor</th>
-                                       <th>Rating</th>
-                                       <th>Score</th>
+                                       <th>@lang('home.evaNo')</th>
+                                       <th>@lang('home.Factor')</th>
+                                       <th>@lang('home.Rating')</th>
+                                       <th>@lang('home.Score')</th>
                                    </tr>
                                </thead>
                                <tbody>
                                    <tr>
                                        <td>1</td>
-                                       <td>Does the candidate meet the minimum qualification required for this job</td>
+                                       <td>@lang('home.Does the candidate meet the minimum qualification required for this job')</td>
                                        <td>
                                             <p style="margin-top: 4px">
                                                 <input type="checkbox" id="qualification" class="switch-field" value="Yes" name="qualification" onchange="restrict(this)" @if($eva_ans[0]->qualification == 'Yes') checked @endif>
@@ -86,9 +86,9 @@
                                </tbody>
                            </table>
                            <hr>
-                           <span class="pull-right margin-right"><strong>Total:<span id="total">{{ $eva_ans[0]->total}}</span></strong></span>
+                           <span class="pull-right margin-right"><strong>@lang('home.Total'):<span id="total">{{ $eva_ans[0]->total}}</span></strong></span>
                            <input type="hidden" name="total" value="{{ $eva_ans[0]->total}}">
-                           <button type="button" class="btn btn-info save" disabled="disabled">Save Changes</button>
+                           <button type="button" class="btn btn-info save" disabled="disabled">@lang('home.Save Changes')</button>
                         </section>
                         </form>
                     </div>

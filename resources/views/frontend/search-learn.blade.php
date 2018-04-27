@@ -36,7 +36,7 @@
 					         <select class="form-control select2 job-country" name="type" >
                                      <option value="">@lang('home.s_type')</option>
                               @foreach(JobCallMe::getUpkillsType() as $skill)
-                                <option value="{!! $skill->name !!}">@lang('home.'.$skill->name)</option>
+                                <option value="{!! $skill->name !!}" {{ $skill->name == Request::input('types') ? 'selected="selected"' : '' }}>@lang('home.'.$skill->name)</option>
                               @endforeach
                                </select>
 							      </div>
