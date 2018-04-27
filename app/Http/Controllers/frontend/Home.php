@@ -659,6 +659,15 @@ class Home extends Controller{
     	$type = trim($request->input('type'));
     	echo @json_encode(array('status' => 'success'));
     }
+	 public function sendquery(Request $request){
+    	//dd($request->all());
+		$input['email']=$request->email;
+		$input['message']=$request->msg;
+		$input['type']='Query';
+		$request->session()->put('query','Thank you for contact us');
+		DB::table('feedback')->insert($input);
+		return back()->withInput();
+    }
 	/* the below code written fo subscribe functionality*/
     public function subscribe(Request $request){
 

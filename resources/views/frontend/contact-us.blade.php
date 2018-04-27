@@ -56,8 +56,10 @@ $headerC = json_decode(file_get_contents(public_path('website/web-setting.info')
             </div>
 			    <div class="company-box-right">
             <h3>@lang('home.helpquery')</h3>
+           
             <hr>
-            <form class="contact-us-form" method="post" action="">
+            
+            <form class="contact-us-form" method="post" action="{{ url('sendquery')}}">
                 @if(count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul>
@@ -66,6 +68,13 @@ $headerC = json_decode(file_get_contents(public_path('website/web-setting.info')
                             @endforeach
                          </ul>
                     </div>
+                @endif
+                  @if ($message = Session::get('query'))
+                <div class="custom-alerts alert alert-success fade in">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    {!! $message !!}
+                </div>
+                <?php Session::forget('query');?>
                 @endif
                 {{ csrf_field() }}
             	<div class="form-group">
@@ -78,7 +87,7 @@ $headerC = json_decode(file_get_contents(public_path('website/web-setting.info')
             	</div>
             	<div class="form-group">
             		<label>@lang('home.yourquery')</label>
-            		<textarea class="form-control" name="query" style="resize: vertical;" placeholder="@lang('home.typequery')" rows="10" required="">{{ old('query') }}</textarea>
+            		<textarea class="form-control" name="msg" style="resize: vertical;" placeholder="@lang('home.typequery')" rows="10" required="">{{ old('query') }}</textarea>
             	</div>
             	<div class="form-group">
             		<button class="btn btn-block btn-primary" type="submit" name="submit">@lang('home.submit')</button>

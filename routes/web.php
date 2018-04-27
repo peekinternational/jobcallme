@@ -174,6 +174,7 @@ Route::get('learn/contest · show/{id}','frontend\Home@viewUpskill');
 Route::match(['get','post'],'learn/search','frontend\Home@searchSkills');
 Route::match(['get','post'],'companies','frontend\Home@companies');
 Route::get('companies/company/{id}','frontend\Home@viewCompany');
+Route::post('sendquery','frontend\Home@sendquery');
 
 Route::group(['prefix' => 'account'], function () {
 	/* generals */
@@ -302,6 +303,7 @@ Route::post('employer/useradd','frontend\Employer@useradd');
 Route::post('employer/userdel','frontend\Employer@userdel');
 Route::get('employer/addevaluation', 'frontend\Employer@allform');
 Route::get('employer/form/get/{id}', 'frontend\Employer@getform');
+
 
 
 Route::get('employer/job_update/{id}','frontend\Employer@updatejob');
