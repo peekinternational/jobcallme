@@ -311,6 +311,8 @@ function initialize(){
     });
 }
 $('#full-screen').click(function(e){
+    $id=$('#user_id').val();
+   // alert($id);
     $('.ja-content').toggleClass('ea-fullscreen');
 });
 function findApplication(jobId){
