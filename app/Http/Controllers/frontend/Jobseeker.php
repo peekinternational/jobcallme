@@ -1059,15 +1059,19 @@ class Jobseeker extends Controller{
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		//dd($plan);
 		$pckg_id= $plan[0]->id;
+		$pckgs_id= $plan[0]->pckg_id;
 		$quantity= $plan[0]->quantity;
 		$remain = $quantity - 1;
 		$inputs['quantity']=$remain;
+		$input['emp_id']=$userid;
+		$input['pckg_id']=$pckgs_id;
+		$input['seeker_id']=$id;
 			if(count($plan) == 0)
 			{
 				return redirect('account/manage?plan');
 			}
 				else{
-
+                    DB::table('jcm_download')->insert($input);
                     DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
 					$user = DB::table('jcm_users')->where('userId',$id)->first();
 					$name= $user->firstName;
@@ -1089,32 +1093,39 @@ class Jobseeker extends Controller{
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		//dd($plan);
 		$pckg_id= $plan[0]->id;
+		$pckgs_id= $plan[0]->pckg_id;
 		$quantity= $plan[0]->quantity;
 		$remain = $quantity - $array;
 		$inputs['quantity']=$remain;
+		
 			if(count($plan) == 0)
-			{
+			  {
 				return redirect('account/manage?plan');
 				//exit();
-			}
-				else{
-					  DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
-			$dirname = rand();
-			mkdir("resumefiles/".$dirname);
-			foreach ($ids as $id) {
-				$user = DB::table('jcm_users')->where('userId',$id)->first();
-				$name= $user->firstName.rand(0,20);
-					
-				$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
-				$resume = $this->userResume($id);
-				$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
-				
-				file_put_contents("resumefiles/".$dirname."/".$name.".pdf", $pdf->output());
-			}
-			$files = glob("resumefiles/".$dirname.'/*');
-			Zipper::make('resumeZip/'.$dirname.'/'.$dirname.'.zip')->add($files)->close();
-			echo 'resumeZip/'.$dirname.'/'.$dirname.'.zip';
-		}
+			  }
+			else{
+
+					DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
+					$dirname = rand();
+					mkdir("resumefiles/".$dirname);
+					foreach ($ids as $id) {
+						$input['emp_id']=$userid;
+						$input['pckg_id']=$pckgs_id;
+						$input['seeker_id']=$id;
+						 DB::table('jcm_download')->insert($input);
+						$user = DB::table('jcm_users')->where('userId',$id)->first();
+						$name= $user->firstName.rand(0,20);
+							
+						$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
+						$resume = $this->userResume($id);
+						$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+						
+						file_put_contents("resumefiles/".$dirname."/".$name.".pdf", $pdf->output());
+						}
+					$files = glob("resumefiles/".$dirname.'/*');
+					Zipper::make('resumeZip/'.$dirname.'/'.$dirname.'.zip')->add($files)->close();
+					echo 'resumeZip/'.$dirname.'/'.$dirname.'.zip';
+		        }
 		}
 		public function deletedownloadedcv(Request $request){
 			$dirname = $request->input('dir');

@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="search-field-box search-item" id="mob_city">
                                     <input type="search" placeholder="@lang('home.Cities')" name="city" style="margin-bottom: 12px;">
-                                    <button type="submit" id="mob_fasearch" style="width:50% !important" class="search-btn">
+                                    <button type="submit" id="mob_fasearch" style="width:45% !important" class="search-btn">
                                     <i class="fa fa-search"></i>
                                     </button>
 								<button  type="button" class="" id="mob_search" style="margin-left: 9px;width: 45%;height: 33px;background: transparent;border: 2px solid #cecdcd;"><span style="color:#fff">@lang('home.learn-search-text')</span>
@@ -115,7 +115,7 @@
                         $cArr = array('#0e8bcc','#94a5a5','#8d846e','#4e6c7c','#919090','#b0a48a','#8d7e8d','#a69b82','#6b91a7','#9b9b36');
                         $i = 0;
                         foreach(JobCallMe::getUpkillsType() as $skill){ ?>
-                            <a href="{{ url('learn/search?type='.strtolower($skill->name)) }}" style="background-color: {{ $cArr[$i] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                            <a href="{{ url('learn?type='.strtolower($skill->name)) }}" style="background-color: {{ $cArr[$i] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                                 /* width: 9.5%; */
                                 padding: 5px 5px;
                                 color: #ffffff;
@@ -165,12 +165,12 @@
                             <p> <a href="{{ url('learn/'.strtolower($rec->type).'/'.$rec->skillId) }}" class="la-title">{!! $rec->title !!}</a></p>
                             <p>{{ $rec->organiser != '' ?  $rec->organiser : JobCallMe::userName($rec->userId) }}</p>
                             <span>#@lang('home.'.$rec->type)</span>
-                            <p><i class="fa fa-calendar"></i> 
+                            <p>
 							  @if($rec->startDate != "0000-00-00")
 								@if(app()->getLocale() == "kr")
-									{{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+									<i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
 								@else
-									{{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+									<i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
 								@endif 
 							  @endif 
 							
@@ -181,9 +181,9 @@
                                 <!-- <p class="pull-right la-price">{{ $rec->currency.' '.number_format($rec->cost)}}/-</p> -->
 								<!-- <p class="pull-left la-price"> --><p class="pull-left la-price"><span style="font-size:12px">@lang('home.leancostlist') :</span> @if($rec->accommodation == "Yes") {{ $rec->currency.' '.number_format($rec->cost)}} @else @if($rec->accommodation == "on") @lang('home.free') @else @lang('home.Contact person') @endif @endif</p>
                             </div>
-                               <div class="ra-author-box">
-                                <img src="{{ url('compnay-logo/'.$rec->companyLogo) }}" class="img-circle" alt="{{ $rec->companyName }}">
-                                <div class="ra-author" style="width: 100%;">
+                               <div class="newimg">
+                                <img src="{{ url('compnay-logo/'.$rec->companyLogo) }}" class="img-circle" style="height: 63px;margin-bottom: 0;margin-top: 0;" alt="{{ $rec->companyName }}">
+                                <div class="ra-author" style="width: 100%;padding-top: 0px;">
                                     <a href="{{ url('companies/company/'.$rec->companyId) }}">{{ $rec->companyName}}</a><br>
                                     <span>@if(app()->getLocale() == "kr")
 											{{ date('Y-m-d',strtotime($rec->createdTime))}}
@@ -191,13 +191,15 @@
 											{{ date('M d, Y',strtotime($rec->createdTime))}}
 										@endif
                                     </span>
+									
                                     <span class="pull-right"><i class="like fa fa-heart <?php echo JOBCALLME::getUserLikes( $rec->skillId,Session::get('jcmUser')->userId,'jcm_upskills' ) ?>"></i> <i class="total-likes"><?php echo JOBCALLME::getReadlikes($rec->skillId,'jcm_upskills')?></i>
                                     </span>
+									</div>
                                     <input type="hidden" class="post_id" value="{{ $rec->skillId }}">
                                     <input type="hidden" class="userId" value="{{  Session::get('jcmUser')->userId }}">
                                 </div>
                             </div>
-                       </div>
+                       
                    </div>
                    </form>
                 </div>

@@ -47,7 +47,7 @@
                     </a>
                 </li>
 				 <li>
-                    <a href="{{ url('download') }}">
+                    <a href="{{ url('account/employer/download') }}">
                         <img src="../frontend-assets/images/employer_icon8.png" style="padding-top:0px">
                         <div class="udp-type">@lang('home.DOWNLOAD')</div>
                     </a>

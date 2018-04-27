@@ -64,7 +64,7 @@
 											<td>@lang('home.'.$order->category)</td>
         							<td>@lang('home.'.$order->orderBy)</td>
         							<td>@lang('home.'.$order->payment_mode)</td>
-        							<td>{{$order->amount}}$</td>
+        							<td>{{$order->amount}} {{$order->currency}}</td>
         							<td>@lang('home.'.$order->status)</td>
         							<td>{{$order->order_date}}</td>
 											@if($order->status == 'Pending' && $order->payment_mode == 'Cash Payment'  )<td>	<div class="col-xs-2 col-md-2"><div class="dropdown">

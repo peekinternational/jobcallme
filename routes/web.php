@@ -303,6 +303,7 @@ Route::get('employer/form/get/{id}', 'frontend\Employer@getform');
 
 
 Route::get('employer/job_update/{id}','frontend\Employer@updatejob');
+Route::get('employer/download','frontend\Employer@downloadusers');
 Route::get('employer/advance_serach', function () {
     return view('frontend.advance-job');
 });
@@ -344,9 +345,7 @@ Route::get('send_test_email', function(){
  Route::get('account/jobseeker/cv','frontend\Jobseeker@convertpdf');
  Route::get('account/jobseeker/cv/{id}','frontend\Jobseeker@resume_pckg');
 // Route::get('account/jobseeker/download/{id}','frontend\Jobseeker@resume_pckg');
-Route::get('download', function () {
-    return view('frontend.employer.download');
-});
+
 Route::get('afterpayment/{id}','frontend\Home@after_payment');
 Route::post('makepayment','frontend\Home@make_payment');
 

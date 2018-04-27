@@ -175,8 +175,47 @@
 										  
 			</div>
 		  </div>
-				<div class="col-md-9 company-box-left">
-				<span>@lang('home.No records found.')</span>
+				<div class="col-md-9">
+				
+				  
+              @foreach($download as $people)
+			  <div class="row  company-box-left" style="height: 130px;margin-bottom: 12px;">
+              <?php
+              $pImage = url('profile-photos/profile-logo.jpg');
+              if($people->profilePhoto != '' && $people->profilePhoto != NULL){
+                $pos = strpos($people->profilePhoto,"ttp");
+                if($pos == 1)
+                {
+                  $pImage = url($people->profilePhoto);
+                } 
+                else{
+                  $pImage = url('profile-photos/'.$people->profilePhoto);
+                }
+
+              }
+              ?>
+            <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
+              <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="fp-img" style="height:96px;width: 85%;">
+                      <img src="@if($people->pImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif" style="width: 100%;">
+
+                    </div>
+					</div>
+					<div class="col-md-10 col-sm-4 col-xs-6">
+                    <div class="fp-item-details" style="padding:19px;background-color: #5c554b;">
+                      <p>{!! $people->firstName.' '.$people->lastName !!}</p>
+                      <p>@lang('home.'.JobCallMe::categoryTitle($people->industry))</p>
+                      <p>@lang('home.'.JobCallMe::cityName($people->city)), @lang('home.'.JobCallMe::countryName($people->country))</p>
+                    </div>
+                 
+                </div>
+              
+			   </a>
+			   </div>
+              @endforeach
+
+            
+            <div style="text-align:center"><?php	echo $download->render(); ?></div>
 				   
 				</div>
 			   
