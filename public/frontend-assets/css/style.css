@@ -110,7 +110,8 @@ position:absolute;
     margin-left: 30px;
 }
 ul.nav li.active{
-    border-bottom: 2px solid #e6b706;
+    border-bottom: 2px solid #e6b706;		
+
 }
 .nav-tabs {
     margin-bottom: 15px;

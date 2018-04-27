@@ -42,7 +42,7 @@
                                                 <td>{!! $job->phonenum !!}</td>
                                                 <td>{!! $job->order_title!!}</td>
                                                 <td>{!! $job->category!!}</td>
-                                                <td>{!! $job->amount!!}$</td>
+                                                <td>{!! $job->amount!!} {{ $job->currency }}</td>
 												<td>{!! $job->bank_name!!}</td>
                                                 <td>{!! $job->branch!!}</td>
                                                  <td>{!! $job->status!!}</td>

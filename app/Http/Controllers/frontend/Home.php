@@ -212,6 +212,16 @@ class Home extends Controller{
 		return view('frontend.privacy-policy',compact('record'));
 	}
 
+	public function picturepolicy(){
+		$record = DB::table('jcm_cms_pages')->where('slug','picture-policy')->first();
+		return view('frontend.picture-policy',compact('record'));
+	}
+
+	public function refundpolicy(){
+		$record = DB::table('jcm_cms_pages')->where('slug','refund-policy')->first();
+		return view('frontend.refund-policy',compact('record'));
+	}
+
 	public function accountLogin(Request $request){
 		if($request->session()->has('jcmUser')){
 			$type = $request->session()->get('jcmUser')->type == 'Employer' ? 'employer' : 'jobseeker';

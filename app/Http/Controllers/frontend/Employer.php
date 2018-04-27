@@ -2504,4 +2504,18 @@ public function allform(Request $request){
    		$all_eva_cand = DB::table('jcm_evaluation_answer as ans')->select('*')->leftJoin('jcm_users as u','u.userId','=','ans.candidate_id')->where('ans.job_id',$jobId)->groupBy('candidate_id')->get();
    		return view('frontend.employer.evaluation',compact('all_eva_cand'));
    }
+
+   public function downloadusers(Request $request){
+
+	   $app = $request->session()->get('jcmUser');
+	   $download = DB::table('jcm_download')
+	   ->select('jcm_download.*','jcm_users.*','jcm_users_meta.*','privacy.profileImage as pImage')
+	   ->join('jcm_users','jcm_users.userId','=','jcm_download.seeker_id')
+	    ->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_download.seeker_id')
+    	->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_download.seeker_id')
+	   ->where('jcm_download.emp_id','=',$app->userId)->groupBy('jcm_download.seeker_id')->paginate(10);
+   //dd($download);
+	 return view('frontend.employer.download',compact('download'));
+
+   }
 }
