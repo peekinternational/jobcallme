@@ -218,7 +218,7 @@ if($user->profilePhoto != ''){
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.education') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
-                                    <select class="form-control" name="education">                                    
+                                    <select class="form-control" name="education" required>                                    
                                         <option value="">@lang('home.degreeLevel-text')</option>
                                         <option value="highschool" {{ $meta->education == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
                                         <option value="college" {{ $meta->education == 'college' ? 'selected="selected"' : '' }}>@lang('home.college')</option>
@@ -446,7 +446,7 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.degreelevel') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
-                                    <select class="form-control input-sm select2" name="degreeLevel">
+                                    <select class="form-control input-sm select2" name="degreeLevel" required>
                                        
                                         <option value="">@lang('home.degreeLevel-text')</option>
 										<option value="highschool" {{ $meta->education == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
@@ -664,14 +664,14 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
 							   <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.state') <span style="color:red">*</span></label>
+                            <label class="control-label col-sm-3">@lang('home.state') <!-- <span style="color:red">*</span> --></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-state" name="state">
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.city') <span style="color:red">*</span></label>
+                            <label class="control-label col-sm-3">@lang('home.city') <!-- <span style="color:red">*</span> --></label>
                             <div class="col-sm-6">
                                 <select class="form-control select2 job-city" name="city">
                                 </select>
@@ -679,7 +679,7 @@ if($user->profilePhoto != ''){
 							</div>
 							
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.details') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.details') <!-- <span style="color:red">*</span> --></label>
                                 <div class="col-md-6">
                                     <textarea class="form-control input-sm tex-editor" name="details"></textarea>
 									<div>@lang('home.certification_text')</div>
@@ -757,9 +757,9 @@ if($user->profilePhoto != ''){
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 text-right">@lang('home.exporganization') <span style="color:red">*</span></label>
+                                <label class="control-label col-md-3 text-right">@lang('home.exporganization') <!-- <span style="color:red">*</span> --></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="organization" required>
+                                    <input type="text" class="form-control input-sm" name="organization">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1369,7 +1369,8 @@ if($user->profilePhoto != ''){
 											<p class="rd-title">@lang('home.Militaryendyear') : {!! $preference->militaryendyear !!}</p>
 											<p class="rd-title">@lang('home.Militaryendmonth') : @lang('home.'.$preference->militaryendmonth)</p>
 											<p class="rd-title">@lang('home.Military type') : @lang('home.'.$preference->militarytype)</p>
-											<p class="rd-title">{!! $resumeId !!}</p>
+											<!-- <p class="rd-title">{!! $resumeId !!}</p> -->
+											<p class="rd-title">@if($preference->militaryclasses != "")@lang('home.Military Classes') : @lang('home.'.$preference->militaryclasses)@endif</p>
 
                                             
                                         </div>
@@ -1952,7 +1953,11 @@ if($user->profilePhoto != ''){
                                                 </a>&nbsp;
                                             </span>
                                             <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->pu_type !!})</span></p>
-											<p class="rd-location"> {!! $skills->month !!}-{!! $skills->year !!}</p>
+											<p class="rd-location">@if(app()->getLocale() == "kr")
+						    {!! $skills->year !!}년 @lang('home.'.$skills->month)							
+						@else
+						   {!! $skills->month !!}-{!! $skills->year !!}
+						@endif </p>
 											<p class="rd-location"> @lang('home.Author') : {!! $skills->author !!}</p>
 											<p class="rd-location">@lang('home.publisher') : {!! $skills->publisher !!}, @lang('home.'.JobCallMe::cityName($skills->city)),@lang('home.'.JobCallMe::countryName($skills->country))</p>
                                            <p class="rd-location">{!! $skills->detail !!}</p>
@@ -2031,7 +2036,11 @@ if($user->profilePhoto != ''){
                              <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.year') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" name="year">
+									<select class="form-control input-sm select2" id="year" name="year">
+                                       
+										
+                                    </select>
+                                    <!-- <input type="text" class="form-control input-sm" name="year"> -->
                                 </div>
                             </div>
 							  <div class="form-group">
@@ -2275,9 +2284,10 @@ if($user->profilePhoto != ''){
                                 <label class="control-label col-md-3 text-right">@lang('home.type') <span style="color:red">*</span></label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm select2" name="type">
+									    <option value="Extracurricular">@lang('home.portExtracurricular')</option>
                                         <option value="Academic">@lang('home.portacademic')</option>
                                         <option value="Professional">@lang('home.portprofessional')</option>
-										<option value="Extracurricular">@lang('home.portExtracurricular')</option>
+										
 										
                                     </select>
                                 </div>
@@ -2364,8 +2374,14 @@ if($user->profilePhoto != ''){
                         <a class="btn btn-primary r-add-btn" onclick="addHopeworking()"><i class="fa fa-plus"></i> </a>
                         <h4><i class="fa fa-graduation-cap r-icon bg-primary"></i> @lang('home.hopeworking')</h4>
                         <ul class="resume-details">
+						<?php
+							$hopeworkingnum = 0;
+						?>
                             @if(count($resume['hopeworking']) > 0)
                                 @foreach($resume['hopeworking'] as $resumeId => $hopeworking)
+								<?php
+									$hopeworkingnum++;
+								?>
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <span class="pull-right li-option">
@@ -2379,7 +2395,9 @@ if($user->profilePhoto != ''){
                                             <p class="rd-title">@lang('home.'.$hopeworking->hopejobtype)</p>
                                             <p class="rd-location">@lang('home.'.JobCallMe::cityName($hopeworking->city)),@lang('home.'.JobCallMe::stateName($hopeworking->state)),@lang('home.'.JobCallMe::countryName($hopeworking->country))</p>										
                                         </div>
+										@if(count($resume['hopeworking']) > $hopeworkingnum)<p class="text-center" style="margin-bottom:10px">@lang('home.hopeworkingor')</p>@endif
                                     </li>
+									
                                 @endforeach
                             @endif
                         </ul>
@@ -3938,6 +3956,16 @@ for(var eyear = eend ; eyear >=estart; eyear--){
 }
 document.getElementById("year").innerHTML = eoptions;
 //
+
+var estart = 1950;
+var eend = new Date().getFullYear();
+var eoptions = "";
+for(var eyear = eend ; eyear >=estart; eyear--){
+  eoptions += "<option value="+eyear+">"+ eyear +"</option>";
+}
+document.getElementById("publicationyear").innerHTML = eoptions;
+//
+
 
 function getSubCategories(categoryId){
     $.ajax({

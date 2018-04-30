@@ -391,6 +391,43 @@
                     </section>
 
 
+
+					<!-- 설명 -->
+<?php
+
+
+   $yo = array("SUN","MON","TUE","WED","THU","FRI","SAT");
+   
+   $resume_yo = $yo[date("w",strtotime(date(strtotime($applicant->createdTime))))];
+
+?>
+					<section class="resume-box">   								
+                                   
+                                        <div class="col-md-12 text-center" style="padding-top:20px;padding-bottom:20px;">                                            
+                                            <p class="rd-location">@lang('home.All of the above is true.')</p>
+                                            <p class="rd-title">@lang('home.Resume entry date') : @if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($applicant->createdTime))}}
+						@else
+							  {{ date('M d, Y',strtotime($applicant->createdTime))}}
+						@endif (<?php echo trans('home.'.$resume_yo) ?>)</p>		
+											<p class="rd-title">@lang('home.Writer') : {{$applicant->firstName}} {{$applicant->lastName}}</p>
+                                        </div>	
+										
+										<div class="col-md-12 text-center" style="background:#f7f7f7;padding-top:20px;padding-bottom:10px;">                                            
+                                            <p class="rd-location">@lang('home.By registering forged documents, you may be legally liable for use in employment activities.')</p>
+                                            <p class="rd-location">@lang('home.Job Coal Meat Co., Ltd. does not guarantee or assume any responsibility for the documents registered by the applicant.')</p>
+											<p class="rd-location">@lang('home.We are not responsible for any legal disputes that arise from trusting the attached document. (Related with Article 14 of Terms of Use)')</p>
+											<p class="rd-location">@lang('home.In addition, resumes may be deleted or closed for use outside the job seeking / employment field.')</p>
+										
+                                        </div>	
+                                
+									
+                               
+                       
+                    </section>
+					<!-- 설명 끝 -->
+
+
                 </div>
             @else 
                 <div class="col-md-9">

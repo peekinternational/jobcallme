@@ -118,7 +118,7 @@
                     <option value="{{ url('privacy-policy') }}">@lang('home.Privacy Policy')</option>
                     <option value="{{ url('terms-conditions') }}">@lang('home.Terms & Conditions')</option>
 					<option value="{{ url('picture-policy') }}">@lang('home.picture policy')</option>
-					<option value="{{ url('refund-policy') }}">@lang('home.Refund Policy')</option>
+					<!-- <option value="{{ url('refund-policy') }}">@lang('home.Refund Policy')</option> -->
                     <option value="{{ url('account/register') }}">@lang('home.Login')</option>
                     <option value="{{ url('account/register') }}">@lang('home.Signup')</option>
                     <option value="{{ url('account/employer/job/new') }}">@lang('home.newpostedjobs')</option>

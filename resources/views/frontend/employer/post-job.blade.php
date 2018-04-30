@@ -160,54 +160,54 @@
 
 
 			<div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid hidden-sm hidden-md hidden-lg">
-                        <ul id="post-job-ad-types2">
+                        <ul id="post-job-ad-types2" class="text-center">
                          
 						 @foreach($plan as $key=>$pay)
 							
 								@if($pay->type == "Basic")
-                            <!----><li style="position:relative;background:#3a79d2;">
+                            <!----><li style="position:relative;background:#3a79d2;" class="text-left">
 									<?php
 										$payad_text = "basic_text";
 										$payad_text2 = "basic_text2";
 									?>
 								@endif
 								@if($pay->type == "Golden")
-                            <!----><li style="position:relative;background:#b0a48a;">
+                            <!----><li style="position:relative;background:#b0a48a;" class="text-left">
 									<?php
 										$payad_text = "golden_text";
 										$payad_text2 = "golden_text2";
 									?>
 								@endif
 								@if($pay->type == "Special")
-                            <!----><li style="position:relative;background:#4e6c7c;">
+                            <!----><li style="position:relative;background:#4e6c7c;" class="text-left">
 									<?php
 										$payad_text = "special_text";
 										$payad_text2 = "special_text2";
 									?>
 								@endif
 								@if($pay->type == "Latest")
-                            <!----><li style="position:relative;background:#94a5a5;">
+                            <!----><li style="position:relative;background:#94a5a5;" class="text-left">
 									<?php
 										$payad_text = "latest_text";
 										$payad_text2 = "latest_text2";
 									?>
 								@endif
 								@if($pay->type == "Hot")
-                            <!----><li style="position:relative;background:#717171;">
+                            <!----><li style="position:relative;background:#717171;" class="text-left">
 									<?php
 										$payad_text = "hot_text";
 										$payad_text2 = "hot_text2";
 									?>
 								@endif
 								@if($pay->type == "Top Job")
-                            <!----><li style="position:relative;background:#a8b3b9;">
+                            <!----><li style="position:relative;background:#a8b3b9;" class="text-left">
 									<?php
 										$payad_text = "top_text";
 										$payad_text2 = "top_text2";
 									?>
 								@endif
 								@if($pay->type == "Premium")
-                            <!----><li style="position:relative;background:#a09d8e;">
+                            <!----><li style="position:relative;background:#a09d8e;" class="text-left">
 									<?php
 										$payad_text = "premium_text";
 										$payad_text2 = "premium_text2";
@@ -241,7 +241,7 @@
                             </li>
 							@endforeach
                         </ul>
-                        <a id="nopckg" href="javascript:void(0)" style="float:right;margin-top:10px;"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Not Use Package Plan?') ></span></a>
+                        <a id="nopckg2" href="javascript:void(0)" style="float:right;margin-top:10px;"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Not Use Package Plan?') ></span></a>
                  
 
                     
@@ -366,53 +366,53 @@
 
 
 				<div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid hidden-sm hidden-md hidden-lg">
-                        <ul id="post-job-ad-types2">
+                        <ul id="post-job-ad-types2" class="text-center">
 						 @foreach($rec as $k=>$payment)
 
 								@if($payment->title == "Basic")
-                            <!----><li style="position:relative;background:#3a79d2;">
+                            <!----><li style="position:relative;background:#3a79d2;" class="text-left">
 									<?php
 										$payad_text = "basic_text";
 										$payad_text2 = "basic_text2";
 									?>
 								@endif
 								@if($payment->title == "Golden")
-                            <!----><li style="position:relative;background:#b0a48a;">
+                            <!----><li style="position:relative;background:#b0a48a;" class="text-left">
 									<?php
 										$payad_text = "golden_text";
 										$payad_text2 = "golden_text2";
 									?>
 								@endif
 								@if($payment->title == "Special")
-                            <!----><li style="position:relative;background:#4e6c7c;">
+                            <!----><li style="position:relative;background:#4e6c7c;" class="text-left">
 									<?php
 										$payad_text = "special_text";
 										$payad_text2 = "special_text2";
 									?>
 								@endif
 								@if($payment->title == "Latest")
-                            <!----><li style="position:relative;background:#94a5a5;">
+                            <!----><li style="position:relative;background:#94a5a5;" class="text-left">
 									<?php
 										$payad_text = "latest_text";
 										$payad_text2 = "latest_text2";
 									?>
 								@endif
 								@if($payment->title == "Hot")
-                            <!----><li style="position:relative;background:#717171;">
+                            <!----><li style="position:relative;background:#717171;" class="text-left">
 									<?php
 										$payad_text = "hot_text";
 										$payad_text2 = "hot_text2";
 									?>
 								@endif
 								@if($payment->title == "Top Job")
-                            <!----><li style="position:relative;background:#a8b3b9;">
+                            <!----><li style="position:relative;background:#a8b3b9;" class="text-left">
 									<?php
 										$payad_text = "top_text";
 										$payad_text2 = "top_text2";
 									?>
 								@endif
 								@if($payment->title == "Premium")
-                            <!----><li style="position:relative;background:#a09d8e;">
+                            <!----><li style="position:relative;background:#a09d8e;" class="text-left">
 									<?php
 										$payad_text = "premium_text";
 										$payad_text2 = "premium_text2";
@@ -447,7 +447,7 @@
 							@endforeach
                         </ul>
 
-                   <a id="nonpckg" href="javascript:void(0)" style="float:right;margin-top:10px;"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Use Package Plan?') ></span></a>
+                   <a id="nonpckg2" href="javascript:void(0)" style="float:right;margin-top:10px;"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Use Package Plan?') ></span></a>
 
                     
                 </div>
@@ -463,52 +463,52 @@
                   <!--  <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypals') !!}" > -->
 					<div id="notpckg" class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-top:30px;">
                 <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid hidden-xs">
-                        <ul id="post-job-ad-types">
+                        <ul id="post-job-ad-types" class="text-center">
 						 @foreach($rec as $keys=>$payment)
 								@if($payment->title == "Basic")
-                            <!----><li style="position:relative;background:#3a79d2;">
+                            <!----><li style="position:relative;background:#3a79d2;" class="text-left">
 									<?php
 										$payad_text = "basic_text";
 										$payad_text2 = "basic_text2";
 									?>
 								@endif
 								@if($payment->title == "Golden")
-                            <!----><li style="position:relative;background:#b0a48a;">
+                            <!----><li style="position:relative;background:#b0a48a;" class="text-left">
 									<?php
 										$payad_text = "golden_text";
 										$payad_text2 = "golden_text2";
 									?>
 								@endif
 								@if($payment->title == "Special")
-                            <!----><li style="position:relative;background:#4e6c7c;">
+                            <!----><li style="position:relative;background:#4e6c7c;" class="text-left">
 									<?php
 										$payad_text = "special_text";
 										$payad_text2 = "special_text2";
 									?>
 								@endif
 								@if($payment->title == "Latest")
-                            <!----><li style="position:relative;background:#94a5a5;">
+                            <!----><li style="position:relative;background:#94a5a5;" class="text-left">
 									<?php
 										$payad_text = "latest_text";
 										$payad_text2 = "latest_text2";
 									?>
 								@endif
 								@if($payment->title == "Hot")
-                            <!----><li style="position:relative;background:#717171;">
+                            <!----><li style="position:relative;background:#717171;" class="text-left">
 									<?php
 										$payad_text = "hot_text";
 										$payad_text2 = "hot_text2";
 									?>
 								@endif
 								@if($payment->title == "Top Job")
-                            <!----><li style="position:relative;background:#a8b3b9;">
+                            <!----><li style="position:relative;background:#a8b3b9;" class="text-left">
 									<?php
 										$payad_text = "top_text";
 										$payad_text2 = "top_text2";
 									?>
 								@endif
 								@if($payment->title == "Premium")
-                            <!----><li style="position:relative;background:#a09d8e;">
+                            <!----><li style="position:relative;background:#a09d8e;" class="text-left">
 									<?php
 										$payad_text = "premium_text";
 										$payad_text2 = "premium_text2";
@@ -572,52 +572,52 @@
 
 
 				<div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid hidden-sm hidden-md hidden-lg">
-                        <ul id="post-job-ad-types2">
+                        <ul id="post-job-ad-types2" class="text-center">
 						 @foreach($rec as $keys=>$payment)
 								@if($payment->title == "Basic")
-                            <!----><li style="position:relative;background:#3a79d2;">
+                            <!----><li style="position:relative;background:#3a79d2;" class="text-left">
 									<?php
 										$payad_text = "basic_text";
 										$payad_text2 = "basic_text2";
 									?>
 								@endif
 								@if($payment->title == "Golden")
-                            <!----><li style="position:relative;background:#b0a48a;">
+                            <!----><li style="position:relative;background:#b0a48a;" class="text-left">
 									<?php
 										$payad_text = "golden_text";
 										$payad_text2 = "golden_text2";
 									?>
 								@endif
 								@if($payment->title == "Special")
-                            <!----><li style="position:relative;background:#4e6c7c;">
+                            <!----><li style="position:relative;background:#4e6c7c;" class="text-left">
 									<?php
 										$payad_text = "special_text";
 										$payad_text2 = "special_text2";
 									?>
 								@endif
 								@if($payment->title == "Latest")
-                            <!----><li style="position:relative;background:#94a5a5;">
+                            <!----><li style="position:relative;background:#94a5a5;" class="text-left">
 									<?php
 										$payad_text = "latest_text";
 										$payad_text2 = "latest_text2";
 									?>
 								@endif
 								@if($payment->title == "Hot")
-                            <!----><li style="position:relative;background:#717171;">
+                            <!----><li style="position:relative;background:#717171;" class="text-left">
 									<?php
 										$payad_text = "hot_text";
 										$payad_text2 = "hot_text2";
 									?>
 								@endif
 								@if($payment->title == "Top Job")
-                            <!----><li style="position:relative;background:#a8b3b9;">
+                            <!----><li style="position:relative;background:#a8b3b9;" class="text-left">
 									<?php
 										$payad_text = "top_text";
 										$payad_text2 = "top_text2";
 									?>
 								@endif
 								@if($payment->title == "Premium")
-                            <!----><li style="position:relative;background:#a09d8e;">
+                            <!----><li style="position:relative;background:#a09d8e;" class="text-left">
 									<?php
 										$payad_text = "premium_text";
 										$payad_text2 = "premium_text2";
@@ -656,7 +656,7 @@
 							@endforeach
                         </ul>
                  
-                 <a id="nonpckg" href="{{ url('account/manage?plan')}}" style="float:right"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Use Package Plan?') ></span></a>
+                 <a id="nonpckg2" href="{{ url('account/manage?plan')}}" style="float:right"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Use Package Plan?') ></span></a>
                     
                 </div>
 
@@ -1622,7 +1622,23 @@ $('#nopckg').click(function() {
          $('#total').show();
           $('#expirediv').show();
 });
+$('#nopckg2').click(function() {
+    $('.checkplan').val('');
+    $('#pckg').hide();
+    $('#notpckg').show();
+     $('#durationdiv').show();
+         $('#total').show();
+          $('#expirediv').show();
+});
 $('#nonpckg').click(function() {
+    $('.checkplan').val('plan');
+    $('#pckg').show();
+    $('#notpckg').hide();
+     $('#durationdiv').hide();
+         $('#total').hide();
+         $('#expirediv').hide();
+});
+$('#nonpckg2').click(function() {
     $('.checkplan').val('plan');
     $('#pckg').show();
     $('#notpckg').hide();

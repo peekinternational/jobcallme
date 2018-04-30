@@ -29,7 +29,7 @@ $headerC = json_decode(file_get_contents(public_path('website/web-setting.info')
 <li><a href='privacy-policy'>@lang('home.Privacy Policy')</a></li>
 <li><a href='picture-policy'>@lang('home.Picture Policy')</a></li>
 <li><a href='terms-conditions'>@lang('home.Terms of Services')</a></li>
-<li><a href='refund-policy'>@lang('home.Refund Policy')</a></li>
+<!-- <li><a href='refund-policy'>@lang('home.Refund Policy')</a></li> -->
 </ul>
 
 	</div>

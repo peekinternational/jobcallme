@@ -20,27 +20,51 @@
                       <input type="radio" name="gender" id="wr_kr" value="kr" checked="checked"> korean
                       &nbsp;&nbsp;<input type="radio" name="gender" id="wr_us" value="us"> US$
                       </div>
-                    <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:50px;">
+                    <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:20px;">
                      <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
-                        <ul id="post-job-ad-types" class="please">
-                            <li style="position:relative;background:#3a79d2;">
-                             <input class="mat-radio-input cdk-visually-hidden" type="radio" id="basicplan" name="cat_id" value="0" ><span style="color:#fff;padding-left:10px;">@lang('home.FreetillEndofOctober')</span>
+                        <ul id="post-job-ad-types-read" class="please">
+
+
+							<li style="position:relative;background:#3a79d2;" class="text-center">
+								<!-- <spans style="color:#fff;padding-left:10px;padding-top:7px;">&nbsp;<input class="mat-radio-input cdk-visually-hidden" type="radio" id="basicplan" name="cat_id" value="0" >@lang('home.FreetillEndofOctober')</span>
                                <div class="mat-radio-label-content" style="padding-top:5px;"><span style="display:none;">&nbsp;</span>
                                <span class="b" style="color:#fff;font-size: 17px;">@lang('home.Basic')</span></div>
-                                <div>
-                                    <!----><label for="basicplan">
-                                            <ul class="list-unstyled desc" >
-                                                <li>@lang('home.Featuredonhomepage')</li>
-                                                <li>@lang('home.adcost')</li>
-                                            </ul>
-                                        
-                                        <div class="credits b" style="color:#fff;font-size: 15px;padding-top:5px;">
-                                        <span class="text-success" style="color:#fff">@lang('home.Free')<span style="padding-left:20px"><strike>[@lang('home.lean1000')]</strike></span></span>
-                                    <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i>
-                                    </div>
-                                    </label>
+
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span></div> -->
+
+							   <div class="col-md-6 col-sm-6 col-xs-6" style="padding-top:25px">    
+										
+                                        <input class="mat-radio-input cdk-visually-hidden" type="radio" id="basicplan" name="cat_id" value="0" >		
+									    <span class="b" style="color:#fff;font-size: 16px;">@lang('home.warticle')</span>                          
+                                    
                                 </div>
+
+
+                                <div class="col-md-6 col-sm-6 col-xs-6" style="padding-top:10px">  
+                                    <!----><label for="{!! $payment->id!!}">
+                                        <!-- <ul class="list-unstyled desc" >
+                                            <li>@lang('home.Featuredonhomepage') --><!-- {!! $payment->tag1!!} --><!-- </li>
+                                            <li>@lang('home.adcost') --><!-- {!! $payment->tag2!!} --><!-- </li>
+                                        </ul> -->
+										
+                                        <div class="credits b" style="color:#fff;font-size: 12px;padding-top:5px;">
+											<div class="text-success" style="color:#fff">@lang('home.FreetillEndofOctober')</div>
+											<div class="text-success" style="color:#fff;padding-top:10px;">@lang('home.Free')<span style="padding-left:20px">@lang('home.pay_cost') : <strike>[@lang('home.lean1000')]</strike></span></div>
+											<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
+										</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+
                             </li>
+
+                            
+							
+							
+
+
 
 <!-- 
                          @foreach($wrpayment as $key=>$payment)

@@ -150,6 +150,7 @@ Route::get('privacy-policy','frontend\Home@privacyPolicy');
 Route::get('companies-advertisement','frontend\Home@advertisement');
 Route::get('picture-policy','frontend\Home@picturepolicy');
 Route::get('refund-policy','frontend\Home@refundPolicy');
+Route::get('howtouse','frontend\Home@howtouse');
 Route::match(['get','post'],'account/login','frontend\Home@accountLogin');
 Route::match(['get','post'],'account/register','frontend\Home@accountRegister');
 Route::get('account/logout','frontend\Home@logout');

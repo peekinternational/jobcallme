@@ -1361,6 +1361,24 @@ ul.jd-rewards li i{
 	padding-top:15px;
 	padding-bottom:15px;
  }
+
+ .jobApp-tabs2{
+    overflow: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #cccccc;
+    margin-bottom: 20px;
+    background: #ffffff;
+}
+.jobApp-tabs2 a{
+    display: inline-block;
+    text-align: left;
+    margin-left: -15px;
+    margin-right: -15px;    
+	/*width: 115.2%;*/                 /* 수정 */
+    border-radius: 0;
+	padding-top:15px;
+	padding-bottom:15px;
+ }
  /*.nav-tab-active{
     border-bottom: 2px solid yellow !important;
  }*/
@@ -2940,9 +2958,9 @@ img.profile-photo-xs{
     margin-bottom: 50px;
 }
 .loginBox{
-    background-image: url("../images/white-background-4.jpg");
+    /*background-image: url("../images/white-background-4.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;*/
     background-position: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
@@ -3021,9 +3039,9 @@ img.profile-photo-xs{
 /*Registration Form*/
 .signupBox{
     display: none;
-    background-image: url("../images/white-background-4.jpg");
+    /*background-image: url("../images/white-background-4.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;*/
     background-position: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
@@ -3930,7 +3948,7 @@ curveIn {  0% {
 
 #post-job-ad-types2>li {
     display: inline-block;
-    width: 170px;
+    width: 270px;
     min-height: 70px;
     cursor: pointer;
     padding: 0px 0px 0px 0px;
@@ -3959,6 +3977,40 @@ curveIn {  0% {
 	    background-color: white;
 }
 
+#post-job-ad-types-upskill>li:not(:last-child) {
+    margin-right: 4px;
+	    background-color: white;
+}
+
+#post-job-ad-types-upskill>li {
+    display: inline-block;
+    width: 270px;
+    min-height: 72px;
+    cursor: pointer;
+     padding: 0px 0px 0px 0px;
+    border: 1px solid #cfd8dc;
+	margin-top:10px;
+    transition: all .2s ease-in-out;
+	    background-color: white;
+}
+
+#post-job-ad-types-read>li:not(:last-child) {
+    margin-right: 4px;
+	    background-color: white;
+}
+
+#post-job-ad-types-read>li {
+    display: inline-block;
+    width: 320px;
+    min-height: 72px;
+    cursor: pointer;
+     padding: 0px 0px 0px 0px;
+    border: 1px solid #cfd8dc;
+	margin-top:10px;
+    transition: all .2s ease-in-out;
+	    background-color: white;
+}
+
 .mat-card {
     color: #3f535c;
     line-height: 20px;
@@ -3971,6 +4023,18 @@ curveIn {  0% {
 }
 
 #post-job-ad-types2 {
+    list-style: none;
+    margin: 0 -1px;
+    padding: 0;
+}
+
+#post-job-ad-types-upskill {
+    list-style: none;
+    margin: 0 -1px;
+    padding: 0;
+}
+
+#post-job-ad-types-read {
     list-style: none;
     margin: 0 -1px;
     padding: 0;
