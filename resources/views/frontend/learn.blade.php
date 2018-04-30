@@ -168,9 +168,9 @@
                             <p>
 							  @if($rec->startDate != "0000-00-00")
 								@if(app()->getLocale() == "kr")
-									<i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+									<i class="fa fa-calendar"></i> {{ date('Y-m-d',strtotime($rec->startDate))}} @if($rec->endDate != "0000-00-00")<i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}} @endif
 								@else
-									<i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}} <i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}}
+									<i class="fa fa-calendar"></i> {{ date('M d, Y',strtotime($rec->startDate))}} @if($rec->endDate != "0000-00-00")<i class="fa fa-clock-o"></i> {{ JobCallMe::timeDuration($rec->startDate,$rec->endDate,'min')}} @endif
 								@endif 
 							  @endif 
 							

@@ -415,7 +415,7 @@
 										
 										<div class="col-md-12 text-center" style="background:#f7f7f7;padding-top:20px;padding-bottom:10px;">                                            
                                             <p class="rd-location">@lang('home.By registering forged documents, you may be legally liable for use in employment activities.')</p>
-                                            <p class="rd-location">@lang('home.Job Coal Meat Co., Ltd. does not guarantee or assume any responsibility for the documents registered by the applicant.')</p>
+                                            <p class="rd-location">@lang('home.JobCallMe Co., Ltd. does not guarantee or assume any responsibility for the documents registered by the applicant.')</p>
 											<p class="rd-location">@lang('home.We are not responsible for any legal disputes that arise from trusting the attached document. (Related with Article 14 of Terms of Use)')</p>
 											<p class="rd-location">@lang('home.In addition, resumes may be deleted or closed for use outside the job seeking / employment field.')</p>
 										

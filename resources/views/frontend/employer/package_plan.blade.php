@@ -18,7 +18,7 @@
 			
 					<div style="padding-bottom:20px">
 						<span>@lang('home.selectcurrency'): &nbsp;</span>
-                        <input type="radio" name="gender" id="kr" value="kr" checked="checked"> korean
+                        <input type="radio" name="gender" id="kr" value="kr" checked="checked"> @lang('home.paykorean')
                       &nbsp;&nbsp;<input type="radio" name="gender" id="us" value="us"> US$
                     </div>
 
@@ -108,7 +108,7 @@
 										<div style="font-size: 13px;text-align: center;padding:20px 15px 25px 15px;" >@lang('home.'.$payad_text2)</div>
 										@elseif($payment->type == "Resume Download")
 										<div style="font-size: 17px;text-align: center;padding:20px 15px 10px 15px;" >@lang('home.'.$payad_text)</div>
-										<div style="font-size: 13px;text-align: center;padding:10px 15px 10px 15px;" >@lang('home.'.$payad_text2)</div>
+										<div style="font-size: 13px;text-align: center;padding:10px 15px 10px 15px;" >+{{$payment->quantity}}@lang('home.'.$payad_text2)</div>
 										@else
 										<div style="font-size: 13px;text-align: center;padding:20px 20px 0 15px;" >@lang('home.'.$payad_text)</div>
 										<div style="font-size: 13px;text-align: center;padding:20px 25px;" >@lang('home.'.$payad_text2)</div>
@@ -127,7 +127,7 @@
 
 										
                                         <div class="credits b" style="font-size: 13px;text-align: center;" >@lang('home.pay_cost') : 
-											<span class="text-success" id="class_text{{$key}}"></span> @if($payment->type != "Resume Download")@lang('home.currencyday_text') @endif
+											<span class="text-success" id="class_text{{$key}}"></span> @if($payment->type != "Resume Download")@lang('home.currencyday_text'){{$payment->duration}}@lang('home.currencyday_text2') @endif
 										</div>
 
 										

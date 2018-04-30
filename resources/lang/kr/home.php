@@ -790,7 +790,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'datebirth' => '생년월일', 	
 	'currentsalary' => '현재 연봉/단위(만원)',
 	'expectedsalary' => '희망 연봉/단위(만원)',
-	'expertise' => '핵심역량',
+	'expertise' => '전문기술',
 	'addacademics' => '학력 추가',
 	'completiondate' => '졸업 년량일',
 	'institution' => '학교명',
@@ -1037,7 +1037,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'Hotels'=>'호텔',
 	//'Intellectual Property'=>'지적 재산권',
 	'Patent'=>'특허',
-	'International'=>'국제',
+	'International'=>'국제ㆍ세계',
 	'Internet'=>'인터넷',
 	'Investment'=>'투자',
 	'Jewelry'=>'보석',
@@ -1151,6 +1151,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'Helper'=>'도우미',
 	'HR'=>'인사',
 	'Work Service'=>'용역',
+	'Trade'=>'무역',
 
 
 
@@ -113973,7 +113974,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 "companyGallery"=>"기업 이미지",
 "Total reviews"=>"전체 리뷰",
 "lean1000"=>"￦1,000",
-"paykorean"=>"원화결제",
+"paykorean"=>"원화결제(VAT 포함)",
 "US$"=>"US$",
 "adsdate"=>"광고 시작날짜",
 "adedate"=>"광고 마감날짜",
@@ -114122,12 +114123,13 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'hot_text2' => '로고와 함께 헤드라인 형태의 큰 이미지 텍스트가 앞ㆍ뒤 면에 노출됩니다',
 'top_text2' => '로고와 함께 헤드라인 형태의 큰 이미지 텍스트가 앞ㆍ뒤 면에 노출됩니다',
 'premium_text2' => '로고와 함께 헤드라인 형태의 큰 이미지 텍스트가 앞ㆍ뒤 면에 노출됩니다',
-'resumedown_text2' => '+20건',
+'resumedown_text2' => '건',
 
 'pay_buy' => '구매',
 'pay_cost' => '가격',
 'Free_text' => '채용 마감일까지 무료',
-'currencyday_text' => '원/일',
+'currencyday_text' => '원/',
+'currencyday_text2' => '일',
 'paylocation' => '상단고정',
 'mpay_text' => '기본 무료등록',
 'mpay_text2' => '앞뒤면 노출',
@@ -114155,7 +114157,13 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'Writer' => '작성자',
 
 'By registering forged documents, you may be legally liable for use in employment activities.' => '위조된 문서를 등록하여 취업활동에 이용시 법적 책임을 지게 될 수 있습니다.',
-'Job Coal Meat Co., Ltd. does not guarantee or assume any responsibility for the documents registered by the applicant.' => '(주)잡콜미는 구직자가 등록한 문서에 대해 보증하거나 별도의 책임을 지지 않으며',
+'JobCallMe Co., Ltd. does not guarantee or assume any responsibility for the documents registered by the applicant.' => '(주)잡콜미는 구직자가 등록한 문서에 대해 보증하거나 별도의 책임을 지지 않으며',
 'We are not responsible for any legal disputes that arise from trusting the attached document. (Related with Article 14 of Terms of Use)' => '첨부된 문서를 신뢰하여 발생한 법적 분쟁에 책임을 지지 않습니다. (이용약관 제14조 관련)',
 'In addition, resumes may be deleted or closed for use outside the job seeking / employment field.' => '또한 구인/구직 목적외 목적으로 이용시 이력서 삭제 혹은 비공개 조치될 수 있습니다.',
+
+'Open Job AD V' => '채용광고 보기',
+'Close Job AD V' => '채용광고 닫기',
+
+'review write' => '사용자 평가 정책',
+'Video & Chat Policy' => '사용자 화상 채팅 정책',
 ];
