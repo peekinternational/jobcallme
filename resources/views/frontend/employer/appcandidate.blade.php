@@ -110,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9 personal-info-right">
-                                    <h3 class="hidden-sm hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}}</h3>
+                                    <h3 class="hidden-sm hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}} <span class="pull-right"><button class="btn btn-primary" onclick="$('#reviewModel').modal('show')">Write Review</button></span></h3>
                                     <p class="jp-profession-heading hidden-sm hidden-xs">@lang('home.'.JobCallMe::categoryTitle($applicant->industry))</p>
                                     <p><span class="pi-title">@lang('home.experiance'):</span>@lang('home.'.$applicant->experiance)</p>
                                     <p><span class="pi-title">@lang('home.salary'):</span> @if($applicant->currency == 'KRW'){{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',0).' '.$applicant->currency }}@endif @if($applicant->currency != 'KRW'){{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',2).' '.$applicant->currency }}@endif  </p>
@@ -500,6 +500,29 @@
 			</div>
         </div>
     </div>
+<div id="reviewModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Review on Resume</h4>
+          </div>
+          <div class="modal-body">
+           <form>
+             <div class="form-group">
+               <label for="review">Review:</label>
+               <textarea type="review" name="review" rows="5" class="form-control" id="review"></textarea>
+             </div>
+           </form>
+          </div>
+          <div class="modal-footer">
+             <button type="submit" class="btn btn-success">Submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+    </div>
+</div>
 </section>
 @endsection
 @section('page-footer')
