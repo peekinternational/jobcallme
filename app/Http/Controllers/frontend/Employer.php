@@ -2518,4 +2518,18 @@ public function allform(Request $request){
 	 return view('frontend.employer.download',compact('download'));
 
    }
+   public function comment(Request $request){
+   		$data = $request->input();
+   		unset($data['_token']);
+   		$data['table_name'] ="resume";
+   		if(DB::table('comments')->insert($data)){
+   			echo 1;
+   		}else{
+   			echo 2;
+   		}
+   }
+   public function deleteResumeReview(Request $request){
+   		$commentId = $request->input('commentId');
+   		DB::table('comments')->where('comment_id',$commentId)->delete();
+   }
 }
