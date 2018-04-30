@@ -5,9 +5,10 @@
 @section('content')
 
 <section id="postNewJob" style="margin-bottom:70px">
+ <div class="container">
  <form action='{{ url("paypals") }}' method='post' class='form-horizontal' enctype='multipart/form-data'>
                         {{ csrf_field() }}
-    <div class="container">
+   
 
 	  <div class="row">
             <div class="col-md-12" style="margin-top:70px">
@@ -238,7 +239,7 @@
                     
                 </div>
             </div>
-		</div>
+		
                
                   @endif
                     <div class="pnj-form-section">
@@ -564,7 +565,7 @@
 
 						 <div class="form-group">
                             <label class="control-label col-md-3">@lang('home.Working hours')</label>
-                                <div class="col-md-3 pnj-form-field"">
+                                <div class="col-md-3 pnj-form-field">
                                     <select class="form-control" name="jobhoursval" required>
 										<option value="jobhours01" {{ $meta->jobhoursval == 'jobhours01' ? 'selected="selected"' : '' }}>@lang('home.jobhours01')</option>
 										<option value="jobhours02" {{ $meta->jobhoursval == 'jobhours02' ? 'selected="selected"' : '' }}>@lang('home.jobhours02')</option>
@@ -945,11 +946,11 @@
                     </div>
                 
             </div>
-        </div>
-    </div>
-	</div>
-	</div>
+      
+  
+	
 </form>
+</div>
 <style type="text/css">
      #map {
         height: 500px;
