@@ -279,7 +279,7 @@
               <!-- <div class="job-locations-box"> -->
 			  <div class="job-schedule-box">
                 @foreach(JobCallMe::getCategories() as $cat)
-
+@if($cat->name != "New and Career Recruitment")
                 @if($cat->name == "outsourcingok")
                 <a  href="https://www.outsourcingok.com" target="_blank" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 width: auto; 
@@ -310,6 +310,7 @@
 
 
                 <span class="text">@lang('home.'.$cat->name)</span></a>
+@endif
                 @endforeach
 				</div>
               </div>

@@ -301,12 +301,17 @@ class Jobs extends Controller{
                     $vhtml .= '</div>';
 				}
 				else{
-					$vhtml .= '<div class="js-action">';
-					if($jobApplied == true){
-                        $vhtml .= '<a href="javascript:void();" class="btn btn-success btn-xs" disabled>'.trans('home.applied').'</a>';
+					$vhtml .= '<div class="js-action" style="padding-top:30px">';
+					if($rec->jobreceipt02 != "" and $rec->jobhomgpage != ""){
+                        $vhtml .= '<a href="'.$rec->jobhomgpage.'" class="btn btn-primary btn-xs" style="margin-right: 10px;" target="_blank">'.trans('home.jobhomepageapply').'</a>';
 					}
-					else{
-						$vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">'.trans('home.apply').'</a>';
+					if($rec->jobreceipt01 != ""){
+						if($jobApplied == true){
+							$vhtml .= '<a href="javascript:void();" class="btn btn-success btn-xs" disabled>'.trans('home.applied').'</a>';
+						}
+						else{
+							$vhtml .= '<a href="'.$applyUrl.'" class="btn btn-primary btn-xs">'.trans('home.apply').'</a>';
+						}
 					}
                         if(in_array($rec->jobId, $savedJobArr)){
 	                        $vhtml .= '<a href="javascript:;" onclick="saveJob('.$rec->jobId.',this)" class="btn btn-success btn-xs" style="margin-left: 10px;" disabled >'.trans('home.saved').'</a>';
@@ -399,8 +404,8 @@ class Jobs extends Controller{
                    
 
                    
-                    $vhtml .= '<p class="js-note">'.$string.'<img style="padding-top: 17px;" src="'.$cLogo.'" width="100"></p>';
-                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 35px;">'.$joblist_date.'</span></p>';
+                    $vhtml .= '<p class="js-note">'.$string.'<img style="padding-top: 17px;margin-top:10px;" src="'.$cLogo.'" width="100"></p>';
+                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 50px;">'.$joblist_date.'</span></p>';
 				
 				$job = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
 				$job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');

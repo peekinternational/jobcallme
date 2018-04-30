@@ -17,7 +17,7 @@ if($user->profilePhoto != ''){
 
 		
         <!-- Mobile View -->
-        <div class="col-md-2 jobApp-tabs jobMblTabs hidden-sm hidden-md hidden-lg">
+        <div class="col-md-2 jobApp-tabs2 jobMblTabs hidden-sm hidden-md hidden-lg">
             <h5 class="mtab-heading">@lang('home.account')</h5>
             <ul class="jobMblTabs">
                 <ul class="nav nav-tabs jobMblTabs">
@@ -144,7 +144,7 @@ if($user->profilePhoto != ''){
                             <tr>
                             <form action="{{ action('frontend\Employer@package') }}" method="post">
                             {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Premium Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Premium Jobs')</td>
                                 <input type="hidden" value="Premium" name="type">
                                 <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
@@ -152,7 +152,7 @@ if($user->profilePhoto != ''){
                              <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Top Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Top Jobs')</td>
                                 <input type="hidden" value="Top" name="type">
                                 <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
@@ -160,7 +160,7 @@ if($user->profilePhoto != ''){
                              <tr>
                             <form action="{{ action('frontend\Employer@package') }}" method="post">
                              {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Hot Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Hot Jobs')</td>
                                 <input type="hidden" value="Hot" name="type">
                                 <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
@@ -168,7 +168,7 @@ if($user->profilePhoto != ''){
                              <tr>
                             <form action="{{ action('frontend\Employer@package') }}" method="post">
                              {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Latest Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Latest Jobs')</td>
                                 <input type="hidden" value="Latest" name="type">
                                 <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
@@ -176,7 +176,7 @@ if($user->profilePhoto != ''){
                             <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Special Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Special Jobs')</td>
                                 <input type="hidden" value="Special" name="type">
                                 <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
@@ -184,7 +184,7 @@ if($user->profilePhoto != ''){
                             <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Goldan Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Goldan Jobs')</td>
                                 <input type="hidden" value="Goldan" name="type">
                                 <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
@@ -192,7 +192,7 @@ if($user->profilePhoto != ''){
                             <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <i class="fa fa-remove color-red"></i> @lang('home.Resume Downloads')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Resume Downloads')</td>
                                 <input type="hidden" value="Resume Download" name="type">
                                 <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>

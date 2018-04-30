@@ -18,7 +18,7 @@
                 <li>
                     <a href="{{ url('account/jobseeker/application') }}">
                         <img src="../frontend-assets/images/jobseek_icon4.png" style="padding-top:0px">
-                        <div class="udp-type">@lang('home.APPLICATION')</div>
+                        <div class="udp-type">@lang('home.APPLICATION_title')</div>
                     </a>
                 </li>
                 <li>

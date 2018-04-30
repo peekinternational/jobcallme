@@ -11,9 +11,9 @@
             
 			<h2 class="text-center">
 						@if(app()->getLocale() == "kr")
-						    <div id="hp_text3"></div><!-- @lang('home.headerHeading') -->
+						    @lang('home.writingheaderHeading')<!-- <div id="hp_text3"></div> --><!-- @lang('home.headerHeading') -->
 						@else
-						    <div id="hp_text4"></div><!-- @lang('home.headerHeading') -->
+						    @lang('home.writingheaderHeading')<!-- <div id="hp_text4"></div> --><!-- @lang('home.headerHeading') -->
 						@endif
 			</h2>
             
@@ -72,9 +72,9 @@
                 <div class="pnj-box">
                     <h3><span style="padding-left:15px;">@lang('home.mywriting2')</span></h3>
                     <div class="upskill-box">
-                        <p style="font-size:25px">@lang('home.creativewriting')</p>
-                        <p style="font-size:15px;padding-top:20px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.eagerlywaiting')</p>
-						<p style="font-size:15px;padding-bottom:80px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.eagerlywaiting2')</p>
+                        <p style="font-size:18px">@lang('home.eagerlywaiting2')<!-- @lang('home.creativewriting') --></p>
+                        <!-- <p style="font-size:15px;padding-top:20px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.eagerlywaiting')</p> -->
+						<!-- <p style="font-size:15px;padding-bottom:80px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.eagerlywaiting2')</p> -->
                         <a href="{{ url('account/writings/article/add') }}" class="btn btn-primary">@lang('home.WRITE YOUR FIRST ARTICLE')</a>
 						<!-- <p style="font-size:15px;padding-top:30px;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.eagerlywaiting3')</p> -->
 						<p style="font-size:15px;padding-top:50px;color:#820923;"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:#820923;"></i> @lang('home.eagerlywaiting4')</p>

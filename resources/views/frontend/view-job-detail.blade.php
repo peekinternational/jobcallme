@@ -170,7 +170,14 @@ $dispatch='';
                         <td class="active">@lang('home.Responsibilities')</td>
                         <td>{{ $job->responsibilities }}</td>
                         <td class="active">@lang('home.expptitle')</td>
-                        <td>@lang('home.'.$job->expptitle)|@lang('home.'.$job->expposition)</td>
+                        <td>@lang('home.'.$job->expptitle)
+							@if($job->expptitle == "")
+							  @lang('home.'.$job->expposition)
+							@else	
+							  &nbsp;|@lang('home.'.$job->expposition)
+							@endif
+						
+						</td>
                     </tr>
 					<tr>
 						<td class="active">@lang('home.careerlevel')</td>
@@ -198,9 +205,10 @@ $dispatch='';
                         <td>@lang('home.'.$job->gender)</td>
                         <td class="active">@lang('home.age')</td>
                         <td>{{ $job->jobage1 }} {{ $job->jobage2 }} 
-						@if($job->jobnoage == "yes")
+						@if($job->jobage1 != "" or $job->jobage2 != "")
 							  &nbsp;| @lang('home.jobnoage')
-						@else							 
+						@else		
+							  @lang('home.jobnoage')
 						@endif</td>
                     </tr>
 
@@ -326,18 +334,41 @@ $dispatch='';
 
 
                 <br>
-                  <h4>@lang('home.admissionsprocess')</h4>
+				<div>
+                  <h4><b>@lang('home.admissionsprocess')</b></h4>
                 @if($process != '')
 	                <ul class="jd-rewards" style="margin-bottom: 32px;">
 	                	@foreach( $process as $pro)
-						
-	                		<li><i class="fa fa-check-circle"></i> @lang('home.'.$pro)</li>
+							<li>
+							@if($pro == 'Document Screening')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)						
+							@elseif($pro == 'human nature test')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'Chat')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'Video & Chat')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'First Interview')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'Second Interview')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'Examination for Employment')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'Final Pass')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@else
+								<i class="fa fa-check-circle"></i> {!! $pro !!}
+							@endif
+							
+							</li>
+	                		
 	                	@endforeach
 	                </ul>
                 @endif
-
+				</div>
 				<br><br>
-				<br><br><br>				
+				<br><br><br><br class="hidden-lg"><br class="hidden-lg"><br class="hidden-lg">	
+				<div>
                 <h4><b>@lang('home.How to register')<b></h4>
                
 	                <ul class="jd-rewards">
@@ -365,11 +396,11 @@ $dispatch='';
 	                	@endif
 
 	                </ul>
-
+				</div>
                 <br>
-                <br><br>
+                <br><br><br>
                 <div>
-                <h4>@lang('home.rewardsbenefits')</h4>
+                <h4><b>@lang('home.rewardsbenefits')</b></h4>
                 @if($benefits != '')
 	                <ul class="jd-rewards">
 	                	@foreach( $benefits as $benefit)
@@ -497,7 +528,7 @@ $dispatch='';
                     <p>{!! $job->companyAbout !!}</p>
                 </div>
                 <p align="center">
-                   <?= checkreview($star)?><br>
+                   <span  style="color:#d6a707"><?= checkreview($star)?></span><br>
                    <span><a href="{{url('companies/company/'.$job->companyId)}}">@lang('home.View all Review')</a> <span class="badge"><?= count($companyReview)?></span></span>
                 </p>
                 <hr>
@@ -506,35 +537,35 @@ $dispatch='';
                         <tr>
                             <td>@lang('home.Career Growth')</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td>
+                            <td style="color:#d6a707">
                             <?= checkreview($career_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>@lang('home.Compensation & Benefits')</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td>
+                            <td style="color:#d6a707">
                             <?= checkreview($benefit_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>@lang('home.Work/Life Balance')</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td>
+                            <td style="color:#d6a707">
                             <?= checkreview($lifebalance_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>@lang('home.Management')</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td>
+                            <td style="color:#d6a707">
                             <?= checkreview($management_star)?>
                             </td>
                         </tr>
                         <tr>
                             <td>@lang('home.Culture')</td>
                             <td>&nbsp;&nbsp;</td>
-                            <td>
+                            <td style="color:#d6a707">
                             <?= checkreview($culture_star)?>
                             </td>
                         </tr>

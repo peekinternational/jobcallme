@@ -63,17 +63,17 @@ print_r($jobs);
                         <a href="{{ url('account/employer/application') }}" id="hire" class="btn btn-block jaTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
                         <a href="{{ url('account/employer/application') }}" id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
                     </div>
-                    <div class="jd-job-details">
-                <h4>@lang('home.Posted By')</h4>
-                <span style="color:#3f535c;">{{ $job->firstName }} {{ $job->lastName }}</span>
+                    <div class="jd-job-details" style="background:#424242">
+                <h4 style="color:#fff;"><img src="/frontend-assets/images/status-icon1.png"> @lang('home.Posted By')</h4>
+                <span style="color:#fff;">{{ $job->firstName }} {{ $job->lastName }}</span>
                 </div>
-                 <div class="jd-job-details">
-                <h4>@lang('home.Hiring Managers')</h4>
-                <span style="color:#3f535c;">{{ $job->firstName }} {{ $job->lastName }}</span>
+                 <div class="jd-job-details" style="background:#424242">
+                <h4 style="color:#fff;"><img src="/frontend-assets/images/status-icon2.png"> @lang('home.Hiring Managers')</h4>
+                <span style="color:#fff;">{{ $job->firstName }} {{ $job->lastName }}</span>
                 </div>
-                 <div class="jd-job-details">
-                <h4>@lang('home.Job Ad Type')</h4>
-               <span style="color:#3f535c;"> @lang('home.'.$job->p_title)</span>
+                 <div class="jd-job-details" style="background:#424242">
+                <h4 style="color:#fff;"><img src="/frontend-assets/images/status-icon3.png"> @lang('home.Job Ad Type')</h4>
+               <span style="color:#fff;"> @lang('home.'.$job->p_title)</span>
                 @if ($job->p_title =='Basic')
 				<a href="{{ url('account/employer/jobupdate/'.$job->jobId) }}">(@lang('home.upgrade'))</a>
                  @else
@@ -262,7 +262,7 @@ print_r($jobs);
 	                <ul class="jd-rewards" style="margin-bottom: 32px;">
 	                	@foreach( $process as $pro)
 						
-	                		<li><i class="fa fa-check-circle"></i> {{ $pro }}</li>
+	                		<li><i class="fa fa-check-circle"></i> @lang('home.'.$pro)</li>
 	                	@endforeach
 	                </ul>
                 @endif
@@ -274,7 +274,7 @@ print_r($jobs);
 	                <ul class="jd-rewards">
 	                	@foreach( $benefits as $benefit)
 						
-	                		<li><i class="fa fa-check-circle"></i> {{ $benefit }}</li>
+	                		<li><i class="fa fa-check-circle"></i> @lang('home.'.$benefit)</li>
 	                	@endforeach
 	                </ul>
                 @endif

@@ -138,15 +138,15 @@ curl_close ($ch);
 				'Address' => 'required',
 			],[
 				
-				'description.required' => 'description is requried',
+				'description.required' => trans('home.description is requried'),
 				'skills.max:1024' => 'Skills Limit Across',
-				'skills.required' => 'Skills is requried',
+				'skills.required' => trans('home.Skills is requried'),
 				'title.required' => 'Title is requried',
 				'department.required' => 'department is requried',
 				'category.required' => 'category is requried',
 				'qualification.required' => 'qualification is requried',
 				'state.required' => 'state is requried',
-				'Address.required' => 'Address is required',
+				'Address.required' => trans('home.Address is required'),
 				
 			]);
 	
@@ -159,7 +159,7 @@ curl_close ($ch);
 	   $durations= $amount*$request->duration;
 
         $mul=$durations;
-        $am=$mul*1000;
+        $am=$mul*1100;
       //  dd($am);
 	    $request->session()->put('p_Category', $request->p_Category);
         $goodsname = Session::get('p_Category');
@@ -762,7 +762,7 @@ else{
 		for($i = 1; $i <= $startFrom; $i++){
 			$k = $i < 10 ? '0'.$i : $i;
 			$dDate = date('Y').'-'.$k;
-			$monthArr[] = '"'.date('F',strtotime($dDate)).'"';
+			$monthArr[] = '"'.trans('home.'.date('F',strtotime($dDate))).'"';
 			$rec = DB::table('jcm_job_applied')->select(DB::raw('count(jcm_job_applied.applyId) as totalApplied'))->join('jcm_jobs','jcm_jobs.jobId','=','jcm_job_applied.jobId')->where('jcm_jobs.userId','=',$app->userId)->where('jcm_job_applied.applyTime','like','%'.$dDate.'%')->first();
 			$dataArr[] = $rec->totalApplied;
 		}
@@ -775,7 +775,7 @@ else{
 		$exprArr = array();
 		$i=1;
 		foreach(JobCallMe::getExperienceLevel() as $exp){
-			$exprArr[] = '"'.$exp.'"';
+			$exprArr[] = '"'.trans('home.'.$exp).'"';
 			$rec = DB::table('jcm_jobs')->select(DB::raw('count(jobId) as totalApplied'))->where('userId','=',$app->userId)->where('experience','like','%'.$exp.'%')->first();
 			$dataArr[] = $rec->totalApplied;
 			if(++$i == 10){break;}
@@ -791,7 +791,7 @@ else{
 		for($i = 1; $i <= $startFrom; $i++){
 			$k = $i < 10 ? '0'.$i : $i;
 			$dDate = date('Y').'-'.$k;
-			$monthArr[] = '"'.date('F',strtotime($dDate)).'"';
+			$monthArr[] = '"'.trans('home.'.date('F',strtotime($dDate))).'"';
 			$rec = DB::table('jcm_jobs')->select(DB::raw('count(jobId) as totalApplied'))->where('userId','=',$app->userId)->where('createdTime','like','%'.$dDate.'%')->first();
 			$dataArr[] = $rec->totalApplied;
 		}
@@ -969,28 +969,28 @@ else{
 								$vhtml .= '<div class="col-md-4">';
 									$vhtml .= '<img src="'.$userImage.'" class="ea-image">';
 									$vhtml .= '<div class="rtj-details">';
-										$vhtml .= '<p><strong><a href="'.url('account/employer/application/candidate/'.$rec->userId."?jobId=".$rec->jobId).'">'.$rec->firstName.' '.$rec->lastName.'</a></strong> - <span class="ea-sm-date">'.date('d M',strtotime($rec->applyTime)).'</span></p>';
+										$vhtml .= '<p><strong><a href="'.url('account/employer/application/candidate/'.$rec->userId."?jobId=".$rec->jobId).'">'.$rec->firstName.' '.$rec->lastName.'</a></strong> - <span class="ea-sm-date">'.$apply_date.'</span></p>';
 										$vhtml .= '<p>'.substr($rec->title,0,28).'</p>';
 										$expectedSalary = $rec->expectedSalary != '' ? $rec->expectedSalary : '0';
 										$vhtml .= '<p><strong>'.trans('home.expected').':</strong> '.number_format($expectedSalary).' '.$rec->currency.'</p>';
 									$vhtml .= '</div>';
 								$vhtml .= '</div>';
-								$vhtml .= '<div class="col-md-3 ea-details">'.$rec->education.'</div>';
-								$vhtml .= '<div class="col-md-3 ea-details"><span style="color: #999">'.$rec->experiance.' </span></div>';
-								$vhtml .= '<div class="col-md-2 ea-details">'.JobCallMe::cityName($rec->city).'</div>';
+								$vhtml .= '<div class="col-md-3 ea-details">'.trans('home.'.$rec->education).'</div>';
+								$vhtml .= '<div class="col-md-3 ea-details"><span style="color: #999">'.trans('home.'.$rec->experiance).' </span></div>';
+								$vhtml .= '<div class="col-md-2 ea-details">'.trans('home.'.JobCallMe::cityName($rec->city)).'</div>';
 							$vhtml .= '</div>';
 						
 
 						$vhtml .= '<div class="row hidden-md hidden-lg">';
 							$vhtml .= '<img src="'.$userImage.'" class="img-circle ea-image">';
 							$vhtml .= '<div class="ea-details-sm">';
-								$vhtml .= '<p><strong><a href="'.url('account/employer/application/applicant/'.$rec->userId).'">'.$rec->firstName.' '.$rec->lastName.'</a></strong> - <span class="ea-sm-date">'.date('d M Y',strtotime($rec->applyTime)).'</span></p>';
+								$vhtml .= '<p><strong><a href="'.url('account/employer/application/applicant/'.$rec->userId).'">'.$rec->firstName.' '.$rec->lastName.'</a></strong> - <span class="ea-sm-date">'.$apply_date.'</span></p>';
                                 $vhtml .= '<p class="ea-sm-experience">'.$rec->expertise.'</p>';
                                 $expectedSalary = $rec->expectedSalary != '' ? $rec->expectedSalary : '0';
                                 $vhtml .= '<p><strong>'.trans('home.expected').':</strong> '.number_format($expectedSalary).' '.$rec->currency.'</p>';
-                                $vhtml .= '<p><strong>'.trans('home.education').':</strong> '.$rec->education.'</p>';
-                                $vhtml .= '<p><strong>'.trans('home.experience').':</strong> '.$rec->experiance.'</p>';
-                                $vhtml .= '<p><strong>'.trans('home.location').':</strong> '.JobCallMe::cityName($rec->city).'</p>';
+                                $vhtml .= '<p><strong>'.trans('home.education').':</strong> '.trans('home.'.$rec->education).'</p>';
+                                $vhtml .= '<p><strong>'.trans('home.experience').':</strong> '.trans('home.'.$rec->experiance).'</p>';
+                                $vhtml .= '<p><strong>'.trans('home.location').':</strong> '.trans('home.'.JobCallMe::cityName($rec->city)).'</p>';
 							$vhtml .= '</div>';
 						$vhtml .= '</div>';
 						$vhtml .= '</td>';
@@ -1986,10 +1986,17 @@ public function mapOrganization(Request $request){
 			$order['user_id']=$apps->userId;
             $order['payment_mode']='Cash Payment';
             $order['orderBy']=$inputs['title'];
-            $order['amount']=$inputs['amount'];
+			if($input['currency'] == 'KRW'){
+				$order['amount']=$inputs['amount']*1100;
+			}else{
+				$order['amount']=$inputs['amount'];
+			}
+            
             $order['status']='Pending';
             $order['category']='Job';
             $order['date']= date('Y-m-d');
+			$order['currency']=$inputs['paycurrency'];
+
 
             DB::table('jcm_orders')->insert($order);
 			//dd($inputs);
@@ -2134,7 +2141,7 @@ public function mapOrganization(Request $request){
 			$info = $request->all();
 			
 			$app= session()->get('jcmUser');
-			$amount=$info['amount'] * 1000;
+			$amount=$info['amount'] * 1100;
 
 			//dd($amount);
 			
@@ -2317,10 +2324,11 @@ public function mapOrganization(Request $request){
 			$order['user_id']=$id;
 			$order['payment_mode']='Nice Pay';
 			$order['orderBy']=$input['type'];
-			$order['amount']=$input['amount'];
+			$order['amount']=$input['amount']*1100;
 			$order['status']='Pending';
 			$order['category']='Package Plan';
 			$order['date']= date('Y-m-d');
+			$order['currency']=$input['currency'];
 
             DB::table('jcm_orders')->insert($order);
 			echo $pk_id.'-package';

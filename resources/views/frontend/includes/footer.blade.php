@@ -117,6 +117,8 @@
                     <option value="{{ url('contact') }}">@lang('home.contact')</option>
                     <option value="{{ url('privacy-policy') }}">@lang('home.Privacy Policy')</option>
                     <option value="{{ url('terms-conditions') }}">@lang('home.Terms & Conditions')</option>
+					<option value="{{ url('picture-policy') }}">@lang('home.picture policy')</option>
+					<!-- <option value="{{ url('refund-policy') }}">@lang('home.Refund Policy')</option> -->
                     <option value="{{ url('account/register') }}">@lang('home.Login')</option>
                     <option value="{{ url('account/register') }}">@lang('home.Signup')</option>
                     <option value="{{ url('account/employer/job/new') }}">@lang('home.newpostedjobs')</option>
@@ -141,7 +143,7 @@
     <!-- <section class="main-slide-foot"> -->
     <div class="foot-links">             
         <ul>
-            <li>고객센터 : 070-7770-0967 (평일 09:00 ~ 19:00 )  l FAX: 02-2058-0138  l Email: help@jobcallme.com</li>
+            <li>고객센터 : 070-7770-0967 (평일 09:00 ~ 17:00 )  l FAX: 02-2058-0138  l Email: help@jobcallme.com</li>
             <li>서울시 서초구 논현로 27길 39 2층(양재동, 천일빌딩) 잡콜미 l 대표 : 김성영 l 사업자등록번호 : 201-86-41011</li>
             <li>통신판매업 신고번호 : 제2014-서울서초-1367호 l 직업정보제공사업 신고번호 : 서울청 제2017-26호</li> 
             <li>Copyrihgt &copy; 2017 Jobcallme Co.,Ltd.(RN 201-86-41011)</li>                

@@ -341,7 +341,7 @@ class Jobseeker extends Controller{
 		$app = $request->session()->get('jcmUser');
 		$this->validate($request, [
 				'jobTitle' => 'required|max:255',
-				'organization' => 'required|max:255',
+				//'organization' => 'required|max:255',
 				'startDate' => 'required|date',
 				'country' => 'required'
 			]);
@@ -563,7 +563,19 @@ class Jobseeker extends Controller{
 
 		extract(array_map('trim', $request->all()));
 
-		$skillsQry = array('language' => $language, 'level' => $level, 'certifiedexam' => $certifiedexam, 'classscore' => $classscore, 'languageyear' => $languageyear, 'languagemonth' => $languagemonth);
+		if($request->file('languagefile') != ''){
+			$image = $request->file('languagefile');
+
+			$imagename = time().'.'.$image->getClientOriginalExtension();
+
+			$destinationPath = public_path('/resume_images');
+
+			$image->move($destinationPath, $imagename);
+		}else{
+			$imagename = $old_languagefile;
+		}
+
+		$skillsQry = array('languagefile'=>$imagename,'language' => $language, 'level' => $level, 'certifiedexam' => $certifiedexam, 'classscore' => $classscore, 'languageyear' => $languageyear, 'languagemonth' => $languagemonth);
 
 		$input = array('type' => 'language', 'resumeData' => @json_encode($skillsQry));
 
@@ -979,7 +991,7 @@ class Jobseeker extends Controller{
 						if($type == 'interview'){
 							$getInterview = JobCallMe::getJobInterview($rec->jobId,$rec->userId);
 							$interviewUrl = url('account/jobseeker/interview/'.$getInterview->interviewId);
-							$vhtml .= '<p class="ja-item-status"><a href="'.$interviewUrl.'"><i class="fa fa-'.$fontIcon.'"></i> '.ucfirst($appType).'</a></p>';
+							$vhtml .= '<p class="ja-item-status"><a href="'.$interviewUrl.'"><i class="fa fa-'.$fontIcon.'"></i> '.trans('home.'.ucfirst($appType)).'</a></p>';
 						}else{
 							$vhtml .= '<p class="ja-item-status"><i class="fa fa-'.$fontIcon.'"></i> '.ucfirst($appType).'</p>';
 						}

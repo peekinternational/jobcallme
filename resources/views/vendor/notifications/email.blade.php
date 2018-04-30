@@ -39,8 +39,8 @@ if(file_exists('../website/'.$headerWeb['webLogo'])){
  <table class="m_1888394735623576276inner-body" align="center" width="570" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;background-color:#ffffff;margin:0 auto;padding:0;width:570px">
 <tbody><tr>
 <td class="m_1888394735623576276content-cell" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;padding:35px">
-     <h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">Hello! {{$Name}}</h1>
-<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">You are receiving this email because we received a password reset request for your account.</p>
+     <h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">@lang('home.Hello!')</h1>
+<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">@lang('home.You are receiving this email because we received a password reset request for your account.')</p>
 <table class="m_1888394735623576276action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%"><tbody><tr>
 <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">
     <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box"><tbody><tr>
@@ -48,7 +48,7 @@ if(file_exists('../website/'.$headerWeb['webLogo'])){
    <table border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box"><tbody><tr>
 <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">
  @component('mail::button', ['url' => $actionUrl, 'color' => $color])
-{{ $actionText }}
+@lang("home.".$actionText)
 @endcomponent
         </td>
              </tr>
@@ -62,15 +62,19 @@ if(file_exists('../website/'.$headerWeb['webLogo'])){
   </tr>
   </tbody>
   </table>
-<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">If you did not request a password reset, no further action is required.</p>
-<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Regards,<br>JobCallMe</p>
+<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">@lang('home.If you did not request a password reset, no further action is required.')</p>
+<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">@lang('home.Regards'),<br>@lang('home.JobCallMe')</p>
 <table class="m_1598845040421941858subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-top:1px solid #edeff2;margin-top:25px;padding-top:25px"><tbody><tr>
 <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">
 <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;line-height:1.5em;margin-top:0;text-align:left;font-size:12px">
 @isset($actionText)
 @component('mail::subcopy')
-If you’re having trouble clicking the "{{ $actionText }}" button, copy and paste the URL below
-into your web browser: [{{ $actionUrl }}]({{ $actionUrl }})
+@if(app()->getLocale() == "kr")
+@lang("home.".$actionText) @lang("home.If you’re having trouble clicking the")  @lang("home.button, copy and paste the URL below into your web browser")
+@else
+@lang("home.If you’re having trouble clicking the") @lang("home.".$actionText) @lang("home.button, copy and paste the URL below into your web browser")
+@endif
+: [{{ $actionUrl }}]({{ $actionUrl }})
 @endcomponent
 @endisset</p>
         </td>

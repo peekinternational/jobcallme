@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.s_department')</label>
-                            <div class="col-sm-8 pnj-form-field">
+                            <div class="col-sm-7 pnj-form-field">
                                 <select class="form-control select2" name="department">
                                     
                                         <option value="Accounting" {{ $result->department == 'Accounting' ? 'selected="selected"' : '' }}>@lang('home.Accounting')</option>
@@ -95,8 +95,10 @@
                                     @endforeach
 
                                 </select>
+								<br>
+								<span style="padding-top:5px">@lang('home.addDepartment-text')</span>
                             </div>
-                             <div class="col-md-1 pnj-form-field"> <span><a href="{{ url('account/employer/departments') }}">@lang('home.addDepartment')</a></span></div>
+                             <div class="col-md-2 pnj-form-field" style="margin-top:5px;"> <span><a href="{{ url('account/employer/departments') }}"><span style="background:#f0ad4e;padding:5px 10px;margin-top:5px;color:#fff;">@lang('home.addDepartment') ></span></a></span></div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.category')</label>

@@ -9,11 +9,11 @@
 				<div class="row" style="background-color: white;">
 
 					<div class="follow-companies6" style="background:#57768a;color:#fff;;margin-bottom:20px;">
-		                    <h3 style="margin-left: 15px">Job Evaluation Matrix</h3>
+		                    <h3 style="margin-left: 15px">@lang('home.Job Evaluation Matrix')</h3>
 					</div>
 		            <div class="col-md-12" style="padding-bottom: 36px;">
 		            	@if(sizeof($all_eva_cand) == 0)
-		            	<h3>No evaluation for this job</h3>
+		            	<h3>@lang('home.No evaluation for this job')</h3>
 		            	@endif
 						<table class="table">
 							@foreach($all_eva_cand as $cand)

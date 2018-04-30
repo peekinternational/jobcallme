@@ -210,13 +210,13 @@ if(Request::input('show') != ''){
          <div class="modal-content">
            <div class="modal-header">
              <button type="button" class="close" data-dismiss="modal">&times;</button>
-             <h4 class="modal-title">Download Zip File</h4>
+             <h4 class="modal-title">@lang("home.Download Zip File")</h4>
            </div>
            <div class="modal-body">
              <p>Some text in the modal.</p>
            </div>
            <div class="modal-footer">
-             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-default" data-dismiss="modal">@lang("home.Close")</button>
            </div>
          </div>
          
@@ -390,7 +390,7 @@ $('.ea-record-selected').each(function(index,element){
         if(result=='resumeZip'){
        
         $('#myModal').modal('show');
-        $('#myModal .modal-body').html('<a href="{{ url("")}}/'+res+'" onclick="delresume('+url[1]+')">click to download</a>');
+        $('#myModal .modal-body').html('<a href="{{ url("")}}/'+res+'" onclick="delresume('+url[1]+')">@lang("home.click to download")</a>');
     }
     else{
         window.location.href = "{{ url('account/manage?plan') }}";

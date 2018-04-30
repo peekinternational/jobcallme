@@ -30,7 +30,7 @@
                 </div>
                 <table class="table table-bordered">
                     <tr>
-                        <td class="active" width="200px">@lang('home.organiser')</td>
+                        <td class="active" width="100px">@lang('home.organiser')</td>
                         <td>{{ $record->organiser != '' ?  $record->organiser : JobCallMe::userName($record->userId) }}</td>
                     </tr>
                     <tr>
@@ -69,10 +69,7 @@
                         <td class="active">@lang('home.mobile')</td>
                         <td>{{ $record->mobile }}</td>
                     </tr>
-                    <tr>
-                        <td class="active">@lang('home.website')</td>
-                        <td>{{ $record->website }}</td>
-                    </tr>
+                    
                     <tr>
                         <td class="active">@lang('home.social')</td>
                         <td>
@@ -105,6 +102,18 @@
                         <td>{{ $record->address }} , @lang('home.'.JobCallMe::cityName($record->city))</td>
                     </tr>
                 </table>
+
+				<h4>@lang('home.website')</h4>
+                <table class="table">
+                   
+                           <tr>
+                               <th class="la-text">{!! $record->website !!}</th>
+                            
+                           </tr>
+                        
+                </table>
+
+				
 				<h4>@lang('home.CostofDescription')</h4>
                 <table class="table">
                    
@@ -163,9 +172,9 @@
 				            @foreach($Qry as $rec)
                    
                       <div class="la-item">
-				      <div class="col-md-4 sp-item">
+				      <div class="col-md-4 suggestedreading-img-mbl">
                         @if($rec->upskillImage != '')
-                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 180px;height:80px;">
+                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:auto !important;">
                         @else
                         <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 180px;height:80px;">
                         @endif

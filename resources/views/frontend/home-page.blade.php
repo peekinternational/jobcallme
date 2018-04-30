@@ -94,6 +94,11 @@ $lToken = csrf_token();
                                         </form>
                                     </div>
                                     <!-- read tab starts from here -->
+<style>
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #cccccc !important;
+    line-height: 28px; }
+</style>
                                     <div class="tab-pane" id="search_tab_4">
                                         <form role="form" method="POST" action="{{url('read')}}">
                                             <div class="input-fields">
@@ -142,7 +147,7 @@ $lToken = csrf_token();
     </section>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-     <button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> @lang('home.Open Quick View V')  </button>
+     <span style="padding-left:10px"><button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> @lang('home.Open Quick View V')</span>  </button>
 </div>
                                                
     <!--Slider Section End-->

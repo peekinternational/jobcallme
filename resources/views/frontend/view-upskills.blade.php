@@ -18,9 +18,9 @@
             
 			<h2 class="text-center">
 						@if(app()->getLocale() == "kr")
-						    <div id="hp_text5"></div><!-- @lang('home.headerHeading') -->
+						    @lang('home.upskillheaderHeading')<!-- <div id="hp_text5"></div> --><!-- @lang('home.headerHeading') -->
 						@else
-						    <div id="hp_text6"></div><!-- @lang('home.headerHeading') -->
+						    @lang('home.upskillheaderHeading')<!-- <div id="hp_text6"></div> --><!-- @lang('home.headerHeading') -->
 						@endif
 			</h2>
             
@@ -78,7 +78,47 @@
                 <div class="pnj-box">
                     <h3><span style="padding-left:15px;color:#fff;">@lang('home.promoteofferings')</span></h3>
                     <div class="upskill-box" style="padding-bottom:70px">
-                        <p style="font-size:17px">@lang('home.advertisecourses')</p>
+<style>
+.job-schedule-box2{    
+    text-align: center;
+	border-radius: 5px;
+
+}
+
+.job-schedule-box2  a{
+    display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 5px 10px;
+    color: #ffffff;
+    font-size: 12px;
+    background-color: #333333;
+    margin-right: 2px;
+    margin-bottom: 10px;
+	border-radius: 5px;
+	
+}
+</style>
+                        <p class="job-schedule-box2">
+						
+							<?php 
+                        $cArr = array('#0e8bcc','#94a5a5','#8d846e','#4e6c7c','#919090','#b0a48a','#8d7e8d','#a69b82','#6b91a7','#9b9b36');
+                        $i = 0;
+                        foreach(JobCallMe::getUpkillsType() as $skill){ ?>
+                            <a href="{{ url('learn/search?type='.strtolower($skill->name)) }}" style="background-color: {{ $cArr[$i] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                                /* width: 9.5%; */
+                                padding: 5px 5px;
+                                color: #ffffff;
+                                font-size: 15px;
+                                margin-bottom: 10px;
+                                /* display: block; */
+                                position: relative;
+                                /* float: left; */
+                                margin-right: 0.5%;
+                                overflow: hidden;
+                                text-decoration: none;">@lang('home.'.$skill->name)</a>
+                        <?php $i++; } ?>
+
+						</p>
                         <a href="{{ url('account/upskill/add') }}" class="btn btn-primary">@lang('home.advertisenow')</a>
                     </div>
                 </div>

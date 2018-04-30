@@ -32,50 +32,80 @@ if($upskill->country != 0){
 			               	@if($upskill->skillId)
 			
                     @else
-                       <div>
+                       <!-- <div>
                     <span style="padding-left:30px">@lang('home.selectcurrency'): &nbsp;</span>
                       <input type="radio" name="gender" id="up_kr" value="kr" checked="checked"> @lang('home.paykorean')
                       &nbsp;&nbsp;<input type="radio" name="gender" id="up_us" value="us"> @lang('home.US$')
-                      </div>
-                    <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:30px;"">
+                      </div> -->
+                    <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:30px;">
                             <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                             
  
-                        <ul id="post-job-ad-types">
+                        <ul id="post-job-ad-types-upskill" class="text-center">
+							
+							<li style="position:relative;background:#c3c3c3;">
+								<span class="pay_skill">
+							   <div  style="padding-top:12px;">
+									<span class="b" style="color:#000;font-size: 17px;"><B>@lang('home.selectcurrency')</B></span>
+							   </div></span>
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span></div>
+                                <div>
+                                    <!----><label for="{!! $payment->id!!}">
+                                        <!-- <ul class="list-unstyled desc" >
+                                            <li>@lang('home.Featuredonhomepage') --><!-- {!! $payment->tag1!!} --><!-- </li>
+                                            <li>@lang('home.adcost') --><!-- {!! $payment->tag2!!} --><!-- </li>
+                                        </ul> -->
+										
+                                        <div class="credits b" style="color:#fff;font-size: 13px;padding-top:8px;">
+										<span class="text-success" style="color:#fff;">
+											<span class="text-success" style="color:#fff;"><input type="radio" name="gender" id="up_kr" value="kr" checked="checked"> @lang('home.paykorean')</span>
+											<span class="text-success" style="color:#fff;padding-left:25px;"><input type="radio" name="gender" id="up_us" value="us" style="padding-left:25px"> @lang('home.US$')</span>
+										</span>
+										
+									<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
+									</div>
+                                    </label>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </li>
+							
 							@foreach($uppayment as $key=> $payment)
 
 								@if($payment->title == "Seminar · Exhibition · Webinar")
-                            <!----><li style="position:relative;background:#a8b3b9;">
+                            <!----><li style="position:relative;background:#6c6148;">
 								@endif
 								@if($payment->title == "Forum · Conference")
-                            <!----><li style="position:relative;background:#b0a48a;">
+                            <!----><li style="position:relative;background:#96aaa8;">
 								@endif
 								@if($payment->title == "Training · Workshop")
-                            <!----><li style="position:relative;background:#4e6c7c;">
+                            <!----><li style="position:relative;background:#6d846f;">
 								@endif
 								@if($payment->title == "Course · Education · Academy")
-                            <!----><li style="position:relative;background:#94a5a5;">
+                            <!----><li style="position:relative;background:#b0a48a;">
 								@endif
 								@if($payment->title == "Contest · Show")
-                            <!----><li style="position:relative;background:#a09d8e;">
+                            <!----><li style="position:relative;background:#4e6c7c;">
 								@endif
 
-                          <span class="pay_skill">
-                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="cat_id" value="{!! $payment->cat_id!!}">
-							   <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
-							   </span>
-							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
-                             <span class="b" style="color:#fff;font-size: 17px;">@lang('home.'.$payment->title)</span></div>
+                          <span class="pay_skill text-left">
+							   <div style="padding-left:10px;padding-top:12px;">
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="cat_id" value="{!! $payment->cat_id!!}" style="padding-top:15px;">
+							   <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">&nbsp;<span class="b" style="color:#fff;font-size: 17px;">@lang('home.'.$payment->title)</span>
+							   </div></span>
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span></div>
                                 <div>
                                     <!----><label for="{!! $payment->id!!}">
-                                        <ul class="list-unstyled desc" >
-                                            <li>@lang('home.Featuredonhomepage')<!-- {!! $payment->tag1!!} --></li>
-                                            <li>@lang('home.adcost')<!-- {!! $payment->tag2!!} --></li>
-                                        </ul>
+                                        <!-- <ul class="list-unstyled desc" >
+                                            <li>@lang('home.Featuredonhomepage') --><!-- {!! $payment->tag1!!} --><!-- </li>
+                                            <li>@lang('home.adcost') --><!-- {!! $payment->tag2!!} --><!-- </li>
+                                        </ul> -->
 										
-                                        <div class="credits b" style="color:#fff;font-size: 15px;padding-top:5px;">
-										<span class="text-success" style="color:#fff" id="up_text{{number_format($key)}}"></span>
-									<i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i>
+                                        <div class="credits b" style="color:#fff;font-size: 13px;padding-top:10px;">
+										<span class="text-success" style="color:#fff;">@lang('home.upskill-pay-text')</span>
+										<span class="text-success" style="color:#fff;padding-left:25px;">@lang('home.pay_cost') : </span><span class="text-success" style="color:#fff;padding-left:0px;" id="up_text{{number_format($key)}}"></span>&nbsp;/@lang('home.days')
+									<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
 									</div>
                                     </label>
                                     <!---->
@@ -236,14 +266,14 @@ if($upskill->country != 0){
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.state')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-state" name="state" data-state="{{ $gState }}">
+                                <select class="form-control select2 job-state" name="state" data-state="{{ $gState }}" required>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.city')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <select class="form-control select2 job-city" name="city" data-city="{{ $gCity }}">
+                                <select class="form-control select2 job-city" name="city" data-city="{{ $gCity }}" required>
                                 </select>
                             </div>
                         </div>
@@ -254,7 +284,7 @@ if($upskill->country != 0){
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.contactperson')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" name="contact" class="form-control" placeholder="@lang('home.contactperson')" value="{{ $upskill->contact }}">
+                                <input type="text" name="contact" class="form-control" placeholder="@lang('home.contactperson')" value="{{ $upskill->contact }}" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -684,7 +714,7 @@ $(document).ready(function(){
      var simplearray = <?php echo json_encode($uppayment); ?>;
 
      for(var i=0;i<simplearray.length;i++){
-     $('#up_text'+i).html('￦ '+number_format(simplearray[i].price*1000)+'')
+     $('#up_text'+i).html('￦ '+number_format(simplearray[i].price*1100)+'')
         //alert(jArray[i].amount);
        }
      
@@ -706,7 +736,7 @@ $(document).ready(function(){
     $('#up_kr').click(function(){
     if ($(this).is(':checked')) {
     for(var i=0;i<simplearray.length;i++){
-     $('#up_text'+i).html('￦ '+number_format(simplearray[i].price*1000) +'')
+     $('#up_text'+i).html('￦ '+number_format(simplearray[i].price*1100) +'')
        // alert(jArray[i].amount*1100);
       }
     }
@@ -727,7 +757,7 @@ $(document).ready(function(){
       $('#adduration').val(to);
             
     if ($('#up_kr').is(':checked')) {
-	  $('#totalam').html("@lang('home.Total Amount') : "+total*1000+" ₩" );
+	  $('#totalam').html("@lang('home.Total Amount') : "+total*1100+" ₩" );
      // alert('kr');
     }
 

@@ -26,7 +26,7 @@
                             @foreach($questionaires as $question)
                                 <tr id="{{$question->ques_id}}">
                                     <td>{{ $question->title }}</td>
-                                    <td>{{ $question->type }}</td>
+                                    <td>@lang('home.'.$question->type)</td>
                                     <td>{{ $question->submission_date }}</td>
                                     <td>@lang('home.Que'.$question->accept_late_submission)</td>
                                     <td>@lang('home.Que'.$question->shuffle_questions)</td>

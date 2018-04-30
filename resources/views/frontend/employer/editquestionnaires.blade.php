@@ -18,7 +18,7 @@
                                     <strong>@lang('home.QueTitle'):</strong> {{$ques->title}}
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>@lang('home.QueType'):</strong> {{$ques->type}}
+                                    <strong>@lang('home.QueType'):</strong> @lang('home.'.$ques->type)
                                 </div>
                                 <div class="col-md-12">
                                     <strong>@lang('home.Duration'):</strong> N/A

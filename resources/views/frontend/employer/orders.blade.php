@@ -61,8 +61,12 @@
         						@foreach($data as $order)
         						<tr>
         							<td>{{$order->order_id}}</td>
-											<td>@lang('home.'.$order->category)</td>
+									<td>@lang('home.'.$order->category)</td>
+									@if($order->category == "Package Plan")
         							<td>@lang('home.'.$order->orderBy)</td>
+									@else
+									<td>{{$order->orderBy}}</td>
+									@endif
         							<td>@lang('home.'.$order->payment_mode)</td>
         							<td>{{$order->amount}} {{$order->currency}}</td>
         							<td>@lang('home.'.$order->status)</td>
