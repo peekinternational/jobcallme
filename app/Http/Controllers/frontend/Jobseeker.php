@@ -115,14 +115,15 @@ class Jobseeker extends Controller{
 		if(!$request->session()->has('jcmUser')){
     		return redirect('account/login?next='.$request->route()->uri);
     	}
-
 		$app = $request->session()->get('jcmUser');
 		$user = DB::table('jcm_users')->where('userId',$app->userId)->first();
+		$comments = DB::table('comments')->where('jobseeker_id',$app->userId)->where('table_name','resume')->get();
+		$totalReview = count($comments);
 		$meta = DB::table('jcm_users_meta')->where('userId',$app->userId)->first();
 		$resume = $this->userResume($app->userId);
 		$privacy = JobCallMe::getprivacy($app->userId);
 		//dd($user);exit;
-		return view('frontend.jobseeker.resume',compact('user','meta','resume','privacy'));
+		return view('frontend.jobseeker.resume',compact('totalReview','comments','user','meta','resume','privacy'));
 	}
 
 	public function userResume($userId){

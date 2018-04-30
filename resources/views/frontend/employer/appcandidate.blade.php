@@ -509,15 +509,19 @@
             <h4 class="modal-title">Review on Resume</h4>
           </div>
           <div class="modal-body">
-           <form>
+           <form id="review-form">
              <div class="form-group">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                <label for="review">Review:</label>
-               <textarea type="review" name="review" rows="5" class="form-control" id="review"></textarea>
+               <textarea type="review" name="comment" rows="5" class="form-control" id="review"></textarea>
+               <input type="hidden" name="jobseeker_id" value="{{$applicant->userId}}">
+               <input type="hidden" name="job_id" value="<?php echo $_GET['jobId']; ?>">
+               <input type="hidden" name="employeer_id" value="{{ Session::get('jcmUser')->userId }}">
              </div>
            </form>
           </div>
           <div class="modal-footer">
-             <button type="submit" class="btn btn-success">Submit</button>
+             <button type="submit" id="btn-review" class="btn btn-success">Submit</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
         </div>
@@ -530,6 +534,21 @@
 .input-error{color: red;}
 </style>
 <script type="text/javascript">
+    $('#btn-review').on('click',function(){
+       var data = $('#review-form').serialize();
+       $.ajax({
+        url:jsUrl()+"/account/employer/application/candidate/review",
+        type:"post",
+        data:data,
+        success:function(res){
+            if(res == 1){
+                toastr.success('review submit successfully');
+                $('#review-form #review').val('');
+                $('#reviewModel').modal('hide');
+            }
+        }
+       });
+    })
     restrict($('#qualification'));
     function restrict(el){
         if($(el).is(':checked')){ 
