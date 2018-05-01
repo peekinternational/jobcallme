@@ -530,7 +530,7 @@ class Home extends Controller{
 		$readQry->where('jcm_upskills.adendDate','>=',date('Y-m-d'));
 		$readQry->orderBy('jcm_upskills.skillId','desc');
 		$readQry->limit(12);
-		$lear_record=$readQry->get();
+		$lear_record=$readQry->paginate(10);
 //dd($lear_record);
     	return view('frontend.learn',compact('lear_record'));
     }

@@ -209,7 +209,21 @@ $lToken = csrf_token();
     </section>
 
     <!--Premium Jobs Section Start-->
+    <div class="container" style="background: #fff;
+                                    margin-top: -12px;
+                                    /* margin-bottom: -10px; */
+                                    width: 100%;
+                                    /* margin-left: 64px; */
+                                    padding-left: 79px;
+                                    padding-bottom: 27px;">
+              <div class="row">
+                <span style="padding-left:10px"><button type="submit" class="btn btn-success btn-sm" id="mainbutton" onclick="myFunctions()"> @lang('home.Open AD View')</span>  </button>
+                    </div>
+                    </div>
+    <div id="maindiv" style="display:none">
+     
     <section class="job-types-section" style="background:#fff;margin-top:-12px;margin-bottom:-10px;">
+   
         <div class="container">
 		<div>
             <p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.prjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
@@ -723,6 +737,7 @@ $lToken = csrf_token();
             </div>
         </div>
     </section>
+    </div>
     <!--Golden Jobs Section End-->
 @endsection
 @section('page-footer')
@@ -754,12 +769,23 @@ $lToken = csrf_token();
   $("#Quickbutton").click(function(){
     $("#QuickView").toggle();
 });
+ $("#mainbutton").click(function(){
+    $("#maindiv").toggle();
+});
 function myFunction() {
     var x = document.getElementById("Quickbutton");
     if (x.innerHTML === "@lang('home.Close Quick View V')") {
         x.innerHTML = "@lang('home.Open Quick View V')";
     } else {
         x.innerHTML = "@lang('home.Close Quick View V')";
+    }
+}
+function myFunctions() {
+    var x = document.getElementById("mainbutton");
+    if (x.innerHTML === "@lang('home.Close AD View')") {
+        x.innerHTML = "@lang('home.Open AD View')";
+    } else {
+        x.innerHTML = "@lang('home.Close AD View')";
     }
 }
 </script>

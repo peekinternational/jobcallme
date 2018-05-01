@@ -1306,7 +1306,7 @@ ul.jd-rewards li i{
 }
 
 .jd-about-organization{
-    border-left: 3px solid #999;
+    /*border-left: 3px solid #999;*/
     color: #999;
     padding-left: 10px;
 }
@@ -3547,6 +3547,25 @@ img.profile-photo-xs{
 
 }
 @media (max-width: 499px){
+
+    #post-job-ad-types2>li {
+   
+    width: 141px !important;
+    min-height: 70px;
+    
+}
+#post-job-ad-types2>li:last-Child {
+   
+    width: 100% !important;
+    min-height: 70px;
+    
+}
+#post-job-ad-types2>li span{
+    font-size:11px !important ;
+}
+#post-job-ad-types2>li:last-Child span:last-child b{
+       padding-left: 37px;
+}
     .sns-box .fb-btn{
         display: inline-block;
         width: 100%;
