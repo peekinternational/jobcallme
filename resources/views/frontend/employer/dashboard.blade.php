@@ -81,7 +81,8 @@
 									
                                 </div>
 									<div class="col-xs-2 col-md-2"><div class="dropdown">
-									  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+									  <i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size: 21px;"></i>
+                                      <i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size: 21px;"></i>
 									  <div class="dropdown-content">
 										<a href="{{url('account/employer/job_update/'.$pjobs->jobId)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')</a>
 										<a href="{{url('account/employer/setfilter/'.$pjobs->jobId)}}"><i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')</a>
