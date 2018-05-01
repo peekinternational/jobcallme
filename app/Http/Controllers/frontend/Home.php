@@ -574,7 +574,7 @@ class Home extends Controller{
 		//dd($Qry);
 		
 		
-    	return view('frontend.view-article',compact('record','Qry'));
+    	return view('frontend.view-article',compact('writingId','record','Qry'));
     }
 
     public function viewUpskill(Request $request,$skillId){
@@ -589,7 +589,7 @@ class Home extends Controller{
     	}
      $Qry = DB::table('jcm_upskills')->limit(4)->inRandomOrder()->get();
 	// dd($Qry);
-    	return view('frontend.view-course',compact('record','Qry'));
+    	return view('frontend.view-course',compact('skillId','record','Qry'));
     }
 
     public function searchSkills(Request $request){  

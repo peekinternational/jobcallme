@@ -2475,7 +2475,7 @@ if($user->profilePhoto != ''){
                                       </div>
                                     </div>
                                     <div class="col-md-11">
-                                      <span class="heading"><a target="" href="{{url('companies/company/'.$companyDetail->companyId)}}">{{ $companyDetail->companyName }}</a></span>
+                                      <span class="heading"><a target="_blank" href="{{url('companies/company/'.$companyDetail->companyId)}}">{{ $companyDetail->companyName }}</a></span>
                                       <span class="pull-right"><button onclick="deleteReview(this,{{$comment->comment_id}})" class="btn btn-danger">delete</button></span>
                                       <p>{{ substr($comment->comment,0,150) }}</p>
                                         <span>{{ date('d M,Y',strtotime($comment->comment_date)) }}</span>
@@ -2484,6 +2484,7 @@ if($user->profilePhoto != ''){
                           </div>
                         </div>
                         @endforeach
+                        
                     </div>
                     
 					

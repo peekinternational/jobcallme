@@ -22,7 +22,9 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
-
+Route::get('comments',function(){
+	return view('comments');
+});
 Route::post('read/likes/{type}','frontend\Home@likes');
 Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');
