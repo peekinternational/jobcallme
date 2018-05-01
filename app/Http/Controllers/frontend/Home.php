@@ -411,6 +411,7 @@ class Home extends Controller{
     		if($request->input('keyword') != ''){
     			$people->where('jcm_users.firstName','like','%'.$request->input('keyword').'%');
     			$people->orWhere('jcm_users.lastName','like','%'.$request->input('keyword').'%');
+				$people->orWhere('jcm_users.username','like','%'.$request->input('keyword').'%');
     		}
     		if($request->input('city') != ''){
     			$cityId = JobCallMe::cityId($request->input('city'));
@@ -540,7 +541,7 @@ class Home extends Controller{
 		$readQry->where('jcm_upskills.adendDate','>=',date('Y-m-d'));
 		$readQry->orderBy('jcm_upskills.skillId','desc');
 		$readQry->limit(12);
-		$lear_record=$readQry->get();
+		$lear_record=$readQry->paginate(10);
 //dd($lear_record);
     	return view('frontend.learn',compact('lear_record'));
     }

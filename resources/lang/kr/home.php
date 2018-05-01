@@ -30,6 +30,17 @@ return [
 	'submit' => '보내기',
 	'subscribe' => '구직 알림 신청',
 	///end navbar//
+	'CustomerService' =>'고객센터 : 070-7770-0967 (평일 09:00 ~ 17:00 )  l FAX: 02-2058-0138  l Email: help@jobcallme.com',
+	'companyaddr' =>'서울시 서초구 논현로 27길 39 2층(양재동, 천일빌딩) 잡콜미 l 대표 : 김성영 l 사업자등록번호 : 201-86-41011',
+	'ceo' =>'통신판매업 신고번호 : 제2014-서울서초-1367호 l 직업정보제공사업 신고번호 : 서울청 제2017-26호',
+
+	'CustomerService1' =>'고객센터 : 070-7770-0967 (평일 09:00 ~ 17:00 )',
+	'CustomerService2' =>'FAX: 02-2058-0138  l Email: help@jobcallme.com',
+	'companyaddr1' =>'서울시 서초구 논현로 27길 39 2층(양재동, 천일빌딩) 잡콜미',
+	'companyaddr2' =>'대표 : 김성영 l 사업자등록번호 : 201-86-41011',
+	'ceo1' =>'통신판매업 신고번호 : 제2014-서울서초-1367호',
+	'ceo2' =>'직업정보제공사업 신고번호 : 서울청 제2017-26호',
+	
 	
 	//Homepage//
 	'Cities' => '전세계 구ㆍ군 작성(예시:강남구,중구 또는 뉴욕)',
@@ -644,7 +655,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 	'WRITE YOUR FIRST ARTICLE' =>'자료 등록',
 	'eagerlywaiting2' => '자료 등록은 자신의 전문분야을 전세계 개인 및 기업들에게 알릴수 있는 창구입니다!', 
 	//'eagerlywaiting3' => '에세이 등록은 자신의 전문분야ㆍ기술ㆍ자료를 전세계 개인 및 기업들에게 공유하실수 있습니다.',
-	'eagerlywaiting4' => '자료 등록하실때 광고 및 홍보와 관련된 글을 작성할 수 없으며 만약 등록할 경우 강제 자동삭제 및 강제 회원탈퇴가 될 수 있습니다.',
+	'eagerlywaiting4' => '자료 등록은 광고 및 홍보와 관련된 글을 작성할 수 없으며 만약 등록할 경우 강제 삭제 및 회원탈퇴가 될 수 있습니다.',
 	'mywriting2' => '회원님의 자료 등록',
 
 	//Employer application//
@@ -114138,7 +114149,7 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'resumeday1' => '이용기간',
 'resumeday2' => '30일',
 'Top' => '탑',
-'aboutinfo' => '개황정보',
+'aboutinfo' => '금융감독원',
 'picture policy' => '사진정책',
 'Refund Policy' => '환불정책',
 'hopeworkingor' => '또는',
@@ -114161,9 +114172,11 @@ b)“내일검색” “잡콜미” 취업정보 검색 사이트(naeil.incruit
 'We are not responsible for any legal disputes that arise from trusting the attached document. (Related with Article 14 of Terms of Use)' => '첨부된 문서를 신뢰하여 발생한 법적 분쟁에 책임을 지지 않습니다. (이용약관 제14조 관련)',
 'In addition, resumes may be deleted or closed for use outside the job seeking / employment field.' => '또한 구인/구직 목적외 목적으로 이용시 이력서 삭제 혹은 비공개 조치될 수 있습니다.',
 
-'Open Job AD V' => '채용광고 보기',
-'Close Job AD V' => '채용광고 닫기',
+'Open AD View' => '채용광고 보기',
+'Close AD View' => '채용광고 닫기',
 
 'review write' => '사용자 평가 정책',
 'Video & Chat Policy' => '사용자 화상 채팅 정책',
+'jcm-foot1' => '(주)잡콜미 ▼',
+'jcm-foot2' => '(주)잡콜미 ▲',
 ];

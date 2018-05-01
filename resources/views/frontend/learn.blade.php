@@ -205,6 +205,7 @@
                 </div>
             @endforeach
         </div>
+        <div style="text-align:center"><?php	echo $lear_record->render(); ?></div>
     </div>
 	<br><br><br>
 </section>

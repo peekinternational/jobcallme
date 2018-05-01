@@ -70,6 +70,18 @@ position:absolute;
 .foot-links3{    
 	background-color: #fff;
 }
+.foot-links-m{
+    padding: 0px 0 10px;
+	
+}
+.foot-links-m li{
+    padding: 5px;
+	color: #d7d7d7;
+    font-size: 11px;
+	text-decoration: none;
+	list-style: none;
+	text-align: center;	
+}
 .foot-links-hr{  
 	position: relative;
 	width: 100%;
@@ -1306,7 +1318,7 @@ ul.jd-rewards li i{
 }
 
 .jd-about-organization{
-    border-left: 3px solid #999;
+    /*border-left: 3px solid #999;*/
     color: #999;
     padding-left: 10px;
 }
@@ -3077,7 +3089,7 @@ img.profile-photo-xs{
     height: 60px;
     border-radius: 50%;
     left: 12px;
-    bottom: 8px;
+    bottom: 30px;
 }
 .job-notification i{
     background: #2e6da4;
@@ -3123,7 +3135,7 @@ img.profile-photo-xs{
     border-radius: 50%;
     margin: 0;
     position: fixed;
-    bottom: 8px;
+    bottom: 30px;
     right: 57px;
     width: 60px;
     height: 60px;
@@ -3145,7 +3157,7 @@ img.profile-photo-xs{
 #footer{
     background-color: #333333;
     padding-top: 20px;
-    min-height: 300px;
+    /*min-height: 300px;*/
 }
 .readmore-btn{
     display: inline-block;
@@ -3547,6 +3559,25 @@ img.profile-photo-xs{
 
 }
 @media (max-width: 499px){
+
+    #post-job-ad-types2>li {
+   
+    width: 141px !important;
+    min-height: 70px;
+    
+}
+#post-job-ad-types2>li:last-Child {
+   
+    width: 100% !important;
+    min-height: 70px;
+    
+}
+#post-job-ad-types2>li span{
+    font-size:11px !important ;
+}
+#post-job-ad-types2>li:last-Child span:last-child b{
+       padding-left: 37px;
+}
     .sns-box .fb-btn{
         display: inline-block;
         width: 100%;

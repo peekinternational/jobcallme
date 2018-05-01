@@ -263,6 +263,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/interview-venues/detail/{id}', 'frontend\Employer@viewInterviewVeneu');
     Route::get('employer/application/applicant/{id}','frontend\Employer@viewApplicant');
 	Route::get('employer/application/candidate/{id}','frontend\Employer@viewApplicants');
+	Route::post('employer/application/candidate/review','frontend\Employer@comment');
+
     Route::get('employer/organization', 'frontend\Employer@organization');
     Route::post('employer/organization/save', 'frontend\Employer@savdOrganization');
     Route::post('employer/organization/about', 'frontend\Employer@aboutOrganization');
@@ -444,3 +446,4 @@ Route::post('account/employer/company/addreview', 'frontend\Employer@addreview')
 Route::post('sajid', 'frontend\Jobseeker@downloadmulticv');
 Route::post('delcv', 'frontend\Jobseeker@deletedownloadedcv');
 Route::post('evaluation/candidate/save','frontend\Employer@candidateEvaluation');
+Route::post('jobseeker/resume/review/delete','frontend\Employer@deleteResumeReview');

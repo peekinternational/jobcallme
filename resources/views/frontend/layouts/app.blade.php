@@ -517,6 +517,19 @@ function saveJob(jobId,obj){
     })
 }
 
+
+$("#footinfobutton").click(function(){
+    $("#footinfodiv").toggle();
+});
+
+function myfootinfo() {
+    var x = document.getElementById("footinfobutton");
+    if (x.innerHTML === "@lang('home.jcm-foot2')") {
+        x.innerHTML = "@lang('home.jcm-foot1')";
+    } else {
+        x.innerHTML = "@lang('home.jcm-foot2')";
+    }
+}
     
 </script>
 

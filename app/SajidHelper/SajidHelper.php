@@ -1,5 +1,6 @@
 <?php
 namespace App\SajidHelper;
+use DB;
 
 Class SajidHelper {
 	private $client_id;
@@ -31,5 +32,12 @@ Class SajidHelper {
 				\Session::put('loadOne', 'yes');
 			}
 		}	
+	}
+	public function getReviewCompany($employeer_id){
+		$table = DB::table('jcm_users');
+		$table->join('jcm_companies','jcm_companies.companyId','=','jcm_users.companyId');
+		$table->where('jcm_users.userId','=',$employeer_id);
+	$data = $table->first();
+	return $data;
 	}
 }

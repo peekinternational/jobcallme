@@ -271,6 +271,7 @@ class Jobs extends Controller{
 				foreach($expl as $kw){
 					$query->orWhere('jcm_jobs.title','LIKE','%'.$kw.'%');
 					$query->orWhere('jcm_jobs.skills','LIKE','%'.$kw.'%');
+					$query->orWhere('jcm_companies.companyName','LIKE','%'.$kw.'%');
 				}
 			});
 		}
