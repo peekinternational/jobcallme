@@ -1319,6 +1319,7 @@ public function mapOrganization(Request $request){
 		$app = $request->session()->get('jcmUser');
 
 		$applicantInter = $request->input('applicantInter');
+		//dd($applicantInter);
 		$fromDate = trim($request->input('fromDate'));
 		$toDate = trim($request->input('toDate'));
 		$perInterview = trim($request->input('perInterview'));
