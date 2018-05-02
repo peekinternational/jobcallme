@@ -2179,7 +2179,7 @@ ul.jd-rewards li i{
 }
 .pnj-form-section{
     padding: 10px 15px;
-    overflow: auto;
+   /* overflow: auto;*/
     
 }
 #pnj-form .control-label{
@@ -3566,6 +3566,7 @@ img.profile-photo-xs{
 #post-job-ad-types2>li:last-Child span:last-child b{
        padding-left: 37px;
 }
+
     .sns-box .fb-btn{
         display: inline-block;
         width: 100%;
@@ -3831,7 +3832,7 @@ img.profile-photo-xs{
         right: 0;
     }
     .pnj-form-section{
-        padding: 10px 0;
+        /*padding: 10px 0;*/
         text-align: left;
     }
      #personal-information .profile-img >img{
