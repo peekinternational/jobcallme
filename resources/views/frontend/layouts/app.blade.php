@@ -524,10 +524,13 @@ $("#footinfobutton").click(function(){
 
 function myfootinfo() {
     var x = document.getElementById("footinfobutton");
+	var x2 = document.getElementById("footinfobutton2");
     if (x.innerHTML === "@lang('home.jcm-foot2')") {
         x.innerHTML = "@lang('home.jcm-foot1')";
+		x2.innerHTML = "@lang('home.jcm-foot1-1')";
     } else {
         x.innerHTML = "@lang('home.jcm-foot2')";
+		x2.innerHTML = "@lang('home.jcm-foot2-1')";
     }
 }
     

@@ -3956,16 +3956,16 @@ curveIn {  0% {
 }
 #post-job-ad-types>li:not(:last-child) {
     margin-right: 4px;
-	    background-color: white;
+	    background-color: #282828;
 }
 
 #post-job-ad-types>li {
     display: inline-block;
-    width: 175px;
-    min-height: 300px;
+    width: 132px;
+    min-height: 242px;
     cursor: pointer;
      padding: 0px 0px 0px 0px;
-    border: 1px solid #cfd8dc;
+    border: 0px solid #cfd8dc;
 	margin-top:10px;
     transition: all .2s ease-in-out;
 	    background-color: white;

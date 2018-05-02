@@ -176,7 +176,7 @@
 
 	<div class="foot-links-m hidden-sm hidden-md hidden-lg">             
         <ul>
-            <li><a id="footinfobutton" onclick="myfootinfo()" style="color:#fff;font-size:15px;"> @lang('home.jcm-foot1')</a></li>			       
+            <li><a id="footinfobutton" onclick="myfootinfo()" style="color:#fff;font-size:15px;"> @lang('home.jcm-foot1')</a><a id="footinfobutton2" style="color:#fff;font-size:11px;"> @lang('home.jcm-foot1-1')</a></li>			       
         </ul>				
     </div>
 	
