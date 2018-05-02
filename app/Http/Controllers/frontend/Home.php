@@ -572,9 +572,10 @@ class Home extends Controller{
 		$read->inRandomOrder();
 		$Qry=$read->get();
 		//dd($Qry);
+		/*comments on article */
+		$comments = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$writingId)->get();
 		
-		
-    	return view('frontend.view-article',compact('writingId','record','Qry'));
+    	return view('frontend.view-article',compact('comments','writingId','record','Qry'));
     }
 
     public function viewUpskill(Request $request,$skillId){

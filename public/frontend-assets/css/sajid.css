@@ -10,6 +10,12 @@
     padding: 20px;
     box-shadow: 0px 1px 17px rgba(0,0,0,0.4);
 }
+.fullwidth{
+  width: 100%;
+}
+.comment-box{
+  
+}
 .bell{
 position: relative;
 }

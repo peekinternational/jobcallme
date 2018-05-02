@@ -440,10 +440,12 @@ Route::get('/locale/{locale}', function ($locale) {
     \Session::put('locale', $locale);
     return redirect()->back();
 });
-/*review routes */
+/* muhammad sajid routes */
 Route::get('account/employeer/companies/company/review', 'frontend\Employer@companyreview');
 Route::post('account/employer/company/addreview', 'frontend\Employer@addreview');
 Route::post('sajid', 'frontend\Jobseeker@downloadmulticv');
 Route::post('delcv', 'frontend\Jobseeker@deletedownloadedcv');
 Route::post('evaluation/candidate/save','frontend\Employer@candidateEvaluation');
 Route::post('jobseeker/resume/review/delete','frontend\Employer@deleteResumeReview');
+Route::post('read/article/comment/save','sajidController@savecomment');
+Route::post('read/article/comment/delete','sajidController@deletecomment');

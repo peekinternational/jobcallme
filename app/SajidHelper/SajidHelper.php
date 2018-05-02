@@ -1,6 +1,7 @@
 <?php
 namespace App\SajidHelper;
 use DB;
+use Session;
 
 Class SajidHelper {
 	private $client_id;
@@ -15,6 +16,9 @@ Class SajidHelper {
 
 	public function getClientId(){
 		return $this->client_id;
+	}
+	public function getprofilepic(){
+		return Session::get('jcmUser')->profilePhoto;
 	}
 	public function getClientSecret(){
 		return $this->client_secret;
