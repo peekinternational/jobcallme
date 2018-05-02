@@ -467,8 +467,12 @@ class JobCallMe{
 	}
 
 	public function timeDuration($date1,$date2,$min = ''){
+		$date = strtotime("+1 day", strtotime($date2));
+        $date3=date("Y-m-d", $date);
 		$datetime1 = new \DateTime($date1);
-		$datetime2 = new \DateTime($date2);
+		$datetime2 = new \DateTime($date3);
+		
+		//dd($datetime2);
 		$interval = $datetime1->diff($datetime2);
 		//if($min != ''){
 			//return $interval->format('%mm %dd');
