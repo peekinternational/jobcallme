@@ -5,17 +5,15 @@
 @section('content')
 
 <section id="postNewJob" style="margin-bottom:70px">
- <div class="container">
+ 
  <form action='{{ url("paypals") }}' method='post' class='form-horizontal' enctype='multipart/form-data'>
                         {{ csrf_field() }}
 
 <input name="paycurrency" type="hidden">
-
-  
-
+<div class="container">
 
 	  <div class="row">
-            <div class="col-md-12" style="margin-top:70px">
+           
            @if(count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul style="list-style: none;">
@@ -361,7 +359,7 @@
 							@endforeach
                         </ul>
 
-                   <a id="nonpckg" href="javascript:void(0)" style="float:right;margin-top:10px;"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Use Package Plan?') ></span></a>
+                   <a id="nonpckg" href="javascript:void(0)" style="float:right;margin-top:12px;margin-bottom: 18px;"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Use Package Plan?') ></span></a>
 
                     
                 </div>
@@ -1409,9 +1407,9 @@
             </div>
       
   
-	
+	</div>
 </form>
-</div>
+
 <style type="text/css">
      #map {
         height: 500px;
