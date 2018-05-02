@@ -12,6 +12,7 @@
                     @endforeach
                 </select>
             </div>
+
                 <h5>
                     <div style="width:100%;overflow: visible;background:#94a5a5;">
                         <select class="form-control select3" name="htype" onchange="location.href=this.value" style="width:200px;overflow: visible;">
@@ -20,11 +21,14 @@
 
                             <option value="{{ url('jobs?category='.$fCat->categoryId.'&head=yes') }}">@lang('home.'.ucfirst($fCat->name))<!-- {!! $cat->name !!} --></option>
 
+
                             @endforeach
                         </select>
                     </div>
                 </h5>
-        </div>
+
+                
+            </div>
         <div id="feed-header" class="none">@lang('home.feedback_header')</div>
         <div id="feedback-main" class="none">@lang('home.feedback')</div>
         <div id="feedback-email" class="none">@lang('home.enteremail')</div>
@@ -50,7 +54,7 @@
                     @endforeach
                 </select>
             </div>
-                
+     
                 <h5>
                     <div style="width:100%;overflow: visible;background:#4e6c7c;">
                         <select class="form-control select3" name="dtype" onchange="location.href=this.value" style="width:200px;overflow: visible;">
@@ -63,6 +67,7 @@
                         </select>
                     </div>
                 </h5>  
+
         </div>
 
         <div class="col-md-2">
@@ -76,11 +81,13 @@
                     @endforeach
                 </select>
             </div>
+
                <h5>
                <div style="width:100%;overflow: visible;background:#695f47;border: 1px solid white; padding: 9px;">
             <a style="color:white" href="{{ url('account/employer/job/new') }}">@lang('home.postjobnew')</a>
             </div>
            </h5>
+
         </div>
 
         <div class="col-md-2">
@@ -94,11 +101,13 @@
                     @endforeach
                 </select>
             </div>
+
                 <h5>
                <div style="width:100%;overflow: visible;background:#5a6d5b;border: 1px solid white; padding: 9px;">
                  <a style="color:white" href="{{ url('companies') }}">&nbsp;@lang('home.Companiesad')&nbsp;&nbsp;</a>
                </div>
            </h5>
+
         </div>
 
         <div class="col-md-2">
@@ -113,6 +122,7 @@
                     <option value="{{ url('jobs?country='.JobCallMe::getHomeCountry().'&state='.$loca2->id )}}">@lang('home.globalOverseas')<!--  @lang('home.jobsin') --></option>
                 </select>
             </div>
+
             <h5>
                <div style="width:100%;overflow: visible;background:#f0ad4e;border: 1px solid white; padding: 9px;">
             <a style="color:white" target="_blank" href="https://www.outsourcingok.com/">www.outsourcingok.com</a>
@@ -122,6 +132,7 @@
         </div>
 
         <div class="col-md-2" style="padding-top: 32px;">
+
             <!-- <h5><span class="footer-title-box" style="background-color: #717171">@lang('home.aboutus')</span></h5> -->
             <h5>&nbsp;</h5>
             <div style="width:100%;overflow: visible;background:#717171;">
@@ -133,6 +144,8 @@
                     <option value="{{ url('privacy-policy') }}">@lang('home.Privacy Policy')</option>
                     <option value="{{ url('terms-conditions') }}">@lang('home.Terms & Conditions')</option>
 					<option value="{{ url('picture-policy') }}">@lang('home.picture policy')</option>
+					<option value="{{ url('review-write') }}">@lang('home.review write')</option>
+					<option value="{{ url('video-chat-policy') }}">@lang('home.Video & Chat Policy')</option>
 					<!-- <option value="{{ url('refund-policy') }}">@lang('home.Refund Policy')</option> -->
                     <option value="{{ url('account/register') }}">@lang('home.Login')</option>
                     <option value="{{ url('account/register') }}">@lang('home.Signup')</option>
@@ -146,12 +159,13 @@
                 <li><a href="https://twitter.com"><i class="fa fa-twitter-square"></i> </a> </li>
                 <li><a href="https://linkedin.com"><i class="fa fa-linkedin-square"></i> </a> </li>
             </ul>
+
         </div>
     
     </div>
     <div class="foot-links-hr hidden-xs"></div>
     <!-- <section class="main-slide-foot"> -->
-    <div class="foot-links">             
+    <div class="foot-links hidden-xs">             
         <ul>
             <li>@lang('home.CustomerService')</li>
             <li>@lang('home.companyaddr')</li>
@@ -159,6 +173,26 @@
             <li>Copyrihgt &copy; 2017 Jobcallme Co.,Ltd.(RN 201-86-41011)</li>                
         </ul>				
     </div>
+
+	<div class="foot-links-m hidden-sm hidden-md hidden-lg">             
+        <ul>
+            <li><a id="footinfobutton" onclick="myfootinfo()" style="color:#fff;font-size:15px;"> @lang('home.jcm-foot1')</a><a id="footinfobutton2" style="color:#fff;font-size:11px;"> @lang('home.jcm-foot1-1')</a></li>			       
+        </ul>				
+    </div>
+	
+<div id="footinfodiv" style="display:none">
+	<div class="foot-links-m hidden-sm hidden-md hidden-lg">             
+        <ul>
+            <li>@lang('home.CustomerService1')</li>
+			<li>@lang('home.CustomerService2')</li>
+            <!-- <li>@lang('home.companyaddr1')</li>
+			<li>@lang('home.companyaddr2')</li> -->
+            <li>@lang('home.ceo1')</li> 
+			<li>@lang('home.ceo2')</li>
+            <li>Copyrihgt &copy; 2017 Jobcallme Co.,Ltd.(RN 201-86-41011)</li>                
+        </ul>				
+    </div>
+</div>
     <!-- @if(Session::has('jcmUser'))
     <script type="text/javascript" charset="utf-8" src="{{asset('cometchat/js.php')}}"></script>
     <link type="text/css" rel="stylesheet" media="all" href="{{asset('cometchat/css.php')}}" /> 
@@ -210,5 +244,10 @@ setTimeout(function(){
     $('#feedback-Form textarea[name="message"]').html(message); 
     $('#fpi_submit_submit button[type="submit"]').html(submit); 
 }, 3000);      
+
+
+
+
+
 
 </script>

@@ -70,6 +70,18 @@ position:absolute;
 .foot-links3{    
 	background-color: #fff;
 }
+.foot-links-m{
+    padding: 0px 0 10px;
+	
+}
+.foot-links-m li{
+    padding: 5px;
+	color: #d7d7d7;
+    font-size: 11px;
+	text-decoration: none;
+	list-style: none;
+	text-align: center;	
+}
 .foot-links-hr{  
 	position: relative;
 	width: 100%;
@@ -2179,7 +2191,7 @@ ul.jd-rewards li i{
 }
 .pnj-form-section{
     padding: 10px 15px;
-    overflow: auto;
+   /* overflow: auto;*/
     
 }
 #pnj-form .control-label{
@@ -3077,7 +3089,7 @@ img.profile-photo-xs{
     height: 60px;
     border-radius: 50%;
     left: 12px;
-    bottom: 8px;
+    bottom: 30px;
 }
 .job-notification i{
     background: #2e6da4;
@@ -3123,7 +3135,7 @@ img.profile-photo-xs{
     border-radius: 50%;
     margin: 0;
     position: fixed;
-    bottom: 8px;
+    bottom: 30px;
     right: 57px;
     width: 60px;
     height: 60px;
@@ -3145,7 +3157,7 @@ img.profile-photo-xs{
 #footer{
     background-color: #333333;
     padding-top: 20px;
-    min-height: 300px;
+    /*min-height: 300px;*/
 }
 .readmore-btn{
     display: inline-block;
@@ -3566,6 +3578,7 @@ img.profile-photo-xs{
 #post-job-ad-types2>li:last-Child span:last-child b{
        padding-left: 37px;
 }
+
     .sns-box .fb-btn{
         display: inline-block;
         width: 100%;
@@ -3831,7 +3844,7 @@ img.profile-photo-xs{
         right: 0;
     }
     .pnj-form-section{
-        padding: 10px 0;
+        /*padding: 10px 0;*/
         text-align: left;
     }
      #personal-information .profile-img >img{
@@ -3944,16 +3957,17 @@ curveIn {  0% {
 }
 #post-job-ad-types>li:not(:last-child) {
     margin-right: 4px;
-	    background-color: white;
+	    background-color: #282828;
 }
 
 #post-job-ad-types>li {
-    display: inline-block;
-    width: 175px;
-    min-height: 300px;
+    display: inline-grid;
+    display: -ms-inline-grid;
+    width: 132px;
+    min-height: 242px;
     cursor: pointer;
      padding: 0px 0px 0px 0px;
-    border: 1px solid #cfd8dc;
+    border: 0px solid #cfd8dc;
 	margin-top:10px;
     transition: all .2s ease-in-out;
 	    background-color: white;

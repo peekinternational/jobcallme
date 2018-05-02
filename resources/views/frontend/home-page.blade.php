@@ -195,7 +195,9 @@ $lToken = csrf_token();
     </section>
 
     <section>
-        <div class="ticker-container" style="margin-top:50px;">
+	<div class="hidden-xs" style="margin-top:10px">&nbsp;</div>
+        <div class="ticker-container" style="margin-top:25px;">
+			
             <!--<div class="ticker-caption">
                 <p>Breaking News</p>
             </div>-->
@@ -214,10 +216,10 @@ $lToken = csrf_token();
                                     /* margin-bottom: -10px; */
                                     width: 100%;
                                     /* margin-left: 64px; */
-                                    padding-left: 79px;
+                                    padding-left: 20px;
                                     padding-bottom: 27px;">
-              <div class="row">
-                <span style="padding-left:10px"><button type="submit" class="btn btn-success btn-sm" id="mainbutton" onclick="myFunctions()"> @lang('home.Open AD View')</span>  </button>
+              <div class="col-md-offset-2">
+                <span style="padding-left:8px"><button type="submit" class="btn btn-success btn-sm" id="mainbutton" onclick="myFunctions()"> @lang('home.Open AD View')</span>  </button>
                     </div>
                     </div>
     <div id="maindiv" style="display:none">
@@ -788,6 +790,8 @@ function myFunctions() {
         x.innerHTML = "@lang('home.Close AD View')";
     }
 }
+
+
 </script>
 @endsection
 <style type="text/css">

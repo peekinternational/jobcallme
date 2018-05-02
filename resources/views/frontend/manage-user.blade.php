@@ -141,6 +141,14 @@ if($user->profilePhoto != ''){
                     <div id="credit-show" class="ja-content-item mc-item" role="tabpanel" style="display: none">
                         <h4>@lang('home.employerAccount')</h4>
                         <table class="table">
+							<tr>
+                             <form action="{{ action('frontend\Employer@package') }}" method="post">
+                              {!! csrf_field() !!} 
+                                <td> <img src="/frontend-assets/images/manage_credit2.png" style="padding-top:0px"> &nbsp;@lang('home.Resume Downloads')</td>
+                                <input type="hidden" value="Resume Download" name="type">
+                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
+                                </form>
+                            </tr>
                             <tr>
                             <form action="{{ action('frontend\Employer@package') }}" method="post">
                             {!! csrf_field() !!} 
@@ -189,14 +197,7 @@ if($user->profilePhoto != ''){
                                 <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
                                 </form>
                             </tr>
-                            <tr>
-                             <form action="{{ action('frontend\Employer@package') }}" method="post">
-                              {!! csrf_field() !!} 
-                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Resume Downloads')</td>
-                                <input type="hidden" value="Resume Download" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
-                                </form>
-                            </tr>
+                            
                         </table>
                     </div>
                     <!--Edit Profile-->

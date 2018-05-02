@@ -227,6 +227,16 @@ class Home extends Controller{
 		return view('frontend.howtouse',compact('record'));
 	}
 
+	public function ReviewWrite(){
+		$record = DB::table('jcm_cms_pages')->where('slug','review-write')->first();
+		return view('frontend.review-write',compact('record'));
+	}
+
+	public function videochatpolicy(){
+		$record = DB::table('jcm_cms_pages')->where('slug','video-chat-policy')->first();
+		return view('frontend.video-chat-policy',compact('record'));
+	}
+
 	public function accountLogin(Request $request){
 		if($request->session()->has('jcmUser')){
 			$type = $request->session()->get('jcmUser')->type == 'Employer' ? 'employer' : 'jobseeker';
@@ -401,6 +411,7 @@ class Home extends Controller{
     		if($request->input('keyword') != ''){
     			$people->where('jcm_users.firstName','like','%'.$request->input('keyword').'%');
     			$people->orWhere('jcm_users.lastName','like','%'.$request->input('keyword').'%');
+				$people->orWhere('jcm_users.username','like','%'.$request->input('keyword').'%');
     		}
     		if($request->input('city') != ''){
     			$cityId = JobCallMe::cityId($request->input('city'));

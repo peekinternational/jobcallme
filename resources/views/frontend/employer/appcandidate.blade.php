@@ -2,6 +2,9 @@
 @section('title','Applicant')
 @section('content')
   <?php
+  $job=$_GET['jobId'];
+ // echo $job;
+ // die();
      $pImage = url('profile-photos/profile-logo.jpg');
       if($applicant->profilePhoto != '' && $applicant->profilePhoto != NULL){
        $pos = strpos($applicant->profilePhoto,"ttp");
@@ -409,13 +412,13 @@
                         <!-- schedule interview -->
                         <div class="col-md-12 ea-scheduleInerview">
                             <div class="col-md-12" style="margin-top: 10px;">
-                                <form action="#" method="" class="form-horizontal interview-forms">
+                                <form action="#" method="" class="form-horizontal interview">
                                     <input type="hidden" name="_token" class="token">
                                     <div class="form-group">
                                         <label class="control-label col-md-4 text-right">@lang('home.applicants')</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control date-picker" name="applicantInter[]" value="{{$applicant->firstName}} {{$applicant->lastName}}" onkeypress="return false">
-                                            
+                                            <input type="text" class="form-control date-picker" value="{{$applicant->firstName}} {{$applicant->lastName}}" onkeypress="return false">
+                                            <input type="hidden" class="form-control date-picker" name="applicantInter[]" value="{{$applicant->userId}}_{{ $job }}" onkeypress="return false">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -534,6 +537,28 @@
 .input-error{color: red;}
 </style>
 <script type="text/javascript">
+  var token = "{{ csrf_token() }}";
+
+   $('form.interview').submit(function(e){
+        $('.interview button[name="save"]').prop('disabled',true);
+
+        $('.interview .token').val(token);
+        $.ajax({
+            type: 'post',
+            data: $('.interview').serialize(),
+            url: "{{ url('account/employer/application/interview/save') }}",
+            success: function(response){
+                if($.trim(response) != '1'){
+                    toastr.error(response, '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                }else{
+                    toastr.success('@lang("home.Action perform successfully")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                    //$("li:first").addClass("active");
+                }
+                $('.interview button[name="save"]').prop('disabled',false);
+            }
+        })
+        e.preventDefault();
+    })
     $('#btn-review').on('click',function(){
        var data = $('#review-form').serialize();
        $.ajax({
@@ -593,30 +618,11 @@
 
     });
     
-    var token = "{{ csrf_token() }}";
+  
     $(document).ready(function(){
         $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
     })
-    $('form.interview-form').submit(function(e){
-        $('.interview-form button[name="save"]').prop('disabled',true);
-
-        $('.interview-form .token').val(token);
-        $.ajax({
-            type: 'post',
-            data: $('.interview-form').serialize(),
-            url: "{{ url('account/employer/application/interview/save') }}",
-            success: function(response){
-                if($.trim(response) != '1'){
-                    toastr.error(response, '', {timeOut: 5000, positionClass: "toast-bottom-center"});
-                }else{
-                    toastr.success('@lang("home.Action perform successfully")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
-                    $('.ea-scheduleInerview').fadeOut();
-                }
-                $('.interview-form button[name="save"]').prop('disabled',false);
-            }
-        })
-        e.preventDefault();
-    })
+   
 
     $(document).on('click','.openConversation',function(){
         $("#cometchat_synergy_iframe").contents().find("#cometchat_userlist_"+"<?=$userId?>").click(); 
