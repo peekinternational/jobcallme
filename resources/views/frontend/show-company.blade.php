@@ -303,7 +303,10 @@ $opHour = json_decode($company->companyOperationalHour,true);
                     </div>
                     <div class="col-md-11">
                       <h4 style="width: 50%;float: left;">{{ $userreview->review_title }}</h4>
+                      @if(Session::has('jcmUser'))
                       <h4 style="width: 50%;float: right;text-align: right;"><a href="{{ url('account/employeer/companies/company/review?type=edit&&CompanyId='.$company->companyId)}}"><i class="fa fa-edit"></i></a> <a href="{{ url('account/employeer/companies/company/delete/'.$userreview->review_id.'?companyid='.$company->companyId)}}"><i class="fa fa-remove"></i></a></h4>
+                      @endif
+                      <div class="clearfix"></div>
                       <span style="color:#d6a707"><?php echo checkreview($userreview->overall_review) ?></span>
                       <span><?
 					  if(app()->getLocale() == "kr"){
