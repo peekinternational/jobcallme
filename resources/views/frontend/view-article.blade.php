@@ -3,6 +3,11 @@
 @section('title', "$record->title")
 
 @section('content')
+<?php 
+$username='';
+$userimage='';
+$userimages='';
+?>
 <!--Read Articles-->
 <section id="postNewJob">
     <div class="container">
@@ -61,21 +66,40 @@
                         <div class="row">
                             <div class="col-md-12" id="put-comments">
                                 @foreach($comments as $comment)
+                                <?php  if($comment->nickName == null){
+                                        $username = $comment->firstName;
+                                    }
+                                    else{
+                                    $username = $comment->nickName;
+                                    } 
+
+                                    if($comment->chatImage){
+                                        $userimage = $comment->chatImage;
+                                    }
+                                    else{
+                                    $userimage = $comment->profileImage;
+                                    } 
+
+                                    ?>
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="comment-area">
                                             <div class="col-md-1">
-                                                <img src="{{ url('profile-photos').'/'.$comment->profilePhoto }}" class="fullwidth img-circle" alt="{{ $comment->firstName }}">
+                                                <img src="{{ url('profile-photos').'/'.$comment->chatImage }}" class="" alt="{{ $comment->firstName }}" style="width:80%;">
+                                               
                                             </div>
                                             <div class="col-md-9 append-edit">
-                                                <p style="border:1px solid #ccc;padding: 5px;min-height: 50px;">{{ $comment->comment}}</p>
+                                             <a href="{{url('account/employer/application/applicant/'.$comment->userId)}}">{{ $username }}</a>
+                                                <p style="padding: 5px;min-height: 50px;">{{ $comment->comment}}</p>
 
                                             </div>
                                             @if($comment->commenter_id == Session::get('jcmUser')->userId)
                                             <div class="col-md-2">
                                                 <div class="btns">
-                                                    <button class="btn btn-warning edit-comment-btn">Edit</button>
-                                                    <button delcommentId="{{ $comment->comment_id}}" class="btn btn-danger del-comment-btn">Delete</button>
+                                                <i class="fa fa-edit edit-comment-btn"></i>
+                                                <i delcommentId="{{ $comment->comment_id}}" class="fa fa-trash del-comment-btn" aria-hidden="true"></i>
+                                                    
                                                 </div>
                                                 <div class="btns-update" style="display: none">
                                                     <button commentId="{{ $comment->comment_id}}" class="btn btn-success update-comment-btn">Update</button>
@@ -92,9 +116,18 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <hr>
+                                <?php 
+                                  if(Session::get('jcmUser')->chatImage){
+                                        $userimages = Session::get('jcmUser')->chatImage;
+                                    }
+                                    else{
+                                    $userimages = Session::get('jcmUser')->profileImage;
+                                    } 
+
+                                    ?>
                                     <div class="comment-box">
                                         <div class="col-md-1">
-                                            <img src="{{ url('profile-photos').'/'.Sajid::getprofilepic() }}" class="img-circle fullwidth" alt="{{ $record->firstName }}">
+                                            <img src="{{ url('profile-photos/').$userimages}}" class="img-circle fullwidth" alt="{{ Session::get('jcmUser')->firstName }}">
                                         </div>
                                         <div class="col-md-9">
                                             <div class="form-group">

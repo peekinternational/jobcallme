@@ -28,14 +28,16 @@ class sajidController extends Controller{
 
 		$data = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$data['post_id'])->where('table_name',$data['table_name'])->get();
 			$row ='';
+            $username='';
 			$url = url('profile-photos/');
+            $link = url('/account/employer/application/applicant');
 
 			foreach ($data as $comment) {
 				if($comment->commenter_id == Session::get('jcmUser')->userId){
                 $temp ='<div class="col-md-2">
                         <div class="btns">
-                            <button class="btn btn-warning edit-comment-btn">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                                <i class="fa fa-edit edit-comment-btn"></i>
+                                                <i delcommentId="{{ $comment->comment_id}}" class="fa fa-trash del-comment-btn" aria-hidden="true"></i>
                         </div>
                         <div class="btns-update" style="display: none">
                             <button commentId="'.$comment->comment_id.'" class="btn btn-success update-comment-btn">Update</button>
@@ -45,15 +47,23 @@ class sajidController extends Controller{
                 }else{
                 	$temp = '';
                 }
+                if($comment->nickName == null){
+                    $username = $comment->firstName;
+                }
+                else{
+                  $username = $comment->nickName;
+                }
 
         $row .= '<div class="row">
                     <div class="col-md-12">
                         <div class="comment-area">
                             <div class="col-md-1">
-                                <img src="'.$url.'/'.$comment->profilePhoto.'" class="fullwidth img-circle" alt="'.$comment->firstName.'">
+                                <img src="'.$url.'/'.$comment->chatImage.'" class="" alt="'.$comment->firstName.'" style="width:80%;">
+                                 
                             </div>
                             <div class="col-md-9 append-edit">
-                                <p style="border:1px solid #ccc;padding: 5px;min-height: 50px;">'.$comment->comment.'</p>
+                            <a href="'.$link.'/'.$comment->userId.'">'.$username.'</a>
+                                <p style="padding: 5px;min-height: 50px;">'.$comment->comment.'</p>
 
                             </div>
                             '.$temp.'
