@@ -584,7 +584,7 @@ class Home extends Controller{
 		$Qry=$read->get();
 		//dd($Qry);
 		/*comments on article */
-		$comments = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$writingId)->where('table_name','read')->get();
+		$comments = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$writingId)->where('table_name','read')->orderBy('jcm_comments.comment_id','desc')->get();
 		
     	return view('frontend.view-article',compact('comments','writingId','record','Qry'));
     }
@@ -601,7 +601,7 @@ class Home extends Controller{
     	}
      $Qry = DB::table('jcm_upskills')->limit(4)->inRandomOrder()->get();
 
-     $comments = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$skillId)->where('table_name','learn')->get();
+     $comments = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$skillId)->where('table_name','learn')->orderBy('jcm_comments.comment_id','desc')->get();
 	// dd($Qry);
     	return view('frontend.view-course',compact('comments','skillId','record','Qry'));
     }

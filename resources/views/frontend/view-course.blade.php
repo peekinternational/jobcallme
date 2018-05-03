@@ -165,6 +165,16 @@
                 <div class="row">
                      <div class="col-md-12">
                         <hr>
+                        <div class="review-header">
+							<span class="bell">
+								<i class="fa fa-bell fa-3x"></i>
+								<span class="badge">{{ count($comments) }}</span>
+							</span>
+							<span class="pull-right"><button onclick="changebtns(this)"  class="btn btn-primary" style="box-shadow: 0px 1px 13px rgba(0,0,0,0.5)">@lang('home.open review') <i class="fa fa-plus"></i> </button></span>
+							
+						</div>
+                        <br>
+                        <div id="show_reviews" style="display:none">
                         <div class="row">
                             <div class="col-md-12" id="put-comments">
                                 @foreach($comments as $comment)
@@ -192,7 +202,7 @@
                                                
                                             </div>
                                             <div class="col-md-9 append-edit">
-                                             <a href="{{url('account/employer/application/applicant/'.$comment->userId)}}">{{ $username }}</a>
+                                             <a href="{{url('account/employer/application/applicant/'.$comment->userId)}}">{{ $username }}</a> <span style="color: #999999;font-size: 10px;">{{ $comment->comment_date}}</span>
                                                 <p style="padding: 5px;min-height: 50px;">{{ $comment->comment}}</p>
 
                                             </div>
@@ -242,6 +252,9 @@
                             </div>                
                                                     
                     </div>
+                               
+                                                    
+                    </div>
                 </div>
             </div>
              
@@ -286,6 +299,18 @@
 @section('page-footer')
 <script type="text/javascript">
 /*comment code start*/
+function changebtns(current){
+    if($(current).hasClass('btn-primary')){
+        $(current).removeClass('btn-primary').addClass('btn-danger');
+        $(current).html('@lang("home.close review") <i class="fa fa-minus"></i>');
+        $('#show_reviews').show();
+    }else{
+        $(current).removeClass('btn-danger').addClass('btn-primary');
+        $(current).html('@lang("home.open review") <i class="fa fa-plus"></i>');
+         $('#show_reviews').hide();
+    }
+}
+
 
 setInterval(function(){ 
     $.ajax({
@@ -333,6 +358,9 @@ $(document).on("click","#comment-btn",function(){
            success:function(res){
                $('#put-comments').html(res);
                $('#comment').val('');
+               var noti = $('.bell .badge').text();
+                    noti = parseInt(noti) + 1;
+                    $('.bell .badge').text(noti);
            }
        }) 
 
@@ -347,6 +375,9 @@ $(document).on("click",".del-comment-btn",function(){
            data:{table_name:"learn",post_id:{{ $record->skillId }},_token:jsCsrfToken(),comment_id:comment_id},
            success:function(res){
                $('#put-comments').html(res);
+               var noti = $('.bell .badge').text();
+                    noti = parseInt(noti) - 1;
+                    $('.bell .badge').text(noti);
            }
         }) 
       } else {

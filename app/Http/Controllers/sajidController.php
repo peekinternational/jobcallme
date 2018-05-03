@@ -26,7 +26,7 @@ class sajidController extends Controller{
 		}
 		
 
-		$data = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$data['post_id'])->where('table_name',$data['table_name'])->get();
+		$data = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$data['post_id'])->where('table_name',$data['table_name'])->orderBy('jcm_comments.comment_id','desc')->get();
 			$row ='';
             $username='';
 			$url = url('profile-photos/');
@@ -63,7 +63,7 @@ class sajidController extends Controller{
                                  
                             </div>
                             <div class="col-md-9 append-edit">
-                            <a href="'.$link.'/'.$comment->userId.'">'.$username.'</a>
+                            <a href="'.$link.'/'.$comment->userId.'">'.$username.'</a> <span style="color: #999999;font-size: 10px;">'.$comment->comment_date.'</span>
                                 <p style="padding: 5px;min-height: 50px;">'.$comment->comment.'</p>
 
                             </div>
@@ -85,7 +85,7 @@ public function deletecomment(Request $request){
 	DB::table('jcm_comments')->where('comment_id',$id)->delete();
 
 	$post_id = $request->input('post_id');
-	$data = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$post_id)->where('table_name',$table_name)->get();
+	$data = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$post_id)->where('table_name',$table_name)->orderBy('jcm_comments.comment_id','desc')->get();
 			$row ='';
             $username='';
 			$url = url('profile-photos/');
@@ -122,7 +122,7 @@ public function deletecomment(Request $request){
                                  
                             </div>
                             <div class="col-md-9 append-edit">
-                            <a href="'.$link.'/'.$comment->userId.'">'.$username.'</a>
+                            <a href="'.$link.'/'.$comment->userId.'">'.$username.'</a> <span style="color: #999999;font-size: 10px;">'.$comment->comment_date.'</span>
                                 <p style="padding: 5px;min-height: 50px;">'.$comment->comment.'</p>
 
                             </div>
