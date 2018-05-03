@@ -18,7 +18,11 @@ Class SajidHelper {
 		return $this->client_id;
 	}
 	public function getprofilepic(){
-		return Session::get('jcmUser')->profilePhoto;
+		if(Session::get('jcmUser')->chatImage){
+		return Session::get('jcmUser')->chatImage;
+		}else{
+			return 'profile-logo.jpg';
+		}
 	}
 	public function getClientSecret(){
 		return $this->client_secret;
