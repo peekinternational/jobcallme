@@ -35,7 +35,7 @@ class sajidController extends Controller{
                 $temp ='<div class="col-md-2">
                         <div class="btns">
                             <button class="btn btn-warning edit-comment-btn">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                            <button delcommentid="'.$comment->comment_id.'" class="btn btn-danger del-comment-btn">Delete</button>
                         </div>
                         <div class="btns-update" style="display: none">
                             <button commentId="'.$comment->comment_id.'" class="btn btn-success update-comment-btn">Update</button>
@@ -67,8 +67,11 @@ class sajidController extends Controller{
 
 public function deletecomment(Request $request){
 	$id = $request->input('comment_id');
+	$post_id = $request->input('post_id');
+	$table_name = $request->input('table_name');
 	DB::table('jcm_comments')->where('comment_id',$id)->delete();
-	$data = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$data['post_id'])->get();
+
+	$data = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$post_id)->where('table_name',$table_name)->get();
 			$row ='';
 			$url = url('profile-photos/');
 

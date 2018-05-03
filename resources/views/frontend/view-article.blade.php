@@ -204,7 +204,7 @@
              $.ajax({
                url:jsUrl()+"/read/article/comment/delete",
                type:"post",
-               data:{post_id:{{ $record->writingId }},_token:jsCsrfToken(),comment_id:comment_id},
+               data:{table_name:"read",post_id:{{ $record->writingId }},_token:jsCsrfToken(),comment_id:comment_id},
                success:function(res){
                    $('#put-comments').html(res);
                }
