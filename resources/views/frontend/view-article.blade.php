@@ -192,8 +192,10 @@
                data:{table_name:"read",comment:comment,post_id:{{ $record->writingId }},_token:jsCsrfToken(),commenter_id:commenter_id},
                success:function(res){
                    $('#put-comments').html(res);
+                   $('#comment').val('');
                }
            }) 
+
         }
     })
     $(document).on("click",".del-comment-btn",function(){
