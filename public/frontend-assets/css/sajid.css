@@ -16,6 +16,9 @@
 .comment-box{
   
 }
+.hide{
+  display: none;
+}
 .bell{
 position: relative;
 }

@@ -444,10 +444,12 @@ Route::get('/locale/{locale}', function ($locale) {
 });
 /* muhammad sajid routes */
 Route::get('account/employeer/companies/company/review', 'frontend\Employer@companyreview');
+Route::get('account/employeer/companies/company/delete/{id}', 'frontend\Employer@deletecompanyreview');
 Route::post('account/employer/company/addreview', 'frontend\Employer@addreview');
 Route::post('sajid', 'frontend\Jobseeker@downloadmulticv');
 Route::post('delcv', 'frontend\Jobseeker@deletedownloadedcv');
 Route::post('evaluation/candidate/save','frontend\Employer@candidateEvaluation');
 Route::post('jobseeker/resume/review/delete','frontend\Employer@deleteResumeReview');
+/* comment system url */
 Route::post('read/article/comment/save','sajidController@savecomment');
 Route::post('read/article/comment/delete','sajidController@deletecomment');

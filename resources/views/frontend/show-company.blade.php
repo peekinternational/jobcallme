@@ -159,7 +159,6 @@ $opHour = json_decode($company->companyOperationalHour,true);
               <div>
                 <!-- companyreview -->
                 <?php 
-                //print_r($companyReview);
                 $overallreview = array();
                 $career = array();
                 $benefit = array();
@@ -303,7 +302,8 @@ $opHour = json_decode($company->companyOperationalHour,true);
                       <strong class="font-16">{{ $userreview->lastName }}</strong>
                     </div>
                     <div class="col-md-11">
-                      <h4>{{ $userreview->review_title }}</h4>
+                      <h4 style="width: 50%;float: left;">{{ $userreview->review_title }}</h4>
+                      <h4 style="width: 50%;float: right;text-align: right;"><a href="{{ url('account/employeer/companies/company/review?type=edit&&CompanyId='.$company->companyId)}}"><i class="fa fa-edit"></i></a> <a href="{{ url('account/employeer/companies/company/delete/'.$userreview->review_id.'?companyid='.$company->companyId)}}"><i class="fa fa-remove"></i></a></h4>
                       <span style="color:#d6a707"><?php echo checkreview($userreview->overall_review) ?></span>
                       <span><?
 					  if(app()->getLocale() == "kr"){

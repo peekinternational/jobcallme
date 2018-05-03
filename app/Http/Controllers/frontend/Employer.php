@@ -2333,7 +2333,6 @@ public function mapOrganization(Request $request){
 
             DB::table('jcm_orders')->insert($order);
 			echo $pk_id.'-package';
-
 			die();
 			// return view('frontend.writecashpayment_detail',compact('input'));
 	} 
@@ -2341,13 +2340,31 @@ public function companyreview(Request $request)
 {
 	$userid = $request->session()->get('jcmUser')->userId;
 	$companyId = $request->input('CompanyId');
-	return view('frontend.employer.companyReview',compact('companyId','userid'));
+	$type = $request->input('type');
+	if($type == 'edit'){
+		$companydata = DB::table('jcm_companyreview')->where('company_id',$companyId)->where('user_id',$userid)->first();
+	}
+	return view('frontend.employer.companyReview',compact('companydata','companyId','userid'));
 }
 public function addreview(Request $request)
 {
 	$userid = $request->session()->get('jcmUser')->userId;
 	$data = $request->input();
+	if($data['current_working'] != 'Yes'){
+		$data['current_working'] = 'no';
+	}else{
+		$data['employer_upto'] = 'NULL';
+	}
+
 	unset($data['_token']);
+	if($data['type'] == 'edit'){
+		unset($data['type']);
+		DB::table('jcm_companyreview')->where('company_id',$data['company_id'])->where('user_id','=',$userid)->update($data);
+		
+		return redirect('companies/company/'.$data['company_id']);
+	}
+	
+	unset($data['type']);
 	$checkrecord = DB::table('jcm_companyreview')->where('company_id',$data['company_id'])->where('user_id','=',$userid)->get();
 	if( count($checkrecord) > 0 ){
 		Session::flash('review-message', 'you already used your review'); 
@@ -2362,6 +2379,11 @@ public function addreview(Request $request)
 	}
 
 	
+}
+public function deletecompanyreview($reviewid){
+	$companyid = $_GET['companyid'];
+	DB::table('jcm_companyreview')->where('review_id',$reviewid)->delete();
+	return redirect('companies/company/'.$companyid);
 }
 
 public function viewJobstatus(Request $request,$id){
