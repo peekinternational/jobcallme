@@ -17,7 +17,7 @@ class sajidController extends Controller{
 		if($request->input('comment_id')){
 			$id = $request->input('comment_id');
 			$data['comment'] = $request->input('comment');
-			$data['update_comment'] = date();
+			$data['update_comment'] = date("Y-m-d h:i:s");
 			DB::table('jcm_comments')->where('comment_id',$id)->update($data);
 		}else if($request->input('comment')){
 			$data['comment'] = $request->input('comment'); 

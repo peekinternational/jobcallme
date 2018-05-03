@@ -152,7 +152,7 @@
         $.ajax({
             url:jsUrl()+"/read/article/comment/save",
             type:"post",
-            data:{_token:jsCsrfToken(),post_id:{{ $record->writingId }}},
+            data:{_token:jsCsrfToken(),post_id:{{ $record->writingId }},table_name:"read"},
             success:function(res){
                 $('#put-comments').html(res);
             }
@@ -172,7 +172,7 @@
         $(this).closest('.comment-area').find('.btns-update').show();
 
     })
-     $(document).on("click",".cancel",function(){
+    $(document).on("click",".cancel",function(){
         $('.append-edit p').show();
         $('#comment-edit').remove();
         $(this).closest('.comment-area').find('.btns').show();
@@ -195,11 +195,10 @@
                }
            }) 
         }
-        
     })
     $(document).on("click",".del-comment-btn",function(){
        var comment_id = $(this).attr('delcommentId');
-       if (confirm("Are you sure to delete!")) {
+        if (confirm("Are you sure to delete!")) {
              $.ajax({
                url:jsUrl()+"/read/article/comment/delete",
                type:"post",
@@ -210,8 +209,7 @@
             }) 
           } else {
               
-          }
-           
+        }
     })
     $(document).on("click",".update-comment-btn",function(){
          var comment_id = 0;
