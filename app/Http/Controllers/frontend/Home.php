@@ -584,7 +584,7 @@ class Home extends Controller{
 		$Qry=$read->get();
 		//dd($Qry);
 		/*comments on article */
-		$comments = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$writingId)->get();
+		$comments = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$writingId)->where('table_name','read')->get();
 		
     	return view('frontend.view-article',compact('comments','writingId','record','Qry'));
     }
@@ -600,8 +600,10 @@ class Home extends Controller{
     		return redirect('learn');
     	}
      $Qry = DB::table('jcm_upskills')->limit(4)->inRandomOrder()->get();
+
+     $comments = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$skillId)->where('table_name','learn')->get();
 	// dd($Qry);
-    	return view('frontend.view-course',compact('skillId','record','Qry'));
+    	return view('frontend.view-course',compact('comments','skillId','record','Qry'));
     }
 
     public function searchSkills(Request $request){  

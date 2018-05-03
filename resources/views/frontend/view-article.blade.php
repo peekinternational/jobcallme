@@ -59,7 +59,7 @@ $userimages='';
                     </div>      
                 </div>
                 
-                
+                <hr>
                 <div class="row">
                     <div class="col-md-12">
                         <hr>
@@ -121,13 +121,13 @@ $userimages='';
                                         $userimages = Session::get('jcmUser')->chatImage;
                                     }
                                     else{
-                                    $userimages = Session::get('jcmUser')->profileImage;
+                                    $userimages = Session::get('jcmUser')->profilePhoto;
                                     } 
 
                                     ?>
                                     <div class="comment-box">
                                         <div class="col-md-1">
-                                            <img src="{{ url('profile-photos/').$userimages}}" class="img-circle fullwidth" alt="{{ Session::get('jcmUser')->firstName }}">
+                                            <img src="{{ url('profile-photos').'/'.$userimages }}" class="img-circle fullwidth" alt="{{ Session::get('jcmUser')->firstName }}">
                                         </div>
                                         <div class="col-md-9">
                                             <div class="form-group">
@@ -225,8 +225,10 @@ $userimages='';
                data:{table_name:"read",comment:comment,post_id:{{ $record->writingId }},_token:jsCsrfToken(),commenter_id:commenter_id},
                success:function(res){
                    $('#put-comments').html(res);
+                   $('#comment').val('');
                }
            }) 
+
         }
     })
     $(document).on("click",".del-comment-btn",function(){
@@ -235,7 +237,7 @@ $userimages='';
              $.ajax({
                url:jsUrl()+"/read/article/comment/delete",
                type:"post",
-               data:{post_id:{{ $record->writingId }},_token:jsCsrfToken(),comment_id:comment_id},
+               data:{table_name:"read",post_id:{{ $record->writingId }},_token:jsCsrfToken(),comment_id:comment_id},
                success:function(res){
                    $('#put-comments').html(res);
                }
