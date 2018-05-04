@@ -24,6 +24,12 @@ class SocialAuthFacebookController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
+     public function instaApi()
+    {
+        return Socialite::driver('instagram')->redirect();
+    }
+
+
     public function lnApi()
     {
         return Socialite::driver('linkedin')->redirect();
@@ -66,6 +72,32 @@ class SocialAuthFacebookController extends Controller
 
     public function gCallback(Request $request){
         $user=Socialite::driver('google')->user();
+        $email=$user->email;
+        $glId=$user->id;
+        $userDetails=User::where('email',$email)->first();
+        if($userDetails){
+            if($userDetails->user_status=='N'){
+                $userDetails->user_status='Y';
+                $userDetails->glId=$glId;
+                $userDetails->save();
+            }
+            elseif(!$userDetails->glId){
+                $userDetails->glId=$glId;
+                $userDetails->save(); 
+            }
+        }
+        else{
+            $userDet=['id'=>$glId,'name'=>$user->name,'email'=>$email,'avatar'=>$user->avatar_original]; 
+            $userDetails=$this->createUser($userDet);
+        }
+
+        $this->loginAndRed($userDetails,$request);
+
+        return redirect('account/jobseeker');
+    }
+
+      public function instaCallback(Request $request){
+        $user=Socialite::driver('instagram')->user();
         $email=$user->email;
         $glId=$user->id;
         $userDetails=User::where('email',$email)->first();
