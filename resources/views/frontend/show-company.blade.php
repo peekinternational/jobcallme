@@ -228,7 +228,7 @@ $opHour = json_decode($company->companyOperationalHour,true);
                     </div>
                     <p align="center">
                         <span  style="color:#d6a707"><?php echo checkreview($star) ?></span><br>
-                        @lang('home.Total reviews') <span class="badge">{{ count($companyReview) }} </span>
+                        <span>@lang('home.Total reviews') <span class="badge red">{{ count($companyReview) }} </span></span>
                     </p>
                     <hr>
                     <p>
@@ -303,36 +303,31 @@ $opHour = json_decode($company->companyOperationalHour,true);
                     </div>
                     <div class="col-md-11">
                       <h4 style="width: 50%;float: left;">{{ $userreview->review_title }}</h4>
-                      @if(Session::has('jcmUser'))
+                      @if(Session::get('jcmUser')->userId == $userreview->userId)
                       <h4 style="width: 50%;float: right;text-align: right;"><a href="{{ url('account/employeer/companies/company/review?type=edit&&CompanyId='.$company->companyId)}}"><i class="fa fa-edit"></i></a> <a href="{{ url('account/employeer/companies/company/delete/'.$userreview->review_id.'?companyid='.$company->companyId)}}"><i class="fa fa-remove"></i></a></h4>
                       @endif
                       <div class="clearfix"></div>
                       <span style="color:#d6a707"><?php echo checkreview($userreview->overall_review) ?></span>
-                      <span><?
+                      <span><?php 
 					  if(app()->getLocale() == "kr"){
-					  ?>
-						<?= date('Y-m-d ', strtotime($userreview->created_date))?>
-					  <?}else{?>
-						<?= date('d M, Y ', strtotime($userreview->created_date))?>
-					  <?}?>	</span>
+					      echo date('Y-m-d ', strtotime($userreview->created_date))."asdasdad sajid";
+					  }else{
+						   echo date('d M, Y ', strtotime($userreview->created_date));
+					  }?></span>
                       <p>@lang('home.'.$userreview->job_type), @lang('home.Worked')  
-					  <?
+					  <?php
 					  if(app()->getLocale() == "kr"){
-					  ?>
-						<?= date('Y-m-d ', strtotime($userreview->employee_sience))?>
-					  <?}else{?>
-						from <?= date('M d, Y ', strtotime($userreview->employee_sience))?>
-					  <?}?>					
-					  
-					    <?
+					     echo date('Y-m-d ', strtotime($userreview->employee_sience));
+					  }else{
+						echo "from ".date('M d, Y ', strtotime($userreview->employee_sience))." to ";
+					  }
 					  if(app()->getLocale() == "kr"){
-					  ?>
-						<?= ($userreview->current_working != 'Yes') ? date('Y-m-d ', strtotime($userreview->employer_upto)) : "현재 재직중"?>
-					  <?}else{?>
-						to <?= ($userreview->current_working != 'Yes') ? date('M d, Y ', strtotime($userreview->employer_upto)) : "Currently working"?> as
-					  <?}?>	
+					  echo ($userreview->current_working != 'Yes') ? date('Y-m-d ', strtotime($userreview->employer_upto)) : "현재 재직중";
+                    }else{
+						echo "to".($userreview->current_working != 'Yes') ? date('M d, Y ', strtotime($userreview->employer_upto)) : "Currently working"; 
+					}?>	
 
-					    {{ $userreview->designation }}</p>
+					   as {{ $userreview->designation }}</p>
                       <table style="width:100%">
                       <tr>
                         <th width="200">@lang('home.Recommend CEO'):</th>

@@ -168,7 +168,7 @@
                         <div class="review-header">
 							<span class="bell">
 								<i class="fa fa-bell fa-3x"></i>
-								<span class="badge">{{ count($comments) }}</span>
+								<span class="badge bell-badge">{{ count($comments) }}</span>
 							</span>
 							<span class="pull-right"><button onclick="changebtns(this)"  class="btn btn-primary" style="box-shadow: 0px 1px 13px rgba(0,0,0,0.5)">@lang('home.open review') <i class="fa fa-plus"></i> </button></span>
 							

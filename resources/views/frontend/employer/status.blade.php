@@ -113,8 +113,9 @@ print_r($jobs);
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk">
                          <a href="{{ url('account/employer/delete/'.$job->jobId) }}" style="color: black;"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')</a>
                         </button>
-                        
-                        
+                        <button type="button" class="ea-panel-btn ea-npm-click" >
+                            <a href="{{url('employer/status/reviews/'.$job->jobId)}}" style="color: black;"><i class="fa fa-file-o" aria-hidden="true"></i> Reviews</a>
+                        </button>
                     </div>
                
                    

@@ -896,7 +896,7 @@ else{
 		}
 		$app = $request->session()->get('jcmUser');
 		$type = $request->segment(4);
-
+		
 		$jobId = $request->input('jobId');
 		//'Delivered','Junk','Shortlist','Screened','Interview','Offer','Hire','Reject'
 
