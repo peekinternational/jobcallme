@@ -81,6 +81,9 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <button class="in-btn">
                     <a style="color:white" href="{{url('/lnApi')}}">LINKEDIN</a>
                 </button>
+                <!--<button class="insta-btn">
+                    <a style="color:white" href="{{url('/instaApi')}}">Instagram</a>
+                </button>-->
             </div>
 			<div>
 				<p class="text-center show-loginBox" style="color:#2e6da4">※ @lang('home.singupinfo')</p>

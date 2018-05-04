@@ -427,7 +427,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-organization">{!! $academic->institution !!}</p>
 											<p class="rd-location">@lang('home.'.JobCallMe::cityName($academic->city)),@lang('home.'.JobCallMe::countryName($academic->country))</p>
 											<p class="rd-grade">@lang('home.GradeGPA') : {!! $academic->grade !!}</p>
-											<a href="{{ url('/resume_images/'.$academic->academicfile)}}">{!! $academic->academicfile !!}</a>
+											<a href="{{ url('/resume_images/'.$academic->academicfile)}}" target="_blank">{!! $academic->academicfile !!}</a>
 										</div>
 									</li>
 								@endforeach
@@ -613,7 +613,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-organization">{!! $certification->institution !!}</p>
 											<p class="rd-location">@lang('home.'.JobCallMe::cityName($certification->city)),@lang('home.'.JobCallMe::countryName($certification->country))</p>
 											<p class="rd-grade">@lang('home.cerscore') : {!! $certification->score !!}</p>
-											 <a href="{{ url('/resume_images/'.$certification->certificatefile)}}">{!! $certification->certificatefile !!}</a>
+											 <a href="{{ url('/resume_images/'.$certification->certificatefile)}}" target="_blank">{!! $certification->certificatefile !!}</a>
 										</div>
 									</li>
 								@endforeach
@@ -734,7 +734,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-title">{!! $experience->jobTitle !!}</p>
 											<p class="rd-organization">{!! $experience->organization !!}</p>
 											<p class="rd-location">@lang('home.'.JobCallMe::cityName($experience->city)),@lang('home.'.JobCallMe::countryName($experience->country))</p>
-											 <a href="{{ url('/resume_images/'.$experience->academicfile)}}">{!! $experience->academicfile !!}</a>
+											 <a href="{{ url('/resume_images/'.$experience->experiencefile)}}" target="_blank">{!! $experience->experiencefile !!}</a>
 										</div>
 									</li>
 								@endforeach
@@ -997,19 +997,19 @@ if($user->profilePhoto != ''){
 												</a>&nbsp;
 											</span>
 											<p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
-											<p class="rd-location"> @if(app()->getLocale() == "kr")
-							{!! $skills->startyear !!}년 @lang('home.'.$skills->startmonth) - {{ $skills->currently == 'yes' ? '현재 재직중' : $skills->endyear.'년' }} @lang('home.'.$skills->endmonth) 
-						@else
-							{!! $skills->startmonth !!} {!! $skills->startyear !!} - {{ $skills->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($skills->endDate)) }}
-						@endif</p>
-											<p class="rd-location"> @if(app()->getLocale() == "kr")
-							@lang('home.projectposition') : {!! $skills->position !!}, @lang('home.occupation') : {!! $skills->occupation !!}, @lang('home.projectorganization') : {!! $skills->organization !!}
-						@else
-							@lang('home.projectposition') :  {!! $skills->position !!}, @lang('home.occupation') : {!! $skills->occupation !!}, @lang('home.projectorganization') : {!! $skills->organization !!}
-						@endif<!-- As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!} --></p>
-											
+																	<p class="rd-location"> @if(app()->getLocale() == "kr")
+													{!! $skills->startyear !!}년 @lang('home.'.$skills->startmonth) - {{ $skills->currently == 'yes' ? '현재 재직중' : $skills->endyear.'년' }} @lang('home.'.$skills->endmonth) 
+												@else
+													{!! $skills->startmonth !!} {!! $skills->startyear !!} - {{ $skills->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($skills->endDate)) }}
+												@endif</p>
+																	<p class="rd-location"> @if(app()->getLocale() == "kr")
+													@lang('home.projectposition') : {!! $skills->position !!}, @lang('home.occupation') : {!! $skills->occupation !!}, @lang('home.projectorganization') : {!! $skills->organization !!}
+												@else
+													@lang('home.projectposition') :  {!! $skills->position !!}, @lang('home.occupation') : {!! $skills->occupation !!}, @lang('home.projectorganization') : {!! $skills->organization !!}
+												@endif<!-- As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!} --></p>
+																	
 										   <p class="rd-location">{!! $skills->detail !!}</p>
-											<a href="{{ url('/resume_images/'.$skills->academicfile)}}">{!! $skills->academicfile !!}</a>
+											<a href="{{ url('/resume_images/'.$skills->projectfile)}}" target="_blank">{!! $skills->projectfile !!}</a>
 										  
 										</div>
 									</li>
@@ -1187,8 +1187,8 @@ if($user->profilePhoto != ''){
 						@else
 							{!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}
 						@endif </p>
-											<p class="rd-location">{!! $afflls->org !!} , @lang('home.'.JobCallMe::cityName($afflls->city)),@lang('home.'.JobCallMe::countryName($afflls->country))
-											  <a href="{{ url('/resume_images/'.$afflls->academicfile)}}">{!! $afflls->academicfile !!}</a>
+											<p class="rd-location">{!! $afflls->org !!} , @lang('home.'.JobCallMe::cityName($afflls->city)),@lang('home.'.JobCallMe::countryName($afflls->country))</p>
+											  <a href="{{ url('/resume_images/'.$afflls->affiliationfile)}}" target="_blank">{!! $afflls->affiliationfile !!}</a>
 										  
 										</div>
 									</li>
@@ -1825,6 +1825,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-location">@lang('home.reforganization') : {!! $skills->organization !!}, @lang('home.'.JobCallMe::cityName($skills->city)),@lang('home.'.JobCallMe::countryName($skills->country))</p>
 										   <p class="rd-location">@lang('home.phone') : {!! $skills->phone !!}</p>
 										   <p class="rd-location">@lang('home.email') : {!! $skills->email !!}</p>
+										    <a href="{{ url('/resume_images/'.$afflls->referencesfile)}}" target="_blank">{!! $afflls->referencesfile !!}</a>
 										</div>
 									</li>
 								@endforeach
@@ -1955,6 +1956,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-location"> @lang('home.Author') : {!! $skills->author !!}</p>
 											<p class="rd-location">@lang('home.publisher') : {!! $skills->publisher !!}, @lang('home.'.JobCallMe::cityName($skills->city)),@lang('home.'.JobCallMe::countryName($skills->country))</p>
 										   <p class="rd-location">{!! $skills->detail !!}</p>
+										   <a href="{{ url('/resume_images/'.$skills->publicationfile)}}" target="_blank">{!! $skills->publicationfile !!}</a>
 										  
 										</div>
 									</li>
@@ -2102,13 +2104,14 @@ if($user->profilePhoto != ''){
 											</span>
 											<p class="rd-title">{!! $skills->title !!}</p>
 											<p class="rd-location"> {!! $skills->type !!},@if(app()->getLocale() == "kr")
-							{!! $skills->startyear !!}년 @lang('home.'.$skills->startmonth)
-						@else
-							{!! $skills->startmonth !!} {!! $skills->startyear !!}
-						@endif</p>
+													{!! $skills->startyear !!}년 @lang('home.'.$skills->startmonth)
+												@else
+													{!! $skills->startmonth !!} {!! $skills->startyear !!}
+												@endif</p>
 											<p class="rd-location"> <!-- {!! $skills->occupation !!} at --> {!! $skills->organization !!}</p>
 											
 										   <p class="rd-location">{!! $skills->detail !!}</p>
+										    <a href="{{ url('/resume_images/'.$skills->awardfile)}}" target="_blank">{!! $skills->awardfile !!}</a>
 										  
 										</div>
 									</li>
@@ -2246,6 +2249,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-location"> {!! $skills->occupation !!}</p>
 											
 										   <p class="rd-location">{!! $skills->detail !!}</p>
+										   <a href="{{ url('/resume_images/'.$skills->portfoliofile)}}" target="_blank">{!! $skills->portfoliofile !!}</a>
 										  
 										</div>
 									</li>
@@ -3125,7 +3129,7 @@ function getExperience(resumeId){
 
 			$('.form-experience #experience-file a').attr('href',jsUrl()+"/resume_images/"+obj.experiencefile);
 			$('.form-experience #experience-file a').text(obj.experiencefile);
-			$('.form-experience #experience-file input[name="old_academicfile"]').val(obj.experiencefile);
+			$('.form-experience #experience-file input[name="old_experiencefile"]').val(obj.experiencefile);
 			$('#experience-edit h4 c').text('@lang("home.Edit Experience")');
 			$('#experience').hide();
 			$('#experience-edit').fadeIn();

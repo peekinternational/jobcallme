@@ -48,6 +48,13 @@ return [
       'redirect' => 'https://www.jobcallme.com/googleCallback',
 		
     ],
+
+    'instagram' => [
+        'client_id' => 'da714c671d9b4722b8605293c6e04fc9',
+        'client_secret' => '0784637c0cbf4ed796a1da71130aca3d',
+      'redirect' => 'https://www.jobcallme.com/instaCallback',
+		
+    ],
     'linkedin' => [
         'client_id' => '818xstq8efstw9',
         'client_secret' => 'j094fcTdDgY7Mx6b',

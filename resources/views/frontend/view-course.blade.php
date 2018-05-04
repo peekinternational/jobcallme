@@ -176,7 +176,7 @@
                         <br>
                         <div id="show_reviews" style="display:none">
                         <div class="row">
-                            <div class="col-md-12" id="put-comments">
+                            <div class="" id="put-comments">
                                 @foreach($comments as $comment)
                                 <?php  if($comment->nickName == null){
                                         $username = $comment->firstName;
@@ -197,17 +197,17 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="comment-area">
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 col-xs-3">
                                                 <img src="{{ url('profile-photos').'/'.$comment->chatImage }}" class="" alt="{{ $comment->firstName }}" style="width:80%;">
                                                
                                             </div>
-                                            <div class="col-md-9 append-edit">
+                                            <div class="col-md-9 col-xs-7 append-edit" style="padding:0;">
                                              <a href="{{url('account/employer/application/applicant/'.$comment->userId)}}">{{ $username }}</a> <span style="color: #999999;font-size: 10px;">{{ $comment->comment_date}}</span>
                                                 <p style="padding: 5px;min-height: 50px;">{{ $comment->comment}}</p>
 
                                             </div>
                                             @if($comment->commenter_id == Session::get('jcmUser')->userId)
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 col-xs-2" style="padding:0;">
                                                 <div class="btns">
                                                 <i class="fa fa-edit edit-comment-btn"></i>
                                                 <i delcommentId="{{ $comment->comment_id}}" class="fa fa-trash del-comment-btn" aria-hidden="true"></i>
@@ -238,15 +238,15 @@
 
                                     ?>
                                     <div class="comment-box">
-                                        <div class="col-md-1">
+                                        <div class="col-md-1 col-xs-3">
                                             <img src="{{ url('profile-photos').'/'.$userimages }}" class="img-circle fullwidth" alt="{{ Session::get('jcmUser')->firstName }}">
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-9 col-xs-9">
                                             <div class="form-group">
                                                 <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
                                             </div>    
                                         </div>
-                                        <div class="col-md-2" style="padding-top: 15px;"><button class="btn btn-success" id="comment-btn">Submit</button></div>
+                                        <div class="col-md-2 col-xs-offset-8" style="padding-top: 15px;"><button class="btn btn-success" id="comment-btn">Submit</button></div>
                                     </div>    
                                 </div>
                             </div>                

@@ -34,7 +34,7 @@ class sajidController extends Controller{
 
 			foreach ($data as $comment) {
 				if($comment->commenter_id == Session::get('jcmUser')->userId){
-                $temp ='<div class="col-md-2">
+                $temp ='<div class="col-md-2 col-xs-2" style="padding: 0px;">
                         <div class="btns">
                                 <i class="fa fa-edit edit-comment-btn"></i>
                                 <i delcommentId="'.$comment->comment_id.'" class="fa fa-trash del-comment-btn" aria-hidden="true"></i>
@@ -58,11 +58,11 @@ class sajidController extends Controller{
         $row .= '<div class="row">
                     <div class="col-md-12">
                         <div class="comment-area">
-                            <div class="col-md-1">
+                            <div class="col-md-1 col-xs-3">
                                 <img src="'.$url.'/'.$comment->chatImage.'" class="" alt="'.$comment->firstName.'" style="width:80%;">
                                  
                             </div>
-                            <div class="col-md-9 append-edit">
+                            <div class="col-md-9 col-xs-7 append-edit" style="padding: 0px;">
                             <a href="'.$link.'/'.$comment->userId.'">'.$username.'</a> <span style="color: #999999;font-size: 10px;">'.$comment->comment_date.'</span>
                                 <p style="padding: 5px;min-height: 50px;">'.$comment->comment.'</p>
 
@@ -93,7 +93,7 @@ public function deletecomment(Request $request){
 
 			foreach ($data as $comment) {
 				if($comment->commenter_id == Session::get('jcmUser')->userId){
-                $temp ='<div class="col-md-2">
+                $temp ='<div class="col-md-2 col-xs-2" style="padding: 0px;">
                         <div class="btns">
                                 <i class="fa fa-edit edit-comment-btn"></i>
                                 <i delcommentId="'.$comment->comment_id.'" class="fa fa-trash del-comment-btn" aria-hidden="true"></i>
@@ -117,11 +117,11 @@ public function deletecomment(Request $request){
         $row .= '<div class="row">
                     <div class="col-md-12">
                         <div class="comment-area">
-                            <div class="col-md-1">
+                            <div class="col-md-1 col-xs-3">
                                 <img src="'.$url.'/'.$comment->chatImage.'" class="" alt="'.$comment->firstName.'" style="width:80%;">
                                  
                             </div>
-                            <div class="col-md-9 append-edit">
+                            <div class="col-md-9 col-xs-7 append-edit" style="padding: 0px;">
                             <a href="'.$link.'/'.$comment->userId.'">'.$username.'</a> <span style="color: #999999;font-size: 10px;">'.$comment->comment_date.'</span>
                                 <p style="padding: 5px;min-height: 50px;">'.$comment->comment.'</p>
 
