@@ -24,12 +24,6 @@ class SocialAuthFacebookController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-     public function instaApi()
-    {
-        return Socialite::driver('instagram')->redirect();
-    }
-
-
     public function lnApi()
     {
         return Socialite::driver('linkedin')->redirect();
@@ -63,6 +57,7 @@ class SocialAuthFacebookController extends Controller
         else{
             $userDet=['id'=>$fbId,'name'=>$user->user['name'],'email'=>$email,'avatar'=>$user->avatar_original]; 
             $userDetails=$this->createUser($userDet);
+            $request->session()->put('jcmUser', $userDetails);
         }
  
         $this->loginAndRed($userDetails,$request);
@@ -89,6 +84,7 @@ class SocialAuthFacebookController extends Controller
         else{
             $userDet=['id'=>$glId,'name'=>$user->name,'email'=>$email,'avatar'=>$user->avatar_original]; 
             $userDetails=$this->createUser($userDet);
+            $request->session()->put('jcmUser', $userDetails);
         }
 
         $this->loginAndRed($userDetails,$request);
@@ -96,31 +92,6 @@ class SocialAuthFacebookController extends Controller
         return redirect('account/jobseeker');
     }
 
-      public function instaCallback(Request $request){
-        $user=Socialite::driver('instagram')->user();
-        $email=$user->email;
-        $glId=$user->id;
-        $userDetails=User::where('email',$email)->first();
-        if($userDetails){
-            if($userDetails->user_status=='N'){
-                $userDetails->user_status='Y';
-                $userDetails->glId=$glId;
-                $userDetails->save();
-            }
-            elseif(!$userDetails->glId){
-                $userDetails->glId=$glId;
-                $userDetails->save(); 
-            }
-        }
-        else{
-            $userDet=['id'=>$glId,'name'=>$user->name,'email'=>$email,'avatar'=>$user->avatar_original]; 
-            $userDetails=$this->createUser($userDet);
-        }
-
-        $this->loginAndRed($userDetails,$request);
-
-        return redirect('account/jobseeker');
-    }
 
     public function lnCallback(Request $request){
         $user=Socialite::driver('linkedin')->user();
@@ -141,6 +112,7 @@ class SocialAuthFacebookController extends Controller
         else{
             $userDet=['id'=>$lnId,'name'=>$user->name,'email'=>$email,'avatar'=>$user->avatar]; 
             $userDetails=$this->createUser($userDet);
+            
         }
 
         $this->loginAndRed($userDetails,$request);
@@ -192,7 +164,7 @@ class SocialAuthFacebookController extends Controller
         $cInput = array('companyName' => $firstName.' '.$lastName, 'companyEmail' => $email, 'companyPhoneNumber' => '', 'companyCountry' =>'', 'companyState' => '', 'companyCity' => '', 'category' => '0', 'companyCreatedTime' => date('Y-m-d H:i:s'), 'companyModifiedTime' => date('Y-m-d H:i:s'));
         $companyId = DB::table('jcm_companies')->insertGetId($cInput);
         DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
-
+        $objModel=$companyId;
         return $objModel;
     }
 }
