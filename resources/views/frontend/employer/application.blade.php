@@ -66,6 +66,7 @@ if(Request::input('show') != ''){
                         <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  @lang('home.offered')</a>
                         <a id="hire" class="btn btn-block jaTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
                         <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
+                        <a id="review" href="{{url('employer/status/reviews/all')}}" class="btn btn-block {{ $review }}"><i class="fa fa-file-o"></i>  Review</a>
                     </div>
                 </div>
             </div>
@@ -379,7 +380,7 @@ $('.ea-record-selected').each(function(index,element){
 })
  
  $.ajax({
-    url:"{{ url('sajid')}}",
+    url:"{{ url('resume/download/multiple') }}",
     type:"post",
     data:{id_array:id_array,_token:"{{ csrf_token() }}"},
     success:function(res){

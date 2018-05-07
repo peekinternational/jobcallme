@@ -168,7 +168,7 @@
                         <div class="review-header">
 							<span class="bell">
 								<i class="fa fa-bell fa-3x"></i>
-								<span class="badge">{{ count($comments) }}</span>
+								<span class="badge bell-badge">{{ count($comments) }}</span>
 							</span>
 							<span class="pull-right"><button onclick="changebtns(this)"  class="btn btn-primary" style="box-shadow: 0px 1px 13px rgba(0,0,0,0.5)">@lang('home.open review') <i class="fa fa-plus"></i> </button></span>
 							
@@ -244,8 +244,10 @@
                                         <div class="col-md-9 col-xs-9">
                                             <div class="form-group">
                                                 <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
-                                            </div>    
+                                            </div> 
+                                            <p style="color: #999999;">if you need more discus you may use jobcallme Live video and chat which you can use multi video and chat</p>   
                                         </div>
+
                                         <div class="col-md-2 col-xs-offset-8" style="padding-top: 15px;"><button class="btn btn-success" id="comment-btn">Submit</button></div>
                                     </div>    
                                 </div>

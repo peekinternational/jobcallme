@@ -48,4 +48,5 @@ Class SajidHelper {
 	$data = $table->first();
 	return $data;
 	}
+	
 }

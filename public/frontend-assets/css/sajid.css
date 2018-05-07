@@ -13,6 +13,18 @@
 .fullwidth{
   width: 100%;
 }
+.header{
+  background-color: #57768a;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 300;
+  color:#fff;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.5);
+}
+.body{
+  background-color: #fff;
+  padding: 5px;
+}
 .comment-box{
   
 }
@@ -28,10 +40,13 @@ position: relative;
   display: inline-block;
   margin-bottom: 5px;
 }
-.badge{
+.bell-badge{
   position: absolute;
   left: 23px;
   background-color: #ef2626;
+}
+.red{
+  background-color: red;
 }
 .bold{
   font-size: 14px;

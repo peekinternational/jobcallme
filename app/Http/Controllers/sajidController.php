@@ -134,4 +134,37 @@ public function deletecomment(Request $request){
             }
             echo $row;
 }
+public function jobreviews($jobid){
+    $userId = Session::get('jcmUser')->userId;
+    
+    if($jobid == 'all'){
+        $data = DB::table('comments')->leftJoin('jcm_users','comments.employeer_id','=','jcm_users.userId')->where('employeer_id',$userId)->get();
+    }else{
+        $data = DB::table('comments')->leftJoin('jcm_users','comments.employeer_id','=','jcm_users.userId')->where('employeer_id',$userId)->where('job_id',$jobid)->get();
+    }
+
+    return view('frontend.employer.jobreviews',compact('data'));
+}
+public function delete(Request $request){
+    $table = $request->input('table');
+    $field = $request->input('field');
+    $id = $request->input('id');
+    if(DB::table($table)->where($field,$id)->delete()){
+        echo 1;
+    }else{
+        echo 2;
+    }
+}
+public function update(Request $request){
+    $table = $request->input('table');
+    $field = $request->input('field');
+    $id = $request->input('id');
+    $data = $request->input('data');
+    
+    if(DB::table($table)->where($field,$id)->update($data)){
+        echo 1;
+    }else{
+        echo 2;
+    }
+}
 }
