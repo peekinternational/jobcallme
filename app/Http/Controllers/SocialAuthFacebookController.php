@@ -112,7 +112,7 @@ class SocialAuthFacebookController extends Controller
         else{
             $userDet=['id'=>$lnId,'name'=>$user->name,'email'=>$email,'avatar'=>$user->avatar]; 
             $userDetails=$this->createUser($userDet);
-            $request->session()->put('jcmUser', $userDetails);
+            
         }
 
         $this->loginAndRed($userDetails,$request);
@@ -163,8 +163,8 @@ class SocialAuthFacebookController extends Controller
         $userId=$objModel->userId;
         $cInput = array('companyName' => $firstName.' '.$lastName, 'companyEmail' => $email, 'companyPhoneNumber' => '', 'companyCountry' =>'', 'companyState' => '', 'companyCity' => '', 'category' => '0', 'companyCreatedTime' => date('Y-m-d H:i:s'), 'companyModifiedTime' => date('Y-m-d H:i:s'));
         $companyId = DB::table('jcm_companies')->insertGetId($cInput);
-        DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
-
+        $userDetails=DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
+        $request->session()->put('jcmUser', $userDetails);
         return $objModel;
     }
 }
