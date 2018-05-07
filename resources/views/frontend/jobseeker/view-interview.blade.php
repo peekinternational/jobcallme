@@ -49,7 +49,7 @@
                                     <th width="50%">@lang('home.interviewdate')</th>
                                     <td width="50%">
                                         <b>@lang('home.date')</b> <i>{{ $interview->fromDate }}</i> @lang('home.to') <i>{{ $interview->toDate }}</i><br>
-                                        <b>@lang('home.timing')</b> <i>09:00 AM</i> @lang('home.to') <i>05:00 PM</i>
+                                        <b>@lang('home.timing')</b> <i>{{ $interview->time_from }}</i> @lang('home.to') <i>{{ $interview->time_to }}</i>
                                     </td>
                                 </tr>
                                 <tr>

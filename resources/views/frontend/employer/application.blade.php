@@ -149,16 +149,33 @@ if(Request::input('show') != ''){
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">@lang('home.date')</label>
+                                    <label class="control-label col-md-4 text-right">Date to</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control date-picker" name="toDate" value="{{ date('Y-m-d',strtotime('+1 Day')) }}" onkeypress="return false">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 text-right">Date from</label>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control date-picker" name="fromDate" value="{{ date('Y-m-d',strtotime('+1 Day')) }}" onkeypress="return false">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">@lang('home.time')</label>
+                                    <label class="control-label col-md-4 text-right">Time to</label>
                                     <div class="col-md-6">
                                       
-                                        <select name="toDate" class="form-control">
+                                        <select name="timeto" class="form-control">
+                                                @foreach(JobCallMe::timeArray() as $time)
+                                                    <option value="{!! $time !!}">{!! $time !!}</option>
+                                                @endforeach
+                                           </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 text-right">Time from</label>
+                                    <div class="col-md-6">
+                                      
+                                        <select name="timefrom" class="form-control">
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}">{!! $time !!}</option>
                                                 @endforeach
