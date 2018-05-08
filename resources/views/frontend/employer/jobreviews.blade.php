@@ -24,7 +24,9 @@
 						@foreach($data as $review)
 						<tr>
 							<td><a href="{{ url('account/employer/application/candidate/'.$review->userId).'?jobId='.$review->job_id }}">{{$review->firstName." ".$review->lastName}}</a></td>
-							<td>{{ substr($review->comment,0,100) }}</td>
+							<!--<td>{{ substr($review->comment,0,100) }}</td>-->
+							<!--<td>{{ date('d M Y h:i',strtotime($review->comment_date)) }}</td>-->
+							<td>{{ $review->comment }}</td>
 							<td>{{ date('d M Y h:i',strtotime($review->comment_date)) }}</td>
 							<td><i class="fa fa-edit pointer" onclick="editreview(this,{{$review->comment_id}},'{{ $review->comment}}')"></i> <i class="fa fa-remove pointer" onclick="delreview(this,{{$review->comment_id}})"></i></td>
 						</tr>
