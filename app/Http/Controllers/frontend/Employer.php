@@ -2399,7 +2399,7 @@ public function viewJobstatus(Request $request,$id){
 		$job = $jobrs->first();
 		$benefits = @explode(',', $job->benefits);
 		$process = @explode(',', $job->process);
-		dd($job);
+		//dd($job);
 		return view('frontend.employer.status',compact('job','benefits','process'));
 
 }
