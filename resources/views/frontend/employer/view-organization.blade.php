@@ -161,7 +161,9 @@ if($company->companyLogo != ''){
                                            <select class="form-control select2" name="industry" required>
                                               
                                                @foreach(JobCallMe::getCategories() as $cat)
+                                               @if($cat->categoryId < 17)
                                                 <option value="{{ $cat->categoryId }}" {{ $cat->categoryId == $company->category ? 'selected="selected"' : '' }}>@lang('home.'.$cat->name)</option>
+                                              @endif
                                                @endforeach
                                            </select>
                                        </div>
