@@ -1154,8 +1154,11 @@ else{
 		$evaluationData = DB::table('jcm_evaluation as eva')->select('eva.*','eva_que.evaluation_factor','eva_que.weight')->leftJoin('jcm_evaluation_question as eva_que','eva.evaluation_id','=','eva_que.evaluation_id')->where('eva.job_id',$jobId)->where('eva.user_id',$app->userId)->get();
 
 		$eva_ans = DB::table('jcm_evaluation_answer as eva_ans')->where('job_id',$jobId)->where('candidate_id',$userId)->get();
-		
-		return view('frontend.employer.appcandidate',compact('evaluationData','applicant','resume','Query','userId','jobId','questionData','eva_ans'));
+
+		/* interview  tab data *muhammad sajid 7/5/2018* */
+		$interviewData = DB::table('jcm_job_interviews')->where('jobseekerId',$userId)->where('jobId',$jobId)->first();
+
+		return view('frontend.employer.appcandidate',compact('evaluationData','applicant','resume','Query','userId','jobId','questionData','eva_ans','interviewData'));
 	}
 public function userResume($userId){
 		$record = DB::table('jcm_resume')->where('userId','=',$userId)->orderBy('resumeId','asc')->get();
@@ -1321,7 +1324,10 @@ public function mapOrganization(Request $request){
 		$applicantInter = $request->input('applicantInter');
 		//dd($applicantInter);
 		$fromDate = trim($request->input('fromDate'));
+		$interviewId = trim($request->input('interviewId'));
 		$toDate = trim($request->input('toDate'));
+		$time_to = trim($request->input('timeto'));
+		$time_from = trim($request->input('timefrom'));
 		$perInterview = trim($request->input('perInterview'));
 		$venue = trim($request->input('venue'));
 
@@ -1342,9 +1348,15 @@ public function mapOrganization(Request $request){
 			$jobseekerId = reset(@explode('_', $appl));
 			$jobId = end(@explode('_', $appl));
 
-			$input = array('userId' => $app->userId, 'jobseekerId' => $jobseekerId, 'jobId' => $jobId, 'fromDate' => $fromDate, 'toDate' => $toDate, 'perInterview' => $perInterview, 'venueId' => $venue, 'createdTime' => date('Y-m-d H:i:s'));
+			$input = array('userId' => $app->userId, 'jobseekerId' => $jobseekerId, 'jobId' => $jobId, 'fromDate' => $fromDate, 'toDate' => $toDate, 'perInterview' => $perInterview, 'venueId' => $venue,'time_from'=>$time_from,'time_to'=>$time_to, 'createdTime' => date('Y-m-d H:i:s'));
+			$check = DB::table('jcm_job_interviews')->where('jobseekerId',$jobseekerId)->where('jobId',$jobId)->get();
+			if(count($check) != 0){
+				DB::table('jcm_job_interviews')->where('jobseekerId',$jobseekerId)->where('jobId',$jobId)->update($input);
+			}else{
+				DB::table('jcm_job_interviews')->insert($input);
+			}
 
-			DB::table('jcm_job_interviews')->insert($input);
+			
 
 			DB::table('jcm_job_applied')->where('userId','=',$jobseekerId)->where('jobId','=',$jobId)->update(array('applicationStatus' => 'Interview'));
 		}

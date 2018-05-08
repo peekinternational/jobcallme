@@ -419,30 +419,48 @@
                                         <div class="col-md-6">
                                             <input type="text" class="form-control date-picker" value="{{$applicant->firstName}} {{$applicant->lastName}}" onkeypress="return false">
                                             <input type="hidden" class="form-control date-picker" name="applicantInter[]" value="{{$applicant->userId}}_{{ $job }}" onkeypress="return false">
+                                            <input type="hidden" name="interviewId" value="{{ $interviewData->interviewId }}">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-4 text-right">@lang('home.date')</label>
+                                        <label class="control-label col-md-4 text-right">Date to</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control date-picker" name="fromDate" value="{{ date('Y-m-d',strtotime('+1 Day')) }}" onkeypress="return false">
+                                            <input type="text" class="form-control date-picker" name="toDate" value="{{ $interviewData->toDate }}" onkeypress="return false">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-4 text-right">@lang('home.time')</label>
+                                        <label class="control-label col-md-4 text-right">Date from</label>
                                         <div class="col-md-6">
-                                            <select name="toDate" class="form-control">
+                                            <input type="text" class="form-control date-picker" name="fromDate" value="{{ $interviewData->fromDate }}" onkeypress="return false">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 text-right">Time to</label>
+                                        <div class="col-md-6">
+                                            <select name="timeto" class="form-control">
                                                 @foreach(JobCallMe::timeArray() as $time)
-                                                    <option value="{!! $time !!}">{!! $time !!}</option>
+                                                    <option value="{!! $time !!}" @if($time == $interviewData->time_to) selected @endif>{!! $time !!}</option>
                                                 @endforeach
                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="control-label col-md-4 text-right">Time from</label>
+                                        <div class="col-md-6">
+                                            <select name="timefrom" class="form-control">
+                                                @foreach(JobCallMe::timeArray() as $time)
+                                                    <option value="{!! $time !!}" @if($time == $interviewData->time_from) selected @endif>{!! $time !!}</option>
+                                                @endforeach
+                                           </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
                                         <label class="control-label col-md-4 text-right">@lang('home.timeinterview')</label>
                                         <div class="col-md-6">
                                             <select class="form-control select2" name="perInterview">
                                                 @for($i = 1; $i < 10; $i++)
-                                                    <option value="{{ $i * 20 }}">{{ ($i * 20).trans('home.Minutes') }}</option>
+                                                    <option value="{{ $i * 20 }}" @if(($i * 20) == $interviewData->perInterview) selected @endif>{{ ($i * 20).trans('home.Minutes') }}</option>
                                                 @endfor
                                             </select>
                                         </div>
