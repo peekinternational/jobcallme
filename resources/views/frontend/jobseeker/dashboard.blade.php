@@ -125,12 +125,14 @@
               <div class="tab-pane" id="rtj_tab_interview">
                 @if(count($interview) > 0)
                 @foreach($interview as $interv)
+                
                 <?php 
+                $user=Session::get('jcmUser');
                 $cLogo = url('compnay-logo/default-logo.jpg');
                 if($interv->companyLogo != ''){
                   $cLogo = url('compnay-logo/'.$interv->companyLogo);
                 }
-                $getInterview = JobCallMe::getJobInterview($interv->jobId,$interv->userId);
+                $getInterview = JobCallMe::getJobInterview($interv->jobId,$user->userId);
                 $interviewUrl = url('account/jobseeker/interview/'.$getInterview->interviewId);
                 ?>
                 <div class="col-md-12 rtj-item">
