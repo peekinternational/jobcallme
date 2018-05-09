@@ -176,7 +176,7 @@ return [
         Stevebauman\Location\LocationServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\SajidServiceProvider::class,
@@ -249,6 +249,7 @@ return [
         'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class, 
         'Zipper' => Chumper\Zipper\Zipper::class,
         'Sajid' => App\SajidHelper\Facade\Sajid::class,
+        'Pusher' => Pusher\Pusher::class,
     ],
 
 ];

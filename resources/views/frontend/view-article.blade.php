@@ -10,6 +10,7 @@ $userimages='';
 ?>
 <!--Read Articles-->
 <section id="postNewJob">
+    <div id="app"></div>
     <div class="container">
         <div class="col-md-9">
             <div class="ld-left">
@@ -190,6 +191,7 @@ $userimages='';
         <textarea name="comment" id="comment-edit" class="form-control" rows="3"></textarea>
     </div>
 </script>
+<script src="{{ asset('js/app.js')}}"></script>
 </section>
 @endsection
 @section('page-footer')
@@ -211,17 +213,7 @@ function changebtn(current){
     }
 }
 
-    setInterval(function(){ 
-        $.ajax({
-            url:jsUrl()+"/read/article/comment/save",
-            type:"post",
-            data:{_token:jsCsrfToken(),post_id:{{ $record->writingId }},table_name:"read"},
-            success:function(res){
-                $('#put-comments').html(res);
-            }
-        })
-
-    }, 60000);
+    
     $(document).on("click",".edit-comment-btn",function(){
         $('.btns').show();
         $('.btns-update').hide();
@@ -254,7 +246,7 @@ function changebtn(current){
                type:"post",
                data:{table_name:"read",comment:comment,post_id:{{ $record->writingId }},_token:jsCsrfToken(),commenter_id:commenter_id},
                success:function(res){
-                   $('#put-comments').html(res);
+                  
                    $('#comment').val('');
                    var noti = $('.bell .badge').text();
                     noti = parseInt(noti) + 1;
