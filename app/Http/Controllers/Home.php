@@ -19,7 +19,10 @@ class Home extends Controller{
     public function notFound(){
     	echo 'here';
     }
-
+    public function sendMessage(Request $request){
+    	$message = $request->message;
+    	event( new \App\Events\TaskEvent($message));
+    }
 	public function testCron(){
 		/*get non communicating users*/
 		$comet=CometChat::whereNull('custom_data')->get()->toArray();

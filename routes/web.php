@@ -25,6 +25,10 @@ Route::get('get-location-from-ip',function(){
 Route::get('comments',function(){
 	return view('comments');
 });
+Route::get('/event','Home@sendMessage');
+Route::get('/listen',function(){
+	return view('broadcoast');
+});
 Route::post('read/likes/{type}','frontend\Home@likes');
 Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');

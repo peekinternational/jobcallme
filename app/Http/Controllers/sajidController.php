@@ -73,7 +73,8 @@ class sajidController extends Controller{
                 </div>';
 
             }
-            echo $row;
+            event(new \App\Events\comments($row));
+            /*echo $row;*/
 	}
 
 public function deletecomment(Request $request){
