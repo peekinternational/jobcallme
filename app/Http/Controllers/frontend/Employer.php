@@ -2600,7 +2600,7 @@ public function allform(Request $request){
    }
    public function deleteoffer(Request $request){
    		$offerId = $request->input('offerId');
-   		DB::table('jcm_offer_id')->where('offer_id',$offerId)->delete();
+   		DB::table('jcm_offer_interview')->where('offer_id',$offerId)->delete();
    }
 
 }

@@ -458,6 +458,14 @@ Route::post('sajid', 'frontend\Jobseeker@downloadmulticv');
 Route::post('delcv', 'frontend\Jobseeker@deletedownloadedcv');
 Route::post('evaluation/candidate/save','frontend\Employer@candidateEvaluation');
 Route::post('jobseeker/resume/review/delete','frontend\Employer@deleteResumeReview');
+Route::post('jobseeker/resume/offer/delete','frontend\Employer@deleteoffer');
 /* comment system url */
 Route::post('read/article/comment/save','sajidController@savecomment');
 Route::post('read/article/comment/delete','sajidController@deletecomment');
+Route::get('employer/status/reviews/{id}','sajidController@jobreviews');
+Route::get('employer/status/offer/all','sajidController@offersinterview');
+/*comment delete url*/
+Route::post('delete/record','sajidController@delete');
+Route::post('update/record','sajidController@update');
+Route::post('offerdelete/record','sajidController@offerdelete');
+Route::post('offerupdate/record','sajidController@offerupdate');

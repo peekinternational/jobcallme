@@ -2461,8 +2461,10 @@ if($user->profilePhoto != ''){
 						<div class="review-header">
 							<span class="bell">
 								<i class="fa fa-bell fa-3x"></i>
-								<span class="badge">{{ $totalReview }}</span>
+								<span class="badge" id="reviewbell">{{ $totalReview }}</span>
+								Reviews On Resume 
 							</span>
+							
 							<span class="pull-right"><button onclick="changebtn(this)" class="btn btn-primary" style="border-radius: 50%;box-shadow: 0px 1px 13px rgba(0,0,0,0.5)"> <i class="fa fa-plus"></i> </button></span>
 							
 						</div>
@@ -2490,7 +2492,41 @@ if($user->profilePhoto != ''){
                         @endforeach
                         
                     </div>
-                    
+
+						<div class="review"  style="margin-top: 16px;">
+						<div class="review-header">
+							<span class="bell">
+								<i class="fa fa-bell fa-3x"></i>
+								<span class="badge" id="offerbell">{{ count($offers) }}</span>
+								Offer Interviews
+							</span>
+							<span class="pull-right"><button onclick="changeoffer(this)" class="btn btn-primary" style="border-radius: 50%;box-shadow: 0px 1px 13px rgba(0,0,0,0.5)"> <i class="fa fa-plus"></i> </button></span>
+							
+						</div>
+					</div>
+                    <div id="show-offer" style="display: none">
+                        @foreach($offers as $comment)
+                        <?php $companyDetail = Sajid::getReviewCompany($comment->emp_id);?>
+                        <div class="row ">
+                          <div class="col-md-12">
+                                <div class="jobs-suggestions">
+                                    <div class="pic col-md-1" align="center">
+                                      <div class="circle">
+                                          <img src="{{ url('compnay-logo/'.$companyDetail->companyLogo)}}" class="circle-img">
+                                      </div>
+                                    </div>
+                                    <div class="col-md-11">
+                                      <span class="heading"><a target="_blank" href="{{url('companies/company/'.$companyDetail->companyId)}}">{{ $companyDetail->companyName }}</a></span>
+                                      <span class="pull-right"><button onclick="deleteOffer(this,{{$comment->offer_id}})" class="btn btn-danger">delete</button></span>
+                                      <p>{{ substr($comment->offer_msg,0,150) }}</p>
+                                        <span>{{ $comment->created_at }}</span>
+                                    </div>
+                                </div>
+                          </div>
+                        </div>
+                        @endforeach
+                        
+                    </div>
 					
 				</div>
 				<div class="col-md-3 hidden-xs">
@@ -2735,6 +2771,19 @@ function changebtn(current){
          $('#show-review').hide();
     }
 }
+
+function changeoffer(current){
+    if($(current).hasClass('btn-primary')){
+        $(current).removeClass('btn-primary').addClass('btn-danger');
+        $(current).html('<i class="fa fa-minus"></i>');
+        $('#show-offer').show();
+    }else{
+        $(current).removeClass('btn-danger').addClass('btn-primary');
+        $(current).html('<i class="fa fa-plus"></i>');
+         $('#show-offer').hide();
+    }
+}
+
 function deleteReview(current,comment_id){
     $.ajax({
         url:jsUrl()+"/jobseeker/resume/review/delete",
@@ -2742,9 +2791,24 @@ function deleteReview(current,comment_id){
         data:{commentId:comment_id,_token:jsCsrfToken()},
         success:function(res){
             $(current).closest('.row').remove();
-            var noti = $('.bell .badge').text();
+            var noti = $('#reviewbell').text();
             noti = parseInt(noti) - 1;
-            $('.bell .badge').text(noti);
+            $('#reviewbell').text(noti);
+
+        }
+    });
+}
+
+function deleteOffer(current,comment_id){
+    $.ajax({
+        url:jsUrl()+"/jobseeker/resume/offer/delete",
+        type:"post",
+        data:{offerId:comment_id,_token:jsCsrfToken()},
+        success:function(res){
+            $(current).closest('.row').remove();
+            var noti = $('#offerbell').text();
+            noti = parseInt(noti) - 1;
+            $('#offerbell').text(noti);
 
         }
     });
