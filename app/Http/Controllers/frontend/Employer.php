@@ -1109,8 +1109,10 @@ else{
 		$people->limit(4);
 		$people->inRandomOrder();
 		$Query=$people->get();
+		$plan = DB::table('jcm_save_packeges')->where('user_id',$app->userId)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
+		$pckg=count($plan);
 		//dd($applicant);
-		return view('frontend.employer.view-applicant',compact('applicant','resume','Query','privacy'));
+		return view('frontend.employer.view-applicant',compact('pckg','applicant','resume','Query','privacy'));
 		//return view('frontend.employer.view-applicant',compact('applicant','resume'));
 	}
 		public function viewApplicants(Request $request){

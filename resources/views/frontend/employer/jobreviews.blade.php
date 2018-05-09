@@ -14,7 +14,7 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>Employee</th>
+							<th>Applicant</th>
 							<th>Review</th>
 							<th>Review Date</th>
 							<th>Action</th>

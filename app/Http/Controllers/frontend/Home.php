@@ -238,6 +238,7 @@ class Home extends Controller{
 	}
 
 	public function accountLogin(Request $request){
+		
 		if($request->session()->has('jcmUser')){
 			$type = $request->session()->get('jcmUser')->type == 'Employer' ? 'employer' : 'jobseeker';
 			return redirect('account/'.$type);
