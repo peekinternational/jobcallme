@@ -2567,4 +2567,40 @@ public function allform(Request $request){
    		$commentId = $request->input('commentId');
    		DB::table('comments')->where('comment_id',$commentId)->delete();
    }
+
+     public function offerinterview(Request $request){
+	
+   		$data = $request->input();
+   		unset($data['_token']);
+   		$data['table_name'] ="offer";
+		   $userid = $request->session()->get('jcmUser')->userId;
+		   $plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
+		//dd($plan);
+			$pckg_id= $plan[0]->id;
+			$pckgs_id= $plan[0]->pckg_id;
+			$quantity= $plan[0]->quantity;
+			$remain = $quantity - 1;
+			$inputs['quantity']=$remain;
+			$input['emp_id']=$userid;
+			$input['pckg_id']=$pckgs_id;
+			$input['seeker_id']=$data['jobseeker_id'];
+			if(count($plan) == 0)
+			{
+				echo 2;
+			}
+				else{
+					 DB::table('jcm_download')->insert($input);
+                    DB::table('jcm_save_packeges')->where('user_id','=',$userid)->where('id','=',$pckg_id)->update($inputs);
+					if(DB::table('jcm_offer_interview')->insert($data)){
+						echo 1;
+					}else{
+						echo 2;
+					}
+				}
+   }
+   public function deleteoffer(Request $request){
+   		$offerId = $request->input('offerId');
+   		DB::table('jcm_offer_id')->where('offer_id',$offerId)->delete();
+   }
+
 }
