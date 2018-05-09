@@ -93,7 +93,7 @@ $userimages='';
 
                                     ?>
 
-                                <div class="row">
+                                <div class="row" id="{{$comment->comment_id}}">
                                     <div class="col-md-12">
                                         <div class="comment-area">
                                             <div class="col-md-1 col-xs-3">
@@ -209,7 +209,7 @@ function changebtn(current){
     }else{
         $(current).removeClass('btn-danger').addClass('btn-primary');
         $(current).html('@lang("home.open review") <i class="fa fa-plus"></i>');
-         $('#show_review').hide();
+        $('#show_review').hide();
     }
 }
 
@@ -244,13 +244,11 @@ function changebtn(current){
            $.ajax({
                url:jsUrl()+"/read/article/comment/save",
                type:"post",
-               data:{table_name:"read",comment:comment,post_id:{{ $record->writingId }},_token:jsCsrfToken(),commenter_id:commenter_id},
+               data:{table_name:"read",comment:comment,post_id:{{ $record->writingId }},_token:jsCsrfToken(),commenter_id:commenter_id,type:"insert"},
                success:function(res){
-                  
-                   $('#comment').val('');
-                   var noti = $('.bell .badge').text();
-                    noti = parseInt(noti) + 1;
-                    $('.bell .badge').text(noti);
+                var obj = jQuery.parseJSON(res)
+                $('#'+obj.comment_id).find('.comment-area').append(obj.temp);
+                $('#comment').val('');
                }
            }) 
 
@@ -260,14 +258,11 @@ function changebtn(current){
        var comment_id = $(this).attr('delcommentId');
         if (confirm("Are you sure to delete!")) {
              $.ajax({
-               url:jsUrl()+"/read/article/comment/delete",
+               url:jsUrl()+"/read/article/comment/save",
                type:"post",
-               data:{table_name:"read",post_id:{{ $record->writingId }},_token:jsCsrfToken(),comment_id:comment_id},
+               data:{table_name:"read",post_id:{{ $record->writingId }},_token:jsCsrfToken(),comment_id:comment_id,type:"delete"},
                success:function(res){
-                   $('#put-comments').html(res);
-                   var noti = $('.bell .badge').text();
-                            noti = parseInt(noti) - 1;
-                            $('.bell .badge').text(noti);
+                   
                }
             }) 
           } else {
@@ -278,13 +273,16 @@ function changebtn(current){
          var comment_id = 0;
         var comment = $('#comment-edit').val();
         comment_id = $(this).attr('commentId');
+        var current = $(this);
        
         $.ajax({
             url:jsUrl()+"/read/article/comment/save",
             type:"post",
-            data:{table_name:"read",comment:comment,post_id:{{ $record->writingId }},comment_id:comment_id,_token:jsCsrfToken()},
+            data:{table_name:"read",comment:comment,post_id:{{ $record->writingId }},comment_id:comment_id,_token:jsCsrfToken(),type:'edit'},
             success:function(res){
-                $('#put-comments').html(res);
+                $(current).closest('.row').remove();
+                var obj = jQuery.parseJSON(res)
+                $('#'+obj.comment_id).find('.comment-area').append(obj.temp);
             }
         })
     })

@@ -978,16 +978,30 @@ window.Vue = __webpack_require__(41);
 Vue.component('example', __webpack_require__(38));
 
 var app = new Vue({
-  el: '#app',
-  created: function created() {
-    Echo.channel('TestChannel').listen('TaskEvent', function (e) {
-      console.log(e.message);
-      $('body').append('<h1>' + e.message + '</h1>');
-    });
-    Echo.channel('comments').listen('comments', function (e) {
-      $('#put-comments').html(e.comment);
-    });
-  }
+    el: '#app',
+    created: function created() {
+        Echo.channel('TestChannel').listen('TaskEvent', function (e) {
+            console.log(e.message);
+            $('body').append('<h1>' + e.message + '</h1>');
+        });
+        Echo.channel('comments').listen('comments', function (e) {
+
+            if (e.comment.type == 'edit') {
+                $('#' + e.comment.comment_id).remove();
+                $('#put-comments').prepend(e.comment.html);
+            } else if (e.comment.type == 'delete') {
+                var noti = $('.bell .badge').text();
+                noti = parseInt(noti) - 1;
+                $('.bell .badge').text(noti);
+                $('#' + e.comment.comment_id).remove();
+            } else {
+                var noti = $('.bell .badge').text();
+                noti = parseInt(noti) + 1;
+                $('.bell .badge').text(noti);
+                $('#put-comments').prepend(e.comment.html);
+            }
+        });
+    }
 });
 
 /***/ }),
