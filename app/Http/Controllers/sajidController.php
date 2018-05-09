@@ -12,129 +12,44 @@ use App;
 use Session;
 class sajidController extends Controller{
 	public function savecomment(Request $request){
+
 		$data['post_id'] = $request->input('post_id');
 		$data['table_name'] = $request->input('table_name');
-		if($request->input('comment_id')){
-			$id = $request->input('comment_id');
-			$data['comment'] = $request->input('comment');
+        $data['comment'] = $request->input('comment');
+        $id = $request->input('comment_id');
+        $type = $request->input('type');
+        
+        if($type == 'delete'){
+            DB::table('jcm_comments')->where('comment_id',$id)->delete();
+        }
+		else if($type == 'edit'){
 			$data['update_comment'] = date("Y-m-d h:i:s");
 			DB::table('jcm_comments')->where('comment_id',$id)->update($data);
-		}else if($request->input('comment')){
-			$data['comment'] = $request->input('comment'); 
-			$data['commenter_id'] = $request->input('commenter_id');
-			DB::table('jcm_comments')->insertGetid($data);
 		}
-		
+        else if($type == 'insert'){
+			$data['commenter_id'] = $request->input('commenter_id');
+			$id = DB::table('jcm_comments')->insertGetid($data);
+		}
+        $comment = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$data['post_id'])->where('table_name',$data['table_name'])->where('comment_id',$id)->first();
 
-		$data = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$data['post_id'])->where('table_name',$data['table_name'])->orderBy('jcm_comments.comment_id','desc')->get();
-			$row ='';
-            $username='';
-			$url = url('profile-photos/');
-            $link = url('/account/employer/application/applicant');
+        event(new \App\Events\comments($comment,$data,$id,$type));
+        
+        $temp ='<div class="col-md-2 col-xs-2" style="padding: 0px;">
+            <div class="btns">
+                    <i class="fa fa-edit edit-comment-btn"></i>
+                    <i delcommentId="'.$comment->comment_id.'" class="fa fa-trash del-comment-btn" aria-hidden="true"></i>
+  
+            </div>
+            <div class="btns-update" style="display: none">
+                <button commentId="'.$comment->comment_id.'" class="btn btn-success update-comment-btn">Update</button>
+                <button class="btn btn-danger cancel">Cancel</button>
+            </div>
+        </div>';
 
-			foreach ($data as $comment) {
-				if($comment->commenter_id == Session::get('jcmUser')->userId){
-                $temp ='<div class="col-md-2 col-xs-2" style="padding: 0px;">
-                        <div class="btns">
-                                <i class="fa fa-edit edit-comment-btn"></i>
-                                <i delcommentId="'.$comment->comment_id.'" class="fa fa-trash del-comment-btn" aria-hidden="true"></i>
-              
-                        </div>
-                        <div class="btns-update" style="display: none">
-                            <button commentId="'.$comment->comment_id.'" class="btn btn-success update-comment-btn">Update</button>
-                            <button class="btn btn-danger cancel">Cancel</button>
-                        </div>
-                    </div>';
-                }else{
-                	$temp = '';
-                }
-                if($comment->nickName == null){
-                    $username = $comment->firstName;
-                }
-                else{
-                  $username = $comment->nickName;
-                }
-
-        $row .= '<div class="row">
-                    <div class="col-md-12">
-                        <div class="comment-area">
-                            <div class="col-md-1 col-xs-3">
-                                <img src="'.$url.'/'.$comment->chatImage.'" class="" alt="'.$comment->firstName.'" style="width:80%;">
-                                 
-                            </div>
-                            <div class="col-md-9 col-xs-7 append-edit" style="padding: 0px;">
-                            <a href="'.$link.'/'.$comment->userId.'">'.$username.'</a> <span style="color: #999999;font-size: 10px;">'.$comment->comment_date.'</span>
-                                <p style="padding: 5px;min-height: 50px;">'.$comment->comment.'</p>
-
-                            </div>
-                            '.$temp.'
-                        </div>
-                    </div>
-                </div>';
-
-            }
-            event(new \App\Events\comments($row));
-            /*echo $row;*/
+    echo json_encode(array("temp"=>$temp,"comment_id"=>$comment->comment_id));
 	}
 
-public function deletecomment(Request $request){
-  
 
-	$id = $request->input('comment_id');
-	$post_id = $request->input('post_id');
-	$table_name = $request->input('table_name');
-	DB::table('jcm_comments')->where('comment_id',$id)->delete();
-
-	$post_id = $request->input('post_id');
-	$data = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$post_id)->where('table_name',$table_name)->orderBy('jcm_comments.comment_id','desc')->get();
-			$row ='';
-            $username='';
-			$url = url('profile-photos/');
-            $link = url('/account/employer/application/applicant');
-
-			foreach ($data as $comment) {
-				if($comment->commenter_id == Session::get('jcmUser')->userId){
-                $temp ='<div class="col-md-2 col-xs-2" style="padding: 0px;">
-                        <div class="btns">
-                                <i class="fa fa-edit edit-comment-btn"></i>
-                                <i delcommentId="'.$comment->comment_id.'" class="fa fa-trash del-comment-btn" aria-hidden="true"></i>
-              
-                        </div>
-                        <div class="btns-update" style="display: none">
-                            <button commentId="'.$comment->comment_id.'" class="btn btn-success update-comment-btn">Update</button>
-                            <button class="btn btn-danger cancel">Cancel</button>
-                        </div>
-                    </div>';
-                }else{
-                	$temp = '';
-                }
-                if($comment->nickName == null){
-                    $username = $comment->firstName;
-                }
-                else{
-                  $username = $comment->nickName;
-                }
-
-        $row .= '<div class="row">
-                    <div class="col-md-12">
-                        <div class="comment-area">
-                            <div class="col-md-1 col-xs-3">
-                                <img src="'.$url.'/'.$comment->chatImage.'" class="" alt="'.$comment->firstName.'" style="width:80%;">
-                                 
-                            </div>
-                            <div class="col-md-9 col-xs-7 append-edit" style="padding: 0px;">
-                            <a href="'.$link.'/'.$comment->userId.'">'.$username.'</a> <span style="color: #999999;font-size: 10px;">'.$comment->comment_date.'</span>
-                                <p style="padding: 5px;min-height: 50px;">'.$comment->comment.'</p>
-
-                            </div>
-                            '.$temp.'
-                        </div>
-                    </div>
-                </div>';
-
-            }
-            echo $row;
-}
 public function jobreviews($jobid){
     $userId = Session::get('jcmUser')->userId;
     
