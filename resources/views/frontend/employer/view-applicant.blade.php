@@ -39,7 +39,7 @@
                                   </div>
                             </div>
                             <div class="col-md-9 personal-info-right">
-                                <h3 class="hidden-sm hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}}</h3>
+                                <h3 class="hidden-sm hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}}<span class="pull-right"><button class="btn btn-primary" onclick="$('#offerdModel').modal('show')"><i class="fa fa-bullhorn"></i> Offerd Interview</button></span></h3>
                                 <p class="jp-profession-heading hidden-sm hidden-xs">@lang('home.'.JobCallMe::categoryTitle($applicant->industry))</p>
                                 <p><span class="pi-title">@lang('home.experiences'):</span>@lang('home.'.$applicant->experiance)</p>
                                 @if($privacy->dateofbirth == 'Yes')
@@ -473,6 +473,33 @@
             </div>
         </div>
     </div>
+    <div id="offerdModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><i class="fa fa-bullhorn"></i> Offerd Interview</h4>
+          </div>
+          <div class="modal-body">
+           <form id="offerd-form">
+             <div class="form-group">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+               <label for="offerd">Offerd Interview:</label>
+               <textarea type="offerd" name="offer_msg" rows="5" class="form-control" id="offerd"></textarea>
+               <input type="hidden" name="jobseeker_id" value="{{$applicant->userId}}">
+               
+               <input type="hidden" name="emp_id" value="{{ Session::get('jcmUser')->userId }}">
+             </div>
+           </form>
+          </div>
+          <div class="modal-footer">
+             <button type="submit" id="btn-offerd" class="btn btn-success">Submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+    </div>
+</div>
 </section>
 @endsection
 @section('page-footer')
@@ -481,6 +508,25 @@
 </style>
 <script type="text/javascript">
 var token = "{{ csrf_token() }}";
+    $('#btn-offerd').on('click',function(){
+       var data = $('#offerd-form').serialize();
+       $.ajax({
+        url:jsUrl()+"/account/employer/application/candidate/offer",
+        type:"post",
+        data:data,
+        success:function(res){
+            if(res == 1){
+                toastr.success('offerd interview submit successfully');
+                $('#offerd-form #offerd').val('');
+                $('#offerdModel').modal('hide');
+            }
+            else{
+             
+                window.location.href = "{{ url('account/manage?plan') }}";
+            }
+        }
+       });
+    })
 $(document).ready(function(){
     $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
 })

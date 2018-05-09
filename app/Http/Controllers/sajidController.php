@@ -83,4 +83,37 @@ public function update(Request $request){
         echo 2;
     }
 }
+public function offersinterview(){
+    $userId = Session::get('jcmUser')->userId;
+    
+        $data = DB::table('jcm_offer_interview')->leftJoin('jcm_users','jcm_offer_interview.jobseeker_id','=','jcm_users.userId')->where('jcm_offer_interview.emp_id',$userId)->get();
+    
+
+    return view('frontend.employer.offerinterview',compact('data'));
+}
+
+public function offerdelete(Request $request){
+    $table = $request->input('table');
+    $field = $request->input('field');
+    $id = $request->input('id');
+    if(DB::table($table)->where($field,$id)->delete()){
+        echo 1;
+    }else{
+        echo 2;
+    }
+}
+public function offerupdate(Request $request){
+    $table = $request->input('table');
+    $field = $request->input('field');
+    $id = $request->input('id');
+    $data = $request->input('data');
+    
+    if(DB::table($table)->where($field,$id)->update($data)){
+        echo 1;
+    }else{
+        echo 2;
+    }
+}
+
+
 }

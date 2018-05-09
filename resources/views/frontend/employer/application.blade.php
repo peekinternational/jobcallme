@@ -67,6 +67,7 @@ if(Request::input('show') != ''){
                         <a id="hire" class="btn btn-block jaTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
                         <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
                         <a id="review" href="{{url('employer/status/reviews/all')}}" class="btn btn-block {{ $review }}"><i class="fa fa-file-o"></i>  Review</a>
+                        <a id="review" href="{{url('employer/status/offer/all')}}" class="btn btn-block {{ $offer }}"><i class="fa fa-bullhorn"></i> Offer Interview</a>
                     </div>
                 </div>
             </div>

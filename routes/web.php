@@ -270,6 +270,7 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/application/applicant/{id}','frontend\Employer@viewApplicant');
 	Route::get('employer/application/candidate/{id}','frontend\Employer@viewApplicants');
 	Route::post('employer/application/candidate/review','frontend\Employer@comment');
+	Route::post('employer/application/candidate/offer','frontend\Employer@offerinterview');
 
     Route::get('employer/organization', 'frontend\Employer@organization');
     Route::post('employer/organization/save', 'frontend\Employer@savdOrganization');
@@ -421,6 +422,9 @@ Route::get('/fbCallback/{provider?}', 'SocialAuthFacebookController@callback');
 Route::get('/googleApi', 'SocialAuthFacebookController@googleApi');
 Route::get('/googleCallback/{provider?}', 'SocialAuthFacebookController@gCallback');
 
+Route::get('/instaApi', 'SocialAuthFacebookController@instaApi');
+Route::get('/instaCallback/{provider?}', 'SocialAuthFacebookController@instaCallback');
+
 Route::get('/lnApi', 'SocialAuthFacebookController@lnApi');
 Route::get('/lnCallback/{provider?}', 'SocialAuthFacebookController@lnCallback');
 Auth::routes();
@@ -450,13 +454,17 @@ Route::get('/locale/{locale}', function ($locale) {
 Route::get('account/employeer/companies/company/review', 'frontend\Employer@companyreview');
 Route::get('account/employeer/companies/company/delete/{id}', 'frontend\Employer@deletecompanyreview');
 Route::post('account/employer/company/addreview', 'frontend\Employer@addreview');
-Route::post('resume/download/multiple', 'frontend\Jobseeker@downloadmulticv');
+Route::post('sajid', 'frontend\Jobseeker@downloadmulticv');
 Route::post('delcv', 'frontend\Jobseeker@deletedownloadedcv');
 Route::post('evaluation/candidate/save','frontend\Employer@candidateEvaluation');
 Route::post('jobseeker/resume/review/delete','frontend\Employer@deleteResumeReview');
+Route::post('jobseeker/resume/offer/delete','frontend\Employer@deleteoffer');
 /* comment system url */
 Route::post('read/article/comment/save','sajidController@savecomment');
 Route::get('employer/status/reviews/{id}','sajidController@jobreviews');
+Route::get('employer/status/offer/all','sajidController@offersinterview');
 /*comment delete url*/
 Route::post('delete/record','sajidController@delete');
 Route::post('update/record','sajidController@update');
+Route::post('offerdelete/record','sajidController@offerdelete');
+Route::post('offerupdate/record','sajidController@offerupdate');
