@@ -22,9 +22,7 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
-Route::get('comments',function(){
-	return view('comments');
-});
+
 Route::get('/event','Home@sendMessage');
 Route::get('/listen',function(){
 	return view('broadcoast');

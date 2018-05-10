@@ -5,6 +5,7 @@
 @section('content')
 <!--Read Articles-->
 <section id="postNewJob">
+    <div id="app"></div>
     <div class="container">
         <div class="col-md-9">
             <div class="ld-left">
@@ -194,7 +195,7 @@
 
                                     ?>
 
-                                <div class="row">
+                                <div class="row" id="{{$comment->comment_id}}">
                                     <div class="col-md-12">
                                         <div class="comment-area">
                                             <div class="col-md-1 col-xs-3">
@@ -297,6 +298,7 @@
     </div>
 </script>
 </section>
+<script src="{{ asset('js/app.js')}}"></script>
 @endsection
 @section('page-footer')
 <script type="text/javascript">
@@ -312,94 +314,78 @@ function changebtns(current){
          $('#show_reviews').hide();
     }
 }
-
-
-setInterval(function(){ 
-    $.ajax({
-        url:jsUrl()+"/read/article/comment/save",
-        type:"post",
-        data:{_token:jsCsrfToken(),post_id:{{ $record->skillId }},table_name:"learn"},
-        success:function(res){
-            $('#put-comments').html(res);
-        }
-    })
-
-}, 60000);
 $(document).on("click",".edit-comment-btn",function(){
+        $('.btns').show();
+        $('.btns-update').hide();
+        $('.append-edit p').show();
+        $('#comment-edit').remove();
+        var text = $(this).closest('.comment-area').find('.append-edit p').text();
+        $(this).closest('.comment-area').find('.append-edit').append($('#edit').html());
+        $(this).closest('.comment-area').find('#comment-edit').val($.trim(text));
+        $(this).closest('.comment-area').find('#comment-edit').parent().siblings().hide();
+        $(this).closest('.comment-area').find('.btns').hide();
+        $(this).closest('.comment-area').find('.btns-update').show();
 
-    $('.btns').show();
-    $('.btns-update').hide();
-    $('.append-edit p').show();
-    $('#comment-edit').remove();
-    var text = $(this).closest('.comment-area').find('.append-edit p').text();
-    $(this).closest('.comment-area').find('.append-edit').append($('#edit').html());
-    $(this).closest('.comment-area').find('#comment-edit').val($.trim(text));
-    $(this).closest('.comment-area').find('#comment-edit').parent().siblings().hide();
-    $(this).closest('.comment-area').find('.btns').hide();
-    $(this).closest('.comment-area').find('.btns-update').show();
+    })
+    $(document).on("click",".cancel",function(){
+        $('.append-edit p').show();
+        $('#comment-edit').remove();
+        $(this).closest('.comment-area').find('.btns').show();
+        $(this).closest('.comment-area').find('.btns-update').hide();
 
-})
-$(document).on("click",".cancel",function(){
-    $('.append-edit p').show();
-    $('#comment-edit').remove();
-    $(this).closest('.comment-area').find('.btns').show();
-    $(this).closest('.comment-area').find('.btns-update').hide();
+    })
+    $(document).on("click","#comment-btn",function(){
+        var check = "{{ Session::get('jcmUser')->userId }}";
+        if(check == ''){
+            window.location.href=jsUrl()+"/account/login";
+        }else{
+           var comment = $('#comment').val();
+           var commenter_id ="{{Session::get('jcmUser')->userId}}";
+           $.ajax({
+               url:jsUrl()+"/read/article/comment/save",
+               type:"post",
+               data:{table_name:"learn",comment:comment,post_id:{{ $record->skillId }},_token:jsCsrfToken(),commenter_id:commenter_id,type:"insert"},
+               success:function(res){
+                var obj = jQuery.parseJSON(res)
+                $('#'+obj.comment_id).find('.comment-area').append(obj.temp);
+                $('#comment').val('');
+               }
+           }) 
 
-})
-$(document).on("click","#comment-btn",function(){
-    var check = "{{ Session::get('jcmUser')->userId }}";
-    if(check == ''){
-        window.location.href=jsUrl()+"/account/login";
-    }else{
-       var comment = $('#comment').val();
-       var commenter_id ="{{Session::get('jcmUser')->userId}}";
-       $.ajax({
-           url:jsUrl()+"/read/article/comment/save",
-           type:"post",
-           data:{table_name:"learn",comment:comment,post_id:{{ $record->skillId }},_token:jsCsrfToken(),commenter_id:commenter_id},
-           success:function(res){
-               $('#put-comments').html(res);
-               $('#comment').val('');
-               var noti = $('.bell .badge').text();
-                    noti = parseInt(noti) + 1;
-                    $('.bell .badge').text(noti);
-           }
-       }) 
-
-    }
-})
-$(document).on("click",".del-comment-btn",function(){
-   var comment_id = $(this).attr('delcommentId');
-    if (confirm("Are you sure to delete!")) {
-         $.ajax({
-           url:jsUrl()+"/read/article/comment/delete",
-           type:"post",
-           data:{table_name:"learn",post_id:{{ $record->skillId }},_token:jsCsrfToken(),comment_id:comment_id},
-           success:function(res){
-               $('#put-comments').html(res);
-               var noti = $('.bell .badge').text();
-                    noti = parseInt(noti) - 1;
-                    $('.bell .badge').text(noti);
-           }
-        }) 
-      } else {
-          
-    }
-})
-$(document).on("click",".update-comment-btn",function(){
-     var comment_id = 0;
-    var comment = $('#comment-edit').val();
-    comment_id = $(this).attr('commentId');
-   
-    $.ajax({
-        url:jsUrl()+"/read/article/comment/save",
-        type:"post",
-        data:{table_name:"learn",comment:comment,post_id:{{ $record->skillId }},comment_id:comment_id,_token:jsCsrfToken()},
-        success:function(res){
-            $('#put-comments').html(res);
         }
     })
-})
+    $(document).on("click",".del-comment-btn",function(){
+       var comment_id = $(this).attr('delcommentId');
+        if (confirm("Are you sure to delete!")) {
+             $.ajax({
+               url:jsUrl()+"/read/article/comment/save",
+               type:"post",
+               data:{table_name:"learn",post_id:{{ $record->skillId }},_token:jsCsrfToken(),comment_id:comment_id,type:"delete"},
+               success:function(res){
+                   
+               }
+            }) 
+          } else {
+              
+        }
+    })
+    $(document).on("click",".update-comment-btn",function(){
+         var comment_id = 0;
+        var comment = $('#comment-edit').val();
+        comment_id = $(this).attr('commentId');
+        var current = $(this);
+       
+        $.ajax({
+            url:jsUrl()+"/read/article/comment/save",
+            type:"post",
+            data:{table_name:"learn",comment:comment,post_id:{{ $record->skillId }},comment_id:comment_id,_token:jsCsrfToken(),type:'edit'},
+            success:function(res){
+                $(current).closest('.row').remove();
+                var obj = jQuery.parseJSON(res)
+                $('#'+obj.comment_id).find('.comment-area').append(obj.temp);
+            }
+        })
+    })
 
 /*comment js code end*/
 $('i.fa').hover(function () {

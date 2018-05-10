@@ -242,23 +242,23 @@ if($company->companyLogo != ''){
                                    </div>
 
 								   <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.capital')</label>
-                                       <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control" name="capital" id="capital" placeholder="@lang('home.capitaltext')" value="{{ $company->capital }}">
-                                       </div>
-                                   </div>
+                       <label class="control-label col-sm-3 col-xs-12">@lang('home.capital')</label>
+                       <div class="col-sm-9 pnj-form-field">
+                           <input type="text" class="form-control" name="capital" id="capital" placeholder="@lang('home.capitaltext')" value="{{ $company->capital }}">
+                       </div>
+                   </div>
 
 								   <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.sales')</label>
-                                       <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyNoOfUsers" name="sales" id="sales" placeholder="@lang('home.salestext')" value="{{ $company->sales }}">
-                                       </div>
-                                   </div>
+                       <label class="control-label col-sm-3 col-xs-12">@lang('home.sales')</label>
+                       <div class="col-sm-9 pnj-form-field">
+                           <input type="text" class="form-control companyNoOfUsers" name="sales" id="sales" placeholder="@lang('home.salestext')" value="{{ $company->sales }}">
+                       </div>
+                   </div>
 
 								   <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.formofbusiness')</label>
-                                       <div class="col-sm-9 pnj-form-field">
-                                           <select class="form-control input-sm select" name="formofbusiness">
+                      <label class="control-label col-sm-3 col-xs-12">@lang('home.formofbusiness')</label>
+                      <div class="col-sm-9 pnj-form-field">
+                        <select class="form-control input-sm select" name="formofbusiness">
 												<option value="Small business" {{ $company->formofbussiness == 'Small business' ? 'selected="selected"' : '' }}>@lang('home.Small business')</option>
 												<option value="Small and Medium-sized Businesses" {{ $company->formofbussiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
 												<option value="Midsize Business" {{ $company->formofbussiness == 'Midsize Business' ? 'selected="selected"' : '' }}>@lang('home.Midsize Business')</option>
