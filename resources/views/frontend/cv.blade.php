@@ -23,7 +23,29 @@ body{
 </style>
 </head>
 
-
+ 
+               <?php
+                    $path = public_path('/profile-photos/profile-logo.jpg');
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+            if($user->profilePhoto != '' && $user->profilePhoto != NULL){
+                $pos = strpos($user->profilePhoto,"ttp");
+                if($pos == 1)
+                {
+                    $path = public_path($user->profilePhoto);
+                    $type = pathinfo($path, PATHINFO_EXTENSION);
+                    $data = file_get_contents($path);
+                    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                }
+                    else{
+                        $path = public_path('profile-photos/'.$user->profilePhoto);
+                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                        $data = file_get_contents($path);
+                        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                    }
+                }
+    ?>
 <body>
 
  <section class="personal-info-section" id="personal-information">
@@ -31,7 +53,7 @@ body{
     <div class="row">
         <div class="col-md-3 personal-info-left">
             <div class="re-img-box">
-                <img src="{{ $userImage }}" class="img-circle">
+                <img src="{{ $base64 }}" class="img-circle">
                
             </div>
             <h3 class="hidden-md hidden-lg" style="font-weight: 400">{{ $user->firstName.' '.$user->lastName }}</h3>

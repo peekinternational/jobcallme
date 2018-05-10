@@ -13,7 +13,7 @@
                 <br>
                 <div class="col-md-4">
                 </div>
-                <div class="col-md-6" style="display:-webkit-box">
+                <div class="col-md-6" style="display:-webkit-box;display:-ms-inline-flexbox;">
                 <div style="padding-left: 22px;padding-right: 13px;">
                  
                         <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.packagepaypal') !!}" >
@@ -24,7 +24,7 @@
                 </div>
                   <div class="" style="padding-left: 22px;padding-right: 13px;" >
                    
-                        <form class="form-horizontal" method="POST" id="" role="form" action="{{ action('frontend\Employer@cashpackage') }}" >
+                        <form class="form-horizontal" method="get" id="" role="form" action="{{ action('frontend\Employer@cashpackage') }}" >
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-warning btn-lg" name="save">@lang('home.Cash Payment')</button> 
                         </form>

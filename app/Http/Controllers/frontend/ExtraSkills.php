@@ -63,13 +63,29 @@ class ExtraSkills extends Controller{
 
     public function addEditArticle(Request $request){
       //  dd($request->all());
+      $app = $request->session()->get('jcmUser');
+
+      $resume = DB::table('jcm_resume')->where('userId','=',$app->userId)->get();
+      $type=$resume->pluck('type');
+      $result = $type->toArray();
+       
+      $getrecored = DB::table('jcm_users_meta')->where('userId','=',$app->userId)->get();
+      $industry=$getrecored->pluck('industry');
+     
+      if(!in_array('academic',$result))
+      {
+          $fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume';
+		  $request->session()->put('fNotice',$fNotice);
+          return redirect('account/jobseeker');
+      }
+
        $rec = DB::table('jcm_writingpayment')->where('id','=',$request->cat_id)->get();
 	   $amount=$rec[0]->price;
 	  // dd($amount);
 	   $durations=  $request->input('duration');
        
 
-    	$app = $request->session()->get('jcmUser');
+    	
     	if($request->ajax()){
     		$this->validate($request,[
     				'title' => 'required',

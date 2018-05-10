@@ -137,7 +137,7 @@
 										<div style="text-align: center;padding-top:15px;"><span style="font-size: 15px;background:#118c4e;padding:5px 20px;color:#fff;width:100px;text-align: center;">@lang('home.Free')</span></div>
 										@else
 										
-										<form class="ng-untouched ng-pristine ng-valid" action="{{ url('account/packageinfo') }}" method="post">
+										<form class="ng-untouched ng-pristine ng-valid" action="{{ url('account/packageinfo') }}" method="#">
                                
 								{{ csrf_field() }}
 								

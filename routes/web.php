@@ -283,8 +283,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/department/delete/{id}','frontend\Employer@deleteDepartment');
 	Route::post('post','frontend\Employer@post');
 	Route::post('packageplan','frontend\Employer@package');
-	Route::post('packageinfo','frontend\Employer@packageinfo');
-	Route::post('cashpackage','frontend\Employer@cashpackage');
+	Route::get('packageinfo','frontend\Employer@packageinfo');
+	Route::get('cashpackage','frontend\Employer@cashpackage');
 
 	Route::post('nicepay', 'frontend\Employer@getresponse');
 	Route::post('pckgnicepay', 'frontend\Employer@nicepaypckg');

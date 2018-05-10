@@ -13,7 +13,7 @@
                 <br>
                 <div class="col-md-4">
                 </div>
-                <div class="col-md-6" style="display:-webkit-box">
+                <div class="col-md-6" style="display:-webkit-box;display:-ms-inline-flexbox;">
                 <div style="padding-left: 22px;padding-right: 13px;">
                     @if($jType)
                         <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
