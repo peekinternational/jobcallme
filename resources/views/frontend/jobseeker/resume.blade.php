@@ -2469,6 +2469,9 @@ if($user->profilePhoto != ''){
 							
 						</div>
 					</div>
+
+
+					
                     <div id="show-review" style="display: none">
                         @foreach($comments as $comment)
                         <?php $companyDetail = Sajid::getReviewCompany($comment->employeer_id);?>
@@ -2491,9 +2494,10 @@ if($user->profilePhoto != ''){
                         </div>
                         @endforeach
                         
-                    </div>
+                    </div> 
 
-						<div class="review"  style="margin-top: 16px;">
+						<div class="review"  style="margin-top: 16px;"> 
+
 						<div class="review-header">
 							<span class="bell">
 								<i class="fa fa-bell fa-3x"></i>

@@ -54,9 +54,9 @@ public function jobreviews($jobid){
     $userId = Session::get('jcmUser')->userId;
     
     if($jobid == 'all'){
-        $data = DB::table('comments')->leftJoin('jcm_users','comments.employeer_id','=','jcm_users.userId')->where('employeer_id',$userId)->get();
+        $data = DB::table('comments')->leftJoin('jcm_users','comments.jobseeker_id','=','jcm_users.userId')->where('employeer_id',$userId)->get();
     }else{
-        $data = DB::table('comments')->leftJoin('jcm_users','comments.employeer_id','=','jcm_users.userId')->where('employeer_id',$userId)->where('job_id',$jobid)->get();
+        $data = DB::table('comments')->leftJoin('jcm_users','comments.jobseeker_id','=','jcm_users.userId')->where('employeer_id',$userId)->where('job_id',$jobid)->get();
     }
 
     return view('frontend.employer.jobreviews',compact('data'));
@@ -90,6 +90,15 @@ public function offersinterview(){
     
 
     return view('frontend.employer.offerinterview',compact('data'));
+}
+
+public function offers_interview(){
+    $userId = Session::get('jcmUser')->userId;
+    
+        $data = DB::table('jcm_offer_interview')->leftJoin('jcm_users','jcm_offer_interview.jobseeker_id','=','jcm_users.userId')->where('jcm_offer_interview.jobseeker_id',$userId)->get();
+    
+
+    return view('frontend.jobseeker.offer_interview',compact('data'));
 }
 
 public function offerdelete(Request $request){

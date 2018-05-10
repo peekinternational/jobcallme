@@ -353,11 +353,14 @@
                 <div class="fp-item" style="height: 256px;">
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     <div class="fp-img">
-                      <img src="@if($people->pImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
+                   <img src="@if(Session::get('jcmUser')->userId == $people->emp_id) {{ $pImage }} @else @if($people->genderpeople == 'Male' or $people->genderpeople == 'Man') {{ url('profile-photos/profile-logo.jpg ')}} @else {{ url('profile-photos/profile-logo2.jpg ')}} @endif @endif">
 
                     </div>
                     <div class="fp-item-details" style="height: 95px;">
-                      <p>{!! $people->firstName.' '.$people->lastName !!}</p>
+                    
+                   
+                      @if(Session::get('jcmUser')->userId == $people->emp_id)<p>{!! $people->firstName.' '.$people->lastName !!}</p>@else <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i> @endif
+                     
                       <p>@lang('home.'.JobCallMe::categoryTitle($people->industry))</p>
                       <p>@lang('home.'.JobCallMe::cityName($people->city)), @lang('home.'.JobCallMe::countryName($people->country))</p>
                     </div>

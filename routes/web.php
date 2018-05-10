@@ -461,6 +461,7 @@ Route::post('jobseeker/resume/offer/delete','frontend\Employer@deleteoffer');
 Route::post('read/article/comment/save','sajidController@savecomment');
 Route::get('employer/status/reviews/{id}','sajidController@jobreviews');
 Route::get('employer/status/offer/all','sajidController@offersinterview');
+Route::get('jobseeker/status/offer/all','sajidController@offers_interview');
 /*comment delete url*/
 Route::post('delete/record','sajidController@delete');
 Route::post('update/record','sajidController@update');

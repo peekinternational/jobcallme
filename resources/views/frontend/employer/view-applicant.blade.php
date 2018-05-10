@@ -58,7 +58,8 @@
                         </div>
                     </section>
                     <!--Personal Info End-->
-
+                    @if($pckg > 0)
+            <div>
                     <!--Academic Section Start-->
                     @if($privacy->academic == 'Yes')
                     <section class="resume-box" id="academic">
@@ -434,6 +435,8 @@
                 <div class="alert alert-danger"> this profile is restricted</div>
                 </div>
             @endif
+            @endif
+             </div>
 				<div class="col-md-3">
                     <div class="pnj-box">
                     <h4>@lang('home.similarpeople') @lang('home.'.JobCallMe::countryName(JobCallMe::getHomeCountry()))</h4>
@@ -469,6 +472,7 @@
                     
                     </div>            
                 </div>
+               
 				
             </div>
         </div>

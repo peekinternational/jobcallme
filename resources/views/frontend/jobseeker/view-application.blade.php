@@ -49,6 +49,7 @@ if(Request::input('show') != ''){
             <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}">@lang('home.interviews')</a>
             <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}">@lang('home.offered')</a>
             <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}">@lang('home.unsuccessful')</a>
+            <a id="offer" href="{{url('jobseeker/status/offer/all')}}" class="btn btn-block {{ $offer }}"> Offer Interview</a>
         </div>
         <div class="col-md-10">
             <div class="tab-content">
