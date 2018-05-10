@@ -357,7 +357,10 @@
 
                     </div>
                     <div class="fp-item-details" style="height: 95px;">
-                      <p>{!! $people->firstName.' '.$people->lastName !!}</p>
+                    
+                   
+                      @if(Session::get('jcmUser')->userId == $people->emp_id)<p>{!! $people->firstName.' '.$people->lastName !!}</p>@else <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i> @endif
+                     
                       <p>@lang('home.'.JobCallMe::categoryTitle($people->industry))</p>
                       <p>@lang('home.'.JobCallMe::cityName($people->city)), @lang('home.'.JobCallMe::countryName($people->country))</p>
                     </div>

@@ -400,12 +400,14 @@ class Home extends Controller{
     }
 
     public function people(Request $request){
+		$app = $request->session()->get('jcmUser');
     	$request->all();
     	/* peoples query */
     	$people = DB::table('jcm_users');
     	$people->select('*','privacy.profileImage as pImage');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
     	$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
+		$people->leftJoin('jcm_download','jcm_download.seeker_id','=','jcm_users.userId');
 		//$people->leftJoin('jcm_resume','jcm_resume.userId','=','jcm_users.userId');
 
     	if($request->isMethod('post')){
@@ -446,10 +448,16 @@ class Home extends Controller{
 
 
     	$people->orderBy('jcm_users.userId','desc');
+		$people->groupBy('jcm_users.userId');
+		$peopleget = $people->get();
     	$peoples = $people->paginate(18);
-      // dd($peoples);
+		$userId = $peopleget->pluck('userId');
+		// dd($items_name);
+		$resumedownload = DB::table('jcm_download')->where('emp_id',$app->userId)->where('seeker_id',$userId)->get();
+		$resumedown=count($resumedownload);
+	//dd($peopleget);
 
-    	return view('frontend.people',compact('peoples'));
+    	return view('frontend.people',compact('peoples','resumedownload'));
     }
 
  public function peoples(Request $request){
