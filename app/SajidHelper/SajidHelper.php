@@ -48,5 +48,11 @@ Class SajidHelper {
 	$data = $table->first();
 	return $data;
 	}
+
+	public function checkDownloadCvs(){
+		$userId = Session::get('jcmUser')->userId;
+		return DB::table('jcm_download')->select('seeker_id')->where('emp_id',$userId)->get();
+		
+	}
 	
 }

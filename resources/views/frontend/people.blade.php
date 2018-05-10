@@ -348,13 +348,24 @@
 
               }
               ?>
-
+              <?php 
+              $check = false;
+              $downloadcvs = Sajid::checkDownloadCvs();
+              foreach($downloadcvs as $cv){
+                
+                if($cv->seeker_id == $people->userId){
+                $check = true;
+                }
+              }
+              
+              ?>
+              
               <div class="col-md-2 col-sm-4 col-xs-6">
                 <div class="fp-item" style="height: 256px;">
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     <div class="fp-img">
                     @if(Session::has('jcmUser'))
-                      <img src="@if(Session::get('jcmUser')->userId == $people->emp_id ) {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
+                      <img src="@if($check) {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
                       @else
                       <img src=" {{ url('profile-photos/profile-logo.jpg ')}}">
                       @endif
@@ -362,7 +373,7 @@
                     <div class="fp-item-details" style="height: 95px;">
                     
                     @if(Session::has('jcmUser'))
-                      @if(Session::get('jcmUser')->userId == $people->emp_id)<p>{!! $people->firstName.' '.$people->lastName !!}</p>@else <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p> @endif
+                      @if($check)<p>{!! $people->firstName.' '.$people->lastName !!}</p>@else <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p> @endif
                      @else
                      <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p>
                      @endif

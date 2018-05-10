@@ -407,9 +407,9 @@ class Home extends Controller{
     	$people->select('*','privacy.profileImage as pImage');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
     	$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
-		$people->leftJoin('jcm_download','jcm_download.seeker_id','=','jcm_users.userId');
+		//$people->leftJoin('jcm_download','jcm_download.seeker_id','=','jcm_users.userId');
 		//$people->leftJoin('jcm_resume','jcm_resume.userId','=','jcm_users.userId');
-
+		
     	if($request->isMethod('post')){
     		if($request->input('keyword') != ''){
     			$people->where('jcm_users.firstName','like','%'.$request->input('keyword').'%');
