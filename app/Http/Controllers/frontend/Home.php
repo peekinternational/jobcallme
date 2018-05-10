@@ -452,7 +452,7 @@ class Home extends Controller{
 		//$peopleget = $people->get();
     	$peoples = $people->paginate(18);
 		//$userId = $peopleget->pluck('userId');
-		// dd($items_name);
+		//dd($peoples);
 		
     	return view('frontend.people',compact('peoples'));
     }

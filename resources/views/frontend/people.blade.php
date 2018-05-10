@@ -353,14 +353,19 @@
                 <div class="fp-item" style="height: 256px;">
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     <div class="fp-img">
-                   <img src="@if(Session::get('jcmUser')->userId == $people->emp_id) {{ $pImage }} @else @if($people->genderpeople == 'Male' or $people->genderpeople == 'Man') {{ url('profile-photos/profile-logo.jpg ')}} @else {{ url('profile-photos/profile-logo2.jpg ')}} @endif @endif">
-
+                    @if(Session::has('jcmUser'))
+                      <img src="@if(Session::get('jcmUser')->userId == $people->emp_id ) {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
+                      @else
+                      <img src=" {{ url('profile-photos/profile-logo.jpg ')}}">
+                      @endif
                     </div>
                     <div class="fp-item-details" style="height: 95px;">
                     
-                   
-                      @if(Session::get('jcmUser')->userId == $people->emp_id)<p>{!! $people->firstName.' '.$people->lastName !!}</p>@else <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i> @endif
-                     
+                    @if(Session::has('jcmUser'))
+                      @if(Session::get('jcmUser')->userId == $people->emp_id)<p>{!! $people->firstName.' '.$people->lastName !!}</p>@else <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p> @endif
+                     @else
+                     <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p>
+                     @endif
                       <p>@lang('home.'.JobCallMe::categoryTitle($people->industry))</p>
                       <p>@lang('home.'.JobCallMe::cityName($people->city)), @lang('home.'.JobCallMe::countryName($people->country))</p>
                     </div>
