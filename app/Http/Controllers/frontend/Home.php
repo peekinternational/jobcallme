@@ -449,15 +449,12 @@ class Home extends Controller{
 
     	$people->orderBy('jcm_users.userId','desc');
 		$people->groupBy('jcm_users.userId');
-		$peopleget = $people->get();
+		//$peopleget = $people->get();
     	$peoples = $people->paginate(18);
-		$userId = $peopleget->pluck('userId');
+		//$userId = $peopleget->pluck('userId');
 		// dd($items_name);
-		$resumedownload = DB::table('jcm_download')->where('emp_id',$app->userId)->where('seeker_id',$userId)->get();
-		$resumedown=count($resumedownload);
-	//dd($peopleget);
-
-    	return view('frontend.people',compact('peoples','resumedownload'));
+		
+    	return view('frontend.people',compact('peoples'));
     }
 
  public function peoples(Request $request){

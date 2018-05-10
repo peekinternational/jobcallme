@@ -353,7 +353,7 @@
                 <div class="fp-item" style="height: 256px;">
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     <div class="fp-img">
-                      <img src="@if($people->pImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
+                   <img src="@if(Session::get('jcmUser')->userId == $people->emp_id) {{ $pImage }} @else @if($people->genderpeople == 'Male' or $people->genderpeople == 'Man') {{ url('profile-photos/profile-logo.jpg ')}} @else {{ url('profile-photos/profile-logo2.jpg ')}} @endif @endif">
 
                     </div>
                     <div class="fp-item-details" style="height: 95px;">
