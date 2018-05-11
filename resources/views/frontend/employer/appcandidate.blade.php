@@ -478,8 +478,8 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-4 text-right">&nbsp;</label>
                                         <div class="col-md-6">
-                                        <a href="{{ url('account/employer/application?show=interview') }}" class="btn btn-primary pull-right">@lang('home.update')</a>
-                                          <!--  <button type="submit" name="save" class="btn btn-primary pull-right">@lang('home.save')</button>-->
+                                       <!-- <a href="{{ url('account/employer/application?show=interview') }}" class="btn btn-primary pull-right">@lang('home.update')</a>-->
+                                          <button type="submit" name="save" class="btn btn-primary pull-right">@lang('home.update')</button>
                                         <!-- <button type="button" class="btn btn-default" onclick="$('.ea-scheduleInerview').fadeOut()">Cancel</button> !-->
                                         </div>
                                     </div>
