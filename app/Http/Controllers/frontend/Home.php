@@ -450,7 +450,7 @@ class Home extends Controller{
     	$people->orderBy('jcm_users.userId','desc');
 		$people->groupBy('jcm_users.userId');
 		//$peopleget = $people->get();
-    	$peoples = $people->paginate(18);
+    	$peoples = $people->paginate(50);
 		$pes=$peoples;
 			$data=[];
 	  foreach($pes as $user){
