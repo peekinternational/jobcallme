@@ -70,7 +70,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 </div>
                
             </form>
-            <div class="col-md-12 sns-box">
+            <div class="col-md-12 sns-box" style="display:none">
                 <p>@lang('home.loginusing')</p>
                 <button class="fb-btn">
                     <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
@@ -177,7 +177,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <button id="regbtn" type="submit" class="btn btn-primary btn-block" name="register">@lang('home.register')</button>
                 <p class="text-center show-loginBox">@lang('home.alreadyaccount') <a href="javascript:;" onclick="switchPage('login')">@lang('home.loginhere')</a></p>
 
-                <div class="col-md-12 sns-box"> 
+                <div class="col-md-12 sns-box" style="display:none"> 
                     <p>@lang('home.loginusing')</p> 
                     <button class="fb-btn">
                         <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>

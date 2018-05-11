@@ -718,7 +718,20 @@ else{
 						->where('jcm_users_meta.userId','!=','')
 						->where('privacy.profile','=','Yes')
 						->limit(6)
-    					->get();				
+    					->get();	
+								$data=[];
+	  foreach($applicants as $user){
+		//echo $user->userId." / ";
+		$resumess = DB::table('jcm_resume')->where('userId','=',$user->userId)->get();
+		$type=$resumess->pluck('type');
+		$result = $type->toArray();
+		$arry=in_array('academic',$result);
+		
+		if($arry){
+		array_push($data,$user);
+		}
+		
+	}			
     	/* end */
 
     	/* job response */
@@ -751,7 +764,7 @@ else{
 				->where('jcm_job_interviews.userId',$app->userId)->orderBy('interviewId','desc')
 				->limit(8)->get();
 
-		return view('frontend.employer.dashboard',compact('upcommingInterviews','postedJobs','applicant','applicants','response','experience','recruit','read_record','lear_record'));
+		return view('frontend.employer.dashboard',compact('upcommingInterviews','postedJobs','applicant','data','response','experience','recruit','read_record','lear_record'));
 	}
 
 	public function getJobResponse($app){
@@ -1106,13 +1119,28 @@ else{
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
     	$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
     	$people->where('privacy.profile','=','Yes');
-		$people->limit(4);
+		$people->limit(6);
 		$people->inRandomOrder();
 		$Query=$people->get();
+		//dd($Query);
+		$data=[];
+	  foreach($Query as $user){
+		//echo $user->userId." / ";
+		$resumess = DB::table('jcm_resume')->where('userId','=',$user->userId)->get();
+		$type=$resumess->pluck('type');
+		$result = $type->toArray();
+		$arry=in_array('academic',$result);
+		
+		if($arry){
+		array_push($data,$user);
+		}
+		
+	}
+
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$app->userId)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		$pckg=count($plan);
 		//dd($applicant);
-		return view('frontend.employer.view-applicant',compact('pckg','applicant','resume','Query','privacy'));
+		return view('frontend.employer.view-applicant',compact('resumess','pckg','applicant','resume','data','privacy'));
 		//return view('frontend.employer.view-applicant',compact('applicant','resume'));
 	}
 		public function viewApplicants(Request $request){
@@ -1145,6 +1173,19 @@ else{
 		$people->limit(4);
 		$people->inRandomOrder();
 		$Query=$people->get();
+			$data=[];
+	  foreach($Query as $user){
+		//echo $user->userId." / ";
+		$resumess = DB::table('jcm_resume')->where('userId','=',$user->userId)->get();
+		$type=$resumess->pluck('type');
+		$result = $type->toArray();
+		$arry=in_array('academic',$result);
+		
+		if($arry){
+		array_push($data,$user);
+		}
+		
+	}
 		$jobId = $_GET['jobId'];
 
 		/* questionaire tab data *muhammad sajid* */
@@ -1160,7 +1201,7 @@ else{
 		/* interview  tab data *muhammad sajid 7/5/2018* */
 		$interviewData = DB::table('jcm_job_interviews')->where('jobseekerId',$userId)->where('jobId',$jobId)->first();
 
-		return view('frontend.employer.appcandidate',compact('evaluationData','applicant','resume','Query','userId','jobId','questionData','eva_ans','interviewData'));
+		return view('frontend.employer.appcandidate',compact('evaluationData','applicant','resume','data','userId','jobId','questionData','eva_ans','interviewData'));
 	}
 public function userResume($userId){
 		$record = DB::table('jcm_resume')->where('userId','=',$userId)->orderBy('resumeId','asc')->get();

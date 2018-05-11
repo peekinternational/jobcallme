@@ -154,11 +154,11 @@
 
                 </select>
             </div>
-            <ul class="social-links" style="padding-top:15px">
+            <!--<ul class="social-links" style="padding-top:15px">
                 <li><a href="https://facebook.com"><i class="fa fa-facebook-square"></i> </a> </li>
                 <li><a href="https://twitter.com"><i class="fa fa-twitter-square"></i> </a> </li>
                 <li><a href="https://linkedin.com"><i class="fa fa-linkedin-square"></i> </a> </li>
-            </ul>
+            </ul>-->
 
         </div>
     

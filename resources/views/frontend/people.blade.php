@@ -333,7 +333,7 @@
           <div class="col-md-12">
             <!--FP item Row-->
             <div class="row">
-              @foreach($peoples as $people)
+              @foreach($data as $people)
               <?php
               $pImage = url('profile-photos/profile-logo.jpg');
               if($people->profilePhoto != '' && $people->profilePhoto != NULL){

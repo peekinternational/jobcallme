@@ -441,7 +441,7 @@
                     <div class="pnj-box">
                     <h4>@lang('home.similarpeople') @lang('home.'.JobCallMe::countryName(JobCallMe::getHomeCountry()))</h4>
                         <div class="row" style="margin-right: 0 !important;">
-                        @foreach($Query as $appl)
+                        @foreach($data as $appl)
                          <?php
                             $pImage = url('profile-photos/profile-logo.jpg');
                             if($appl->profilePhoto != '' && $appl->profilePhoto != NULL){
@@ -457,12 +457,31 @@
                                                 
                                         }
                                         ?>
+                                         <?php 
+                                            $check = false;
+                                            $downloadcvs = Sajid::checkDownloadCvs();
+                                            foreach($downloadcvs as $cv){
+                                                
+                                                if($cv->seeker_id == $appl->userId){
+                                                $check = true;
+                                                }
+                                            }
+                                            
+                                            ?>
                              <div class="col-md-12 sr-item">
                               <div class="col-md-4 applicant-SimilarImg">
-                                <img src="@if($appl->privacyImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg') }} @endif" style="width: 70px;height:75px;">
+                                @if(Session::has('jcmUser'))
+                                <img src="@if($check) {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif" style="width: 70px;height:75px !important;">
+                                @else
+                                <img src=" {{ url('profile-photos/profile-logo.jpg ')}}" style="width: 70px;height:75px !important;">
+                                @endif
                                 </div>
                                 <div class="col-md-8 sp-item">
-                                <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>
+                                  @if(Session::has('jcmUser'))
+                                    @if($check)<p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>@else <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p> @endif
+                                    @else
+                                    <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></a></p>
+                                    @endif
                                 <p>{!! $appl->companyName !!}</p>
                                 <p>@lang('home.'.JobCallMe::cityName($appl->city)), @lang('home.'.JobCallMe::countryName($appl->country))</p>
                             </div>
