@@ -128,7 +128,7 @@
                             <div class="col-md-12 rtj-item">
                                 <img src="{{ url('profile-photos/'.$interview->profilePhoto)}}" style="width: 50px">
                                 <div class="rtj-details">
-                                    <p><strong><a href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">{{ $interview->firstName." ".$interview->lastName}}</a></strong></p>
+                                    <p><strong><a href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId.'?jobId='.$interview->jobId) }}">{{ $interview->firstName." ".$interview->lastName}}</a></strong></p>
                                     <p><a href="{{ url('jobs/'.$interview->jobId) }}">{{ $interview->title }}</a> <span class="label" style="background-color:{{ $colorArr[array_rand($colorArr)] }}"><a style="color:#fff" href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">@lang('home.interview Details')</a></span></p>
                                     <p><i class="fa fa-clock-o"></i> Date {{ $interview->fromDate }} Time {{ $interview->toDate }}   <i class="fa fa-map-marker"></i> @lang('home.'.$interview->country), @lang('home.'.$interview->state), @lang('home.'.$interview->city)</p>
                                 </div>
