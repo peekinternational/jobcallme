@@ -107,13 +107,16 @@
                                     </div>
                                     <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">{{ $applicant->firstName}}{{ $applicant->lastName}}</h3>
                                     <p class="text-center hidden-md hidden-lg jp-profession-heading">@lang('home.'.JobCallMe::categoryTitle($applicant->industry))</p>
-                                    <a href="#" class="btn btn-primary btn-block jp-contact-btn">@lang('home.CONTACT DETAILS')</a>
+                                    <a href="#" class="btn btn-primary btn-block jp-contact-btn hidden-xs"><i class="fa fa-id-card-o" aria-hidden="true"></i> @lang('home.CONTACT DETAILS')</a>
+                                    <div class="hidden-md hidden-lg hidden-sm" style="display: flex;margin-bottom: 24px;"><a href="#" class="btn btn-primary" style="margin-right: 21px;">CONTACT DETAILS</a>
+                                    <span class="pull-right"><button class="btn btn-success" onclick="$('#reviewModel').modal('show')">Write Review</button></span>
+                                    </div>
                                     <div class="" style="text-align:center">
                                     <a href="{{ url('account/jobseeker/cv/'.$applicant->userId)}}" style="color:#737373" class=""><i class="fa fa-download"></i> @lang('home.DOWNLOAD')</a>
                                     </div>
                                 </div>
                                 <div class="col-md-9 personal-info-right">
-                                    <h3 class="hidden-sm">{{$applicant->firstName}} {{$applicant->lastName}} <span class="pull-right"><button class="btn btn-success" onclick="$('#reviewModel').modal('show')">@lang('home.Resume Write Review')</button></span></h3>
+                                    <h3 class="hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}} <span class="pull-right"><button class="btn btn-success" onclick="$('#reviewModel').modal('show')">@lang('home.Resume Write Review')</button></span></h3>
                                     <p class="jp-profession-heading hidden-sm hidden-xs">@lang('home.'.JobCallMe::categoryTitle($applicant->industry))</p>
                                     <p style="padding-top:15px"><span class="pi-title">@lang('home.experiance'):</span>@lang('home.'.$applicant->experiance)</p>
                                     <p><span class="pi-title">@lang('home.salary'):</span> @if($applicant->currency == 'KRW'){{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',0).' '.$applicant->currency }}@endif @if($applicant->currency != 'KRW'){{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',2).' '.$applicant->currency }}@endif  </p>
