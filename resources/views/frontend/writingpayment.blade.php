@@ -16,15 +16,8 @@
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-6" style="display:-webkit-box;display:-ms-inline-flexbox;">
-                <div style="padding-left: 22px;padding-right: 13px;">
                 
-                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.writepaypal') !!}" >
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary btn-lg" name="save">@lang('home.PayPal')</button> 
-                        </form>
-                   
-                </div>
-                <div class="" style="padding-left: 22px;padding-right: 13px;" >
+                <div class="" style="padding-left: 0px;padding-right: 13px;" >
                    
                         <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{{ action('frontend\ExtraSkills@writecashpayment') }}" >
                             {{ csrf_field() }}
@@ -46,6 +39,16 @@
                     </form>
                 
                 </div>
+
+				<div style="padding-left: 22px;padding-right: 13px;">
+                
+                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.writepaypal') !!}" >
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-primary btn-lg" name="save">@lang('home.PayPal')</button> 
+                        </form>
+                   
+                </div>
+
                 </div>
             </div>
         </div>

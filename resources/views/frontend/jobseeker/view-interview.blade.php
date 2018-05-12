@@ -48,8 +48,8 @@
                                 <tr>
                                     <th width="50%">@lang('home.interviewdate')</th>
                                     <td width="50%">
-                                        <b>@lang('home.date')</b> <i>{{ $interview->fromDate }}</i> @lang('home.to') <i>{{ $interview->toDate }}</i><br>
-                                        <b>@lang('home.timing')</b> <i>{{ $interview->time_from }}</i> @lang('home.to') <i>{{ $interview->time_to }}</i>
+                                        <b>@lang('home.date')</b> <i>@lang('home.interviewfrom') {{ $interview->fromDate }}</i>@lang('home.interviewfrom2') @lang('home.interviewto') <i>{{ $interview->toDate }}</i>@lang('home.interviewto2')<br>
+                                        <b>@lang('home.timing')</b> @lang('home.interviewfrom')<i>{{ $interview->time_from }}</i>@lang('home.interviewfrom2') @lang('home.interviewto') <i>{{ $interview->time_to }}</i>@lang('home.interviewto2')
                                     </td>
                                 </tr>
                                 <tr>

@@ -14,25 +14,8 @@
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-6" style="display:-webkit-box;display:-ms-inline-flexbox;">
-                <div style="padding-left: 22px;padding-right: 13px;">
-                    @if($jType)
-                        <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
-                            <input  type="hidden" name="amount" value="{!! $am!!}" class="ng-untouched ng-pristine ng-valid">
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                            <input name="p_Category" type="hidden" value="{!! $p_Category!!}"/>
-                            <input name="jType" type="hidden" value="{!! $jType!!}"/>
-                            <div>
-                                <button type="submit" class="btn btn-primary btn-lg" name="save">@lang('home.PayPal')</button> 
-                            </div>
-                        </form>
-                    @else
-                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypal') !!}" >
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary btn-lg" name="save">@lang('home.PayPal')</button> 
-                        </form>
-                    @endif
-                </div>
-                  <div class="" style="padding-left: 22px;padding-right: 13px;" >
+                
+                  <div class="" style="padding-left: 0px;padding-right: 13px;" >
                    
                         <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{{ action('frontend\Employer@cashpayment') }}" >
                             {{ csrf_field() }}
@@ -52,6 +35,26 @@
                         <a href='javascript:void(0)'  class="btn btn-info btn-lg nicePay">@lang('home.NicePay')</a>
                     </form>
                 </div>
+
+				<div style="padding-left: 22px;padding-right: 13px;">
+                    @if($jType)
+                        <form class="ng-untouched ng-pristine ng-valid" action="{{ action('frontend\Employer@update') }}" method="post">
+                            <input  type="hidden" name="amount" value="{!! $am!!}" class="ng-untouched ng-pristine ng-valid">
+                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                            <input name="p_Category" type="hidden" value="{!! $p_Category!!}"/>
+                            <input name="jType" type="hidden" value="{!! $jType!!}"/>
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg" name="save">@lang('home.PayPal')</button> 
+                            </div>
+                        </form>
+                    @else
+                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.paypal') !!}" >
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-primary btn-lg" name="save">@lang('home.PayPal')</button> 
+                        </form>
+                    @endif
+                </div>
+
                 </div>
             </div>
         </div>

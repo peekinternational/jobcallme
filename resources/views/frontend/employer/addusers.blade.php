@@ -14,16 +14,16 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>@lang('home.Name')</th>
+                                    <th width="15%">@lang('home.Name')</th>
                                     <th>@lang('home.Email')</th>
-                                    <th>@lang('home.Created Date')</th>
-                                    <th>@lang('home.Action')</th>
+                                    <th width="15%">@lang('home.Created Date')</th>
+                                    <th width="15%">@lang('home.Action')</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach($data as $user)
                                 <tr>
-                                    <td>{{$user->username}}</td>
+                                    <td width="150px">{{$user->firstName}}{{$user->lastName}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->createdTime}}</td>
                                     <td>

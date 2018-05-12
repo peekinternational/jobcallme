@@ -10,7 +10,7 @@
 				<section class="resume-box" id="academic">
                         <a class="btn btn-primary r-add-btn" onclick="addAcademic()"><i class="fa fa-plus"></i> </a>
                         <div>
-                            <h4>{{$ques->title}}</h4>
+                            <h4><img src="/frontend-assets/images/que_icon2.png"> {{$ques->title}}</h4>
                         </div>
                         <div class="row">
                             <div class="col-md-5">
@@ -18,7 +18,7 @@
                                     <strong>@lang('home.QueTitle'):</strong> {{$ques->title}}
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>@lang('home.QueType'):</strong> @lang('home.'.$ques->type)
+                                    <strong>@lang('home.QueType'):</strong> {{$ques->type}}
                                 </div>
                                 <div class="col-md-12">
                                     <strong>@lang('home.Duration'):</strong> N/A
@@ -61,7 +61,7 @@
                         </ul> -->
                 </section>
                 <section class="resume-box" id="academic-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.AddQuestionnaire')asdasd</c></h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.AddQuestionnaire')</c></h4>
                         <form method="post" action="{{ url('account/employer/questionnaires/new') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="ques_id" value="{{ $ques->ques_id }}">
@@ -72,14 +72,14 @@
                           <div class="form-group">
                             <label for="type">@lang('home.QueType'):</label>
                             <select class="form-control" id="type" name="type" required>
-                                <option value="">Select type</option>
-                                <option @if($ques->type == 'Test') selected @endif>Test</option>
-                                <option @if($ques->type == 'Questionnaires') selected @endif>Questionnaires</option>
+                                <option value="">@lang('home.Select Questionnaire')</option>
+                                <option @if($ques->type == 'Test') selected @endif>@lang('home.Test')</option>
+                                <option @if($ques->type == 'Questionnaires') selected @endif>@lang('home.Questionnaires')</option>
                             </select>
                           </div>
                           <div class="form-group">
                             <label for="days">@lang('home.Submission Days'):</label>
-                            <input type="number" name="submission_date" value="{{ $ques->submission_date}}" class="form-control" id="days">
+                            <input type="text" name="submission_date" value="{{ $ques->submission_date}}" class="form-control" id="days">
                           </div>
                           <div class="checkbox">
                             <label><input name="late_submission" value="Yes" type="checkbox" @if($ques->accept_late_submission == 'Yes') checked @endif> @lang('home.Accept Late Submission')</label>
@@ -100,7 +100,7 @@
                 <!-- add question area start -->
                 <section class="resume-box" id="question">
                         <a class="btn btn-primary r-add-btn" onclick="addquestion()"><i class="fa fa-plus"></i> </a>
-                        <h4>@lang('home.Questions')</h4>
+                        <h4><img src="/frontend-assets/images/que_icon1.png"> @lang('home.Questions')</h4>
                         
                         <div>
                             <ol type='1' style="margin-left:30px;">
@@ -127,7 +127,7 @@
                 </section>
                 <!-- edit question area start -->
                 <section class="resume-box" id="aquestion-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.AddQuestionnaire')asdasd</c></h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.AddQuestionnaire')</c></h4>
                         <form method="post" action="{{ url('account/employer/questionnaires/question/new') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="ques_id" value="{{ $ques->ques_id }}">
@@ -137,7 +137,7 @@
                           </div>
                           
                           <div class="form-group">
-                            <label for="days">@lang('home.Marks'):</label>
+                            <label for="days">@lang('home.MARKS'):</label>
                             <input type="number" name="marks" class="form-control" id="days">
                           </div>
                           <div class="form-group" id="addoption">

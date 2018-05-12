@@ -83,12 +83,10 @@ class Kernel extends ConsoleKernel
                         /*endif;*/
                     endif;
                 endforeach;
-
             endif; 
 			
         })->everyMinute();
 		
-
     }
 
     /**

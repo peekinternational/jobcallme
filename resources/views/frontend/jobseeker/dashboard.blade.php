@@ -25,7 +25,7 @@
                 <a href="#rtj_tab_application" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-file-text"></i><span style="font-size:13px"> @lang('home.APPLICATION_DASH')</span> </a>
               </li>
               <li class="col-md-3 col-xs-5">
-                <a href="#rtj_tab_interview" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-calendar"></i><span style="font-size:13px"> @lang('home.interviews')</span> </a>
+                <a href="#rtj_tab_interview" data-toggle="tab" style="background:#57768a;color:#fff;"><i class="fa fa-calendar"></i><span style="font-size:13px"> @lang('home.dashinterviews')</span> </a>
               </li>
             </ul>
           </div>
@@ -52,9 +52,9 @@
                         <i class="fa fa-paper-plane"></i>
                       </a>&nbsp;
                       @if(in_array($sgJob->jobId, $savedJobArr))
-                      <a href="javascript:;" onclick="saveJob({{ $sgJob->jobId }},this)" class="" style="margin-left: 10px;"><i class="fa fa-heart"></i></a>
+                      <a href="javascript:;" onclick="saveJob({{ $sgJob->jobId }},this)" class="" style="margin-left: 10px;" title="@lang('home.SAVE')"><i class="fa fa-heart"></i></a>
                       @else
-                      <a href="javascript:;" onclick="saveJob({{ $sgJob->jobId }},this)" class="" style="margin-left: 10px;"><i class="fa fa-heart"></i></a>
+                      <a href="javascript:;" onclick="saveJob({{ $sgJob->jobId }},this)" class="" style="margin-left: 10px;" title="@lang('home.SAVE')"><i class="fa fa-heart"></i></a>
                       @endif
                     </span>
                   </div>
@@ -111,8 +111,12 @@
                     <p>{!! $appl->companyName !!}</p>
                     <p>@lang('home.'.JobCallMe::cityName($appl->city)), @lang('home.'.JobCallMe::countryName($appl->country))</p>
                     <span class="rtj-action">
-                      <a href="javascript:;" title="Applied On">
-                        {{ date('M d Y, h:i A',strtotime($appl->applyTime))}}
+                      <a href="javascript:;" title="@lang('home.Applied On')">
+                        @if(app()->getLocale() == "kr")
+						    {{ date('Y-m-d, h:i A',strtotime($appl->applyTime))}}
+						@else
+						    {{ date('M d Y, h:i A',strtotime($appl->applyTime))}}
+						@endif
                       </a>
                     </span>
                   </div>
@@ -142,15 +146,19 @@
                     <p>{!! $interv->companyName !!}</p>
                     <p>@lang('home.'.JobCallMe::cityName($interv->city)), @lang('home.'.JobCallMe::countryName($interv->country))</p>
                     <span class="rtj-action">
-                      <a href="javascript:;" title="Applied On">
-                        {{ date('M d Y, h:i A',strtotime($interv->applyTime))}}
+                      <a href="javascript:;" title="@lang('home.Applied On')">
+                        @if(app()->getLocale() == "kr")
+						    {{ date('Y-m-d, h:i A',strtotime($interv->applyTime))}}
+						@else
+						    {{ date('M d Y, h:i A',strtotime($interv->applyTime))}}
+						@endif
                       </a>
                     </span>
                   </div>
                 </div>
                 @endforeach
                 @else
-                <p>@lang('home.Nojobapplications')</p>
+                <p>@lang('home.NoInterviewschedule')</p>
                 @endif
               </div>
             </div>

@@ -8,16 +8,16 @@
 		<div class="row">
 		<div class="col-md-12">
 			<div class="header">
-				Offers Interviews
+				@lang('home.Offers Interviews Company')
 			</div>
 			<div class="body">
 				<table class="table">
 					<thead>
 						<tr>
-							<th>Employer</th>
-							<th>Offer Message</th>
-							<th>Offer Date</th>
-							<th>Action</th>
+							<th>@lang('home.Employer Offer')</th>
+							<th>@lang('home.Offer Message')</th>
+							<th>@lang('home.Offer Date')</th>
+							<th width="70px">@lang('home.Action')</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -28,7 +28,11 @@
 							<!--<td>{{ substr($offer->comment,0,100) }}</td>-->
 							<!--<td>{{ date('d M Y h:i',strtotime($offer->comment_date)) }}</td>-->
 							<td>{{ $offer->offer_msg }}</td>
-							<td>{{ date('d M Y h:i',strtotime($offer->created_at)) }}</td>
+							<td>@if(app()->getLocale() == "kr")
+						    {{ date('Y-m-d M Y h:i',strtotime($offer->created_at)) }}
+						@else
+						    {{ date('d M Y h:i',strtotime($offer->created_at)) }}
+						@endif</td>
 							<td><i class="fa fa-edit pointer" onclick="editoffer(this,{{$offer->offer_id}},'{{ $offer->offer_msg}}')"></i> <i class="fa fa-remove pointer" onclick="deloffer(this,{{$offer->offer_id}})"></i></td>
 						</tr>
 						@endforeach

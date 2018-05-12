@@ -21,29 +21,29 @@ print_r($jobs);
                 <div class="row">
                     <div class="col-md-12 jobApp-tabs jobMblTabs">
                         <ul class="nav nav-tabs jobMblTabs">
-                            <li>
-                                <a id="inbox" class="mblTabBtn nav-tab-active {{ $inbox }}"><i class="fa fa-users"></i> @lang('home.inbox')</a>
+                            <li style="width:50%">
+                                <a href="{{ url('account/employer/application') }}" id="inbox" class="mblTabBtn nav-tab-active {{ $inbox }}"><i class="fa fa-users"></i> @lang('home.inbox')</a>
                             </li>
-                            <li>
-                                <a id="junk" class="mblTabBtn {{ $junk }}"><i class="fa fa-ban"></i>  @lang('home.junks')</a>
+                            <li style="width:50%;padding-left:23px;">
+                                <a href="{{ url('account/employer/application') }}" id="junk" class="mblTabBtn {{ $junk }}"><i class="fa fa-ban"></i>  @lang('home.junks')</a>
                             </li>
-                            <li>
-                                <a id="shortlist" class="mblTabBtn {{ $shortlist }}"><i class="fa fa-thumbs-up"></i>  @lang('home.shortlists')</a>
+                            <li style="width:50%">
+                                <a href="{{ url('account/employer/application') }}" id="shortlist" class="mblTabBtn {{ $shortlist }}"><i class="fa fa-thumbs-up"></i>  @lang('home.shortlists')</a>
                             </li>
-                            <li>
-                                <a id="screened" class="mblTabBtn {{ $screened }}"><i class="fa fa-mobile"></i>  @lang('home.screened')</a>
+                            <li style="width:50%;padding-left:23px;">
+                                <a href="{{ url('account/employer/application') }}" id="screened" class="mblTabBtn {{ $screened }}"><i class="fa fa-mobile"></i>  @lang('home.screened')</a>
                             </li>
-                            <li>
-                                <a id="interview" class="mblTabBtn {{ $interview }}"><i class="fa fa-calendar"></i>  @lang('home.interviews')</a>
+                            <li style="width:50%">
+                                <a href="{{ url('account/employer/application') }}" id="interview" class="mblTabBtn {{ $interview }}"><i class="fa fa-calendar"></i>  @lang('home.interviews')</a>
                             </li>
-                            <li>
-                                <a id="offer" class="mblTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  @lang('home.offered')</a>
+                            <li style="width:50%;padding-left:20px;">
+                                <a href="{{ url('account/employer/application') }}" id="offer" class="mblTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  @lang('home.offered')</a>
                             </li>
-                            <li>
-                                <a id="hire" class="mblTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
+                            <li style="width:50%">
+                                <a href="{{ url('account/employer/application') }}" id="hire" class="mblTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
                             </li>
-                            <li>
-                                <a id="reject" class="mblTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
+                            <li style="width:50%;padding-left:20px;">
+                                <a href="{{ url('account/employer/application') }}" id="reject" class="mblTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
                             </li>
                         </ul>
                     </div>
@@ -63,15 +63,15 @@ print_r($jobs);
                         <a href="{{ url('account/employer/application') }}" id="hire" class="btn btn-block jaTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
                         <a href="{{ url('account/employer/application') }}" id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
                     </div>
-                    <div class="jd-job-details" style="background:#424242">
+                    <div class="jd-job-details" style="background:#57768a">
                 <h4 style="color:#fff;"><img src="/frontend-assets/images/status-icon1.png"> @lang('home.Posted By')</h4>
                 <span style="color:#fff;">{{ $job->firstName }} {{ $job->lastName }}</span>
                 </div>
-                 <div class="jd-job-details" style="background:#424242">
+                 <div class="jd-job-details" style="background:#57768a">
                 <h4 style="color:#fff;"><img src="/frontend-assets/images/status-icon2.png"> @lang('home.Hiring Managers')</h4>
                 <span style="color:#fff;">{{ $job->firstName }} {{ $job->lastName }}</span>
                 </div>
-                 <div class="jd-job-details" style="background:#424242">
+                 <div class="jd-job-details" style="background:#57768a">
                 <h4 style="color:#fff;"><img src="/frontend-assets/images/status-icon3.png"> @lang('home.Job Ad Type')</h4>
                <span style="color:#fff;"> @lang('home.'.$job->p_title)</span>
                 @if ($job->p_title =='Basic')
@@ -90,18 +90,18 @@ print_r($jobs);
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="shortlist" id="status_click">
                             <i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')
                         </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="reject">
-                            <a href="{{url('account/employer/setfilter/'.$job->jobId)}}" style="color: black;"><i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')</a>
-                        </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="screened">
-                          <a href="{{url('account/employer/job/share/'.$job->jobId)}}" style="color: black;"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
-                        </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="offer">
-                           <a href="{{url('account/employer/evalution/'.$job->jobId)}}" style="color: black;"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
-                        </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" >
-                            <a href="{{url('account/employer/job_update/'.$job->jobId )}}" style="color: black;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')</a>
-                        </button>
+                       <a href="{{url('account/employer/setfilter/'.$job->jobId)}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="reject">
+                            <i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')
+                        </button></a>
+                        <a href="{{url('account/employer/job/share/'.$job->jobId)}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="screened">
+                          <i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')
+                        </button></a>
+                        <a href="{{url('account/employer/evalution/'.$job->jobId)}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="offer">
+                           <i class="fa fa-pie-chart" aria-hidden="true"></i> @lang('home.evaluation')
+                        </button></a>
+                        <a href="{{url('account/employer/job_update/'.$job->jobId )}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" >
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')
+                        </button></a>
                         
                         <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk" id="showMore">
                         
@@ -110,12 +110,15 @@ print_r($jobs);
                         </button>
                    
                         
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk">
-                         <a href="{{ url('account/employer/delete/'.$job->jobId) }}" style="color: black;"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')</a>
-                        </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" >
-                            <a href="{{url('employer/status/reviews/'.$job->jobId)}}" style="color: black;"><i class="fa fa-file-o" aria-hidden="true"></i> Reviews</a>
-                        </button>
+                        <a href="{{ url('account/employer/delete/'.$job->jobId) }}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="junk">
+                         <i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')
+                        </button></a>
+                        <a href="{{url('employer/status/reviews/all')}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" >
+                            <i class="fa fa-file-o" aria-hidden="true"></i> @lang('home.Reviews')
+                        </button></a>
+						<a href="{{url('employer/status/offer/all')}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" >
+                            <i class="fa fa-bullhorn" aria-hidden="true"></i> @lang('home.Offerd Interview status')
+                        </button></a>
                     </div>
                
                    

@@ -5,7 +5,7 @@
 @section('content')
 <?php 
 $reviewSelect = ['Excellent','Verygood','Good','Fair','Poor'];
-$jobtype = ['Part Time','Intership','Seasonal','Temporary/Contract','Work Study'];
+$jobtype = ['Full-Time','Temporary/Contract','Intership','Part Time','Work Study'];
 ?>
 
 <div class="container margintop bg-white content-area">

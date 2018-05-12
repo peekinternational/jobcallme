@@ -113,8 +113,8 @@ $userimages='';
                                                     
                                                 </div>
                                                 <div class="btns-update" style="display: none">
-                                                    <button commentId="{{ $comment->comment_id}}" class="btn btn-success update-comment-btn">Update</button>
-                                                    <button class="btn btn-danger cancel">Cancel</button>
+                                                    <button commentId="{{ $comment->comment_id}}" class="btn btn-success update-comment-btn">@lang('home.reviewupdate')Update</button>
+                                                    <button class="btn btn-danger cancel">@lang('home.Cancel')</button>
                                                 </div>
                                             </div>
                                             @endif
@@ -144,10 +144,10 @@ $userimages='';
                                             <div class="form-group">
                                                 <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
                                             </div>
-                                            <p style="color: #999999;">if you need more discus you may use jobcallme Live video and chat which you can use multi video and chat</p>    
+                                            <p style="color: #999999;"><img src="/frontend-assets/images/video_icon2.png"> @lang('home.Need more dicuss, use Jobcallme live MultiㆍGroupㆍIndividual Video & Chat')&nbsp;<a href="/messages"><img src="/frontend-assets/images/video_icon.png">@lang('home.videochatlink')</a></p>
                                         </div>
 
-                                        <div class="col-md-2 col-xs-offset-8" style="padding-top: 15px;"><button class="btn btn-success" id="comment-btn">Submit</button></div>
+                                        <div class="col-md-2 col-xs-offset-8" style="padding-top: 15px;"><button class="btn btn-success" id="comment-btn">@lang('home.reviewsubmit')</button></div>
                                     </div>    
                                 </div>
                             </div>                

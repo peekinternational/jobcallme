@@ -63,11 +63,14 @@ if(Request::input('show') != ''){
                         <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}"><i class="fa fa-thumbs-up"></i>  @lang('home.shortlists')</a>
                         <a id="screened" class="btn btn-block jaTabBtn {{ $screened }}"><i class="fa fa-mobile"></i>  @lang('home.screened')</a>
                         <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}"><i class="fa fa-calendar"></i>  @lang('home.interviews')</a>
-                        <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  @lang('home.offered')</a>
+                        <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  @lang('home.empoffered')</a>
                         <a id="hire" class="btn btn-block jaTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
                         <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
-                        <a id="review" href="{{url('employer/status/reviews/all')}}" class="btn btn-block {{ $review }}"><i class="fa fa-file-o"></i>  Review</a>
-                        <a id="review" href="{{url('employer/status/offer/all')}}" class="btn btn-block {{ $offer }}"><i class="fa fa-bullhorn"></i> Offer Interview</a>
+
+                        <a id="review" href="{{url('employer/status/reviews/all')}}" class="btn btn-block {{ $review }}"><i class="fa fa-file-o"></i>  @lang('home.Reviews list')</a>
+                        <a id="review" href="{{url('employer/status/offer/all')}}" class="btn btn-block {{ $offer }}"><i class="fa fa-bullhorn"></i> @lang('home.Offer Interview list')</a>
+
+
                     </div>
                 </div>
             </div>
@@ -106,7 +109,7 @@ if(Request::input('show') != ''){
                             <div class="ea-toolkit">@lang('home.sendmessageapplicant')</div>
                         </button>
                         <button type="button" class="ea-panel-btn" id="ea-scheduleInerview">
-                            <i class="fa fa-briefcase" style="font-size:20px"></i>
+                            <i class="fa fa-calendar" style="font-size:20px"></i>
                             <div class="ea-toolkit">@lang('home.scheduleinterview')</div>
                         </button>
                         <button type="button" class="ea-panel-btn" id="resume-download"><i class="fa fa-download" style="font-size:20px"></i>
@@ -149,34 +152,36 @@ if(Request::input('show') != ''){
                                         </select>
                                     </div>
                                 </div>
+                                
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">Date to</label>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control date-picker" name="toDate" value="{{ date('Y-m-d',strtotime('+1 Day')) }}" onkeypress="return false">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">Date from</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.Date from')</label>
                                     <div class="col-md-6">
                                         <input type="text" class="form-control date-picker" name="fromDate" value="{{ date('Y-m-d',strtotime('+1 Day')) }}" onkeypress="return false">
                                     </div>
                                 </div>
+								<div class="form-group">
+                                    <label class="control-label col-md-4 text-right">@lang('home.Date to')</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control date-picker" name="toDate" value="{{ date('Y-m-d',strtotime('+1 Day')) }}" onkeypress="return false">
+                                    </div>
+                                </div>
+                                
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">Time to</label>
+                                    <label class="control-label col-md-4 text-right">@lang('home.Time from')</label>
                                     <div class="col-md-6">
                                       
-                                        <select name="timeto" class="form-control">
+                                        <select name="timefrom" class="form-control">
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}">{!! $time !!}</option>
                                                 @endforeach
                                            </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4 text-right">Time from</label>
+								<div class="form-group">
+                                    <label class="control-label col-md-4 text-right">@lang('home.Time to')</label>
                                     <div class="col-md-6">
                                       
-                                        <select name="timefrom" class="form-control">
+                                        <select name="timeto" class="form-control">
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}">{!! $time !!}</option>
                                                 @endforeach
@@ -188,7 +193,7 @@ if(Request::input('show') != ''){
                                     <div class="col-md-6">
                                         <select class="form-control select2" name="perInterview">
                                             @for($i = 1; $i < 10; $i++)
-                                                <option value="{{ $i * 20 }}">{{ ($i * 20).' Minutes' }}</option>
+                                                <option value="{{ $i * 20 }}">{{ ($i * 20)}} @lang('home.Minutes')</option>
                                             @endfor
                                         </select>
                                     </div>
@@ -350,11 +355,11 @@ $('.ea-npm-click').click(function(){
             data: {type:type,ids:appString,_token:token},
             url: "{{ url('account/employer/update/application') }}",
             success: function(response){
-                toastr.success('Action successfully perform', '', {timeOut: 5000});
+                toastr.success('@lang("home.Action successfully perform")', '', {timeOut: 5000});
             }
         })
     }else{
-        toastr.error('Please select some applicant', '', {timeOut: 5000, positionClass: "toast-top-center"});
+        toastr.error('@lang("home.Please select some applicant")', '', {timeOut: 5000, positionClass: "toast-top-center"});
     }
 })
 $('#ea-scheduleInerview').click(function(){
@@ -367,7 +372,7 @@ $('#ea-scheduleInerview').click(function(){
         $('.mul-appl').trigger('change');
         $('.ea-scheduleInerview').fadeIn();
     }else{
-        toastr.error('Please select some applicant', '', {timeOut: 5000, positionClass: "toast-top-center"});
+        toastr.error('@lang("home.Please select some applicant")', '', {timeOut: 5000, positionClass: "toast-top-center"});
     }
 })
 $('form.interview-form').submit(function(e){
@@ -382,7 +387,7 @@ $('form.interview-form').submit(function(e){
             if($.trim(response) != '1'){
                 toastr.error(response, '', {timeOut: 5000, positionClass: "toast-bottom-center"});
             }else{
-                toastr.success('Action perform successfully', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                toastr.success('@lang("home.Action perform successfully2")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
                 $('.ea-scheduleInerview').fadeOut();
             }
             $('.interview-form button[name="save"]').prop('disabled',false);

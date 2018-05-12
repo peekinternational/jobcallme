@@ -18,60 +18,60 @@ if($user->profilePhoto != ''){
 		
         <!-- Mobile View -->
         <div class="col-md-2 jobApp-tabs2 jobMblTabs hidden-sm hidden-md hidden-lg">
-            <h5 class="mtab-heading">@lang('home.account')</h5>
+            <h5 class="mtab-heading"><i class="fa fa-cogs" aria-hidden="true"></i> @lang('home.account')</h5>
             <ul class="jobMblTabs">
                 <ul class="nav nav-tabs jobMblTabs">
-                    <li>
-                        <a id="password" class="mblTabBtn nav-tab-active" data-toggle="tab" href="#password" role="tab" aria-controls="password">@lang('home.changepassword')</a>
+                    <li style="width:50%;padding-left:20px;">
+                        <a id="password" class="mblTabBtn nav-tab-active" data-toggle="tab" href="#password" role="tab" aria-controls="password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> @lang('home.changepassword')</a>
                     </li>
-                    <li>
-                        <a id="profile" class=" mblTabBtn" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">@lang('home.editprofile')</a>
+                    <li style="width:50%">
+                        <a id="profile" class=" mblTabBtn" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"><i class="fa fa-user-o" aria-hidden="true"></i> @lang('home.editprofile')</a>
                     </li>
-                    <li>
-                        <a id="notification" class="mblTabBtn" data-toggle="tab" href="#notification" role="tab" aria-controls="notification">@lang('home.notification')</a>
+                    <li style="width:50%;padding-left:20px;">
+                        <a id="notification" class="mblTabBtn" data-toggle="tab" href="#notification" role="tab" aria-controls="notification"><i class="fa fa-bell-o" aria-hidden="true"></i> @lang('home.notification')</a>
                     </li>
-                    <li>
-                        <a id="privacy" class="mblTabBtn" data-toggle="tab" href="#privacy" role="tab" aria-controls="privacy">@lang('home.p_privacy')</a>
+                    <li style="width:50%">
+                        <a id="privacy" class="mblTabBtn" data-toggle="tab" href="#privacy" role="tab" aria-controls="privacy"><i class="fa fa-address-card-o" aria-hidden="true"></i> @lang('home.p_privacy')</a>
                     </li>
                 </ul>
-                <h5 class="mtab-heading">@lang('home.organization')</h5>
+                <h5 class="mtab-heading"><i class="fa fa-building-o" aria-hidden="true"></i> @lang('home.organization')</h5>
                 <ul class="nav nav-tabs jobMblTabs">
-                    <li>
-                        <a href="{{ url('account/employer/departments') }}" class="">@lang('home.departments')</a>
+                    <li style="width:50%;padding-left:20px;">
+                        <a href="{{ url('account/employer/departments') }}" class=""><i class="fa fa-address-book-o" aria-hidden="true"></i> @lang('home.departments')</a>
                     </li>
-                    <li>
-                        <a href="{{ url('account/employer/organization') }}" class=" ext-link">@lang('home.editorganization')</a>
+                    <li style="width:50%">
+                        <a href="{{ url('account/employer/organization') }}" class=" ext-link"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.editorganization')</a>
                     </li>
-                    <li>
-                        <a href="{{ url('account/employer/interview-venues/') }}" class="  ext-link">@lang('home.interviewvenues')</a>
+                    <li style="width:50%;padding-left:20px;">
+                        <a href="{{ url('account/employer/interview-venues/') }}" class="  ext-link"><i class="fa fa-map-marker" aria-hidden="true"></i> @lang('home.interviewvenues')</a>
                     </li>
-                    <li>
-                        <a href="{{ url('account/employer/users/') }}" class=" ext-link">@lang('home.users')</a>
+                    <li style="width:50%">
+                        <a href="{{ url('account/employer/users/') }}" class=" ext-link"><i class="fa fa-user-plus" aria-hidden="true"></i> @lang('home.users')</a>
                     </li>
-                    <li>
-                        <a href="{{ url('account/employer/addevaluation/') }}" class="  ext-link">@lang('home.evaluationforms')</a>
+                    <li style="width:50%;padding-left:20px;">
+                        <a href="{{ url('account/employer/addevaluation/') }}" class="  ext-link"><i class="fa fa-line-chart" aria-hidden="true"></i> @lang('home.evaluationforms')</a>
                     </li>
-                    <li>
-                        <a href="{{ url('account/employer/questionnaires') }}" class=" ext-link">@lang('home.questionnaires')</a>
+                    <li style="width:50%">
+                        <a href="{{ url('account/employer/questionnaires') }}" class=" ext-link"><i class="fa fa-file-text-o" aria-hidden="true"></i> @lang('home.setquestionnaires')</a>
                     </li>
                 </ul>
                 <!-- <a class="btn btn-block jaTabBtn">Users</a>
                 <a class="btn btn-block jaTabBtn">Evaluation Form</a>
                 <a class="btn btn-block jaTabBtn">Questionnaires</a> -->
-                <h5 class="mtab-heading" id="credit_plan">@lang('home.subscription')</h5>
+                <h5 class="mtab-heading" id="credit_plan"><i class="fa fa-list-ol" aria-hidden="true"></i> @lang('home.subscription')</h5>
                 <ul class="nav nav-tabs jobMblTabs">
-                    <li>
-                        <a id="credit" class="btn btn-block  ">@lang('home.credits')</a>
+                    <li style="width:60%;padding-left:20px;">
+                        <a id="credit" class=" mblTabBtn"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> @lang('home.credits')</a>
                     </li>
-                    <li>
-                        <a href="{{ url('account/employer/orders') }}" class="  ext-link">@lang('home.orders')</a>
+                    <li style="width:40%">
+                        <a href="{{ url('account/employer/orders') }}" class="  ext-link"><i class="fa fa-list-alt" aria-hidden="true"></i> @lang('home.orders')</a>
                     </li>
                 </ul>
                 
-                <h5 class="mtab-heading">@lang('home.deactivation')</h5>
+                <h5 class="mtab-heading"><i class="fa fa-ban" aria-hidden="true"></i> @lang('home.deactivation')</h5>
                 <ul class="nav nav-tabs jobMblTabs">
-                    <li>
-                        <a class="btn btn-block" data-popup-open="popup-1" style="margin-bottom:10px">@lang('home.deactivateaccount')</a>
+                    <li style="padding-left:20px;">
+                        <a class="btn btn-block" data-popup-open="popup-1" style="margin-bottom:10px"><i class="fa fa-sign-out" aria-hidden="true"></i> @lang('home.deactivateaccount')</a>
                     </li>
                 </ul>
             </ul>
@@ -79,28 +79,28 @@ if($user->profilePhoto != ''){
         <!-- End Mobile View -->
 
         <div class="col-md-2 jobApp-tabs hidden-xs">
-            <h5 class="mtab-heading"><img src="/frontend-assets/images/manage_icon1.png" style="padding-top:0px"><span style="padding-left:10px;font-size:15px;">@lang('home.account')</span></h5>
-            <a id="password" class="btn btn-block jaTabBtn ja-tab-active"><img src="/frontend-assets/images/manage_icon2.png" style="padding-top:0px"> @lang('home.changepassword')</a>
-            <a id="profile" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon3.png" style="padding-top:0px"> @lang('home.editprofile')</a>
-            <a id="notification" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon4.png" style="padding-top:0px"> @lang('home.notification')</a>
-            <a id="privacy" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon5.png" style="padding-top:0px"> @lang('home.p_privacy')</a>
-            <h5 class="mtab-heading"><img src="/frontend-assets/images/manage_icon6.png" style="padding-top:0px"><span style="padding-left:10px;font-size:15px;">@lang('home.organization')</span></h5>
-            <a href="{{ url('account/employer/departments') }}" class="btn btn-block jaTabBtn"><img src="/frontend-assets/images/manage_icon7.png" style="padding-top:0px"> @lang('home.departments')</a>
-            <a href="{{ url('account/employer/organization') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon8.png" style="padding-top:0px"> @lang('home.editorganization')</a>
-            <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon9.png" style="padding-top:0px"> @lang('home.interviewvenues')</a>
-			<a href="{{ url('account/employer/users/') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon10.png" style="padding-top:0px">@lang('home.users')</a>
-			<a href="{{ url('account/employer/addevaluation/') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon11.png" style="padding-top:0px">@lang('home.evaluationforms')</a>
-			<a href="{{ url('account/employer/questionnaires') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon12.png" style="padding-top:0px">@lang('home.questionnaires')</a>
+            <h5 class="mtab-heading"><span style="padding-left:10px;font-size:15px;"><i class="fa fa-cogs" aria-hidden="true" style="font-size:20px"></i>  @lang('home.account')</span></h5>
+            <a id="password" class="btn btn-block jaTabBtn ja-tab-active" style="padding-left:20px"><i class="fa fa-unlock-alt" aria-hidden="true"></i> @lang('home.changepassword')</a>
+            <a id="profile" class="btn btn-block jaTabBtn" style="padding-left:20px"><i class="fa fa-user-o" aria-hidden="true"></i> @lang('home.editprofile')</a>
+            <a id="notification" class="btn btn-block jaTabBtn" style="padding-left:20px"><i class="fa fa-bell-o" aria-hidden="true"></i> @lang('home.notification')</a>
+            <a id="privacy" class="btn btn-block jaTabBtn" style="padding-left:20px"><i class="fa fa-address-card-o" aria-hidden="true"></i> @lang('home.p_privacy')</a>
+            <h5 class="mtab-heading"><span style="padding-left:10px;font-size:15px;"><i class="fa fa-building-o" aria-hidden="true" style="font-size:20px"></i> @lang('home.organization')</span></h5>
+            <a href="{{ url('account/employer/departments') }}" class="btn btn-block jaTabBtn" style="padding-left:20px"><i class="fa fa-address-book-o" aria-hidden="true"></i> @lang('home.departments')</a>
+            <a href="{{ url('account/employer/organization') }}" class="btn btn-block jaTabBtn ext-link" style="padding-left:20px"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.editorganization')</a>
+            <a href="{{ url('account/employer/interview-venues/') }}" class="btn btn-block jaTabBtn ext-link" style="padding-left:20px"><i class="fa fa-map-marker" aria-hidden="true"></i> @lang('home.interviewvenues')</a>
+			<a href="{{ url('account/employer/users/') }}" class="btn btn-block jaTabBtn ext-link" style="padding-left:20px"><i class="fa fa-user-plus" aria-hidden="true"></i> @lang('home.users')</a>
+			<a href="{{ url('account/employer/addevaluation/') }}" class="btn btn-block jaTabBtn ext-link" style="padding-left:20px"><i class="fa fa-line-chart" aria-hidden="true"></i> @lang('home.evaluationforms')</a>
+			<a href="{{ url('account/employer/questionnaires') }}" class="btn btn-block jaTabBtn ext-link" style="padding-left:20px"><i class="fa fa-file-text-o" aria-hidden="true"></i> @lang('home.setquestionnaires')</a>
             <!-- <a class="btn btn-block jaTabBtn">Users</a>
             <a class="btn btn-block jaTabBtn">Evaluation Form</a>
             <a class="btn btn-block jaTabBtn">Questionnaires</a> -->
-			<h5 class="mtab-heading"><img src="/frontend-assets/images/manage_icon13.png" style="padding-top:0px">@lang('home.subscription')</h5>
-			<a id="credit" class="btn btn-block jaTabBtn "><img src="/frontend-assets/images/manage_icon14.png" style="padding-top:0px">@lang('home.credits')</a>
-			<a href="{{ url('account/employer/orders') }}" class="btn btn-block jaTabBtn ext-link"><img src="/frontend-assets/images/manage_icon15.png" style="padding-top:0px">@lang('home.orders')</a>
+			<h5 class="mtab-heading"><span style="padding-left:10px;font-size:15px;"><i class="fa fa-list-ol" aria-hidden="true" style="font-size:20px"></i> @lang('home.subscription')</span></h5>
+			<a id="credit" class="btn btn-block jaTabBtn " style="padding-left:20px"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> @lang('home.credits')</a>
+			<a href="{{ url('account/employer/orders') }}" class="btn btn-block jaTabBtn ext-link" style="padding-left:20px"><i class="fa fa-list-alt" aria-hidden="true"></i> @lang('home.orders')</a>
 			
 			
-            <h5 class="mtab-heading"><img src="/frontend-assets/images/manage_icon16.png" style="padding-top:0px">@lang('home.deactivation')</h5>
-            <a class="btn btn-block" data-popup-open="popup-1" style="margin-bottom:10px"><img src="/frontend-assets/images/manage_icon17.png" style="padding-top:0px">@lang('home.deactivateaccount')</a>
+            <h5 class="mtab-heading"><span style="padding-left:10px;font-size:15px;"><i class="fa fa-ban" aria-hidden="true" style="font-size:20px"></i> @lang('home.deactivation')</h5>
+            <a class="btn btn-block" data-popup-open="popup-1" style="margin-bottom:10px;padding-left:20px"><i class="fa fa-sign-out" aria-hidden="true"></i> @lang('home.deactivateaccount')</a>
         </div>
         <div class="col-md-10">
             <div class="tab-content">
@@ -144,57 +144,57 @@ if($user->profilePhoto != ''){
 							<tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <img src="/frontend-assets/images/manage_credit2.png" style="padding-top:0px"> &nbsp;@lang('home.Resume Downloads')</td>
+                                <td height="150px" style="padding-top:20px;padding-bottom:20px"> <div class="text-center" style="background:#2e6da4;height:130px;width:230px;border-radius: 10px;"><img src="/frontend-assets/images/manage_credit3.png" style="padding-top:15px;"><br><span style="color:#fff;font-size:15px;"><b>@lang('home.ResumeDownloadsbuy')</b></span></div></td>
                                 <input type="hidden" value="Resume Download" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
+                                <td><input type="submit" class="btn btn-info" style="margin-top:50px;background:#2e6da4;" value="@lang('home.View Contents')"></td>
                                 </form>
                             </tr>
                             <tr>
                             <form action="{{ action('frontend\Employer@package') }}" method="post">
                             {!! csrf_field() !!} 
-                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Premium Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Premium Jobs pack')</td>
                                 <input type="hidden" value="Premium" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
+                                <td><input type="submit" class="btn btn-info" style="background:#a09d8e;border: 1px solid #a09d8e;" value="@lang('home.View Contents')"></td>
                                 </form>
                             </tr>
                              <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Top Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Top Jobs pack')</td>
                                 <input type="hidden" value="Top" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
+                                <td><input type="submit" class="btn btn-info" style="background:#a8b3b9;border: 1px solid #a8b3b9;" value="@lang('home.View Contents')"></td>
                                 </form>
                             </tr>
                              <tr>
                             <form action="{{ action('frontend\Employer@package') }}" method="post">
                              {!! csrf_field() !!} 
-                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Hot Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Hot Jobs pack')</td>
                                 <input type="hidden" value="Hot" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
+                                <td><input type="submit" class="btn btn-info" style="background:#717171;border: 1px solid #717171e;" value="@lang('home.View Contents')"></td>
                                 </form>
                             </tr>
                              <tr>
                             <form action="{{ action('frontend\Employer@package') }}" method="post">
                              {!! csrf_field() !!} 
-                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Latest Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Latest Jobs pack')</td>
                                 <input type="hidden" value="Latest" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
+                                <td><input type="submit" class="btn btn-info" style="background:#94a5a5;border: 1px solid #94a5a5;"value="@lang('home.View Contents')"></td>
                                 </form>
                             </tr>
                             <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Special Jobs')</td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Special Jobs pack')</td>
                                 <input type="hidden" value="Special" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
+                                <td><input type="submit" class="btn btn-info" style="background:#4e6c7c;border: 1px solid #4e6c7c;" value="@lang('home.View Contents')"></td>
                                 </form>
                             </tr>
                             <tr>
                              <form action="{{ action('frontend\Employer@package') }}" method="post">
                               {!! csrf_field() !!} 
-                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Goldan Jobs')</td>
-                                <input type="hidden" value="Goldan" name="type">
-                                <td><input type="submit" class="btn btn-info" style value="@lang('home.Buy Now')"></td>
+                                <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Golden Jobs pack')</td>
+                                <input type="hidden" value="Golden" name="type">
+                                <td><input type="submit" class="btn btn-info" style="background:#b0a48a;border: 1px solid #b0a48a;" value="@lang('home.View Contents')"></td>
                                 </form>
                             </tr>
                             

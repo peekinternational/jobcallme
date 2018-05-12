@@ -421,7 +421,7 @@ class Jobs extends Controller{
 				{
 					$comUrl = url('companies/company/'.$sim->companyId);
 					$cityUrl = url('jobs?city='.$sim->city);
-					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'"><span style="color:#337ab7">'.trans('home.similerjob').'</span>  '.trans('home.'.JobCallMe::cityName($sim->city)).'</a><span style="padding-left: 85px;" ><a style="color: #337ab7;" href="'.$comUrl.'">'.trans('home.jobIn').' <span style="color:#999999"> '.$sim->companyName.'</span></a></span></p>';
+					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'"><span style="color:#337ab7">'.trans('home.similerjob').'</span>  '.trans('home.'.JobCallMe::cityName($sim->city)).'</a><br><span style="padding-left: 0px;" ><a style="color: #337ab7;" href="'.$comUrl.'">'.trans('home.jobIn').' <span style="color:#999999"> '.$sim->companyName.'</span></a></span></p>';
 				}
 				$vhtml .='</div>';
 			}

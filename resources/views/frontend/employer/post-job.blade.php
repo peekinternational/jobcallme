@@ -51,7 +51,7 @@
 						 @foreach($plan as $key=>$pay)
 							
 								@if($pay->type == "Basic")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');color:#464646;">
 									<?php
 										$payad_text = "basic_text";
 										$payad_text2 = "basic_text2";
@@ -59,7 +59,7 @@
 									?>
 								@endif
 								@if($pay->type == "Golden")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#fff;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#464646;">
 									<?php
 										$payad_text = "golden_text";
 										$payad_text2 = "golden_text2";
@@ -67,10 +67,13 @@
 										$payad_text4 = "golden_text4";
 										$payad_text5 = "golden_text5";
 										$payad_text6 = "golden_text6";
+										$payad_text7 = "golden_text7";
+										$payad_text8 = "golden_text8";
+										$payad_text9 = "golden_text9";
 									?>
 								@endif
 								@if($pay->type == "Special")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job3.png');color:#464646;">
 									<?php
 										$payad_text = "special_text";
 										$payad_text2 = "special_text2";
@@ -78,10 +81,13 @@
 										$payad_text4 = "special_text4";
 										$payad_text5 = "special_text5";
 										$payad_text6 = "special_text6";
+										$payad_text7 = "special_text7";
+										$payad_text8 = "special_text8";
+										$payad_text9 = "special_text9";
 									?>
 								@endif
 								@if($pay->type == "Latest")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#fff;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job4.png');color:#464646;">
 									<?php
 										$payad_text = "latest_text";
 										$payad_text2 = "latest_text2";
@@ -89,10 +95,13 @@
 										$payad_text4 = "latest_text4";
 										$payad_text5 = "latest_text5";
 										$payad_text6 = "latest_text6";
+										$payad_text7 = "latest_text7";
+										$payad_text8 = "latest_text8";
+										$payad_text9 = "latest_text9";
 									?>
 								@endif
 								@if($pay->type == "Hot")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job5.png');color:#464646;">
 									<?php
 										$payad_text = "hot_text";
 										$payad_text2 = "hot_text2";
@@ -100,10 +109,13 @@
 										$payad_text4 = "hot_text4";
 										$payad_text5 = "hot_text5";
 										$payad_text6 = "hot_text6";
+										$payad_text7 = "hot_text7";
+										$payad_text8 = "hot_text8";
+										$payad_text9 = "hot_text9";
 									?>
 								@endif
 								@if($pay->type == "Top Job")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#fff;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job6.png');color:#464646;">
 									<?php
 										$payad_text = "top_text";
 										$payad_text2 = "top_text2";
@@ -111,10 +123,13 @@
 										$payad_text4 = "top_text4";
 										$payad_text5 = "top_text5";
 										$payad_text6 = "top_text6";
+										$payad_text7 = "top_text7";
+										$payad_text8 = "top_text8";
+										$payad_text9 = "top_text9";
 									?>
 								@endif
 								@if($pay->type == "Premium")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job7.png');color:#464646;">
 									<?php
 										$payad_text = "premium_text";
 										$payad_text2 = "premium_text2";
@@ -122,6 +137,9 @@
 										$payad_text4 = "premium_text4";
 										$payad_text5 = "premium_text5";
 										$payad_text6 = "premium_text6";
+										$payad_text7 = "premium_text7";
+										$payad_text8 = "premium_text8";
+										$payad_text9 = "premium_text9";
 									?>
 								@endif
 
@@ -130,11 +148,7 @@
 								<div class="text-left">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $pay->id!!}" name="allarray" value="{!! $pay->cat_id!!}|{!! $pay->id!!}|{!! $pay->amount!!}|{!! $pay->duration!!}|{!! $pay->quantity!!}" style="margin-top:15px;margin-left:10px;">
 									<input class="mat-radio-input visually-hidden pckg_amount" id="radioval" type="hidden"  value="{!! $pay->amount!!}">
-									@if($pay->type == "Basic")<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@else<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@endif<b>@if(app()->getLocale() == "kr")
-			@if($pay->type == "Golden")골드 @else @lang('home.'.$pay->type) @endif
-		@else
-			@lang('home.'.$pay->type)
-		@endif </b></span>	
+									@if($pay->type == "Basic")<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@else<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@endif</span>	
                                     
                                     <input class="checkplan"  type="hidden" name="plan"  value="plan">
 								</div>
@@ -148,11 +162,24 @@
 										<div style="font-size: 11px;padding:20px 0px 0px 5px;" class="text-left">@lang('home.'.$payad_text2)</div>
 										<div style="font-size: 11px;padding:20px 0px 0px 5px;" class="text-left">@lang('home.'.$payad_text3)</div>
 										@else
-										<div style="font-size: 11px;padding:30px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text2)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text3)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text4)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text5)</div>
+										<div style="font-size: 13px;padding:38px 0px 0 0px;color:#fff;" class="text-center"><b>@if(app()->getLocale() == "kr")
+			@if($pay->type == "Golden")골드 @else @lang('home.'.$pay->type) @endif
+		@else
+			@lang('home.'.$pay->type)
+		@endif </b></div>
+										<div style="font-size: 11px;padding:11px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text)</div>
+										<div style="font-size: 11px;padding:5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text2)</div>
+										<div style="font-size: 11px;padding:5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text3)</div>
+										<div style="font-size: 11px;padding:5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text4)</div>
+										@if($pay->type == "Premium")
+										<div style="font-size: 11px;padding:5px 0px 0 0px;color:#f9993c" class="text-center"> @lang('home.'.$payad_text8)</span>
+										</div>
+										@endif
+										@if($pay->type == "Premium")
+			<div style="font-size: 11px;padding:-5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text5)</div>
+		@else
+			<div style="font-size: 11px;padding:7px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text5)</div>
+		@endif
 										@endif
 
 										
@@ -164,13 +191,33 @@
 										@endif -->
 										
 
+									@if(app()->getLocale() == "kr")	
+                                       @if($pay->type == "Premium") 
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:13px;" >
+											<span class="text-success" style="color:#f9993c" id="class_text{{$key}}"></span>
+										</div>
+										@else
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:23px;" >
+											<span class="text-success" style="color:#f9993c" id="class_text{{$key}}"></span>
+										</div>
+										@endif
+									@else
+										@if($pay->type == "Premium") 
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:0px;" >
+											<span class="text-success" style="color:#f9993c" id="class_text{{$key}}"></span>
+										</div>
+										@else
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:10px;" >
+											<span class="text-success" style="color:#f9993c" id="class_text{{$key}}"></span>
+										</div>
+										@endif
+									@endif
+										<div style="font-size: 11px;text-align: center;color:#ff3b3b;padding-top:-5px;" > @lang('home.'.$payad_text6)</span>
+										</div>
+										<div style="font-size: 11px;text-align: center;color:#464646;padding-top:9px;" >@lang('home.'.$payad_text9)</span>
+										</div>
 										
-                                        
-										<div style="font-size: 12px;text-align: center;color:#ff3b3b;padding-top:7px;" >@lang('home.'.$payad_text6)</span>
-										</div>
-										<div class="credits b" style="font-size: 13px;text-align: center;padding-top:29px;" >
-											<span class="text-success" style="color:#fff" id="class_text{{$key}}"></span>
-										</div>
+										
 									</div>
 
 										@if($payment->title == "Basic")
@@ -249,6 +296,7 @@
 									<?php
 										$payad_text = "premium_text";
 										$payad_text2 = "premium_text2";
+										
 									?>
 								@endif
 
@@ -257,7 +305,7 @@
 								<div style="height:40px">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $pay->id!!}" name="allarray" value="{!! $pay->cat_id!!}|{!! $pay->id!!}|{!! $pay->amount!!}|{!! $pay->duration!!}|{!! $pay->quantity!!}" style="margin-top:10px;margin-left:10px;">
 									<input class="mat-radio-input visually-hidden pckg_amount" id="radioval" type="hidden"  value="{!! $pay->amount!!}">
-									<span style="color:#fff;font-size: 15px;padding-left:10px;"><b>@lang('home.'.$pay->type)</b></span>&nbsp;<span style="color:#fff;font-size: 12px;padding-left:0px;"><b>@if($payment->title == "Basic") @lang('home.mpay_text') @else @lang('home.mpay_text2') @endif</b></span>
+									<span style="color:#fff;font-size: 15px;padding-left:10px;"><b>@lang('home.'.$pay->type)</b></span>&nbsp;<span style="color:#fff;font-size: 12px;padding-left:0px;"><b>@if($payment->title == "Basic") @lang('home.mpay_text') @else @lang('home.mpay_text2') @endif @if($pay->type == "Premium") @lang('home.mpay_text3') @endif</b></span>
                                     
                                     <input class="checkplan"  type="hidden" name="plan"  value="plan">
 								</div>
@@ -266,7 +314,7 @@
                                 <div style="background:#fff;height:50px;text-align: center;">
                                     <!----><label for="{!! $pay->id!!}">
 
-									<div class="credits b" style="font-size: 13px;text-align: center;padding-top:5px;" >@lang('home.pay_cost') : <span style="color:#118c4e" class="text-success" id="mclass_text{{$key}}"></span>@lang('home.currencyday_text')<br><span style="font-size: 13px;text-align: center;padding-bottom:10px;color:#ff6600">@lang('home.paylocation')</span>
+									<div class="credits b" style="font-size: 13px;text-align: center;padding-top:5px;" >@lang('home.pay_cost') : <span style="color:#118c4e" class="text-success" id="mclass_text{{$key}}"></span>@lang('home.currencyday_text')@lang('home.currencyday_text2')<br><span style="font-size: 13px;text-align: center;padding-bottom:10px;color:#ff6600">@lang('home.paylocation')</span>
 										
 									</div>
 
@@ -295,15 +343,17 @@
 						 @foreach($rec as $k=>$payment)
 
 								@if($payment->title == "Basic")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');color:#464646;">
 									<?php
 										$payad_text = "basic_text";
 										$payad_text2 = "basic_text2";
 										$payad_text3 = "basic_text3";
+										$payad_text4 = "basic_text4";
+										$payad_text5 = "basic_text5";
 									?>
 								@endif
 								@if($payment->title == "Golden")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#fff;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#464646;">
 									<?php
 										$payad_text = "golden_text";
 										$payad_text2 = "golden_text2";
@@ -311,10 +361,13 @@
 										$payad_text4 = "golden_text4";
 										$payad_text5 = "golden_text5";
 										$payad_text6 = "golden_text6";
+										$payad_text7 = "golden_text7";
+										$payad_text8 = "golden_text8";
+										$payad_text9 = "golden_text9";
 									?>
 								@endif
 								@if($payment->title == "Special")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job3.png');color:#464646;">
 									<?php
 										$payad_text = "special_text";
 										$payad_text2 = "special_text2";
@@ -322,10 +375,13 @@
 										$payad_text4 = "special_text4";
 										$payad_text5 = "special_text5";
 										$payad_text6 = "special_text6";
+										$payad_text7 = "special_text7";
+										$payad_text8 = "special_text8";
+										$payad_text9 = "special_text9";
 									?>
 								@endif
 								@if($payment->title == "Latest")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#fff;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job4.png');color:#464646;">
 									<?php
 										$payad_text = "latest_text";
 										$payad_text2 = "latest_text2";
@@ -333,10 +389,13 @@
 										$payad_text4 = "latest_text4";
 										$payad_text5 = "latest_text5";
 										$payad_text6 = "latest_text6";
+										$payad_text7 = "latest_text7";
+										$payad_text8 = "latest_text8";
+										$payad_text9 = "latest_text9";
 									?>
 								@endif
 								@if($payment->title == "Hot")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job5.png');color:#464646;">
 									<?php
 										$payad_text = "hot_text";
 										$payad_text2 = "hot_text2";
@@ -344,10 +403,13 @@
 										$payad_text4 = "hot_text4";
 										$payad_text5 = "hot_text5";
 										$payad_text6 = "hot_text6";
+										$payad_text7 = "hot_text7";
+										$payad_text8 = "hot_text8";
+										$payad_text9 = "hot_text9";
 									?>
 								@endif
 								@if($payment->title == "Top Job")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#fff;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job6.png');color:#464646;">
 									<?php
 										$payad_text = "top_text";
 										$payad_text2 = "top_text2";
@@ -355,10 +417,13 @@
 										$payad_text4 = "top_text4";
 										$payad_text5 = "top_text5";
 										$payad_text6 = "top_text6";
+										$payad_text7 = "top_text7";
+										$payad_text8 = "top_text8";
+										$payad_text9 = "top_text9";
 									?>
 								@endif
 								@if($payment->title == "Premium")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job7.png');color:#464646;">
 									<?php
 										$payad_text = "premium_text";
 										$payad_text2 = "premium_text2";
@@ -366,6 +431,9 @@
 										$payad_text4 = "premium_text4";
 										$payad_text5 = "premium_text5";
 										$payad_text6 = "premium_text6";
+										$payad_text7 = "premium_text7";
+										$payad_text8 = "premium_text8";
+										$payad_text9 = "premium_text9";
 									?>
 								@endif
 								
@@ -374,11 +442,7 @@
 								<div class="text-left">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}" style="margin-top:15px;margin-left:10px;">
 									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
-									@if($payment->title == "Basic")<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@else<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@endif<b>@if(app()->getLocale() == "kr")
-			@if($payment->title == "Golden")골드 @else @lang('home.'.$payment->title) @endif
-		@else
-			@lang('home.'.$payment->title)
-		@endif</b></span>
+									@if($payment->title == "Basic")<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@else<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@endif</span>
 								</div>
 
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
@@ -387,17 +451,31 @@
                                 <div class="text-center">
                                     <!----><label for="{!! $payment->id!!}">
                                         @if($payment->title == "Basic")
-										<div style="font-size: 11px;padding:30px 0px 0px 5px;" class="text-left">@lang('home.'.$payad_text)</div>
-										<div style="font-size: 11px;padding:20px 0px 0px 5px;" class="text-left">@lang('home.'.$payad_text2)</div>
-										<div style="font-size: 11px;padding:20px 0px 0px 5px;" class="text-left">@lang('home.'.$payad_text3)</div>
+										<div style="font-size: 13px;padding:38px 0px 0px 0px;color:#fff;" class="text-center">@lang('home.'.$payment->title)</div>
+										<div style="font-size: 11px;padding:11px 0px 0px 0px;" class="text-center">@lang('home.'.$payad_text)</div>
+										<div style="font-size: 11px;padding:5px 0px 0px 0px;" class="text-center">@lang('home.'.$payad_text2)</div>
+										<div style="font-size: 11px;padding:5px 0px 0px 0px;" class="text-center">@lang('home.'.$payad_text3)</div>
+										<div style="font-size: 11px;padding:5px 0px 0px 0px;" class="text-center">@lang('home.'.$payad_text4)</div>
 										@else
-										<div style="font-size: 11px;padding:30px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text2)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text3)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text4)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text5)</div>
+										<div style="font-size: 13px;padding:38px 0px 0 0px;color:#fff;" class="text-center"><b>@if(app()->getLocale() == "kr")
+			@if($payment->title == "Golden")골드 @else @lang('home.'.$payment->title) @endif
+		@else
+			@lang('home.'.$payment->title)
+		@endif </b></div>
+										<div style="font-size: 11px;padding:11px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text)</div>
+										<div style="font-size: 11px;padding:5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text2)</div>
+										<div style="font-size: 11px;padding:5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text3)</div>
+										<div style="font-size: 11px;padding:5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text4)</div>
+										@if($payment->title == "Premium")
+										<div style="font-size: 11px;padding:5px 0px 0 0px;color:#f9993c" class="text-center"> @lang('home.'.$payad_text8)</span>
+										</div>
 										@endif
-
+										@if($payment->title == "Premium")
+			<div style="font-size: 11px;padding:-5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text5)</div>
+		@else
+			<div style="font-size: 11px;padding:7px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text5)</div>
+		@endif
+										@endif
 										
 										
 										
@@ -409,18 +487,42 @@
 
 										
                                          @if($payment->price ==0)
-										
+										<div style="font-size: 17px;text-align: center;padding-top:25px;color:#f9993c;" class="text-center">@lang('home.Free')</div>
+										<div style="font-size: 11px;text-align: center;color:#ff3b3b;padding-top:-5px;color:#ff3b3b;">@lang('home.'.$payad_text5)</div>
 										@else
 										
-										<div style="font-size: 12px;text-align: center;color:#ff3b3b;padding-top:7px;" >@lang('home.'.$payad_text6)</span>
+									@if(app()->getLocale() == "kr")
+										@if($payment->title == "Premium") 
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:13px;" >
+											<span class="text-success" style="color:#f9993c" id="simple_text{{$k}}"></span>
 										</div>
-										<div class="credits b" style="font-size: 13px;text-align: center;padding-top:29px;" >
-											<span class="text-success" style="color:#fff" id="simple_text{{$k}}"></span>
+										@else
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:23px;" >
+											<span class="text-success" style="color:#f9993c" id="simple_text{{$k}}"></span>
 										</div>
+										@endif
+									@else
+										@if($payment->title == "Premium") 
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:0px;" >
+											<span class="text-success" style="color:#f9993c" id="simple_text{{$k}}"></span>
+										</div>
+										@else
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:10px;" >
+											<span class="text-success" style="color:#f9993c" id="simple_text{{$k}}"></span>
+										</div>
+										@endif
+									@endif
+
+										<div style="font-size: 11px;text-align: center;color:#ff3b3b;padding-top:-5px;" > @lang('home.'.$payad_text6)</span>
+										</div>
+										<div style="font-size: 11px;text-align: center;color:#464646;padding-top:9px;" >@lang('home.'.$payad_text9)</span>
+										</div>
+
+										
 										@endif
 
 										@if($payment->title == "Basic")
-										<div style="padding-top:71px;font-size: 13px;color:#fff;" class="text-center">@lang('home.Free')</div>
+										<div style="padding-top:16px;font-size: 11px;color:#464646;" class="text-center">@lang('home.Free')</div>
 										@else										
 										<!-- <div style="text-align: center;padding-top:15px;"><span style="font-size: 15px;background:#118c4e;padding:5px 20px;color:#fff;width:100px;text-align: center;">@lang('home.pay_buy')</span></div> -->
 										@endif
@@ -490,7 +592,7 @@
                             <!----><li style="position:relative;background:#a09d8e;" class="text-left">
 									<?php
 										$payad_text = "premium_text";
-										$payad_text2 = "premium_text2";
+										$payad_text2 = "premium_text2";										
 									?>
 								@endif
 								
@@ -499,7 +601,7 @@
 								<div style="height:40px">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}" style="margin-top:10px;margin-left:10px;">
 									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
-									<span style="color:#fff;font-size: 15px;padding-left:10px;"><b>@lang('home.'.$payment->title)</b></span>&nbsp;<span style="color:#fff;font-size: 12px;padding-left:0px;"><b>@if($payment->title == "Basic") @lang('home.mpay_text') @else @lang('home.mpay_text2') @endif</b>
+									<span style="color:#fff;font-size: 15px;padding-left:10px;"><b>@lang('home.'.$payment->title)</b></span>&nbsp;<span style="color:#fff;font-size: 12px;padding-left:0px;"><b>@if($payment->title == "Basic") @lang('home.mpay_text') @else @lang('home.mpay_text2') @endif @if($payment->title == "Premium") @lang('home.mpay_text3') @endif</b>
 								</div>
 
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
@@ -510,7 +612,7 @@
                                         <div class="credits b" style="font-size: 13px;text-align: center;padding-top:5px;" >@lang('home.pay_cost') : @if($payment->price ==0)
 										<span class="free" style="color:#118c4e">@lang('home.Free_text')<br><span style="font-size: 13px;text-align: center;padding-bottom:10px;color:#ff6600">&nbsp;</span>
 										@else
-										<span class="text-success" style="color:#118c4e" id="msimple_text{{$k}}"></span>@lang('home.currencyday_text')<br><span style="font-size: 13px;text-align: center;padding-bottom:10px;color:#ff6600">@lang('home.paylocation')</span>
+										<span class="text-success" style="color:#118c4e" id="msimple_text{{$k}}"></span>@lang('home.currencyday_text')@lang('home.currencyday_text2')<br><span style="font-size: 13px;text-align: center;padding-bottom:10px;color:#ff6600">@lang('home.paylocation')</span>
 										
 									@endif</div>
                                     </label>
@@ -541,15 +643,17 @@
                         <ul id="post-job-ad-types" class="text-center">
 						 @foreach($rec as $keys=>$payment)
 								@if($payment->title == "Basic")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');color:#464646;">
 									<?php
 										$payad_text = "basic_text";
 										$payad_text2 = "basic_text2";
 										$payad_text3 = "basic_text3";
+										$payad_text4 = "basic_text4";
+										$payad_text5 = "basic_text5";
 									?>
 								@endif
 								@if($payment->title == "Golden")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#fff;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#464646;">
 									<?php
 										$payad_text = "golden_text";
 										$payad_text2 = "golden_text2";
@@ -557,10 +661,13 @@
 										$payad_text4 = "golden_text4";
 										$payad_text5 = "golden_text5";
 										$payad_text6 = "golden_text6";
+										$payad_text7 = "golden_text7";
+										$payad_text8 = "golden_text8";
+										$payad_text9 = "golden_text9";
 									?>
 								@endif
 								@if($payment->title == "Special")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job3.png');color:#464646;">
 									<?php
 										$payad_text = "special_text";
 										$payad_text2 = "special_text2";
@@ -568,10 +675,13 @@
 										$payad_text4 = "special_text4";
 										$payad_text5 = "special_text5";
 										$payad_text6 = "special_text6";
+										$payad_text7 = "special_text7";
+										$payad_text8 = "special_text8";
+										$payad_text9 = "special_text9";
 									?>
 								@endif
 								@if($payment->title == "Latest")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#fff;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job4.png');color:#464646;">
 									<?php
 										$payad_text = "latest_text";
 										$payad_text2 = "latest_text2";
@@ -579,10 +689,13 @@
 										$payad_text4 = "latest_text4";
 										$payad_text5 = "latest_text5";
 										$payad_text6 = "latest_text6";
+										$payad_text7 = "latest_text7";
+										$payad_text8 = "latest_text8";
+										$payad_text9 = "latest_text9";
 									?>
 								@endif
 								@if($payment->title == "Hot")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job5.png');color:#464646;">
 									<?php
 										$payad_text = "hot_text";
 										$payad_text2 = "hot_text2";
@@ -590,10 +703,13 @@
 										$payad_text4 = "hot_text4";
 										$payad_text5 = "hot_text5";
 										$payad_text6 = "hot_text6";
+										$payad_text7 = "hot_text7";
+										$payad_text8 = "hot_text8";
+										$payad_text9 = "hot_text9";
 									?>
 								@endif
 								@if($payment->title == "Top Job")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job2.png');color:#fff;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job6.png');color:#464646;">
 									<?php
 										$payad_text = "top_text";
 										$payad_text2 = "top_text2";
@@ -601,10 +717,13 @@
 										$payad_text4 = "top_text4";
 										$payad_text5 = "top_text5";
 										$payad_text6 = "top_text6";
+										$payad_text7 = "top_text7";
+										$payad_text8 = "top_text8";
+										$payad_text9 = "top_text9";
 									?>
 								@endif
 								@if($payment->title == "Premium")
-                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job1.png');">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/pay-job7.png');color:#464646;">
 									<?php
 										$payad_text = "premium_text";
 										$payad_text2 = "premium_text2";
@@ -612,6 +731,9 @@
 										$payad_text4 = "premium_text4";
 										$payad_text5 = "premium_text5";
 										$payad_text6 = "premium_text6";
+										$payad_text7 = "premium_text7";
+										$payad_text8 = "premium_text8";
+										$payad_text9 = "premium_text9";
 									?>
 								@endif
 								
@@ -619,11 +741,7 @@
 								<div class="text-left">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}" style="margin-top:15px;margin-left:10px;">
 									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
-									@if($payment->title == "Basic")<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@else<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@endif<b>@if(app()->getLocale() == "kr")
-			@if($payment->title == "Golden")골드 @else @lang('home.'.$payment->title) @endif
-		@else
-			@lang('home.'.$payment->title)
-		@endif</b></span>
+									@if($payment->title == "Basic")<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@else<span style="font-size: 12px;padding-left:5px;padding-top:-10px;">@endif</span>
 								</div>
 
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
@@ -632,17 +750,31 @@
                                 <div class="text-center">
                                     <!----><label for="{!! $payment->id!!}">
                                         @if($payment->title == "Basic")
-										<div style="font-size: 11px;padding:30px 0px 0px 5px;" class="text-left">@lang('home.'.$payad_text)</div>
-										<div style="font-size: 11px;padding:20px 0px 0px 5px;" class="text-left">@lang('home.'.$payad_text2)</div>
-										<div style="font-size: 11px;padding:20px 0px 0px 5px;" class="text-left">@lang('home.'.$payad_text3)</div>
+										<div style="font-size: 13px;padding:38px 0px 0px 0px;color:#fff;" class="text-center">@lang('home.'.$payment->title)</div>
+										<div style="font-size: 11px;padding:11px 0px 0px 0px;" class="text-center">@lang('home.'.$payad_text)</div>
+										<div style="font-size: 11px;padding:5px 0px 0px 0px;" class="text-center">@lang('home.'.$payad_text2)</div>
+										<div style="font-size: 11px;padding:5px 0px 0px 0px;" class="text-center">@lang('home.'.$payad_text3)</div>
+										<div style="font-size: 11px;padding:5px 0px 0px 0px;" class="text-center">@lang('home.'.$payad_text4)</div>
 										@else
-										<div style="font-size: 11px;padding:30px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text2)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text3)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text4)</div>
-										<div style="font-size: 11px;padding:7px 0px 0 5px;" class="text-left">@lang('home.'.$payad_text5)</div>
+										<div style="font-size: 13px;padding:38px 0px 0 0px;color:#fff;" class="text-center"><b>@if(app()->getLocale() == "kr")
+			@if($payment->title == "Golden")골드 @else @lang('home.'.$payment->title) @endif
+		@else
+			@lang('home.'.$payment->title)
+		@endif </b></div>
+										<div style="font-size: 11px;padding:11px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text)</div>
+										<div style="font-size: 11px;padding:5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text2)</div>
+										<div style="font-size: 11px;padding:5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text3)</div>
+										<div style="font-size: 11px;padding:5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text4)</div>
+										@if($payment->title == "Premium")
+										<div style="font-size: 11px;padding:5px 0px 0 0px;color:#f9993c" class="text-center"> @lang('home.'.$payad_text8)</span>
+										</div>
 										@endif
-
+										@if($payment->title == "Premium")
+			<div style="font-size: 11px;padding:-5px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text5)</div>
+		@else
+			<div style="font-size: 11px;padding:7px 0px 0 0px;" class="text-center">@lang('home.'.$payad_text5)</div>
+		@endif
+										@endif
 										
 										
 										
@@ -654,18 +786,40 @@
 
 										
                                         @if($payment->price ==0)
-										
+										<div style="font-size: 17px;text-align: center;padding-top:25px;color:#f9993c;" class="text-center">@lang('home.Free')</div>
+										<div style="font-size: 11px;text-align: center;color:#ff3b3b;padding-top:-5px;color:#ff3b3b;">@lang('home.'.$payad_text5)</div>
 										@else
-										
-										<div style="font-size: 12px;text-align: center;color:#ff3b3b;padding-top:7px;" >@lang('home.'.$payad_text6)</span>
+
+									@if(app()->getLocale() == "kr")
+										@if($payment->title == "Premium") 
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:13px;" >
+											<span class="text-success" style="color:#f9993c" id="simple_text{{$keys}}"></span>
 										</div>
-										<div class="credits b" style="font-size: 13px;text-align: center;padding-top:29px;" >
-											<span class="text-success" style="color:#fff" id="simple_text{{$keys}}"></span>
+										@else
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:23px;" >
+											<span class="text-success" style="color:#f9993c" id="simple_text{{$keys}}"></span>
+										</div>
+										@endif
+									@else
+										@if($payment->title == "Premium") 
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:0px;" >
+											<span class="text-success" style="color:#f9993c" id="simple_text{{$keys}}"></span>
+										</div>
+										@else
+										<div class="credits b" style="font-size: 17px;text-align: center;padding-top:10px;" >
+											<span class="text-success" style="color:#f9993c" id="simple_text{{$keys}}"></span>
+										</div>
+										@endif
+									@endif
+
+										<div style="font-size: 11px;text-align: center;color:#ff3b3b;padding-top:-5px;" > @lang('home.'.$payad_text6)</span>
+										</div>
+										<div style="font-size: 11px;text-align: center;color:#464646;padding-top:9px;" >@lang('home.'.$payad_text9)</span>
 										</div>
 										@endif
 
 										@if($payment->title == "Basic")
-										<div style="padding-top:71px;font-size: 13px;color:#fff;" class="text-center">@lang('home.Free')</div>
+										<div style="padding-top:16px;font-size: 11px;color:#464646;" class="text-center">@lang('home.Free')</div>
 										
 										@else										
 										<!-- <div style="text-align: center;padding-top:15px;"><span style="font-size: 15px;background:#118c4e;padding:5px 20px;color:#fff;width:100px;text-align: center;">@lang('home.pay_buy')</span></div> -->
@@ -733,7 +887,7 @@
                             <!----><li style="position:relative;background:#a09d8e;" class="text-left">
 									<?php
 										$payad_text = "premium_text";
-										$payad_text2 = "premium_text2";
+										$payad_text2 = "premium_text2";										
 									?>
 								@endif
 								
@@ -741,7 +895,7 @@
 								<div style="height:40px">
 									<input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="p_Category" value="{!! $payment->id!!}" style="margin-top:10px;margin-left:10px;">
 									<input class="mat-radio-input visually-hidden" id="radioval" type="hidden" value="{!! $payment->price!!}">
-									<span style="color:#fff;font-size: 15px;padding-left:10px;"><b>@lang('home.'.$payment->title)</b></span>&nbsp;<span style="color:#fff;font-size: 12px;padding-left:0px;"><b>@if($payment->title == "Basic") @lang('home.mpay_text') @else @lang('home.mpay_text2') @endif</b></span>
+									<span style="color:#fff;font-size: 15px;padding-left:10px;"><b>@lang('home.'.$payment->title)</b></span>&nbsp;<span style="color:#fff;font-size: 12px;padding-left:0px;"><b>@if($payment->title == "Basic") @lang('home.mpay_text') @else @lang('home.mpay_text2') @endif @if($payment->title == "Premium") @lang('home.mpay_text3') @endif</b></span>
 								</div>
 
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span>
@@ -754,7 +908,7 @@
                                         <div class="credits b" style="font-size: 13px;text-align: center;padding-top:5px;" >@lang('home.pay_cost') : @if($payment->price ==0)
 										<span class="free" style="color:#118c4e">@lang('home.Free_text')<br><span style="font-size: 13px;text-align: center;padding-bottom:10px;color:#ff6600">&nbsp;</span>
 										@else
-										<span class="text-success" style="color:#118c4e" id="msimple_text{{$keys}}"></span>@lang('home.currencyday_text')<br><span style="font-size: 13px;text-align: center;padding-bottom:10px;color:#ff6600">@lang('home.paylocation')</span>
+										<span class="text-success" style="color:#118c4e" id="msimple_text{{$keys}}"></span>@lang('home.currencyday_text')@lang('home.currencyday_text2')<br><span style="font-size: 13px;text-align: center;padding-bottom:10px;color:#ff6600">@lang('home.paylocation')</span>
 										
 									@endif</div>
 
@@ -813,7 +967,7 @@
                                     @endforeach
                                 </select>
 							    <br>
-								<span style="padding-top:5px;font-size:12px;color:#3a79d2;">※@lang('home.addDepartment-text')</span>
+								<span style="padding-top:5px;font-size:12px;color:#3a79d2;">@lang('home.addDepartment-text')</span>
                             </div>
                            <div class="col-md-2 pnj-form-field" style="margin-top:5px;"> <a href="{{ url('account/employer/departments') }}"><span style="background:#f0ad4e;padding:5px 10px;margin-top:5px;color:#fff;">@lang('home.addDepartment') ></span></a></div>
                         </div>
@@ -956,8 +1110,9 @@
                         <div class="form-group" id="expirediv">
                             <label class="control-label col-sm-3">@lang('home.expirydate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" id="secondDate" name="expiryAd" onkeypress="return false">
-                            </div>
+                                <input type="text" class="form-control date-picker" id="secondDate" name="expiryAd" onkeypress="return false"><br>
+								<b><span style="padding-top:5px;font-size:12px;color:#3a79d2;">@lang('home.Up to 10% discount applies when you purchase job announcement advertisement package.')</span></b><div style="padding-top:7px"><a id="nonpckg" href="{{ url('account/manage?plan')}}" style="margin-top:15px;"><span style="background:#013d80;padding:5px 10px;color:#fff;">@lang('home.Use Package Plan?') ></span></a></div>
+                            </div>							
                         </div>
 						<div class="form-group" id="durationdiv">
                             <label class="control-label col-sm-3">@lang('home.adduration')</label>
@@ -1621,6 +1776,7 @@ $(document).ready(function(){
      for(var i=0;i<simplearray.length;i++){
      $('#simple_text'+i).html('￦ '+simplearray[i].price*1100+'')
 	 $('#msimple_text'+i).html('￦ '+simplearray[i].price*1100+'')
+	 $('#tax_text5'+i).html('부가세 : 포함')
         //alert(jArray[i].amount);
 	 $('.form-horizontal input[name="paycurrency"]').val('KRW');
        }
@@ -1631,6 +1787,7 @@ $(document).ready(function(){
 
      $('#simple_text'+i).html('US$ '+simplearray[i].price+'.00')
 	 $('#msimple_text'+i).html('US$ '+simplearray[i].price+'.00')
+	 $('#tax_text5'+i).html('부가세 : 없음')
         //alert(jArray[i].amount);
 	 $('.form-horizontal input[name="paycurrency"]').val('USD');
          }
@@ -1642,6 +1799,7 @@ $(document).ready(function(){
     for(var i=0;i<simplearray.length;i++){
      $('#simple_text'+i).html('￦ '+simplearray[i].price*1100 +'')
 	 $('#msimple_text'+i).html('￦ '+simplearray[i].price*1100+'')
+	 $('#tax_text5'+i).html('부가세 : 포함')
        // alert(jArray[i].amount*1100);
 	 $('.form-horizontal input[name="paycurrency"]').val('KRW');
       }

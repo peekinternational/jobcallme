@@ -42,17 +42,19 @@
                                 </div>
                                 <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">@if($resumedown > 0) {{$applicant->firstName}} {{$applicant->lastName}} @else {{$applicant->firstName}} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i> @endif</h3>
                                 <p class="text-center hidden-md hidden-lg jp-profession-heading">@lang('home.'.JobCallMe::categoryTitle($applicant->industry))</p>
-                                <a href="#" class="btn btn-primary btn-block jp-contact-btn hidden-xs">@lang('home.CONTACT DETAILS')</a>
+                                <a href="#" class="btn btn-primary btn-block jp-contact-btn hidden-xs"><i class="fa fa-id-card-o" aria-hidden="true"></i> @lang('home.CONTACT DETAILS')</a>
                               <div class="hidden-md hidden-lg hidden-sm" style=" display:  inline-flex; margin-bottom: 20px;">
-                              <a href="#" class="btn btn-primary" style="margin-right:5px; ">CONTACT DETAILS</a>
-                              <span ><button class="btn btn-primary" onclick="$('#offerdModel').modal('show')"><i class="fa fa-bullhorn"></i> Offerd Interview</button></span>
+                              <a href="#" class="btn btn-primary" style="margin-right:5px; "><i class="fa fa-id-card-o" aria-hidden="true"></i> @lang('home.CONTACT DETAILS')</a>
+                              <span ><button class="btn btn-success" onclick="$('#offerdModel').modal('show')"><i class="fa fa-bullhorn"></i> @lang('home.Offerd Interview')</button></span>
                               </div>
 								<div class="" style="text-align:center">
                                    <a href="{{ url('account/jobseeker/cv/'.$applicant->userId)}}" style="color:#337ab7" class=""><i class="fa fa-download"></i> @lang('home.DOWNLOAD')</a>
                                   </div>
                             </div>
+
                             <div class="col-md-9 personal-info-right hidden-sm">
-                                <h3 class="hidden-xs">@if($resumedown > 0) {{$applicant->firstName}} {{$applicant->lastName}} @else {{$applicant->firstName}} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i> @endif<span class="pull-right"><button class="btn btn-primary" onclick="$('#offerdModel').modal('show')"><i class="fa fa-bullhorn"></i> @lang('home.Offerd Interview')</button></span></h3>
+                                <h3 class="hidden-xs">@if($resumedown > 0) {{$applicant->firstName}} {{$applicant->lastName}} @else {{$applicant->firstName}} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i> @endif<span class="pull-right"><button class="btn btn-success" onclick="$('#offerdModel').modal('show')"><i class="fa fa-bullhorn"></i> @lang('home.Offerd Interview')</button></span></h3>
+
                                 <p class="jp-profession-heading hidden-sm hidden-xs">@lang('home.'.JobCallMe::categoryTitle($applicant->industry))</p>
                                 <p><span class="pi-title">@lang('home.experiences'):</span>@lang('home.'.$applicant->experiance)</p>
                                 @if($privacy->dateofbirth == 'Yes')
@@ -67,7 +69,7 @@
                                     @if($resumedown > 0)
 									<p>{!! $applicant->about !!}</p>
 									@else
-									<p style="color:#337ab7"><b> @lang('home.View resume download')</b></p>
+									<p style="color:#337ab7"><b> <a href="{{ url('account/jobseeker/cv/'.$applicant->userId)}}" style="color:#337ab7" class="">@lang('home.View resume download')</a></b></p>
 									@endif
                                 </div>
                             </div>
@@ -828,7 +830,14 @@
                         <div class="row" style="margin-right: 0 !important;">
                         @foreach($data as $appl)
                          <?php
-                            $pImage = url('profile-photos/profile-logo.jpg');
+                            if($appl->genderpeople == 'Male' or $appl->genderpeople == 'Man'){
+								$pImage = url('profile-photos/profile-logo.jpg');
+							}elseif($appl->genderpeople == 'Female'){
+								$pImage = url('profile-photos/profile-logo2.jpg');
+							}else{
+								$pImage = url('profile-photos/profile-logo3.jpg');
+							}
+							//$pImage = url('profile-photos/profile-logo.jpg');
                             if($appl->profilePhoto != '' && $appl->profilePhoto != NULL){
                             $pos = strpos($appl->profilePhoto,"ttp");
                                 if($pos == 1)
@@ -856,16 +865,16 @@
                              <div class="col-md-12 sr-item">
                               <div class="col-md-4 applicant-SimilarImg">
                                 @if(Session::has('jcmUser'))
-                                <img src="@if($check) {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif" style="width: 70px;height:75px !important;">
+                                <img src="@if($check) {{ $pImage }} @else @if($appl->genderpeople == 'Male' or $appl->genderpeople == 'Man') {{url('profile-photos/profile-logo.jpg')}} @elseif($appl->genderpeople == 'Female') {{url('profile-photos/profile-logo2.jpg')}} @else {{url('profile-photos/profile-logo3.jpg')}} @endif @endif" style="width: 70px;height:75px !important;">
                                 @else
                                 <img src=" {{ url('profile-photos/profile-logo.jpg ')}}" style="width: 70px;height:75px !important;">
                                 @endif
                                 </div>
                                 <div class="col-md-8 sp-item">
                                   @if(Session::has('jcmUser'))
-                                    @if($check)<p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>@else <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p> @endif
+                                    @if($check)<p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>@else <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true" style="font-size:10px"></i> <i class="fa fa-circle-o" aria-hidden="true" style="font-size:10px"></i></a></p> @endif
                                     @else
-                                    <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></a></p>
+                                    <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true" style="font-size:10px"></i> <i class="fa fa-circle-o" aria-hidden="true" style="font-size:10px"></i></a></p>
                                     @endif
 
                                 <p>{!! $appl->companyName !!}</p>

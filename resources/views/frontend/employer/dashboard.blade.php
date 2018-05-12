@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-4">
                 <div class="eg-job-response">
-                    <h4>@lang('home.experiencelevel')</h4>
+                    <h4>@lang('home.dashexperiencelevel')</h4>
                     <canvas id="experience-level" ></canvas>
                 </div>
             </div>
@@ -81,14 +81,14 @@
 									
                                 </div>
 									<div class="col-xs-2 col-md-2"><div class="dropdown">
-									  <i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size: 21px;"></i>
-                                      <i class="fa fa-ellipsis-v" aria-hidden="true" style="font-size: 21px;"></i>
+									  <i class="fa fa-ellipsis-v" aria-hidden="true" style="padding-top:5px;padding-left:10px;font-size: 17px;color:#008000;"></i>
+                                      <i class="fa fa-ellipsis-v" aria-hidden="true" style="padding-top:5px;font-size: 17px;color:#008000;"></i>
 									  <div class="dropdown-content">
 										<a href="{{url('account/employer/job_update/'.$pjobs->jobId)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')</a>
 										<a href="{{url('account/employer/setfilter/'.$pjobs->jobId)}}"><i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')</a>
 										<a href="{{url('account/employer/job/share/'.$pjobs->jobId)}}"><i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')</a>
 										<a href="{{url('account/employer/status/'.$pjobs->jobId)}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')</a>
-										<a href="{{url('account/employer/evalution/'.$pjobs->jobId)}}"><i class="fa fa-question" aria-hidden="true"></i> @lang('home.evaluation')</a>
+										<a href="{{url('account/employer/evalution/'.$pjobs->jobId)}}"><i class="fa fa-pie-chart" aria-hidden="true"></i> @lang('home.evaluation')</a>
                                         <a href="#" onclick="return false;" class="active_deactive{{$pjobs->jobId}}" id="active_deactive{{$key}}"><i class="fa fa-eye" aria-hidden="true"></i> @lang('home.Active')</a>
                                         <input type="hidden" class="JobId" value="{{$pjobs->jobId}}">
                                         <input type="hidden" class="check{{$pjobs->jobId}}" value="{{$pjobs->jobStatus}}">
@@ -97,7 +97,7 @@
 									</div></div>
                             @endforeach
 							 <div class="col-md-12">
-                                <a href="{{ url('jobs')}}" class="pull-right" style="padding-top: 5px">@lang('home.jobviewall')</a>
+                                <a href="{{ url('jobs')}}" class="pull-right" style="padding-top: 5px;padding-bottom:20px;">@lang('home.jobviewall')</a>
                             </div>
 						<div style="text-align:center"><?php	echo $postedJobs->render(); ?></div>
                         </div>
@@ -130,7 +130,7 @@
                                 <div class="rtj-details">
                                     <p><strong><a href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId.'?jobId='.$interview->jobId) }}">{{ $interview->firstName." ".$interview->lastName}}</a></strong></p>
                                     <p><a href="{{ url('jobs/'.$interview->jobId) }}">{{ $interview->title }}</a> <span class="label" style="background-color:{{ $colorArr[array_rand($colorArr)] }}"><a style="color:#fff" href="{{ url('account/employer/application/candidate/'.$interview->jobseekerId) }}">@lang('home.interview Details')</a></span></p>
-                                    <p><i class="fa fa-clock-o"></i> Date {{ $interview->fromDate }} Time {{ $interview->toDate }}   <i class="fa fa-map-marker"></i> @lang('home.'.$interview->country), @lang('home.'.$interview->state), @lang('home.'.$interview->city)</p>
+                                    <p><i class="fa fa-clock-o"></i> @lang('home.date') {{ $interview->fromDate }} @lang('home.Time') {{ $interview->toDate }}   <i class="fa fa-map-marker"></i> @lang('home.'.$interview->country), @lang('home.'.$interview->state), @lang('home.'.$interview->city)</p>
                                 </div>
                             </div>
                              @endforeach
@@ -155,7 +155,15 @@
                     <div class="row">
 					@foreach($data as $appl)
 					 <?php
-                        $pImage = url('profile-photos/profile-logo.jpg');
+						if($appl->gender == 'Male' or $appl->gender == 'Man'){
+							$pImage = url('profile-photos/profile-logo.jpg');
+						}elseif($applicant->gender == 'Female'){
+							$pImage = url('profile-photos/profile-logo2.jpg');
+						}else{
+							$pImage = url('profile-photos/profile-logo3.jpg');
+						}
+
+                        //$pImage = url('profile-photos/profile-logo.jpg');
                         if($appl->profilePhoto != '' && $appl->profilePhoto != NULL){
                         $pos = strpos($appl->profilePhoto,"ttp");
                             if($pos == 1)
@@ -168,6 +176,7 @@
                                             
                                     }
                                     ?>
+
                                         <?php 
                                             $check = false;
                                             $downloadcvs = Sajid::checkDownloadCvs();
@@ -180,22 +189,24 @@
                                             
                                             ?>
                          <div class="col-md-4 col-xs-6 sp-item" style="padding-top:10px">
+						 <a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">
                                     @if(Session::has('jcmUser'))
-                                <img src="@if($check) {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif" style="width: 70px;height:75px !important;">
+                                <img src="@if($check) {{ $pImage }} @else @if($appl->gender == 'Male' or $appl->gender == 'Man') {{url('profile-photos/profile-logo.jpg')}} @elseif($appl->gender == 'Female') {{url('profile-photos/profile-logo2.jpg')}} @else {{url('profile-photos/profile-logo3.jpg')}} @endif @endif" style="width: 70px;height:75px;">
                                 @else
                                 <img src=" {{ url('profile-photos/profile-logo.jpg ')}}" style="width: 70px;height:75px !important;">
                                 @endif
                             @if(Session::has('jcmUser'))
-                                    @if($check)<p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>@else <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p> @endif
+                                    @if($check)<p>{!! $appl->firstName.' '.$appl->lastName !!}</p>@else <p>{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i> <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i></p> @endif
                                     @else
-                                    <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></a></p>
+                                    <p>{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i> <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i></p>
                                     @endif
 						
-								<p>{!! $appl->companyName !!}</p>
+								<!-- <p>{!! $appl->companyName !!}</p> -->
+
 								<p>@lang('home.'.JobCallMe::cityName($appl->city)), @lang('home.'.JobCallMe::countryName($appl->country))</p>
 
 							
-						
+						</a>
 						</div>
 						 @endforeach
 

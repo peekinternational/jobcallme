@@ -47,8 +47,10 @@
                             echo '<div class="col-md-4">';
                             echo '<ul class="list-unstyled">';
                         }
+						if($cat->categoryId < 17){
                         echo '<li class="ellipsis"><a href="'.url('companies?in='.$cat->categoryId).'" class="hvr-forward">'.trans('home.'.$cat->name).'</a></li>';
                         $i++;
+						}
                     ?>
                     <?php }?>
                     </ul>

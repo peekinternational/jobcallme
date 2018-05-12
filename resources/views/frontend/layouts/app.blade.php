@@ -15,7 +15,14 @@ date_default_timezone_set("Asia/Seoul");
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <title>@yield('title') &raquo; {{ $headerWeb['webTitle'] }}</title>
+        <title>{{ $headerWeb['webTitle'] }} [잡콜미]</title>
+
+		<meta property="og:url" content="https://www.jobcallme.com/">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="JobCallMe">
+		<meta property="og:image" content="https://www.jobcallme.com/website/weblinkimage.png">		
+		<link rel="canonical" href="https://www.jobcallme.com/"> 
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">

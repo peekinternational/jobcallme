@@ -607,7 +607,7 @@ $dispatch='';
 		<div class="col-md-3">
 		    <!--Follow Companies - Start -->
                 <div class="follow-companies">
-                    <h4>@lang('home.similarjob') @lang('home.'.JobCallMe::countryName(JobCallMe::getHomeCountry()))</h4>
+                    <h4>@lang('home.similarjobdetail') <!-- @lang('home.'.JobCallMe::countryName(JobCallMe::getHomeCountry())) --></h4>
                     <hr>
                     <div class="row">
 					@foreach($suggest as $appl)

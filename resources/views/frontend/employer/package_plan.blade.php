@@ -111,7 +111,10 @@
 										<div style="font-size: 13px;text-align: center;padding:10px 15px 10px 15px;" >+{{$payment->quantity}}@lang('home.'.$payad_text2)</div>
 										@else
 										<div style="font-size: 13px;text-align: center;padding:20px 20px 0 15px;" >@lang('home.'.$payad_text)</div>
-										<div style="font-size: 13px;text-align: center;padding:20px 25px;" >@lang('home.'.$payad_text2)</div>
+										@if($payment->type == "Premium")
+										<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;" >@lang('home.premium_text8')</div>
+										@endif
+										<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;" >@lang('home.'.$payad_text2)</div>									
 										@endif
 
 										
@@ -127,7 +130,133 @@
 
 										
                                         <div class="credits b" style="font-size: 13px;text-align: center;" >@lang('home.pay_cost') : 
-											<span class="text-success" id="class_text{{$key}}"></span> @if($payment->type != "Resume Download")@lang('home.currencyday_text'){{$payment->duration}}@lang('home.currencyday_text2') @endif
+											@if($payment->type == "Premium")
+												@if(app()->getLocale() == "kr")
+													@if($payment->amount == "360")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦440000원</strike> [10%]</div>
+													@elseif($payment->amount == "260")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦308000원</strike> [7%]</div>
+													@elseif($payment->amount == "190")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦220000원</strike> [5%]</div>
+													@endif
+												@else
+													@if($payment->amount == "360")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄400</strike> [10%]</div>
+													@elseif($payment->amount == "260")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄280</strike> [7%]</div>
+													@elseif($payment->amount == "190")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄200</strike> [5%]</div>
+													@endif
+												@endif
+											
+											@endif
+
+											@if($payment->type == "Top")
+												@if(app()->getLocale() == "kr")
+													@if($payment->amount == "315")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦385000원</strike> [10%]</div>
+													@elseif($payment->amount == "227")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦269500원</strike> [7%]</div>
+													@elseif($payment->amount == "166")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦192500원</strike> [5%]</div>
+													@endif
+												@else
+													@if($payment->amount == "315")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄350</strike> [10%]</div>
+													@elseif($payment->amount == "227")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄245</strike> [7%]</div>
+													@elseif($payment->amount == "166")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄175</strike> [5%]</div>
+													@endif
+												@endif
+											
+											@endif
+
+											@if($payment->type == "Hot")
+												@if(app()->getLocale() == "kr")
+													@if($payment->amount == "270")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦330000원</strike> [10%]</div>
+													@elseif($payment->amount == "195")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦231000원</strike> [7%]</div>
+													@elseif($payment->amount == "142")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦165000원</strike> [5%]</div>
+													@endif
+												@else
+													@if($payment->amount == "270")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄150</strike> [10%]</div>
+													@elseif($payment->amount == "195")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄210</strike> [7%]</div>
+													@elseif($payment->amount == "142")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄300</strike> [5%]</div>
+													@endif
+												@endif
+											
+											@endif
+
+											@if($payment->type == "Latest")
+												@if(app()->getLocale() == "kr")
+													@if($payment->amount == "225")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦247500원</strike> [10%]</div>
+													@elseif($payment->amount == "162")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦192500원</strike> [7%]</div>
+													@elseif($payment->amount == "118")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦178200원</strike> [5%]</div>
+													@endif
+												@else
+													@if($payment->amount == "225")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄250</strike> [10%]</div>
+													@elseif($payment->amount == "162")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄162</strike> [7%]</div>
+													@elseif($payment->amount == "118")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄118</strike> [5%]</div>
+													@endif
+												@endif
+											
+											@endif
+
+											@if($payment->type == "Special")
+												@if(app()->getLocale() == "kr")
+													@if($payment->amount == "180")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦220000원</strike> [10%]</div>
+													@elseif($payment->amount == "130")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦154000원</strike> [7%]</div>
+													@elseif($payment->amount == "95")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦110000원</strike> [5%]</div>
+													@endif
+												@else
+													@if($payment->amount == "180")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄200</strike> [10%]</div>
+													@elseif($payment->amount == "130")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄140</strike> [7%]</div>
+													@elseif($payment->amount == "95")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄100</strike> [5%]</div>
+													@endif
+												@endif
+											
+											@endif
+
+											@if($payment->type == "Golden")
+												@if(app()->getLocale() == "kr")
+													@if($payment->amount == "135")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦165000원</strike> [10%]</div>
+													@elseif($payment->amount == "97")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦115500원</strike> [7%]</div>
+													@elseif($payment->amount == "71")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>￦82500원</strike> [5%]</div>
+													@endif
+												@else
+													@if($payment->amount == "135")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄150</strike> [10%]</div>
+													@elseif($payment->amount == "97")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄105</strike> [7%]</div>
+													@elseif($payment->amount == "71")
+													<div style="font-size: 13px;text-align: center;padding:10px 10px 0 15px;color:#db132f;" ><strike>＄75</strike> [5%]</div>
+													@endif
+												@endif
+											
+											@endif
+
+											<span class="text-success" id="class_text{{$key}}"></span> @if($payment->type != "Resume Download")@lang('home.currencyday_text'){{$payment->duration}}@lang('home.currencyday_text3') @endif
 										</div>
 
 										

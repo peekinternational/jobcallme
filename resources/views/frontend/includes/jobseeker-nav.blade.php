@@ -1,6 +1,6 @@
 <section id="jobseeker-box">
     <div class="container">
-        <h2>@lang('home.welcome') {{ Session::get('jcmUser')->firstName.' '.Session::get('jcmUser')->lastName }} @lang('home.welcomeend')</h2>
+        <h2><span style="font-size:23px">@lang('home.welcome') {{ Session::get('jcmUser')->firstName.' '.Session::get('jcmUser')->lastName }} @lang('home.welcomeend') <span style="color:#337ab7;">@lang('home.welcomeend2')</span> @lang('home.welcomeend4')</span></h2>
         <div class="col-md-12 user-dashboard-panel">
             <ul class="udp-itemss">
                 <li>
@@ -35,7 +35,7 @@
                 </li>
                 <li>
                      <a href="{{ url('learn') }}">
-                        <img src="../frontend-assets/images/jobseek_icon7.png" style="padding-top:0px">
+                        <img src="../frontend-assets/images/employer_icon7.png" style="padding-top:0px">
                         <div class="udp-type">@lang('home.LEARN')</div>
                     </a>
                 </li>

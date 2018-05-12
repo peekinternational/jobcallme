@@ -22,7 +22,9 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
-
+Route::get('comments',function(){
+	return view('comments');
+});
 Route::get('/event','Home@sendMessage');
 Route::get('/listen',function(){
 	return view('broadcoast');
@@ -157,6 +159,14 @@ Route::get('refund-policy','frontend\Home@refundPolicy');
 Route::get('howtouse','frontend\Home@howtouse');
 Route::get('review-write','frontend\Home@ReviewWrite');
 Route::get('video-chat-policy','frontend\Home@videochatpolicy');
+Route::get('write-resume','frontend\Home@writeresume');
+Route::get('self-introduction','frontend\Home@selfintroduction');
+Route::get('interview-strategy','frontend\Home@interviewstrategy');
+Route::get('increased-recruitment','frontend\Home@increasedrecruitment');
+Route::get('conformity-verification','frontend\Home@conformityverification');
+Route::get('active-communication','frontend\Home@activecommunication');
+Route::match(['get','post'],'account/login','frontend\Home@accountLogin');
+Route::match(['get','post'],'account/register','frontend\Home@accountRegister');
 Route::match(['get','post'],'account/login','frontend\Home@accountLogin');
 Route::match(['get','post'],'account/register','frontend\Home@accountRegister');
 Route::get('account/logout','frontend\Home@logout');
@@ -173,7 +183,7 @@ Route::get('learn/training/{id}','frontend\Home@viewUpskill');
 Route::get('learn/webinar/{id}','frontend\Home@viewUpskill');
 Route::get('learn/workshop/{id}','frontend\Home@viewUpskill');
 Route::get('learn/exhibition/{id}','frontend\Home@viewUpskill');
-Route::get('learn/seminar · exhibition · webinar/{id}','frontend\Home@viewUpskill');
+Route::get('learn/seminar · fair · exhibition/{id}','frontend\Home@viewUpskill');
 Route::get('learn/forum · conference/{id}','frontend\Home@viewUpskill');
 Route::get('learn/training · workshop/{id}','frontend\Home@viewUpskill');
 Route::get('learn/course · education · academy/{id}','frontend\Home@viewUpskill');
@@ -283,8 +293,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/department/delete/{id}','frontend\Employer@deleteDepartment');
 	Route::post('post','frontend\Employer@post');
 	Route::post('packageplan','frontend\Employer@package');
-	Route::get('packageinfo','frontend\Employer@packageinfo');
-	Route::get('cashpackage','frontend\Employer@cashpackage');
+	Route::post('packageinfo','frontend\Employer@packageinfo');
+	Route::post('cashpackage','frontend\Employer@cashpackage');
 
 	Route::post('nicepay', 'frontend\Employer@getresponse');
 	Route::post('pckgnicepay', 'frontend\Employer@nicepaypckg');
@@ -466,4 +476,6 @@ Route::get('jobseeker/status/offer/all','sajidController@offers_interview');
 Route::post('delete/record','sajidController@delete');
 Route::post('update/record','sajidController@update');
 Route::post('offerdelete/record','sajidController@offerdelete');
+
 Route::post('offerupdate/record','sajidController@offerupdate');
+

@@ -11,14 +11,14 @@ class sajid extends Command
      *
      * @var string
      */
-    protected $signature = 'sendJobEmails';
+    protected $signature = 'echo';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'send related job emails to All users who turn on this notification';
+    protected $description = 'echo hello';
 
     /**
      * Create a new command instance.

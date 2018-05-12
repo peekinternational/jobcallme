@@ -26,21 +26,21 @@ $lToken = csrf_token();
                     <div class="col-md-8 col-md-offset-2">
                         <div class="tabbable-panel">
                             <div class="tabbable-line">
-                                <ul class="nav nav-tabs ">
+                                <ul class="nav nav-tabs " style="padding-left:10px">
                                     <li class="active">
-                                        <a href="#search_tab_1" data-toggle="tab">@lang('home.jobs')</a>
+                                        <a href="#search_tab_1" data-toggle="tab">@lang('home.jobs_search')</a>
                                     </li>
-                                    <li>
-                                        <a href="#search_tab_2" data-toggle="tab">@lang('home.companies') </a>
+                                    <li style="padding-left:10px">
+                                        <a href="#search_tab_2" data-toggle="tab">@lang('home.companies_search') </a>
                                     </li>
-                                    <li>
-                                        <a href="#search_tab_3" data-toggle="tab">@lang('home.peoples')</a>
+                                    <li style="padding-left:10px">
+                                        <a href="#search_tab_3" data-toggle="tab">@lang('home.peoples_search')</a>
                                     </li>
-                                    <li>
+                                    <li style="padding-left:10px">
                                         <a href="#search_tab_4" data-toggle="tab">@lang('home.read_search')</a>
                                     </li>
-                                    <li>
-                                        <a href="#search_tab_5" data-toggle="tab">@lang('home.learn')</a>
+                                    <li style="padding-left:10px">
+                                        <a href="#search_tab_5" data-toggle="tab">@lang('home.learn_search')</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
@@ -147,12 +147,12 @@ $lToken = csrf_token();
     </section>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-     <span style="padding-left:10px"><button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> @lang('home.Open Quick View V')</span>  </button>
+     <span style="padding-left:10px"><button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> @lang('home.Close Quick View V')</span>  </button>
 </div>
                                                
     <!--Slider Section End-->
 
-    <section class="login-type-section" id="QuickView" style="display:none;">
+    <section class="login-type-section" id="QuickView">
         <div class="container">
             <div class="col-md-8 col-md-offset-2">
                 <div class="col-md-6 login-type ">
@@ -218,11 +218,16 @@ $lToken = csrf_token();
                                     /* margin-left: 64px; */
                                     padding-left: 20px;
                                     padding-bottom: 27px;">
-              <div class="col-md-offset-2">
-                <span style="padding-left:8px"><button type="submit" class="btn btn-success btn-sm" id="mainbutton" onclick="myFunctions()"> @lang('home.Open AD View')</span>  </button>
+              <div class="col-md-offset-2 hidden-xs" style="margin-top:2px">
+                <span style="padding-left:11px;"><button type="submit" class="btn btn-success btn-sm" id="mainbutton" onclick="myFunctions()"> @lang('home.Close AD View')  </button></span>
                     </div>
+
+			  <div class="col-md-offset-2 hidden-sm hidden-md hidden-lg" style="margin-top:-3px">
+                <span style="padding-left:5px;"><button type="submit" class="btn btn-success btn-sm" id="mainbutton2" onclick="myFunctions2()"> @lang('home.Close AD View')  </button></span>
                     </div>
-    <div id="maindiv" style="display:none">
+
+                    </div>
+    <div id="maindiv">
      
     <section class="job-types-section" style="background:#fff;margin-top:-12px;margin-bottom:-10px;">
    
@@ -685,8 +690,8 @@ $lToken = csrf_token();
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="img sj-job-type">
 							  <div style="background:#fff">
-                               <div class="" style="height: 30px; width:100%">
-                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:30px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
+                               <div class="" style="height: 35px; width:100%">
+                                <img src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" style="height:35px !important;margin: 0 auto;width: auto !important;padding-top:5px;" alt="img">
                                </div>
                                 <b class="pull-right" style="padding-top:8px;padding-right:5px;">{!! $job->companyName !!}</b>
                                 <div class="clearfix"></div>
@@ -774,20 +779,32 @@ $lToken = csrf_token();
  $("#mainbutton").click(function(){
     $("#maindiv").toggle();
 });
+
+$("#mainbutton2").click(function(){
+    $("#maindiv").toggle();
+});
 function myFunction() {
     var x = document.getElementById("Quickbutton");
-    if (x.innerHTML === "@lang('home.Close Quick View V')") {
-        x.innerHTML = "@lang('home.Open Quick View V')";
-    } else {
+    if (x.innerHTML === "@lang('home.Open Quick View V')") {
         x.innerHTML = "@lang('home.Close Quick View V')";
+    } else {
+        x.innerHTML = "@lang('home.Open Quick View V')";
     }
 }
 function myFunctions() {
     var x = document.getElementById("mainbutton");
-    if (x.innerHTML === "@lang('home.Close AD View')") {
-        x.innerHTML = "@lang('home.Open AD View')";
-    } else {
+    if (x.innerHTML === "@lang('home.Open AD View')") {
         x.innerHTML = "@lang('home.Close AD View')";
+    } else {
+        x.innerHTML = "@lang('home.Open AD View')";
+    }
+}
+function myFunctions2() {
+    var x = document.getElementById("mainbutton2");
+    if (x.innerHTML === "@lang('home.Open AD View')") {
+        x.innerHTML = "@lang('home.Close AD View')";
+    } else {
+        x.innerHTML = "@lang('home.Open AD View')";
     }
 }
 

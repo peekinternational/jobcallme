@@ -58,18 +58,23 @@ body{
             </div>
             <h3 class="hidden-md hidden-lg" style="font-weight: 400">{{ $user->firstName.' '.$user->lastName }}</h3>
             <p><span class="pi-title">@lang('home.fathername'):</span> {{ $meta->fatherName }}</p>
+			<?php
+				$email_addr = explode('@',$user->email);
+			?>
+			@if($email_addr[1] != 'jobcallme.com')
             <p><span class="pi-title">@lang('home.email'):</span> {{ $user->email }}</p>
+			@endif
             <p><span class="pi-title">@lang('home.mobile'):</span> {{ $user->phoneNumber }}</p>
             <p><span class="pi-title">@lang('home.cnic'):</span> {{ $meta->cnicNumber }}</p>
-            <p><span class="pi-title">@lang('home.address'):</span> {!! $meta->address.' ,'.JobCallMe::cityName($user->city).' ,'.JobCallMe::countryName($user->country) !!}</p>
+            <p><span class="pi-title">@lang('home.address'):</span> {!! $meta->address !!} ,@lang('home.'.JobCallMe::cityName($user->city)) ,@lang('home.'.JobCallMe::countryName($user->country))</p>
         </div>
         <div class="col-md-9 personal-info-right">
            
            
-            <p><span class="pi-title">@lang('home.age'):</span> {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title">Gender:</span>{{ $meta->gender }},<span class="pi-title">Status:</span>{{ $meta->maritalStatus }}</p>
-            <p><span class="pi-title">@lang('home.education'):</span> {{ $meta->education }}</p>
-            <p><span class="pi-title">@lang('home.experience'):</span> {{ $meta->experiance }}</p>
-            <p><span class="pi-title">@lang('home.industry'):</span> {{ JobCallMe::categoryTitle($meta->industry) }}</p>
+            <p><span class="pi-title">@lang('home.age'):</span> {{ JobCallMe::timeInYear($meta->dateOfBirth) }}, <span class="pi-title">@lang('home.gender'):</span>@lang('home.'.$meta->gender) ,<span class="pi-title">@lang('home.maritalstatus'):</span>@lang('home.'.$meta->maritalStatus)</p>
+            <p><span class="pi-title">@lang('home.education'):</span> @lang('home.'.$meta->education)</p>
+            <p><span class="pi-title">@lang('home.experience'):</span> @lang('home.'.$meta->experiance)</p>
+            <p><span class="pi-title">@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryTitle($meta->industry))</p>
             <p><span class="pi-title">@lang('home.salary'):</span> {{ number_format($meta->currentSalary != '' ? $meta->currentSalary : '0',2).' '.$meta->currency }}</p>
             <div class="professional-summary">
                 <div>@lang('home.p_summary')</div>

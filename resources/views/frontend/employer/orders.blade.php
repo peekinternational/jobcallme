@@ -45,16 +45,17 @@
         		<div class="col-md-10" >
         			<div style="background: #fff; margin:20px 0px 20px 0px; padding: 10px 10px 10px 10px">
         				<!-- <h5>No data found</h5> -->
-        				<table class="table">
+						<section class="resume-box">
+        				<table class="table questionr-table">
         					<thead>
         						<tr>
-        							<th>@lang('home.ID')</th>
-									<th>@lang('home.Category By')</th>
+        							<th width="14%">@lang('home.ID')</th>
+									<th width="12%">@lang('home.Category By')</th>
         							<th>@lang('home.Ordered By')</th>
-        							<th>@lang('home.Payment Mode')</th>
-        							<th>@lang('home.Amount')</th>
-        							<th>@lang('home.Status')</th>
-        							<th>@lang('home.Date')</th>
+        							<th width="15%">@lang('home.Payment Mode')</th>
+        							<th width="10%">@lang('home.Amount')</th>
+        							<th width="10%">@lang('home.Status')</th>
+        							<th width="10%">@lang('home.listDate')</th>
         						</tr>
         					</thead>
         					<tbody>
@@ -72,7 +73,7 @@
         							<td>@lang('home.'.$order->status)</td>
         							<td>{{$order->order_date}}</td>
 											@if($order->status == 'Pending' && $order->payment_mode == 'Cash Payment'  )<td>	<div class="col-xs-2 col-md-2"><div class="dropdown">
-									  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+									  <i class="fa fa-ellipsis-v" aria-hidden="true" style="color:green"></i>
 									  <div class="dropdown-content">
 										<a href="{{url('afterpayment/'.$order->order_id)}}"><span style="font-size: 12px;"> @lang('home.MakePayment')</span></a>
 										
@@ -85,6 +86,7 @@
         						@endforeach
         					</tbody>
         				</table>
+						</section>
         			</div>
         			
         		</div>

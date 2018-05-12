@@ -15,19 +15,19 @@ if(Request::input('show') != ''){
     <div class="container">
 
         <div class="follow-companies6" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
-            <h3 style="margin-left: 15px">@lang('home.APPLICATION_title')</h3>
+            <h3 style="margin-left: 15px">@lang('home.APPLICATION_title2')</h3>
         </div>
         <!-- Mobile View Only -->
-        <div class="col-md-2 jobApp-tabs hidden-sm hidden-md hidden-lg">
+        <!-- <div class="col-md-2 jobApp-tabs hidden-sm hidden-md hidden-lg">
             <ul class="nav nav-tabs">
                 <li>
                     <a id="delivered" class="mblTabBtn {{ $delivered }}" data-toggle="tab" href="#delivered" role="tab" aria-controls="delivered">@lang('home.delivered')</a>
                 </li>
-                <li>
+                <li style="width:90px">
                     <a id="shortlist" class=" mblTabBtn {{ $shortlist }}" data-toggle="tab" href="#shortlist" role="tab" aria-controls="shortlist">@lang('home.shortlisted')</a>
                 </li>
                 <li>
-                    <a id="interview" class="mblTabBtn {{ $interview }}" data-toggle="tab" href="#interview" role="tab" aria-controls="interview">@lang('home.interviews')</a>
+                    <a id="interview" class="mblTabBtn {{ $interview }}" data-toggle="tab" href="#interview" role="tab" aria-controls="interview">@lang('home.jobseekinterviews')</a>
                 </li>
                 <li>
                     <a id="offer" class="mblTabBtn {{ $offer }}" data-toggle="tab" href="#offer" role="tab" aria-controls="offer">@lang('home.offered')</a>
@@ -35,21 +35,24 @@ if(Request::input('show') != ''){
                 <li>
                     <a id="reject" class="mblTabBtn {{ $reject }}" data-toggle="tab" href="#reject" role="tab" aria-controls="reject">@lang('home.unsuccessful')</a>
                 </li>
-            </ul>
+            </ul> -->
             <!-- <a id="delivered" class="btn btn-block jaTabBtn {{ $delivered }}">@lang('home.delivered')</a>
             <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}">@lang('home.shortlisted')</a>
             <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}">@lang('home.interviews')</a>
             <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}">@lang('home.offered')</a>
             <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}">@lang('home.unsuccessful')</a> -->
-         </div>
+         <!-- </div> -->
         <!-- End Mobile View -->
-        <div class="col-md-2 jobApp-tabs hidden-xs">
-            <a id="delivered" class="btn btn-block jaTabBtn {{ $delivered }}">@lang('home.delivered')</a>
-            <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}">@lang('home.shortlisted')</a>
-            <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}">@lang('home.interviews')</a>
-            <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}">@lang('home.offered')</a>
-            <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}">@lang('home.unsuccessful')</a>
-            <a id="offer" href="{{url('jobseeker/status/offer/all')}}" class="btn btn-block {{ $offer }}"> Offer Interview</a>
+
+        <div class="col-md-2 jobApp-tabs">
+            <a id="delivered" class="btn btn-block jaTabBtn {{ $delivered }}"><i class="fa fa-list-ul" aria-hidden="true"></i> @lang('home.delivered')</a>
+            <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}"><i class="fa fa-building-o" aria-hidden="true"></i> @lang('home.shortlisted')</a>
+            <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}"><i class="fa fa-calendar" aria-hidden="true"></i> @lang('home.interviews')</a>
+			<a id="offer" class="btn btn-block jaTabBtn {{ $offer }}"><i class="fa fa-ticket"></i> @lang('home.offered')</a>
+            <a id="offer" href="{{url('jobseeker/status/offer/all')}}" class="btn btn-block {{ $offer }}"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> @lang('home.Offers Interviews Company')</a>
+            <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> @lang('home.unsuccessful')</a>
+           
+
         </div>
         <div class="col-md-10">
             <div class="tab-content">

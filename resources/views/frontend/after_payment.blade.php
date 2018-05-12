@@ -48,25 +48,31 @@
                             <div class="col-sm-9 pnj-form-field">
                                 <input type="text" class="form-control" name="" placeholder="@lang('home.title')" value="{{ $userinfo->phoneNumber }}" disabled>
                             </div>
-                        </div>
+                        </div>							
+
                         <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.ordertitle')</label>
+                            <label class="control-label col-sm-3">@lang('home.orderdetailtitle')</label>
                            <div class="col-sm-9 pnj-form-field">
                             <input type="hidden" class="form-control"  name="order_title" placeholder="@lang('home.eamount')" value="{!! $order->orderBy !!}" >
-                                <input type="text" class="form-control"  placeholder="@lang('home.eamount')" value="{!! $order->orderBy !!}" disabled>
+							@if($order->category == 'Package Plan')
+								<input type="text" class="form-control"  placeholder="@lang('home.eamount')" value="@lang('home.'.$order->orderBy)" disabled>
+							@else
+								<input type="text" class="form-control"  placeholder="@lang('home.eamount')" value="{!! $order->orderBy !!}" disabled>
+							@endif
+                                
                             </div>
                         </div>
                          <div class="form-group">
-                            <label class="control-label col-sm-3">@lang('home.category')</label>
+                            <label class="control-label col-sm-3">@lang('home.ordercategory')</label>
                            <div class="col-sm-9 pnj-form-field">
                             <input type="hidden" class="form-control"  name="category" placeholder="@lang('home.eamount')" value="{!! $order->category !!}" >
-                                <input type="text" class="form-control"  placeholder="@lang('home.eamount')" value="{!! $order->category !!}" disabled>
+                                <input type="text" class="form-control"  placeholder="@lang('home.eamount')" value="@lang('home.'.$order->category)" disabled>
                             </div>
                         </div>
                        <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.amount')</label>
                             <div class="col-sm-9 pnj-form-field">
-                             <input type="text" class="form-control" placeholder="@lang('home.eamount')" value="{!! $order->amount !!} $" disabled>
+                             <input type="text" class="form-control" placeholder="@lang('home.eamount')" value="{!! $order->amount !!} @if($order->currency = 'KRW')￦ @else＄ @endif" disabled>
                                 <input type="hidden" class="form-control" name="amount"   placeholder="@lang('home.eamount')" value="{!! $order->amount !!}" >
                             </div>
                         </div>

@@ -7,6 +7,7 @@
 		<section id="company-box">
 			<div class="container">
 				<div class="row" style="background-color: white;">
+				<!-- <div class="row"> -->
 
 					<div class="follow-companies6" style="background:#57768a;color:#fff;;margin-bottom:20px;">
 		                    <h3 style="margin-left: 15px">@lang('home.Job Evaluation Matrix')</h3>
@@ -15,27 +16,28 @@
 		            	@if(sizeof($all_eva_cand) == 0)
 		            	<h3>@lang('home.No evaluation for this job')</h3>
 		            	@endif
-						<table class="table">
+						<section class="resume-box">
+						<table class="table evaluation-table">
 							@foreach($all_eva_cand as $cand)
 							<tr>
-								<th>Candidate</th>
-								<td>{{ $cand->firstName." ".$cand->lastName }}</td>
+								<th>@lang('home.Candidate')</th>
+								<td style="color:#2e6da4">{{ $cand->firstName." ".$cand->lastName }}</td>
 								<!-- geeting ans of candidates -->
 								<?php $eva_ans = DB::table('jcm_evaluation_answer')->where('candidate_id',$cand->candidate_id)->where('job_id',$cand->job_id)->get();?>
-								<th>Evaluation</th>
-								<td>{{ $cand->evaluation_title }}</td>
-								<th>Meet Qualification</th>
-								<td>{{ $cand->qualification }}</td>
+								<th>@lang('home.Evaluation')</th>
+								<td style="color:#2e6da4">{{ $cand->evaluation_title }}</td>
+								<th>@lang('home.Meet Qualification')</th>
+								<td style="color:#2e6da4">{{ $cand->qualification }}</td>
 								@foreach($eva_ans as $ans)
 								<th>{{ $ans->evaluation_factor }}</th>
-								<td>{{ $ans->point }}</td>
+								<td style="color:#2e6da4">{{ $ans->point }}</td>
 								@endforeach
-								<th>Total</th>
-								<td>{{$cand->total}}</td>
+								<th style="color:#f1b707">@lang('home.Total')</th>
+								<td style="color:#00c90a">{{$cand->total}}</td>
 							</tr>
 							@endforeach
 						</table>
-						
+						</section>
 					</div>
 				   
 				</div>

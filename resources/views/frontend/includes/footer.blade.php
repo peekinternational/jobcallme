@@ -83,9 +83,10 @@
             </div>
 
                <h5>
-               <div style="width:100%;overflow: visible;background:#695f47;border: 1px solid white; padding: 9px;">
-            <a style="color:white" href="{{ url('account/employer/job/new') }}">@lang('home.postjobnew')</a>
-            </div>
+               <a style="color:white" href="{{ url('account/employer/job/new') }}"><div style="width:100%;overflow: visible;background:#695f47;border: 1px solid white; padding: 9px;">
+            @lang('home.postjobnew')
+			<span style="font-size:5px;float:right;">▶</span>
+            </div></a>
            </h5>
 
         </div>
@@ -103,9 +104,10 @@
             </div>
 
                 <h5>
-               <div style="width:100%;overflow: visible;background:#5a6d5b;border: 1px solid white; padding: 9px;">
-                 <a style="color:white" href="{{ url('companies') }}">&nbsp;@lang('home.Companiesad')&nbsp;&nbsp;</a>
-               </div>
+               <a style="color:white" href="{{ url('companies') }}"><div style="width:100%;overflow: visible;background:#5a6d5b;border: 1px solid white; padding: 9px;">
+                 &nbsp;@lang('home.Companiesad')&nbsp;&nbsp;
+				 <span style="font-size:5px;float:right;">▶</span>
+               </div></a>
            </h5>
 
         </div>
@@ -124,9 +126,10 @@
             </div>
 
             <h5>
-               <div style="width:100%;overflow: visible;background:#f0ad4e;border: 1px solid white; padding: 9px;">
-            <a style="color:white" target="_blank" href="https://www.outsourcingok.com/">www.outsourcingok.com</a>
-                </div>
+               <a style="color:white" target="_blank" href="https://www.outsourcingok.com/"><div style="width:100%;overflow: visible;background:#f0ad4e;border: 1px solid white; padding: 9px;">
+            www.outsourcingok.com
+			<span style="font-size:5px;float:right;">▶</span>
+                </div></a>
            </h5>
             
         </div>
@@ -146,6 +149,12 @@
 					<option value="{{ url('picture-policy') }}">@lang('home.picture policy')</option>
 					<option value="{{ url('review-write') }}">@lang('home.review write')</option>
 					<option value="{{ url('video-chat-policy') }}">@lang('home.Video & Chat Policy')</option>
+					<option value="{{ url('write-resume') }}">@lang('home.Write resume')</option>
+					<option value="{{ url('self-introduction') }}">@lang('home.Self Introduction')</option>
+					<option value="{{ url('interview-strategy') }}">@lang('home.Interview Strategy')</option>
+					<option value="{{ url('increased-recruitment') }}">@lang('home.Increased Recruitment')</option>
+					<option value="{{ url('conformity-verification') }}">@lang('home.Conformity Verification')</option>
+					<option value="{{ url('active-communication') }}">@lang('home.Active Communication')</option>
 					<!-- <option value="{{ url('refund-policy') }}">@lang('home.Refund Policy')</option> -->
                     <option value="{{ url('account/register') }}">@lang('home.Login')</option>
                     <option value="{{ url('account/register') }}">@lang('home.Signup')</option>
@@ -154,11 +163,19 @@
 
                 </select>
             </div>
+<<<<<<< HEAD
+            <!-- <ul class="social-links" style="padding-top:15px">
+                <li><a href="https://facebook.com"><i class="fa fa-facebook-square"></i> </a> </li>
+                <li><a href="https://twitter.com"><i class="fa fa-twitter-square"></i> </a> </li>
+                <li><a href="https://linkedin.com"><i class="fa fa-linkedin-square"></i> </a> </li>
+            </ul> -->
+=======
             <!--<ul class="social-links" style="padding-top:15px">
                 <li><a href="https://facebook.com"><i class="fa fa-facebook-square"></i> </a> </li>
                 <li><a href="https://twitter.com"><i class="fa fa-twitter-square"></i> </a> </li>
                 <li><a href="https://linkedin.com"><i class="fa fa-linkedin-square"></i> </a> </li>
             </ul>-->
+>>>>>>> f63769e61a4056ee42a3a47994e1ade44f664292
 
         </div>
     
@@ -185,8 +202,9 @@
         <ul>
             <li>@lang('home.CustomerService1')</li>
 			<li>@lang('home.CustomerService2')</li>
-            <!-- <li>@lang('home.companyaddr1')</li>
-			<li>@lang('home.companyaddr2')</li> -->
+            <li>@lang('home.companyaddr1')</li>
+			<li>@lang('home.companyaddr2')</li>
+			<li>@lang('home.companyaddr3')</li>
             <li>@lang('home.ceo1')</li> 
 			<li>@lang('home.ceo2')</li>
             <li>Copyrihgt &copy; 2017 Jobcallme Co.,Ltd.(RN 201-86-41011)</li>                

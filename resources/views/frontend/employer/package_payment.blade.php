@@ -14,15 +14,8 @@
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-6" style="display:-webkit-box;display:-ms-inline-flexbox;">
-                <div style="padding-left: 22px;padding-right: 13px;">
-                 
-                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.packagepaypal') !!}" >
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary btn-lg" name="save">@lang('home.PayPal')</button> 
-                            </form>
-                   
-                </div>
-                  <div class="" style="padding-left: 22px;padding-right: 13px;" >
+                
+                  <div class="" style="padding-left: 0px;padding-right: 13px;" >
                    
                         <form class="form-horizontal" method="get" id="" role="form" action="{{ action('frontend\Employer@cashpackage') }}" >
                             {{ csrf_field() }}
@@ -43,6 +36,16 @@
                         <a href='javascript:void(0)'  class="btn btn-info btn-lg nicePay">@lang('home.NicePay')</a>
                     </form>
                 </div>
+
+				<div style="padding-left: 22px;padding-right: 13px;">
+                 
+                        <form class="form-horizontal" method="POST" id="payment-form" role="form" action="{!! URL::route('addmoney.packagepaypal') !!}" >
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-primary btn-lg" name="save" title="@lang('home.paypal-text')">@lang('home.PayPal')</button> 
+                            </form>
+                   
+                </div>
+
                 </div>
             </div>
         </div>

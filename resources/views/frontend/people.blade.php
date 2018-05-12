@@ -335,7 +335,14 @@
             <div class="row">
               @foreach($data as $people)
               <?php
-              $pImage = url('profile-photos/profile-logo.jpg');
+				if($people->genderpeople == 'Male' or $people->genderpeople == 'Man'){
+					$pImage = url('profile-photos/profile-logo.jpg');
+				}elseif($people->genderpeople == 'Female'){
+					$pImage = url('profile-photos/profile-logo2.jpg');
+				}else{
+					$pImage = url('profile-photos/profile-logo3.jpg');
+				}
+              //$pImage = url('profile-photos/profile-logo.jpg');
               if($people->profilePhoto != '' && $people->profilePhoto != NULL){
                 $pos = strpos($people->profilePhoto,"ttp");
                 if($pos == 1)
@@ -364,18 +371,27 @@
                 <div class="fp-item" style="height: 256px;">
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     <div class="fp-img">
+
                     @if(Session::has('jcmUser'))
-                      <img src="@if($check) {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif">
+                      <img src="@if($check) {{ $pImage }} @else @if($people->genderpeople == 'Male' or $people->genderpeople == 'Man') {{url('profile-photos/profile-logo.jpg')}} @elseif($people->genderpeople == 'Female') {{url('profile-photos/profile-logo2.jpg')}} @else {{url('profile-photos/profile-logo3.jpg')}} @endif @endif">
                       @else
-                      <img src=" {{ url('profile-photos/profile-logo.jpg ')}}">
+						@if($people->genderpeople == 'Male' or $people->genderpeople == 'Man') 
+							<img src=" {{ url('profile-photos/profile-logo.jpg ')}}">
+						@elseif($people->genderpeople == 'Female') 
+							<img src=" {{ url('profile-photos/profile-logo2.jpg ')}}">
+						@else
+							<img src=" {{ url('profile-photos/profile-logo3.jpg ')}}">
+						@endif
+                      
                       @endif
+
                     </div>
                     <div class="fp-item-details" style="height: 95px;">
                     
                     @if(Session::has('jcmUser'))
-                      @if($check)<p>{!! $people->firstName.' '.$people->lastName !!}</p>@else <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p> @endif
+                      @if($check)<p>{!! $people->firstName.' '.$people->lastName !!}</p>@else <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i> <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i></p> @endif
                      @else
-                     <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p>
+                     <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i> <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px;"></i></p>
                      @endif
                       <p>@lang('home.'.JobCallMe::categoryTitle($people->industry))</p>
                       <p>@lang('home.'.JobCallMe::cityName($people->city)), @lang('home.'.JobCallMe::countryName($people->country))</p>

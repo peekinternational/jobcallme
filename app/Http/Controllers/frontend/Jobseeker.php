@@ -984,7 +984,7 @@ class Jobseeker extends Controller{
 				$companyPhoto = url('compnay-logo/'.$company->companyLogo);
 
 				$vhtml .= '<li id="apply-'.$rec->applyId.'">';
-					$vhtml .= '<span class="ja-applyDate">'.date('M d, Y',strtotime($rec->applyTime)).' <a href="javascript:;" class="application-remove" title="Remove/Cancel Application" onclick="removeApplication('.$rec->applyId.')">&times;</a></span>';
+					$vhtml .= '<span class="ja-applyDate">'.date('Y-m-d',strtotime($rec->applyTime)).' <a href="javascript:;" class="application-remove" title="Remove/Cancel Application" onclick="removeApplication('.$rec->applyId.')">&times;</a></span>';
 					$vhtml .= '<img src="'.$companyPhoto.'" class="ja-item-img">';
 					$vhtml .= '<div class="ja-item-details">';
 						$vhtml .= '<p class="ja-item-title"><a href="'.url('jobs/'.$rec->jobId).'" >'.$rec->title.'</a></p>';
@@ -994,14 +994,14 @@ class Jobseeker extends Controller{
 							$interviewUrl = url('account/jobseeker/interview/'.$getInterview->interviewId);
 							$vhtml .= '<p class="ja-item-status"><a href="'.$interviewUrl.'"><i class="fa fa-'.$fontIcon.'"></i> '.trans('home.'.ucfirst($appType)).'</a></p>';
 						}else{
-							$vhtml .= '<p class="ja-item-status"><i class="fa fa-'.$fontIcon.'"></i> '.ucfirst($appType).'</p>';
+							$vhtml .= '<p class="ja-item-status"><i class="fa fa-'.$fontIcon.'"></i> '.trans('home.'.ucfirst($appType)).'</p>';
 						}
 					$vhtml .= '</div>';
 				$vhtml .= '</li>';
 			}
 			$vhtml .= '</ul>';
 		}else{
-			$vhtml = '<div class="col-md-12 ea-no-record">No records found.</div>';
+			$vhtml = '<div class="col-md-12 ea-no-record">'.trans('home.No records found.').'</div>';
 		}
 		echo $vhtml;
 	}
@@ -1088,13 +1088,13 @@ class Jobseeker extends Controller{
                     DB::table('jcm_download')->insert($input);
                     DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
 					$user = DB::table('jcm_users')->where('userId',$id)->first();
-					$name= $user->firstName;
-						
+					$name= $user->firstName .$user->lastName;
+					$ExName = iconv('UTF-8', 'EUC-KR', $name);	
 					$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
 					$resume = $this->userResume($id);
 				
 					$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
-					return $pdf->download($name.'_cv.pdf');
+					return $pdf->download($ExName.'_cv.pdf');
 				}
 				
 		}

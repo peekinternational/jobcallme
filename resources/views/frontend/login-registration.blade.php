@@ -70,8 +70,13 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 </div>
                
             </form>
+
+            <div class="col-md-12 sns-box">
+                <!-- <p>@lang('home.loginusing')</p>
+
             <div class="col-md-12 sns-box" style="display:none">
                 <p>@lang('home.loginusing')</p>
+
                 <button class="fb-btn">
                     <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
                 </button> 
@@ -80,13 +85,14 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 </button>
                 <button class="in-btn">
                     <a style="color:white" href="{{url('/lnApi')}}">LINKEDIN</a>
-                </button>
+                </button> -->
                 <!--<button class="insta-btn">
                     <a style="color:white" href="{{url('/instaApi')}}">Instagram</a>
                 </button>-->
+				<p class="text-center show-loginBox" style="color:#2e6da4"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.videochat_text')</p>
             </div>
 			<div>
-				<p class="text-center show-loginBox" style="color:#2e6da4">※ @lang('home.singupinfo')</p>
+				<!-- <p class="text-center show-loginBox" style="color:#2e6da4">※ @lang('home.singupinfo')</p> -->
 			</div>
         </div> 		
 
@@ -103,7 +109,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 @endif
                 @if(Session::has('fNotice'))
                     <div class="alert alert-danger">
-                        {{Session::get('fNotice')}} 
+                        @lang('home.'.Session::get('fNotice')) 
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -150,7 +156,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                             <option value="{{ $country->id }}">@lang('home.'.$country->name)</option>
                         @endforeach
                     </select>
-					<p class="terms-condition" style="padding-top:5px;color:#2e6da4;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.alphabetical order')</p>
+					<!-- <p class="terms-condition" style="padding-top:5px;color:#2e6da4;"><img src="../frontend-assets/images/info-icon.png"> @lang('home.alphabetical order')</p> -->
                 </div>
                 <div class="form-group">
                     <select class="form-control select2 job-state" name="state"><option value="">@lang('home.s_state')</option></select>
@@ -177,8 +183,13 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <button id="regbtn" type="submit" class="btn btn-primary btn-block" name="register">@lang('home.register')</button>
                 <p class="text-center show-loginBox">@lang('home.alreadyaccount') <a href="javascript:;" onclick="switchPage('login')">@lang('home.loginhere')</a></p>
 
+
+                <div class="col-md-12 sns-box"> 
+                    <!-- <p>@lang('home.loginusing')</p> 
+
                 <div class="col-md-12 sns-box" style="display:none"> 
                     <p>@lang('home.loginusing')</p> 
+
                     <button class="fb-btn">
                         <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
                     </button> 
@@ -187,16 +198,16 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     </button>
                     <button class="in-btn">
                         <a style="color:white" href="{{url('/lnApi')}}">LINKEDIN</a>
-                    </button>
-					 
+                    </button> -->
+				    <p class="text-center show-loginBox" style="color:#2e6da4"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.videochat_text')</p>
                 </div>
 				<div style="padding-top:20px">
-				   <p class="text-center show-loginBox" style="color:#2e6da4"><img src="../frontend-assets/images/info-icon.png">@lang('home.singupinfo')</p>
+				   <!-- <p class="text-center show-loginBox" style="color:#2e6da4"><img src="../frontend-assets/images/info-icon.png">@lang('home.singupinfo')</p> -->
 				</div>
             </form>
         </div>
 		<div class="col-md-12" style="padding-top:20px">
-				<p class="text-center show-loginBox" style="color:#2e6da4"><img src="../frontend-assets/images/info-icon.png"> @lang('home.videochat_text')</p>
+				<!-- <p class="text-center show-loginBox" style="color:#2e6da4"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.videochat_text')</p> -->
 			</div>
     </div>
 </section>

@@ -12,7 +12,7 @@
             	<h2 style="color:#716a6a">{!!$currentjob->title!!}</h2>
             <div class="bgblue" align="center">
                 <h3>@lang('home.Additional Requirements - Submit an Online Questionnaires')</h3>
-                <p>You are required to <strong>submit an online questionaire</strong> schedule by employer with in {{$quesdata->submission_date}} <strong>@lang('home.days')</strong></p>
+                <p>You are required to <strong>submit an online questionaire</strong> schedule by employer within {{$quesdata->submission_date}} <strong>@lang('home.days')</strong></p>
                 <button class="btn btn-info" id="next"> @lang('home.Start Now')</button>
             </div>
                

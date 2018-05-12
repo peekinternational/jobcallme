@@ -88,7 +88,7 @@
                         <div class="col-md-12 pnj-form-field">
 								  <div class="form-group">
                                    <div class=" pnj-form-field">
-                                  <input type="text" class="form-control" name="exmaz" placeholder="@lang('home.skills')">
+                                  <input type="text" class="form-control" name="exmaz" placeholder="@lang('home.filterskills')">
                               </div>
                            </div>
 					   </div>

@@ -8,28 +8,33 @@
 		<div class="row">
 		<div class="col-md-12">
 			<div class="header">
-				Reviews related to job
+				@lang('home.Reviews related to job')
 			</div>
 			<div class="body">
 				<table class="table">
 					<thead>
 						<tr>
-							<th>Applicant</th>
-							<th>Review</th>
-							<th>Review Date</th>
-							<th>Action</th>
+
+							<th width="70px">@lang('home.Applicants')</th>
+							<th>@lang('home.Review')</th>
+							<th>@lang('home.Review Date')</th>
+							<th width="50px">@lang('home.Action')</th>
+
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($data as $review)
 						<tr>
 							<td><a href="{{ url('account/employer/application/candidate/'.$review->userId).'?jobId='.$review->job_id }}">{{$review->firstName." ".$review->lastName}}</a></td>
-							<!--<td>{{ substr($review->comment,0,100) }}</td>-->
-							<!--<td>{{ date('d M Y h:i',strtotime($review->comment_date)) }}</td>-->
+
 							<td>{{ $review->comment }}</td>
-							<td>{{ date('d M Y h:i',strtotime($review->comment_date)) }}</td>
-							<td><i class="fa fa-edit pointer" onclick="editreview(this,{{$review->comment_id}},'{{ $review->comment}}')"></i> <i class="fa fa-remove pointer" onclick="delreview(this,{{$review->comment_id}})"></i></td>
-						</tr>
+							<td>@if(app()->getLocale() == "kr")
+											{{ date('Y-m-d h:i',strtotime($review->comment_date)) }}
+										@else      
+											{{ date('d M Y h:i',strtotime($review->comment_date)) }}
+										@endif</td>
+							<td><a href="javascript:;" onclick="editreview(this,{{$review->comment_id}},'{{ $review->comment}}')" data-toggle="tooltip" data-original-title="@lang('home.Edit')"><i class="fa fa-edit pointer"></i></a> <a href="javascript:;"  onclick="delreview(this,{{$review->comment_id}})" data-toggle="tooltip" data-original-title="@lang('home.Delete')"><i class="fa fa-remove pointer"></i></a></td>
+
 						@endforeach
 					</tbody>
 				</table>
@@ -45,17 +50,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Review</h4>
+        <h4 class="modal-title">@lang('home.Edit employment Review')</h4>
       </div>
       <div class="modal-body">
       	<form id="reviewform">
       		<input type="hidden" name="id" id="review_id">
       		<textarea name="review" id="review" rows="5" class="form-control"></textarea><br>
-        	<button class="btn btn-primary" type="button" id="update-btn">Update</button>
+        	<button class="btn btn-primary" type="button" id="update-btn">@lang('home.Update employment Review')</button>
       	</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('home.Close')</button>
       </div>
     </div>
 
@@ -99,5 +104,12 @@ $('#update-btn').click(function(){
 		}
 	})
 })
+
+
+$(document).ready(function(){
+    $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
+    
+})
+
 </script>
 @endsection

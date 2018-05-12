@@ -9,24 +9,24 @@
 				<div class="col-md-12">
 				 <section class="resume-box" id="academic">
                         <a class="btn btn-primary r-add-btn" onclick="addAcademic()"><i class="fa fa-plus"></i> </a>
-                        <h4> @lang('home.Test/Questionnaires')</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Test/Questionnaires')</h4>
                         <?php //print_r($resume); ?>
                         <table class="table questionr-table">
                             <thead>
                                 <tr>
                                     <th>@lang('home.Questionnaire')</th>
-                                    <th>@lang('home.QueType')</th>
-                                    <th>@lang('home.Submitted in')</th>
-                                    <th>@lang('home.Late Submission')</th>
-                                    <th>@lang('home.Shuffle')</th>
-                                    <th>@lang('home.Actions')</th>
+                                    <th width="80px">@lang('home.QueType')</th>
+                                    <th width="50px">@lang('home.Submitted in')</th>
+                                    <th width="100px">@lang('home.Late Submission')</th>
+                                    <th width="100px">@lang('home.Shuffle')</th>
+                                    <th width="50px">@lang('home.Actions')</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach($questionaires as $question)
                                 <tr id="{{$question->ques_id}}">
                                     <td>{{ $question->title }}</td>
-                                    <td>@lang('home.'.$question->type)</td>
+                                    <td>{{$question->type}}</td>
                                     <td>{{ $question->submission_date }}</td>
                                     <td>@lang('home.Que'.$question->accept_late_submission)</td>
                                     <td>@lang('home.Que'.$question->shuffle_questions)</td>

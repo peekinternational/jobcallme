@@ -27,6 +27,7 @@ if($upskill->country != 0){
                     {{ csrf_field() }}
                     <input type="hidden" name="skillId" value="{{ $upskill->skillId }}">
                     <input type="hidden" name="prevIcon" value="{{ $upskill->upskillImage }}">
+					<input type="hidden" name="paycurrency" value="KRW">
                     <h3>@lang('home.basicinformation')</h3>
 
 			               	@if($upskill->skillId)
@@ -56,10 +57,16 @@ if($upskill->country != 0){
                                             <li>@lang('home.adcost') --><!-- {!! $payment->tag2!!} --><!-- </li>
                                         </ul> -->
 										
-                                        <div class="credits b" style="color:#fff;font-size: 13px;padding-top:8px;">
+                                        <div class="credits b" style="color:#fff;font-size: 13px;padding-top:3px;">
 										<span class="text-success" style="color:#fff;">
 											<span class="text-success" style="color:#fff;"><input type="radio" name="gender" id="up_kr" value="kr" checked="checked"> @lang('home.paykorean')</span>
-											<span class="text-success" style="color:#fff;padding-left:25px;"><input type="radio" name="gender" id="up_us" value="us" style="padding-left:25px"> @lang('home.US$')</span>
+											
+										</span>
+										
+									<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
+									</div>
+									<div class="credits b text-left" style="color:#fff;font-size: 13px;padding-top:8px;">										
+											<span class="text-success" style="color:#fff;"><input type="radio" name="gender" id="up_us" value="us"> @lang('home.US$')</span>
 										</span>
 										
 									<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
@@ -72,8 +79,8 @@ if($upskill->country != 0){
                             </li>
 							
 							@foreach($uppayment as $key=> $payment)
-
-								@if($payment->title == "Seminar · Exhibition · Webinar")
+														
+								@if($payment->title == "Seminar · Fair · Exhibition")
                             <!----><li style="position:relative;background:#6c6148;">
 								@endif
 								@if($payment->title == "Forum · Conference")
@@ -103,8 +110,11 @@ if($upskill->country != 0){
                                         </ul> -->
 										
                                         <div class="credits b" style="color:#fff;font-size: 13px;padding-top:10px;">
-										<span class="text-success" style="color:#fff;">@lang('home.upskill-pay-text')</span>
-										<span class="text-success" style="color:#fff;padding-left:25px;">@lang('home.pay_cost') : </span><span class="text-success" style="color:#fff;padding-left:0px;" id="up_text{{number_format($key)}}"></span>&nbsp;/@lang('home.days')
+										<span class="text-success" style="color:#fff;">@lang('home.upskill-pay-text')</span>										
+									<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
+									</div>
+									<div class="credits b" style="color:#fff;font-size: 13px;padding-top:10px;">										
+										<span class="text-success" style="color:#fff;">@lang('home.pay_cost') : </span><span class="text-success" style="color:#fff;padding-left:0px;" id="up_text{{number_format($key)}}"></span>&nbsp;/@lang('home.days')
 									<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
 									</div>
                                     </label>
@@ -352,26 +362,26 @@ if($upskill->country != 0){
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.sdate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" id="firstDate" name="startDate" onkeypress="return false;" value="{{ $upskill->startDate }}">
+                                <input type="text" class="form-control date-picker" id="firstDate" name="startDate" onkeypress="return false;" value="@if($upskill->startDate == '0000-00-00') @else {{ $upskill->startDate }} @endif">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.edate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" id="second" name="endDate" onkeypress="return false;" value="{{ $upskill->endDate }}">
+                                <input type="text" class="form-control date-picker" id="second" name="endDate" onkeypress="return false;" value="@if($upskill->endDate == '0000-00-00') @else {{ $upskill->endDate }} @endif">
                             </div>
                         </div>
 
 						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.adsdate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" id="adfirstDate" name="adstartDate" onkeypress="return false;" value="{{ $upskill->adstartDate }}">
+                                <input type="text" class="form-control date-picker" id="adfirstDate" name="adstartDate" onkeypress="return false;" value="@if($upskill->adstartDate == '0000-00-00') @else {{ $upskill->adstartDate }} @endif">
                             </div>
                         </div>
 						<div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.adedate')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control date-picker" id="adsecond" name="adendDate" onkeypress="return false;" value="{{ $upskill->adendDate }}">
+                                <input type="text" class="form-control date-picker" id="adsecond" name="adendDate" onkeypress="return false;" value="@if($upskill->adendDate == '0000-00-00') @else {{ $upskill->adendDate }} @endif">
                             </div>
                         </div>
 
@@ -724,9 +734,11 @@ $(document).ready(function(){
 			if(i == 0 || i == 2){
 				$('#up_text'+i).html('US$ '+simplearray[i].price+'.00')
 				//alert(jArray[i].amount);
+				$('.upskill-form input[name="paycurrency"]').val('USD');
 			}else{
-				$('#up_text'+i).html('US$ '+simplearray[i].price+'0')
+				$('#up_text'+i).html('US$ '+simplearray[i].price+'00')
 				//alert(jArray[i].amount);
+				$('.upskill-form input[name="paycurrency"]').val('USD');
 			}
 
          }
@@ -738,6 +750,7 @@ $(document).ready(function(){
     for(var i=0;i<simplearray.length;i++){
      $('#up_text'+i).html('￦ '+number_format(simplearray[i].price*1100) +'')
        // alert(jArray[i].amount*1100);
+	 $('.upskill-form input[name="paycurrency"]').val('KRW');
       }
     }
 }) ;

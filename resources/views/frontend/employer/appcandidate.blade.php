@@ -26,7 +26,7 @@
             <li><a data-toggle="tab" class='openConversation' href="#menu1" ><i class="fa fa-comments" aria-hidden="true"></i> @lang('home.conversation')</a></li>
             <li><a data-toggle="tab" href="#menu2"><i class="fa fa-clipboard" aria-hidden="true"></i> @lang('home.questionnaires')</a></li>
             <li><a data-toggle="tab" href="#evaluation"><i class="fa fa-star" aria-hidden="true"></i> @lang('home.evaluation')</a></li>
-            <li><a data-toggle="tab" href="#menu4"><i class="fa fa-calendar" aria-hidden="true"></i> @lang('home.interviews')</a></li>
+            <li><a data-toggle="tab" href="#menu4"><i class="fa fa-calendar" aria-hidden="true"></i> @lang('home.resumeinterviews')</a></li>
         </ul>
         <div class="row">
             <div class="col-md-9">
@@ -44,10 +44,10 @@
                            <table class="table">
                                <thead>
                                    <tr>
-                                       <th>@lang('home.evaNo')</th>
+                                       <th width="50px">@lang('home.evaNo')</th>
                                        <th>@lang('home.Factor')</th>
                                        <th>@lang('home.Rating')</th>
-                                       <th>@lang('home.Score')</th>
+                                       <th width="50px">@lang('home.Score')</th>
                                    </tr>
                                </thead>
                                <tbody>
@@ -105,7 +105,7 @@
                                     <div>
                                         <img src="{{ $pImage}}" style="width: 100%;height:221px;">
                                     </div>
-                                    <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">$applicant->firstName</h3>
+                                    <h3 class="text-center hidden-md hidden-lg" style="font-weight: 600">{{ $applicant->firstName}}{{ $applicant->lastName}}</h3>
                                     <p class="text-center hidden-md hidden-lg jp-profession-heading">@lang('home.'.JobCallMe::categoryTitle($applicant->industry))</p>
                                     <a href="#" class="btn btn-primary btn-block jp-contact-btn">@lang('home.CONTACT DETAILS')</a>
                                     <div class="" style="text-align:center">
@@ -113,9 +113,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9 personal-info-right">
-                                    <h3 class="hidden-sm hidden-xs">{{$applicant->firstName}} {{$applicant->lastName}} <span class="pull-right"><button class="btn btn-primary" onclick="$('#reviewModel').modal('show')">Write Review</button></span></h3>
+                                    <h3 class="hidden-sm">{{$applicant->firstName}} {{$applicant->lastName}} <span class="pull-right"><button class="btn btn-success" onclick="$('#reviewModel').modal('show')">@lang('home.Resume Write Review')</button></span></h3>
                                     <p class="jp-profession-heading hidden-sm hidden-xs">@lang('home.'.JobCallMe::categoryTitle($applicant->industry))</p>
-                                    <p><span class="pi-title">@lang('home.experiance'):</span>@lang('home.'.$applicant->experiance)</p>
+                                    <p style="padding-top:15px"><span class="pi-title">@lang('home.experiance'):</span>@lang('home.'.$applicant->experiance)</p>
                                     <p><span class="pi-title">@lang('home.salary'):</span> @if($applicant->currency == 'KRW'){{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',0).' '.$applicant->currency }}@endif @if($applicant->currency != 'KRW'){{ number_format($applicant->currentSalary != '' ? $applicant->currentSalary : '0',2).' '.$applicant->currency }}@endif  </p>
                                     <p><span class="pi-title">@lang('home.location'):</span> @lang('home.'.JobCallMe::cityName($applicant->city)), @lang('home.'.JobCallMe::countryName($applicant->country))</p>
                                     <div class="professional-summary">
@@ -422,34 +422,36 @@
                                             <input type="hidden" name="interviewId" value="{{ $interviewData->interviewId }}">
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <label class="control-label col-md-4 text-right">Date to</label>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control date-picker" name="toDate" value="{{ $interviewData->toDate }}" onkeypress="return false">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-4 text-right">Date from</label>
+                                        <label class="control-label col-md-4 text-right">@lang('home.Date from')</label>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control date-picker" name="fromDate" value="{{ $interviewData->fromDate }}" onkeypress="return false">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-4 text-right">Time to</label>
+									<div class="form-group">
+                                        <label class="control-label col-md-4 text-right">@lang('home.Date to')</label>
                                         <div class="col-md-6">
-                                            <select name="timeto" class="form-control">
-                                                @foreach(JobCallMe::timeArray() as $time)
-                                                    <option value="{!! $time !!}" @if($time == $interviewData->time_to) selected @endif>{!! $time !!}</option>
-                                                @endforeach
-                                           </select>
+                                            <input type="text" class="form-control date-picker" name="toDate" value="{{ $interviewData->toDate }}" onkeypress="return false">
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <label class="control-label col-md-4 text-right">Time from</label>
+                                        <label class="control-label col-md-4 text-right">@lang('home.Time from')</label>
                                         <div class="col-md-6">
                                             <select name="timefrom" class="form-control">
                                                 @foreach(JobCallMe::timeArray() as $time)
                                                     <option value="{!! $time !!}" @if($time == $interviewData->time_from) selected @endif>{!! $time !!}</option>
+                                                @endforeach
+                                           </select>
+                                        </div>
+                                    </div>
+									<div class="form-group">
+                                        <label class="control-label col-md-4 text-right">@lang('home.Time to')</label>
+                                        <div class="col-md-6">
+                                            <select name="timeto" class="form-control">
+                                                @foreach(JobCallMe::timeArray() as $time)
+                                                    <option value="{!! $time !!}" @if($time == $interviewData->time_to) selected @endif>{!! $time !!}</option>
                                                 @endforeach
                                            </select>
                                         </div>
@@ -479,7 +481,7 @@
                                         <label class="control-label col-md-4 text-right">&nbsp;</label>
                                         <div class="col-md-6">
                                        <!-- <a href="{{ url('account/employer/application?show=interview') }}" class="btn btn-primary pull-right">@lang('home.update')</a>-->
-                                          <button type="submit" name="save" class="btn btn-primary pull-right">@lang('home.update')</button>
+                                          <button type="submit" name="save" class="btn btn-primary pull-right">@lang('home.candidateupdate')</button>
                                         <!-- <button type="button" class="btn btn-default" onclick="$('.ea-scheduleInerview').fadeOut()">Cancel</button> !-->
                                         </div>
                                     </div>
@@ -519,7 +521,7 @@
                                             
                                             ?>
                         <div class="col-md-12 sr-item">
-					        <div class="col-md-4">
+					        <div class="col-md-4 applicant-SimilarImg">
                                  @if(Session::has('jcmUser'))
                                 <img src="@if($check) {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif" style="width: 70px;height:75px !important;">
                                 @else
@@ -528,7 +530,7 @@
 							</div>
 							<div class="col-md-8 sp-item">
                               @if(Session::has('jcmUser'))
-                                    @if($check)<p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>@else <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></p> @endif
+                                    @if($check)<p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></p>@else <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></a></p> @endif
                                     @else
                                     <p><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true"></i> <i class="fa fa-circle-o" aria-hidden="true"></i></a></p>
                                     @endif
@@ -548,13 +550,13 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Review on Resume</h4>
+            <h4 class="modal-title"><img src="/frontend-assets/images/resume_icon3.png"> @lang('home.Notice of employment result or Review')</h4>
           </div>
           <div class="modal-body">
            <form id="review-form">
              <div class="form-group">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-               <label for="review">Review:</label>
+               <label for="review" style="padding-left:10px">@lang('home.Review or Notice of employment result'):</label>
                <textarea type="review" name="comment" rows="5" class="form-control" id="review"></textarea>
                <input type="hidden" name="jobseeker_id" value="{{$applicant->userId}}">
                <input type="hidden" name="job_id" value="<?php echo $_GET['jobId']; ?>">
@@ -563,8 +565,8 @@
            </form>
           </div>
           <div class="modal-footer">
-             <button type="submit" id="btn-review" class="btn btn-success">Submit</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+             <button type="submit" id="btn-review" class="btn btn-success">@lang('home.resumereivewSubmit')</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">@lang('home.Cancel')</button>
           </div>
         </div>
     </div>
@@ -590,7 +592,7 @@
                 if($.trim(response) != '1'){
                     toastr.error(response, '', {timeOut: 5000, positionClass: "toast-bottom-center"});
                 }else{
-                    toastr.success('@lang("home.Action perform successfully")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                    toastr.success('@lang("home.Action perform successfully2")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
                     //$("li:first").addClass("active");
                 }
                 $('.interview button[name="save"]').prop('disabled',false);
@@ -606,7 +608,7 @@
         data:data,
         success:function(res){
             if(res == 1){
-                toastr.success('review submit successfully');
+                toastr.success('@lang("home.review submit successfully")');
                 $('#review-form #review').val('');
                 $('#reviewModel').modal('hide');
             }

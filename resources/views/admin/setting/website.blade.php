@@ -13,7 +13,7 @@ if(file_exists('/website/'.$web['webFavicon'])){
     $favicon = url('/website/'.$favicon['webFavicon']);
 }
 ?>
-
+?>
     <div class="layout-content">
         <div class="layout-content-body">
             <div class="title-bar">
@@ -114,7 +114,6 @@ if(file_exists('/website/'.$web['webFavicon'])){
 <script type="text/javascript">
 function getFileName(obj,aClass){
     var vValue = $(obj).val();
-   // alert(vValue);
     vValue = vValue.replace("C:\\fakepath\\",'');
     $('.'+aClass).val(vValue);
 }

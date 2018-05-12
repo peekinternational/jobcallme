@@ -7,8 +7,8 @@
 			<div class="container">
 			<div class="row">
 
-			<div class="follow-companies6" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
-                    <h3 style="margin-left: 15px">@lang('home.APPLICATION')</h3>
+			<div class="col-md-12 follow-companies6" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
+                    <h3 style="margin-left: 15px">@lang('home.Facebook Careers Tab')</h3>
 				</div>
 
 

@@ -21,7 +21,7 @@ if($user->profilePhoto != ''){
 	<div class="container">
 
 	<div class="follow-companies5" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
-					<h3 style="margin-left: 15px">@lang('home.resume')</h3>
+					<h3 style="margin-left: 15px">@lang('home.resume') <span style="font-size:11px;padding-left:30px;"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.If you do not have personal resume information with final education information, you will not be able to register for the resume.')</span></h3>
 				</div>
 
 		<div class="row">
@@ -54,7 +54,7 @@ if($user->profilePhoto != ''){
 								<p><span class="pi-title">@lang('home.email'):</span>  {{ $user->email }}</p>
 								<p><span class="pi-title">@lang('home.mobile'):</span>  {{ $user->phoneNumber }}</p>
 								<p><span class="pi-title">@lang('home.cnic'):</span>  {{ $meta->cnicNumber }}</p>
-								<p><span class="pi-title">@lang('home.address'):</span>  {!! $meta->address !!}} @lang('home.'.JobCallMe::cityName($user->city)) ,@lang('home.'.JobCallMe::countryName($user->country))</p>
+								<p><span class="pi-title">@lang('home.address'):</span>  {!! $meta->address !!} @lang('home.'.JobCallMe::cityName($user->city)) ,@lang('home.'.JobCallMe::countryName($user->country))</p>
 							 </div>
 							<div class="col-md-9 personal-info-right">
 								<h3 class="hidden-sm hidden-xs">{{ $user->firstName.' '.$user->lastName }}</h3>
@@ -218,7 +218,7 @@ if($user->profilePhoto != ''){
 							 <div class="form-group">
 								<label class="control-label col-md-3 text-right">@lang('home.education') <span style="color:red">*</span></label>
 								<div class="col-md-6">
-									<select class="form-control" name="education">                                    
+									<select class="form-control" name="education" required>                                    
 										<option value="">@lang('home.degreeLevel-text')</option>
 										<option value="highschool" {{ $meta->education == 'highschool' ? 'selected="selected"' : '' }}>@lang('home.highschool')</option>
 										<option value="college" {{ $meta->education == 'college' ? 'selected="selected"' : '' }}>@lang('home.college')</option>
@@ -1042,10 +1042,10 @@ if($user->profilePhoto != ''){
 								<label class="control-label col-md-3 text-right">@lang('home.type') <span style="color:red">*</span></label>
 								<div class="col-md-6">
 									<select class="form-control input-sm select2" name="type">
-										<option value="@lang('home.academic')">@lang('home.projectacademic')</option>
-										<option value="@lang('home.academicsearch')">@lang('home.projectacademicacademicsearch')</option>
-										<option value="@lang('home.professional')">@lang('home.projectacademicprofessional')</option>
-										<option value="@lang('home.professionalsearch')">@lang('home.projectacademicprofessionalsearch')</option>
+										<option value="@lang('home.projectacademic')">@lang('home.projectacademic')</option>
+										<option value="@lang('home.projectacademicacademicsearch')">@lang('home.projectacademicacademicsearch')</option>
+										<option value="@lang('home.projectacademicprofessional')">@lang('home.projectacademicprofessional')</option>
+										<option value="@lang('home.projectacademicprofessionalsearch')">@lang('home.projectacademicprofessionalsearch')</option>
 										
 									</select>
 								</div>
@@ -1369,7 +1369,7 @@ if($user->profilePhoto != ''){
 											<p class="rd-title">@lang('home.Militaryendyear') : {!! $preference->militaryendyear !!}</p>
 											<p class="rd-title">@lang('home.Militaryendmonth') : @lang('home.'.$preference->militaryendmonth)</p>
 											<p class="rd-title">@lang('home.Military type') : @lang('home.'.$preference->militarytype)</p>
-											<p class="rd-title">{!! $resumeId !!}</p>
+											<p class="rd-title">@lang('home.Military Classes') : @lang('home.'.$preference->militaryclasses)</p>
 
 											
 										</div>
@@ -2462,7 +2462,7 @@ if($user->profilePhoto != ''){
 							<span class="bell">
 								<i class="fa fa-bell fa-3x"></i>
 								<span class="badge" id="reviewbell">{{ $totalReview }}</span>
-								Reviews On Resume 
+								@lang('home.Reviews On Resume') 
 							</span>
 							
 							<span class="pull-right"><button onclick="changebtn(this)" class="btn btn-primary" style="border-radius: 50%;box-shadow: 0px 1px 13px rgba(0,0,0,0.5)"> <i class="fa fa-plus"></i> </button></span>
@@ -2502,7 +2502,7 @@ if($user->profilePhoto != ''){
 							<span class="bell">
 								<i class="fa fa-bell fa-3x"></i>
 								<span class="badge" id="offerbell">{{ count($offers) }}</span>
-								Offer Interviews
+								@lang('home.Offer Interviews')
 							</span>
 							<span class="pull-right"><button onclick="changeoffer(this)" class="btn btn-primary" style="border-radius: 50%;box-shadow: 0px 1px 13px rgba(0,0,0,0.5)"> <i class="fa fa-plus"></i> </button></span>
 							
@@ -2535,7 +2535,7 @@ if($user->profilePhoto != ''){
 				</div>
 				<div class="col-md-3 hidden-xs">
 					<div class="resume-listing-section hidden-sm hidden-xs">
-						<h4>@lang('home.resumesections')</h4>
+						<h4><img src="/frontend-assets/images/resume_icon1.png"> @lang('home.resumesections')</h4>
 						<hr>
 						<?php 
 							   /*count user info*/
@@ -2572,7 +2572,7 @@ if($user->profilePhoto != ''){
 						</div>
 						<ul class="rls" style="padding-left: 0;">
 							<li>
-								<a id="#" onclick="$('#personal-information').fadeIn();$('#personal-information-edit').hide();">@lang('home.personalinformation')</a> 
+								<a id="#" onclick="$('#personal-information').fadeIn();$('#personal-information-edit').hide();"> @lang('home.personalinformation')</a> 
 								<a id="#" onclick="$('#personal-information').hide();$('#personal-information-edit').fadeIn()"><i class="fa fa-edit pull-right"></i> </a> 
 							</li>
 							<li>
@@ -2636,7 +2636,7 @@ if($user->profilePhoto != ''){
 				<div id="privacy-show" class="ja-content-item mc-item resume-listing-section" style="">
 					<form class="form-horizontal privacy-form" method="post" action="">
 						<input type="hidden" name="_token" value="">
-						<h4>@lang('home.privacysettings')</h4>
+						<h4><img src="/frontend-assets/images/resume_icon2.png"> @lang('home.privacysettings')</h4>
 						
 						<div class="col-md-12">
 							<p style="margin-top: 4px">
@@ -2695,7 +2695,7 @@ if($user->profilePhoto != ''){
 					</form>
 				</div>
 				 <div class="ja-content-item mc-item resume-listing-section">
-					<h4>@lang('home.Video & Chat Image')</h4>
+					<h4><span style="font-size:15px"><b><img src="/frontend-assets/images/resume_video_icon.png"> @lang('home.Video & Chat Image')</b></span></h4>
 					<div class="re-img-box" style="left: 50px;">
 						<img src="<?= ($user->chatImage != '') ? url('profile-photos/'.$user->chatImage) : asset('profile-photos/profile-logo.jpg') ?>" class="chat-img-target">
 						<div class="re-img-toolkit">
@@ -4173,7 +4173,7 @@ function getSubCategories2(categoryId2){
 		type:'POST',
 		success:function(res){
 			if(res == 1){
-				toastr.success('Profile Pic Remove');
+				toastr.success('@lang("home.Profile Pic Remove")');
 				$('.img-target').attr('src','{{ asset("profile-photos/profile-logo.jpg") }}');
 			}
 		}
@@ -4267,7 +4267,7 @@ function getSubCategories2(categoryId2){
 		type:'POST',
 		success:function(res){
 			if(res == 1){
-				toastr.success('Profile Pic Remove');
+				toastr.success('@lang("home.Profile Pic Remove")');
 				if(req == 'chat'){
 				$('.chat-img-target').attr('src','{{ asset("profile-photos/profile-logo.jpg") }}');
 				} 

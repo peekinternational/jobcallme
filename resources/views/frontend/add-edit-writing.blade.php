@@ -49,7 +49,7 @@
 										
                                         <div class="credits b" style="color:#fff;font-size: 12px;padding-top:5px;">
 											<div class="text-success" style="color:#fff">@lang('home.FreetillEndofOctober')</div>
-											<div class="text-success" style="color:#fff;padding-top:10px;">@lang('home.Free')<span style="padding-left:20px">@lang('home.pay_cost') : <strike>[@lang('home.lean1000')]</strike></span></div>
+											<div class="text-success" style="color:#fff;padding-top:10px;"><!-- @lang('home.Free') --><span style="padding-left:20px">@lang('home.pay_cost') : <strike>[@lang('home.lean1000')]</strike></span></div>
 											<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
 										</div>
                                     </label>
