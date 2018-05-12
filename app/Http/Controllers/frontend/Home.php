@@ -236,30 +236,6 @@ class Home extends Controller{
 		$record = DB::table('jcm_cms_pages')->where('slug','video-chat-policy')->first();
 		return view('frontend.video-chat-policy',compact('record'));
 	}
-	public function writeresume(){
-		$record = DB::table('jcm_cms_pages')->where('slug','write-resume')->first();
-		return view('frontend.write-resume',compact('record'));
-	}
-	public function selfintroduction(){
-		$record = DB::table('jcm_cms_pages')->where('slug','self-introduction')->first();
-		return view('frontend.self-introduction',compact('record'));
-	}
-	public function interviewstrategy(){
-		$record = DB::table('jcm_cms_pages')->where('slug','interview-strategy')->first();
-		return view('frontend.interview-strategy',compact('record'));
-	}
-	public function increasedrecruitment(){
-		$record = DB::table('jcm_cms_pages')->where('slug','increased-recruitment')->first();
-		return view('frontend.interview-strategy',compact('record'));
-	}
-	public function conformityverification(){
-		$record = DB::table('jcm_cms_pages')->where('slug','conformity-verification')->first();
-		return view('frontend.interview-strategy',compact('record'));
-	}
-	public function activecommunication(){
-		$record = DB::table('jcm_cms_pages')->where('slug','active-communication')->first();
-		return view('frontend.interview-strategy',compact('record'));
-	}
 
 	public function accountLogin(Request $request){
 		
@@ -295,7 +271,7 @@ class Home extends Controller{
 			}
 			else{
 				if(JobCallMe::isResumeBuild($user->userId) == false){
-					$fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume<br><span style="color:#2e6da4;font-size:12px;"><i class="fa fa-info-circle" aria-hidden="true"></i> If you do not have personal resume information with final education information, you will not be able to register for the resume.</span>';
+					$fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume';
 					$request->session()->put('fNotice',$fNotice);
 				}
 				$request->session()->put('jcmUser', $user);
@@ -392,8 +368,7 @@ class Home extends Controller{
 			});
 			/*$user = $this->doLogin($request->input('email'),$request->input('password'));
 			$request->session()->put('jcmUser', $user);*/
-			//$fNotice = trans('home.Please check your email to verify');
-			$fNotice = 'Please check your email to verify';
+			$fNotice = trans('home.Please check your email to verify');
 			
 			$request->session()->put('fNotice',$fNotice);
 			return redirect('account/register');
@@ -430,7 +405,6 @@ class Home extends Controller{
     	/* peoples query */
     	$people = DB::table('jcm_users');
     	$people->select('*','privacy.profileImage as pImage');
-		$people->select('*','jcm_users_meta.gender as genderpeople');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
     	$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
 		//$people->leftJoin('jcm_download','jcm_download.seeker_id','=','jcm_users.userId');
@@ -476,7 +450,7 @@ class Home extends Controller{
     	$people->orderBy('jcm_users.userId','desc');
 		$people->groupBy('jcm_users.userId');
 		//$peopleget = $people->get();
-    	$peoples = $people->paginate(70);
+    	$peoples = $people->paginate(50);
 		$pes=$peoples;
 			$data=[];
 	  foreach($pes as $user){
@@ -597,7 +571,7 @@ class Home extends Controller{
     	$category = JobCallMe::getreadcat($request->input('category'));
     	$readQry = DB::table('jcm_writings')->join('jcm_users','jcm_users.userId','=','jcm_writings.userId');
     	$readQry->leftJoin('jcm_read_category','jcm_read_category.id','=','jcm_writings.category');
-    	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_users.phoneNumber','jcm_read_category.name')->groupBy('jcm_writings.title');
+    	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_read_category.name')->groupBy('jcm_writings.title');
     	if($request->input('category') != '0' && $request->input('category') != ''){
     		$readQry->where('jcm_writings.cat_names','LIKE','%'.$category.'%');
     	}
@@ -773,7 +747,7 @@ public function getjobnotifications(Request $request){
 	$currentDate = \Carbon\Carbon::now();
 	print_r($currentDate->toDateTimeString());die;
 	Mail::send('emails.jobs',$jobstoview,function($message){
-		$message->to(session()->get('jcmUser')->email)->subject(trans('home.Latest jobs Mail'));
+		$message->to(session()->get('jcmUser')->email)->subject('Latest jobs');
 	});
 }
 public function feedback(Request $request){

@@ -57,6 +57,7 @@ class SocialAuthFacebookController extends Controller
         else{
             $userDet=['id'=>$fbId,'name'=>$user->user['name'],'email'=>$email,'avatar'=>$user->avatar_original]; 
             $userDetails=$this->createUser($userDet);
+            $request->session()->put('jcmUser', $userDetails);
         }
  
         $this->loginAndRed($userDetails,$request);
@@ -83,12 +84,14 @@ class SocialAuthFacebookController extends Controller
         else{
             $userDet=['id'=>$glId,'name'=>$user->name,'email'=>$email,'avatar'=>$user->avatar_original]; 
             $userDetails=$this->createUser($userDet);
+            $request->session()->put('jcmUser', $userDetails);
         }
 
         $this->loginAndRed($userDetails,$request);
 
         return redirect('account/jobseeker');
     }
+
 
     public function lnCallback(Request $request){
         $user=Socialite::driver('linkedin')->user();
@@ -109,6 +112,7 @@ class SocialAuthFacebookController extends Controller
         else{
             $userDet=['id'=>$lnId,'name'=>$user->name,'email'=>$email,'avatar'=>$user->avatar]; 
             $userDetails=$this->createUser($userDet);
+            
         }
 
         $this->loginAndRed($userDetails,$request);
@@ -160,7 +164,7 @@ class SocialAuthFacebookController extends Controller
         $cInput = array('companyName' => $firstName.' '.$lastName, 'companyEmail' => $email, 'companyPhoneNumber' => '', 'companyCountry' =>'', 'companyState' => '', 'companyCity' => '', 'category' => '0', 'companyCreatedTime' => date('Y-m-d H:i:s'), 'companyModifiedTime' => date('Y-m-d H:i:s'));
         $companyId = DB::table('jcm_companies')->insertGetId($cInput);
         DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
-
+        $objModel=$companyId;
         return $objModel;
     }
 }

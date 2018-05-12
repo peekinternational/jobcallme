@@ -448,7 +448,7 @@ class Cms extends Controller{
         return redirect(url()->previous());
     }
     public function writing(Request $request){
-        $writings = DB::table('jcm_writings')->groupBy('title')->orderBy('writingId','desc')->get();
+        $writings = DB::table('jcm_writings')->groupBy('title')->orderBy('writingId','desc')->paginate(10);
         return view('admin.cms.writing',compact('writings'));
     }
     public function writestatupdate(Request $request){
@@ -508,13 +508,15 @@ class Cms extends Controller{
     
     /* Approve upskills*/
     public function upskills(Request $request){
-        $upskills = DB::table('jcm_upskills')->orderBy('skillId','desc')->get();
+        $upskills = DB::table('jcm_upskills')->orderBy('skillId','desc')->paginate(10);
+     //   dd($upskills);
         return view('admin.cms.upskills',compact('upskills'));
     }
     public function viewskill(Request $request){
         $id = $request->input('id');
         
         $check = DB::table('jcm_upskills')->where('skillId',$id)->first();
+        $check->description = strip_tags($check->description);
         if($check){
           echo json_encode($check);
         }else{

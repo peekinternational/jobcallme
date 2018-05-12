@@ -465,7 +465,6 @@ class ExtraSkills extends Controller{
 			$input['userId'] = $app->userId;
             $input['companyId'] = $app->companyId;
             $input['paymentMode'] = 'Paypal';
-			$input['paycurrency'] = trim($request->input('paycurrency'));
             $input['createdTime'] = date('Y-m-d H:i:s');
 			$request->session()->put('input', $input);
 			$alldata = Session::get('input');
@@ -635,13 +634,6 @@ class ExtraSkills extends Controller{
             $input = Session::get('input');
             $input['status']='Inactive';
             $input['paymentMode']='Cash Payment';
-
-			if($input['paycurrency'] == 'KRW'){
-				$input['amount']=$input['amount']*1100;
-			}else{
-				$input['amount']=$input['amount'];
-			}
-
 	       $up_id= DB::table('jcm_upskills')->insertGetId($input);
 
             $order['user_id']=$apps->userId;
@@ -652,7 +644,6 @@ class ExtraSkills extends Controller{
             $order['status']='Pending';
             $order['category']='Upskill';
             $order['date']= date('Y-m-d');
-			$order['currency']=$input['paycurrency'];
 
             DB::table('jcm_orders')->insert($order);
             return view('frontend.upskillcashpayment_detail',compact('order'));

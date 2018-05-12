@@ -710,7 +710,7 @@ else{
 						
 						
 		$applicants = DB::table('jcm_companies')
-    					->select('jcm_users.city','privacy.profileImage as privacyImage','jcm_users.country','jcm_companies.companyName','jcm_companies.companyId','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_users_meta.gender')
+    					->select('jcm_users.city','privacy.profileImage as privacyImage','jcm_users.country','jcm_companies.companyName','jcm_companies.companyId','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto')
     					
 						->join('jcm_users','jcm_users.companyId','=','jcm_companies.companyId')
 						->join('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId')
@@ -1115,7 +1115,7 @@ else{
 		$resume = $this->userResume($userId);
 		//print_r($resume);exit;
 		$people = DB::table('jcm_users');
-    	$people->select('jcm_users.*','privacy.profileImage as privacyImage','jcm_users_meta.gender as genderpeople');		
+    	$people->select('jcm_users.*','privacy.profileImage as privacyImage');
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
     	$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
     	$people->where('privacy.profile','=','Yes');
@@ -1139,12 +1139,8 @@ else{
 
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$app->userId)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		$pckg=count($plan);
-
-		$resumedownload = DB::table('jcm_download')->where('emp_id',$app->userId)->where('seeker_id',$userId)->get();
-		$resumedown=count($resumedownload);
-
 		//dd($applicant);
-		return view('frontend.employer.view-applicant',compact('resumess','pckg','applicant','resume','data','privacy','resumedown'));
+		return view('frontend.employer.view-applicant',compact('resumess','pckg','applicant','resume','data','privacy'));
 		//return view('frontend.employer.view-applicant',compact('applicant','resume'));
 	}
 		public function viewApplicants(Request $request){
