@@ -6,7 +6,7 @@
 <section id="postNewJob">
     <div class="container">
         <div class="col-md-9">
-            <div class="pnj-box">
+            <div class="pnj-box row">
                 <form id="pnj-form" action="" method="post" class="writing-form">
                     {{ csrf_field() }}
                     <input type="hidden" name="prevIcon" value="{{ $article->wIcon }}">

@@ -47,6 +47,7 @@ if($user->profilePhoto != ''){
 								</div>
 								<h3 class="hidden-md hidden-lg" style="font-weight: 600">{{ $user->firstName.' '.$user->lastName }}</h3>
 								<p class="user-sns">
+								    <a href="{{ $meta->instagram }}"><i class="fa fa-instagram"></i></a>
 									<a href="{{ $meta->twitter }}"><i class="fa fa-twitter-square"></i></a>
 									<a href="{{ $meta->linkedin }}"><i class="fa fa-linkedin-square"></i></a>
 									<a href="{{ $meta->facebook }}"><i class="fa fa-facebook-square"></i></a>
@@ -379,6 +380,13 @@ if($user->profilePhoto != ''){
 								<div class="col-md-6">
 									<input type="text" class="form-control input-sm" name="twitter" value="{{ $meta->twitter }}">
 									<p class="help-block">https://twitter.com/user</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 text-right">Instagram</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control input-sm" name="instagram" value="{{ $meta->instagram }}">
+									<p class="help-block">https://instagram.com/user</p>
 								</div>
 							</div>
 							<div class="form-group">

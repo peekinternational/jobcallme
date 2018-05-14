@@ -235,6 +235,12 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
+                                       <label class="control-label col-sm-3 col-xs-12">Instagram</label>
+                                       <div class="col-sm-9 pnj-form-field">
+                                           <input type="url" class="form-control companyInstagram" name="companyInstagram" id="instagram" placeholder="Instagram" value="{{ $company->companyInstagram }}">
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.noemployees')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <input type="number" class="form-control companyNoOfUsers" name="companyNoOfUsers" id="companyNoOfUsers" placeholder="Total Employees" value="{{ $company->companyNoOfUsers }}" required>

@@ -208,6 +208,7 @@ class Jobseeker extends Controller{
 				'facebook' => 'nullable|url',
 				'linkedin' => 'nullable|url',
 				'twitter' => 'nullable|url',
+				'instagram' => 'nullable|url',
 				'website' => 'nullable|url',
 			]);
 
@@ -225,6 +226,7 @@ class Jobseeker extends Controller{
 		if($facebook != '') $metaQry['facebook'] = $facebook;
 		if($linkedin != '') $metaQry['linkedin'] = $linkedin;
 		if($twitter != '') $metaQry['twitter'] = $twitter;
+		if($instagram != '') $metaQry['instagram'] = $instagram;
 		if($website != '') $metaQry['website'] = $website;
 
 		if($metaId != '' && $metaId != '0' && $metaId != NULL){
@@ -874,7 +876,7 @@ class Jobseeker extends Controller{
     		DB::table('jcm_users_meta')->where('metaId','=',$meta->metaId)->update($input);
     	}else{
     		$savedJobs = array($jobId);
-    		$input = array('userId' => $app->userId, 'saved' => @implode(',', $savedJobs), 'createdTime' => date('Y-m-d H:i:s'), 'fatherName' => '', 'dateOfBirth' => '1979-12-31', 'gender' => '', 'maritalStatus' => '', 'experiance' => '', 'education' => '', 'industry' => '0', 'currentSalary' => '', 'expectedSalary' => '', 'currency' => '', 'cnicNumber' => '', 'address' => '', 'expertise' => '', 'facebook' => '', 'linkedIn' => '', 'twitter' => '', 'website' => '', 'follow' => '');
+    		$input = array('userId' => $app->userId, 'saved' => @implode(',', $savedJobs), 'createdTime' => date('Y-m-d H:i:s'), 'fatherName' => '', 'dateOfBirth' => '1979-12-31', 'gender' => '', 'maritalStatus' => '', 'experiance' => '', 'education' => '', 'industry' => '0', 'currentSalary' => '', 'expectedSalary' => '', 'currency' => '', 'cnicNumber' => '', 'address' => '', 'expertise' => '', 'facebook' => '', 'linkedIn' => '', 'twitter' => '', 'instagram' => '', 'website' => '', 'follow' => '');
     		DB::table('jcm_users_meta')->insert($input);
     	}
     	exit('done');
