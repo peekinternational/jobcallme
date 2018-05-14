@@ -3566,6 +3566,11 @@ img.profile-photo-xs{
     min-height: 70px;
     
 }
+.pnj-form-field{
+    margin-bottom: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
 #post-job-ad-types2>li:last-Child {
    
     width: 77% !important;

@@ -20,9 +20,9 @@ if($upskill->country != 0){
 ?>
 <section id="postNewJob">
     <div class="container">
-        <div class="col-md-10 mbl-view-upskills">
+        <!-- <div class="col-md-10 mbl-view-upskills"> -->
             <h3 class="text-center">@lang('home.up_heading')</h3>
-            <div class="pnj-box">
+            <div class="pnj-box row">
                 <form id="pnj-form" action="" method="post" class="upskill-form">
                     {{ csrf_field() }}
                     <input type="hidden" name="skillId" value="{{ $upskill->skillId }}">
@@ -38,7 +38,7 @@ if($upskill->country != 0){
                       <input type="radio" name="gender" id="up_kr" value="kr" checked="checked"> @lang('home.paykorean')
                       &nbsp;&nbsp;<input type="radio" name="gender" id="up_us" value="us"> @lang('home.US$')
                       </div> -->
-                    <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:30px;">
+                    <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;">
                             <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                             
  
@@ -592,7 +592,7 @@ if($upskill->country != 0){
                     </div>
                 </form>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
 
 <style type="text/css">
