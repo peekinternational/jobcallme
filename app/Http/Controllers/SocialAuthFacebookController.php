@@ -41,7 +41,8 @@ class SocialAuthFacebookController extends Controller
             die("Facebook account is not verified");
         endif;
         $email=$user->user['email'];
-        $fbId=$user->id;
+        dd($user);
+       /*  $fbId=$user->id;
         $userDetails=User::where('email',$email)->first();
         if($userDetails){
             if($userDetails->user_status=='N'){
@@ -60,7 +61,7 @@ class SocialAuthFacebookController extends Controller
             $request->session()->put('jcmUser', $userDetails);
         }
  
-        $this->loginAndRed($userDetails,$request);
+        $this->loginAndRed($userDetails,$request); */
         
         return redirect('account/jobseeker');
     }

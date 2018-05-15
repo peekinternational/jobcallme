@@ -185,9 +185,9 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
 
 
                 <div class="col-md-12 sns-box"> 
-                    <!-- <p>@lang('home.loginusing')</p> 
+                    <p>@lang('home.loginusing')</p> 
 
-                <div class="col-md-12 sns-box" style="display:none"> 
+                <div class="col-md-12 sns-box" > 
                     <p>@lang('home.loginusing')</p> 
 
                     <button class="fb-btn">
@@ -198,7 +198,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     </button>
                     <button class="in-btn">
                         <a style="color:white" href="{{url('/lnApi')}}">LINKEDIN</a>
-                    </button> -->
+                    </button>
 				    <p class="text-center show-loginBox" style="color:#2e6da4"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.videochat_text')</p>
                 </div>
 				<div style="padding-top:20px">
