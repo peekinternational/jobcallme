@@ -70,7 +70,8 @@ class SocialAuthFacebookController extends Controller
     public function gCallback(Request $request){
         $user=Socialite::driver('google')->user();
         $email=$user->email;
-        $glId=$user->id;
+        $request->session()->put('email',$email);
+        /* $glId=$user->id;
         $userDetails=User::where('email',$email)->first();
         if($userDetails){
             if($userDetails->user_status=='N'){
@@ -89,16 +90,17 @@ class SocialAuthFacebookController extends Controller
             $request->session()->put('jcmUser', $userDetails);
         }
 
-        $this->loginAndRed($userDetails,$request);
+        $this->loginAndRed($userDetails,$request); */
 
-        return redirect('account/jobseeker');
+        return redirect('account/register');
     }
 
 
     public function lnCallback(Request $request){
         $user=Socialite::driver('linkedin')->user();
         $email=$user->email;
-        $lnId=$user->id;
+        $request->session()->put('email',$email);
+       /*  $lnId=$user->id;
         $userDetails=User::where('email',$email)->first();
         if($userDetails){
             if($userDetails->user_status=='N'){
@@ -117,9 +119,9 @@ class SocialAuthFacebookController extends Controller
             
         }
 
-        $this->loginAndRed($userDetails,$request);
+        $this->loginAndRed($userDetails,$request); */
 
-        return redirect('account/jobseeker');
+        return redirect('account/register');
     }
 
     public function loginAndRed($userDetails,$request){
