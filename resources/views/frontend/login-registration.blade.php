@@ -90,6 +90,18 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <a style="color:white" href="{{url('/instaApi')}}">Instagram</a>
                 </button>-->
 				<p class="text-center show-loginBox" style="color:#2e6da4"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.videochat_text')</p>
+                <!-- <div class="jd-share-btn" style="text-align:center;">
+                    <a href="{{url('/fbApi')}}">
+                    	<i class="fa fa-facebook" style="background: #2e6da4;"></i> 
+                    </a>
+                    <a href="{{url('/lnApi')}}">
+                    	<i class="fa fa-linkedin" style=" background: #007BB6;"></i> 
+                    </a>
+                    
+                    <a href="{{url('/googleApi')}}">
+                    	<i class="fa fa-google-plus" style="background: #F63E28;"></i> 
+                    </a>
+                </div> -->
             </div>
 			<div>
 				<!-- <p class="text-center show-loginBox" style="color:#2e6da4">※ @lang('home.singupinfo')</p> -->
@@ -184,11 +196,11 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <p class="text-center show-loginBox">@lang('home.alreadyaccount') <a href="javascript:;" onclick="switchPage('login')">@lang('home.loginhere')</a></p>
 
 
-                <div class="col-md-12 sns-box"> 
-                    <p>@lang('home.loginusing')</p> 
+               <!--  <div class="col-md-12 sns-box"> 
+                    <p>@lang('home.loginusing')</p>  -->
 
                 <div class="col-md-12 sns-box" > 
-                    <p>@lang('home.loginusing')</p> 
+                   <!--  <p>@lang('home.loginusing')</p> 
 
                     <button class="fb-btn">
                         <a style="color:white" href="{{url('/fbApi')}}">FACEBOOK</a>
@@ -198,8 +210,20 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     </button>
                     <button class="in-btn">
                         <a style="color:white" href="{{url('/lnApi')}}">LINKEDIN</a>
-                    </button>
+                    </button> -->
 				    <p class="text-center show-loginBox" style="color:#2e6da4"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.videochat_text')</p>
+                   <!--  <div class="jd-share-btn" style="text-align:center;">
+                    <a href="{{url('/fbApi')}}">
+                    	<i class="fa fa-facebook" style="background: #2e6da4;"></i> 
+                    </a>
+                    <a href="{{url('/lnApi')}}">
+                    	<i class="fa fa-linkedin" style=" background: #007BB6;"></i> 
+                    </a>
+                    
+                    <a href="{{url('/googleApi')}}">
+                    	<i class="fa fa-google-plus" style="background: #F63E28;"></i> 
+                    </a>
+                </div> -->
                 </div>
 				<div style="padding-top:20px">
 				   <!-- <p class="text-center show-loginBox" style="color:#2e6da4"><img src="../frontend-assets/images/info-icon.png">@lang('home.singupinfo')</p> -->
