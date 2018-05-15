@@ -127,7 +127,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 {{ csrf_field() }}
                 
                 <div class="form-group">
-                    <input type="text" class="form-control" name="email"  value="{{ $email}}" placeholder="@lang('home.email-text')" requried>
+                    <input type="text" class="form-control" name="email"  value="Session::get('email')" placeholder="@lang('home.email-text')" requried>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" id="pwd" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="@lang('home.Password-text')">

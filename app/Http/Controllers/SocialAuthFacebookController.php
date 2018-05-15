@@ -41,6 +41,7 @@ class SocialAuthFacebookController extends Controller
             die("Facebook account is not verified");
         endif;
         $email=$user->user['email'];
+        $request->session()->put('email',$email);
         //dd($user);
        /*  $fbId=$user->id;
         $userDetails=User::where('email',$email)->first();
@@ -63,7 +64,7 @@ class SocialAuthFacebookController extends Controller
  
         $this->loginAndRed($userDetails,$request); */
         
-        return redirect('account/register',compact('email'));
+        return redirect('account/register');
     }
 
     public function gCallback(Request $request){
