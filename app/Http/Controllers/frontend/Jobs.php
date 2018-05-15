@@ -611,7 +611,7 @@ class Jobs extends Controller{
 		$jobrs->where('jcm_jobs.status','=','1');
 		$jobrs->where('jcm_jobs.jobId','=',$jobId);
 		$job = $jobrs->first();
-		//dd($job);
+		//dd($job->companyId);
 		$userId = $request->session()->get('jcmUser')->userId;
 		//dd($userId);
 
@@ -619,7 +619,19 @@ class Jobs extends Controller{
 			return redirect('jobs');
 		}
 		
+		$input['userId']=$jobId;
+		$input['checker_id']=$userId;
+		$input['h_type']='Job';
+		DB::table('jcm_history')->insert($input);
 
+		$jobcount=DB::table('jcm_history')->where('userId',$jobId)->where('h_type','Job')->count();
+		$applycount=DB::table('jcm_job_applied')->where('jobId',$jobId)->count();
+		$reviewcount=DB::table('jcm_companyreview')->where('company_id',$job->companyId)->count();
+		$learncount=DB::table('jcm_upskills')->where('companyId',$job->companyId)->count();
+		$ncount=DB::table('jcm_users_meta')->select('follow')->get();
+		$Arr = @explode(',', $ncount);
+		$fellow=count(array_keys($Arr, $job->companyId));
+		
 		$savedJobArr = array();
 		$followArr = array();
 		if($request->session()->has('jcmUser')){
@@ -639,7 +651,7 @@ class Jobs extends Controller{
 		     //dd($benefits);
 			$companyReview = DB::table('jcm_companyreview')->where('company_id',$job->companyId)->get();
 			
-		return view('frontend.view-job-detail',compact('companyReview','job','savedJobArr','followArr','userId','suggest','jobApplied','benefits','process'));
+		return view('frontend.view-job-detail',compact('fellow','learncount','reviewcount','applycount','jobcount','companyReview','job','savedJobArr','followArr','userId','suggest','jobApplied','benefits','process'));
 		
 	}
 

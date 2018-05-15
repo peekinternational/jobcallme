@@ -605,7 +605,13 @@ $dispatch='';
                     </div>
         
 		<div class="col-md-3">
-		    <!--Follow Companies - Start -->
+        <button class="btn btn-md" style=" border-radius:0px !important;background-color: #337ab7;border: none;color: white;">Job Searching {{$applycount}} of {{$jobcount}}</button> <button class="btn btn-md" style=" border-radius:0px !important;background-color: #a0b1b9;border: none;color: white;">Company Review: {{$reviewcount}}  </button> 
+                <br>
+                <br>
+                <button class="btn btn-md" style=" border-radius:0px !important;background-color: #5b5c5e;border: none;color: white;">Company Fellow: {{$fellow}} </button> <button class="btn btn-md" style=" border-radius:0px !important;background-color: #57768a;border: none;color: white;">Total Post Upskill: {{$learncount}} &nbsp; </button>
+		    <br>
+            <br>
+            <!--Follow Companies - Start -->
                 <div class="follow-companies">
                     <h4>@lang('home.similarjobdetail') <!-- @lang('home.'.JobCallMe::countryName(JobCallMe::getHomeCountry())) --></h4>
                     <hr>

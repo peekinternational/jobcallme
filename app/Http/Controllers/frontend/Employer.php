@@ -1116,9 +1116,10 @@ else{
 		$input['h_type']='Profile';
 		DB::table('jcm_history')->insert($input);
 
-		$profilecount=DB::table('jcm_history')->where('userId',$userId)->count();
+		$profilecount=DB::table('jcm_history')->where('userId',$userId)->where('h_type','Profile')->count();
 		$readcount=DB::table('jcm_writings')->where('userId',$userId)->count();
 		$offercount=DB::table('jcm_offer_interview')->where('jobseeker_id',$userId)->count();
+		$cvcount=DB::table('jcm_download')->where('seeker_id',$userId)->count();
 		//dd($readcount);
 		
 		$resume = $this->userResume($userId);
@@ -1149,7 +1150,7 @@ else{
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$app->userId)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		$pckg=count($plan);
 		//dd($applicant);
-		return view('frontend.employer.view-applicant',compact('profilecount','offercount','readcount','resumess','pckg','applicant','resume','data','privacy'));
+		return view('frontend.employer.view-applicant',compact('cvcount','profilecount','offercount','readcount','resumess','pckg','applicant','resume','data','privacy'));
 		//return view('frontend.employer.view-applicant',compact('applicant','resume'));
 	}
 		public function viewApplicants(Request $request){
