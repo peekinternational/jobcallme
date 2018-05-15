@@ -54,5 +54,15 @@ class LogDemo extends Command
         }
         
     }
+    $allsub = DB::table('jcm_save_packeges')->where('status','1')->where('expire_date','>','0')->where('type','Resume Download')->where('quantity','>','0')->get();
+    foreach ($allsub as $users) {
+        
+        $newdate=$users->expire_date;
+        $date=$newdate-1;
+        $input['expire_date']=$date;
+        DB::table('jcm_save_packeges')->where('status','1')->where('expire_date','>','0')->where('type','Resume Download')->where('quantity','>','0')->where('user_id',$users->user_id)->update($input);
+    }
+    
+//dd($users);
     }
 }

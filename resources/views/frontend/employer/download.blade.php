@@ -12,7 +12,7 @@
 			<div class="row">
 
 			<div class="follow-companies5" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
-                    <h3 style="margin-left: 15px">@lang('home.DOWNLOAD')</h3>
+                    <h3 style="margin-left: 15px">@lang('home.DOWNLOAD')<span style="float:right;font-size:14px;">@if ($mypackage->expire_date <= '0') No Package <a href="{{ url('account/manage?plan') }}" style="color: white;"> Get Package Plan</a>  @else Remain Quantity:{{$mypackage->quantity}}, Remain Days: {{ $mypackage->expire_date }} @endif &nbsp;</span></h3>
 				</div>
 			
 			<div class="col-md-3 ">

@@ -21,7 +21,7 @@ if(Request::input('show') != ''){
 
         <div class="col-md-12">
             <!-- Mobile View Only -->
-         <!--   <div class="col-md-2 hidden-sm hidden-md hidden-lg">
+         <div class="col-md-2 hidden-sm hidden-md hidden-lg">
                 <div class="row">
                     <div class="col-md-12 jobApp-tabs jobMblTabs">
                         <ul class="nav nav-tabs jobMblTabs">
@@ -52,10 +52,10 @@ if(Request::input('show') != ''){
                         </ul>
                     </div>
                 </div>
-            </div>-->
+            </div>
             <!-- End Mobile View -->
 
-            <div class="col-md-2">
+            <div class="col-md-2 hidden-xs">
                 <div class="row">
                     <div class="col-md-12 jobApp-tabs">
                         <a id="inbox" class="btn btn-block jaTabBtn {{ $inbox }}"><i class="fa fa-users"></i> @lang('home.inbox')</a>

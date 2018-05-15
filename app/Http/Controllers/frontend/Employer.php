@@ -2310,6 +2310,17 @@ public function mapOrganization(Request $request){
             $input['user_id']=$id;
 			$input['paymentMode']='Paypal';
 			$input['status']=1;
+		/* 	$date = date('Y-m-d', strtotime('+1 month'));
+
+			// One month from a specific date
+			$expire_date = date('Y-m-d', strtotime('+1 month', strtotime(date("Y-m-d"))));
+			//dd($expire_date);
+			$input['expire_date']=$expire_date; */
+			if($input['currency'] == 'KRW'){
+				$input['amount']=$input['amount']*1100;
+			}else{
+				$input['amount']=$input['amount'];
+			}
 
 	        DB::table('jcm_save_packeges')->insert($input);
 
@@ -2342,6 +2353,12 @@ public function mapOrganization(Request $request){
             $input['user_id']=$id;
 			$input['paymentMode']='Cash Payment';
 			$input['status']=2;
+			/* $date = date('Y-m-d', strtotime('+1 month'));
+
+			// One month from a specific date
+			$expire_date = date('Y-m-d', strtotime('+1 month', strtotime(date("Y-m-d"))));
+			//dd($expire_date);
+			$input['expire_date']=$expire_date; */
 
 			if($input['currency'] == 'KRW'){
 				$input['amount']=$input['amount']*1100;
@@ -2374,7 +2391,17 @@ public function mapOrganization(Request $request){
             $input['user_id']=$id;
 			$input['paymentMode']='Nice Pay';
 			$input['status']=2;
+            /* $date = date('Y-m-d', strtotime('+1 month'));
 
+			// One month from a specific date
+			$expire_date = date('Y-m-d', strtotime('+1 month', strtotime(date("Y-m-d"))));
+			//dd($expire_date);
+			$input['expire_date']=$expire_date; */
+			if($input['currency'] == 'KRW'){
+				$input['amount']=$input['amount']*1100;
+			}else{
+				$input['amount']=$input['amount'];
+			}
 	        $pk_id=DB::table('jcm_save_packeges')->insertGetId($input);
 
 			$order['user_id']=$id;
@@ -2593,7 +2620,30 @@ public function allform(Request $request){
     	->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_download.seeker_id')
 	   ->where('jcm_download.emp_id','=',$app->userId)->groupBy('jcm_download.seeker_id')->paginate(10);
    //dd($download);
-	 return view('frontend.employer.download',compact('download'));
+	 $mypackage = DB::table('jcm_save_packeges')->where('user_id',$app->userId)->where('type','Resume Download')->where('quantity','>','0')->where('status','=','1')->first();
+	/* //dd($mypackage->expire_date);
+	 /*  $date = date('Y-m-d', strtotime('+1 month'));
+
+    // One month from a specific date
+	$date = date('Y-m-d', strtotime('+1 month', strtotime($mypackage->created_at))); */
+	    
+ 
+		/* $after_delete=date('Y-m-d', strtotime('-1 day', strtotime($mypackage->expire_date))); 
+		$now = time(); // or your date as well
+		$your_date = strtotime($after_delete);
+		$datediff = $your_date - $now;
+		$date=round($datediff / (60 * 60 * 24));
+		$expire=$date;
+		echo 'first'.$expire;
+
+		$newdate=date('Y-m-d', strtotime("+".$expire." days"));
+	dd($newdate);
+
+        $inputs['expire_date']=$newdate;
+		$pckg_id= $mypackage->id;
+		$pckgs_id= $mypackage->pckg_id;  */
+		
+	 return view('frontend.employer.download',compact('download','mypackage'));
 
    }
    public function comment(Request $request){

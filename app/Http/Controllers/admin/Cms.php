@@ -679,11 +679,11 @@ class Cms extends Controller{
         $input = array('type' => $type, 'amount' => $amount,'cat_id' => $p_category, 'quantity' => $quantity, 'duration' => $duration );
         if($typeId != '0'){
             DB::table('jcm_package_plan')->where('pckg_id','=',$typeId)->update($input);
-            $sMsg = 'Job Type Updated';
+            $sMsg = 'Package Updated';
         }else{
            // $input['createdTime'] = date('Y-m-d H:i:s');
             DB::table('jcm_package_plan')->insert($input);
-            $sMsg = 'New Job Type Added';
+            $sMsg = 'Package Added';
         }
         $request->session()->flash('alert',['message' => $sMsg, 'type' => 'success']);
         exit('1');

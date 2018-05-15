@@ -21,41 +21,47 @@ if(Request::input('show') != ''){
 
         <div class="col-md-12">
             <!-- Mobile View Only -->
-         <!--   <div class="col-md-2 hidden-sm hidden-md hidden-lg">
+          <div class="col-md-2 hidden-sm hidden-md hidden-lg">
                 <div class="row">
                     <div class="col-md-12 jobApp-tabs jobMblTabs">
                         <ul class="nav nav-tabs jobMblTabs">
                             <li>
-                                <a id="inbox" class="mblTabBtn nav-tab-active {{ $inbox }}"><i class="fa fa-users"></i> @lang('home.inbox')</a>
+                            <a id="inbox" class="btn btn-block jaTabBtn {{ $inbox }}"><i class="fa fa-users"></i> @lang('home.inbox')</a>
                             </li>
                             <li>
-                                <a id="junk" class="mblTabBtn {{ $junk }}"><i class="fa fa-ban"></i>  @lang('home.junks')</a>
+                            <a id="junk" class="btn btn-block jaTabBtn {{ $junk }}"><i class="fa fa-ban"></i>  @lang('home.junks')</a>
                             </li>
                             <li>
-                                <a id="shortlist" class="mblTabBtn {{ $shortlist }}"><i class="fa fa-thumbs-up"></i>  @lang('home.shortlists')</a>
+                            <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}"><i class="fa fa-thumbs-up"></i>  @lang('home.shortlists')</a>
                             </li>
                             <li>
-                                <a id="screened" class="mblTabBtn {{ $screened }}"><i class="fa fa-mobile"></i>  @lang('home.screened')</a>
+                            <a id="screened" class="btn btn-block jaTabBtn {{ $screened }}"><i class="fa fa-mobile"></i>  @lang('home.screened')</a>
                             </li>
                             <li>
-                                <a id="interview" class="mblTabBtn {{ $interview }}"><i class="fa fa-calendar"></i>  @lang('home.interviews')</a>
+                            <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}"><i class="fa fa-calendar"></i>  @lang('home.interviews')</a>
                             </li>
                             <li>
-                                <a id="offer" class="mblTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  @lang('home.offered')</a>
+                            <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  @lang('home.empoffered')</a>
                             </li>
                             <li>
-                                <a id="hire" class="mblTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
+                            <a id="hire" class="btn btn-block jaTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
                             </li>
                             <li>
-                                <a id="reject" class="mblTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
+                            <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
+                            </li>
+                            <li>
+                            <a id="review" href="{{url('employer/status/reviews/all')}}" class="btn btn-block {{ $review }}"><i class="fa fa-file-o"></i>  @lang('home.Reviews list')</a>
+                            </li>
+                            <li>
+                            <a id="offer" href="{{url('employer/status/offer/all')}}" class="btn btn-block {{ $offer }}"><i class="fa fa-bullhorn"></i> @lang('home.Offer Interview list')</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-            </div>-->
+            </div>
             <!-- End Mobile View -->
 
-            <div class="col-md-2">
+            <div class="col-md-2 hidden-xs">
                 <div class="row">
                     <div class="col-md-12 jobApp-tabs">
                         <a id="inbox" class="btn btn-block jaTabBtn {{ $inbox }}"><i class="fa fa-users"></i> @lang('home.inbox')</a>
@@ -68,7 +74,7 @@ if(Request::input('show') != ''){
                         <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
 
                         <a id="review" href="{{url('employer/status/reviews/all')}}" class="btn btn-block {{ $review }}"><i class="fa fa-file-o"></i>  @lang('home.Reviews list')</a>
-                        <a id="review" href="{{url('employer/status/offer/all')}}" class="btn btn-block {{ $offer }}"><i class="fa fa-bullhorn"></i> @lang('home.Offer Interview list')</a>
+                        <a id="offer" href="{{url('employer/status/offer/all')}}" class="btn btn-block {{ $offer }}"><i class="fa fa-bullhorn"></i> @lang('home.Offer Interview list')</a>
 
 
                     </div>

@@ -1082,6 +1082,7 @@ class Jobseeker extends Controller{
 		$input['emp_id']=$userid;
 		$input['pckg_id']=$pckgs_id;
 		$input['seeker_id']=$id;
+		
 			if(count($plan) == 0)
 			{
 				return redirect('account/manage?plan');

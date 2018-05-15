@@ -43,11 +43,11 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                           <div class="form-group">
                             <label for="title">@lang('home.QueTitle'):</label>
-                            <input type="text" name="title" class="form-control" id="title">
+                            <input type="text" name="title" class="form-control" id="title" required>
                           </div>
                           <div class="form-group">
                             <label for="type">@lang('home.QueType'):</label>
-                            <select class="form-control" id="type" name="type">
+                            <select class="form-control" id="type" name="type" >
                                 <option>@lang('home.Que Select type')</option>
                                 <option>@lang('home.Test')</option>
                                 <option>@lang('home.Questionnaires')</option>
@@ -55,7 +55,7 @@
                           </div>
                           <div class="form-group">
                             <label for="days">@lang('home.Submission Days'):</label>
-                            <input type="number" name="submission_date" class="form-control" id="days">
+                            <input type="number" name="submission_date" class="form-control" id="days" required>
                           </div>
                           <div class="checkbox">
                             <label><input name="late_submission" value="Yes" type="checkbox"> @lang('home.Accept Late Submission')</label>
