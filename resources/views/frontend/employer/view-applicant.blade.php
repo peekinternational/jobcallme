@@ -825,6 +825,12 @@
             @endif
              </div>
 				<div class="col-md-3">
+                @if($resumedown > 0)
+                <button class="btn btn-md" style=" border-radius:0px !important;background-color: #337ab7;border: none;color: white;">searching 23 of 135</button> <button class="btn btn-md" style=" border-radius:0px !important;background-color: #a0b1b9;border: none;color: white;">Total Post Articals: {{$readcount}} </button> 
+                <br>
+                <br>
+                <button class="btn btn-md" style=" border-radius:0px !important;background-color: #5b5c5e;border: none;color: white;">Interview Offered: {{ $offercount }} </button> <button class="btn btn-md" style=" border-radius:0px !important;background-color: #57768a;border: none;color: white;">Profile Searching: &nbsp; {{ $profilecount }}</button>
+                    @endif
                     <div class="pnj-box">
                     <h4>@lang('home.similarpeople') @lang('home.'.JobCallMe::countryName(JobCallMe::getHomeCountry()))</h4>
                         <div class="row" style="margin-right: 0 !important;">

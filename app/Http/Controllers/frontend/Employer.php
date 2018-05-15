@@ -1099,7 +1099,7 @@ else{
 		if(!$request->session()->has('jcmUser')){
     		return redirect('account/login?next='.$request->route()->uri);
     	}
-
+		$app = $request->session()->get('jcmUser');
 		$userId = $request->segment(5);
 		$privacy = DB::table('jcm_privacy_setting')->where('userId',$userId)->first();
 		$applicant = DB::table('jcm_users')
@@ -1111,7 +1111,16 @@ else{
 		if(count($applicant) == 0){
 			return redirect('account/employer/application');
 		}
-		$app = $request->session()->get('jcmUser');
+		$input['userId']=$userId;
+		$input['checker_id']=$app->userId;
+		$input['h_type']='Profile';
+		DB::table('jcm_history')->insert($input);
+
+		$profilecount=DB::table('jcm_history')->where('userId',$userId)->count();
+		$readcount=DB::table('jcm_writings')->where('userId',$userId)->count();
+		$offercount=DB::table('jcm_offer_interview')->where('jobseeker_id',$userId)->count();
+		//dd($readcount);
+		
 		$resume = $this->userResume($userId);
 		//print_r($resume);exit;
 		$people = DB::table('jcm_users');
@@ -1140,7 +1149,7 @@ else{
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$app->userId)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		$pckg=count($plan);
 		//dd($applicant);
-		return view('frontend.employer.view-applicant',compact('resumess','pckg','applicant','resume','data','privacy'));
+		return view('frontend.employer.view-applicant',compact('profilecount','offercount','readcount','resumess','pckg','applicant','resume','data','privacy'));
 		//return view('frontend.employer.view-applicant',compact('applicant','resume'));
 	}
 		public function viewApplicants(Request $request){
