@@ -77,6 +77,7 @@
 											 @endif
 										 </p>
 										 <p><i class="fa fa-users"></i> {{ $pjobs->count}}</p>
+                                         <p style="color: #999;"> {{ $pjobs->createdTime}}</p>
                                     </div>
 									
                                 </div>
