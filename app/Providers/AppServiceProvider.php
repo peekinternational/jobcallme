@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         error_reporting(E_ALL ^ E_NOTICE);
-        date_default_timezone_set('America/Los_Angeles');
+        date_default_timezone_set('Asia/Seoul');
     }
 
     /**

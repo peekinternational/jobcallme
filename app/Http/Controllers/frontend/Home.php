@@ -542,10 +542,24 @@ class Home extends Controller{
 		$people->where('jcm_users_meta.userId','!=','');
     	$people->orderBy('jcm_users.userId','desc');
          $people->groupBy('jcm_users.userId');
-    	$peoples = $people->paginate(18);
+		$peoples = $people->paginate(18);
+		$pes=$peoples;
+		$data=[];
+  foreach($pes as $user){
+	//echo $user->userId." / ";
+	$resumess = DB::table('jcm_resume')->where('userId','=',$user->userId)->get();
+	$type=$resumess->pluck('type');
+	$result = $type->toArray();
+	$arry=in_array('academic',$result);
+	
+	if($arry){
+	array_push($data,$user);
+	}
+	
+}
         // dd($peoples);
 
-    	return view('frontend.people',compact('peoples'));
+    	return view('frontend.people',compact('data','peoples'));
     }
 
     public function learn(Request $request){

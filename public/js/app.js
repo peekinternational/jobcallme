@@ -32614,7 +32614,7 @@ module.exports = Echo;
 /* 35 */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'E:\\xampp\\htdocs\\jobcallme\\jobcallme\\node_modules\\pusher-js\\dist\\web\\pusher.js'");
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '\\node_modules\\pusher-js\\dist\\web\\pusher.js'");
 
 /***/ }),
 /* 36 */
