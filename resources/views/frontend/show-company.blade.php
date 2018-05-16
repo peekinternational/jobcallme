@@ -114,6 +114,7 @@ $opHour = json_decode($company->companyOperationalHour,true);
                                 <div class="rtj-details">
                                     <p><strong><a href="{{ url('jobs/'.$job->jobId) }}">{{ $job->title }}</a></strong></p>
                                     <p>@lang('home.'.JobCallMe::cityName($company->companyCity)), @lang('home.'.JobCallMe::countryName($company->companyCountry))</p>
+                                    <p>{{ $job->createdTime }}</p>
                                 </div>
                             </div>
                         @endforeach
