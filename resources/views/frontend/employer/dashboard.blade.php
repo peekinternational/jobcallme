@@ -61,8 +61,14 @@
                         <div class="tab-pane active" id="rtj_tab_posted_jobs">
 						<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
                             @foreach($postedJobs as $key=>$pjobs)
-							
-                                <div class="col-xs-10 col-md-10 rtj-item">
+                            <!-- <?php $randId = time().rand(000000,999999); ?>
+							<div class="col-xs-1 col-md-1 a-single-record" style="margin-top: 43px;">
+                            <input type="checkbox" id="inbox-'.$randId.'" class="cbx" name="searchjob[]" value="{{$pjobs->jobId}}">
+                            <label class="cbx" for="inbox-'.$randId.'"></label>
+                            
+                            </div> -->
+                                <div class="col-xs-10 col-md-9 rtj-item">
+
 							
                                     <div class="rtj-details">
                                         <p><strong><a href="{{ url('jobs/'.$pjobs->jobId) }}">{!! $pjobs->title !!}</a></strong> <i class="fa fa-check-circle-o"></i></p>
