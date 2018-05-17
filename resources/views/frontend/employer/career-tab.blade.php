@@ -3,6 +3,7 @@
 		@section('title', 'Career Tab')
 
 		@section('content')
+		
 		<section id="company-box">
 			<div class="container">
 			<div class="row">
@@ -18,13 +19,14 @@
 				<br>
 				<br>
 				
-				<span><b>@lang('home.addcareerstab')</b></span>
+			
 				<br>
-				<span style="font-size: 12px;">@lang('home.careertab1')<b>@lang('home.careerstab')</b> @lang('home.careertab2')</span>
+				<span style="font-size: 12px;">Facebook Careers Tab  page for your organization. Careers Tab to it and let Jobseekers find your jobs through social media.! 
+               </span>
 				<br>
 				<br>
 				<br>
-				   <button type="submit" class="btn btn-primary">@lang('home.facebookcareerstab')</button>
+				   <button type="submit" class="btn btn-primary"><a href="{{$company->companyFb}}" style="color:white">@lang('home.facebookcareerstab')</a></button>
 				</div>
 			   
 				 

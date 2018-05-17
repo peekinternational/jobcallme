@@ -2709,7 +2709,7 @@ public function allform(Request $request){
    		unset($data['_token']);
    		$data['table_name'] ="offer";
 		   $userid = $request->session()->get('jcmUser')->userId;
-		   $plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
+		   $plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('expire_date','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		//dd($plan);
 			$pckg_id= $plan[0]->id;
 			$pckgs_id= $plan[0]->pckg_id;
@@ -2724,8 +2724,8 @@ public function allform(Request $request){
 				echo 2;
 			}
 				else{
-					 DB::table('jcm_download')->insert($input);
-                    DB::table('jcm_save_packeges')->where('user_id','=',$userid)->where('id','=',$pckg_id)->update($inputs);
+					/*  DB::table('jcm_download')->insert($input);
+                    DB::table('jcm_save_packeges')->where('user_id','=',$userid)->where('id','=',$pckg_id)->update($inputs); */
 					if(DB::table('jcm_offer_interview')->insert($data)){
 						echo 1;
 					}else{
@@ -2737,5 +2737,11 @@ public function allform(Request $request){
    		$offerId = $request->input('offerId');
    		DB::table('jcm_offer_interview')->where('offer_id',$offerId)->delete();
    }
+
+   public function career(Request $request){
+	$company = DB::table('jcm_companies')->select('*')->where('companyId','=',$request->session()->get('jcmUser')->companyId)->first();
+	//dd($company);
+	return view('frontend.employer.career-tab',compact('company'));  
+}
 
 }

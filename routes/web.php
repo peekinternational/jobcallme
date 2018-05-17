@@ -374,9 +374,8 @@ Route::get('send_test_email', function(){
 Route::get('afterpayment/{id}','frontend\Home@after_payment');
 Route::post('makepayment','frontend\Home@make_payment');
 
-Route::get('career-tab', function () {
-    return view('frontend.employer.career-tab');
-});
+Route::get('career-tab','frontend\Employer@career');
+
 Route::get('test', function () {
     return view('welcome');
 });

@@ -118,7 +118,7 @@
                                 <div class="col-md-12 rtj-item">
                                     <img src="{{ url('profile-photos/'.$appl->profilePhoto) }}" style="width: 50px">
                                     <div class="rtj-details">
-                                        <p><strong><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
+                                        <p><strong><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}?jobId={{$appl->jobId}}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
                                         <p>{!! $appl->title !!}</p>
                                         <p>{{ date('d M',strtotime($appl->applyTime)) }}</p>
                                     </div>
@@ -522,7 +522,7 @@ $('#active_deactive'+i).click(function(e){
            htmls += '<div class="col-md-12 rtj-item">';
            htmls += '<img src="'+jsUrl()+'/profile-photos/'+applicant[i][j].profilePhoto+'" style="width: 50px">';
            htmls += '<div class="rtj-details">';
-           htmls +=  '<p><strong><a href="'+jsUrl()+'/account/employer/application/applicant/'+applicant[i][j].userId+'">'+applicant[i][j].firstName+' '+applicant[i][j].lastName+'</a></strong></p>';
+           htmls +=  '<p><strong><a href="'+jsUrl()+'/account/employer/application/candidate/'+applicant[i][j].userId+'?jobId='+applicant[i][j].jobId+'">'+applicant[i][j].firstName+' '+applicant[i][j].lastName+'</a></strong></p>';
            htmls +=  '<p>'+applicant[i][j].title+'</p>';
            htmls +=  '<p>'+applicant[i][j].applyTime+'</p>';
            htmls +=  '</div>';
