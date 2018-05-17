@@ -1072,7 +1072,7 @@ class Jobseeker extends Controller{
 
 		$app = $request->session()->get('jcmUser');
 		$userid = $request->session()->get('jcmUser')->userId;
-		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
+		$plan = DB::table('jcm_save_packeges')->where('user_id',$userid)->where('quantity','>','0')->where('duration','=','0')->where('expire_date','>','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		//dd($plan);
 		$pckg_id= $plan[0]->id;
 		$pckgs_id= $plan[0]->pckg_id;
@@ -1088,6 +1088,20 @@ class Jobseeker extends Controller{
 				return redirect('account/manage?plan');
 			}
 				else{
+					$hi=DB::table('jcm_download')->where('seeker_id',$id)->get();
+					$checkcv=count($hi);
+					if($checkcv !="" && $checkcv != null)
+					{
+					$user = DB::table('jcm_users')->where('userId',$id)->first();
+					$name= $user->firstName;
+						
+					$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
+					$resume = $this->userResume($id);
+				
+					$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+					return $pdf->download($name.'_cv.pdf');
+					}
+					else{
                     DB::table('jcm_download')->insert($input);
                     DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
 					$user = DB::table('jcm_users')->where('userId',$id)->first();
@@ -1098,6 +1112,7 @@ class Jobseeker extends Controller{
 				
 					$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
 					return $pdf->download($name.'_cv.pdf');
+					}
 				}
 				
 		}

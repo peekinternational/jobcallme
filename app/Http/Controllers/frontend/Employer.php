@@ -684,9 +684,41 @@ else{
 		echo $jobId.'-'.$p_Categorys;
 	    die();   
 	 }
-	
+	 public function homepage(Request $request){
+		//return $request->input('jobarry');
+		$app = $request->session()->get('jcmUser');
+		$data=[];
+		if($request->input('jobarry')==""){
+			$applicant = DB::table('jcm_job_applied')
+    					->select('jcm_job_applied.applyTime','jcm_jobs.jobId','jcm_users.city','jcm_users.country','jcm_jobs.title','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto')
+    					->join('jcm_users','jcm_users.userId','=','jcm_job_applied.userId')
+    					->join('jcm_jobs','jcm_jobs.jobId','=','jcm_job_applied.jobId')
+    					->orderBy('jcm_job_applied.applyId','desc')
+    					->where('jcm_jobs.userId','=',$app->userId)
+						->get();
+						array_push($data,$applicant);
+					return $data;
+		}
+		
+		foreach($request->input('jobarry') as $uIds){
+			$applicant = DB::table('jcm_job_applied')
+    					->select('jcm_job_applied.applyTime','jcm_jobs.jobId','jcm_users.city','jcm_users.country','jcm_jobs.title','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto')
+    					->join('jcm_users','jcm_users.userId','=','jcm_job_applied.userId')
+    					->join('jcm_jobs','jcm_jobs.jobId','=','jcm_job_applied.jobId')
+    				
+						->where('jcm_job_applied.jobId','=',$uIds)
+						->orderBy('jcm_jobs.jobId','desc')
+    					->get();
+		 
+		 array_push($data,$applicant);
+		}
+		return $data;
+		
+	 }
 	
     public function home(Request $request){
+		
+	
     	if(!$request->session()->has('jcmUser')){
     		return redirect('account/login?next='.$request->route()->uri);
     	}

@@ -61,13 +61,15 @@
                         <div class="tab-pane active" id="rtj_tab_posted_jobs">
 						<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
                             @foreach($postedJobs as $key=>$pjobs)
-                            <!-- <?php $randId = time().rand(000000,999999); ?>
-							<div class="col-xs-1 col-md-1 a-single-record" style="margin-top: 43px;">
-                            <input type="checkbox" id="inbox-'.$randId.'" class="cbx" name="searchjob[]" value="{{$pjobs->jobId}}">
-                            <label class="cbx" for="inbox-'.$randId.'"></label>
+                            <?php $randId = time().rand(000000,999999); ?>
+                            <div class="row" style="margin-left: 0;margin-right: 0;">
+							<div class="col-xs-2 col-md-1 select_job" style="margin-top: 40px;" >
+                            <input type="checkbox" id="inbox-'.{{$randId}}.'" class="cbx-field plz" name="searchjob[]" value="{{$pjobs->jobId}}">
+                            <label class="cbx" for="inbox-'.{{$randId}}.'"></label>
+                            <input type="hidden" id="job_id" value="{{$pjobs->jobId}}">
                             
-                            </div> -->
-                                <div class="col-xs-10 col-md-9 rtj-item">
+                            </div>
+                                <div class="col-xs-8 col-md-9 rtj-item">
 
 							
                                     <div class="rtj-details">
@@ -87,7 +89,7 @@
                                     </div>
 									
                                 </div>
-									<div class="col-xs-2 col-md-2"><div class="dropdown">
+									<div class="col-xs-2 col-md-2" style="padding-left: 0;margin-top: 20px;padding-right: 0;"><div class="dropdown">
 									  <i class="fa fa-ellipsis-v" aria-hidden="true" style="padding-top:5px;padding-left:10px;font-size: 17px;color:#008000;"></i>
                                       <i class="fa fa-ellipsis-v" aria-hidden="true" style="padding-top:5px;font-size: 17px;color:#008000;"></i>
 									  <div class="dropdown-content">
@@ -101,7 +103,9 @@
                                         <input type="hidden" class="check{{$pjobs->jobId}}" value="{{$pjobs->jobStatus}}">
 										<a href="{{ url('account/employer/delete/'.$pjobs->jobId) }}"><i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')</a>
 									  </div>
-									</div></div>
+									</div>
+                                    </div>
+                                    </div>
                             @endforeach
 							 <div class="col-md-12">
                                 <a href="{{ url('jobs')}}" class="pull-right" style="padding-top: 5px;padding-bottom:20px;">@lang('home.jobviewall')</a>
@@ -110,13 +114,13 @@
                         </div>
                         <!--Recent Applicant Start-->
                         <div class="tab-pane" id="rtj_tab_recent_application">
-                            @foreach($applicant as $appl)
+                        @foreach($applicant as $appl)
                                 <div class="col-md-12 rtj-item">
                                     <img src="{{ url('profile-photos/'.$appl->profilePhoto) }}" style="width: 50px">
                                     <div class="rtj-details">
-                                        <p><strong><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}?jobId={{$appl->jobId}}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
+                                        <p><strong><a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
                                         <p>{!! $appl->title !!}</p>
-                                        <p>{{ $appl->applyTime }}</p>
+                                        <p>{{ date('d M',strtotime($appl->applyTime)) }}</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -493,5 +497,67 @@ $('#active_deactive'+i).click(function(e){
             }
         }
     });
+    $('input[type=checkbox]').on('change', function() {
+        var val = [];
+        $(':checkbox:checked').each(function(i){
+          val[i] = $(this).val();
+         
+          
+        });
+        var jobarry=$.unique(val.sort()).sort();
+       
+        //console.log(jobarry);
+        $.ajax({
+    url:"{{ url('account/employer/yes') }}",
+    type:"post",
+    data:{jobarry:jobarry,_token:"{{ csrf_token() }}"},
+    success:function(applicant){
+       console.log(applicant);
+       var htmls='';
+       //var alldata =$.parseJSON(applicant);
+        for(var i=0; i<applicant.length; i++){
+            
+            for(var j=0; j<applicant[i].length; j++){
+                console.log(applicant[i][j].title);
+           htmls += '<div class="col-md-12 rtj-item">';
+           htmls += '<img src="'+jsUrl()+'/profile-photos/'+applicant[i][j].profilePhoto+'" style="width: 50px">';
+           htmls += '<div class="rtj-details">';
+           htmls +=  '<p><strong><a href="'+jsUrl()+'/account/employer/application/applicant/'+applicant[i][j].userId+'">'+applicant[i][j].firstName+' '+applicant[i][j].lastName+'</a></strong></p>';
+           htmls +=  '<p>'+applicant[i][j].title+'</p>';
+           htmls +=  '<p>'+applicant[i][j].applyTime+'</p>';
+           htmls +=  '</div>';
+           htmls +=  '</div>';
+            }                                
+
+        }
+        console.log(htmls);
+        $('#rtj_tab_recent_application').html(htmls);
+    }
+ })
+        
+});
+    /* $('.select_job').click(function(event) {
+       // alert("jj");
+        var id_array = [];
+        if(this.checked) {
+           // alert("jj");
+            // Iterate each checkbox
+            $(':checkbox').each(function() {
+                this.checked = true;
+                var id = $(this).find('#job_id').val();
+                    id_array.push(id);
+                    alert(id_array);
+
+               
+            });
+        }
+        else{
+            $(':checkbox').each(function() {
+                this.checked = false;
+                $('table tr').removeClass('ea-record-selected');
+            });
+        }
+    }); */
+
 </script>
 @endsection

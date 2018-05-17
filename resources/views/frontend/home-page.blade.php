@@ -94,11 +94,11 @@ $lToken = csrf_token();
                                         </form>
                                     </div>
                                     <!-- read tab starts from here -->
-<style>
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #cccccc !important;
-    line-height: 28px; }
-</style>
+                                    <style>
+                                    .select2-container--default .select2-selection--single .select2-selection__rendered {
+                                        color: #cccccc !important;
+                                        line-height: 28px; }
+                                    </style>
                                     <div class="tab-pane" id="search_tab_4">
                                         <form role="form" method="POST" action="{{url('read')}}">
                                             <div class="input-fields">
@@ -285,8 +285,11 @@ $lToken = csrf_token();
 										@endif
 										@if($job->jobreceipt06 == 'yes')
 											@lang('home.jobreceipt06')ㆍ
-										@endif								
-									</p>
+										@endif	
+                                        @if($job->questionaire_id)
+                                        <span style="float:right;padding-right: 6px;">Test Require	</span>						
+									@endif
+                                    </p>
                                     <p style="padding-left:5px;padding-top:2px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>							
                                 </div>
                             </div>
@@ -374,7 +377,10 @@ $lToken = csrf_token();
 										@endif
 										@if($comp->jobreceipt06 == 'yes')
 											@lang('home.jobreceipt06')
-										@endif					
+										@endif	
+                                        @if($comp->questionaire_id)
+                                        <span style="float:right;padding-right: 6px;">Test Require	</span>						
+									@endif				
 								</p>
                                 <p style="padding-left:5px">@lang('home.'.JobCallMe::cityName($comp->city)), @lang('home.'.JobCallMe::countryName($comp->country))</p>
 							</span>
@@ -467,6 +473,9 @@ $lToken = csrf_token();
 										@if($job->jobreceipt06 == 'yes')
 											@lang('home.jobreceipt06')
 										@endif
+                                        @if($job->questionaire_id)
+                                        <span style="float:right;padding-right: 6px;">Test Require	</span>						
+									@endif
 									</p>
                                     <p style="padding-left:5px;padding-top:2px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
@@ -552,7 +561,10 @@ $lToken = csrf_token();
 										@endif
 										@if($job->jobreceipt06 == 'yes')
 											@lang('home.jobreceipt06')
-										@endif										
+										@endif	
+                                        @if($job->questionaire_id)
+                                        <span style="float:right;padding-right: 6px;">Test Require	</span>						
+									@endif									
 									</p>
                                     <p style="padding-left:5px;color:#fff;padding-top:2px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>
@@ -635,7 +647,10 @@ $lToken = csrf_token();
 										@endif
 										@if($job->jobreceipt06 == 'yes')
 											@lang('home.jobreceipt06')
-										@endif			
+										@endif	
+                                        @if($job->questionaire_id)
+                                        <span style="float:right;padding-right: 6px;">Test Require	</span>						
+									@endif		
 								</p>
                                 <p style="padding-left:5px;color:#fff">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                             </div>
@@ -721,6 +736,9 @@ $lToken = csrf_token();
 										@if($job->jobreceipt06 == 'yes')
 											@lang('home.jobreceipt06')
 										@endif
+                                        @if($job->questionaire_id)
+                                        <span style="float:right;padding-right: 6px;">Test Require	</span>						
+									@endif
 									</p>
                                     <p style="padding-left:5px;color:#fff;padding-top:2px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</p>
                                 </div>

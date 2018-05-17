@@ -259,7 +259,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('jobseeker/interview/{id}', 'frontend\Jobseeker@showInterview');
 
     /* employer */
-    Route::get('employer','frontend\Employer@home');
+	Route::get('employer','frontend\Employer@home');
+	Route::post('employer/yes','frontend\Employer@homepage');
     Route::get('getprivcy','frontend\Employer@getprivacyrecord');
     Route::match(['get','post'],'employer/job/new','frontend\Employer@jobPost');
     Route::post('employer/job/save','frontend\Employer@saveJob');

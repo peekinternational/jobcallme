@@ -163,20 +163,13 @@
 
                 </select>
             </div>
-<<<<<<< HEAD
-            <!-- <ul class="social-links" style="padding-top:15px">
-                <li><a href="https://facebook.com"><i class="fa fa-facebook-square"></i> </a> </li>
-                <li><a href="https://twitter.com"><i class="fa fa-twitter-square"></i> </a> </li>
-                <li><a href="https://linkedin.com"><i class="fa fa-linkedin-square"></i> </a> </li>
-            </ul> -->
-=======
-            <!--<ul class="social-links" style="padding-top:15px">
-                <li><a href="https://facebook.com"><i class="fa fa-facebook-square"></i> </a> </li>
-                <li><a href="https://twitter.com"><i class="fa fa-twitter-square"></i> </a> </li>
-                <li><a href="https://linkedin.com"><i class="fa fa-linkedin-square"></i> </a> </li>
-            </ul>-->
->>>>>>> f63769e61a4056ee42a3a47994e1ade44f664292
-
+            <p class="user-sns" style="padding-top: 16px;float: left;">
+            <a href="{{url('/fbApi')}}"><i class="fa fa-facebook-square"></i></a>
+			<a href="{{url('/googleApi')}}"><i class="fa fa-google-plus-square"></i></a>
+			<a href="{{url('/lnApi')}}"><i class="fa fa-linkedin-square"></i></a>
+								   
+			</p>
+           
         </div>
     
     </div>
