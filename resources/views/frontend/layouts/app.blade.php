@@ -49,6 +49,7 @@ date_default_timezone_set("Asia/Seoul");
         <!--Latest Job Slide -->
         <!-- <link href="{{ asset('frontend-assets/css/ticker.css') }}" rel="stylesheet"> -->
         <link href="{{ asset('frontend-assets/css/toastr.css') }}" rel="stylesheet">
+        <link href="{{ asset('frontend-assets/css/circle.css') }}" rel="stylesheet">
         <!--FeedBack Form-->
         <link href="{{ asset('frontend-assets/css/feedBackBox.css') }}" rel="stylesheet">
         <!-- pace -->
