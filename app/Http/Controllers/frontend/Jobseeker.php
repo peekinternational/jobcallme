@@ -1088,7 +1088,7 @@ class Jobseeker extends Controller{
 				return redirect('account/manage?plan');
 			}
 				else{
-					$hi=DB::table('jcm_download')->where('seeker_id',$id)->get();
+					$hi=DB::table('jcm_download')->where('seeker_id',$id)->where('emp_id',$userid)->get();
 					$checkcv=count($hi);
 					if($checkcv !="" && $checkcv != null)
 					{
