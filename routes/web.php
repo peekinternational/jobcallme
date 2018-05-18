@@ -478,4 +478,8 @@ Route::post('update/record','sajidController@update');
 Route::post('offerdelete/record','sajidController@offerdelete');
 
 Route::post('offerupdate/record','sajidController@offerupdate');
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
 

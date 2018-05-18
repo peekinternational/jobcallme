@@ -233,6 +233,8 @@ $opHour = json_decode($company->companyOperationalHour,true);
                         <span>@lang('home.Total reviews') <span class="badge red">{{ count($companyReview) }} </span></span>
                     </p>
                     <hr>
+                    <div class="row">
+                    <div class="col-md-4">
                     <p>
                         <table>
                             <tr>
@@ -272,18 +274,39 @@ $opHour = json_decode($company->companyOperationalHour,true);
                             </tr>
                         </table>
                     </p>
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-4">
+                    </div>
+                        <div class="col-md-8">
                             <div class="row" align="center">
                                 <div class="col-md-4">
+                                <div class="c100 p0">
+                            <span>0%</span>
+                            <div class="slice">
+                                <div class="bar"></div>
+                                <div class="fill"></div>
+                            </div>
+                        </div>
                                     <span style="font-size:12px;color:#0d3f6b;">@lang('home.'.$ceo_recommend_star)</span>
                                     <p>@lang('home.CEO Recommended')</p>
                                 </div>
                                 <div class="col-md-4">
+                                <div class="c100 p0">
+                            <span>0%</span>
+                            <div class="slice">
+                                <div class="bar"></div>
+                                <div class="fill"></div>
+                            </div>
+                        </div>
                                     <span style="font-size:12px;color:#0d3f6b;">@if($recommend_star == 'on') Yes @else @lang('home.Not recommend') @endif</span>
                                     <p>@lang('home.Recommend to a friend')</p>
                                 </div>
                                 <div class="col-md-4">
+                                <div class="c100 p0">
+                            <span>0%</span>
+                            <div class="slice">
+                                <div class="bar"></div>
+                                <div class="fill"></div>
+                            </div>
+                        </div>
                                     <span style="font-size:12px;color:#0d3f6b;">@lang('home.'.$future_star)</span>
                                     <p>@lang('home.Future Expectations')</p>
                                 </div>
