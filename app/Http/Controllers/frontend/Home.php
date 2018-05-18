@@ -683,6 +683,7 @@ class Home extends Controller{
     		$company->where('category','=',$request->input('in'));
     	}
 		$company->where('jcm_companies.category','!=','');
+		$company->where('jcm_companies.companyAbout','!=',null);
     	
     	$company->orderBy('package','desc');
     	$company->orderBy('companyModifiedTime','desc');
