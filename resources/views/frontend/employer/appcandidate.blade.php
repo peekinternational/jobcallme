@@ -37,6 +37,12 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="candidate_id" value="{{$userId}}">
                             <input type="hidden" name="job_id" value="{{ $jobId }}">
+                         
+                            @if($evaluationData[0] =='')
+                            <section class="personal-info-section">
+                           <h5>No Evalutation Found</h5>
+                           </section>
+                            @else
                         <section class="personal-info-section">
                            <p class="bold">{{$evaluationData[0]->title}}</p>
                            <input type="hidden" name="evaluation_title" value="{{$evaluationData[0]->title}}">
@@ -93,6 +99,7 @@
                            <input type="hidden" name="total" value="{{ $eva_ans[0]->total}}">
                            <button type="button" class="btn btn-info save" disabled="disabled">@lang('home.Save Changes')</button>
                         </section>
+                        @endif
                         </form>
                     </div>
                     <!-- main tab start resume -->

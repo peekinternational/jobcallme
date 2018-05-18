@@ -1098,7 +1098,7 @@
                                        <select class="form-control" name="evaluation_form" id="ev_form" disabled="disabled">
                                            <option value=""> @lang('home.select evaluation')</option>
                                            @foreach($evaluation as $form)
-                                           <option value="{{ $form->id}}">{{$form->title}}</option>
+                                           <option value="{{ $form->evaluation_id}}">{{$form->title}}</option>
 
                                            @endforeach
                                        </select>                             

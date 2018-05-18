@@ -119,7 +119,7 @@ curl_close ($ch);
 	 
     public function postPaymentWithpaypals(Request $request)
     {
-	//dd($request->draft);
+	//dd($request->all());
 	$this->validate($request,[
 				'title' => 'required|max:255',
 				'department' => 'required',
@@ -168,6 +168,7 @@ curl_close ($ch);
 		$request->session()->put('amount', $durations);
 		$request->session()->put('title', $request->title);
 		$request->session()->put('jobaddr', $request->jobaddr);
+		$request->session()->put('evaluation_form', $request->evaluation_form);
 		$request->session()->put('head', $request->head);
 		$request->session()->put('dispatch', $request->dispatch);
 		$request->session()->put('jType', 'Paid');
@@ -319,6 +320,10 @@ if($request->draft){
 			$input['subCategory'] = '';
 		}
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
+		$inputs['job_id']=$jobId;
+		$inputs['user_id']=$app->userId;
+		$inputs['evaluation_id']=$request->evaluation_form;
+		 DB::table('jcm_job_evaluation')->insertGetId($inputs);
 		//DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 		//dd($jobId);
 		\Session::put('success',trans('home.Add Job Successfully To Draft'));
@@ -359,6 +364,10 @@ else{
 			$input['subCategory'] = '';
 		}
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
+		$inputs['job_id']=$jobId;
+		$inputs['user_id']=$app->userId;
+		$inputs['evaluation_id']=$request->evaluation_form;
+		 DB::table('jcm_job_evaluation')->insertGetId($inputs);
 		 
 		 $remain =$quantity-1;
 		 $inputs['quantity']=$remain;
@@ -398,6 +407,10 @@ else{
 			$input['subCategory'] = '';
 		}
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
+		$inputs['job_id']=$jobId;
+		$inputs['user_id']=$app->userId;
+		$inputs['evaluation_id']=$request->evaluation_form;
+		 DB::table('jcm_job_evaluation')->insertGetId($inputs);
 		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 		//dd($jobId);
 		\Session::put('success',trans('home.Add Job Successfully'));
@@ -525,6 +538,7 @@ else{
 		$currency = Session::get('currency');
 		$benefits = Session::get('benefits');
 		$process = Session::get('process');
+		$evaluation_form = Session::get('evaluation_form');
 		//$jobaddr = Session::get('jobaddr');
 		$country = Session::get('country');
 		$shift = Session::get('shift');
@@ -570,6 +584,10 @@ else{
 			$input['subCategory'] = '';
 		}
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
+		$inputs['job_id']=$jobId;
+		$inputs['user_id']=$app->userId;
+		$inputs['evaluation_id']=$evaluation_form;
+		 DB::table('jcm_job_evaluation')->insertGetId($inputs);
 		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]);  
 		echo $jobId;
             
@@ -657,6 +675,7 @@ else{
 			$jobreceipt07 = Session::get('jobreceipt07');
 			$jobhomgpage = Session::get('jobhomgpage');
 			$afterinterview = Session::get('afterinterview');
+			$evaluation_form = Session::get('evaluation_form');
 
 			extract($request->all());
 
@@ -668,6 +687,11 @@ else{
 			}
 			
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
+				$jobId = DB::table('jcm_jobs')->insertGetId($input);
+			$inputss['job_id']=$jobId;
+			$inputss['user_id']=$app->userId;
+			$inputss['evaluation_id']=$evaluation_form;
+			DB::table('jcm_job_evaluation')->insertGetId($inputss);
 			DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 			Session::put('postedJobId',$jobId);
 		else: 
@@ -1236,7 +1260,7 @@ else{
 
 		/* evaluation tab data *muhammad sajid 20/4/2018* */
 
-		$evaluationData = DB::table('jcm_evaluation as eva')->select('eva.*','eva_que.evaluation_factor','eva_que.weight')->leftJoin('jcm_evaluation_question as eva_que','eva.evaluation_id','=','eva_que.evaluation_id')->where('eva.job_id',$jobId)->where('eva.user_id',$app->userId)->get();
+		$evaluationData = DB::table('jcm_evaluation as eva')->select('eva.*','eva_que.evaluation_factor','eva_que.weight')->leftJoin('jcm_evaluation_question as eva_que','eva.evaluation_id','=','eva_que.evaluation_id')->leftJoin('jcm_job_evaluation as eva_job','eva.evaluation_id','=','eva_job.evaluation_id')->where('eva_job.job_id',$jobId)->where('eva.user_id',$app->userId)->get();
 
 		$eva_ans = DB::table('jcm_evaluation_answer as eva_ans')->where('job_id',$jobId)->where('candidate_id',$userId)->get();
 
@@ -2068,6 +2092,7 @@ public function mapOrganization(Request $request){
 			$jobreceipt07 = Session::get('jobreceipt07');
 			$jobhomgpage = Session::get('jobhomgpage');
 			$afterinterview = Session::get('afterinterview');
+			$evaluation_form = Session::get('evaluation_form');
 		
       //	dd($amounts);
 			extract($request->all());
@@ -2077,8 +2102,12 @@ public function mapOrganization(Request $request){
 				$inputs['subCategory'] = '';
 			}
 			
-        $input['questionaire_id'] = $questionaire_id;
+            $inputs['questionaire_id'] = $questionaire_id;
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
+			$inputsss['job_id']=$jobId;
+			$inputsss['user_id']=$app->userId;
+			$inputsss['evaluation_id']=$evaluation_form;
+			DB::table('jcm_job_evaluation')->insertGetId($inputsss);
 			DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Categoryss,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 			$order['job_id']=$jobId;
 			$order['user_id']=$apps->userId;
