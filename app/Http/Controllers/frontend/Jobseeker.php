@@ -40,6 +40,7 @@ class Jobseeker extends Controller{
 		$company = DB::table('jcm_companies');
     	$company->orderBy('companyId','desc');
 		$company->where('category','!=','');
+		$company->where('companyAbout','!=',null);
     	$company->limit(4);
     	$companies = $company->inRandomOrder()->get();
 
