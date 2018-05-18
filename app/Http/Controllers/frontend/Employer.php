@@ -364,11 +364,12 @@ else{
 			$input['subCategory'] = '';
 		}
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
+		
 		if($request->evaluation_form !=""){
-		$inputs['job_id']=$jobId;
-		$inputs['user_id']=$app->userId;
-		$inputs['evaluation_id']=$request->evaluation_form;
-		 DB::table('jcm_job_evaluation')->insertGetId($inputs);
+		$in['job_id']=$jobId;
+		$in['user_id']=$app->userId;
+		$in['evaluation_id']=$request->evaluation_form;
+		 DB::table('jcm_job_evaluation')->insertGetId($in);
 		}
 		 
 		 $remain =$quantity-1;
