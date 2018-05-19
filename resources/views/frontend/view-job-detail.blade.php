@@ -929,4 +929,5 @@ geocoder.geocode( { 'address': address}, function(results, status) {
     <meta property="og:url" content="https://www.jobcallme.com/">
     <meta property="og:image" content="{{ $cLogo }}">
     <meta property="og:description" content="{{$job->title}}">
+    
 @endsection
