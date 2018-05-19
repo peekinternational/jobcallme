@@ -17,7 +17,11 @@ date_default_timezone_set("Asia/Seoul");
     <head>
         <title>{{ $headerWeb['webTitle'] }} [잡콜미]</title>
 
-		@yield('og')
+		<meta property="og:url" content="https://www.jobcallme.com/">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="JobCallMe">
+		<meta property="og:image" content="https://www.jobcallme.com/website/weblinkimage.png">		
+		<link rel="canonical" href="https://www.jobcallme.com/"> 
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -113,7 +117,7 @@ date_default_timezone_set("Asia/Seoul");
         <script src="{{ asset('frontend-assets/js/toastr.min.js') }}"></script>
         <!--FeedBack Form-->
        <!-- check if session is set then not include else include -->
-        @if(!session()->has('jcmUser'))<script src="{{ asset('frontend-assets/js/feedBackBox.js') }}"></script>@endif
+        <script src="{{ asset('frontend-assets/js/feedBackBox.js') }}"></script>
         <!-- pace -->
 		<script type="text/javascript" src="{{ asset('frontend-assets/pace/pace.js') }}"></script>
         <script src="{{ asset('frontend-assets/tinymce/tinymce.min.js') }}"></script>
@@ -136,12 +140,12 @@ date_default_timezone_set("Asia/Seoul");
 </script>
 <!--FeedBack Form-->
 <!-- <script src="js/feedBackBox.js"></script> -->
-@if(!session()->has('jcmUser'))<script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $('#feedback-Form').feedBackBox();
     });
 </script>
-@endif
+
 <!--Scroll to top Button-->
 <script>
     jQuery(document).ready(function() {
@@ -373,7 +377,7 @@ date_default_timezone_set("Asia/Seoul");
         $(document).ready(function() {
             $(".location,.select2").select2();
 			$(".select3").select3();
-            @if(!session()->has('jcmUser'))$('#feedback-Form').feedBackBox();@endif
+            $('#feedback-Form').feedBackBox();
             var offset = 250;
             var duration = 300;
             $(window).scroll(function() {

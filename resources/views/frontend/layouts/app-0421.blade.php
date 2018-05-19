@@ -369,7 +369,7 @@ date_default_timezone_set("Asia/Seoul");
         $(document).ready(function() {
             $(".location,.select2").select2();
 			$(".select3").select3();
-            @if(!session()->has('jcmUser'))$('#feedback-Form').feedBackBox();@endif
+            $('#feedback-Form').feedBackBox();
             var offset = 250;
             var duration = 300;
             $(window).scroll(function() {
