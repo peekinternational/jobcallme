@@ -922,3 +922,13 @@ geocoder.geocode( { 'address': address}, function(results, status) {
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1RaWWrKsEf2xeBjiZ5hk1gannqeFxMmw&libraries=places&callback=initAutocomplete" async defer></script>
 
 @endsection
+
+@section('og')
+<meta property="og:url" content="https://www.jobcallme.com/jobs/'.$job->jobId">
+			
+		
+<meta property="og:title" content="{{ $job->title }}" />
+<meta property="og:image" content="{{ $cLogo }}" />
+<meta property="og:type" content="website" />
+
+@endsection
