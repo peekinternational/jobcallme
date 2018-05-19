@@ -1,6 +1,6 @@
 <?php 
 $headerWeb = json_decode(file_get_contents(public_path('website/web-setting.info')),true);
-$headerFavicon = url('/website/favicon.ico');
+$headerFavicon = url('/website/logo.png');
 if(file_exists('/website/'.$headerWeb['webFavicon'])){
     $headerFavicon = url('/website/'.$headerWeb['webFavicon']);
 }
