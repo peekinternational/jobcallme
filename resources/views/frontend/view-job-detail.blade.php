@@ -926,9 +926,9 @@ geocoder.geocode( { 'address': address}, function(results, status) {
 @section('og')
 
 			
- <meta property="og:url" content="https://www.jobcallme.com/">	
+ 	
 <meta property="og:title" content="{{ $job->title }}" />
 <meta property="og:image" content="{{ $cLogo }}" />
 <meta property="og:type" content="website" />
-<link rel="canonical" href="https://www.jobcallme.com/"> 
+
 @endsection
