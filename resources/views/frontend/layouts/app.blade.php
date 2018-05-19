@@ -17,7 +17,7 @@ date_default_timezone_set("Asia/Seoul");
     <head>
         <title>{{ $headerWeb['webTitle'] }} [잡콜미]</title>
 
-		@yield('og')
+		@yield('facebook_meta')
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -921,14 +921,12 @@ geocoder.geocode( { 'address': address}, function(results, status) {
     </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1RaWWrKsEf2xeBjiZ5hk1gannqeFxMmw&libraries=places&callback=initAutocomplete" async defer></script>
 
-@endsection
+
 
 @section('og')
 
-			
- 	
-<meta property="og:title" content="{{ $job->title }}" />
-<meta property="og:image" content="{{ $cLogo }}" />
-<meta property="og:type" content="website" />
-
+@section('facebook_meta')
+    <meta property="og:url" content="https://www.jobcallme.com/">
+    <meta property="og:image" content="{{ $cLogo }}">
+    <meta property="og:description" content="{{$job->title}}">
 @endsection
