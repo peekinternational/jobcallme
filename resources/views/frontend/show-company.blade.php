@@ -278,8 +278,8 @@ $opHour = json_decode($company->companyOperationalHour,true);
                         <div class="col-md-8">
                             <div class="row" align="center">
                                 <div class="col-md-4">
-                                <div class="c100 p0">
-                            <span>0%</span>
+                                <div class="c100 p<?php echo round($allrecmond) ?>">
+                            <span><?php echo round($allrecmond) ?>%</span>
                             <div class="slice">
                                 <div class="bar"></div>
                                 <div class="fill"></div>
@@ -289,8 +289,8 @@ $opHour = json_decode($company->companyOperationalHour,true);
                                     <p>@lang('home.CEO Recommended')</p>
                                 </div>
                                 <div class="col-md-4">
-                                <div class="c100 p0">
-                            <span>0%</span>
+                                <div class="c100 p<?php echo round($allon) ?>">
+                            <span><?php echo round($allon) ?>%</span>
                             <div class="slice">
                                 <div class="bar"></div>
                                 <div class="fill"></div>
@@ -300,8 +300,8 @@ $opHour = json_decode($company->companyOperationalHour,true);
                                     <p>@lang('home.Recommend to a friend')</p>
                                 </div>
                                 <div class="col-md-4">
-                                <div class="c100 p0">
-                            <span>0%</span>
+                                <div class="c100 p<?php echo round($allgrowing) ?>">
+                            <span><?php echo round($allgrowing) ?>%</span>
                             <div class="slice">
                                 <div class="bar"></div>
                                 <div class="fill"></div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
+use Mail;
 use Illuminate\Support\Facades\Lang;
 
 class Jobs extends Controller{
@@ -651,7 +652,21 @@ class Jobs extends Controller{
 		     //dd($benefits);
 			$companyReview = DB::table('jcm_companyreview')->where('company_id',$job->companyId)->get();
 			
-		return view('frontend.view-job-detail',compact('fellow','learncount','reviewcount','applycount','jobcount','companyReview','job','savedJobArr','followArr','userId','suggest','jobApplied','benefits','process'));
+			$companyRecommended= DB::table('jcm_companyreview')->where('company_id',$job->companyId)->where('recommend_ceo','Recommended')->get();
+			$companyon= DB::table('jcm_companyreview')->where('company_id',$job->companyId)->where('recommend','on')->get();
+			$companygrowing= DB::table('jcm_companyreview')->where('company_id',$job->companyId)->where('future','Growing Up')->get();
+			
+			$allrec=count($companyReview);
+			$percec=count($companyRecommended);
+			$peron=count($companyon);
+			$pergrowing=count($companygrowing);
+			$allrecmond=$allrec == 0 ? 0 : ($percec*100/$allrec);
+			$allon=$allrec == 0 ? 0 : ($peron*100/$allrec);
+			$allgrowing=$allrec == 0 ? 0 : ($pergrowing*100/$allrec);
+			//dd($allrecmond);
+
+			
+		return view('frontend.view-job-detail',compact('allgrowing','allon','allrecmond','fellow','learncount','reviewcount','applycount','jobcount','companyReview','job','savedJobArr','followArr','userId','suggest','jobApplied','benefits','process'));
 		
 	}
 
@@ -680,7 +695,24 @@ class Jobs extends Controller{
 	    		$questiondata = DB::table('jcm_questions')->where('ques_id',$quesdata->ques_id)->get();
 	    		DB::table('jcm_job_applied')->insert($input);
 	    		return view('frontend.employer.questionaireScreen',compact('currentjob','quesdata','questiondata'));
-	    	}
+			}
+			$alert=DB::table('jcm_account_alert')->where('userId',$currentjob->userId)->first();
+			//dd($alert->newApplication);
+
+			if($alert->newApplication == 'Yes'){
+			$secid=DB::table('jcm_users')->where('userId',$currentjob->userId)->first();
+			$secidtoview = array($secid);
+			
+			//dd($secidtoview);
+
+
+            $toemail=$secidtoview[0]->email;
+			
+			Mail::send('emails.applyjob',['data'=>$currentjob,'userdata'=>$secid],function($message) use ($toemail) {
+				$message->to($toemail)->subject(trans('home.Jobseeker apply job'));
+				
+			});
+			}
 	    	/* insert apply job data to database*/
 	    	DB::table('jcm_job_applied')->insert($input);
 	    	return redirect('account/jobseeker');

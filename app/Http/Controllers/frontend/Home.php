@@ -705,9 +705,22 @@ class Home extends Controller{
 			$savedJobArr = @explode(',', $meta->saved);
 			$followArr = @explode(',', $meta->follow);
 		}
+
 		$companyReview = DB::table('jcm_companyreview')->leftJoin('jcm_users','jcm_users.userId','=','jcm_companyreview.user_id')->where('company_id','=',$companyId)->get();
-		
-    	return view('frontend.show-company',compact('company','jobs','followArr','companyReview'));
+	
+		    $companyRecommended= DB::table('jcm_companyreview')->leftJoin('jcm_users','jcm_users.userId','=','jcm_companyreview.user_id')->where('company_id',$companyId)->where('recommend_ceo','Recommended')->get();
+			$companyon= DB::table('jcm_companyreview')->leftJoin('jcm_users','jcm_users.userId','=','jcm_companyreview.user_id')->where('company_id',$companyId)->where('recommend','on')->get();
+			$companygrowing= DB::table('jcm_companyreview')->leftJoin('jcm_users','jcm_users.userId','=','jcm_companyreview.user_id')->where('company_id',$companyId)->where('future','Growing Up')->get();
+			
+			$allrec=count($companyReview);
+			$percec=count($companyRecommended);
+			$peron=count($companyon);
+			$pergrowing=count($companygrowing);
+			$allrecmond=$allrec == 0 ? 0 : ($percec*100/$allrec);
+			$allon=$allrec == 0 ? 0 : ($peron*100/$allrec);
+			$allgrowing=$allrec == 0 ? 0 : ($pergrowing*100/$allrec);
+
+    	return view('frontend.show-company',compact('allgrowing','allon','allrecmond','company','jobs','followArr','companyReview'));
     }
 
     public function sendFeedback(Request $request){
