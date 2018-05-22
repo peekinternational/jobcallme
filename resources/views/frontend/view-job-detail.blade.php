@@ -84,7 +84,7 @@ $dispatch='';
                 
                 <div class="jd-share-btn">
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}" target="_blank">
-                    	<i class="fa fa-facebook social-share" style="background: #2e6da4;"></i> 
+                    	<i class="fa fa-facebook" style="background: #2e6da4;"></i> 
                     </a>
                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url('jobs/'.$job->jobId) }}&title=&summary=&source=">
                     	<i class="fa fa-linkedin" style=" background: #007BB6;"></i> 
