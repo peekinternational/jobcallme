@@ -83,16 +83,16 @@ $dispatch='';
 		
                 
                 <div class="jd-share-btn">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('jobs/'.$job->jobId) }}">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('jobs/'.$job->jobId) }}" target="_blank">
                     	<i class="fa fa-facebook" style="background: #2e6da4;"></i> 
                     </a>
                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url('jobs/'.$job->jobId) }}&title=&summary=&source=">
                     	<i class="fa fa-linkedin" style=" background: #007BB6;"></i> 
                     </a>
-                    <a href="https://twitter.com/home?status={{ url('jobs/'.$job->jobId) }}">
+                    <a href="https://twitter.com/home?status={{ url('jobs/'.$job->jobId) }}" target="_blank" >
                     	<i class="fa fa-twitter" style="background: #15B4FD;"></i> 
                     </a>
-                    <a href="https://plus.google.com/share?url={{ url('jobs/'.$job->jobId) }}">
+                    <a href="https://plus.google.com/share?url={{ url('jobs/'.$job->jobId) }}" target="_blank" >
                     	<i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                     </a>
                 </div>

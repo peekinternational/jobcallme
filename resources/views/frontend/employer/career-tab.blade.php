@@ -26,7 +26,7 @@
 				<br>
 				<br>
 				<br>
-				   <button type="submit" class="btn btn-primary"><a href="{{$company->companyFb}}" style="color:white">@lang('home.facebookcareerstab')</a></button>
+				   <button type="submit" class="btn btn-primary"><a href="{{$company->companyFb}}" style="color:white" target="_blank" >@lang('home.facebookcareerstab')</a></button>
 				</div>
 			   
 				 
