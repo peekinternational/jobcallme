@@ -83,7 +83,7 @@ $dispatch='';
 		
                 
                 <div class="jd-share-btn">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}" target="_blank">
+                    <a  href="javascript: void(0)" onClick="window.open('https://www.facebook.com/dialog/share?app_id=377749349357447&display=page&href=https%3A%2F%2Fwww.jobcallme.com%2Fjobs%2F<?php echo $job->jobId; ?>%2F&redirect_uri=https%3A%2F%2Fwww.jobcallme.com&picture=<?php echo $cLogo;?>&title=<?php echo $job->title; ?> ');return false;">
                     	<i class="fa fa-facebook" style="background: #2e6da4;"></i> 
                     </a>
                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url('jobs/'.$job->jobId) }}&title=&summary=&source=">
@@ -422,6 +422,10 @@ $dispatch='';
 								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
 							@elseif($benefit == 'Overtime pay')
 								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
+							@elseif($benefit == 'See Homepage')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
+							@elseif($benefit == 'See Description')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
 							@else
 								<i class="fa fa-check-circle"></i> {{ $benefit }}
 							@endif
@@ -632,10 +636,17 @@ $dispatch='';
                     </div>
         
 		<div class="col-md-3">
-        <button class="btn btn-md" style=" border-radius:0px !important;background-color: #337ab7;border: none;color: white;">Job Searching {{$applycount}} of {{$jobcount}}</button> <button class="btn btn-md" style=" border-radius:0px !important;background-color: #a0b1b9;border: none;color: white;">Company Review: {{$reviewcount}}  </button> 
-                <br>
-                <br>
-                <button class="btn btn-md" style=" border-radius:0px !important;background-color: #5b5c5e;border: none;color: white;">Company Fellow: {{$fellow}} </button> <button class="btn btn-md" style=" border-radius:0px !important;background-color: #57768a;border: none;color: white;">Total Post Upskill: {{$learncount}} &nbsp; </button>
+			<div><button class="btn btn-md" style=" border-radius:5px !important;background-color: #337ab7;border: none;color: white;width:100%;"><span style="float:left;padding-left:10px;">@lang('home.Job Searching')</span> <span style="font-size:20px;color:#f7d23a;float:right;padding-right:10px;">{{$applycount}}<span style="font-size:13px;color:#f7d23a;">@lang('home.totApplicant')</span> &nbsp;{{$jobcount}}<span style="font-size:13px;color:#f7d23a;">@lang('home.totView')</span></span></button></div>
+
+			<div style="padding-top:10px;"><button class="btn btn-md" style=" border-radius:5px !important;background-color: #a0b1b9;border: none;color: white;width:100%;"><span style="float:left;padding-left:10px;">@lang('home.Company Review')</span> <span style="font-size:20px;color:#f7d23a;float:right;padding-right:10px;">{{$reviewcount}}</span></button></div>
+
+			<div style="padding-top:10px;"><button class="btn btn-md" style=" border-radius:5px !important;background-color: #5b5c5e;border: none;color: white;width:100%;"><span style="float:left;padding-left:10px;">@lang('home.Company Fellow')</span> <span style="font-size:20px;color:#f7d23a;float:right;padding-right:10px;">{{$fellow}}</span></button></div>
+
+			<div style="padding-top:10px;"><button class="btn btn-md" style=" border-radius:5px !important;background-color: #57768a;border: none;color: white;width:100%;"><span style="float:left;padding-left:10px;">@lang('home.Total Post Upskill')</span> <span style="font-size:20px;color:#f7d23a;float:right;padding-right:10px;">{{$learncount}}</span></button></div>
+
+
+			
+        
 		    <br>
             <br>
             <!--Follow Companies - Start -->
@@ -943,3 +954,14 @@ geocoder.geocode( { 'address': address}, function(results, status) {
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1RaWWrKsEf2xeBjiZ5hk1gannqeFxMmw&libraries=places&callback=initAutocomplete" async defer></script>
 
 @endsection
+@section('og')
+<meta property="og:url" content="https://www.jobcallme.com/">
+			
+		
+<meta property="og:title" content="{{ $job->title }}" />
+<meta property="og:image" content="{{ $cLogo }}" />
+<meta property="og:type" content="website" />
+<link rel="canonical" href="{{url('jobs/'.$job->jobId)}}"> 
+@endsection
+
+

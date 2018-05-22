@@ -103,6 +103,12 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('cms/shift/get/{id}','admin\Cms@getJobShift');
 	Route::delete('cms/shift/delete','admin\Cms@deleteJobShift');
 
+	/* job shift */
+	Route::match(['get','post'],'services','admin\Cms@viewservices');
+	Route::post('services/save','admin\Cms@saveservices');
+	Route::get('services/get/{id}','admin\Cms@getservices');
+	Route::delete('services/delete','admin\Cms@deleteservices');
+
 	/* job type */
 	Route::match(['get','post'],'cms/jobtype','admin\Cms@viewJobType');
 	Route::post('cms/jobtype/save','admin\Cms@saveJobType');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
 use DB;
+use Mail;
 use App\UpskillType;
 
 class Cms extends Controller{
@@ -758,5 +759,90 @@ class Cms extends Controller{
             
         }
     }
+
+
+
+
+
+    public function viewservices(Request $request){
+        
+        $services = DB::table('jcm_our_service')->get();
+       // dd($services);
+               
+        /* end */
+
+        return view('admin.service',compact('services'));
+    }
+
+    public function saveservices(Request $request){
+
+        if(!$request->ajax()){
+            exit('Directory access is forbidden');
+        }
+        //dd($request->all());
+        $serveId = trim($request->input('serveId'));
+        $services = trim($request->input('services'));
+        $servicesdetail = trim($request->input('servicesdetail'));
+        $input['services']=$services;
+        $input['servicesdetail']=$servicesdetail;
+
+
+        if($services == ''){
+            exit('Please enter Service Link.');
+        }
+        if($servicesdetail == ''){
+            exit('Please enter Service Detail.');
+        }
+       
+        $input = array('services' => $services,'servicesdetail' =>$servicesdetail );
+        if($serveId != '0'){
+            DB::table('jcm_our_service')->where('serve_id','=',$serveId)->update($input);
+            $sMsg = 'Service Updated';
+        }else{
+            $allusers=DB::table('jcm_users')
+            ->leftJoin('jcm_account_alert','jcm_users.userId','=','jcm_account_alert.userId')
+            ->where('jcm_account_alert.serviceAlert','Yes')
+            ->get();
+           
+        // dd($allusers);
+            foreach($allusers as $peruser){
+
+                $toemail=$peruser->email;
+                //echo $toemail;
+			
+                Mail::send('emails.services',['data'=>$input],function($message) use ($toemail) {
+                    $message->to($toemail)->subject(trans('home.New Services Provide'));
+                });
+                
+            }
+            DB::table('jcm_our_service')->insert($input);
+           
+
+
+            $sMsg = 'Service Added';
+        }
+        $request->session()->flash('alert',['message' => $sMsg, 'type' => 'success']);
+        exit('1');
+    }
+
+    public function getservices(Request $request){
+        if(!$request->ajax()){
+            exit('Directory access is forbidden');
+        }
+        $serveId = $request->segment(4);
+        $cat = DB::table('jcm_our_service')->where('serve_id',$serveId)->first();
+        echo @json_encode($cat);
+    }
+
+    public function deleteservices(Request $request){
+        if($request->isMethod('delete')){
+            $serveId = $request->input('serveId');
+            DB::table('jcm_our_service')->where('serve_id','=',$serveId)->delete();
+            $request->session()->flash('alert',['message' => 'Service Deleted','type' => 'success']);
+        }
+        return redirect(url()->previous());
+    }
+
+
 	
 }

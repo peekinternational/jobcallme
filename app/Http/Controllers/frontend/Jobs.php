@@ -710,7 +710,6 @@ class Jobs extends Controller{
 			
 			Mail::send('emails.applyjob',['data'=>$currentjob,'userdata'=>$secid],function($message) use ($toemail) {
 				$message->to($toemail)->subject(trans('home.Jobseeker apply job'));
-				
 			});
 			}
 	    	/* insert apply job data to database*/
