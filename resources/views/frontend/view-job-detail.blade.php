@@ -827,7 +827,7 @@ $(document).on('click', '.social-share', function(event){
     var url = $(this).attr('href');
     var popup = window.open(url, 'Social Share',
         'width='+popupMeta.width+',height='+popupMeta.height+
-        ',left='+vpPsition+',top='+hPosition+
+        ',left='+vPosition+',top='+hPosition+
         ',location=0,menubar=0,toolbar=0,status=0,scrollbars=1,resizable=1');
 
     if (popup) {
