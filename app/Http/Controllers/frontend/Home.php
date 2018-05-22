@@ -785,7 +785,7 @@ public function feedback(Request $request){
 		DB::table('feedback')->insert($data);
 }
 public function getfeedback(Request $request){
-		$data = DB::table('feedback')->get();
+		$data = DB::table('feedback')->orderBy('id','decs')->get();
 		return view('admin.users.feedback',compact('data'));
 }
 public function editfeedback(Request $request){

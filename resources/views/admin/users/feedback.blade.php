@@ -17,6 +17,7 @@
                                         <th>Email</th>
                                         <th>Type</th>
                                         <th>Message</th>
+                                        <th>Created On</th>
                                         <th>Action</th>
                                     </thead>
                                     <tbody>
@@ -43,6 +44,7 @@
                                                 ?>
 
                                                </td>
+                                               <td>{{$feedback->created_at}}</td>
                                                <td>
                                                    <a href="#" onclick="viewfeedback({{$feedback->id}})" data-toggle="tooltip" data-original-title="View"><i class="icon icon-eye"></i></a>&nbsp;&nbsp;&nbsp;
                                                    <a href="javascript:;" onclick="deletefeedback({{$feedback->id}})" data-toggle="tooltip" data-original-title="Delete"><i class="icon icon-remove"></i></a>
