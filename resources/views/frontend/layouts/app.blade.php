@@ -17,7 +17,7 @@ date_default_timezone_set("Asia/Seoul");
     <head>
         <title>{{ $headerWeb['webTitle'] }} [잡콜미]</title>
 
-		<meta property="og:url" content="https://www.jobcallme.com/">
+		<meta property="og:url" content="{{ Request::url() }}">
 		<meta property="og:type" content="website">
 		<meta property="og:title" content="JobCallMe">
 		<meta property="og:image" content="https://www.jobcallme.com/website/weblinkimage.png">		
