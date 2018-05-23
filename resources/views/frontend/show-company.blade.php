@@ -57,10 +57,10 @@ $opHour = json_decode($company->companyOperationalHour,true);
                                 @endif
                                 <a href="{{ url('account/employeer/companies/company/review?CompanyId='.$company->companyId) }}" class="btn btn-default">@lang('home.Write Review')</a>
                                <div class="jd-share-btn cp-social">
-                                   <a href="{!! $company->companyFb !!}"><i class="fa fa-facebook" style="background: #2e6da4;"></i> </a>
-                                   <a href="{!! $company->companyLinkedin !!}"><i class="fa fa-linkedin" style=" background: #007BB6;"></i> </a>
-                                   <a href="{!! $company->companyTwitter !!}"><i class="fa fa-twitter" style="background: #15B4FD;"></i> </a>
-                                   <a href="{!! $company->companyInstagram !!}"><i class="fa fa-google-plus" style="background: #fb3958;"></i> </a>
+                                   <a href="{!! $company->companyFb !!}" target="_blank"><i class="fa fa-facebook" style="background: #2e6da4;"></i> </a>
+                                   <a href="{!! $company->companyLinkedin !!}" target="_blank"><i class="fa fa-linkedin" style=" background: #007BB6;"></i> </a>
+                                   <a href="{!! $company->companyTwitter !!}" target="_blank"><i class="fa fa-twitter" style="background: #15B4FD;"></i> </a>
+                                   <a href="{!! $company->companyInstagram !!}" target="_blank"><i class="fa fa-google-plus" style="background: #fb3958;"></i> </a>
                                </div>
                            </div>
                        </div>
