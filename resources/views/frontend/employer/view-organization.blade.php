@@ -235,9 +235,9 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">Instagram</label>
+                                       <label class="control-label col-sm-3 col-xs-12">Google Plus</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="url" class="form-control companyInstagram" name="companyInstagram" id="instagram" placeholder="Instagram" value="{{ $company->companyInstagram }}">
+                                           <input type="url" class="form-control companyInstagram" name="companyInstagram" id="instagram" placeholder="Google Plus" value="{{ $company->companyInstagram }}">
                                        </div>
                                    </div>
                                    <div class="form-group">
