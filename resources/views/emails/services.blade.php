@@ -23,7 +23,7 @@
 <tbody><tr>
 <td class="m_1888394735623576276content-cell" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;padding:35px">
                                         <h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">@lang('home.Dear Customer!')</h1>
-<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">@lang('home.we provided you new services at jobcallme.com .Please visit the link given below')</p>
+<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{ $data['servicesdetail'] }}</p>
 <table class="m_1888394735623576276action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%"><tbody><tr>
 <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">
             <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box"><tbody><tr>
@@ -37,7 +37,7 @@
                 </tr></tbody></table>
 </td>
     </tr></tbody></table>
-<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">@lang('home.If you did not request a verify email, no further action is required.')</p>
+<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">@lang('home.If you did not request a service email, no further action is required.')</p>
 <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">@lang('home.Regards'),<br>@lang('home.JobCallMe')</p>
 
 </td>
