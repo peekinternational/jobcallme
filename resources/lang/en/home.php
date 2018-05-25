@@ -157576,4 +157576,6 @@ We trust everyone to have equal employment opportunities, without discrimination
 "interviewto2"=>"",
 "candidateupdate"=>"Save",
 "Profile Pic Remove"=>"Profile Pic Remove",
+'aboutheading' => 'We are pleased to welcome you to our job information platform.',
+
 ];

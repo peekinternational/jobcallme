@@ -188,7 +188,7 @@ $(document).ready(function(){
                    $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
                }
            })
-    }else if(getkeyword != '' || getcity != ''){
+      }else if(getkeyword != '' || getcity != ''){
        $.ajax({
         type: 'post',
         data: {keyword:getkeyword,city:getcity,_token:"{{ csrf_token() }}"},
