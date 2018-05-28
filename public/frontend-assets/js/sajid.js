@@ -12,6 +12,13 @@ $('#head').on('click',function(){
 $('#dispatch').on('click',function(){
 	$('#head').prop('checked', false); // Unchecks it
 })
+$('#anynational').on('click',function(){
+	$('#onlynational').prop('checked', false); // Unchecks it
+})
+$('#onlynational').on('click',function(){
+	$('#anynational').prop('checked', false); // Unchecks it
+})
+
 /* likes functionality js code*/
 
 

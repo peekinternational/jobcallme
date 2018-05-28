@@ -13,6 +13,8 @@
 $head='';
 $travelFound=false;			
 $dispatch='';
+$onlynational='';
+$anynational='';
 
   if($job->head == "yes")		
 					{		
@@ -24,9 +26,26 @@ $dispatch='';
 					if($job->dispatch == "yes")		
 					{		
 						$dispatch='<span class="label" style="background-color:blue">Dispatch & Agency</span>';		
-					}						else{		
-					$dispatch="";		
-				}
+                    }					
+                    else{		
+					    $dispatch="";		
+                    }
+
+                
+                if($job->anynational == "yes")		
+                {		
+                   $anynational=trans('home.anynationality');		
+                }		
+            else{		
+                $anynational="";		
+            }		
+                if($job->onlynational == "yes")		
+                {		
+                    $onlynational=trans('home.only').' '.trans('home.'.JobCallMe::countryName($job->country)).' '.trans('home.nationality');	
+                }	
+                else{		
+                $onlynational="";		
+            }
 ?>
 <section id="jobs">
     <div class="container">
@@ -156,11 +175,15 @@ $dispatch='';
                     <tbody>
                     <tr>
                         <td class="active">@lang('home.category')</td>
-                        <td colspan="3">@lang('home.'.JobCallMe::categoryTitle($job->category)) / @lang('home.'.JobCallMe::subcategoryTitle($job->subCategory)) / @lang('home.'.JobCallMe::subcategoryTitle2($job->subCategory2))</td>                        
+                        <td colspan="3">@lang('home.'.JobCallMe::categoryTitle($job->category)) / @lang('home.'.JobCallMe::subcategoryTitle($job->subCategory)) / @lang('home.'.JobCallMe::subcategoryTitle2($job->subCategory2))</td>     
+                                                                 
                     </tr>
+                    
 					<tr>
                         <td class="active">@lang('home.jobaddr')</td>
-                        <td colspan="3">{{ $job->jobaddr }}</td>                     
+                        <td colspan="1">{{ $job->jobaddr }}</td>   
+                        <td class="active">@lang('home.jobseekernationality')</td>
+                        <td colspan="2">{{$anynational}}{{$onlynational}}</td>                    
                     </tr>
 
 

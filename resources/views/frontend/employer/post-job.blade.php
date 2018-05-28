@@ -1305,7 +1305,37 @@
                             </div>
                         </div>
 
+                          <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.anynationality')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                    <div class="col-md-4 benefits-checks">
+                                        <input id="anynational" type="checkbox" class="cbx-field" name="anynational" value="yes">								
+										<label class="cbx" for="anynational"></label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.only') {{JobCallMe::countryName(Session()->get('jcmUser')->country)}} @lang('home.nationality')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                
+                                        <div class="col-md-4 benefits-checks">                                        
+											<input id="onlynational" type="checkbox" class="cbx-field" name="onlynational" value="yes">
+											<label class="cbx" for="onlynational"></label>
+                                            
+                                        </div>
+                              
+                                </div>
+                            </div>
+                        </div>
+
                    </div>
+
+                   
 
 
 				   <h3>@lang('home.Eligibility and preferential terms')</h3>
