@@ -85,7 +85,7 @@ $anynational='';
 							@else
 								<a href="{{ url('jobs/apply/'.$job->jobId) }}" class="btn btn-primary">@lang('home.apply')</a>
 							@endif
-                            @elseif($job->jobreceipt02 == 'yes')
+                            @elseif($job->jobreceipt02 == 'yes' && $job->jobhomgpage !="" )
 							<a href="{{$job->jobhomgpage}}" class="btn btn-primary" style="margin-right: 10px;" target="_blank">@lang('home.jobhomepageapply')</a>
                             @elseif($job->jobreceipt03 == 'yes')
 							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.email')</button>
