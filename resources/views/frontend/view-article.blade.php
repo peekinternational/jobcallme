@@ -23,7 +23,8 @@ $userimages='';
                 </div>
                 <div class="col-md-6">
                     <div class="jd-share-btn pull-right">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('read/article/'.$record->writingId ) }}">
+                    <a  href="javascript: void(0)" onClick="window.open('https://www.facebook.com/dialog/share?app_id=377749349357447&display=page&href=https%3A%2F%2Fwww.jobcallme.com%2Fread%2Farticle%2F<?php echo $record->writingId; ?>%2F&redirect_uri=https%3A%2F%2Fwww.jobcallme.com');return false;">
+                       
                             <i class="fa fa-facebook" style="background: #2e6da4;"></i> 
                         </a>
                         <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url('read/article/'.$record->writingId ) }}&title=&summary=&source=">

@@ -142,7 +142,7 @@ if($user->profilePhoto != ''){
                         <h4>@lang('home.employerAccount')</h4>
                         <table class="table">
 							<tr>
-                             <form action="{{ action('frontend\Employer@package') }}" method="post">
+                             <form action="{{ action('frontend\Employer@package') }}" method="get">
                               {!! csrf_field() !!} 
                                 <td height="150px" style="padding-top:20px;padding-bottom:20px"> <div class="text-center" style="background:#2e6da4;height:130px;width:230px;border-radius: 10px;"><img src="/frontend-assets/images/manage_credit3.png" style="padding-top:15px;"><br><span style="color:#fff;font-size:15px;"><b>@lang('home.ResumeDownloadsbuy')</b></span></div></td>
                                 <input type="hidden" value="Resume Download" name="type">
@@ -150,7 +150,7 @@ if($user->profilePhoto != ''){
                                 </form>
                             </tr>
                             <tr>
-                            <form action="{{ action('frontend\Employer@package') }}" method="post">
+                            <form action="{{ action('frontend\Employer@package') }}" method="get">
                             {!! csrf_field() !!} 
                                 <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Premium Jobs pack')</td>
                                 <input type="hidden" value="Premium" name="type">
@@ -158,7 +158,7 @@ if($user->profilePhoto != ''){
                                 </form>
                             </tr>
                              <tr>
-                             <form action="{{ action('frontend\Employer@package') }}" method="post">
+                             <form action="{{ action('frontend\Employer@package') }}" method="get">
                               {!! csrf_field() !!} 
                                 <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Top Jobs pack')</td>
                                 <input type="hidden" value="Top" name="type">
@@ -166,7 +166,7 @@ if($user->profilePhoto != ''){
                                 </form>
                             </tr>
                              <tr>
-                            <form action="{{ action('frontend\Employer@package') }}" method="post">
+                            <form action="{{ action('frontend\Employer@package') }}" method="get">
                              {!! csrf_field() !!} 
                                 <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Hot Jobs pack')</td>
                                 <input type="hidden" value="Hot" name="type">
@@ -174,7 +174,7 @@ if($user->profilePhoto != ''){
                                 </form>
                             </tr>
                              <tr>
-                            <form action="{{ action('frontend\Employer@package') }}" method="post">
+                            <form action="{{ action('frontend\Employer@package') }}" method="get">
                              {!! csrf_field() !!} 
                                 <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Latest Jobs pack')</td>
                                 <input type="hidden" value="Latest" name="type">
@@ -182,7 +182,7 @@ if($user->profilePhoto != ''){
                                 </form>
                             </tr>
                             <tr>
-                             <form action="{{ action('frontend\Employer@package') }}" method="post">
+                             <form action="{{ action('frontend\Employer@package') }}" method="get">
                               {!! csrf_field() !!} 
                                 <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Special Jobs pack')</td>
                                 <input type="hidden" value="Special" name="type">
@@ -190,7 +190,7 @@ if($user->profilePhoto != ''){
                                 </form>
                             </tr>
                             <tr>
-                             <form action="{{ action('frontend\Employer@package') }}" method="post">
+                             <form action="{{ action('frontend\Employer@package') }}" method="get">
                               {!! csrf_field() !!} 
                                 <td> <img src="/frontend-assets/images/manage_credit1.png" style="padding-top:0px"> @lang('home.Golden Jobs pack')</td>
                                 <input type="hidden" value="Golden" name="type">

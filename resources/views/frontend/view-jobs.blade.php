@@ -112,8 +112,10 @@
                     </div>
                 </form>
             </div>
+            
+            <div id="dialog1" title="www.jobcallme.com Detail:" hidden="hidden"><span>Search directly from company information and apply directly.</span><br></div>
             <div class="col-md-9 show-jobs">
-                
+      
                 <p style="text-align:center;">Loading ....</p>
 				
             </div>
@@ -135,6 +137,10 @@
 }
 </style>
 <script type="text/javascript">
+function dialogclick() {
+      //alert("helllo");
+    $("#dialog1").dialog('open');
+  }
     $('body').on('click', '.pagination a', function(e) {
         e.preventDefault();
 
@@ -159,6 +165,14 @@
 var isFirst = 0;
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
+    $(function () {
+  $( "#dialog1" ).dialog({
+    autoOpen: false
+  });
+  
+  
+});
+
     var getcountry = "<?php echo $_GET['country'];?>";
     var getsate = "<?php echo $_GET['state'];?>";
     var getkeyword = "<?php echo $_GET['keyword'];?>";
@@ -188,6 +202,7 @@ $(document).ready(function(){
                    $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
                }
            })
+     
       }else if(getkeyword != '' || getcity != ''){
        $.ajax({
         type: 'post',

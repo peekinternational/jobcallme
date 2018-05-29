@@ -50,7 +50,7 @@ $anynational='';
 <section id="jobs">
     <div class="container">
         <div class="col-md-9">
-		
+        <div id="dialog1" title="www.jobcallme.com Detail:" hidden="hidden"><span>Search directly from company information and apply directly.</span><br></div>
             <div class="jobs-suggestions">
 			<div style="display: -webkit-box;" class="suggestions-user-info">
 			 <img src="{{ $cLogo }}"  style="width:118px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
@@ -65,6 +65,7 @@ $anynational='';
 					
                
 				</div>
+               
 			 
 			@if($job->userId == $userId )
                 <div class="jd-action-btn">
@@ -75,9 +76,7 @@ $anynational='';
 				  <div class="jd-action-btn">
                     @if(strtotime($job->expiryDate) < strtotime(date('Y-m-d')))
                         <button class="btn btn-danger">@lang('home.s_close')</button>
-                    @else
-						@if($job->jobreceipt02 == 'yes')
-							<a href="{{$job->jobhomgpage}}" class="btn btn-primary" style="margin-right: 10px;" target="_blank">@lang('home.jobhomepageapply')</a>
+                    
 						@endif
 
 						@if($job->jobreceipt01 == 'yes')
@@ -86,7 +85,19 @@ $anynational='';
 							@else
 								<a href="{{ url('jobs/apply/'.$job->jobId) }}" class="btn btn-primary">@lang('home.apply')</a>
 							@endif
-						@endif
+                            @elseif($job->jobreceipt02 == 'yes')
+							<a href="{{$job->jobhomgpage}}" class="btn btn-primary" style="margin-right: 10px;" target="_blank">@lang('home.jobhomepageapply')</a>
+                            @elseif($job->jobreceipt03 == 'yes')
+							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.email')</button>
+                            @elseif($job->jobreceipt04 == 'yes')
+							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.post')</button>
+                            @elseif($job->jobreceipt05 == 'yes')
+							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.visit')</button>
+                            @elseif($job->jobreceipt06 == 'yes')
+							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.telephone')</button>
+                            @elseif($job->jobreceipt07 == 'yes')
+							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.fex')</button>
+                        @endif
 
                         @if(in_array($job->jobId, $savedJobArr))
                             <a href="javascript:;" onclick="saveJob({{ $job->jobId }},this)" class="btn btn-success" style="margin-left: 10px;">@lang('home.saved')</a>
@@ -96,7 +107,7 @@ $anynational='';
                     @endif
 					
                 </div>
-			@endif
+			
 			
 			
 		
@@ -846,6 +857,17 @@ $anynational='';
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+function dialogclick() {
+      //alert("helllo");
+    $("#dialog1").dialog('open');
+  }
+  $(function () {
+  $( "#dialog1" ).dialog({
+    autoOpen: false
+  });
+  
+  
+});
 $(document).ready(function(){
 })
 var popupMeta = {

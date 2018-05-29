@@ -299,7 +299,7 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('employer/department/get/{id}','frontend\Employer@getDepartment');
     Route::get('employer/department/delete/{id}','frontend\Employer@deleteDepartment');
 	Route::post('post','frontend\Employer@post');
-	Route::post('packageplan','frontend\Employer@package');
+	Route::get('packageplan','frontend\Employer@package');
 	Route::get('packageinfo','frontend\Employer@packageinfo');
 	Route::get('cashpackage','frontend\Employer@cashpackage');
 

@@ -30,6 +30,9 @@ date_default_timezone_set("Asia/Seoul");
         <link rel="shortcut icon" href="{{ $headerFavicon }}">
 		
          <!-- Bootstrap -->
+        
+
+         <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
         <link href="{{ asset('frontend-assets/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('frontend-assets/css/rcrop.min.css') }}" media="screen" rel="stylesheet" type="text/css">
         <link href="{{ asset('frontend-assets/css/style.css') }}" rel="stylesheet">
@@ -121,6 +124,7 @@ date_default_timezone_set("Asia/Seoul");
         <!-- pace -->
 		<script type="text/javascript" src="{{ asset('frontend-assets/pace/pace.js') }}"></script>
         <script src="{{ asset('frontend-assets/tinymce/tinymce.min.js') }}"></script>
+        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 		
 <!--Top Navigation active li-->

@@ -337,7 +337,9 @@ class JobCallMe{
 	//}
 
 	public function jobBenefits(){
-		return array('National pension', 'Employment Insurance', 'Industrial accident insurance', 'Health Insurance', 'Severance Pay', 'Lunch offer', 'Vehicle oil subsidy', 'Overtime pay');
+
+		return array('National pension', 'Employment Insurance', 'Industrial accident insurance', 'Health Insurance', 'Severance Pay', 'Lunch offer', 'Vehicle oil subsidy', 'Overtime pay', 'See Homepage', 'See Description');
+
 	}
 
 	//추가
@@ -358,6 +360,20 @@ class JobCallMe{
 		return $readcategories;
 	}
 
+
+	public function getReadCategories_select(){
+		
+			
+			$array = array('145','21','23','143','20','48');			
+	
+		
+		$readcategories = DB::table('jcm_read_category')->whereIn('id',$array)->get();
+		//$cities = DB::table('jcm_cities')->whereIn('id',$array)->get();
+		return $readcategories;
+
+	}
+
+
 	public function categoryName($categoryId){
 		return DB::table('jcm_categories')->where('categoryId','=',$categoryId)->first()->name;
 	}
@@ -365,16 +381,23 @@ class JobCallMe{
 		return DB::table('jcm_read_category')->where('id','=',$categoryId)->first();
 	}
 
+
 	public function getSubCategories($subCategoryId){
 		return DB::table('jcm_sub_categories')->where('categoryId','=',$subCategoryId)->get();
 	}
+
 
 	public function getSubCategories2($categoryId2){
 		return DB::table('jcm_sub_categories2')->where('categoryId1','=',$categoryId2)->get();
 	}
 
 	public function getJobShifts(){
-		$jobShifts = DB::table('jcm_job_shift')->get();
+		if(app()->getLocale() == "kr"){
+			$jobShifts = DB::table('jcm_job_shift')->orderBy('name_ko','asc')->get();
+		}else{
+			$jobShifts = DB::table('jcm_job_shift')->orderBy('name','asc')->get();
+		}
+		//$jobShifts = DB::table('jcm_job_shift')->get();
 		return $jobShifts;
 	}
 
@@ -384,7 +407,14 @@ class JobCallMe{
 	}
 
 	public function getJobCountries(){
-		$jobCountries = DB::table('jcm_countries')->orderBy('id','asc')->get();
+
+		//$jobCountries = DB::table('jcm_countries')->orderBy('id','asc')->get();
+		if(app()->getLocale() == "kr"){
+			$jobCountries = DB::table('jcm_countries')->orderBy('name_ko','asc')->get();
+		}else{
+			$jobCountries = DB::table('jcm_countries')->orderBy('name','asc')->get();
+		}
+
 		return $jobCountries;
 	}
 
@@ -440,7 +470,9 @@ class JobCallMe{
 		}
 		$etime = time() - strtotime($ptime);
 		if ($etime < 1) { return '0 Year'; } 
-		$interval = array( 12 * 30 * 24 * 60 * 60 =>  $yr,
+
+		$interval = array( 12 * 30 * 24 * 60 * 60 =>  trans('home.'.$yr),
+
 				30 * 24 * 60 * 60       =>  $month,
 				24 * 60 * 60            =>  $day,
 				60 * 60                 =>  $hr,
@@ -645,19 +677,12 @@ class JobCallMe{
 	}
 	public function registrationPassValidation($pass){
 
-		if(!preg_match('/[A-Z]/', $pass)){
-			return 1;
-			
-		}
+		
 		if(!preg_match('/[0-9]/', $pass)){
 		 	return 1;
 		 
 		}
-		if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pass))
-		{
-		    return 1;
-		 	
-		} 
+		
 	}
 	
 }
