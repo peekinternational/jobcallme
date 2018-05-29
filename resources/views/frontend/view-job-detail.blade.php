@@ -104,10 +104,10 @@ $anynational='';
                         @else
                             <a href="javascript:;" onclick="saveJob({{ $job->jobId }},this)" class="btn btn-default" style="margin-left: 10px;">@lang('home.save')</a>
                         @endif
-                    @endif
+                   
 					
                 </div>
-			
+                @endif
 			
 			
 		
