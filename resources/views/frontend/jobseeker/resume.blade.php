@@ -4332,6 +4332,7 @@ jQuery(function() {
 });
 
 $('#giftbtn').click(function(){
+	$('#giftbtn').remove();
 	$.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
