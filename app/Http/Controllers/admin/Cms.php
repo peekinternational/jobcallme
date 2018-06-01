@@ -843,6 +843,11 @@ class Cms extends Controller{
         return redirect(url()->previous());
     }
 
-
+    public function gift(Request $request){
+        
+        
+        $gift = DB::table('jcm_gift')->paginate(10);
+        return view('admin.gift',compact('gift'));
+    }
 	
 }

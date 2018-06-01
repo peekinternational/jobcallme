@@ -130,6 +130,12 @@ $$nav = 'active';
                         </a>
                     </li>
                     <li class="sidenav-item">
+                        <a href="{{ url ('admin/gift') }}">
+                        <span class="sidenav-icon icon icon-briefcase"></span>
+                        <span class="sidenav-label">Gifts</span>
+                        </a>
+                    </li>
+                    <li class="sidenav-item">
                         <a href="{{ url ('admin/services') }}">
                         <span class="sidenav-icon icon icon-briefcase"></span>
                         <span class="sidenav-label">Our New Services</span>

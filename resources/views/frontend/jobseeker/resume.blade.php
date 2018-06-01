@@ -5,6 +5,7 @@
 @section('content')
 <?php
 $userImage = url('profile-photos/profile-logo.jpg');
+$giftimage = url('images/gift_vouchers_button.gif');
 if($user->profilePhoto != ''){
 
 	$pos = strpos($user->profilePhoto,"ttp");
@@ -2578,6 +2579,12 @@ if($user->profilePhoto != ''){
 							<?php echo $width?>%
 						  </div>
 						</div>
+						@if(!$gift->user_id)
+						@if($width >='50')
+						<img src="{{ $giftimage }}"id="giftbtn" style="margin-bottom: 23px;width: 73%;margin-left: 36px;">
+						
+						@endif
+						@endif
 						<ul class="rls" style="padding-left: 0;">
 							<li>
 								<a id="#" onclick="$('#personal-information').fadeIn();$('#personal-information-edit').hide();"> @lang('home.personalinformation')</a> 
@@ -2760,6 +2767,23 @@ if($user->profilePhoto != ''){
 @endsection
 @section('page-footer')
 <style type="text/css">
+@-moz-keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* Firefox */
+@-webkit-keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* Webkit */
+@-ms-keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* IE */
+@keyframes blink {0%{opacity:1;} 50%{opacity:0;} 100%{opacity:1;}} /* Opera and prob css3 final iteration */
+#giftbtn {
+
+-moz-transition:all 3s ease-in-out;
+-webkit-transition:all 3s ease-in-out;
+-o-transition:all 3s ease-in-out;
+-ms-transition:all 3s ease-in-out;
+transition:all 3s ease-in-out;
+/* order: name, direction, duration, iteration-count, timing-function */  
+-moz-animation:blink normal 4s infinite ease-in-out; /* Firefox */
+-webkit-animation:blink normal 4s infinite ease-in-out; /* Webkit */
+-ms-animation:blink normal 4s infinite ease-in-out; /* IE */
+animation:blink normal 4s infinite ease-in-out; /* Opera and prob css3 final iteration */
+}​
 .edit-btn{z-index: 5;}
 .li-option{display: none;}
 .li-option a{color: #cccccc;text-decoration: none;}
@@ -2770,6 +2794,7 @@ textarea.form-control{resize: vertical;}
 @media screen and (max-width: 992px){
 	.f-name, .l-name{padding-left: 15px !important;padding-right: 15px !important;}
 }
+
 </style>
 <script type="text/javascript">
 function changebtn(current){
@@ -4305,6 +4330,30 @@ jQuery(function() {
 	  jQuery('#callback_result').text(JSON.stringify(parsedGeocodeResult, null, 4));
 	}
 });
+
+$('#giftbtn').click(function(){
+	$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+})
+	$.ajax({
+		type: 'post',
+		data: {{$user->userId}},
+		cache:false,
+		contentType: false,
+		processData: false,
+		url: "{{ url('account/gift') }}",
+		success: function(response){
+			console.log(response);
+			$('#giftbtn').remove();
+			toastr.success('Please check your email for get token ', '', {timeOut: 20000, positionClass: "toast-bottom-center"});
+		}
+
+	});
+		
+});
+
 </script>
 
 

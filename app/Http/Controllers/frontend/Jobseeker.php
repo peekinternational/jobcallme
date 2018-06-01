@@ -9,6 +9,7 @@ use DB;
 use PDF;
 use Zipper;
 use File;
+use Mail;
 
 class Jobseeker extends Controller{
 
@@ -124,8 +125,9 @@ class Jobseeker extends Controller{
 		$meta = DB::table('jcm_users_meta')->where('userId',$app->userId)->first();
 		$resume = $this->userResume($app->userId);
 		$privacy = JobCallMe::getprivacy($app->userId);
-		//dd($user);exit;
-		return view('frontend.jobseeker.resume',compact('offers','totalReview','comments','user','meta','resume','privacy'));
+		$gift=DB::table('jcm_gift')->where('user_id',$app->userId)->first();
+		//dd($gift->user_id);
+		return view('frontend.jobseeker.resume',compact('gift','offers','totalReview','comments','user','meta','resume','privacy'));
 	}
 
 	public function userResume($userId){
@@ -1164,6 +1166,111 @@ class Jobseeker extends Controller{
 			$dirname = $request->input('dir');
 			$success = File::deleteDirectory("resumefiles/".$dirname);
 			echo $success = File::deleteDirectory("resumeZip/".$dirname);
+		}
+		public function gift(Request $request){
+			$app=$request->session()->get('jcmUser');
+			$have=DB::table('jcm_gift')->where('user_id',$app->userId)->first();
+			if($have =="" || $have==null){
+				$a = '';
+				for ($i = 0; $i<7; $i++) 
+				{
+					$a .= mt_rand(0,9);
+				}
+				//echo $a;
+				$appName=$app->firstName.' '.$app->lastName;
+///// coffee////
+				$myContent=
+				trans('home.Jobcallme') ."(www.jobcallme.com) <br/><br/>"
+				.trans('home.An ice coffee coupon has been issued to').'<b> '.$appName.' </b>'.trans('home.member').
+				"<br/>".trans('home.tokennumber').':<button style="font-family: Avenir,Helvetica,sans-serif;
+				box-sizing: border-box;
+				border-radius: 3px;
+				color: #fff;
+				display: inline-block;
+				text-decoration: none;
+				background-color: #3097d1;
+				">'.$a."</button><br/><br/>"
+				.trans('home.Regards').""; 
+				$subject=trans('home.coupon issue: JobCallMe');                           
+				$email='catmig24@naver.com';
+				Mail::send([],[], function ($message) use($email,$myContent,$subject){  
+					$message->to($email, $email)->subject($subject)->setBody($myContent,'text/html');
+				}); 
+
+				///// coffee////
+				$myContent=
+				trans('home.Jobcallme') ."(www.jobcallme.com) <br/><br/>"
+				.trans('home.An ice coffee coupon has been issued to').'<b> '.$appName.' </b>'.trans('home.member').
+				"<br/>".trans('home.tokennumber').':<button style="font-family: Avenir,Helvetica,sans-serif;
+				box-sizing: border-box;
+				border-radius: 3px;
+				color: #fff;
+				display: inline-block;
+				text-decoration: none;
+				background-color: #3097d1;
+				">'.$a."</button><br/><br/>"
+				.trans('home.Regards').""; 
+				$subject=trans('home.coupon issue: JobCallMe');                           
+				$email='gmulimstudio@naver.com';
+				Mail::send([],[], function ($message) use($email,$myContent,$subject){  
+					$message->to($email, $email)->subject($subject)->setBody($myContent,'text/html');
+				}); 
+/// Admin/////
+				$myContent=
+				trans('home.Jobcallme') ."(www.jobcallme.com) <br/><br/>"
+				.trans('home.An ice coffee coupon has been issued to').'<b> '.$appName.' </b>'.trans('home.member').
+				"<br/>".trans('home.tokennumber').':<button style="font-family: Avenir,Helvetica,sans-serif;
+				box-sizing: border-box;
+				border-radius: 3px;
+				color: #fff;
+				display: inline-block;
+				text-decoration: none;
+				background-color: #3097d1;
+				">'.$a."</button><br/><br/>"
+				.trans('home.Regards').""; 
+				$subject=trans('home.coupon issue: JobCallMe');                           
+				$email='cafecapsuleone@gmail.com';
+				Mail::send([],[], function ($message) use($email,$myContent,$subject){  
+					$message->to($email, $email)->subject($subject)->setBody($myContent,'text/html');
+				}); 
+//// user////
+				$myContent=
+				trans('home.Jobcallme') ."(www.jobcallme.com) <br/><br/>"
+				.trans('home.Thank you for completing more than 50% of your resume information').".<br/>"
+				.trans('home.We will send you an ice coffee coupon at the event').
+				"<br/>" .trans('home.tokennumber').':<button style="font-family: Avenir,Helvetica,sans-serif;
+				box-sizing: border-box;
+				border-radius: 3px;
+				color: #fff;
+				display: inline-block;
+				text-decoration: none;
+				background-color: #3097d1;
+				">'.$a."</button><br/><br/>"
+				.trans('home.Coupon available stores')."<br/><br/>"
+				.trans('home.Mapo-gu')."<br/>"
+				.trans('home.1st floor World Cup-ro 15-gil 23, Mapo-gu, Seoul, Korea Avocado Dolce 376-13, Maengwon-dong, Mapo-gu, Seoul').
+				"<br/><br/>"
+				.trans('home.Seocho-gu')."<br/>"
+				.trans('home.1st floor Nonhyeon-ro 27-gil 39, Seocho-gu, Seoul, Korea, 5avenue 88-11 Yangjae-dong, Seocho-gu, Seoul').
+				"<br/><br/>"
+				.trans('home.Regards').""; 
+				$subject=trans('home.coupon issue: JobCallMe');                           
+				$email=$app->email;
+				Mail::send([],[], function ($message) use($email,$myContent,$subject){  
+					$message->to($email, $email)->subject($subject)->setBody($myContent,'text/html');
+				}); 
+
+
+				$input['user_id']=$app->userId;
+				$input['username']=$app->firstName;
+				$input['useremail']=$app->email;
+				$input['userphone']=$app->phoneNumber;
+				$input['token_num']=$a;
+				DB::table('jcm_gift')->insert($input);
+				
+				exit(1);
+			}
+			echo 'already save';
 		}
 		
 }

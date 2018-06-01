@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 	Route::get('dashboard','admin\Dashboard@index');
 	Route::get('orders','admin\Dashboard@home');
+	Route::get('gift','admin\Cms@gift');
 	Route::get('receivepayment','admin\Dashboard@receive');
 	Route::post('cms/jobs/delete','admin\Cms@deleteJob');
 	Route::get('cms/jobs/update/{id}','admin\Cms@editjob');
@@ -262,7 +263,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('jobseeker/application','frontend\Jobseeker@application');
     Route::get('jobseeker/application/{id}','frontend\Jobseeker@getApplication');
     Route::get('jobseeker/application/remove/{id}','frontend\Jobseeker@removeApplication');
-    Route::get('jobseeker/interview/{id}', 'frontend\Jobseeker@showInterview');
+	Route::get('jobseeker/interview/{id}', 'frontend\Jobseeker@showInterview');
+	Route::post('gift', 'frontend\Jobseeker@gift');
 
     /* employer */
 	Route::get('employer','frontend\Employer@home');
