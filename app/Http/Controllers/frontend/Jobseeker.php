@@ -1229,7 +1229,7 @@ class Jobseeker extends Controller{
 				">'.$a."</button><br/><br/>"
 				.trans('home.Regards').""; 
 				$subject=trans('home.coupon issue: JobCallMe');                           
-				$email='cafecapsuleone@gmail.com';
+				$email='info@jobcallme.com ';
 				Mail::send([],[], function ($message) use($email,$myContent,$subject){  
 					$message->to($email, $email)->subject($subject)->setBody($myContent,'text/html');
 				}); 
