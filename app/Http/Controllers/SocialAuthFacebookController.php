@@ -28,6 +28,10 @@ class SocialAuthFacebookController extends Controller
     {
         return Socialite::driver('linkedin')->redirect();
     }
+    public function TwApi()
+    {
+        return Socialite::driver('twitter')->redirect();
+    }
     /**
      * Return a callback method from facebook api.
      *
@@ -43,7 +47,7 @@ class SocialAuthFacebookController extends Controller
         $email=$user->user['email'];
         $request->session()->put('email',$email);
         //dd($user);
-       /*  $fbId=$user->id;
+        $fbId=$user->id;
         $userDetails=User::where('email',$email)->first();
         if($userDetails){
             if($userDetails->user_status=='N'){
@@ -62,16 +66,16 @@ class SocialAuthFacebookController extends Controller
             $request->session()->put('jcmUser', $userDetails);
         }
  
-        $this->loginAndRed($userDetails,$request); */
+        $this->loginAndRed($userDetails,$request);
         
-        return redirect('account/register');
+        return redirect('account/jobseeker');
     }
 
     public function gCallback(Request $request){
         $user=Socialite::driver('google')->user();
         $email=$user->email;
         $request->session()->put('email',$email);
-        /* $glId=$user->id;
+        $glId=$user->id;
         $userDetails=User::where('email',$email)->first();
         if($userDetails){
             if($userDetails->user_status=='N'){
@@ -90,9 +94,9 @@ class SocialAuthFacebookController extends Controller
             $request->session()->put('jcmUser', $userDetails);
         }
 
-        $this->loginAndRed($userDetails,$request); */
+        $this->loginAndRed($userDetails,$request);
 
-        return redirect('account/register');
+        return redirect('account/jobseeker');
     }
 
 
@@ -100,7 +104,7 @@ class SocialAuthFacebookController extends Controller
         $user=Socialite::driver('linkedin')->user();
         $email=$user->email;
         $request->session()->put('email',$email);
-       /*  $lnId=$user->id;
+        $lnId=$user->id;
         $userDetails=User::where('email',$email)->first();
         if($userDetails){
             if($userDetails->user_status=='N'){
@@ -119,9 +123,39 @@ class SocialAuthFacebookController extends Controller
             
         }
 
-        $this->loginAndRed($userDetails,$request); */
+        $this->loginAndRed($userDetails,$request);
 
-        return redirect('account/register');
+        return redirect('account/jobseeker');
+    }
+
+    
+    public function TwCallback(Request $request){
+        $user=Socialite::driver('twitter')->user();
+        dd($user);
+        $email=$user->email;
+        $request->session()->put('email',$email);
+        $lnId=$user->id;
+        $userDetails=User::where('email',$email)->first();
+        if($userDetails){
+            if($userDetails->user_status=='N'){
+                $userDetails->user_status='Y';
+                $userDetails->TwId=$lnId;
+                $userDetails->save();
+            }
+            elseif(!$userDetails->lnId){
+                $userDetails->lnId=$lnId;
+                $userDetails->save(); 
+            }
+        }
+        else{
+            $userDet=['id'=>$lnId,'name'=>$user->name,'email'=>$email,'avatar'=>$user->avatar]; 
+            $userDetails=$this->createUser($userDet);
+            
+        }
+
+        $this->loginAndRed($userDetails,$request);
+
+        return redirect('account/jobseeker');
     }
 
     public function loginAndRed($userDetails,$request){

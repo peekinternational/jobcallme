@@ -443,6 +443,9 @@ Route::get('/instaCallback/{provider?}', 'SocialAuthFacebookController@instaCall
 
 Route::get('/lnApi', 'SocialAuthFacebookController@lnApi');
 Route::get('/lnCallback/{provider?}', 'SocialAuthFacebookController@lnCallback');
+
+Route::get('/TwApi', 'SocialAuthFacebookController@TwApi');
+Route::get('/TwCallback/{provider?}', 'SocialAuthFacebookController@TwCallback');
 Auth::routes();
 
 

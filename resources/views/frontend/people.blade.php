@@ -315,6 +315,7 @@
 				</div>
               </div>
               <div class="clearfix"></div>
+              @if(Session()->has('jcmUser'))
               <div class="job-schedule-box">
                 <a href="{{ url('account/people?city='.$loca->id) }}">@lang('home.All')<!-- {{ $loca->name }} --></a>
                 @foreach(JobCallMe::getHomeCities() as $loca)
@@ -322,6 +323,7 @@
                 @endforeach
 				<a href="{{ url('account/people?city=000') }}">@lang('home.globalOverseas')<!-- {{ $loca->name }} --></a>
               </div>
+              @endif
             </div>
           </div>
         </div>

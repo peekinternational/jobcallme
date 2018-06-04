@@ -2998,7 +2998,7 @@ img.profile-photo-xs{
 .sns-box .fb-btn{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: #295395;
-    width: 32%;
+    width: 22%;
     margin-right: 2%;
     color: #ffffff;
     border: none;
@@ -3008,7 +3008,7 @@ img.profile-photo-xs{
 .sns-box .google-btn{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: #F63E28;
-    width: 32%;
+    width: 22%;
     margin-right: 2%;
     color: #ffffff;
     border: none;
@@ -3017,7 +3017,17 @@ img.profile-photo-xs{
 .sns-box .in-btn{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: #007BB6;
-    width: 30%;
+    width: 22%;
+    color: #ffffff;
+    border: none;
+    height: 28px;
+    margin-right: 2%;
+}
+
+.sns-box .tw-btn{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: #1da1f2;
+    width: 22%;
     color: #ffffff;
     border: none;
     height: 28px;

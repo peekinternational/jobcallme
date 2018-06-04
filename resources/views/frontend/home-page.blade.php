@@ -171,6 +171,7 @@ $lToken = csrf_token();
                 </div>
             </div>
 			<?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9') ?>
+          @if(Session()->has('jcmUser'))
             <div class="row">
                 <div class="col-md-12">
                     <div class="job-locations-box">
@@ -181,6 +182,7 @@ $lToken = csrf_token();
                     @endforeach
                        
                     </div>
+                    @endif
                     <div class="clearfix"></div>
                     <div class="job-schedule-box">
 					 @foreach(JobCallMe::getJobType() as $shift)

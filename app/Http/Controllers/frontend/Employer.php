@@ -702,7 +702,7 @@ else{
 			}
 			
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
-				$jobId = DB::table('jcm_jobs')->insertGetId($input);
+				//$jobId = DB::table('jcm_jobs')->insertGetId($input);
 				if($evaluation_form !=""){
 					$inputss['job_id']=$jobId;
 					$inputss['user_id']=$app->userId;
