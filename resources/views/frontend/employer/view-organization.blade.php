@@ -169,6 +169,12 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <div class="form-group">
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.business sector')</label>
+                                       <div class="col-sm-9 pnj-form-field">
+                                           <input type="text" class="form-control business_sector" name="business_sector" id="business_sector" placeholder="Please type of your business sector" value="{{ $company->business_sector }}" required>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.address')</label>
                                        <div class="col-sm-9 pnj-form-field">
                                            <textarea required class="form-control companyAddress" placeholder="Address" name="companyAddress" style="resize: vertical">{{ $company->companyAddress }}</textarea>
