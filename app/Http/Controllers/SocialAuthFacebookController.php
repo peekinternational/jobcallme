@@ -131,7 +131,7 @@ class SocialAuthFacebookController extends Controller
     
     public function TwCallback(Request $request){
         $user=Socialite::driver('twitter')->user();
-        dd($user);
+       // dd($user);
         $email=$user->email;
         $request->session()->put('email',$email);
         $lnId=$user->id;
