@@ -41,6 +41,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     </div>
                 @endif
                 {{ csrf_field() }}
+                
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input id="login-username" type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="@lang('home.email-text')">
@@ -110,7 +111,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
 
         <div id="signupBox" class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
             <h3>@lang('home.createaccount')</h3>
-            <form id="signUpForm" action="{{ url('account/register') }}" method="post">
+            <form id="signUpForm" class="getapi" action="{{ url('account/register') }}" method="post">
                 @if(Session::has('registerAlert'))
                     <div class="alert alert-danger">
                         {{Session::get('registerAlert')}} 
@@ -137,9 +138,12 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     </div>
                 @endif
                 {{ csrf_field() }}
-                
                 <div class="form-group">
-                    <input type="text" class="form-control" name="email"  value="{{ Session::get('email') }}" placeholder="@lang('home.email-text')" requried>
+                   
+                    <input id="username" type="text" class="form-control" name="username" value="{{ Session::get('email') }}" placeholder="@lang('home.username')">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="get_email" name="email"  value="{{ Session::get('email') }}" placeholder="@lang('home.email-text')" requried>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" id="pwd" onblur="sendpassword(this.value)" name="password" value="{{ old('password') }}" placeholder="@lang('home.Password-text')">
@@ -389,5 +393,27 @@ function sendpassword(pass){
     }
  });
 }
+
+$('form.getapi').submit(function(e){
+    //alert('hello');
+   var email=$('#get_email').val();
+    var password=$('#pwd').val();
+   var confirm_password=$('#confirm_password').val();
+   var gender='male';
+   var username=$('#username').val();
+   //var username='nabeelphatak';
+   
+    var form=$("#signUpForm");
+    $.ajax({
+        url: "http://localhost/jobcallme/social/Script/requests.php?f=register",
+        type: 'POST',
+        data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username},
+        async: false,
+        success: function(response) {
+            console.log(response);
+
+        }
+    });
+});
 </script>
 @endsection

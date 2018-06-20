@@ -181,17 +181,19 @@
                                 <!-- <p class="pull-right la-price">{{ $rec->currency.' '.number_format($rec->cost)}}/-</p> -->
 								<!-- <p class="pull-left la-price"> --><p class="pull-left la-price"><span style="font-size:12px">@lang('home.leancostlist') :</span> @if($rec->accommodation == "Yes") {{ $rec->currency.' '.number_format($rec->cost)}} @else @if($rec->accommodation == "on") @lang('home.free') @else @lang('home.Contact person') @endif @endif</p>
                             </div>
-                               <div class="newimg">
-                                <img src="{{ url('compnay-logo/'.$rec->companyLogo) }}" class="img-circle" style="height: 63px;margin-bottom: 0;margin-top: 0;" alt="{{ $rec->companyName }}">
+                              
                                 <div class="ra-author" style="width: 100%;padding-top: 0px;">
                                     <a href="{{ url('companies/company/'.$rec->companyId) }}">{{ $rec->companyName}}</a><br>
-                                    <span>@if(app()->getLocale() == "kr")
+                                  
+                                    <div class="newimg">
+                               
+                               <img src="@if($rec->companyLogo){{ url('compnay-logo/'.$rec->companyLogo) }}@else{{ url('compnay-logo/default-logo.jpg') }} @endif" class="" style="height: 63px;margin-bottom: 0;margin-top: 0;width:63px;" alt="{{ $rec->companyName }}"></div>
+                               <span>@if(app()->getLocale() == "kr")
 											{{ date('Y-m-d',strtotime($rec->createdTime))}}
 										@else      
 											{{ date('M d, Y',strtotime($rec->createdTime))}}
 										@endif
                                     </span>
-									
                                     <span class="pull-right"><i class="like fa fa-heart <?php echo JOBCALLME::getUserLikes( $rec->skillId,Session::get('jcmUser')->userId,'jcm_upskills' ) ?>"></i> <i class="total-likes"><?php echo JOBCALLME::getReadlikes($rec->skillId,'jcm_upskills')?></i>
                                     </span>
 									</div>

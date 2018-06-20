@@ -97,7 +97,8 @@
 
                             <div class="la-text">{!! $rec->citation !!}</div>
                             <div class="ra-author-box">
-                                <img src="{{ url('profile-photos/'.$rec->profilePhoto) }}" class="img-circle" alt="{{ $rec->firstName }}">
+                           
+                                <img src="@if($rec->profilePhoto !=''){{ url('profile-photos/'.$rec->profilePhoto) }} @else{{url('profile-photos/profile-logo.jpg')}} @endif" class="img-circle" alt="{{ $rec->firstName }}">
                                 <div class="ra-author">
                                     @if($rec->phoneNumber == ''){{ $rec->firstName.' '.$rec->lastName }}@else<a href="{{ url('account/employer/application/applicant/'.$rec->userId) }}">{{ $rec->firstName.' '.$rec->lastName }}</a>@endif<br>
                                     <span>

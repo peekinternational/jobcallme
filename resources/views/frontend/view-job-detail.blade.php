@@ -128,21 +128,21 @@ $anynational='';
                 </div>
                 <ul class="js-listing">
                     <li>
-                        <p class="js-title">@lang('home.jobtype')</p>
-                        <p>@lang('home.'.$job->jobType)</p>
+                        <p class="js-title " style="border-right: 1px solid;">@lang('home.jobtype')</p>
+                        <p >@lang('home.'.$job->jobType)</p>
                     </li>
                     <li>
-                        <p class="js-title">@lang('home.shift')</p>
-                        <p>@lang('home.'.$job->jobShift)</p>
+                        <p class="js-title" style="border-right: 1px solid;">@lang('home.shift')</p>
+                        <p class="li_dotted">@lang('home.'.$job->jobShift)</p>
                     </li>
                     <li>
-                        <p class="js-title">@lang('home.experience')</p>
-                        <p>@lang('home.'.$job->experience)</p>
+                        <p class="js-title" style="border-right: 1px solid;">@lang('home.experience')</p>
+                        <p class="li_dotted">@lang('home.'.$job->experience)</p>
                     </li>
                     <li>
-                        <p class="js-title">@lang('home.salary')</p>
-                        <p>
-						<p>
+                        <p class="js-title" style="border-right: 1px solid;">@lang('home.salary')</p>
+                       
+						<p class="li_dotted">
 						@if($job->afterinterview != "")
 							@lang('home.'.$job->afterinterview)
 						@else
@@ -155,8 +155,8 @@ $anynational='';
 						</p>
                     </li>
 					<li>
-                        <p class="js-title">@lang('home.poston')</p>
-                        <p>@if(app()->getLocale() == "kr")
+                        <p class="js-title" style="border-right: 1px solid;">@lang('home.poston')</p>
+                        <p class="li_dotted">@if(app()->getLocale() == "kr")
 							  {{ date('Y-m-d',strtotime($job->createdTime))}}
 						@else
 							  {{ date('M d, Y',strtotime($job->createdTime))}}
@@ -164,7 +164,7 @@ $anynational='';
                     </li>
 					<li>
                         <p class="js-title">@lang('home.lastdate')</p>
-                        <p>@if(app()->getLocale() == "kr")
+                        <p class="li_dotted">@if(app()->getLocale() == "kr")
 							  {{ date('Y-m-d',strtotime($job->expiryDate))}}
 						@else
 							  {{ date('M d, Y',strtotime($job->expiryDate))}}

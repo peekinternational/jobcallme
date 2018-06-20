@@ -304,6 +304,14 @@ ul.nav li.active{
     background: transparent;
     color: #cccccc;
 }
+.input-fields .search-item select{
+    width: 88%;
+    border: 1px solid #ccc;
+    height: 33px;
+    padding-left: 2%;
+    background: transparent;
+    color: #cccccc;
+}
 .input-fields .search-item input::-webkit-input-placeholder{
     color: #cccccc;
 }
@@ -1244,7 +1252,7 @@ a.job-location:hover span.shine {
 .jobs-suggestions  .js-listing li{
     width: 16%;
     float: left;
-    border-right: 1px solid #cccccc;
+    /* border-right: 1px solid #cccccc; */
     padding: 10px;
 }
 .jobs-suggestions  .js-listing li:last-child{
@@ -3504,6 +3512,12 @@ img.profile-photo-xs{
         height: 33px;
 
     }
+    .input-fields .search-item select{
+        width: 100%;
+        border: 1px solid #ccc;
+        height: 33px;
+
+    }
     .input-fields .search-location{
         width: 100%;
         float: none;
@@ -4405,4 +4419,25 @@ li.ui-timepicker-selected .ui-timepicker-duration,
 .suggestedreading-img-mbl{
     height: 110px;
     overflow: hidden;
+}
+.li_dotted{
+    display: list-item;
+    /* text-align: -webkit-match-parent; */
+    list-style-type: disc;
+    margin-left: -5px;
+
+}
+.mobile-suggestions {
+    position: relative;
+    overflow: auto;
+    padding: 10px 20px;
+   /*  border: 1px solid #cccccc; */
+    margin-bottom: 5px;
+    background: #ffffff;
+}
+.jobs-logo {
+    height: 83px;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
 }

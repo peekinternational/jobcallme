@@ -1222,8 +1222,11 @@ else{
 
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$app->userId)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		$pckg=count($plan);
+
+		$resumedownload = DB::table('jcm_download')->where('emp_id',$app->userId)->where('seeker_id',$userId)->get();
+		$resumedown=count($resumedownload);
 		//dd($applicant);
-		return view('frontend.employer.view-applicant',compact('cvcount','profilecount','offercount','readcount','resumess','pckg','applicant','resume','data','privacy'));
+		return view('frontend.employer.view-applicant',compact('resumedown','cvcount','profilecount','offercount','readcount','resumess','pckg','applicant','resume','data','privacy'));
 		//return view('frontend.employer.view-applicant',compact('applicant','resume'));
 	}
 		public function viewApplicants(Request $request){
@@ -1897,13 +1900,13 @@ public function mapOrganization(Request $request){
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
                 return 'Connection timeout';
-                return Redirect::route('add.frontend.employer.post-job');
+                return redirect('account/employer');
                 /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
                 /** $err_data = json_decode($ex->getData(), true); **/
                 /** exit; **/
             } else {
                 return 'Some error occur, sorry for inconvenient';
-                return Redirect::route('ey.frontend.employer.post-job');
+                return redirect('account/employer');
                 /** die('Some error occur, sorry for inconvenient'); **/
             }
         }
@@ -1951,7 +1954,7 @@ public function mapOrganization(Request $request){
             return Redirect::away($redirect_url);
         }
        return 'Unknown error occurred';
-        return Redirect::route('frontend.employer.post-job');
+        return redirect('account/employer');
     
 	}
     public function updategetPaymentStatus(Request $request)
@@ -2003,7 +2006,7 @@ public function mapOrganization(Request $request){
         Session::forget('paypal_payment_id');
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
             \Session::put('error','Payment failed');
-            return Redirect::route('addmoney.frontend.employer.post-job');
+            return redirect('account/employer');
         }
         $payment = Payment::get($payment_id, $this->_api_context);
         /** PaymentExecution object includes information necessary **/
@@ -2023,7 +2026,7 @@ public function mapOrganization(Request $request){
             return Redirect::route('addmoney.account/employer/job/share');
         }
         \Session::put('error','Payment failed');
-        return Redirect::route('addmoney.frontend.employer.post-job');
+        return redirect('account/employer');
     }
     public function orders(Request $request){
     	$to = $request->input('to');

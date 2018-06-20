@@ -312,6 +312,7 @@ class Home extends Controller{
 		if($request->isMethod('post')){
 			$this->validate($request,[
 				'email' => 'required|email|unique:jcm_users,email',
+				'username' => 'required|unique:jcm_users,username',
 				'password' => 'required|min:6|max:16',
 				'firstName' => 'required|min:1|max:50',
 				'lastName' => 'required|min:1|max:50',
@@ -319,7 +320,9 @@ class Home extends Controller{
 				'state' => 'required',
 				'phoneNumber' => 'required|digits_between:10,12',
 			],[
+				'username.unique' => trans('home.Username must be unique'),
 				'email.unique' => trans('home.Email must be unique'),
+				'username.required' => trans('home.Enter username'),
 				'email.required' => trans('home.Enter Email'),
 				'firstName.required' => trans('home.Enter First Name'),
 				'lastName.required' => trans('home.Enter Last Name'),
@@ -341,7 +344,8 @@ class Home extends Controller{
 			$input['firstName'] = trim($request->input('firstName'));
 			$input['lastName'] = trim($request->input('lastName'));
 			$input['email'] = trim($request->input('email'));
-			$input['username'] = strtolower($request->input('firstName').$request->input('lastName').rand(00,99));
+			//$input['username'] = strtolower($request->input('firstName').$request->input('lastName').rand(00,99));
+			$input['username'] = trim($request->input('username'));
 			$input['password'] = md5(trim($request->input('password')));
 			$input['phoneNumber'] = trim($request->input('phoneNumber'));
 			$input['country'] = $request->input('country');
@@ -375,6 +379,77 @@ class Home extends Controller{
 		}
 		$pageType = \Request::segment('2');
 		return view('frontend.login-registration',compact('pageType'));
+	}
+
+	public function apiaccountRegister(Request $request){
+	//	dd($request->all());
+	
+		if($request->isMethod('post')){
+			$this->validate($request,[
+				'email' => 'required|email|unique:jcm_users,email',
+				'password' => 'required|min:6|max:16',
+				'firstName' => 'required|min:1|max:50',
+				'lastName' => 'required|min:1|max:50',
+				'country' => 'required',
+				'state' => 'required',
+				'phoneNumber' => 'required|digits_between:10,12',
+			],[
+				'email.unique' => trans('home.Email must be unique'),
+				'email.required' => trans('home.Enter Email'),
+				'firstName.required' => trans('home.Enter First Name'),
+				'lastName.required' => trans('home.Enter Last Name'),
+				'password.required' => trans('home.Enter password'),	
+				'country.required' => trans('home.Enter Country'),
+				'state.required' => trans('home.Enter State'),
+				'phoneNumber.required' => trans('home.Enter Phone Number'),
+				'phoneNumber.digits_between' => trans('home.Phone Number must be contain 10,12 digits'),
+			]);
+			$regdata['email'] = $request->input('email');
+			$regdata['password'] = $request->input('password');
+			$regdata['firstName'] = $request->input('firstName');
+			$regdata['lastName'] = $request->input('lastName');
+			$regdata['phoneNumber'] = $request->input('phoneNumber');
+		//	session()->put('regdata',$regdata);
+			$input['companyId'] = '0';
+			$input['type'] = 'User';
+			$input['secretId'] = JobCallMe::randomString();
+			$input['firstName'] = trim($request->input('firstName'));
+			$input['lastName'] = trim($request->input('lastName'));
+			$input['email'] = trim($request->input('email'));
+			$input['username'] = strtolower($request->input('firstName').$request->input('lastName').rand(00,99));
+			$input['password'] = md5(trim($request->input('password')));
+			$input['phoneNumber'] = trim($request->input('phoneNumber'));
+			$input['country'] = $request->input('country');
+			$input['state'] = $request->input('state');
+			$input['city'] = $request->input('city');
+			$input['subscribe'] = $request->input('jobalert');
+			$input['profilePhoto'] = '';
+			$input['about'] = '';
+			$input['createdTime'] = date('Y-m-d H:i:s');
+			$input['modifiedTime'] = date('Y-m-d H:i:s');
+			
+			$userId = DB::table('jcm_users')->insertGetId($input);
+			setcookie('cc_data', $userId, time() + (86400 * 30), "/");
+			extract($request->all());
+			$cInput = array('companyName' => $firstName.' '.$lastName, 'companyEmail' => $email, 'companyPhoneNumber' => $phoneNumber, 'companyCountry' => $country, 'companyState' => $state, 'companyCity' => $city, 'category' => '0', 'companyCreatedTime' => date('Y-m-d H:i:s'), 'companyModifiedTime' => date('Y-m-d H:i:s'));
+			$companyId = DB::table('jcm_companies')->insertGetId($cInput);
+
+			$userinfo=DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
+			/* end */
+			$toemail = $input['email'];
+			$secidtoview = array('id' => $input['secretId'],'Name' => $input['firstName'],'lastName' => $input['lastName']);
+			Mail::send('emails.reg',$secidtoview,function($message) use ($toemail) {
+				$message->to($toemail)->subject(trans('home.Account Verification'));
+			});
+			/*$user = $this->doLogin($request->input('email'),$request->input('password'));
+			$request->session()->put('jcmUser', $user);*/
+			$fNotice = trans('home.Please check your email to verify');
+			
+		//	$request->session()->put('fNotice',$fNotice);
+			return $cInput;
+		}
+		//$pageType = \Request::segment('2');
+		return $cInput;
 	}
 
 	public function logout(Request $request){
