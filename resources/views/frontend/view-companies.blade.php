@@ -68,7 +68,9 @@
         <div class="companies-item-box">
 
             <div class="row">
+           
                 @foreach($companies as $company)
+               
                     <?php
                     //print_r($company);exit;
                     $cLogo = url('compnay-logo/default-logo.jpg');
@@ -76,11 +78,15 @@
                       $cLogo = url('compnay-logo/'.$company->companyLogo);
                     }
                     ?>
-                    <div class="col-md-2 col-xs-6 hvr-bob companies-mbl-vew" style="padding-right: 0px">
+                    <div class="col-pr-10 col-xs-6 hvr-bob companies-mbl-vew" style="padding-right: 0px;margin-bottom: 5px;">
                         <!-- normal -->
-                        <div class="ih-item square effect8 scale_up">
+                        <div class="ih-item square effect8 scale_up" style="height: 105px !important;border: 1px solid #a29a9a !important">
                             <a href="{{ url('companies/company/'.$company->companyId) }}">
-                            <div class="img"><img src="{{ $cLogo }}" alt="img" class="img-resposive"></div>
+                          
+                            <div class="jobs-logo">
+                            <img src="{{ $cLogo }}" alt="img" style="width:100%" >
+                            </div>
+                          
                             <div class="info">
                                 <h3>{!! $company->companyName !!}</h3>
 					<?
@@ -105,9 +111,14 @@
 							<div class="info companies-mbl-info">
                                 <h3>{!! $company->companyName !!}</h3>                               
                             </div>
-
+                            
                         </div>
                         <!-- end normal -->
+                        @if($company->package)
+                        <div class="starhave">
+                            <i class="fa fa-star-o"></i>
+                            </div>
+                            @endif
                     </div>
                 @endforeach
             </div>

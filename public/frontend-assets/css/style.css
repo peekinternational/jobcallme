@@ -3583,6 +3583,10 @@ img.profile-photo-xs{
 
 }
 @media (max-width: 499px){
+    .starhave {
+        left: 148px !important;
+    }
+
 
     #post-job-ad-types2>li {
    
@@ -4440,4 +4444,22 @@ li.ui-timepicker-selected .ui-timepicker-duration,
     display: flex;
     overflow: hidden;
     align-items: center;
+}
+@media (min-width: 992px){
+.col-pr-10  {
+    width: 10%;
+}
+}
+.starhave{
+    position: absolute;
+    z-index: 9999;
+    width: 27px;
+    height: 26px;
+    padding-left: 6px;
+    background-color: white;
+    top: 89px;
+    left: 115px;
+    border-radius: 50px;
+    border: 1px solid #c9c2c2;
+    padding-top: 2px;
 }

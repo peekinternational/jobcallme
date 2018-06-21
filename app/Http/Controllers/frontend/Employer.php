@@ -303,7 +303,7 @@ curl_close ($ch);
 			$input['subCategory'] = '';
 		}
 		$jobId = DB::table('jcm_jobs')->insertGetId($input);
-		//DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
+		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 		//dd($jobId);
 		\Session::put('success',trans('home.Add Job Successfully To Draft'));
 		return Redirect::route('addmoney.account/employer/job/share');	
@@ -326,7 +326,7 @@ curl_close ($ch);
 		$inputs['user_id']=$app->userId;
 		$inputs['evaluation_id']=$request->evaluation_form;
 		 DB::table('jcm_job_evaluation')->insertGetId($inputs);
-		//DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
+		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 		//dd($jobId);
 		\Session::put('success',trans('home.Add Job Successfully To Draft'));
 		return Redirect::route('addmoney.account/employer/job/share');	
