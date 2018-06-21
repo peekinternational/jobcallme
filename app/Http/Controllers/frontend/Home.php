@@ -763,7 +763,7 @@ class Home extends Controller{
     	$company->orderBy('package','desc');
     	$company->orderBy('companyModifiedTime','desc');
     	
-    	$companies = $company->paginate(30);
+    	$companies = $company->paginate(60);
 		
     	return view('frontend.view-companies',compact('companies'));
     }
