@@ -179,10 +179,10 @@ $(document).ready(function(){
     var getcity = "<?php echo $_GET['city'];?>";
     console.log(getkeyword);
     console.log(getcity);
-    if(getcountry != '' || getsate != ''){
+    if(getcountry != '' || getsate != '' || getcity !='' || getkeyword != ''){
         $.ajax({
                type: 'post',
-               data: {country:getcountry,state:getsate,_token:"{{ csrf_token() }}"},
+               data: {country:getcountry,state:getsate,city:getcity,keyword:getkeyword,_token:"{{ csrf_token() }}"},
                url: "{{ url('jobs/search') }}?_find="+isFirst,
                success: function(response){
                    console.log(response);
@@ -203,10 +203,10 @@ $(document).ready(function(){
                }
            })
      
-      }else if(getkeyword != '' || getcity != ''){
+      }else if(getkeyword != ''){
        $.ajax({
         type: 'post',
-        data: {keyword:getkeyword,city:getcity,_token:"{{ csrf_token() }}"},
+        data: {keyword:getkeyword,_token:"{{ csrf_token() }}"},
         url: "{{ url('jobs/search') }}?_find="+isFirst,
         success: function(response){
             $('.show-jobs').html(response);

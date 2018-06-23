@@ -16,44 +16,43 @@
                                 <div class="search-field-box search-item" id="l_key">
                                     <input type="search" placeholder="@lang('home.key')" name="learn-keyword">
                                 </div>
-                                <div class="search-field-box search-item" id="l_city">
-                                    <input type="search" placeholder="@lang('home.Cities')" name="city">
-										<button type="submit" id="l_fasearch" style="width:11% !important;padding-left:-5px;" class="search-btn">
+                                <div class="search-field-box search-item" id="l_city" style="width: 53%;">
+                                <select class="form-control  job-country" name="type" id="cat_select" style="width: 66% !important;display: inline-block;border-radius: 0;">
+                                                <option value="">@lang('home.category')</option>
+                                        @foreach(JobCallMe::getUpkillsType() as $skill)
+                                            <option value="{!! $skill->name !!}">@lang('home.'.$skill->name)</option>
+                                        @endforeach
+                                    </select>
+                                    <span id="l_type" style="display:none;padding-top: 14px;">
+									   <button  type="submit" class="btn btn-success btn-sm">
+                                        @lang('home.Search')</button>
+                                        <button  type="button" id="l_close" class="btn btn-default btn-sm">
+                                        @lang('home.Close')</button>
+                                   </span>
+                                    <div class="" id="l_country" style="display:none;padding-top: 14px;">
+                                    <select class="learn-countrys" name="country" style="width: 66% !important;">
+                                        <option value="0">@lang('home.country')</option>
+                                        @foreach(JobCallMe::getJobCountries() as $country)
+                                            <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
+                                        @endforeach
+                                    </select>
+                            
+                                    <select class="learn-states" name="state" id="state_learns"  style="width: 66% !important;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                        <option value="0">@lang('home.state')</option>
+                                    </select>
+                                
+                                    <select class="learn-citys" name="city" id="city_learns"  style="width: 66% !important;display:none;">
+                                        <option value="0">@lang('home.city')</option>
+                                    </select>
+                                    </div>
+
+									<button type="submit" id="l_fasearch" style="width:11% !important;padding-left:-5px;float:none" class="search-btn">
                                     <i class="fa fa-search"></i>
-                                </button> 
-
-                                
-                                </div>
-								<div class="search-field-box search-item" id="l_type" style="display:none;padding-top: 14px;">
-								<select class="form-control select2 job-country" name="type" >
-                                     <option value="">@lang('home.category')</option>
-                              @foreach(JobCallMe::getUpkillsType() as $skill)
-                                <option value="{!! $skill->name !!}">@lang('home.'.$skill->name)</option>
-                              @endforeach
-                          </select>
-									<button  type="submit" class="btn btn-success" style="margin-top: 12px;">
-                                @lang('home.Search')</button>
-								<button  type="button" id="l_close" class="btn btn-default" style="margin-top: 12px;">
-                                @lang('home.Close')</button>
-
-                                </div>
-                                
-                                <div class="search-field-box search-item" id="l_country" style="display:none;padding-top: 14px;">
-								
-                                    <select class="form-control select2 job-country" name="country">
-                                        <option value="">@lang('home.country')</option>
-                                    @foreach(JobCallMe::getJobCountries() as $cntry)
-                                        <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
-                                    @endforeach
-									</select>
-
-	                               
-									
-                                </div>
-							
-                                
-								<button  type="button" class="" id="l_search" style="margin-left: 9px;width: 4%;height: 33px;background: transparent;border: 2px solid #cecdcd;">
-                                <span class="caret" style="color:white"></span></button>
+                                    </button> 
+                                    <button type="button" class="btn btn-success btn-sm" id="l_search" style="margin-left: 9px;/* width: 7%; */height: 33px;/* background: transparent; *//* border: 2px solid #cecdcd; */">
+                                    <span style="color:white">Country</span></button>
+                                    </div>
+                                   
 								
                             </div>
                         </form>
@@ -73,7 +72,7 @@
                                     <button type="submit" id="mob_fasearch" style="width:45% !important" class="search-btn">
                                     <i class="fa fa-search"></i>
                                     </button>
-								<button  type="button" class="" id="mob_search" style="margin-left: 9px;width: 45%;height: 33px;background: transparent;border: 2px solid #cecdcd;"><span style="color:#fff">@lang('home.learn-search-text')</span>
+								<button  type="button" class="" id="mob_search" style="margin-left: 9px;width: 45%;height: 33px;background: transparent;border: 2px solid #cecdcd;">
                                 <span class="caret" style="color:white"></span></button>
                                 </div>
 								<div class="search-field-box search-item" id="mob_type" style="display:none;padding-top: 14px;">
@@ -275,8 +274,10 @@ function lightboxOnResize() {
  $("#l_search").click(function(){
         $("#l_type").fadeIn();
 		 $("#l_country").fadeIn();
-		 $('.ls-box').css('height', '175px');
+		 $('.ls-box').css('height', '134px');
          $('.mob-box').css('height', '300px');
+         $('#l_city').css('width','50%');
+         $('#cat_select').css('width','66%');
 		 $('#l_city input[name="learn-city"]').css('width', '100%');
 		 $('#l_type').css('padding-right', '40px');
 		 $('#l_fasearch').hide();
@@ -288,9 +289,13 @@ function lightboxOnResize() {
 		 $("#l_country").fadeOut();
 		 $('.ls-box').css('height', 'auto');
          $('.mob-box').css('height', '175px');
+         $('#l_city').css('width','53%');
+         $('#cat_select').css('width','66%');
 		 $('#l_city input[name="learn-city"]').css('width', '88%');
 		 $('#l_fasearch').show();
 		 $('#l_search').show();
+         $('#city_learns').hide();
+         $('#state_learns').hide();
         
     });
 
@@ -315,5 +320,47 @@ function lightboxOnResize() {
 		 $('#mob_search').show();
         
     });
+
+    $('.learn-countrys').on('change',function(){
+    var countryId = $(this).val();
+    $('#state_learns').show();
+    $(".ls-box").css("height", "205px");
+    getStatesssss(countryId)
+})
+function getStatesssss(countryId){
+    $.ajax({
+        url: "{{ url('account/get-state') }}/"+countryId,
+        success: function(response){
+            console.log(response)
+            
+
+            var currentState = $('.learn-states').attr('data-state');
+            $(".learn-states").html('').trigger('change');
+                $(".learn-states").append(response).trigger('change');
+           
+        }
+    })
+}
+
+$('.learn-states').on('change',function(){
+    var stateId = $(this).val();
+   
+    getCitiesssss(stateId)
+})
+function getCitiesssss(stateId){
+   
+    $.ajax({
+        url: "{{ url('account/get-city') }}/"+stateId,
+        success: function(response){
+            $('#city_learns').show();
+            var currentCity = $('.learn-citys').attr('data-city');
+           
+            $(".learn-citys").html('').trigger('change');
+           
+                $(".learn-citys").append(response).trigger('change');
+            
+        }
+    })
+}
 </script>
 @endsection

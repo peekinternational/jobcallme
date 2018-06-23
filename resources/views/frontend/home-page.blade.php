@@ -46,6 +46,7 @@ $lToken = csrf_token();
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="search_tab_1">
                                         <form method="get" action="{{ url('jobs') }}">
+                                      
                                             <div class="input-fields">
                                                 <div class="search-field-box search-item">
                                                     <input type="search" placeholder="@lang('home.lookingjob')" name="keyword">
@@ -60,11 +61,11 @@ $lToken = csrf_token();
                                                     @endforeach
                                                 </select>
                                         
-                                                <select class=" jobs-states" name="state" id="state_id" data-state="{{ Request::input('state') }}" style="width: 98%;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                                <select class=" jobs-states" name="state" id="state_id"  style="width: 98%;display:none; margin-bottom: 7px;margin-top: 7px;">
                                                     <option value="0">@lang('home.state')</option>
                                                 </select>
                                             
-                                                <select class=" jobs-citys" name="city" id="city_id" data-city="{{ Request::input('city') }}" style="width: 98%;display:none;">
+                                                <select class=" jobs-citys" name="city" id="city_id"  style="width: 98%;display:none;">
                                                     <option value="0">@lang('home.city')</option>
                                                 </select>
                                             </div>
@@ -82,7 +83,20 @@ $lToken = csrf_token();
                                                 </div>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="search-field-box search-item">
-                                                    <input type="search" placeholder="@lang('home.Cities')" name="city" style="width: 100%">
+                                                <select class="country-countrys" name="country" style="width: 98%;">
+                                                    <option value="0">@lang('home.country')</option>
+                                                    @foreach(JobCallMe::getJobCountries() as $country)
+                                                        <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
+                                                    @endforeach
+                                                </select>
+                                        
+                                                <select class="country-states" name="state" id="state_country"  style="width: 98%;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                                    <option value="0">@lang('home.state')</option>
+                                                </select>
+                                            
+                                                <select class="country-citys" name="city" id="city_country"  style="width: 98%;display:none;">
+                                                    <option value="0">@lang('home.city')</option>
+                                                </select>
                                                 </div>
                                                 <button type="submit" class="search-btn">
                                                     <i class="fa fa-search"></i>
@@ -98,7 +112,20 @@ $lToken = csrf_token();
                                                 </div>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="search-field-box search-item">
-                                                    <input type="search" placeholder="@lang('home.Cities')" name="city" style="width: 100%">
+                                                <select class="people-countrys" name="country" style="width: 98%;">
+                                                    <option value="0">@lang('home.country')</option>
+                                                    @foreach(JobCallMe::getJobCountries() as $country)
+                                                        <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
+                                                    @endforeach
+                                                </select>
+                                        
+                                                <select class="people-states" name="state" id="state_people"  style="width: 98%;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                                    <option value="0">@lang('home.state')</option>
+                                                </select>
+                                            
+                                                <select class="people-citys" name="city" id="city_people"  style="width: 98%;display:none;">
+                                                    <option value="0">@lang('home.city')</option>
+                                                </select>
                                                 </div>
                                                 <button type="submit" class="search-btn">
                                                     <i class="fa fa-search"></i>
@@ -142,7 +169,20 @@ $lToken = csrf_token();
                                                 </div>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="search-field-box search-item">
-                                                    <input type="search" placeholder="@lang('home.Cities')" name="city" style="width: 100%">
+                                                <select class="learn-countrys" name="country" style="width: 98%;">
+                                                    <option value="0">@lang('home.country')</option>
+                                                    @foreach(JobCallMe::getJobCountries() as $country)
+                                                        <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
+                                                    @endforeach
+                                                </select>
+                                        
+                                                <select class="learn-states" name="state" id="state_learn"  style="width: 98%;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                                    <option value="0">@lang('home.state')</option>
+                                                </select>
+                                            
+                                                <select class="learn-citys" name="city" id="city_learn"  style="width: 98%;display:none;">
+                                                    <option value="0">@lang('home.city')</option>
+                                                </select>
                                                 </div>
                                                 <button type="submit" class="search-btn">
                                                     <i class="fa fa-search"></i>
@@ -730,6 +770,154 @@ function getCitiess(stateId){
         }
     })
 }
+
+$('.country-countrys').on('change',function(){
+    var countryId = $(this).val();
+    $('#state_country').show();
+    $(".tabbable-panel").css("height", "200px");
+    getStatesss(countryId)
+})
+function getStatesss(countryId){
+    $.ajax({
+        url: "{{ url('account/get-state') }}/"+countryId,
+        success: function(response){
+            console.log(response)
+            
+
+            var currentState = $('.country-states').attr('data-state');
+            $(".country-states").html('').trigger('change');
+                $(".country-states").append(response).trigger('change');
+           
+        }
+    })
+}
+
+$('.country-states').on('change',function(){
+    var stateId = $(this).val();
+   
+    getCitiesss(stateId)
+})
+function getCitiesss(stateId){
+   
+    $.ajax({
+        url: "{{ url('account/get-city') }}/"+stateId,
+        success: function(response){
+            $('#city_country').show();
+            var currentCity = $('.country-citys').attr('data-city');
+           
+            $(".country-citys").html('').trigger('change');
+           
+                $(".country-citys").append(response).trigger('change');
+            
+        }
+    })
+}
+
+$('.people-countrys').on('change',function(){
+    var countryId = $(this).val();
+    $('#state_people').show();
+    $(".tabbable-panel").css("height", "200px");
+    getStatessss(countryId)
+})
+function getStatessss(countryId){
+    $.ajax({
+        url: "{{ url('account/get-state') }}/"+countryId,
+        success: function(response){
+            console.log(response)
+            
+
+            var currentState = $('.people-states').attr('data-state');
+            $(".people-states").html('').trigger('change');
+                $(".people-states").append(response).trigger('change');
+           
+        }
+    })
+}
+
+$('.people-states').on('change',function(){
+    var stateId = $(this).val();
+   
+    getCitiessss(stateId)
+})
+function getCitiessss(stateId){
+   
+    $.ajax({
+        url: "{{ url('account/get-city') }}/"+stateId,
+        success: function(response){
+            $('#city_people').show();
+            var currentCity = $('.people-citys').attr('data-city');
+           
+            $(".people-citys").html('').trigger('change');
+           
+                $(".people-citys").append(response).trigger('change');
+            
+        }
+    })
+}
+
+$('.country-states').on('change',function(){
+    var stateId = $(this).val();
+   
+    getCitiesss(stateId)
+})
+function getCitiesss(stateId){
+   
+    $.ajax({
+        url: "{{ url('account/get-city') }}/"+stateId,
+        success: function(response){
+            $('#city_country').show();
+            var currentCity = $('.country-citys').attr('data-city');
+           
+            $(".country-citys").html('').trigger('change');
+           
+                $(".country-citys").append(response).trigger('change');
+            
+        }
+    })
+}
+
+$('.learn-countrys').on('change',function(){
+    var countryId = $(this).val();
+    $('#state_learn').show();
+    $(".tabbable-panel").css("height", "200px");
+    getStatesssss(countryId)
+})
+function getStatesssss(countryId){
+    $.ajax({
+        url: "{{ url('account/get-state') }}/"+countryId,
+        success: function(response){
+            console.log(response)
+            
+
+            var currentState = $('.learn-states').attr('data-state');
+            $(".learn-states").html('').trigger('change');
+                $(".learn-states").append(response).trigger('change');
+           
+        }
+    })
+}
+
+$('.learn-states').on('change',function(){
+    var stateId = $(this).val();
+   
+    getCitiesssss(stateId)
+})
+function getCitiesssss(stateId){
+   
+    $.ajax({
+        url: "{{ url('account/get-city') }}/"+stateId,
+        success: function(response){
+            $('#city_learn').show();
+            var currentCity = $('.learn-citys').attr('data-city');
+           
+            $(".learn-citys").html('').trigger('change');
+           
+                $(".learn-citys").append(response).trigger('change');
+            
+        }
+    })
+}
+
 function firstCapitals(myString){
     firstChar = myString.substring( 0, 1 );
     firstChar = firstChar.toUpperCase();

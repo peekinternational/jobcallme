@@ -3731,7 +3731,10 @@ img.profile-photo-xs{
         overflow: hidden;
     }
     .jobs-suggestions img{
-        width: 30% !important;
+        width: 70% !important;
+        height: auto;
+        position: inherit !important;
+        top: 84%;
     }
     .la-item-img{
         height: 140px;
@@ -3801,7 +3804,7 @@ img.profile-photo-xs{
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0px 2px 8px 0 rgba(0, 0, 0, 0.65);
     }
     .js-note{
-        width: 65%;
+        width: 100%;
         word-wrap: break-word;
     }
     .tabbable-line > .nav-tabs > li{

@@ -29,9 +29,7 @@
 					<div class="form-group">
                           <input type="text" class="form-control" id="keyword" name="keyword" placeholder="@lang('home.key')" value="{{ Request::input('keyword') }}">
 						</div>	  
-						<div class="form-group">
-				           <input type="text" class="form-control select2" id="city" name="city" placeholder="@lang('home.city')" value="{{ Request::input('city') }}">
-							    </div>
+						
 								<div class="form-group">
 					         <select class="form-control select2 job-country" name="type" >
                                      <option value="">@lang('home.s_type')</option>

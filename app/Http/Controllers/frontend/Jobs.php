@@ -213,7 +213,7 @@ class Jobs extends Controller{
 		//echo $result->render();
 	}
 	public function searchJobs(Request $request){
-		//dd($request->all());
+		//dd($request->keyword);
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}
@@ -268,7 +268,8 @@ class Jobs extends Controller{
 		if($cityss == ''){
 			$cityss= 0;
 		}
-		$city = JobCallMe::cityId($city);
+		
+		
 		$cityss = JobCallMe::cityId($cityss);
 		if($country != '0' && $country != "") $jobs->where('jcm_jobs.country','=',$country);
 		if($countrys != '0' && $countrys != "") $jobs->where('jcm_jobs.country','=',$countrys);
@@ -409,23 +410,23 @@ class Jobs extends Controller{
                         $vhtml .= '</li>';
                         $vhtml .= '<li>';
                             $vhtml .= '<p class="js-title" style="color:#008000; border-right: 1px solid;">'.trans('home.shift').'</p>';
-                            $vhtml .= '<p class="li_dotted">'.trans('home.'.$rec->jobShift).'</p>';
+                            $vhtml .= '<p >'.trans('home.'.$rec->jobShift).'</p>';
                         $vhtml .= '</li>';
                         $vhtml .= '<li>';
                             $vhtml .= '<p class="js-title" style="color:#008000; border-right: 1px solid;">'.trans('home.experience').'</p>';
-                            $vhtml .= '<p class="li_dotted">'.trans('home.'.$rec->experience).'</p>';
+                            $vhtml .= '<p >'.trans('home.'.$rec->experience).'</p>';
                         $vhtml .= '</li>';
                         $vhtml .= '<li style="border-right: 0px solid #cccccc; ">';
                             $vhtml .= '<p class="js-title" style="color:#008000; border-right: 1px solid;">'.trans('home.salary').'</p>';
-                            $vhtml .= '<p class="li_dotted">'.$Salary_money.'</p>';
+                            $vhtml .= '<p >'.$Salary_money.'</p>';
                         $vhtml .= '</li>';
 						$vhtml .= '<li style="border-right: 0px solid #cccccc;">';
                             $vhtml .= '<p class="js-title" style="color:#0000ff; border-right: 1px solid;">'.trans('home.poston').'</p>';
-                             $vhtml .= '<p class="li_dotted">'.$joblist_date.'</p>';
+                             $vhtml .= '<p >'.$joblist_date.'</p>';
                         $vhtml .= '</li>';
 						$vhtml .= '<li>';
                             $vhtml .= '<p class="js-title" style="color:#ff4500;">'.trans('home.lastdate').'</p>';
-                            $vhtml .= '<p class="li_dotted">'.$joblist_date2.'</p>';
+                            $vhtml .= '<p >'.$joblist_date2.'</p>';
                         $vhtml .= '</li>';
                     $vhtml .= '</ul>';
                     $cLogo = url('compnay-logo/default-logo.jpg');

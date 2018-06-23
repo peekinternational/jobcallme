@@ -490,21 +490,19 @@ class Home extends Controller{
     			$people->where('jcm_users.firstName','like','%'.$request->input('keyword').'%');
     			$people->orWhere('jcm_users.lastName','like','%'.$request->input('keyword').'%');
 				$people->orWhere('jcm_users.username','like','%'.$request->input('keyword').'%');
-    		}
-    		if($request->input('city') != ''){
-    			$cityId = JobCallMe::cityId($request->input('city'));
-	    		if($cityId != '0'){
-		    		$people->where('jcm_users.city','=',$cityId);
-		    	}
-    		}
-    	}else{
+			}
+			if($request->input('country') != ''){
+				$people->where('jcm_users.country','=',$request->input('country'));
+			}
 			if($request->input('city') != ''){
-				if($request->input('city') == '000'){
-	    			$people->where('jcm_users.country','!=','1');
-				}else{
-					$people->where('jcm_users.state','=',$request->input('city'));
-				}
-	    	}
+				$people->where('jcm_users.state','=',$request->input('state'));
+			}
+
+			
+    		if($request->input('city') != ''){
+		        $people->where('jcm_users.city','=',$request->input('city'));
+    		}
+    	
 
 	    	//if($request->input('city') != ''){
 	    		//$people->where('jcm_users.city','=',$request->input('city'));
@@ -727,15 +725,17 @@ class Home extends Controller{
     		$learnQry->where('title','LIKE','%'.$request->input('keyword').'%'); 
     		}  
     		if($request->input('city') != ''){      
-    			$cityId = JobCallMe::cityId($request->input('city'));      
-    			if($cityId != '0'){       
-    				$learnQry->where('city','=',$cityId);      
-    			}     
-    		}  
-
+    				$learnQry->where('city','=',$request->input('city'));      
+			} 
+			 
+			if($request->input('state') != ''){      
+				$learnQry->where('state','=',$request->input('state'));      
+		} 
     			if($request->input('country') != ''){             
-    				$learnQry->where('country','=',$request->input('country'));               }     
-    				$record = $learnQry->orderBy('skillId','desc')->paginate(30);     return view('frontend.search-learn',compact('record'));    
+					$learnQry->where('country','=',$request->input('country'));  
+				  }     
+					$record = $learnQry->orderBy('skillId','desc')->paginate(30);    
+					 return view('frontend.search-learn',compact('record'));    
 	}
 
 
@@ -748,15 +748,18 @@ class Home extends Controller{
     			$company->where('companyName','like','%'.$request->input('keyword').'%');
     		}
     		if($request->input('city') != ''){
-    			$cityId = JobCallMe::cityId($request->input('city'));
-	    		if($cityId != '0'){
-		    		$company->where('companyCity','=',$cityId);
-		    	}
-    		}
+    		$company->where('companyCity','=',$request->input('city'));
+	         }
+		if($request->input('country') != ''){
+    		$company->where('companyCountry','=',$request->input('country'));
+		}
+		if($request->input('state') != ''){
+    		$company->where('companyState','=',$request->input('state'));
     	}
     	if($request->input('in') != ''){
     		$company->where('category','=',$request->input('in'));
-    	}
+		}
+	}
 		$company->where('jcm_companies.category','!=','');
 		$company->where('jcm_companies.companyAbout','!=',null);
     	

@@ -9,24 +9,36 @@
       <h2 class="text-center"><!-- @lang('home.searchpeople') --> <!--  {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }} --></h2>
       <div class="row">
         <div class="col-md-offset-2 col-md-8" style="padding-top:20px">
-          <div class="ls-box hidden-xs">
+          <div class="ls-box hidden-xs people-panel">
             <form role="form" action="{{ url('account/people') }}" method="post">
               {{ csrf_field() }}
               <div class="input-fields">
                 <div class="search-field-box search-item">
                   <input type="search" placeholder="@lang('home.lookingpeople')" name="keyword">
                 </div>
-                <div class="search-field-box search-item" id="p_city">
-                  <input type="search" placeholder="@lang('home.Cities')" name="city">
-                  <button type="submit" class="search-btn" style="width:10% !important">
+                <div class="search-field-box search-item" id="p_city" style="width: 52%;">
+                <select class="people-countrys" name="country" style="width: 67%;">
+                  <option value="">@lang('home.country')</option>
+                  @foreach(JobCallMe::getJobCountries() as $country)
+                      <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
+                  @endforeach
+                    </select>
+                    <button type="submit" class="search-btn" style="width:12% !important;float: none;">
                     <i class="fa fa-search"></i>
                   </button>
-                  <button  type="button" data-toggle="modal" data-target="#myModal" class="hidden-sm hidden-md hidden-lg" style="margin-left: 9px;width: 4%;height: 33px;background: transparent; border: 2px solid white;">
-                    <span class="caret" style="color:white"></span></button>
+                  <button  type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success btn-sm hidden-xs" style="margin-left: 2px;height: 33px;">
+                    <span style="color:white">See More</span></button>
+                    <select class="people-states" name="state" id="states_people"  style="width: 67%;display:none; margin-bottom: 7px;margin-top: 7px;">
+                        <option value="">@lang('home.state')</option>
+                    </select>
+                
+                    <select class="people-citys" name="city" id="citys_people"  style="width: 67%;display:none;">
+                        <option value="">@lang('home.city')</option>
+                    </select>
+                  
                   </div>
 
-                  <button  type="button" data-toggle="modal" data-target="#myModal" class="hidden-xs" style="margin-left: 9px;width: 4%;height: 33px;background: transparent; border: 2px solid #cecdcd;">
-                    <span class="caret" style="color:white"></span></button>
+                  
                   </div>
                 </form>
               </div>
@@ -502,6 +514,48 @@ $(".job-sub-category2").append(newOption).trigger('change');
 }
 })
       }
+
+      $('.people-countrys').on('change',function(){
+    var countryId = $(this).val();
+    $('#states_people').show();
+   $(".people-panel").css("height", "163px");
+    getStatessss(countryId)
+})
+function getStatessss(countryId){
+    $.ajax({
+        url: "{{ url('account/get-state') }}/"+countryId,
+        success: function(response){
+            console.log(response)
+            
+
+            var currentState = $('.people-states').attr('data-state');
+            $(".people-states").html('').trigger('change');
+                $(".people-states").append(response).trigger('change');
+           
+        }
+    })
+}
+
+$('.people-states').on('change',function(){
+    var stateId = $(this).val();
+   
+    getCitiessss(stateId)
+})
+function getCitiessss(stateId){
+   
+    $.ajax({
+        url: "{{ url('account/get-city') }}/"+stateId,
+        success: function(response){
+            $('#citys_people').show();
+            var currentCity = $('.people-citys').attr('data-city');
+           
+            $(".people-citys").html('').trigger('change');
+           
+                $(".people-citys").append(response).trigger('change');
+            
+        }
+    })
+}
 
 
     </script>
