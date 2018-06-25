@@ -85,7 +85,7 @@ if($company->companyLogo != ''){
                        </div>
                        <div class="col-md-6 eo-section">
                            <a class="btn btn-primary eo-edit-btn" onClick="$('.eo-section').hide(); $('.eo-edit-section').show()"><i class="fa fa-edit"></i> </a>
-                           <h4>@lang('home.operationhours')</h4>
+                           <!-- <h4>@lang('home.operationhours')</h4>
                            <?php $opHour = json_decode($company->companyOperationalHour,true); ?>
                            <table class="table">
                                <tbody>
@@ -118,7 +118,7 @@ if($company->companyLogo != ''){
                                        <td>{!! $opHour['sun']['from'] !!} - {!! $opHour['sun']['to'] !!} </td>
                                    </tr>
                                </tbody>
-                           </table>
+                           </table> -->
                        </div>
                        <div class="eo-edit-section">
                            <form id="pnj-form" action="" method="post" class="organization-form">
@@ -292,7 +292,7 @@ if($company->companyLogo != ''){
 
                                    <hr>
                                    <!--Monday Schedule-->
-                                   <div class="form-group">
+                                  <!--  <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.monday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[mon][]" class="form-control">
@@ -311,10 +311,10 @@ if($company->companyLogo != ''){
                                            </select>
                                        </div>
                                    </div>
-                                   <hr>
+                                   <hr> -->
 
                                    <!--Tuesday Schedule-->
-                                   <div class="form-group">
+                                   <!-- <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.tuesday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[tue][]" class="form-control">
@@ -334,9 +334,9 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <hr>
-
+ -->
                                    <!--Wednesday Schedule-->
-                                   <div class="form-group">
+                                  <!--  <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.wednesday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[wed][]" class="form-control">
@@ -356,9 +356,9 @@ if($company->companyLogo != ''){
                                        </div>
                                    </div>
                                    <hr>
-
+ -->
                                    <!--Thursday Schedule-->
-                                   <div class="form-group">
+                                   <!-- <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.thursday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[thu][]" class="form-control">
@@ -377,10 +377,10 @@ if($company->companyLogo != ''){
                                            </select>
                                        </div>
                                    </div>
-                                   <hr>
+                                   <hr> -->
 
                                    <!--Friday Schedule-->
-                                   <div class="form-group">
+                                 <!--   <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.friday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[fri][]" class="form-control">
@@ -399,10 +399,10 @@ if($company->companyLogo != ''){
                                            </select>
                                        </div>
                                    </div>
-                                   <hr>
+                                   <hr> -->
 
                                    <!--Saturday Schedule-->
-                                   <div class="form-group">
+                                 <!--   <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.saturday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[sat][]" class="form-control">
@@ -421,10 +421,10 @@ if($company->companyLogo != ''){
                                            </select>
                                        </div>
                                    </div>
-                                   <hr>
+                                   <hr> -->
 
                                    <!--Sunday Schedule-->
-                                   <div class="form-group">
+                                 <!--   <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.sunday')</label>
                                        <div class="col-sm-4 pnj-form-field">
                                            <select name="opHours[sun][]" class="form-control">
@@ -441,7 +441,7 @@ if($company->companyLogo != ''){
                                                     <option value="{!! $time !!}" {!! $time == $opHour['sun']['to'] ? 'selected="selected"' : '' !!}>{!! $time !!}</option>
                                                 @endforeach
                                            </select>
-                                       </div>
+                                       </div> -->
                                    </div>
                                    <div class="col-md-12">
                                        <div class="row">

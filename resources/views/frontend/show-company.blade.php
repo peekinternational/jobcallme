@@ -81,9 +81,9 @@ $opHour = json_decode($company->companyOperationalHour,true);
                     <li>
                         <a href="#rtj_tab_jobs" data-toggle="tab"><i class="fa fa-briefcase"></i> @lang('home.jobs') </a>
                     </li>
-                    <li>
+               <!--      <li>
                         <a href="#rtj_tab_operation" data-toggle="tab"><i class="fa fa-clock-o"></i> @lang('home.operationhours')</a>
-                    </li>
+                    </li> -->
 					<li>
                     @if(app()->getLocale() == "kr")
 						    <a href="http://dart.fss.or.kr/dsae001/main.do" target="_blank">

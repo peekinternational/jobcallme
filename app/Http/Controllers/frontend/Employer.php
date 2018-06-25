@@ -1320,7 +1320,7 @@ public function userResume($userId){
 		$companyId = JobCallMe::getUser($app->userId)->companyId;
 
 		extract($request->all());
-		$opHours = $request->input('opHours');
+	/* 	$opHours = $request->input('opHours');
 		foreach($opHours as $i => $k){
 			if($i == 'sun' || $i == 'sat'){
 				if($k[0] == ''){ $k[0] = '00:00 AM';}
@@ -1330,7 +1330,7 @@ public function userResume($userId){
 				if($k[1] == ''){ $k[1] = '00:00 PM';}
 			}
 			$opHoursArr[$i] = array('from' => $k[0], 'to' => $k[1]);
-		}
+		} */
 		
 		$inputOr = array('business_sector' => $business_sector,'businessType' => $businessType,'category' => $industry,'Capital' =>$capital,'sales' => $sales,'formofbussiness' => $formofbusiness,'corporatenumber'=> $corporatenumber,'companyName' => $companyName, 'companyAddress' => $companyAddress, 'companyEmail' => $companyEmail, 'companyPhoneNumber' => $companyPhoneNumber, 'companyState' => $companyState, 'companyCity' => $companyCity, 'companyCountry' => $companyCountry, 'companyWebsite' => $companyWebsite, 'companyFb' => $companyFb, 'companyLinkedin' => $companyLinkedin, 'companyTwitter' => $companyTwitter, 'companyInstagram' => $companyInstagram,'companyNoOfUsers' => $companyNoOfUsers, 'companyEstablishDate' => $companyEstablishDate, 'companyOperationalHour' => @json_encode($opHoursArr), 'companyModifiedTime' => date('Y-m-d H:i:s'));
 		
