@@ -81,9 +81,9 @@ $opHour = json_decode($company->companyOperationalHour,true);
                     <li>
                         <a href="#rtj_tab_jobs" data-toggle="tab"><i class="fa fa-briefcase"></i> @lang('home.jobs') </a>
                     </li>
-               <!--      <li>
+                    <li>
                         <a href="#rtj_tab_operation" data-toggle="tab"><i class="fa fa-clock-o"></i> @lang('home.operationhours')</a>
-                    </li> -->
+                    </li>
 					<li>
                     @if(app()->getLocale() == "kr")
 						    <a href="http://dart.fss.or.kr/dsae001/main.do" target="_blank">
@@ -126,14 +126,14 @@ $opHour = json_decode($company->companyOperationalHour,true);
                         <table class="table">
                             <tbody>
                             <tr>
-                                <td>@lang('home.monday')</td>
-                                <td>{!! $opHour['mon']['from'] !!} - {!! $opHour['mon']['to'] !!}</td>
+                                <td>@lang('home.Working day')</td>
+                                <td>@lang('home.'.$company->companydayval)</td>
                             </tr>
                             <tr>
-                                <td>@lang('home.tuesday')</td>
-                                <td>{!! $opHour['tue']['from'] !!} - {!! $opHour['thu']['to'] !!}</td>
+                                <td>@lang('home.Working hours')</td>
+                                <td>@lang('home.'.$company->companyhoursval)</td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td>@lang('home.wednesday')</td>
                                 <td>{!! $opHour['wed']['from'] !!} - {!! $opHour['wed']['to'] !!}</td>
                             </tr>
@@ -152,7 +152,7 @@ $opHour = json_decode($company->companyOperationalHour,true);
                             <tr>
                                 <td>@lang('home.sunday')</td>
                                 <td>{!! $opHour['sun']['from'] !!} - {!! $opHour['sun']['to'] !!}</td>
-                            </tr>
+                            </tr> -->
                             </tbody>
                         </table>
                     </div>

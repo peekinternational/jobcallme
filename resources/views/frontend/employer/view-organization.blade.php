@@ -289,6 +289,36 @@ if($company->companyLogo != ''){
                                             <input class="form-control date-pickers companyEstablishDate" type="text" name="companyEstablishDate" value="{{ $company->companyEstablishDate }}" required>
                                         </div>
                                    </div>
+                                   <div class="form-group">
+                            <label class="control-label col-md-3">@lang('home.Working day')</label>
+                                <div class="col-md-9 pnj-form-field">
+                                    <select class="form-control" name="companydayval" required>
+										<option value="jobday01" {{ $meta->jobdayval == 'jobday01' ? 'selected="selected"' : '' }}>@lang('home.jobday01')</option>
+										<option value="jobday02" {{ $meta->jobdayval == 'jobday02' ? 'selected="selected"' : '' }}>@lang('home.jobday02')</option>
+										<option value="jobday03" {{ $meta->jobdayval == 'jobday03' ? 'selected="selected"' : '' }}>@lang('home.jobday03')</option>
+										<option value="jobday04" {{ $meta->jobdayval == 'jobday04' ? 'selected="selected"' : '' }}>@lang('home.jobday04')</option>
+										<option value="jobday05" {{ $meta->jobdayval == 'jobday05' ? 'selected="selected"' : '' }}>@lang('home.jobday05')</option>
+										<option value="jobday06" {{ $meta->jobdayval == 'jobday06' ? 'selected="selected"' : '' }}>@lang('home.jobday06')</option>
+										<option value="jobday07" {{ $meta->jobdayval == 'jobday07' ? 'selected="selected"' : '' }}>@lang('home.jobday07')</option>
+										<option value="jobday08" {{ $meta->jobdayval == 'jobday08' ? 'selected="selected"' : '' }}>@lang('home.jobday08')</option>
+										<option value="jobday09" {{ $meta->jobdayval == 'jobday09' ? 'selected="selected"' : '' }}>@lang('home.jobday09')</option>
+										<option value="jobday10" {{ $meta->jobdayval == 'jobday10' ? 'selected="selected"' : '' }}>@lang('home.jobday10')</option>
+                                        
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                            <label class="control-label col-md-3">@lang('home.Working hours')</label>
+                                <div class="col-md-9 pnj-form-field">
+                                    <select class="form-control" name="companyhoursval" required>
+										<option value="jobhours01" {{ $meta->jobhoursval == 'jobhours01' ? 'selected="selected"' : '' }}>@lang('home.jobhours01')</option>
+										<option value="jobhours02" {{ $meta->jobhoursval == 'jobhours02' ? 'selected="selected"' : '' }}>@lang('home.jobhours02')</option>
+										<option value="jobhours03" {{ $meta->jobhoursval == 'jobhours03' ? 'selected="selected"' : '' }}>@lang('home.jobhours03')</option>
+										<option value="jobhours04" {{ $meta->jobhoursval == 'jobhours04' ? 'selected="selected"' : '' }}>@lang('home.jobhours04')</option>
+										<option value="jobhours05" {{ $meta->jobhoursval == 'jobhours05' ? 'selected="selected"' : '' }}>@lang('home.jobhours05')</option>
+																			
+                                    </select>
+                                </div>
 
                                    <hr>
                                    <!--Monday Schedule-->

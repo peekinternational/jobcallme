@@ -797,6 +797,7 @@ class Home extends Controller{
 			$allrecmond=$allrec == 0 ? 0 : ($percec*100/$allrec);
 			$allon=$allrec == 0 ? 0 : ($peron*100/$allrec);
 			$allgrowing=$allrec == 0 ? 0 : ($pergrowing*100/$allrec);
+			//dd($company);
 
     	return view('frontend.show-company',compact('allgrowing','allon','allrecmond','company','jobs','followArr','companyReview'));
     }
