@@ -734,6 +734,7 @@ $('.jobs-countrys').on('change',function(){
     var countryId = $(this).val();
     $('#state_id').show();
     $(".tabbable-panel").css("height", "200px");
+    $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .tabbable-panel { height: 350px !important;}}</style>');
     getStatess(countryId)
 })
 function getStatess(countryId){
@@ -775,6 +776,7 @@ $('.country-countrys').on('change',function(){
     var countryId = $(this).val();
     $('#state_country').show();
     $(".tabbable-panel").css("height", "200px");
+    $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .tabbable-panel { height: 350px !important;}}</style>');
     getStatesss(countryId)
 })
 function getStatesss(countryId){
@@ -817,6 +819,7 @@ $('.people-countrys').on('change',function(){
     var countryId = $(this).val();
     $('#state_people').show();
     $(".tabbable-panel").css("height", "200px");
+    $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .tabbable-panel { height: 350px !important;}}</style>');
     getStatessss(countryId)
 })
 function getStatessss(countryId){
@@ -880,6 +883,7 @@ $('.learn-countrys').on('change',function(){
     var countryId = $(this).val();
     $('#state_learn').show();
     $(".tabbable-panel").css("height", "200px");
+    $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .tabbable-panel { height: 350px !important;}}</style>');
     getStatesssss(countryId)
 })
 function getStatesssss(countryId){
