@@ -348,6 +348,39 @@
             <!--FP item Row-->
             <div class="row">
               @foreach($data as $people)
+              <?php 
+							   /*count user info*/
+            $re=0;
+            $res=0;
+            $ress=0;
+            $resss=0;
+            $ressss=0;
+
+              $resume=JOBCALLME::getUserresume($people->userId);
+             // print_r($resume);
+              foreach ($resume as $key => $value) {
+                //print_r($value->type);
+								if($value->type == 'academic' ){
+									$re = 16.6666;
+                }
+                if($value->type == 'skills'){
+									$res = 16.6666;
+                }
+                if($value->type == 'experience' ){
+									$ress = 16.6666;
+                }
+                if($value->type == 'project' ){
+									$resss = 16.6666;
+                }
+                if($value->type == 'language'){
+									$ressss = 16.6666;
+								}
+							}
+						
+              $width = round($re+$ress+$resss+$ressss+$res);
+            
+						?>
+
               <?php
 				if($people->genderpeople == 'Male' or $people->genderpeople == 'Man'){
 					$pImage = url('profile-photos/profile-logo.jpg');
@@ -381,24 +414,28 @@
               
               ?>
               
-              <div class="col-md-2 col-sm-4 col-xs-6">
+              <div class="col-md-2 col-sm-4 col-xs-6 ">
                 <div class="fp-item" style="height: 256px;">
                   <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
-                    <div class="fp-img">
+                    <div class="fp-img ih-item square effect8 scale_up" style="margin-bottom:0;box-shadow: none !important;">
 
+                    <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
                     @if(Session::has('jcmUser'))
-                      <img src="@if($check) {{ $pImage }} @else @if($people->genderpeople == 'Male' or $people->genderpeople == 'Man') {{url('profile-photos/profile-logo.jpg')}} @elseif($people->genderpeople == 'Female') {{url('profile-photos/profile-logo2.jpg')}} @else {{url('profile-photos/profile-logo3.jpg')}} @endif @endif">
+                      <img src="@if($check) {{ $pImage }} @else @if($people->genderpeople == 'Male' or $people->genderpeople == 'Man') {{url('profile-photos/profile-logo.jpg')}} @elseif($people->genderpeople == 'Female') {{url('profile-photos/profile-logo2.jpg')}} @else {{url('profile-photos/profile-logo3.jpg')}} @endif @endif" style="height: 145px;">
                       @else
-						@if($people->genderpeople == 'Male' or $people->genderpeople == 'Man') 
-							<img src=" {{ url('profile-photos/profile-logo.jpg ')}}">
-						@elseif($people->genderpeople == 'Female') 
-							<img src=" {{ url('profile-photos/profile-logo2.jpg ')}}">
-						@else
-							<img src=" {{ url('profile-photos/profile-logo3.jpg ')}}">
-						@endif
-                      
+                          @if($people->genderpeople == 'Male' or $people->genderpeople == 'Man') 
+                            <img src=" {{ url('profile-photos/profile-logo.jpg ')}}">
+                          @elseif($people->genderpeople == 'Female') 
+                            <img src=" {{ url('profile-photos/profile-logo2.jpg ')}}">
+                          @else
+                            <img src=" {{ url('profile-photos/profile-logo3.jpg ')}}">
+                          @endif
+                                    
                       @endif
-
+                      <div class="info">
+                      <h3 style="margin-top: 56px;"> <?php echo $width; ?>% Information Completed </h3>
+                      </div>
+                    </a>
                     </div>
                     <div class="fp-item-details" style="height: 95px;">
                     
@@ -407,10 +444,13 @@
                      @else
                      <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i> <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px;"></i></p>
                      @endif
+                    
                       <p>@lang('home.'.JobCallMe::categoryTitle($people->industry))</p>
                       <p>@lang('home.'.JobCallMe::cityName($people->city)), @lang('home.'.JobCallMe::countryName($people->country))</p>
                     </div>
+                    
                   </a>
+                  
                 </div>
               </div>
               @endforeach

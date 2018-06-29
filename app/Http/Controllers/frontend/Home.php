@@ -515,7 +515,7 @@ class Home extends Controller{
     	$people->where('privacy.profile','=','Yes');
     	//$people->limit(30);
 
-		$people->where('jcm_users_meta.userId','!=','');
+		//$people->where('jcm_users_meta.userId','!=','');
     	
     //	$people->limit(30);
 
@@ -524,9 +524,9 @@ class Home extends Controller{
 		$people->groupBy('jcm_users.userId');
 		//$peopleget = $people->get();
     	$peoples = $people->paginate(50);
-		$pes=$peoples;
-			$data=[];
-	  foreach($pes as $user){
+		$data=$peoples;
+			//$data=[];
+	 /*  foreach($pes as $user){
 		//echo $user->userId." / ";
 		$resumess = DB::table('jcm_resume')->where('userId','=',$user->userId)->get();
 		$type=$resumess->pluck('type');
@@ -537,7 +537,7 @@ class Home extends Controller{
 		array_push($data,$user);
 		}
 		
-	}
+	} */
 		//$userId = $peopleget->pluck('userId');
 		//dd($peoples);
 		

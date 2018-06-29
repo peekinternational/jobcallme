@@ -19,6 +19,13 @@ class JobCallMe{
 		return DB::table('jcm_users_meta')->where('userId','=',$userId)->first();
 	}
 
+	public function getUserresume($userId){
+		
+		$hello= DB::table('jcm_resume')->where('userId','=',$userId)->get();
+		//print_r($hello);
+		return $hello;
+	}
+
 	public function userName($userId){
 		$rec = DB::table('jcm_users')->select('firstName','lastName')->where('userId','=',$userId)->first();
 		return $rec->firstName.' '.$rec->lastName;

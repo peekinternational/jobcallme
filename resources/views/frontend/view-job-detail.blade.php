@@ -125,6 +125,7 @@ $anynational='';
                     <a href="https://plus.google.com/share?url={{ url('jobs/'.$job->jobId) }}" target="_blank" >
                     	<i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                     </a>
+                   <!--  <button onclick="OpenWindow('{{ url('jobs/'.$job->jobId) }}')">Click me</button> -->
                 </div>
                 <ul class="js-listing">
                     <li>
@@ -994,7 +995,13 @@ geocoder.geocode( { 'address': address}, function(results, status) {
 });
      
       }
-
+      function OpenWindow(url, windowName) {
+   newwindow = window.open('http://localhost/jobcallme/social/Script//sharer?url=' + url, windowName, 'height=600,width=800');
+   if (window.focus) {
+      newwindow.focus();
+   }
+   return false;
+}
     </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1RaWWrKsEf2xeBjiZ5hk1gannqeFxMmw&libraries=places&callback=initAutocomplete" async defer></script>
 
