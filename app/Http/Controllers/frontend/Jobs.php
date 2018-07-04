@@ -38,12 +38,14 @@ class Jobs extends Controller{
 	
 		$app = $request->session()->get('jcmUser');
 
-		$result = $jobs->orderBy('jobId','desc')->paginate(20);
+		$result = $jobs->orderBy('jobId','desc')->paginate(15);
 		
 		//dd($result);
         $head = '';
 		$vhtml = '';
 		$category ='';
+		echo '<div class="jobs-suggestions" style="background: none;box-shadow: none;border: none;padding: 0;margin-bottom: 6px;
+		">'.$result->render().'</div>';
 		if(count($result) > 0){
 			foreach($result as $rec){
 				$jobApplied = JobCallMe::isAppliedToJob($app->userId,$rec->jobId);
@@ -135,7 +137,7 @@ class Jobs extends Controller{
 					}else{
 						$Salary_money = number_format($rec->minSalary).' - '.number_format($rec->maxSalary).' '.$salarycurrency;						
 					}
-
+              
 				$colorArr = array('purple','green','darkred','orangered','blueviolet');
                     $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_title.'</span></a>  '.$head.' '.$dispatch.' </h4>';
                     $vhtml .= '<p style="font-size:15px;color:#113886;"><b>'.$rec->companyName.'</b></p>';
@@ -302,7 +304,7 @@ class Jobs extends Controller{
 		}
 		$app = $request->session()->get('jcmUser');
 
-		$result = $jobs->orderBy('jobId','desc')->paginate(20);
+		$result = $jobs->orderBy('jobId','desc')->paginate(15);
 		
 		//dd($result);
         $head = '';
