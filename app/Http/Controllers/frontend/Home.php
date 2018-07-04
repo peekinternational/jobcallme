@@ -476,7 +476,7 @@ class Home extends Controller{
 
     public function people(Request $request){
 		$app = $request->session()->get('jcmUser');
-    	$request->all();
+    	//dd($request->all());
     	/* peoples query */
     	$people = DB::table('jcm_users');
     	$people->select('*','privacy.profileImage as pImage');
@@ -494,7 +494,7 @@ class Home extends Controller{
 			if($request->input('country') != ''){
 				$people->where('jcm_users.country','=',$request->input('country'));
 			}
-			if($request->input('city') != ''){
+			if($request->input('state') != ''){
 				$people->where('jcm_users.state','=',$request->input('state'));
 			}
 
@@ -507,15 +507,15 @@ class Home extends Controller{
 	    	//if($request->input('city') != ''){
 	    		//$people->where('jcm_users.city','=',$request->input('city'));
 	    	//}
-	    	if($request->input('industry') != ''){
-	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
-	    	}
+	    	
 	    }
-
+		if($request->input('industry') != ''){
+			$people->where('jcm_users_meta.industry','=',$request->input('industry'));
+		}
     	$people->where('privacy.profile','=','Yes');
     	//$people->limit(30);
 
-		//$people->where('jcm_users_meta.userId','!=','');
+		$people->where('jcm_users_meta.userId','!=','');
     	
     //	$people->limit(30);
 
