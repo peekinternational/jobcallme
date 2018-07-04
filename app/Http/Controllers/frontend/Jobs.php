@@ -26,19 +26,19 @@ class Jobs extends Controller{
 			$meta = JobCallMe::getUserMeta($request->session()->get('jcmUser')->userId);
 			$savedJobArr = @explode(',', $meta->saved);
 		}
-
+		$country = trim($request->input('country'));
 		
 		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
 		$jobs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
 		$jobs->where('jcm_jobs.status','=','1');
 		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
-		
+		if($country != '0' && $country != "") $jobs->where('jcm_jobs.country','=',$country);
 		$jobs->where('jcm_jobs.jobStatus','=','Publish');
 	
 		$app = $request->session()->get('jcmUser');
 
-		$result = $jobs->orderBy('jobId','desc')->paginate(15);
+		$result = $jobs->orderBy('jobId','desc')->paginate(2);
 		
 		//dd($result);
         $head = '';
@@ -304,7 +304,7 @@ class Jobs extends Controller{
 		}
 		$app = $request->session()->get('jcmUser');
 
-		$result = $jobs->orderBy('jobId','desc')->paginate(15);
+		$result = $jobs->orderBy('jobId','desc')->paginate(2);
 		
 		//dd($result);
         $head = '';

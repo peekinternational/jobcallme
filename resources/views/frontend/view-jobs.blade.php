@@ -14,7 +14,7 @@
             <div class="col-md-3 job-search-box">
 			<span>@lang('home.refinesearch')</span>
 			<br>
-                <form action="" method="post" class="search-job" style="padding-top:13px">
+                <form action="" method="post" class="search-job" id="form" style="padding-top:13px">
                 	<input type="hidden" name="_token" class="token">
                     <div class="form-group">
                         <input type="text" class="form-control" name="keyword" value="{{ Request::input('keyword') }}" placeholder="@lang('home.key')">
@@ -153,8 +153,10 @@ function dialogclick() {
     });
      function getArticles(page) {
          location.hash=page;
+         var data=$('#form').serialize();
         $.ajax({
-            url : '/ajex/products?page='+page 
+            url : '/ajex/products?page='+page,
+            data: data
         }).done(function (data) {
             $('.show-jobs').html(data); 
             
