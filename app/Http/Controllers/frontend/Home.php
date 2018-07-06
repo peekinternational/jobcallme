@@ -515,7 +515,7 @@ class Home extends Controller{
     	$people->where('privacy.profile','=','Yes');
     	//$people->limit(30);
 
-		$people->where('jcm_users_meta.userId','!=','');
+		//$people->where('jcm_users_meta.userId','!=','');
     	
     //	$people->limit(30);
 
@@ -616,7 +616,8 @@ class Home extends Controller{
     	$people->orderBy('jcm_users.userId','desc');
          $people->groupBy('jcm_users.userId');
 		$peoples = $people->paginate(18);
-		$pes=$peoples;
+		$data=$peoples;
+	/* 	$pes=$peoples;
 		$data=[];
   foreach($pes as $user){
 	//echo $user->userId." / ";
@@ -629,7 +630,7 @@ class Home extends Controller{
 	array_push($data,$user);
 	}
 	
-}
+} */
         // dd($peoples);
 
     	return view('frontend.people',compact('data','peoples'));

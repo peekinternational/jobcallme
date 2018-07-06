@@ -405,7 +405,7 @@ $('form.getapi').submit(function(e){
    
     var form=$("#signUpForm");
     $.ajax({
-        url: "http://localhost/jobcallme/social/Script/requests.php?f=register",
+        url: "http://jcmlink.com/Script/requests.php?f=register",
         type: 'POST',
         data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username},
         async: false,

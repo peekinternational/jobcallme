@@ -355,6 +355,7 @@
             $ress=0;
             $resss=0;
             $ressss=0;
+            $info=0;
 
               $resume=JOBCALLME::getUserresume($people->userId);
              // print_r($resume);
@@ -375,9 +376,18 @@
                 if($value->type == 'language'){
 									$ressss = 16.6666;
 								}
-							}
+              }
+              if($people->metaId ==null){
+                $info = 13;
+              }
+                elseif($people->phoneNumber==null){
+                  $info = 10;
+                }
+                else{
+                  $info = 17;
+                }
 						
-              $width = round($re+$ress+$resss+$ressss+$res);
+              $width = round($re+$ress+$resss+$ressss+$res+$info);
             
 						?>
 
@@ -433,7 +443,14 @@
                                     
                       @endif
                       <div class="info">
-                      <h3 style="margin-top: 56px;"> <?php echo $width; ?>% Information Completed </h3>
+                      <h3 style="margin-top: 56px;"> 
+							@if(app()->getLocale() == "kr")
+								
+								이력서 정보 <?php echo $width; ?>%</option>
+
+							@else
+								<?php echo $width; ?>% Information Completed
+							@endif </h3>
                       </div>
                     </a>
                     </div>

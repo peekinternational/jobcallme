@@ -125,7 +125,7 @@ $anynational='';
                     <a href="https://plus.google.com/share?url={{ url('jobs/'.$job->jobId) }}" target="_blank" >
                     	<i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                     </a>
-                   <!--  <button onclick="OpenWindow('{{ url('jobs/'.$job->jobId) }}')">Click me</button> -->
+                  <img src="{{asset('website/icon.ico')}}" onclick="OpenWindow('{{ url('jobs/'.$job->jobId) }}')" style="width: 25px;border-radius: 50px; cursor: pointer;">
                 </div>
                 <ul class="js-listing">
                     <li>
@@ -996,7 +996,7 @@ geocoder.geocode( { 'address': address}, function(results, status) {
      
       }
       function OpenWindow(url, windowName) {
-   newwindow = window.open('http://localhost/jobcallme/social/Script//sharer?url=' + url, windowName, 'height=600,width=800');
+   newwindow = window.open('http://jcmlink.com/Script/sharer?url=' + url, windowName, 'height=600,width=800');
    if (window.focus) {
       newwindow.focus();
    }

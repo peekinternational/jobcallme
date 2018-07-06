@@ -38,7 +38,7 @@ class Jobs extends Controller{
 	
 		$app = $request->session()->get('jcmUser');
 
-		$result = $jobs->orderBy('jobId','desc')->paginate(2);
+		$result = $jobs->orderBy('jobId','desc')->paginate(12);
 		
 		//dd($result);
         $head = '';
@@ -304,7 +304,7 @@ class Jobs extends Controller{
 		}
 		$app = $request->session()->get('jcmUser');
 
-		$result = $jobs->orderBy('jobId','desc')->paginate(2);
+		$result = $jobs->orderBy('jobId','desc')->paginate(12);
 		
 		//dd($result);
         $head = '';
