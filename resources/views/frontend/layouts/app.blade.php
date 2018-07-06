@@ -476,7 +476,7 @@ function firstCapital(myString){
     tail = myString.substring( 1 );
     return firstChar + tail;
 }
-$('form.search-job').submit(function(e){
+/* $('form.search-job').submit(function(e){
     //$('.search-job button[name="save"]').prop('disabled',true);
     $('.search-job .token').val(token);
     $.ajax({
@@ -502,7 +502,7 @@ $('form.search-job').submit(function(e){
     })
     isFirst = 1;
     e.preventDefault();
-})
+}) */
 function saveJob(jobId,obj){
     if($(obj).hasClass('btn-default')){
         var type = 'save';

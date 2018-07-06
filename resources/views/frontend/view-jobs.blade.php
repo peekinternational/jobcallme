@@ -199,9 +199,9 @@ $(document).ready(function(){
                        $(this).children(".js-action").fadeOut('fast');
                    });
 
-                   $('.search-job select option[value=""]').prop('selected',true);
-                   $('.search-job input').val('');
-                   $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
+                  // $('.search-job select option[value=""]').prop('selected',true);
+                  // $('.search-job input').val('');
+                  // $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
                }
            })
      
@@ -222,9 +222,9 @@ $(document).ready(function(){
                 $(this).children(".js-action").fadeOut('fast');
             });
 
-            $('.search-job select option[value=""]').prop('selected',true);
-            $('.search-job input').val('');
-            $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
+           // $('.search-job select option[value=""]').prop('selected',true);
+           // $('.search-job input').val('');
+           // $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
         }
     })
     }else if(getkeyword == '' && getcity == '' || getcountry == '' && getsate == ''){
@@ -307,9 +307,9 @@ $('form.search-job').submit(function(e){
 		        $(this).children(".js-action").fadeOut('fast');
 		    });
 
-            $('.search-job select option[value=""]').prop('selected',true);
-            $('.search-job input').val('');
-            $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
+          //  $('.search-job select option[value=""]').prop('selected',true);
+          //  $('.search-job input').val('');
+          //  $('.search-job .job-city').html('<option value="">@lang("home.s_city")</option>');
 		}
 	})
 	isFirst = 1;

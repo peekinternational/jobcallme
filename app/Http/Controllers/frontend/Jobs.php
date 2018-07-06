@@ -19,6 +19,30 @@ class Jobs extends Controller{
 	public function ajexhome(Request $request){
 		//dd($request->all());
 	
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		
+		$_find = trim($request->input('_find'));
+		$keyword = trim($request->input('keyword'));
+		$categoryId = trim($request->input('categoryId'));
+		$htype = trim($request->input('htype'));
+		$dtype = trim($request->input('dtype'));
+		$jobType = trim($request->input('jobType'));
+		$jobShift = trim($request->input('jobShift'));
+		$head = trim($request->input('head'));
+		$dispatch = trim($request->input('dispatch'));
+		$careerLevel = trim($request->input('careerLevel'));
+		$experience = trim($request->input('experience'));
+		$minSalary = trim($request->input('minSalary'));
+		$maxSalary = trim($request->input('maxSalary'));
+		$country = trim($request->input('country'));
+		$state = trim($request->input('state'));
+		$city = trim($request->input('city'));
+		$countrys = trim($request->input('countrys'));
+		$states = trim($request->input('states'));
+		$cityss = trim($request->input('cityss'));
+		$currency = trim($request->input('currency'));
 		$userinfo=$request->session()->get('jcmUser')->userId;
 		
 		$savedJobArr = array();
@@ -26,15 +50,61 @@ class Jobs extends Controller{
 			$meta = JobCallMe::getUserMeta($request->session()->get('jcmUser')->userId);
 			$savedJobArr = @explode(',', $meta->saved);
 		}
-		$country = trim($request->input('country'));
+
 		
 		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
 		$jobs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
 		$jobs->where('jcm_jobs.status','=','1');
 		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
+		//$jobs->where('jcm_jobs.country','=',$country);
+		/*if($_find == '0'){
+			if($request->session()->has('jcmUser')){
+				$meta = JobCallMe::getUserMeta($request->session()->get('jcmUser')->userId);
+				if($meta->industry != '0' && $meta->industry != ''){
+					$jobs->where('jcm_jobs.category','=',$meta->industry);
+				}
+			}
+		}*/
+		/* write below code for resolve an issue when city is empty cityId function return 1 which mean record exsist*/
+		if($city == ''){
+			$city = 0;
+		}
+		if($cityss == ''){
+			$cityss= 0;
+		}
+		
+		
+		$cityss = JobCallMe::cityId($cityss);
 		if($country != '0' && $country != "") $jobs->where('jcm_jobs.country','=',$country);
+		if($countrys != '0' && $countrys != "") $jobs->where('jcm_jobs.country','=',$countrys);
+		if($categoryId != '') $jobs->where('jcm_jobs.category','=',$categoryId);
+		if($htype != '') $jobs->where('jcm_jobs.head','=',$htype);
+		if($dtype != '') $jobs->where('jcm_jobs.dispatch','=',$dtype);
+		if($jobType != '') $jobs->where('jcm_jobs.jobType','=',$jobType);
+		if($jobShift != '') $jobs->where('jcm_jobs.jobShift','=',$jobShift);
+		if($careerLevel != '') $jobs->where('jcm_jobs.careerLevel','=',$careerLevel);
+		if($experience != '') $jobs->where('jcm_jobs.experience','=',$experience);
+		if($head != '') $jobs->where('jcm_jobs.head','=',$head);
+		if($dispatch != '') $jobs->where('jcm_jobs.dispatch','=',$dispatch);
+		if($minSalary != '') $jobs->where('jcm_jobs.minSalary','<=',$minSalary);
+		if($maxSalary != '') $jobs->where('jcm_jobs.maxSalary','>=',$maxSalary);
+		if($state != '0' && $state != "") $jobs->where('jcm_jobs.state','=',$state);
+		if($city != '0') $jobs->where('jcm_jobs.city','=',$city);
+		if($states != '0' && $states != "") $jobs->where('jcm_jobs.state','=',$states);
+		if($cityss != '0') $jobs->where('jcm_jobs.city','=',$cityss);
+		if($currency != '') $jobs->where('jcm_jobs.currency','=',$currency);
 		$jobs->where('jcm_jobs.jobStatus','=','Publish');
+		if($keyword != ''){
+			$jobs->where(function ($query) use ($keyword) {
+				$expl = @explode(' ', $keyword);
+				foreach($expl as $kw){
+					$query->orWhere('jcm_jobs.title','LIKE','%'.$kw.'%');
+					$query->orWhere('jcm_jobs.skills','LIKE','%'.$kw.'%');
+					$query->orWhere('jcm_companies.companyName','LIKE','%'.$kw.'%');
+				}
+			});
+		}
 	
 		$app = $request->session()->get('jcmUser');
 
@@ -215,7 +285,7 @@ class Jobs extends Controller{
 		//echo $result->render();
 	}
 	public function searchJobs(Request $request){
-		//dd($request->keyword);
+		//dd($request->all());
 		if(!$request->ajax()){
 			exit('Directory access is forbidden');
 		}

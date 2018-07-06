@@ -125,7 +125,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.title')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" name="title" id="title" placeholder="@lang('home.title')" required="" value="{{ $article->title }}">
+                                <input type="text" class="form-control" name="title" value="{{ old('title') }}" id="title" placeholder="@lang('home.title')" required="" value="{{ $article->title }}">
                             </div>
                         </div>
                         <div class="form-group">
