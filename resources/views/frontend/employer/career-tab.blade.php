@@ -21,12 +21,12 @@
 				
 			
 				<br>
-				<span style="font-size: 12px;">Facebook Careers Tab  page for your organization. Careers Tab to it and let Jobseekers find your jobs through social media.! 
+				<span style="font-size: 12px;">Jobcallme Careers Tab  page for your organization. Careers Tab to it and let Jobseekers find your jobs through social media.! 
                </span>
 				<br>
 				<br>
 				<br>
-				   <button type="submit" class="btn btn-primary"><a href="http://localhost/jobcallme/social/Script/" style="color:white" target="_blank" >@lang('home.facebookcareerstab')</a></button>
+				   <button type="submit" class="btn btn-primary"><a href="http://jcmlink.com/Script/" style="color:white" target="_blank" >@lang('home.jcmlinkcareerstab')</a></button>
 				</div>
 			   
 				 
