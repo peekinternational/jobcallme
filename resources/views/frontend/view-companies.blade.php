@@ -16,8 +16,23 @@
                                 <div class="search-field-box search-item">
                                     <input type="search" placeholder="@lang('home.key')" name="keyword">
                                 </div>
-                                <div class="search-field-box search-item">
-                                    <input type="search" placeholder="@lang('home.Cities')" name="city" style="width: 100%">
+                                <div class="search-field-box search-item" style="width:45%;">
+                                <div class="" id="r_country" style="">
+                                    <select class="company-countrys" name="country" style="width: 100% !important;">
+                                        <option value="0">@lang('home.country')</option>
+                                        @foreach(JobCallMe::getJobCountries() as $country)
+                                            <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
+                                        @endforeach
+                                    </select>
+                            
+                                    <select class="company-states" name="state" id="state_companys"  style="width: 100% !important;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                        <option value="">@lang('home.state')</option>
+                                    </select>
+                                
+                                    <select class="company-citys" name="city" id="city_companys"  style="width: 100% !important;display:none;">
+                                        <option value="">@lang('home.city')</option>
+                                    </select>
+                                    </div>
                                 </div>
                                 <button type="submit" class="search-btn">
                                     <i class="fa fa-search"></i>
@@ -130,5 +145,50 @@
 <style type="text/css">
 .ih-item.square.effect8 .info h3 {font-size: 13px;}
 </style>
+
 @endsection
 @section('page-footer')
+<script type="text/javascript">
+    $('.company-countrys').on('change',function(){
+        var countryId = $(this).val();
+        $('#state_companys').show();
+        $(".ls-box").css("height", "205px");
+        getStatesssss(countryId)
+    })
+    function getStatesssss(countryId){
+        $.ajax({
+            url: "{{ url('account/get-state') }}/"+countryId,
+            success: function(response){
+                console.log(response)
+                
+
+                var currentState = $('.company-states').attr('data-state');
+                $(".company-states").html('').trigger('change');
+                    $(".company-states").append(response).trigger('change');
+            
+            }
+        })
+    }
+
+    $('.company-states').on('change',function(){
+        var stateId = $(this).val();
+    
+        getCitiesssss(stateId)
+    })
+    function getCitiesssss(stateId){
+    
+        $.ajax({
+            url: "{{ url('account/get-city') }}/"+stateId,
+            success: function(response){
+                $('#city_companys').show();
+                var currentCity = $('.company-citys').attr('data-city');
+            
+                $(".company-citys").html('').trigger('change');
+            
+                    $(".company-citys").append(response).trigger('change');
+                
+            }
+        })
+    }
+</script>
+@endsection

@@ -23,17 +23,38 @@
                                 <div class="search-field-box search-item">
                                     <input type="search" placeholder="@lang('home.lookingread')" name="keyword">
                                 </div>
-                                <div class="search-field-box search-item">
+                                <div class="search-field-box search-item" style="width: 45%;">
                                     <select class="form-control select2" name="category">
                                         <option value="0">@lang('home.category')</option>
                                         @foreach(JobCallMe::getReadCategories() as $cat)
                                             <option value="{!! $cat->id !!}">@lang('home.'.$cat->name)</option>
                                         @endforeach
                                     </select>
+                                  <!--   <div class="" id="r_country" style="display:none;padding-top: 8px;">
+                                    <select class="read-countrys" name="country" style="width: 100% !important;">
+                                        <option value="0">@lang('home.country')</option>
+                                        @foreach(JobCallMe::getJobCountries() as $country)
+                                            <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
+                                        @endforeach
+                                    </select>
+                            
+                                    <select class="read-states" name="state" id="state_reads"  style="width: 100% !important;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                        <option value="">@lang('home.state')</option>
+                                    </select>
+                                
+                                    <select class="read-citys" name="city" id="city_reads"  style="width: 100% !important;display:none;">
+                                        <option value="">@lang('home.city')</option>
+                                    </select>
+                                    </div> -->
                                  </div>
-                                <button type="submit" class="search-btn">
+                                 
+                                <button type="submit" class="search-btn" style="">
                                     <i class="fa fa-search"></i>
                                 </button>
+                              <!--   <button type="button" class="btn btn-success btn-sm" id="r_search" style="margin-left: 9px;/* width: 7%; */height: 33px;/* background: transparent; *//* border: 2px solid #cecdcd; */">
+                                    <span style="color:white">Country</span></button>
+                                    <button type="button" class="btn btn-default btn-sm" id="c_search" style="display: none;margin-left: 9px;/* width: 7%; */height: 33px;/* background: transparent; *//* border: 2px solid #cecdcd; */">
+                                    <span style="color:white">Close</span></button> -->
                             </div>
                         </form>
                     </div>
@@ -186,6 +207,62 @@ function lightboxOnResize() {
 
     }
 }
+
+$("#r_search").click(function(){
+    $('#r_country').show();
+    $('#c_search').show();
+    $('#r_search').hide();
+
+});
+
+$("#c_search").click(function(){
+    $('#r_country').hide();
+    $('#r_search').hide();
+    $('#r_search').show();
+
+});
+
+    $('.read-countrys').on('change',function(){
+        var countryId = $(this).val();
+        $('#state_reads').show();
+        $(".ls-box").css("height", "205px");
+        getStatesssss(countryId)
+    })
+    function getStatesssss(countryId){
+        $.ajax({
+            url: "{{ url('account/get-state') }}/"+countryId,
+            success: function(response){
+                console.log(response)
+                
+
+                var currentState = $('.read-states').attr('data-state');
+                $(".read-states").html('').trigger('change');
+                    $(".read-states").append(response).trigger('change');
+            
+            }
+        })
+    }
+
+    $('.read-states').on('change',function(){
+        var stateId = $(this).val();
+    
+        getCitiesssss(stateId)
+    })
+    function getCitiesssss(stateId){
+    
+        $.ajax({
+            url: "{{ url('account/get-city') }}/"+stateId,
+            success: function(response){
+                $('#city_reads').show();
+                var currentCity = $('.read-citys').attr('data-city');
+            
+                $(".read-citys").html('').trigger('change');
+            
+                    $(".read-citys").append(response).trigger('change');
+                
+            }
+        })
+    }
 </script>
 @endsection
 

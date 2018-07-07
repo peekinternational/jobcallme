@@ -741,7 +741,8 @@ class Home extends Controller{
 
 
     public function companies(Request $request){
-    	/* companies query */
+		/* companies query */
+		//dd($request->all());
     	$company = DB::table('jcm_companies');
     	
     	if($request->isMethod('post')){
