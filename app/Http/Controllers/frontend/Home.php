@@ -312,7 +312,7 @@ class Home extends Controller{
 		if($request->isMethod('post')){
 			$this->validate($request,[
 				'email' => 'required|email|unique:jcm_users,email',
-				'username' => 'required|unique:jcm_users,username',
+				'username' => 'required|min:5|max:32|unique:jcm_users,username',
 				'password' => 'required|min:6|max:16',
 				'firstName' => 'required|min:1|max:50',
 				'lastName' => 'required|min:1|max:50',
