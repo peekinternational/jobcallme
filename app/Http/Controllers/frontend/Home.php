@@ -769,7 +769,7 @@ class Home extends Controller{
     	$company->orderBy('package','desc');
     	$company->orderBy('companyModifiedTime','desc');
     	
-		$companies = $company->paginate(10);
+		$companies = $company->paginate(60);
 		$companies->appends(['keyword' => $request->input('keyword')]);
 		
     	return view('frontend.view-companies',compact('companies'));
