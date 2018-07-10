@@ -213,6 +213,7 @@ $("#r_search").click(function(){
     $('#c_search').show();
     $('#r_search').hide();
     $(".ls-box").css("height", "116px");
+    $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .ls-box { height: 250px !important;}}</style>');
 
 });
 
@@ -221,6 +222,7 @@ $("#c_search").click(function(){
     $('#c_search').hide();
     $('#r_search').show();
     $(".ls-box").css("height", "96px");
+    $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .ls-box { height: 166px !important;}}</style>');
 
 });
 
@@ -228,6 +230,7 @@ $("#c_search").click(function(){
         var countryId = $(this).val();
         $('#state_reads').show();
         $(".ls-box").css("height", "205px");
+        $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .ls-box { height: 350px !important;}}</style>');
         getStatesssss(countryId)
     })
     function getStatesssss(countryId){

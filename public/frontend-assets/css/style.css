@@ -3509,7 +3509,7 @@ img.profile-photo-xs{
         display: none;
     }
     .input-fields .search-item{
-        width:100%;
+        width:100% !important;
         float: none;
         margin-bottom: 10px;
     }
@@ -3541,7 +3541,7 @@ img.profile-photo-xs{
     .select2-container--default .select2-selection--single .select2-selection__rendered{
     }
     .search-btn{
-        width: 100%;
+        width: 70%;
         float: none;
         border:2px solid #e6b706 ;
     }
