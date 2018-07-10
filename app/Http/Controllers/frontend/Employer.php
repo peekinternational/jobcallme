@@ -119,7 +119,7 @@ curl_close ($ch);
 	 
     public function postPaymentWithpaypals(Request $request)
     {
-	//dd($request->all());
+	dd($request->afterinterview);
 	$this->validate($request,[
 				'title' => 'required|max:255',
 				'department' => 'required',

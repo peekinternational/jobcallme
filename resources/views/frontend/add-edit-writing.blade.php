@@ -1,7 +1,9 @@
 @extends('frontend.layouts.app')
 
 @section('title', 'Writing')
-
+<?php
+$gCountry = Session()->get('jcmUser')->country;
+?>
 @section('content')
 <section id="postNewJob">
     <div class="container">
@@ -200,6 +202,30 @@
                             </div>
                         </div>
                         @endif
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.country')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control select2 job-country" name="country">
+                                    @foreach(JobCallMe::getJobCountries() as $cntry)
+                                        <option value="{{ $cntry->id }}" {{ $gCountry == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.state')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control select2 job-state" name="state" data-state="{{ $gState }}" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.city')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <select class="form-control select2 job-city" name="city" data-city="{{ $gCity }}" required>
+                                </select>
+                            </div>
+                        </div>
 
                     </div>
 
