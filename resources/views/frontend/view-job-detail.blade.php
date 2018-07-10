@@ -125,7 +125,7 @@ $anynational='';
                     <a href="https://plus.google.com/share?url={{ url('jobs/'.$job->jobId) }}" target="_blank" >
                     	<i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                     </a>
-                  <img src="{{asset('website/icon.ico')}}" onclick="OpenWindow('{{ url('jobs/'.$job->jobId) }}')" style="width: 25px;border-radius: 50px; cursor: pointer;">
+                  <img src="{{asset('website/icon.ico')}}" onclick="OpenWindow('{{ url('jobs/'.$job->jobId) }}')" style="width: 25px !important;border-radius: 50px; cursor: pointer;">
                 </div>
                 <ul class="js-listing">
                     <li>

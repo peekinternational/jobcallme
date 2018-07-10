@@ -37,6 +37,7 @@
                         <a href="https://plus.google.com/share?url={{ url('jobs/'.$jobId) }}" target="_blank">
                             <i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                         </a>
+                        <img src="{{asset('website/icon.ico')}}" onclick="OpenWindow('{{ url('jobs/'.$jobId) }}')" style="width: 25px !important;border-radius: 50px; cursor: pointer;">
                         <a href="{{ url('jobs/'.$jobId) }}" style="display: block;margin-top: 25px;">@lang('home.Skip')</a>
                     </div>
                 </div>
@@ -144,5 +145,12 @@ $('form.job-form').submit(function(e){
     })
     e.preventDefault();
 })
+function OpenWindow(url, windowName) {
+   newwindow = window.open('http://jcmlink.com/Script/sharer?url=' + url, windowName, 'height=600,width=800');
+   if (window.focus) {
+      newwindow.focus();
+   }
+   return false;
+}
 </script>
 @endsection

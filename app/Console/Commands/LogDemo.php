@@ -47,7 +47,7 @@ class LogDemo extends Command
         $getCat = DB::table('jcm_users_meta')->where('userId',$user->userId)->first()->industry;
         $jobs = DB::table('jcm_jobs')->where('category',$getCat)->whereDate('createdTime','=',$yesterday)->get();
         if(count($jobs) > 0){
-            $jobstoview = array('jobs' => $jobs);
+            $jobstoview = array('jobs' => $jobs, 'category'=>$getCat);
             Mail::send('emails.jobs',$jobstoview,function($message) use ($user){
                 $message->to($user->email)->subject('Latest jobs');
             });
