@@ -745,8 +745,9 @@ class Home extends Controller{
 		//dd($request->all());
     	$company = DB::table('jcm_companies');
     	
-    	if($request->isMethod('post')){
+    	if($request->isMethod('get')){
     		if($request->input('keyword') != ''){
+				//dd($request->keyword);
     			$company->where('companyName','like','%'.$request->input('keyword').'%');
     		}
     		if($request->input('city') != ''){
@@ -768,7 +769,8 @@ class Home extends Controller{
     	$company->orderBy('package','desc');
     	$company->orderBy('companyModifiedTime','desc');
     	
-    	$companies = $company->paginate(60);
+		$companies = $company->paginate(10);
+		$companies->appends(['keyword' => $request->input('keyword')]);
 		
     	return view('frontend.view-companies',compact('companies'));
     }

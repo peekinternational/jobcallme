@@ -10,16 +10,16 @@
             <div class="row">
                 <div class="col-md-offset-2 col-md-8" style="margin-top:20px">
                     <div class="ls-box">
-                        <form role="form" action="{{ url('companies') }}" method="post">
+                        <form role="form" action="{{ url('companies') }}" method="get">
                             {{ csrf_field() }}
                             <div class="input-fields">
                                 <div class="search-field-box search-item">
-                                    <input type="search" placeholder="@lang('home.key')" name="keyword" id="text_1" onkeyup='saveValue(this);'>
+                                    <input type="search" placeholder="@lang('home.key')" name="keyword" >
                                 </div>
                                 <div class="search-field-box search-item" style="width:45%;">
                                 <div class="" id="r_country" style="">
                                     <select class="company-countrys" name="country" style="width: 100% !important;">
-                                        <option value="0">@lang('home.country')</option>
+                                        <option value="">@lang('home.country')</option>
                                         @foreach(JobCallMe::getJobCountries() as $country)
                                             <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
                                         @endforeach

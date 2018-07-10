@@ -76,7 +76,7 @@ $lToken = csrf_token();
                                         </form>
                                     </div>
                                     <div class="tab-pane" id="search_tab_2">
-                                        <form role="form" method="POST" action="{{ url('companies')}}">
+                                        <form role="form" method="GET" action="{{ url('companies')}}">
                                             <div class="input-fields">
                                                 <div class="search-field-box search-item">
                                                     <input type="search" placeholder="@lang('home.lookingcompany')" name="keyword">
@@ -84,7 +84,7 @@ $lToken = csrf_token();
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="search-field-box search-item">
                                                 <select class="country-countrys" name="country" style="width: 98%;">
-                                                    <option value="0">@lang('home.country')</option>
+                                                    <option value="">@lang('home.country')</option>
                                                     @foreach(JobCallMe::getJobCountries() as $country)
                                                         <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
                                                     @endforeach
