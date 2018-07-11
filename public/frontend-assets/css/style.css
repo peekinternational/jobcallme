@@ -1782,10 +1782,29 @@ ul.jd-rewards li i{
     color: #ffffff;
     border: 1px solid #fff;
 }
+
+.eo-timeline:hover .eo-timeline-toolkits{
+    display: inline-block;
+}
+.eo-timeline-toolkits{
+    display: none;
+    position: absolute;
+    top: 16px;
+    left: 156px;
+    padding: 5px 20px;
+    background-color: rgba(0,0,0,0.7);
+    text-align: center;
+    color: #ffffff;
+    border: 1px solid #fff;
+}
 .eo-timeline input[type=file]{
     visibility: hidden;
 }
 .eo-timeline-toolkit label{
+    font-size: 12px;
+    font-weight: normal;
+}
+.eo-timeline-toolkits label{
     font-size: 12px;
     font-weight: normal;
 }

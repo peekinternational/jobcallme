@@ -1408,7 +1408,7 @@ public function mapOrganization(Request $request){
         if($pImage != ''){
             @unlink(public_path('/compnay-logo/'.$pImage));
         }
-        DB::table('jcm_companies')->where('companyId',$companyId)->update(array('companyLogo' => $cLogo));
+        DB::table('jcm_companies')->where('companyId',$companyId)->update(array('companyLogo' => $cLogo,'youtubeLog' => '0','picLog' => '1'));
         echo url('compnay-logo/'.$cLogo);
 	}
 
@@ -1440,8 +1440,20 @@ public function mapOrganization(Request $request){
         if($pImage != ''){
             @unlink(public_path('/compnay-logo/'.$pImage));
         }
-        DB::table('jcm_companies')->where('companyId',$companyId)->update(array('companyCover' => $cLogo));
+        DB::table('jcm_companies')->where('companyId',$companyId)->update(array('companyCover' => $cLogo,'youtubeLog' => '0','picLog' => '1'));
         echo url('compnay-logo/'.$cLogo);
+	}
+
+	public function companyYoutube(Request $request){
+		
+		if(!$request->ajax()){
+			exit('Directory access is forbidden');
+		}
+		$youtube= $request->input('youtube');
+		$app = $request->session()->get('jcmUser');
+		$companyId = JobCallMe::getUser($app->userId)->companyId;
+		DB::table('jcm_companies')->where('companyId',$companyId)->update(array('companyYoutube' => $youtube,'youtubeLog' => '1','picLog' => '0'));
+		echo $request->input('youtube');
 	}
 
 	public function saveJobInterview(Request $request){

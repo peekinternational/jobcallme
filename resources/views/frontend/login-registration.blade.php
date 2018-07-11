@@ -401,14 +401,16 @@ $('form.getapi').submit(function(e){
    var confirm_password=$('#confirm_password').val();
    var gender='male';
    var username=$('#username').val();
+   var f='register';
    //var username='nabeelphatak';
    
     var form=$("#signUpForm");
     $.ajax({
-        url: "http://jcmlink.com/Script/requests.php?f=register",
+        url: "https://jcmlink.com/Script/reg.php",
         type: 'POST',
-        data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username},
-        async: false,
+        data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username,f:f},
+        processData : false,
+        contentType: false,
         success: function(response) {
             console.log(response);
 

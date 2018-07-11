@@ -294,7 +294,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::post('employer/organization/about', 'frontend\Employer@aboutOrganization');
 	Route::post('employer/organization/map', 'frontend\Employer@mapOrganization');
     Route::post('employer/company/logo', 'frontend\Employer@companyLogo');
-    Route::post('employer/company/cover', 'frontend\Employer@companyCover');
+	Route::post('employer/company/cover', 'frontend\Employer@companyCover');
+	Route::post('employer/company/youtube', 'frontend\Employer@companyYoutube');
     Route::post('employer/application/interview/save', 'frontend\Employer@saveJobInterview');
     Route::get('employer/departments','frontend\Employer@departments');
     Route::post('employer/department/save','frontend\Employer@saveDepartment');
