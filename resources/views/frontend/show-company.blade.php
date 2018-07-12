@@ -14,6 +14,7 @@ if($company->companyLogo != ''){
 }
 $opHour = json_decode($company->companyOperationalHour,true);
 ?>
+
 <section id="edit-organization">
     <div class="container">
         <div class="eo-box">
