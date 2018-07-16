@@ -719,8 +719,9 @@ class Jobs extends Controller{
     	}
 		
 		$jobId = $request->segment(2);
+		//dd($jobId);
 
-		$jobrs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.*');
+		$jobrs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_jobs.category as jobcategory','jcm_payments.title as p_title','jcm_companies.*');
 		$jobrs->join('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId');
 		$jobrs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
 		$jobrs->where('jcm_jobs.status','=','1');
@@ -728,7 +729,7 @@ class Jobs extends Controller{
 		$job = $jobrs->first();
 		//dd($job->companyId);
 		$userId = $request->session()->get('jcmUser')->userId;
-		//dd($userId);
+		//dd($job);
 
 		if(count($job) == 0){
 			return redirect('jobs');

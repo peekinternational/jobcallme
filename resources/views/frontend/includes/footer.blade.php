@@ -164,9 +164,11 @@
                 </select>
             </div>
             <p class="user-sns" style="padding-top: 16px;float: left;">
-            <a href="{{url('/fbApi')}}"><i class="fa fa-facebook-square"></i></a>
-			<a href="{{url('/googleApi')}}"><i class="fa fa-google-plus-square"></i></a>
-			<a href="{{url('/lnApi')}}"><i class="fa fa-linkedin-square"></i></a>
+            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook-square"></i></a>
+			<a href="https://plus.google.com/people" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+			<a href="https://www.linkedin.com/uas/login?_l=en" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+			<a href="https://twitter.com/?lang=en" target="_blank"><i class="fa fa-twitter-square"></i></a>
+			<a href="https://www.jcmlink.com/" target="_blank"><img src="{{ asset('website/j.png') }}"></a>
 								   
 			</p>
            

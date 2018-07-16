@@ -187,7 +187,7 @@ $anynational='';
                     <tbody>
                     <tr>
                         <td class="active">@lang('home.category')</td>
-                        <td colspan="3">@lang('home.'.JobCallMe::categoryTitle($job->category)) / @lang('home.'.JobCallMe::subcategoryTitle($job->subCategory)) / @lang('home.'.JobCallMe::subcategoryTitle2($job->subCategory2))</td>     
+                        <td colspan="3">@lang('home.'.JobCallMe::categoryTitle($job->jobcategory)) / @lang('home.'.JobCallMe::subcategoryTitle($job->subCategory)) / @lang('home.'.JobCallMe::subcategoryTitle2($job->subCategory2))</td>     
                                                                  
                     </tr>
                     
@@ -996,7 +996,7 @@ geocoder.geocode( { 'address': address}, function(results, status) {
      
       }
       function OpenWindow(url, windowName) {
-   newwindow = window.open('http://jcmlink.com/Script/sharer?url=' + url, windowName, 'height=600,width=800');
+   newwindow = window.open('https://jcmlink.com/sharer?url=' + url, windowName, 'height=600,width=800');
    if (window.focus) {
       newwindow.focus();
    }

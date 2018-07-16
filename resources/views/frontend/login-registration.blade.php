@@ -403,14 +403,27 @@ $('form.getapi').submit(function(e){
    var username=$('#username').val();
    var f='register';
    //var username='nabeelphatak';
-   
+   $.ajaxSetup({
+        header: {
+              "accept": "application/json",
+              "Access-Control-Allow-Origin":"*"
+        }
+      });
     var form=$("#signUpForm");
     $.ajax({
-        url: "https://jcmlink.com/Script/reg.php",
+        url: "https://jcmlink.com/request.php?f=register",
         type: 'POST',
+        async: true,
+        crossDomain: true,
+        contentType: "text/xml",
+        header: {
+              "accept": "application/json",
+              "Access-Control-Allow-Origin":"*"
+        }
+        
+        origin:window.location.protocol + "//" + window.location.host,
         data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username,f:f},
-        processData : false,
-        contentType: false,
+       
         success: function(response) {
             console.log(response);
 
