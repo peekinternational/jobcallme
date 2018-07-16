@@ -1304,6 +1304,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.foregin companies')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                    <div class="col-md-4 benefits-checks">
+                                        <input id="f_company" type="checkbox" class="cbx-field" name="f_company" value="yes">								
+										<label class="cbx" for="f_company"></label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                           <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.anynationality')</label>

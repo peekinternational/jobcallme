@@ -26,7 +26,7 @@
 				<br>
 				<br>
 				<br>
-				   <button type="submit" class="btn btn-primary"><a href="http://jcmlink.com/Script/" style="color:white" target="_blank" >@lang('home.jcmlinkcareerstab')</a></button>
+				   <button type="submit" class="btn btn-primary"><a href="https://jcmlink.com/" style="color:white" target="_blank" >@lang('home.jcmlinkcareerstab')</a></button>
 				</div>
 			   
 				 
