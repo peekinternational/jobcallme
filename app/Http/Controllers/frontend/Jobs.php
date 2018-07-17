@@ -111,7 +111,8 @@ class Jobs extends Controller{
 		$result = $jobs->orderBy('jobId','desc')->paginate(12);
 		
 		//dd($result);
-        $head = '';
+		$head = '';
+		$f_company='';
 		$vhtml = '';
 		$category ='';
 		echo '<div class="jobs-suggestions" style="background: none;box-shadow: none;border: none;padding: 0;margin-bottom: 6px;
@@ -172,6 +173,13 @@ class Jobs extends Controller{
 	                    }
                     $vhtml .= '</div>';
 				}
+				if($rec->f_company == "yes")
+				{
+					$f_company='<span class="label" style="background-color:orange;font-size: 49% !important;">Foreign Co</span>';
+				}
+				else{
+					$f_company="";
+				}
 				if($rec->head == "yes")
 				{
 					$head='<span class="label" style="background-color:green">Headhunting</span>';
@@ -209,7 +217,7 @@ class Jobs extends Controller{
 					}
               
 				$colorArr = array('purple','green','darkred','orangered','blueviolet');
-                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_title.'</span></a>  '.$head.' '.$dispatch.' </h4>';
+                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_title.'</span></a>  '.$head.' '.$dispatch.' '.$f_company.' </h4>';
                     $vhtml .= '<p style="font-size:15px;color:#113886;"><b>'.$rec->companyName.'</b></p>';
                     $vhtml .= '<ul class="js-listing">';
                     	$vhtml .= '<li>';
@@ -377,7 +385,8 @@ class Jobs extends Controller{
 		$result = $jobs->orderBy('jobId','desc')->paginate(12);
 		
 		//dd($result);
-        $head = '';
+		$head = '';
+		$f_company = '';
 		$vhtml = '';
 		$category ='';
 		if(count($result) > 0){
@@ -436,6 +445,13 @@ class Jobs extends Controller{
 	                    }
                     $vhtml .= '</div>';
 				}
+				if($rec->f_company == "yes")
+				{
+					$f_company='<span class="label" style="background-color:orange;float: right;">Foreign Co</span>';
+				}
+				else{
+					$f_company="";
+				}
 				if($rec->head == "yes")
 				{
 					$head='<span class="label" style="background-color:green">Headhunting</span>';
@@ -473,7 +489,7 @@ class Jobs extends Controller{
 					}
 
 				$colorArr = array('purple','green','darkred','orangered','blueviolet');
-                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_title.'</span></a>  '.$head.' '.$dispatch.' </h4>';
+                    $vhtml .= '<h4><a href="'.$viewUrl.'">'.$rec->title.' <span class="label" style="background-color:'.$colorArr[array_rand($colorArr)].'">' .$rec->p_title.'</span></a>  '.$head.' '.$dispatch.' '.$f_company .' </h4>';
                     $vhtml .= '<p style="font-size:15px;color:#113886;"><b>'.$rec->companyName.'</b></p>';
                     $vhtml .= '<ul class="js-listing">';
                     	$vhtml .= '<li>';

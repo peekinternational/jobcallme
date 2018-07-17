@@ -780,6 +780,7 @@ class Home extends Controller{
     	
 		$companies = $company->paginate(60);
 		$companies->appends(['keyword' => $request->input('keyword')]);
+		$companies->appends(['country' => $request->input('country')]);
 		
     	return view('frontend.view-companies',compact('companies'));
     }

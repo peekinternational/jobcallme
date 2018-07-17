@@ -401,28 +401,25 @@ $('form.getapi').submit(function(e){
    var confirm_password=$('#confirm_password').val();
    var gender='male';
    var username=$('#username').val();
-   var f='register';
+   alert(username);
+   //var f='register';
    //var username='nabeelphatak';
-   $.ajaxSetup({
-        header: {
-              "accept": "application/json",
-              "Access-Control-Allow-Origin":"*"
-        }
-      });
+   let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+     headers.append('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    headers.append('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Credentials', 'true');
+   
     var form=$("#signUpForm");
     $.ajax({
-        url: "https://jcmlink.com/request.php?f=register",
-        type: 'POST',
-        async: true,
-        crossDomain: true,
-        contentType: "text/xml",
-        header: {
-              "accept": "application/json",
-              "Access-Control-Allow-Origin":"*"
-        }
         
-        origin:window.location.protocol + "//" + window.location.host,
-        data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username,f:f},
+        type: 'POST',
+        crossDomain:true,
+        
+        async: false,
+        url: "https://www.jcmlink.com/requests.php?f=register",
+        data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username},
        
         success: function(response) {
             console.log(response);

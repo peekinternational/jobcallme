@@ -4,6 +4,7 @@
 
 @section('content')
  <?php 
+ //print_r($job); die;
      $cLogo = url('compnay-logo/default-logo.jpg');
        if($job->companyLogo != ''){
           $cLogo = url('compnay-logo/'.$job->companyLogo);
@@ -13,10 +14,17 @@
 $head='';
 $travelFound=false;			
 $dispatch='';
+$f_company='';
 $onlynational='';
 $anynational='';
-
-  if($job->head == "yes")		
+            if($job->f_company == "yes")		
+					{		
+				$f_company='<span class="label" style="background-color:orange;font-size: 49% !important;float:right;">Foreign Co</span>';		
+				}		
+				else{		
+					$f_company="";		
+				}
+               if($job->head == "yes")		
 					{		
 				$head='<span class="label" style="background-color:green">Headhunting</span>';		
 				}		
@@ -55,7 +63,7 @@ $anynational='';
 			<div style="display: -webkit-box;" class="suggestions-user-info">
 			 <img src="{{ $cLogo }}"  style="width:118px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
 			<div style="padding-left: 42px;">
-			<span style="text-transform: uppercase;font-size: 26px;">{{$job->companyName}}</span>
+			<span style="text-transform: uppercase;font-size: 20px;">{{$job->companyName}}</span><span style="text-transform: uppercase;font-size: 26px;">{!! $f_company !!}</span>
                 <p style="font-size: 18px;margin-top: 24px; margin-left: 6px;">{{ $job->title }},  &nbsp;<span style="font-size: 13px; padding-top: 9px;">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country)) </span> &nbsp;<span class="label" style="background-color: {{ $colorArr[array_rand($colorArr)] }}">
 				{{ $job->p_title }}
 				</span> &nbsp;{!! $head !!} <span style="font-size:9px;margin-left:13px">@lang('home.Never pay for job application, test or interview') <a href="{{ url('/safety')}}">@lang('home.More')</a></span></p>
@@ -996,7 +1004,7 @@ geocoder.geocode( { 'address': address}, function(results, status) {
      
       }
       function OpenWindow(url, windowName) {
-   newwindow = window.open('https://jcmlink.com/sharer?url=' + url, windowName, 'height=600,width=800');
+   newwindow = window.open('https://www.jcmlink.com/sharer?url=' + url, windowName, 'height=600,width=800');
    if (window.focus) {
       newwindow.focus();
    }
