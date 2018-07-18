@@ -9,6 +9,7 @@ use DB;
 use Sajid;
 use Mail;
 use App;
+use GuzzleHttp\Client;
 date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
@@ -303,6 +304,9 @@ class Home extends Controller{
 		}
 		/* end */
 	}
+	public function check(Request $request){
+		echo "hello";
+	}
 
 	public function accountRegister(Request $request){
 		if($request->session()->has('jcmUser')){
@@ -356,6 +360,45 @@ class Home extends Controller{
 			$input['about'] = '';
 			$input['createdTime'] = date('Y-m-d H:i:s');
 			$input['modifiedTime'] = date('Y-m-d H:i:s');
+			$outsourceRegistertionData = array(
+				'firstName' => $request->input('firstName'),
+		        'lastName' => $request->input('lastName'),
+		        'email' => $request->input('email'),
+		        'username' => $request->input('username'),
+		        'country' => array(
+		          'name' => $request->input('country'),
+		          'code' => $request->input('country'),
+		          'city' => $request->input('city')
+		        ),
+		        'userType' => 'individual',
+		        'mobileNumber' => $request->input('phoneNumber'),
+		        'userRole' => '',
+		        'subscribe' => '',
+		        'password' => $request->input('password'),
+		        'status' => 'offline'
+				 );
+			$data = http_build_query($outsourceRegistertionData);
+			$url = "https://www.outsourcingok.com/api/auth/signup";
+			$ch = curl_init();
+		    curl_setopt($ch, CURLOPT_URL,$url);
+		    curl_setopt($ch, CURLOPT_POST, 1);
+		    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+		    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		    curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+		    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		    $server_output = curl_exec ($ch);
+		    curl_close ($ch);
+			$outsourceResponse = json_decode($server_output);
+			if($outsourceResponse->message){
+				print_r($outsourceResponse);
+				die();
+			}
+			if($outsourceResponse->_id){
+				$input['outsourceid'] = $outsourceResponse->_id;
+			}
 			
 			$userId = DB::table('jcm_users')->insertGetId($input);
 			setcookie('cc_data', $userId, time() + (86400 * 30), "/");
@@ -922,7 +965,25 @@ public function verifyUser(Request $request){
 	$secretId = trim($request->segment(2));
 	$data = DB::table('jcm_users')->where('secretId',$secretId)->first();
 	if($data > 0){
-		
+		$url = "https://www.outsourcingok.com/api/jobcallme/verify/$data->outsourceid";
+		$data = http_build_query(array(
+				'userInfo.verEmail' => true
+			));
+		echo $url; 
+		$ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL,$url);
+	    //curl_setopt($ch, CURLOPT_POST, 1);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+	    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+	    curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+	    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	    //curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+	    $server_output = curl_exec ($ch);
+	    //print_r($server_output);
+	    curl_close ($ch);
+	    //die();
 		DB::table('jcm_users')->where('secretId',$secretId)->update(['user_status' => 'Y']);
 		$request->session()->flash('emailAlert', trans('home.Your account is Verified Please Login'));
 		return redirect('account/login');

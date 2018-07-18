@@ -109,9 +109,9 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
 			</div>
         </div> 		
 
-        <div id="signupBox" class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
+        <div id="signupBox"  class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
             <h3>@lang('home.createaccount')</h3>
-            <form id="signUpForm" class="getapi" action="{{ url('account/register') }}" method="post">
+            <form id="signUpForm" action="{{url('account/register')}}" method="post" class="getapi">
                 @if(Session::has('registerAlert'))
                     <div class="alert alert-danger">
                         {{Session::get('registerAlert')}} 
@@ -158,15 +158,15 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="firstName" value="{{ old('firstName') }}" placeholder="@lang('home.fname')" requried>
+                            <input type="text" class="form-control" id="firstname" name="firstName" value="{{ old('firstName') }}" placeholder="@lang('home.fname')" requried>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="lastName" value="{{ old('lastName') }}" placeholder="@lang('home.lname')" requried>
+                            <input type="text" class="form-control" id="lastname" name="lastName" value="{{ old('lastName') }}" placeholder="@lang('home.lname')" requried>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <select class="form-control select2 job-country" name="country">
+                    <select class="form-control select2 job-country" id="country" name="country">
                              <option value="">@lang('home.selectCountry')</option>
                         @foreach(JobCallMe::getJobCountries() as $country)
                             <option value="{{ $country->id }}">@lang('home.'.$country->name)</option>
@@ -178,10 +178,10 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <select class="form-control select2 job-state" name="state"><option value="">@lang('home.s_state')</option></select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control select2 job-city" name="city"><option value="">@lang('home.s_city')</option></select>
+                    <select class="form-control select2 job-city" id="city" name="city"><option value="">@lang('home.s_city')</option></select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber-text')" requried>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber-text')" requried>
                 </div>
                 <div class="input-group">
                     <div class="checkbox">
@@ -394,17 +394,39 @@ function sendpassword(pass){
  });
 }
 
-$('form.getapi').submit(function(e){
+/*$('form.getapi').submit(function(e){
     //alert('hello');
+    e.preventDefault();
    var email=$('#get_email').val();
     var password=$('#pwd').val();
+    var firstname=$('#firstname').val();
+    var lastname=$('#lastname').val();
+    var country=$('#country').val();
+    var city=$('#city').val();
+    var phoneNumber=$('#phoneNumber').val();
    var confirm_password=$('#confirm_password').val();
    var gender='male';
    var username=$('#username').val();
    //var username='nabeelphatak';
-   
-    var form=$("#signUpForm");
-    $.ajax({
+    var cre = {
+          'firstName' : firstname,
+          'lastName' : lastname,
+          'email' : email,
+          'username' : username,
+          'country' : {
+            'name' : country,
+            'code' : country,
+            'city' : city
+          },
+          'userType' : 'individual',
+          'mobileNumber' : phoneNumber,
+          'userRole' : '',
+          'subscribe' : '',
+          'password' : password,
+          'status' : 'offline'
+        };
+    var form=$("#signUpForm");*/
+    /*$.ajax({
         url: "http://jcmlink.com/Script/requests.php?f=register",
         type: 'POST',
         data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username},
@@ -413,7 +435,36 @@ $('form.getapi').submit(function(e){
             console.log(response);
 
         }
+    });*/
+    /*let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+     headers.append('Access-Control-Allow-Headers', 'session-variable');
+    headers.append('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Credentials', 'true');
+    $.ajax({
+        url: "https://localhost:3001/api/sajid",
+        type: 'POST',
+        data: cre,
+        crossDomain:true,
+        headers: headers,
+        value:'https://3001/api/sajid',
+        async: false,
+        success: function(response) {
+            console.log(response);
+
+        }
+    });*/
+   /* $.ajax({
+        url: "https://localhost:3001/api/registrationApi",
+        type: 'post',
+        data:cre,
+        async: false,
+        success: function(response) {
+            console.log(response);
+
+        }
     });
-});
+});*/
 </script>
 @endsection

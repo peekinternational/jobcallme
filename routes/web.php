@@ -22,6 +22,7 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
+Route::get('/check','frontend\Home@check');
 Route::get('comments',function(){
 	return view('comments');
 });
