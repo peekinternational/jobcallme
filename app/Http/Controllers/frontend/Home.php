@@ -377,6 +377,12 @@ class Home extends Controller{
 		        'password' => $request->input('password'),
 		        'status' => 'offline'
 				 );
+
+
+
+
+
+			
 			$data = http_build_query($outsourceRegistertionData);
 			$url = "https://www.outsourcingok.com/api/auth/signup";
 			$ch = curl_init();
