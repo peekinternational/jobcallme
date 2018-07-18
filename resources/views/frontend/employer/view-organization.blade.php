@@ -4,10 +4,14 @@
 
 @section('content')
 <?php
+
 $cCover = url('compnay-logo/default-cover.jpg');
 if($company->companyCover != ''){
   $cCover = url('compnay-logo/'.$company->companyCover);
 }
+
+    $youtube=$company->companyYoutube;
+
 $cLogo = url('compnay-logo/default-logo.jpg');
 if($company->companyLogo != ''){
   $cLogo = url('compnay-logo/'.$company->companyLogo);
@@ -26,12 +30,45 @@ if($company->companyLogo != ''){
                 @endif
         <div class="eo-box">
             <div class="eo-timeline">
-                <img src="{{ $cCover }}" class="eo-timeline-cover">
+            <div id="youtube_html">
+
+            </div>
+           
+                <img  class="eo-timeline-cover" id="cover_img">
+                
                 <input type="file" id="eo-timeline" class="compnay-cover">
                 <div class="eo-timeline-toolkit">
                     <label for="eo-timeline"><i class="fa fa-camera"></i> &nbsp;@lang('home.change')</label>
                 </div>
+                <div class="eo-timeline-toolkits">
+                    <label data-toggle="modal" data-target="#myModal"><i class="fa fa-youtube"></i> &nbsp;@lang('home.change')</label>
+                </div>
+                
             </div>
+            <!-- Modal -->
+                    <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add youtube Link</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                            <input type="hidden" name="_token" class="token" id="you_token" value="{{ csrf_token() }}" requried>
+                            <input type="text" class="form-control" id="youtube_data" placeholder="Enter youtube link">
+                    </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="add_youtube" data-dismiss="modal">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+
+                    </div>
+                    </div>
             <div class="col-md-12">
                <div class="row">
                    <div class="col-md-2 eo-dp-box">
@@ -675,6 +712,23 @@ if($company->companyLogo != ''){
  });
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
+    var url= "{{ $cCover }}";
+var youtubes="{{ $company->companyYoutube }}";
+var youtubeflg="{{ $company->youtubeLog }}";
+if(youtubeflg == 1){
+    var htm='<iframe src="https://www.youtube.com/embed/'+youtubes+'" frameborder="0" allowfullscreen class="eo-timeline-cover"></iframe>';
+            $('#youtube_html').html(htm);
+         $('#cover_img').hide();
+         $('#youtube_html').show();
+}
+var pic="{{$company->companyCover}}";
+var piclog="{{$company->picLog}}";
+if(piclog ==1){
+    $('img.eo-timeline-cover').attr('src',url);
+                $('#youtube_html').hide();
+                $('#cover_img').show();
+}
+
 
     $('button[data-toggle="tooltip"],a[data-toggle="tooltip"]').tooltip();
     getStates($('.job-country option:selected:selected').val());
@@ -878,12 +932,41 @@ $('.compnay-cover').on('change',function(){
         success : function(response) {
             if($.trim(response) != '1'){
                 $('img.eo-timeline-cover').attr('src',response);
+                $('#youtube_html').hide();
+                $('#cover_img').show();
             }else{
                 toastr.error('@lang("home.Following format allowed (PNG/JPG/JPEG)")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
             }
         }
     });
 })
+$('#add_youtube').on('click',function(){
+    var final= $('#youtube_data').val();
+    var youtube=final.slice(-11);
+    var tokens=$('#you_token').val();
+    var formData = new FormData();
+    formData.append('_token', tokens);
+    formData.append('youtube', youtube);
+    
+    //alert(youtube);
+    $.ajax({
+        url : "{{ url('account/employer/company/youtube') }}",
+        type : 'POST',
+        data : formData,
+        processData: false,
+        contentType: false,
+        timeout: 30000000,
+        success : function(response) {
+            var htm='<iframe src="https://www.youtube.com/embed/'+response+'" frameborder="0" allowfullscreen class="eo-timeline-cover"></iframe>';
+            $('#youtube_html').html(htm);
+         $('#cover_img').hide();
+         $('#youtube_html').show();
+            
+            //alert(response);
+        }
+    });
+
+});
   //**dataURL to blob**
     function dataURLtoBlob(dataurl) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],

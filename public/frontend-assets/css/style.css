@@ -1782,10 +1782,29 @@ ul.jd-rewards li i{
     color: #ffffff;
     border: 1px solid #fff;
 }
+
+.eo-timeline:hover .eo-timeline-toolkits{
+    display: inline-block;
+}
+.eo-timeline-toolkits{
+    display: none;
+    position: absolute;
+    top: 16px;
+    left: 156px;
+    padding: 5px 20px;
+    background-color: rgba(0,0,0,0.7);
+    text-align: center;
+    color: #ffffff;
+    border: 1px solid #fff;
+}
 .eo-timeline input[type=file]{
     visibility: hidden;
 }
 .eo-timeline-toolkit label{
+    font-size: 12px;
+    font-weight: normal;
+}
+.eo-timeline-toolkits label{
     font-size: 12px;
     font-weight: normal;
 }
@@ -3509,7 +3528,7 @@ img.profile-photo-xs{
         display: none;
     }
     .input-fields .search-item{
-        width:100%;
+        width:100% !important;
         float: none;
         margin-bottom: 10px;
     }
@@ -3541,7 +3560,7 @@ img.profile-photo-xs{
     .select2-container--default .select2-selection--single .select2-selection__rendered{
     }
     .search-btn{
-        width: 100%;
+        width: 70%;
         float: none;
         border:2px solid #e6b706 ;
     }

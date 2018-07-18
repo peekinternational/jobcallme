@@ -23,14 +23,14 @@
                                 <div class="search-field-box search-item">
                                     <input type="search" placeholder="@lang('home.lookingread')" name="keyword">
                                 </div>
-                                <div class="search-field-box search-item" style="width: 45%;">
+                                <div class="search-field-box search-item" style="width: 36%; ">
                                     <select class="form-control select2" name="category">
                                         <option value="0">@lang('home.category')</option>
                                         @foreach(JobCallMe::getReadCategories() as $cat)
                                             <option value="{!! $cat->id !!}">@lang('home.'.$cat->name)</option>
                                         @endforeach
                                     </select>
-                                  <!--   <div class="" id="r_country" style="display:none;padding-top: 8px;">
+                                    <div class="" id="r_country" style="display:none;padding-top: 8px;">
                                     <select class="read-countrys" name="country" style="width: 100% !important;">
                                         <option value="0">@lang('home.country')</option>
                                         @foreach(JobCallMe::getJobCountries() as $country)
@@ -45,16 +45,16 @@
                                     <select class="read-citys" name="city" id="city_reads"  style="width: 100% !important;display:none;">
                                         <option value="">@lang('home.city')</option>
                                     </select>
-                                    </div> -->
+                                    </div>
                                  </div>
                                  
-                                <button type="submit" class="search-btn" style="">
+                                <button type="submit" class="search-btn" style="float:left">
                                     <i class="fa fa-search"></i>
                                 </button>
-                              <!--   <button type="button" class="btn btn-success btn-sm" id="r_search" style="margin-left: 9px;/* width: 7%; */height: 33px;/* background: transparent; *//* border: 2px solid #cecdcd; */">
+                                <button type="button" class="btn btn-success btn-sm" id="r_search" style="margin-left: 9px;/* width: 7%; */height: 33px;/* background: transparent; *//* border: 2px solid #cecdcd; */">
                                     <span style="color:white">Country</span></button>
                                     <button type="button" class="btn btn-default btn-sm" id="c_search" style="display: none;margin-left: 9px;/* width: 7%; */height: 33px;/* background: transparent; *//* border: 2px solid #cecdcd; */">
-                                    <span style="color:white">Close</span></button> -->
+                                    <span style="color:white">Close</span></button>
                             </div>
                         </form>
                     </div>
@@ -212,13 +212,17 @@ $("#r_search").click(function(){
     $('#r_country').show();
     $('#c_search').show();
     $('#r_search').hide();
+    $(".ls-box").css("height", "116px");
+    $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .ls-box { height: 250px !important;}}</style>');
 
 });
 
 $("#c_search").click(function(){
     $('#r_country').hide();
-    $('#r_search').hide();
+    $('#c_search').hide();
     $('#r_search').show();
+    $(".ls-box").css("height", "96px");
+    $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .ls-box { height: 166px !important;}}</style>');
 
 });
 
@@ -226,6 +230,7 @@ $("#c_search").click(function(){
         var countryId = $(this).val();
         $('#state_reads').show();
         $(".ls-box").css("height", "205px");
+        $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .ls-box { height: 350px !important;}}</style>');
         getStatesssss(countryId)
     })
     function getStatesssss(countryId){

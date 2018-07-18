@@ -708,6 +708,15 @@ class Home extends Controller{
     	}
     	if($request->input('keyword') != ''){
     		$readQry->where('jcm_writings.title','LIKE','%'.$request->input('keyword').'%');
+		}
+		if($request->input('city') != ''){
+    		$readQry->where('jcm_writings.city','=',$request->input('city'));
+	         }
+		if($request->input('country') != ''){
+    		$readQry->where('jcm_writings.country','=',$request->input('country'));
+		}
+		if($request->input('state') != ''){
+    		$readQry->where('jcm_writings.state','=',$request->input('state'));
     	}
 		$readQry->where('jcm_writings.status','Publish');
     	$readQry->orderBy('jcm_writings.writingId','desc');
@@ -814,6 +823,7 @@ class Home extends Controller{
     	
 		$companies = $company->paginate(60);
 		$companies->appends(['keyword' => $request->input('keyword')]);
+		$companies->appends(['country' => $request->input('country')]);
 		
     	return view('frontend.view-companies',compact('companies'));
     }

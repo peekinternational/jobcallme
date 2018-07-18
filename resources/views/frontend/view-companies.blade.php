@@ -153,6 +153,7 @@
         var countryId = $(this).val();
         $('#state_companys').show();
         $(".ls-box").css("height", "179px");
+        $('.container').append('<style type="text/css">@media screen and (max-width: 465px){ .ls-box { height: 244px !important;}}</style>');
         getStatesssss(countryId)
     })
     function getStatesssss(countryId){

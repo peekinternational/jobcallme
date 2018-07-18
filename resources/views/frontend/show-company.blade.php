@@ -14,11 +14,16 @@ if($company->companyLogo != ''){
 }
 $opHour = json_decode($company->companyOperationalHour,true);
 ?>
+
 <section id="edit-organization">
     <div class="container">
         <div class="eo-box">
             <div class="eo-timeline">
+            @if($company->picLog == 0)
+            <iframe src="https://www.youtube.com/embed/{{$company->companyYoutube}}" frameborder="0" allowfullscreen class="eo-timeline-cover"></iframe>
+           @else
                 <img src="{{ $cCover }}" class="eo-timeline-cover">
+                @endif
             </div>
             <div class="col-md-12">
                <div class="row">

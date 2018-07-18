@@ -407,7 +407,10 @@ function sendpassword(pass){
    var confirm_password=$('#confirm_password').val();
    var gender='male';
    var username=$('#username').val();
+   alert(username);
+   //var f='register';
    //var username='nabeelphatak';
+<<<<<<< HEAD
     var cre = {
           'firstName' : firstname,
           'lastName' : lastname,
@@ -428,9 +431,25 @@ function sendpassword(pass){
     var form=$("#signUpForm");*/
     /*$.ajax({
         url: "http://jcmlink.com/Script/requests.php?f=register",
+=======
+   let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+     headers.append('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    headers.append('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Credentials', 'true');
+   
+    var form=$("#signUpForm");
+    $.ajax({
+        
+>>>>>>> c7167f322caa79f3a3caca7a882170616a98e6d4
         type: 'POST',
-        data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username},
+        crossDomain:true,
+        
         async: false,
+        url: "https://www.jcmlink.com/requests.php?f=register",
+        data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username},
+       
         success: function(response) {
             console.log(response);
 

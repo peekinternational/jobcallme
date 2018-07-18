@@ -126,6 +126,9 @@ class ExtraSkills extends Controller{
             $input['description'] = $request->input('description');
             $input['citation'] = $request->input('citation');
             $input['status'] = $request->input('option');
+            $input['country'] = $request->input('country');
+            $input['state'] = $request->input('state');
+            $input['city'] = $request->input('city');
             $input['userId'] = $app->userId;
             $input['createdTime'] = date('Y-m-d H:i:s');
            // $input['cat_names'] = $catnames; 
