@@ -395,23 +395,29 @@ function sendpassword(pass){
 }
 
 $('form.getapi').submit(function(e){
-    //alert('hello');
+   
    var email=$('#get_email').val();
     var password=$('#pwd').val();
    var confirm_password=$('#confirm_password').val();
    var gender='male';
    var username=$('#username').val();
-   alert(username);
-   //var f='register';
-   //var username='nabeelphatak';
-   let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-     headers.append('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    headers.append('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    headers.append('Access-Control-Allow-Origin', '*');
-    headers.append('Access-Control-Allow-Credentials', 'true');
+   
    
     var form=$("#signUpForm");
+    $.ajax({
+        
+        type: 'POST',
+        crossDomain:true,
+        
+        async: false,
+        url: "https://www.talksns.com/requests.php?f=register",
+        data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username},
+       
+        success: function(response) {
+            console.log(response);
+
+        }
+    });
     $.ajax({
         
         type: 'POST',
@@ -426,6 +432,8 @@ $('form.getapi').submit(function(e){
 
         }
     });
+
+    
 });
 </script>
 @endsection

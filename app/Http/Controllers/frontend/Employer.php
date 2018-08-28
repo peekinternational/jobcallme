@@ -1868,7 +1868,7 @@ public function mapOrganization(Request $request){
 			$jobId = DB::table('jcm_jobs')->where('jobId','=',$jobid)->update($input);
 			echo $jobId;
 			\Session::put('success',trans('home.Job Update Successfully'));
-			return Redirect::route('addmoney.account/employer/job/share');
+			return view('frontend.employer.share-job',compact('jobid'));
 		//}	
 		//else{ 
 			//$request->session()->forget('postedJobId');  /*For nice pay*/

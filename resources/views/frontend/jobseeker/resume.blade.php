@@ -40,7 +40,7 @@ if($user->profilePhoto != ''){
 									<div class="re-img-toolkit">
 										<div class="re-file-btn">
 											@lang('home.change') <i class="fa fa-camera"></i>
-											<input type="file" class="upload profile-pic" name="image" />
+											<input type="file" class="upload profile-pic" onchange="profilePic()" name="image" />
 										</div>
 										<span id="remove-re-image" style="margin-right: 42px;" onclick="removeResumePic('profile')">@lang('home.remove') <i class="fa fa-remove"></i></span>
 										<p id="remove-re-image" style="margin-right: 71px;" onclick="editResumeProPic()">@lang('home.Edit') <i class="fa fa-edit"><input type="hidden" value="{{ session()->get('jcmUser')->userId }}" id="userID" ></i></p>

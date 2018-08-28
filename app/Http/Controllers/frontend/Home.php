@@ -321,6 +321,7 @@ class Home extends Controller{
 				'phoneNumber' => 'required|digits_between:10,12',
 			],[
 				'username.unique' => trans('home.Username must be unique'),
+				'username.min' => trans('home.Username must be 5 more characters'),
 				'email.unique' => trans('home.Email must be unique'),
 				'username.required' => trans('home.Enter username'),
 				'email.required' => trans('home.Enter Email'),

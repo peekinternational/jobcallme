@@ -14,7 +14,7 @@ class SocialAuthFacebookController extends Controller
    *
    * @return void
    */
-    public function fbApi()
+    public function fbApi(Request $request)
     {
         return Socialite::driver('facebook')->redirect();
     }

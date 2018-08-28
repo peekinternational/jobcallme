@@ -4,7 +4,7 @@
     </IfModule>
 
     RewriteEngine On
-
+    php_value memory_limit 128M
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/$ /$1 [L,R=301]

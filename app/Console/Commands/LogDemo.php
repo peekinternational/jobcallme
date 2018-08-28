@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Console\Commands;
-
+use Illuminate\Http\Request;
 use Illuminate\Console\Command;
 use DB;
 use Mail;
@@ -41,14 +41,17 @@ class LogDemo extends Command
     { 
         $yesterday = date('Y-m-d',strtotime("-1 days"));
         $allusers = DB::table('jcm_users')->where('subscribe','Y')->get();
+		
+		
         //echo $yesterday;
         foreach ($allusers as $user) {
             //echo $user->email;
+			
             $getCat = DB::table('jcm_users_meta')->where('userId',$user->userId)->first()->industry;
             $jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
                 ->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
                 ->where('jcm_jobs.category',$getCat)->whereDate('jcm_jobs.createdTime','=',$yesterday)
-                >limit(12)
+                ->limit(12)
                 ->get();
             // $jobs = DB::table('jcm_jobs')->where('category',$getCat)->whereDate('createdTime','=',$yesterday)->get();
             if(count($jobs) > 0){

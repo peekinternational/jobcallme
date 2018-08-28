@@ -42,10 +42,10 @@
 </tr>
   @foreach($jobs as $users)
   <?php
-  $companylogo=url('compnay-logo/default-logo');
-  if ($users->companyLogo!="") {
-      $companylogo=url('compnay-logo/'.$users->companyLogo);
-  }
+  $companylogo='';
+  
+      $companylogo='https://www.jobcallme.com/compnay-logo/'.$users->companyLogo;
+  
    ?>
    <tr>
    <td style="padding-left:8.5%;padding-right:8.5%;padding-top:20px;padding-bottom:20px">
@@ -63,7 +63,7 @@
    <table border="0" cellpadding="0" cellspacing="0" width="50" style="min-width:50px;max-width:50px">
    <tbody><tr>
    <td align="center" valign="bottom" style="line-height:0;font-size:0" width="50" height="50">
-   <img src="{{asset('compnay-logo/'.$users->companyLogo)" alt="Company-Logo" style="border-top:1px solid #4B4B4B;border-left:1px solid #4B4B4B;border-right:1px solid #4B4B4B;width:50px; height:60px;">
+   <img src="{{ $companylogo }}" alt="{{ $companyLogo}}" style="border-top:1px solid #4B4B4B;border-left:1px solid #4B4B4B;border-right:1px solid #4B4B4B;width:50px; height:60px;">
    </td>
    </tr>
    <tr>
@@ -105,43 +105,8 @@
 </td>
 </tr>
 </tbody></table>
-<tr>
-<td>
-<hr style="height:1px;background-color:#7f7f7f;border:none;margin-top:20px;">
-</td>
-</tr>
-<tr>
-    <td>
-<div class="" style="float:left;">
-  <img src="https://www.jobcallme.com/compnay-logo/1514990780-699854.jpg" alt="" style="vertical-align: middle;width: 120px;height: 120px; margin-left:40px;border-radius: 50%;">
-</div>
-<div class="" style="margin-top:30px; font-size:18px;">
-  <span style="margin-left: 10px;">Apply to the job with one click by</span>
-    <br><span style="margin-left: 10px;"> completing your profile</span>
-</div>
-  </td>
-</tr>
-<tr>
-  <td style="text-align:center;">
-    <a href="https://www.jobcallme.com/account/jobseeker/resume">
-<button type="button" name="button" style="background-color: #3596D8; border-radius: 15px;color: white;text-align:center;padding: 20px 70px;font-size: 16px; margin-top:15px;">Complete Your Profile</button>
-  </a>
-</td>
-</tr>
-<tr>
-  <td>
-<table cellspacing="0" cellpadding="0" width="100%" style="min-width:100%">
-<tbody><tr>
-<td align="left" valign="top" width="50" style="padding-right:20px">
-<table border="0" cellpadding="0" cellspacing="0" width="50" style="min-width:50px;max-width:50px">
-<tbody><tr>
-<td align="center" valign="bottom" style="line-height:0;font-size:0" width="50" height="50">
-<tr>
-<td colspan="2"></td>
-</tr>
-</tbody></table>
-</td>
-</tr>
+
+
 <tr>
 <td style="background-color:#404040;padding-top:25px;padding-bottom:25px;padding-left:8.5%;padding-right:8.5%">
 <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="min-width:100%">
