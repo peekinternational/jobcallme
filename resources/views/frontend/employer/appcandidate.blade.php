@@ -409,8 +409,8 @@
                                     <ol type="1" style="margin-left:30px;">
                                     <?php $i =0 ;?>
                                     @foreach($questionData as $question)
-                                        <li><strong>{{$question->question}}</strong><br>
-                                            @lang('home.Ans') <strong>{{$question->answer}}</strong>
+                                        <li style="padding-top:20px"><strong>{{$question->question}}</strong><br>
+                                            <span style="color:#f3bb02"><strong>@lang('home.queAns')</strong></span> : <strong><span style="color:#337abe">{{$question->answer}}</span></strong>
                                         </li>
                                         @endforeach
                                     </ol>
@@ -660,9 +660,9 @@
                if(res != 1){
                 $('#evaluation-form').find('input[name="eva_ans_id[]"]').remove();
                 $('#evaluation-form').append(res);
-                toastr.success("evaluation Done");
+                toastr.success("@lang('home.evaluation Done')");
                }else{
-                toastr.success("evaluation Data Updated");
+                toastr.success("@lang('home.evaluation Data Updated')");
                }
             }
         });

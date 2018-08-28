@@ -85,6 +85,42 @@ class Cms extends Controller{
         return redirect(url()->previous());
     }
 
+	public function saveMainAD(Request $request){
+    	if(!$request->ajax()){
+    		exit('Directory access is forbidden');
+    	}
+		$jobId = trim($request->input('jobId'));
+		$name = trim($request->input('name'));
+		$adexpiry = trim($request->input('adexpiry'));
+
+		if($name == ''){
+			exit('Please enter category name.');
+		}
+		if($adexpiry == ''){
+			exit('Please enter adexpiry name.');
+		}
+		$job = DB::table('jcm_jobs')->where('jobId','=',$jobId)->first();
+		
+
+		$input = array('p_Category' => $name, 'expiryAd' => $adexpiry);
+		if($jobId != '0'){
+			DB::table('jcm_jobs')->where('jobId','=',$jobId)->update($input);
+			$sMsg = 'AD Updated';
+		}
+
+		$request->session()->flash('alert',['message' => $sMsg, 'type' => 'success']);
+		exit('1');
+    }
+
+	public function getMainAD(Request $request){
+    	if(!$request->ajax()){
+    		exit('Directory access is forbidden');
+    	}
+    	$jobId = $request->segment(5);
+    	$job = DB::table('jcm_jobs')->where('jobId',$jobId)->first();
+    	echo @json_encode($job);
+    }
+
     public function viewSubCategories(Request $request){
     	$categoryId = $request->segment(4);
     	$cat = DB::table('jcm_categories')->where('categoryId',$categoryId)->first();
@@ -552,20 +588,24 @@ class Cms extends Controller{
     public function viewjobs(Request $request){
     if($request->isMethod('post')){
             $request->session()->put('jobSearch',$request->all());
+			
         }
 
         if($request->input('reset') && $request->input('reset') == 'true'){
             $request->session()->forget('jobSearch');
+		
             return redirect('admin/cms/alljobs');
         }
-
+		
+	   
        $s_app = $request->session()->get('jobSearch');
         $jobs = DB::table('jcm_jobs as job')
-       ->select('jcm_users.*','job.*','cat.name','subcat.subName','subcat2.subName as cat2')
+       ->select('jcm_users.*','job.*','cat.name','subcat.subName','subcat2.subName as cat2','jcm_companies.companyLogo')
         ->leftJoin('jcm_users','jcm_users.userId','=','job.userId')
         ->leftJoin('jcm_categories as cat','cat.categoryId','=','job.category')
         ->leftJoin('jcm_sub_categories as subcat','subcat.subCategoryId','=','job.subCategory')
         ->leftJoin('jcm_sub_categories2 as subcat2','subcat2.subCategoryId2','=','job.subCategory2')
+		->leftJoin('jcm_companies','jcm_companies.companyId','=','job.companyId')
           ->where(function ($query) use ($s_app) {
                         if(count($s_app) > 0){
                             if($s_app['search'] != ''){
@@ -573,6 +613,14 @@ class Cms extends Controller{
                             }
                         }
           })
+		  ->where(function ($query) use ($s_app) {
+                        if(count($s_app) > 0){
+                            if($s_app['searchcountry'] != ''){
+                                $query->where('job.country', '=', $s_app['searchcountry']);
+                            }
+                        }
+          })
+		->where('job.expiryDate','>','0000-00-00')
         ->orderBy('job.jobId','des')
         ->paginate(15);
         //dd($jobs);

@@ -16,16 +16,18 @@ date_default_timezone_set("Asia/Seoul");
 <html lang="{{ app()->getLocale() }}">
     <head>
         <title>{{ $headerWeb['webTitle'] }} [잡콜미]</title>
-
+		<meta name="B-verify" content="80f7c739f500d6b0a49af378735f8b3e369dc9a0" />
 		<meta property="og:url" content="{{ Request::url() }}">
 		<meta property="og:type" content="website">
-		<meta property="og:title" content="JobCallMe">
-		<meta property="og:image" content="https://www.jobcallme.com/website/weblinkimage.png">		
+		<!--<meta property="og:title" content="JobbCallMe">
+		<meta property="og:image" content="https://www.jobcallme.com/website/weblinkimage.png">		-->
 		<link rel="canonical" href="https://www.jobcallme.com/"> 
+
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+		
 		<meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="shortcut icon" href="{{ $headerFavicon }}">
 		

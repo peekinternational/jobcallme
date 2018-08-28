@@ -42,10 +42,12 @@
 </tr>
   @foreach($jobs as $users)
   <?php
+
   $companylogo='';
   
       $companylogo='https://www.jobcallme.com/compnay-logo/'.$users->companyLogo;
   
+
    ?>
    <tr>
    <td style="padding-left:8.5%;padding-right:8.5%;padding-top:20px;padding-bottom:20px">
@@ -63,7 +65,9 @@
    <table border="0" cellpadding="0" cellspacing="0" width="50" style="min-width:50px;max-width:50px">
    <tbody><tr>
    <td align="center" valign="bottom" style="line-height:0;font-size:0" width="50" height="50">
+
    <img src="{{ $companylogo }}" alt="{{ $companyLogo}}" style="border-top:1px solid #4B4B4B;border-left:1px solid #4B4B4B;border-right:1px solid #4B4B4B;width:50px; height:60px;">
+
    </td>
    </tr>
    <tr>
@@ -74,6 +78,7 @@
    </tbody></table>
    </td>
    <td align="left" valign="top" width="90%">
+
 
    <a style="font-size:20px;color:#1861bf; text-decoration:none;" href="{{ url('jobs/'.$users->jobId)}}">{{$users->title}}</a>
    <br><span>{{$users->companyName}}</span>
@@ -105,7 +110,6 @@
 </td>
 </tr>
 </tbody></table>
-
 
 <tr>
 <td style="background-color:#404040;padding-top:25px;padding-bottom:25px;padding-left:8.5%;padding-right:8.5%">

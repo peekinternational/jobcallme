@@ -62,6 +62,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                                 {!!$writings->render() !!}
+
                             </div>
                             
                         </div>

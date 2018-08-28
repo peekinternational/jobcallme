@@ -15,24 +15,24 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="col-md-12">
-                                    <strong>@lang('home.QueTitle'):</strong> {{$ques->title}}
+                                    <strong>@lang('home.QueTitle'):</strong> <span style="color:#337ab7">{{$ques->title}}</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>@lang('home.QueType'):</strong> {{$ques->type}}
+                                    <strong>@lang('home.QueType'):</strong> <span style="color:#337ab7">{{$ques->type}}</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>@lang('home.Duration'):</strong> N/A
+                                    <strong>@lang('home.Duration'):</strong> <span style="color:#337ab7">{{$ques->submission_date}}@lang('home.day')</span>
                                 </div>
                             </div>
                             <di class="col-md-5">
                                 <div class="col-md-12">
-                                    <strong>@lang('home.Submission Days'):</strong> {{$ques->submission_date}}
+                                    <strong>@lang('home.Submission Days'):</strong> <span style="color:#337ab7">{{$ques->submission_date}}@lang('home.day')</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>@lang('home.Late Submission'):</strong> {{$ques->accept_late_submission}}
+                                    <strong>@lang('home.Late Submission'):</strong> <span style="color:#337ab7">@lang('home.Queview'.$ques->accept_late_submission)</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <strong>@lang('home.Shuffle Questions'):</strong> {{$ques->shuffle_questions}}
+                                    <strong>@lang('home.Shuffle Questions'):</strong> <span style="color:#337ab7">@lang('home.Queview'.$ques->shuffle_questions)</span>
                                 </div>
                             </di>
                         </div>
@@ -185,7 +185,7 @@ function addquestion(){
     $('#aquestion-edit').find('input[name="question"]').val('');
     $('#aquestion-edit').find('input[name="marks"]').val('');
     $('#addoption').html('');
-    $('#addoption').append('<label for="days">Option:</label><input type="text" name="options[]" class="form-control" id="days">');
+    $('#addoption').append('<label for="days">@lang("home.Option"):</label><input type="text" name="options[]" class="form-control" id="days">');
 }
 $('#addMore').on("click",function(){
    $('#addoption').append('<div><input type="text" name="options[]" style="width:98%;display:inline" class="form-control" id="days"><span style="font-size:25px;cursor:pointer;" onclick="$(this).parent().remove()" class="remove">&times;</span></div>');
@@ -201,7 +201,7 @@ $('.queseditbtn').on('click',function(){
     $('input[name="question"]').val(arrayName[index].question);
     $('input[name="marks"]').val(arrayName[index].marks);
      $('#addoption').html('');
-     $('#addoption').append('<label for="days">Option:</label><input type="hidden" value="'+arrayName[index].q_id+'" name="q_id">');
+     $('#addoption').append('<label for="days">@lang("home.Option"):</label><input type="hidden" value="'+arrayName[index].q_id+'" name="q_id">');
     $(some).each(function(index){
         $('#addoption').append('<div><input type="text" value="'+some[index]+'" name="options[]" style="width:98%;display:inline" class="form-control" id="days"><span style="font-size:25px;cursor:pointer;" onclick="$(this).parent().remove()" class="remove">&times;</span></div>');
     });

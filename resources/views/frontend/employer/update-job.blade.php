@@ -98,7 +98,7 @@
 								<br>
 								<span style="padding-top:5px">@lang('home.addDepartment-text')</span>
                             </div>
-                             <div class="col-md-2 pnj-form-field" style="margin-top:5px;"> <span><a href="{{ url('account/employer/departments') }}"><span style="background:#f0ad4e;padding:5px 10px;margin-top:5px;color:#fff;">@lang('home.addDepartment') ></span></a></span></div>
+                             <div class="col-md-2 pnj-form-field" style="margin-top:5px;"> <span><a href="{{ url('account/employer/departments') }}"><span style="background:#f0ad4e;padding:5px 7px;margin-top:5px;color:#fff;">@lang('home.addDepartment') ></span></a></span></div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.category')</label>
@@ -155,7 +155,8 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.description')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <textarea name="description" class="form-control tex-editor">{!! $result->description !!}</textarea>
+                                <textarea id="editor3" name="description">{!! $result->description !!}</textarea>
+								<!-- <textarea name="description" class="form-control tex-editor">{!! $result->description !!}</textarea> -->
                             </div>
                         </div>
                         <div class="form-group">
@@ -167,7 +168,8 @@
                         <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.qualification')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" value="{!! $result->qualification !!}" name="qualification" placeholder="Qualification" required>
+								<textarea class="form-control" name="qualification" rows="3">{!! $result->qualification !!}</textarea>
+                                <!-- <input type="text" class="form-control" value="{!! $result->qualification !!}" name="qualification" placeholder="Qualification" required> -->
                             </div>
                         </div>
                         <div class="form-group" style="display:none">
@@ -194,7 +196,8 @@
 					   <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.Responsibilities')</label>
                             <div class="col-sm-9 pnj-form-field">
-                                <input type="text" class="form-control" value="{!! $result->responsibilities !!}" name="responsibilities" placeholder="@lang('home.Responsibilities')">
+                                <textarea class="form-control" name="responsibilities" rows="3">{!! $result->responsibilities !!}</textarea>
+								<!-- <input type="text" class="form-control" value="{!! $result->responsibilities !!}" name="responsibilities" placeholder="@lang('home.Responsibilities')"> -->
                             </div>
                        </div>
 					   <div class="form-group">
@@ -278,7 +281,8 @@
 					   <div class="form-group">
                             <label class="control-label col-sm-3">@lang('home.jobaddr')</label>
                             <div class="col-sm-9 pnj-form-field">
-								<input type="text" name="jobaddr" class="form-control" id="Address" value="<?php if ( isset($result->jobaddr) && $result->jobaddr != "" ){ print $result->jobaddr;}?>"  placeholder="@lang('home.jobaddrtext')" required />
+								<textarea class="form-control" name="jobaddr" rows="3" required>{!! $result->jobaddr !!}</textarea>
+								<!-- <input type="text" name="jobaddr" class="form-control" id="Address" value="<?php if ( isset($result->jobaddr) && $result->jobaddr != "" ){ print $result->jobaddr;}?>"  placeholder="@lang('home.jobaddrtext')" required /> -->
 
                                 
                             </div>
@@ -287,8 +291,9 @@
 						<div class="form-group">
                             <label class="control-label col-md-3">@lang('home.Working day')</label>
                                 <div class="col-md-3 pnj-form-field">
-                                    <select class="form-control" name="jobdayval" required>
+                                    <select class="form-control" name="jobdayval" required>										
 										<option value="jobday01" {{ $result->jobdayval == 'jobday01' ? 'selected="selected"' : '' }}>@lang('home.jobday01')</option>
+										<option value="jobday11" {{ $result->jobdayval == 'jobday11' ? 'selected="selected"' : '' }}>@lang('home.jobday11')</option>
 										<option value="jobday02" {{ $result->jobdayval == 'jobday02' ? 'selected="selected"' : '' }}>@lang('home.jobday02')</option>
 										<option value="jobday03" {{ $result->jobdayval == 'jobday03' ? 'selected="selected"' : '' }}>@lang('home.jobday03')</option>
 										<option value="jobday04" {{ $result->jobdayval == 'jobday04' ? 'selected="selected"' : '' }}>@lang('home.jobday04')</option>
@@ -318,7 +323,8 @@
 										<option value="jobhours03" {{ $result->jobhoursval == 'jobhours03' ? 'selected="selected"' : '' }}>@lang('home.jobhours03')</option>
 										<option value="jobhours04" {{ $result->jobhoursval == 'jobhours04' ? 'selected="selected"' : '' }}>@lang('home.jobhours04')</option>
 										<option value="jobhours05" {{ $result->jobhoursval == 'jobhours05' ? 'selected="selected"' : '' }}>@lang('home.jobhours05')</option>
-										<option value="jobhours06" {{ $result->jobhoursval == 'jobhours06' ? 'selected="selected"' : '' }}>@lang('home.jobday06')</option>										
+										<option value="jobhours07" {{ $result->jobhoursval == 'jobhours07' ? 'selected="selected"' : '' }}>@lang('home.jobhours07')</option>
+										<option value="jobhours06" {{ $result->jobhoursval == 'jobhours06' ? 'selected="selected"' : '' }}>@lang('home.jobhours06')</option>
                                     </select>
                                 </div>
 
@@ -360,6 +366,26 @@
                                 </div>
                             </div>
                         </div>
+
+						<div class="form-group">
+                            <label class="control-label col-sm-3">@lang('home.foregin companies')</label>
+                            <div class="col-sm-9 pnj-form-field">
+                                <div class="row">
+                                
+                                        <div class="col-md-4 benefits-checks">
+                                            <input id="f_company" type="checkbox" class="cbx-field" name="f_company" value="yes" {{ $result->f_company == 'yes' ? 'checked=""' : '' }}>								
+											<label class="cbx" for="f_company"></label>
+                                            <label class="lbl" for="f_company">@lang('home.foregin companies')</label>
+                                            
+                                        </div>
+										
+										
+
+                                </div>
+                            </div>
+                        </div>
+
+
                    </div>
 
 
@@ -612,27 +638,27 @@
 										</div>
 								</div>
 								<div class="row"> 
-										<div class="col-md-3 benefits-checks">
+										<div class="col-md-2 benefits-checks">
                                             <input id="jobreceipt07"  type="checkbox" class="cbx-field" name="jobreceipt07"  value="yes" {{ $result->jobreceipt07 == 'yes' ? 'checked=""' : '' }}>
                                             <label class="cbx" for="jobreceipt07"></label>
                                             <label class="lbl" for="jobreceipt07">@lang('home.jobreceipt07')</label>
                                         </div>
-										<div class="col-md-3 benefits-checks">
+										<div class="col-md-2 benefits-checks">
                                             <input id="jobreceipt03"  type="checkbox" class="cbx-field" name="jobreceipt03"  value="yes" {{ $result->jobreceipt03 == 'yes' ? 'checked=""' : '' }}>
                                             <label class="cbx" for="jobreceipt03"></label>
                                             <label class="lbl" for="jobreceipt03">@lang('home.jobreceipt03')</label>
                                         </div>
-										<div class="col-md-3 benefits-checks">
+										<div class="col-md-2 benefits-checks">
                                             <input id="jobreceipt04"  type="checkbox" class="cbx-field" name="jobreceipt04"  value="yes" {{ $result->jobreceipt04 == 'yes' ? 'checked=""' : '' }}>
                                             <label class="cbx" for="jobreceipt04"></label>
                                             <label class="lbl" for="jobreceipt04">@lang('home.jobreceipt04')</label>
                                         </div>
-										<div class="col-md-3 benefits-checks">
+										<div class="col-md-2 benefits-checks">
                                             <input id="jobreceipt05"  type="checkbox" class="cbx-field" name="jobreceipt05"  value="yes" {{ $result->jobreceipt05 == 'yes' ? 'checked=""' : '' }}>
                                             <label class="cbx" for="jobreceipt05"></label>
                                             <label class="lbl" for="jobreceipt05">@lang('home.jobreceipt05')</label>
                                         </div>
-										<div class="col-md-3 benefits-checks">
+										<div class="col-md-2 benefits-checks">
                                             <input id="jobreceipt06"  type="checkbox" class="cbx-field" name="jobreceipt06"  value="yes" {{ $result->jobreceipt06 == 'yes' ? 'checked=""' : '' }}>
                                             <label class="cbx" for="jobreceipt06"></label>
                                             <label class="lbl" for="jobreceipt06">@lang('home.jobreceipt06')</label>
@@ -890,6 +916,18 @@
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+
+ CKEDITOR.replace( 'editor3',{
+  filebrowserBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files')}}",
+   filebrowserImageBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images')}}",
+   filebrowserFlashBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash')}}",
+   filebrowserUploadUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files')}}",
+   filebrowserImageUploadUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images')}}",
+   filebrowserFlashUploadUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash')}}",
+   height: '500px',
+ });
+
+
 $(document).ready(function(){
         $('#addprocess').on('change', function() {
       // process= $('#addprocess').val();

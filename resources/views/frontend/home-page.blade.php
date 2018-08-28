@@ -54,22 +54,25 @@ $lToken = csrf_token();
                                                
                                                 <div class="search-field-box search-item">
                                                                                    
-                                                <select class="jobs-countrys" name="country" style="width: 98%;">
+                                                <select class="jobs-countrys select2" name="country" style="width: 98%;">
                                                     <option value="0">@lang('home.country')</option>
-                                                    @foreach(JobCallMe::getJobCountries() as $country)
+														@if(app()->getLocale() == "kr")	
+															<option value="1">@lang('home.Korea')</option>
+														@endif
+													@foreach(JobCallMe::getJobCountries() as $country)
                                                         <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
                                                     @endforeach
                                                 </select>
                                         
-                                                <select class=" jobs-states" name="state" id="state_id"  style="width: 98%;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                                <select class=" jobs-states" name="state" id="state_id"  style="width: 100%;display:none; margin-bottom: 7px;margin-top: 7px;">
                                                     <option value="0">@lang('home.state')</option>
                                                 </select>
                                             
-                                                <select class=" jobs-citys" name="city" id="city_id"  style="width: 98%;display:none;">
+                                                <select class=" jobs-citys" name="city" id="city_id"  style="width: 100%;display:none;">
                                                     <option value="0">@lang('home.city')</option>
                                                 </select>
                                             </div>
-                                                <button type="submit" class="search-btn">
+                                                <button type="submit" class="search-btn2">
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </div>
@@ -83,22 +86,23 @@ $lToken = csrf_token();
                                                 </div>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="search-field-box search-item">
-                                                <select class="country-countrys" name="country" style="width: 98%;">
+                                        <select class="country-countrys" name="country" style="width: 100%;">
+
                                                     <option value="">@lang('home.country')</option>
                                                     @foreach(JobCallMe::getJobCountries() as $country)
                                                         <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
                                                     @endforeach
                                                 </select>
                                         
-                                                <select class="country-states" name="state" id="state_country"  style="width: 98%;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                                <select class="country-states" name="state" id="state_country"  style="width: 100%;display:none; margin-bottom: 7px;margin-top: 7px;">
                                                     <option value="0">@lang('home.state')</option>
                                                 </select>
                                             
-                                                <select class="country-citys" name="city" id="city_country"  style="width: 98%;display:none;">
+                                                <select class="country-citys" name="city" id="city_country"  style="width: 100%;display:none;">
                                                     <option value="0">@lang('home.city')</option>
                                                 </select>
                                                 </div>
-                                                <button type="submit" class="search-btn">
+                                                <button type="submit" class="search-btn2">
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </div>
@@ -112,22 +116,22 @@ $lToken = csrf_token();
                                                 </div>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="search-field-box search-item">
-                                                <select class="people-countrys" name="country" style="width: 98%;">
+                                                <select class="people-countrys select2" name="country" style="width: 98%;">
                                                     <option value="0">@lang('home.country')</option>
                                                     @foreach(JobCallMe::getJobCountries() as $country)
                                                         <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
                                                     @endforeach
                                                 </select>
                                         
-                                                <select class="people-states" name="state" id="state_people"  style="width: 98%;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                                <select class="people-states" name="state" id="state_people"  style="width: 100%;display:none; margin-bottom: 7px;margin-top: 7px;">
                                                     <option value="0">@lang('home.state')</option>
                                                 </select>
                                             
-                                                <select class="people-citys" name="city" id="city_people"  style="width: 98%;display:none;">
+                                                <select class="people-citys" name="city" id="city_people"  style="width: 100%;display:none;">
                                                     <option value="0">@lang('home.city')</option>
                                                 </select>
                                                 </div>
-                                                <button type="submit" class="search-btn">
+                                                <button type="submit" class="search-btn2">
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </div>
@@ -154,7 +158,7 @@ $lToken = csrf_token();
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <button type="submit" class="search-btn">
+                                                <button type="submit" class="search-btn2">
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </div>
@@ -169,22 +173,22 @@ $lToken = csrf_token();
                                                 </div>
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="search-field-box search-item">
-                                                <select class="learn-countrys" name="country" style="width: 98%;">
-                                                    <option value="0">@lang('home.country')</option>
+                                                <select class="learn-countrys select2" name="country" style="width: 98%;">
+                                                    <option value="">@lang('home.country')</option>
                                                     @foreach(JobCallMe::getJobCountries() as $country)
                                                         <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
                                                     @endforeach
                                                 </select>
                                         
-                                                <select class="learn-states" name="state" id="state_learn"  style="width: 98%;display:none; margin-bottom: 7px;margin-top: 7px;">
-                                                    <option value="0">@lang('home.state')</option>
+                                                <select class="learn-states" name="state" id="state_learn"  style="width: 100%;display:none; margin-bottom: 7px;margin-top: 7px;">
+                                                    <option value="">@lang('home.state')</option>
                                                 </select>
                                             
-                                                <select class="learn-citys" name="city" id="city_learn"  style="width: 98%;display:none;">
-                                                    <option value="0">@lang('home.city')</option>
+                                                <select class="learn-citys" name="city" id="city_learn"  style="width: 100%;display:none;">
+                                                    <option value="">@lang('home.city')</option>
                                                 </select>
                                                 </div>
-                                                <button type="submit" class="search-btn">
+                                                <button type="submit" class="search-btn2">
                                                     <i class="fa fa-search"></i>
                                                 </button>
                                             </div>
@@ -200,12 +204,12 @@ $lToken = csrf_token();
     </section>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-     <span style="padding-left:10px"><button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> @lang('home.Close Quick View V')</span>  </button>
+     <span style="padding-left:10px"><button type="submit" class="btn btn-warning btn-sm" id="Quickbutton" onclick="myFunction()"> @lang('home.Open Quick View V')</span>  </button>
 </div>
                                                
     <!--Slider Section End-->
 
-    <section class="login-type-section" id="QuickView">
+    <section class="login-type-section" id="QuickView" style="display:none;">
         <div class="container">
             <div class="col-md-8 col-md-offset-2">
                 <div class="col-md-6 login-type ">
@@ -224,26 +228,12 @@ $lToken = csrf_token();
                 </div>
             </div>
 			<?php $colorArr = array('#57768a','#96aaa8','#a09d8e','#605e63','#9e947b','#8a9fa0','#695244','#5b5c5e','#7b767d','#a0b1b9','#6d846f','#a8b3b9') ?>
-          @if(Session()->has('jcmUser'))
+         
             <div class="row">
                 <div class="col-md-12">
-                    <div class="job-locations-box">
-
-						<a class="job-location" href="{{ url('jobs?country='.JobCallMe::getHomeCountry() )}}" style="background-color: {{ $colorArr[array_rand($colorArr)] }}"><span class="shine"></span><span class="text">@lang('home.All')<!-- @lang('home.jobsin') --></span></a>
-					@foreach(JobCallMe::getJobStates(JobCallMe::getHomeCountry()) as $loca2)
-                        <a class="job-location" href="{{ url('jobs?country='.JobCallMe::getHomeCountry().'&state='.$loca2->id )}}" style="background-color: {{ $colorArr[array_rand($colorArr)] }}"><span class="shine"></span><span class="text">@lang('home.'.$loca2->name)</span></a>
-                    @endforeach
-                       
-                    </div>
-                    @endif
-                    <div class="clearfix"></div>
-                    <div class="job-schedule-box">
-					 @foreach(JobCallMe::getJobType() as $shift)
-                        <a href="{{ url('jobs?type='.$shift->name) }}" class="hvr-shutter-in-horizontal">@lang('home.'.ucfirst($shift->name))</a>
-                    @endforeach
-                      
-                        
-                    </div>
+                    
+                   
+                    
                 </div>
             </div>
         </div>
@@ -284,9 +274,10 @@ $lToken = csrf_token();
                     </div>
     <div id="maindiv" class="feature-companies">
      
-    <section class="job-types-section" style="background:#fff;margin-top:-12px;margin-bottom:-10px;">
+    <section class="job-types-section" style="background:#dedede;margin-top:-12px;margin-bottom:-10px;">
    
         <div class="container">
+		<!-- <div class="container" style="border: 1px solid #cccccc;border-radius: 10px;padding:20px 10px;"> -->
 		<div>
             <p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.prjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
 			</div>
@@ -311,29 +302,42 @@ $lToken = csrf_token();
                     <div class="ih-item square effect8 scale_up tc-box">
                         
                         <a href="{{ url('jobs/'.$job->jobId) }}">
+
                             <div class="mobile-suggestions ">
                            <div class="row">
-					<div class="col-xs-3 jobs-logo" style="padding-left:0;"><img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >
+					<div class="col-xs-3 jobs-logo" style="padding-left:0;">
+					@if($job->work_id)
+						<?php
+							$is_file_exist = file_exists('compnay-logo/'.$job->work_id.'_Logo.jpg');
+
+						    if ($is_file_exist) {
+							  $jLogo = url('compnay-logo/'.$job->work_id.'_Logo.jpg');
+						    }else{
+							  $jLogo = 'compnay-logo/j_Logo.jpg';
+							}
+						?>
+						  <img style="width:100%; position: relative;" src="{!! $jLogo !!}" >@else<img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >@endif
 
                     </div>
                      <div class="col-xs-9" style="padding-left:0; padding-right:0;">
                      <h5 style="overflow: hidden; height: 16px;">{{$string}}</h5>
                      <p style="font-size: 12px;color: #71787b; overflow: hidden; height: 16px;">{{$job->companyName}}</p>
-                     <p style="font-size: 13px;overflow: hidden; height: 16px;">{{JobCallMe::cityName($job->city).', '.JobCallMe::countryName($job->country)}} </p>
+                     <p style="font-size: 13px;overflow: hidden; height: 16px;">@lang('home.'.JobCallMe::cityName($job->city)),  @lang('home.'.JobCallMe::countryName($job->country)) </p>
                      
                     </div>
                     
 
                          <div class="info" style="overflow: hidden;">
+
                                 <h3>{!! $job->companyName !!}</h3>
 								<p style="padding-top:10px">{!! $string !!}
 								
                                 
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<span style="color:#f0ad4e"><i class="fa fa-heart"></i>&nbsp;D-@if($job->expiryDate == "2100-12-31")@lang('home.Untill Hire')@else{{ JobCallMe::timeInDays($job->expiryDate) }}@endif</span>
                                 </div>
                                 <div class="job-status days-left">
-                                    <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+                                    <span style="color:#f0ad4e">{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
                                 </div>
                             </div>
                     </div>
@@ -372,18 +376,31 @@ $lToken = csrf_token();
                         }
 			?>
                 <div class="col-sm-4">
+
                     <div class="ih-item square effect8 scale_up tc-box">
                         
                         <a href="{{ url('jobs/'.$job->jobId) }}">
                             <div class="mobile-suggestions ">
                            <div class="row">
-					<div class="col-xs-3 jobs-logo" style="padding-left:0;"><img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >
+					<div class="col-xs-3 jobs-logo" style="padding-left:0;">
+					@if($job->work_id)
+						<?php
+							$is_file_exist = file_exists('compnay-logo/'.$job->work_id.'_Logo.jpg');
+
+						    if ($is_file_exist) {
+							  $jLogo = url('compnay-logo/'.$job->work_id.'_Logo.jpg');
+						    }else{
+							  $jLogo = 'compnay-logo/j_Logo.jpg';
+							}
+						?>
+					<img style="width:100%; position: relative;" src="{!! $jLogo !!}" >@else<img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >@endif
+
 
                     </div>
                      <div class="col-xs-9" style="padding-left:0; padding-right:0;">
                      <h5 style="overflow: hidden; height: 16px;">{{$string}}</h5>
                      <p style="font-size: 12px;color: #71787b; overflow: hidden; height: 16px;">{{$job->companyName}}</p>
-                     <p style="font-size: 13px;overflow: hidden; height: 16px;">{{JobCallMe::cityName($job->city).', '.JobCallMe::countryName($job->country)}} </p>
+                     <p style="font-size: 13px;overflow: hidden; height: 16px;">@lang('home.'.JobCallMe::cityName($job->city)),  @lang('home.'.JobCallMe::countryName($job->country)) </p>
                      
                     </div>
                     
@@ -394,10 +411,11 @@ $lToken = csrf_token();
 								
                                 
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-@if($job->expiryDate == "2100-12-31")@lang('home.Untill Hire')@else{{ JobCallMe::timeInDays($job->expiryDate) }}@endif
                                 </div>
                                 <div class="job-status days-left">
                                     <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+
                                 </div>
                             </div>
                     </div>
@@ -414,7 +432,7 @@ $lToken = csrf_token();
     <!--Top Companies Section End-->
 
     <!--Hot Jobs Section Start-->
-    <section class="job-types-section" id="latest-jobs">
+    <section class="job-types-section" id="latest-jobs" style="background:#dedede;">
         <div class="container" style="padding-top:0px;padding-bottom:0px;">
 			<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.hotjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
           
@@ -438,29 +456,44 @@ $lToken = csrf_token();
                     <div class="ih-item square effect8 scale_up tc-box">
                         
                         <a href="{{ url('jobs/'.$job->jobId) }}">
+
                             <div class="mobile-suggestions ">
                            <div class="row">
-					<div class="col-xs-3 jobs-logo" style="padding-left:0;"><img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >
+					<div class="col-xs-3 jobs-logo" style="padding-left:0;">
+					@if($job->work_id)
+						<?php
+							$is_file_exist = file_exists('compnay-logo/'.$job->work_id.'_Logo.jpg');
+
+						    if ($is_file_exist) {
+							  $jLogo = url('compnay-logo/'.$job->work_id.'_Logo.jpg');
+						    }else{
+							  $jLogo = 'compnay-logo/j_Logo.jpg';
+							}
+						?>
+					<img style="width:100%; position: relative;" src="{!! $jLogo !!}" >@else<img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >@endif
 
                     </div>
                      <div class="col-xs-9" style="padding-left:0; padding-right:0;">
                      <h5 style="overflow: hidden; height: 16px;">{{$string}}</h5>
                      <p style="font-size: 12px;color: #71787b; overflow: hidden; height: 16px;">{{$job->companyName}}</p>
-                     <p style="font-size: 13px;overflow: hidden; height: 16px;">{{JobCallMe::cityName($job->city).', '.JobCallMe::countryName($job->country)}} </p>
+                     <p style="font-size: 13px;overflow: hidden; height: 16px;">@lang('home.'.JobCallMe::cityName($job->city)),  @lang('home.'.JobCallMe::countryName($job->country)) </p>
                      
                     </div>
                     
 
                          <div class="info" style="overflow: hidden;">
+
                                 <h3>{!! $job->companyName !!}</h3>
 								<p style="padding-top:10px">{!! $string !!}
 								
                                 
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<span style="color:#f0ad4e"><i class="fa fa-heart"></i>&nbsp;D-@if($job->expiryDate == "2100-12-31")@lang('home.Untill Hire')@else{{ JobCallMe::timeInDays($job->expiryDate) }}@endif</span>
                                 </div>
                                 <div class="job-status days-left">
+
                                     <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+
                                 </div>
                             </div>
                     </div>
@@ -501,29 +534,44 @@ $lToken = csrf_token();
                     <div class="ih-item square effect8 scale_up tc-box">
                         
                         <a href="{{ url('jobs/'.$job->jobId) }}">
+
                             <div class="mobile-suggestions ">
                            <div class="row">
-					<div class="col-xs-3 jobs-logo" style="padding-left:0;"><img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >
+					<div class="col-xs-3 jobs-logo" style="padding-left:0;">
+					@if($job->work_id)
+						<?php
+							$is_file_exist = file_exists('compnay-logo/'.$job->work_id.'_Logo.jpg');
+
+						    if ($is_file_exist) {
+							  $jLogo = url('compnay-logo/'.$job->work_id.'_Logo.jpg');
+						    }else{
+							  $jLogo = 'compnay-logo/j_Logo.jpg';
+							}
+						?>
+					<img style="width:100%; position: relative;" src="{!! $jLogo !!}" >@else<img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >@endif
 
                     </div>
                      <div class="col-xs-9" style="padding-left:0; padding-right:0;">
                      <h5 style="overflow: hidden; height: 16px;">{{$string}}</h5>
                      <p style="font-size: 12px;color: #71787b; overflow: hidden; height: 16px;">{{$job->companyName}}</p>
-                     <p style="font-size: 13px;overflow: hidden; height: 16px;">{{JobCallMe::cityName($job->city).', '.JobCallMe::countryName($job->country)}} </p>
+                     <p style="font-size: 13px;overflow: hidden; height: 16px;">@lang('home.'.JobCallMe::cityName($job->city)),  @lang('home.'.JobCallMe::countryName($job->country)) </p>
                      
                     </div>
                     
 
                          <div class="info" style="overflow: hidden;">
+
                                 <h3>{!! $job->companyName !!}</h3>
 								<p style="padding-top:10px">{!! $string !!}
 								
                                 
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<span style="color:#f0ad4e"><i class="fa fa-heart"></i>&nbsp;D-@if($job->expiryDate == "2100-12-31")@lang('home.Untill Hire')@else{{ JobCallMe::timeInDays($job->expiryDate) }}@endif</span>
                                 </div>
                                 <div class="job-status days-left">
+
                                     <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+
                                 </div>
                             </div>
                     </div>
@@ -541,7 +589,7 @@ $lToken = csrf_token();
     <!--Latest Jobs Section End-->
 
     <!--Special Jobs Section Start-->
-    <section class="job-types-section" id="latest-jobs">
+    <section class="job-types-section" id="latest-jobs" style="background:#dedede;">
         <div class="container" style="padding-top:0px;padding-bottom:0px;">
 		<p style="font-size: 17px;margin-top: 12px;"><span>@lang('home.specialjob')</span><span style="float:right"><a style="font-size: 12px;color:#d7a707" href="{{ url('account/employer/job/new') }}">@lang('home.postjoblike')</a></span></p>
 
@@ -564,15 +612,27 @@ $lToken = csrf_token();
                     <div class="ih-item square effect8 scale_up tc-box">
                         
                         <a href="{{ url('jobs/'.$job->jobId) }}">
+
                             <div class="mobile-suggestions ">
                            <div class="row">
-					<div class="col-xs-3 jobs-logo" style="padding-left:0;"><img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >
+					<div class="col-xs-3 jobs-logo" style="padding-left:0;">
+					@if($job->work_id)
+						<?php
+							$is_file_exist = file_exists('compnay-logo/'.$job->work_id.'_Logo.jpg');
+
+						    if ($is_file_exist) {
+							  $jLogo = url('compnay-logo/'.$job->work_id.'_Logo.jpg');
+						    }else{
+							  $jLogo = 'compnay-logo/j_Logo.jpg';
+							}
+						?>
+					<img style="width:100%; position: relative;" src="{!! $jLogo !!}" >@else<img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >@endif
 
                     </div>
                      <div class="col-xs-9" style="padding-left:0; padding-right:0;">
                      <h5 style="overflow: hidden; height: 16px;">{{$string}}</h5>
                      <p style="font-size: 12px;color: #71787b; overflow: hidden; height: 16px;">{{$job->companyName}}</p>
-                     <p style="font-size: 13px;overflow: hidden; height: 16px;">{{JobCallMe::cityName($job->city).', '.JobCallMe::countryName($job->country)}} </p>
+                     <p style="font-size: 13px;overflow: hidden; height: 16px;">@lang('home.'.JobCallMe::cityName($job->city)),  @lang('home.'.JobCallMe::countryName($job->country)) </p>
                      
                     </div>
                     
@@ -583,11 +643,12 @@ $lToken = csrf_token();
 								
                                 
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-@if($job->expiryDate == "2100-12-31")@lang('home.Untill Hire')@else{{ JobCallMe::timeInDays($job->expiryDate) }}@endif
                                 </div>
                                 <div class="job-status days-left">
                                     <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
                                 </div>
+
                             </div>
                     </div>
                     </div>
@@ -630,29 +691,44 @@ $lToken = csrf_token();
                     <div class="ih-item square effect8 scale_up tc-box">
                         
                         <a href="{{ url('jobs/'.$job->jobId) }}">
+
                             <div class="mobile-suggestions ">
                            <div class="row">
-					<div class="col-xs-3 jobs-logo" style="padding-left:0;"><img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >
+					<div class="col-xs-3 jobs-logo" style="padding-left:0;">
+					@if($job->work_id)
+						<?php
+							$is_file_exist = file_exists('compnay-logo/'.$job->work_id.'_Logo.jpg');
+
+						    if ($is_file_exist) {
+							  $jLogo = url('compnay-logo/'.$job->work_id.'_Logo.jpg');
+						    }else{
+							  $jLogo = 'compnay-logo/j_Logo.jpg';
+							}
+						?>
+					<img style="width:100%; position: relative;" src="{!! $jLogo !!}" >@else<img style="width:100%; position: relative;" src="{!! $job->companyLogo != '' ? url('/compnay-logo/'.$job->companyLogo) : url('/compnay-logo/default-logo.jpg') !!}" >@endif
 
                     </div>
                      <div class="col-xs-9" style="padding-left:0; padding-right:0;">
                      <h5 style="overflow: hidden; height: 16px;">{{$string}}</h5>
                      <p style="font-size: 12px;color: #71787b; overflow: hidden; height: 16px;">{{$job->companyName}}</p>
-                     <p style="font-size: 13px;overflow: hidden; height: 16px;">{{JobCallMe::cityName($job->city).', '.JobCallMe::countryName($job->country)}} </p>
+                     <p style="font-size: 13px;overflow: hidden; height: 16px;">@lang('home.'.JobCallMe::cityName($job->city)),  @lang('home.'.JobCallMe::countryName($job->country)) </p>
                      
                     </div>
                     
 
                          <div class="info" style="overflow: hidden;">
+
                                 <h3>{!! $job->companyName !!}</h3>
 								<p style="padding-top:10px">{!! $string !!}
 								
                                 
                                 <div class="job-status eye-icon">
-                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<i class="fa fa-heart"></i>&nbsp;D-{{ JobCallMe::timeInDays($job->expiryDate) }}
+                                    <span style="padding-right:20px">@lang('home.vacancies') {!! $job->vacancies !!}</span><i class="fa fa-eye"></i>&nbsp;&nbsp;<span style="color:#f0ad4e"><i class="fa fa-heart"></i>&nbsp;D-@if($job->expiryDate == "2100-12-31")@lang('home.Untill Hire')@else{{ JobCallMe::timeInDays($job->expiryDate) }}@endif</span>
                                 </div>
                                 <div class="job-status days-left">
+
                                     <span>{{ JobCallMe::timeInDays($job->expiryAd) }}@lang('home.days left')</span>
+
                                 </div>
                             </div>
                     </div>
@@ -705,12 +781,12 @@ $lToken = csrf_token();
 $("#mainbutton2").click(function(){
     $("#maindiv").toggle();
 });
-function myFunction() {
-    var x = document.getElementById("Quickbutton");
-    if (x.innerHTML === "@lang('home.Open Quick View V')") {
-        x.innerHTML = "@lang('home.Close Quick View V')";
-    } else {
+function myFunction() {  
+	var x = document.getElementById("Quickbutton");
+    if (x.innerHTML === "@lang('home.Close Quick View V')") {
         x.innerHTML = "@lang('home.Open Quick View V')";
+    } else {
+        x.innerHTML = "@lang('home.Close Quick View V')";
     }
 }
 function myFunctions() {

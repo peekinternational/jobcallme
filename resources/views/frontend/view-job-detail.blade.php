@@ -6,9 +6,24 @@
  <?php 
  //print_r($job); die;
      $cLogo = url('compnay-logo/default-logo.jpg');
-       if($job->companyLogo != ''){
-          $cLogo = url('compnay-logo/'.$job->companyLogo);
-             }
+       
+					 if($job->work_id){
+						
+						  $is_file_exist = file_exists('compnay-logo/'.$job->work_id.'_Logo.jpg');
+
+						  if ($is_file_exist) {
+							$cLogo = url('compnay-logo/'.$job->work_id.'_Logo.jpg');
+						  }
+
+
+						
+					}else{
+						if($job->companyLogo != ''){
+							$cLogo = url('compnay-logo/'.$job->companyLogo);
+						 }
+					}
+
+	   
               ?>
 <?php
 $head='';
@@ -58,7 +73,10 @@ $anynational='';
 <section id="jobs">
     <div class="container">
         <div class="col-md-9">
-        <div id="dialog1" title="www.jobcallme.com Detail:" hidden="hidden"><span>Search directly from company information and apply directly.</span><br></div>
+        <div id="dialog1" title="@lang('home.www.jobcallme.com Detail:')" hidden="hidden"><span><center><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:#f0ad4e;font-size:25px;"></i></center> @lang('home.Search directly from company information and apply directly.')</span><br></div>
+		<div id="dialog2" title="@lang('home.www.jobcallme.com Detail:')" hidden="hidden"><span>@lang('home.email') : {{ $job_work->email }}</span><br><center><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:#f0ad4e;font-size:15px;"></i></center>위 개인정보(연락처 및 이메일 등)는 채용 및 취업을 위해서 제공된 정보입니다. 용도 이외의 목적(영리목적의 광고, 자격증 대여 문의 등)으로 사용할 경우 개인정보보호법 위반으로 5년 이하의 징역 또는 5천만원 이하의 벌금에 처할 수 있습니다.</div>
+		<div id="dialog3" title="@lang('home.www.jobcallme.com Detail:')" hidden="hidden"><span>{{ $job_work2->CompanyAddress }}<br><center><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:#f0ad4e;font-size:15px;"></i></center>위 개인정보(연락처 및 이메일 등)는 채용 및 취업을 위해서 제공된 정보입니다. 용도 이외의 목적(영리목적의 광고, 자격증 대여 문의 등)으로 사용할 경우 개인정보보호법 위반으로 5년 이하의 징역 또는 5천만원 이하의 벌금에 처할 수 있습니다.</span><br></div>
+
             <div class="jobs-suggestions">
 			<div style="display: -webkit-box;" class="suggestions-user-info">
 			 <img src="{{ $cLogo }}"  style="width:118px;">	<?php $colorArr = array('purple','green','darkred','orangered','blueviolet') ?>
@@ -87,41 +105,49 @@ $anynational='';
                     
 						@endif
 
+					
 						@if($job->jobreceipt01 == 'yes')
 							@if($jobApplied == true)
 								<a href="{{ url('jobs/apply/'.$job->jobId) }}" class="btn btn-success">@lang('home.applied')</a>
 							@else
 								<a href="{{ url('jobs/apply/'.$job->jobId) }}" class="btn btn-primary">@lang('home.apply')</a>
 							@endif
-                            @elseif($job->jobreceipt02 == 'yes' && $job->jobhomgpage !="" )
+                            @elseif($job->jobreceipt02 == 'yes')
 							<a href="{{$job->jobhomgpage}}" class="btn btn-primary" style="margin-right: 10px;" target="_blank">@lang('home.jobhomepageapply')</a>
-                            @elseif($job->jobreceipt03 == 'yes')
-							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.email')</button>
-                            @elseif($job->jobreceipt04 == 'yes')
-							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.post')</button>
-                            @elseif($job->jobreceipt05 == 'yes')
-							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.visit')</button>
+							@elseif($job->jobreceipt07 == 'yes')
+								@if($job->work_idx)
+									<button class="btn btn-primary" onclick="dialogclick2()" style="margin-right: 10px;" ><!-- <a href="{{$job->companyWebsite}}" style="color:#fff" target="_blank"> -->@lang('home.emailapply')<!-- </a> --></button>
+								@else
+									<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.emailapply')</button>					
+								@endif	
+							@elseif($job->jobreceipt05 == 'yes')
+							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.telephoneapply')</button>
                             @elseif($job->jobreceipt06 == 'yes')
-							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.telephone')</button>
-                            @elseif($job->jobreceipt07 == 'yes')
-							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.fex')</button>
+							<button class="btn btn-primary" onclick="dialogclick()" style="margin-right: 10px;" >@lang('home.faxapply')</button>  
+                            @elseif($job->jobreceipt04 == 'yes')
+							<button class="btn btn-primary" onclick="dialogclick3()" style="margin-right: 10px;" >@lang('home.visitapply')</button>
+							@elseif($job->jobreceipt03 == 'yes')
+							<button class="btn btn-primary" onclick="dialogclick3()" style="margin-right: 10px;" >@lang('home.postapply')</button>  
+                           			
                         @endif
+
+					
 
                         @if(in_array($job->jobId, $savedJobArr))
                             <a href="javascript:;" onclick="saveJob({{ $job->jobId }},this)" class="btn btn-success" style="margin-left: 10px;">@lang('home.saved')</a>
                         @else
                             <a href="javascript:;" onclick="saveJob({{ $job->jobId }},this)" class="btn btn-default" style="margin-left: 10px;">@lang('home.save')</a>
                         @endif
-                   
+                    
 					
                 </div>
-                @endif
+			@endif
 			
 			
 		
                 
                 <div class="jd-share-btn">
-                    <a  href="javascript: void(0)" onClick="window.open('https://www.facebook.com/dialog/share?app_id=377749349357447&display=page&href=https%3A%2F%2Fwww.jobcallme.com%2Fjobs%2F<?php echo $job->jobId; ?>%2F&redirect_uri=https%3A%2F%2Fwww.jobcallme.com&picture=<?php echo $cLogo;?>&title=<?php echo $job->title; ?> ');return false;">
+                    <a  href="javascript: void(0)" onClick="window.open('https://www.facebook.com/dialog/share?app_id=377749349357447&title=<?php echo $job->title; ?>&image=<?php echo $cLogo;?>&display=page&href=https%3A%2F%2Fwww.jobcallme.com%2Fjobs%2F<?php echo $job->jobId; ?>%2F&redirect_uri=https%3A%2F%2Fwww.jobcallme.com ');return false;">
                     	<i class="fa fa-facebook" style="background: #2e6da4;"></i> 
                     </a>
                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url('jobs/'.$job->jobId) }}&title=&summary=&source=">
@@ -132,8 +158,10 @@ $anynational='';
                     </a>
                     <a href="https://plus.google.com/share?url={{ url('jobs/'.$job->jobId) }}" target="_blank" >
                     	<i class="fa fa-google-plus" style="background: #F63E28;"></i> 
-                    </a>
-                  <img src="{{asset('website/icon.ico')}}" onclick="OpenWindow('{{ url('jobs/'.$job->jobId) }}')" style="width: 25px !important;border-radius: 50px; cursor: pointer;">
+					</a>
+
+                  <img src="{{asset('website/talksns.png')}}" onclick="OpenWindows('{{ url('jobs/'.$job->jobId) }}')" style="width: 25px !important;border-radius: 50px; cursor: pointer;">
+
                 </div>
                 <ul class="js-listing">
                     <li>
@@ -146,21 +174,34 @@ $anynational='';
                     </li>
                     <li>
                         <p class="js-title" style="border-right: 1px solid;">@lang('home.experience')</p>
-                        <p >@lang('home.'.$job->experience)</p>
+                        @if($job->work_idx)
+							<p>{{ $job_work->CareerConditions }} </p>		
+						@else
+							<p >@lang('home.'.$job->experience)</p>							
+						@endif
+						
                     </li>
                     <li>
                         <p class="js-title" style="border-right: 1px solid;">@lang('home.salary')</p>
                        
 						<p >
-						@if($job->afterinterview != "")
-							@lang('home.'.$job->afterinterview)
+						@if($job->work_idx)
+							<p>{{ $job_work->wagecondition }} </p>		
 						@else
-							{{ number_format($job->minSalary) }} - {{ number_format($job->maxSalary) }} @if($job->currency == "KRW" or $job->currency == "KRW|대한민국 원")
-								원
+							<p>
+							@if($job->afterinterview != "")
+								@lang('home.'.$job->afterinterview)
 							@else
-								  {{ $job->currency }}
+								{{ number_format($job->minSalary) }} - {{ number_format($job->maxSalary) }} @if($job->currency == "KRW" or $job->currency == "KRW|대한민국 원")
+									원
+								@else
+									  {{ $job->currency }}
+								@endif
 							@endif
-						@endif
+								</p>							
+							@endif
+
+						
 						</p>
                     </li>
 					<li>
@@ -173,18 +214,47 @@ $anynational='';
                     </li>
 					<li>
                         <p class="js-title">@lang('home.lastdate')</p>
-                        <p >@if(app()->getLocale() == "kr")
-							  {{ date('Y-m-d',strtotime($job->expiryDate))}}
-						@else
-							  {{ date('M d, Y',strtotime($job->expiryDate))}}
-						@endif</p>
+
+                        <p >
+							@if(app()->getLocale() == "kr")
+							    @if($job->expiryDate == "2100-12-31")								
+									채용시 마감<br>(채용공고 참조)
+								@else
+									@if($job->expiryDate < date('Y-m-d'))
+										@lang('home.Finished')
+									@else
+										@if($job->expiryDate == date('Y-m-d'))
+											@lang('home.daytoday')
+										@else
+											{{ date('Y-m-d',strtotime($job->expiryDate))}}<span style="color:#d00000;font-size:15px;"><br><b>{{ JobCallMe::timeInDays($job->expiryDate) }}일 남음</b></span>
+										@endif
+										
+									@endif
+								@endif
+							 
+							@else
+								@if($job->expiryDate == "2100-12-31")								
+									Untill Hire
+								@else
+									@if($job->expiryDate < date('Y-m-d'))
+										@lang('home.Finished')
+									@else
+										{{ date('M d, Y',strtotime($job->expiryDate))}}<span style="color:#d00000;font-size:15px;">&nbsp;<b>Day-{{ JobCallMe::timeInDays($job->expiryDate) }}</b></span>
+									@endif
+								@endif
+							  
+							@endif
+
+
+						</p>
+
                     </li>
                 </ul>
             </div>
 
             <!--JOB Details-->
             <div class="jd-job-details">
-                <h4>{{ $job->title }} @if(app()->getLocale() == "kr")
+                <h4><span style="color:#337ab7">{{ $job->title }}</span> @if(app()->getLocale() == "kr")
 							  @lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))
 						@else
 							  at {{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}
@@ -194,16 +264,34 @@ $anynational='';
                 <table class="table table-bordered hidden-xs hidden-sm">
                     <tbody>
                     <tr>
-                        <td class="active">@lang('home.category')</td>
-                        <td colspan="3">@lang('home.'.JobCallMe::categoryTitle($job->jobcategory)) / @lang('home.'.JobCallMe::subcategoryTitle($job->subCategory)) / @lang('home.'.JobCallMe::subcategoryTitle2($job->subCategory2))</td>     
+
+                     <td class="active" width="150px">@lang('home.category')</td>
+                        <td colspan="3">
+						@if($job->work_idx)
+							{{ $job_work2->Sectors }}		
+						@else
+							@lang('home.'.JobCallMe::categoryTitle($job->jobcategory)) @if($job->subCategory)/ @lang('home.'.JobCallMe::subcategoryTitle($job->subCategory)) @endif @if($job->subCategory)/ @lang('home.'.JobCallMe::subcategoryTitle2($job->subCategory2))@endif					
+						@endif
+						</td>     
+
+
                                                                  
                     </tr>
                     
 					<tr>
-                        <td class="active">@lang('home.jobaddr')</td>
-                        <td colspan="1">{{ $job->jobaddr }}</td>   
-                        <td class="active">@lang('home.jobseekernationality')</td>
-                        <td colspan="2">{{$anynational}}{{$onlynational}}</td>                    
+                        <td class="active" width="150px">@lang('home.jobaddr')</td>
+                        <td>@if($job->work_idx)
+							<?php
+							$name_array = explode("  ", $job_work->WorkingCondition_WorkingArea);
+							echo $name_array[0]." ";
+							echo $name_array[1];
+						?>		
+						@else
+							@if($job->jobaddr == 'Korea') @lang('home.'.$job->jobaddr) @else {{ $job->jobaddr }} @endif					
+						@endif
+						</td>   
+                        <td class="active" width="150px">@lang('home.jobseekernationality')</td>
+                        <td width="150px">{{$anynational}}{{$onlynational}}</td>                    
                     </tr>
 
 
@@ -211,13 +299,19 @@ $anynational='';
 
 					<tr>
                         <td class="active">@lang('home.Responsibilities')</td>
-                        <td>{{ $job->responsibilities }}</td>
+                        <td style="color:#337ab7">
+						@if($job->work_idx)
+							{{ $job_work->jobdescription }}	
+						@else
+							@if($job->jobType == 'Full Time/Contract Workers'){{ $job->title }} @else {{ $job->responsibilities }} @endif				
+						@endif
+						</td>
                         <td class="active">@lang('home.expptitle')</td>
                         <td>@lang('home.'.$job->expptitle)
 							@if($job->expptitle == "")
 							  @lang('home.'.$job->expposition)
 							@else	
-							  &nbsp;|@lang('home.'.$job->expposition)
+							  @if($job->expposition)&nbsp;|@lang('home.'.$job->expposition) @endif
 							@endif
 						
 						</td>
@@ -226,40 +320,86 @@ $anynational='';
 						<td class="active">@lang('home.careerlevel')</td>
                         <td>@lang('home.'.$job->careerLevel)</td>
                         <td class="active">@lang('home.Working day')</td>
-                        <td>@lang('home.'.$job->jobdayval) {{ $job->jobdayval_text }}</td>                        
+                        <td>@if($job->work_idx)
+							{{ $job_work->WorkingStyle }}	
+						@else
+							@if($job->jobdayval == "jobday10")
+								{{ $job->jobdayval_text }}
+							@else
+								@lang('home.'.$job->jobdayval)
+							@endif
+						@endif</td>                        
                     </tr>
 					<tr>
                         <td class="active">@lang('home.Working hours')</td>
-                        <td>@lang('home.'.$job->jobhoursval) {{ $job->jobhoursval_text }}</td>
+                        <td>@if($job->work_idx)
+							 <?php $name_array = explode("※", $job_work->workinghours);
+							echo $name_array[0]."<br>";
+							echo $name_array[1]."<br>";
+							//echo $name_array[2];?>
+								
+						@else
+							@lang('home.'.$job->jobhoursval) {{ $job->jobhoursval_text }}		
+						@endif</td>
                         <td class="active">@lang('home.jobacademic')</td>
                         <td>
-						@if($job->jobacademic_not == "yes")
-							  @lang('home.Regardless Education')
-						@else	
-							  @lang('home.'.$job->jobacademic)
+						@if($job->work_idx)
+							{{ $job->jobacademic }}	
+						@else
+							@if($job->jobacademic_not == "yes")
+								  @lang('home.Regardless Education')
+							@else	
+								  @lang('home.'.$job->jobacademic)
+							@endif
+							@if($job->jobgraduate == "yes")
+								  @lang('home.jobgraduate')
+							@else							 
+							@endif		
 						@endif
-						@if($job->jobgraduate == "yes")
-							  @lang('home.jobgraduate')
-						@else							 
-						@endif</td>
+
+						</td>
                     </tr>
 					<tr>
                         <td class="active">@lang('home.gender')</td>
                         <td>@lang('home.'.$job->gender)</td>
                         <td class="active">@lang('home.age')</td>
-                        <td>{{ $job->jobage1 }} {{ $job->jobage2 }} 
-						@if($job->jobage1 != "" or $job->jobage2 != "")
-							  &nbsp;| @lang('home.jobnoage')
-						@else		
-							  @lang('home.jobnoage')
-						@endif</td>
+                        <td>
+						@if($job->work_idx)
+							@lang('home.jobnoage')
+						@else
+							{{ $job->jobage1 }} {{ $job->jobage2 }} 
+							@if($job->jobage1 != "" or $job->jobage2 != "")
+								  &nbsp;| @lang('home.jobnoage')
+							@else		
+								  @lang('home.jobnoage')
+							@endif			
+						@endif
+						</td>
                     </tr>
 
                     <tr>
                         <td class="active">@lang('home.location')</td>
-                        <td>@lang('home.'.JobCallMe::cityName($job->city)),@lang('home.'.JobCallMe::countryName($job->country))</td>
+                        <td>@if($job->work_idx)
+							<?php
+							$name_array = explode("  ", $job_work->WorkingCondition_WorkingArea);
+							echo $name_array[0]." ";
+							echo $name_array[1];
+						?>,@lang('home.'.JobCallMe::countryName($job->country))
+						@else
+							@if(JobCallMe::cityName($job->city))@lang('home.'.JobCallMe::cityName($job->city)) @else @lang('home.'.JobCallMe::stateName($job->state)) @endif ,@lang('home.'.JobCallMe::countryName($job->country))			
+						@endif
+						
+						
+						</td>
                         <td class="active">@lang('home.totalvacancies')</td>
-                        <td>{{ $job->vacancies }}</td>
+                        <td>@if($job->work_idx)							
+							<?php
+							$name_array = explode("명", $job_work->RecruitmentNumber);
+							echo $name_array[0];							
+						?>
+						@else
+							{{ $job->vacancies }}	
+						@endif</td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.poston')</td>
@@ -269,32 +409,56 @@ $anynational='';
 							  {{ date('M d, Y',strtotime($job->createdTime))}}
 						@endif</td>
                         <td class="active">@lang('home.lastdate')</td>
-                        <td>@if(app()->getLocale() == "kr")
-							  {{ date('Y-m-d',strtotime($job->expiryDate))}}
-						@else
-							  {{ date('M d, Y',strtotime($job->expiryDate))}}
-						@endif</td>
+                        <td>
+							@if(app()->getLocale() == "kr")
+							    @if($job->expiryDate == "2100-12-31")								
+									채용시 마감
+								@else
+									{{ date('Y-m-d',strtotime($job->expiryDate))}} @if($job->expiryTime){{ $job->expiryTime }}:00 @endif
+								@endif
+							 
+							@else
+								@if($job->expiryDate == "2100-12-31")								
+									Untill Hire
+								@else
+									{{ date('M d, Y',strtotime($job->expiryDate))}} @if($job->expiryTime){{ $job->expiryTime }}:00 @endif
+								@endif
+							  
+							@endif
+						</td>
 						
                     </tr>
                     <tr>
-					 <td class="active">@lang('home.location')</td>
-                        <td>@lang('home.'.JobCallMe::cityName($job->city)),@lang('home.'.JobCallMe::countryName($job->country))</td>
+					 <td class="active">@lang('home.locationcountry')</td>
+                        <td>@if($job->work_idx)
+							<?php
+							$name_array = explode("  ", $job_work->WorkingCondition_WorkingArea);
+							echo $name_array[0]." ";
+							echo $name_array[1];
+						?>,@lang('home.'.JobCallMe::countryName($job->country))
+						@else
+							@if(JobCallMe::cityName($job->city))@lang('home.'.JobCallMe::cityName($job->city)) @else @lang('home.'.JobCallMe::stateName($job->state)) @endif ,@lang('home.'.JobCallMe::countryName($job->country))
+						@endif</td>
                         <td class="active">@lang('home.travelling')</td>
                         <td>@if($benefits != '')
 							@foreach( $benefits as $benefit)
 						     @if($benefit == 'Travelling')
 							   <?php $travelFound = true; ?>
-						     @endif
+							   <?php if($travelFound){
+										 echo Yes;
+									}
+									else{
+										echo No;
+									}
+								?>
+						     @elseif($benefit == 'See Description')
+									@lang('home.overseasedescription')
+									
+								 @endif
 						    @endforeach
 							
 							@endif
-							<?php if($travelFound){
-								 echo Yes;
-							}
-							else{
-								echo No;
-							}
-							?>
+							
 							
 						</td>
 						
@@ -308,8 +472,28 @@ $anynational='';
                     <tbody>
                     <tr>
                         <td class="active">@lang('home.category')</td>
-                        <td>@lang('home.'.JobCallMe::categoryTitle($job->category))</td>
+                        <td>@if($job->work_idx)
+							{{ $job_work2->Sectors }}		
+						@else
+							@lang('home.'.JobCallMe::categoryTitle($job->category)) @if($job->subCategory)/ @lang('home.'.JobCallMe::subcategoryTitle($job->subCategory)) @endif @if($job->subCategory)/ @lang('home.'.JobCallMe::subcategoryTitle2($job->subCategory2))@endif					
+						@endif</td>
                     </tr>
+
+					<tr>
+                        <td class="active">@lang('home.jobaddr')</td>
+                        <td>@if($job->work_idx)
+							<?php
+							$name_array = explode("  ", $job_work->WorkingCondition_WorkingArea);
+							echo $name_array[0]." ";
+							echo $name_array[1];
+						?>		
+						@else
+							@if($job->jobaddr == 'Korea') @lang('home.'.$job->jobaddr) @else {{ $job->jobaddr }} @endif					
+						@endif
+						</td>           
+                    </tr>
+
+
                     <tr>
                         <td class="active">@lang('home.careerlevel')</td>
                         <td>@lang('home.'.$job->careerLevel)</td>
@@ -317,7 +501,22 @@ $anynational='';
 					
                     <tr>
                         <td class="active">@lang('home.jobacademic')</td>
-                        <td>@lang('home.'.$job->jobacademic)
+                        <td>
+						@if($job->work_idx)
+							{{ $job->jobacademic }}	
+						@else
+							@if($job->jobacademic_not == "yes")
+								  @lang('home.Regardless Education')
+							@else	
+								  @lang('home.'.$job->jobacademic)
+							@endif
+							@if($job->jobgraduate == "yes")
+								  @lang('home.jobgraduate')
+							@else							 
+							@endif		
+						@endif
+						
+						<!-- @lang('home.'.$job->jobacademic)
 						@if($job->jobacademic_not == "yes")
 							  &nbsp;| @lang('home.Regardless Education')
 						@else							 
@@ -325,16 +524,20 @@ $anynational='';
 						@if($job->jobgraduate == "yes")
 							  &nbsp;| @lang('home.jobgraduate')
 						@else							 
-						@endif</td>
+						@endif --></td>
                     </tr>
 
 					<tr>
                         <td class="active">@lang('home.age')</td>
                         <td>{{ $job->jobage1 }} {{ $job->jobage2 }} 
-						@if($job->jobnoage == "yes")
+						@if($job->jobage1 != "" or $job->jobage2 != "")
 							  &nbsp;| @lang('home.jobnoage')
-						@else							 
-						@endif</td>
+						@else		
+							  @lang('home.jobnoage')
+						@endif
+						
+						
+						</td>
                     </tr>
 					<tr>
                         <td class="active">@lang('home.gender')</td>
@@ -351,28 +554,61 @@ $anynational='';
                     </tr>
                     <tr>
                         <td class="active">@lang('home.lastdate')</td>
-                        <td>@if(app()->getLocale() == "kr")
-							  {{ date('Y-m-d',strtotime($job->expiryDate))}}
-						@else
-							  {{ date('M d, Y',strtotime($job->expiryDate))}}
-						@endif</td>
+                        <td>
+							@if(app()->getLocale() == "kr")
+							    @if($job->expiryDate == "2100-12-31")								
+									채용시 마감
+								@else
+									@if($job->expiryDate = date('Y-m-d'))
+										@lang('home.daytoday')
+									@else
+										{{ date('Y-m-d',strtotime($job->expiryDate))}}<span style="color:#d00000;font-size:15px;">&nbsp;<b>-{{ JobCallMe::timeInDays($job->expiryDate) }}D</b></span>
+									@endif
+									
+								@endif
+							 
+							@else
+								@if($job->expiryDate == "2100-12-31")								
+									Untill Hire
+								@else
+									{{ date('M d, Y',strtotime($job->expiryDate))}}<span style="color:#d00000;font-size:15px;">&nbsp;<b>DL-{{ JobCallMe::timeInDays($job->expiryDate) }}</b></span>
+								@endif
+							  
+							@endif
+
+						</td>
                     </tr>
                     <tr>
-                        <td class="active">@lang('home.location')</td>
-                        <td>@lang('home.'.JobCallMe::cityName($job->city)),@lang('home.'.JobCallMe::countryName($job->country))</td>
+                        <td class="active">@lang('home.locationcountry')</td>
+                        <td>@if(JobCallMe::cityName($rec->city))@lang('home.'.JobCallMe::cityName($job->city)) @else @lang('home.'.JobCallMe::stateName($job->state)) @endif ,@lang('home.'.JobCallMe::countryName($job->country))</td>
                     </tr>
 					
                     </tbody>
                 </table>
-                <h4>@lang('home.description')</h4>
-                <p><strong>@lang('home.We are conveniently located in') {{ JobCallMe::getCompany($job->companyId)->companyAddress }}.</strong></p>
-                <p class="job-descrptn-img">{!! $job->description !!}</p>
+                <h4 style="padding-top:20px;"><span style="padding:10px 0px;color:#337ab7;"><b>@lang('home.description-post')</b></h4>
+                <p style="padding-top:20px"><strong>@lang('home.We are conveniently located in') {{ JobCallMe::getCompany($job->companyId)->companyAddress }}.</strong></p>
+                @if($job->work_idx)
+							{{ $job_work->jobdescription }}	
+				@else
+					@if($job->jobType == 'Full Time/Contract Workers')
+					<p class="job-descrptn-img">{!! nl2br($job->description) !!}</p>
+					@else
+					<div style="margin-left:10px"><p class="job-descrptn-img">{!! $job->description !!}</p></div>
+					@endif
+				@endif
+
+				
 				<br>
-                <h4>@lang('home.skills')</h4>
-                <p>{!! $job->skills !!}</p>				
+                <h4><b>@lang('home.skills')</b></h4>
+						@if($job->work_idx)
+							{{ $job_work->RecruitmentOccupation }}	
+						@else
+							<p>@if($job->skills == 'See Description3') @lang('home.'.$job->skills) @else {!! $job->skills !!} @endif</p>				
+						@endif
+                		
 				<br>
 				<h4><b>@lang('home.qualification')</b></h4>
-                <p>{!! $job->qualification !!}</p>			
+                <p>@if($job->qualification == 'See Description3') @lang('home.'.$job->qualification) @else {!! nl2br($job->qualification) !!} @endif</p>			
 
 
 
@@ -398,6 +634,8 @@ $anynational='';
 							@elseif($pro == 'Examination for Employment')
 								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
 							@elseif($pro == 'Final Pass')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
+							@elseif($pro == 'See Description2')
 								<i class="fa fa-check-circle"></i> @lang('home.'.$pro)
 							@else
 								<i class="fa fa-check-circle"></i> {!! $pro !!}
@@ -444,7 +682,45 @@ $anynational='';
                 <br><br><br>
                 <div>
                 <h4><b>@lang('home.rewardsbenefits')</b></h4>
-                @if($benefits != '')
+				@if($job->work_idx)
+							{{ $job_work->SocialInsurance }}<br>
+							{{ $job_work->ServerancePay }}<br>
+							<?php
+							$name_array = explode(";", $job_work->Benefits);
+							
+							?>
+							@if($name_array[0])
+								ㆍ{{ $name_array[0] }}<br>	
+							@endif
+							@if($name_array[1])
+								ㆍ{{ $name_array[1] }}<br>
+							@endif
+							@if($name_array[2])
+								ㆍ{{ $name_array[2] }}<br>
+							@endif
+							@if($name_array[3])
+								ㆍ{{ $name_array[3] }}<br>
+							@endif
+							@if($name_array[4])
+								ㆍ{{ $name_array[4] }}<br>
+							@endif
+							@if($name_array[5])
+								ㆍ{{ $name_array[5] }}<br>
+							@endif
+							@if($name_array[6])
+								ㆍ{{ $name_array[6] }}<br>
+							@endif
+							@if($name_array[7])
+								ㆍ{{ $name_array[7] }}<br>
+							@endif
+
+
+							<br>
+							{{ $job_work->Benefits_1 }}
+						@else
+
+
+							@if($benefits != '')
 	                <ul class="jd-rewards">
 	                	@foreach( $benefits as $benefit)
 						
@@ -469,6 +745,8 @@ $anynational='';
 								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
 							@elseif($benefit == 'See Description')
 								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
+							@elseif($benefit == 'Comprehensive Health Checkup')
+								<i class="fa fa-check-circle"></i> @lang('home.'.$benefit)
 							@else
 								<i class="fa fa-check-circle"></i> {{ $benefit }}
 							@endif
@@ -477,6 +755,11 @@ $anynational='';
 	                	@endforeach
 	                </ul>
                 @endif
+
+
+						@endif
+
+                
                 </div>
                 <br>
               
@@ -561,7 +844,7 @@ $anynational='';
             }
             ?>
             <div class="jobs-suggestions">
-                <div class="jd-action-btn">
+                <div class="jd-action-btn" style="padding-top:45px">
                     @if(in_array($job->companyId,$followArr))
                         <a href="javascript:;" onclick="followCompany({{ $job->companyId }},this)" class="btn btn-success">@lang('home.following')</a>
                     @else
@@ -569,8 +852,30 @@ $anynational='';
                     @endif   
                     <a href="{{ url('account/employeer/companies/company/review?CompanyId='.$job->companyId) }}" class="btn btn-default">@lang('home.Write Review')</a>   
                 </div>
-                <a href="{{url('companies/company/'.$job->companyId)}}"><h4>{{ $job->companyName }}</h4></a>
-                <p>@lang('home.'.JobCallMe::cityName($job->companyCity)), @lang('home.'.JobCallMe::countryName($job->companyCountry))</p>
+				<div style="padding-top:10px;float:right;">
+					<a href="{{url('companies/company/'.$job->companyId)}}"><span style="padding: 7px;background:#337ab7;border-radius: 5px;color:#fff;font-size:13px;">회사정보 보기</span></a>
+				</div><br>
+                <h4 style="padding-top:10px"><a href="{{url('companies/company/'.$job->companyId)}}">{{ $job->companyName }}</a></h4>
+                <p style="padding-top:10px">@if($job->work_idx)
+							<?php
+							$name_array = explode("  ", $job_work->WorkingCondition_WorkingArea);
+							echo $name_array[0]." ";
+							echo $name_array[1];
+						?>,@lang('home.'.JobCallMe::countryName($job->country))
+						@else
+							@if(JobCallMe::cityName($rec->city))@lang('home.'.JobCallMe::cityName($job->city)) @else @lang('home.'.JobCallMe::stateName($job->state)) @endif ,@lang('home.'.JobCallMe::countryName($job->country))			
+						@endif
+						
+						
+				
+				
+				
+				</p>
+				@if($job_work->phone)
+				<div class="jd-about-organization">
+                    <p>@lang('home.phone') : {!! $job_work->phone !!}<br>@lang('home.fax') : {!! $job_work->fax !!} @if($job_work->email)<br>@lang('home.email') : {!! $job_work->email !!} @endif</p>					
+                </div>
+				@endif
                 <div class="jd-about-organization">
                     <p>{!! $job->companyAbout !!}</p>
                 </div>
@@ -672,7 +977,12 @@ $anynational='';
                                     border: 1px solid #cccccc;
                                     margin-bottom: 20px;
                                     background: #ffffff;">
-                      <input id="pac-input" class="controls" type="hidden" value="{!! $job->Address !!}" >
+                      @if($job->work_id)
+						<input id="pac-input" class="controls" type="hidden" value="{!! $job->companyAddress !!}" >			
+					@else
+						<input id="pac-input" class="controls" type="hidden" value="{!! $job->Address !!}" >							
+					@endif
+					  
                     <!-- google map code html -->
                     <div id="map" style="width: 100%; height: 500px;"></div>
                     </div>
@@ -712,7 +1022,10 @@ $anynational='';
 							<div class="col-md-8 col-xs-8 sp-item" style="text-align:left !important">
                             <p><a href="{{ url('jobs/'.$appl->jobId) }}">{!! $appl->title!!}</a></p>
                             <p>{!! $appl->companyName !!}</p>
-                            <p>@lang('home.'.JobCallMe::cityName($appl->city)), @lang('home.'.JobCallMe::countryName($appl->country))</p>
+                            <p>@if(JobCallMe::cityName($appl->city))@lang('home.'.JobCallMe::cityName($appl->city)) @else @lang('home.'.JobCallMe::stateName($appl->state)) @endif ,@lang('home.'.JobCallMe::countryName($appl->country))     
+							
+							
+							</p>
 							 <span class="rtj-action">
                                                 <a href="{{ url('jobs/apply/'.$sJob->jobId) }}" title="Apply">
                                                     <i class="fa fa-paper-plane"></i>
@@ -866,6 +1179,37 @@ $anynational='';
 @endsection
 @section('page-footer')
 <script type="text/javascript">
+  function OpenWindows(url, windowName) {
+
+   newwindow = window.open('https://www.talksns.com/sharer?url=' + url, windowName, 'height=600,width=800');
+
+   if (window.focus) {
+      newwindow.focus();
+   }
+   return false;
+}
+function dialogclick2() {
+      //alert("helllo");
+    $("#dialog2").dialog('open');
+  }
+  $(function () {
+  $( "#dialog2" ).dialog({
+    autoOpen: false
+  });
+  
+  
+});
+function dialogclick3() {
+      //alert("helllo");
+    $("#dialog3").dialog('open');
+  }
+  $(function () {
+  $( "#dialog3" ).dialog({
+    autoOpen: false
+  });
+  
+  
+});
 function dialogclick() {
       //alert("helllo");
     $("#dialog1").dialog('open');
@@ -952,10 +1296,66 @@ function followCompany(companyId,obj){
 }
 </script>
 <!-- google map code start from there  -->
+@if($job->jobType == "Full Time/Contract Workers")
 <script>
 $(document).ready(function(){
  
 });
+ 
+    var addr=$('#pac-input').val();
+        
+   
+
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      function initAutocomplete() {
+               var geocoder = new google.maps.Geocoder();
+               var address = addr;
+               var longitude="";
+               var latitude="";
+               var myLatLng="";
+
+geocoder.geocode( { 'address': address}, function(results, status) {
+
+  if (status == google.maps.GeocoderStatus.OK) {
+        latitude = results[0].geometry.location.lat();
+        longitude = results[0].geometry.location.lng();
+         myLatLng={lat: latitude, lng: longitude}
+    //alert(latitude);
+     var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: latitude, lng: longitude},
+          zoom: 8,
+          mapTypeId: 'roadmap'
+        });
+
+  } 
+   var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: addr
+        });
+});
+     
+      }
+
+    </script>
+@else
+<script>
+$(document).ready(function(){
+ 
+});
+
  
     var addr=$('#pac-input').val();
         
@@ -1003,14 +1403,9 @@ geocoder.geocode( { 'address': address}, function(results, status) {
 });
      
       }
-      function OpenWindow(url, windowName) {
-   newwindow = window.open('https://www.jcmlink.com/sharer?url=' + url, windowName, 'height=600,width=800');
-   if (window.focus) {
-      newwindow.focus();
-   }
-   return false;
-}
+
     </script>
+@endif
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1RaWWrKsEf2xeBjiZ5hk1gannqeFxMmw&libraries=places&callback=initAutocomplete" async defer></script>
 
 @endsection

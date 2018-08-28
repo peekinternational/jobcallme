@@ -85,6 +85,7 @@ $s_app = Session()->get('companySearch');
                                                     <a href="{{ url('admin/users/company/'.$company->companyId)}}" data-toggle="tooltip" data-original-title="View"><i class="icon icon-eye"></i></a>&nbsp;&nbsp;&nbsp;
                                                     <a href="{{ url('admin/users/company/edit/'.$company->companyId)}}" data-toggle="tooltip" data-original-title="Update"><i class="icon icon-pencil"></i></a>&nbsp;&nbsp;&nbsp;
                                                     <a href="javascript:;" onclick="deleteCompany('{{ $company->companyId }}')" data-toggle="tooltip" data-original-title="Delete"><i class="icon icon-remove"></i></a>
+													<a href="{{ url('admin/users/company/editals/'.$company->companyId)}}" data-toggle="tooltip">분석수정</a>&nbsp;&nbsp;&nbsp;
                                                 </td>
                                             </tr>
                                         @endforeach

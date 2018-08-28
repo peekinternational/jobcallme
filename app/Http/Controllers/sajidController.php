@@ -41,8 +41,8 @@ class sajidController extends Controller{
   
             </div>
             <div class="btns-update" style="display: none">
-                <button commentId="'.$comment->comment_id.'" class="btn btn-success update-comment-btn">Update</button>
-                <button class="btn btn-danger cancel">Cancel</button>
+                <button commentId="'.$comment->comment_id.'" class="btn btn-success update-comment-btn">'.trans('home.reviewupdate').'</button>
+                <button class="btn btn-danger cancel">'.trans('home.Cancel').'</button>
             </div>
         </div>';
 

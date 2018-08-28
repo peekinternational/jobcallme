@@ -53,9 +53,9 @@
                     </a>
                 </li>
 				 <li>
-                    <a href="{{ url('career-tab') }}">
-                        <img src="../frontend-assets/images/employer_icon9.png" style="padding-top:0px">
-                        <div class="udp-type">@lang('home.CAREER TAB')</div>
+                    <a href="{{ url('career-tab') }}">					
+                        <img src="../frontend-assets/images/employer_icon9.png" style="padding-top:0px" title="@lang('home.Updating')">
+                        <div class="udp-type" title="@lang('home.Updating')">@lang('home.CAREER TAB')</div>
                     </a>
                 </li>
                 <li>

@@ -13,5 +13,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         'jobCallMePayResult',
+		'curl-data',
+		'api/registerUser',
     ];
 }

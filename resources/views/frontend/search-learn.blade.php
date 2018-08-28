@@ -68,7 +68,8 @@
                 <div class="sc-item" style="overflow: hidden;">
                     <div class="sc-thumbnail">
                         @if($rec->upskillImage != '')
-                            <img src="{{ url('upskill-images/'.$rec->upskillImage) }}" style="height: auto !important;">
+                            <!-- <img src="{{ url('upskill-images/'.$rec->upskillImage) }}" style="height: auto !important;"> -->
+							<img src="{{ url('upskill-images/'.$rec->upskillImage) }}" style="height: 60px !important;">
                         @else
                             <img src="{{ url('d-cover.jpg') }}">
                         @endif
@@ -90,7 +91,8 @@
                         <p class="hidden-xs"><i class="fa fa-map-marker"></i> online, @lang('home.'.JobCallMe::cityName($rec->city)), @lang('home.'.JobCallMe::countryName($rec->country))</p>
                     </div>
                     <div class="sc-cost">
-                        {{ $rec->currency.' '.number_format($rec->cost).'/-'}}
+						@if($rec->accommodation == "Yes") {{ $rec->currency.' '.number_format($rec->cost)}} @else @if($rec->accommodation == "on") @lang('home.free') @else @if($rec->website)<a href="{!! $rec->website !!}" target="_blank">@endif @lang('home.Contact person') @endif @endif
+                        <!-- {{ $rec->currency.' '.number_format($rec->cost).'/-'}} -->
                     </div>
                 </div>
             @endforeach

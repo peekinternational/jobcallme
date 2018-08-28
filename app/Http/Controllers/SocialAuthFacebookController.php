@@ -14,7 +14,7 @@ class SocialAuthFacebookController extends Controller
    *
    * @return void
    */
-    public function fbApi(Request $request)
+    public function fbApi()
     {
         return Socialite::driver('facebook')->redirect();
     }
@@ -30,6 +30,7 @@ class SocialAuthFacebookController extends Controller
     }
     public function TwApi()
     {
+		
         return Socialite::driver('twitter')->redirect();
     }
     /**
@@ -130,6 +131,7 @@ class SocialAuthFacebookController extends Controller
 
     
     public function TwCallback(Request $request){
+		//dd("hello");
         $user=Socialite::driver('twitter')->user();
        // dd($user);
         $email=$user->email;
@@ -142,8 +144,8 @@ class SocialAuthFacebookController extends Controller
                 $userDetails->TwId=$lnId;
                 $userDetails->save();
             }
-            elseif(!$userDetails->lnId){
-                $userDetails->lnId=$lnId;
+            elseif(!$userDetails->TwId){
+                $userDetails->TwId=$lnId;
                 $userDetails->save(); 
             }
         }
@@ -202,7 +204,7 @@ class SocialAuthFacebookController extends Controller
         $cInput = array('companyName' => $firstName.' '.$lastName, 'companyEmail' => $email, 'companyPhoneNumber' => '', 'companyCountry' =>'', 'companyState' => '', 'companyCity' => '', 'category' => '0', 'companyCreatedTime' => date('Y-m-d H:i:s'), 'companyModifiedTime' => date('Y-m-d H:i:s'));
         $companyId = DB::table('jcm_companies')->insertGetId($cInput);
         DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
-        $objModel=$companyId;
+        
         return $objModel;
     }
 }

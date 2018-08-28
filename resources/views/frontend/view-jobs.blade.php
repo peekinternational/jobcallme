@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="keyword" value="{{ Request::input('keyword') }}" placeholder="@lang('home.key')">
                     </div>
-                    <div class="form-group hidden-xs">
+                    <div class="form-group">
                        <select class="form-control job-category" name="categoryId" onchange="getSubCategories(this.value)">
                        		<option value="">@lang('home.s_category')</option>
                        		@foreach(JobCallMe::getCategories() as $cat)
@@ -98,12 +98,12 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control job-state" name="state" data-state="{{ Request::input('state') }}">
+                        <select class="form-control job-state" name="state" id="state_companys" data-state="{{ Request::input('state') }}" style="width: 100% !important;display:none;">
                             <option value="0">@lang('home.state')</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control job-city" name="city" data-city="{{ Request::input('city') }}">
+                        <select class="form-control job-city" name="city" id="city_companys" data-city="{{ Request::input('city') }}" style="width: 100% !important;display:none;">
                             <option value="0">@lang('home.city')</option>
                         </select>
                     </div>
@@ -112,13 +112,23 @@
                     </div>
                 </form>
             </div>
+ 
+
             
-            <div id="dialog1" title="www.jobcallme.com Detail:" hidden="hidden"><span>Search directly from company information and apply directly.</span><br></div>
             <div class="col-md-9 show-jobs">
       
                 <p style="text-align:center;">Loading ....</p>
 				
             </div>
+			
+			<div id="dialog1" title="@lang('home.www.jobcallme.com Detail:')" hidden="hidden"><span>@lang('home.Search directly from company information and apply directly.')</span><br><center><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:#f0ad4e;font-size:15px;"></i></center>위 개인정보(연락처 및 이메일 등)는 채용 및 취업을 위해서 제공된 정보입니다. 용도 이외의 목적(영리목적의 광고, 자격증 대여 문의 등)으로 사용할 경우 개인정보보호법 위반으로 5년 이하의 징역 또는 5천만원 이하의 벌금에 처할 수 있습니다.</div>
+
+			<div id="dialog2" title="@lang('home.www.jobcallme.com Detail:')" hidden="hidden"><span>@lang('home.email') : <span id="jobemail"></span></span><br><center><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:#f0ad4e;font-size:15px;"></i></center>위 개인정보(연락처 및 이메일 등)는 채용 및 취업을 위해서 제공된 정보입니다. 용도 이외의 목적(영리목적의 광고, 자격증 대여 문의 등)으로 사용할 경우 개인정보보호법 위반으로 5년 이하의 징역 또는 5천만원 이하의 벌금에 처할 수 있습니다.</div>
+
+			<div id="dialog3" title="@lang('home.www.jobcallme.com Detail:')" hidden="hidden"><span><span id="jobpost"></span></span><br><center><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:#f0ad4e;font-size:15px;"></i></center>위 개인정보(연락처 및 이메일 등)는 채용 및 취업을 위해서 제공된 정보입니다. 용도 이외의 목적(영리목적의 광고, 자격증 대여 문의 등)으로 사용할 경우 개인정보보호법 위반으로 5년 이하의 징역 또는 5천만원 이하의 벌금에 처할 수 있습니다.</div>
+
+			
+
         </div>
      </div>
 </section>
@@ -141,6 +151,27 @@ function dialogclick() {
       //alert("helllo");
     $("#dialog1").dialog('open');
   }
+
+function dialogclick2(jobemail) {
+      //alert(jobId);
+		$('#jobemail').text(jobemail);
+		//$("#jobemail").html('').val(jobId);
+		//($(obj).text('Saved');
+		$("#dialog2").dialog('open');
+		//$('#jobemail').val(pageToken);
+	
+  }
+function dialogclick3(jobpost) {
+      //alert(jobId);
+		$('#jobpost').text(jobpost);
+		//$("#jobemail").html('').val(jobId);
+		//($(obj).text('Saved');
+		$("#dialog3").dialog('open');
+		//$('#jobemail').val(pageToken);
+	
+  }
+
+
     $('body').on('click', '.pagination a', function(e) {
         e.preventDefault();
 
@@ -169,6 +200,14 @@ var token = "{{ csrf_token() }}";
 $(document).ready(function(){
     $(function () {
   $( "#dialog1" ).dialog({
+    autoOpen: false
+  });
+  
+  $( "#dialog2" ).dialog({
+    autoOpen: false
+  });
+
+  $( "#dialog3" ).dialog({
     autoOpen: false
   });
   
@@ -233,7 +272,13 @@ $(document).ready(function(){
 	
     getStates($('.job-country option:selected:selected').val());
 })
+
+
+
+
 $('.job-country').on('change',function(){
+	$('#state_companys').show();
+	$('#city_companys').show();
     var countryId = $(this).val();
     getStates(countryId)
 })
@@ -260,6 +305,7 @@ $('.job-state').on('change',function(){
     getCities(stateId)
 })
 function getCities(stateId){
+		
     if(stateId == '0'){
         $(".job-city").html('').trigger('change');
         var newOption = new Option('Select City', '0', true, false);
@@ -268,7 +314,7 @@ function getCities(stateId){
     }
     $.ajax({
         url: "{{ url('account/get-city') }}/"+stateId,
-        success: function(response){
+        success: function(response){			
             var currentCity = $('.job-city').attr('data-city');
             var obj = $.parseJSON(response);
             $(".job-city").html('').trigger('change');
@@ -315,6 +361,8 @@ $('form.search-job').submit(function(e){
 	isFirst = 1;
 	e.preventDefault();
 })
+
+
 function saveJob(jobId,obj){
     if($(obj).hasClass('btn-default')){
         var type = 'save';

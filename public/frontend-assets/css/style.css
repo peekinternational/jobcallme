@@ -39,7 +39,11 @@ position:absolute;
     width: 114px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 9999;
+
+	/*margin-left:-90px;*/
+
 	margin-left:-36px;
+
 }
 
 .dropdown-content a {
@@ -132,8 +136,18 @@ ul.nav li.active{
     border-bottom: 2px solid #e6b706;		
 
 }
+ul.nav.companybu li.active{
+    border-bottom: 2px solid #e6b706;		
+
+}
+ul.nav.companybu li{
+    border-bottom: 2px solid #fff;		
+	margin-bottom: 2px;
+
+}
 .nav-tabs {
     margin-bottom: 15px;
+
 }
 
 .main-nav-btn {
@@ -364,6 +378,23 @@ ul.nav li.active{
     
 }
 
+.search-btn2{
+    float: right;
+    background: transparent;
+    border: 2px solid #e6b706;
+    color: #ffffff;
+    height: 33px;
+	padding:0 15px;
+    
+
+}
+.search-btn2:hover{
+    background: #e6b706;
+    color: #ffffff;
+    height: 33px;
+    
+}
+
 .login-type{
     padding-top: 50px;
     text-align: center;
@@ -485,7 +516,7 @@ a.job-location:hover span.shine {
 	
 }
 .ticker-container{
-    background-color: #363b3f;
+    background-color: #337ab7;
 }
 .ticker-container ul div li{
     color: #fff !important;
@@ -821,7 +852,7 @@ a.job-location:hover span.shine {
     overflow: auto;
     padding: 15px;
     border: 1px solid #cccccc;
-    margin-bottom: 20px;
+    margin-bottom: 80px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: #ffffff;
 }
@@ -1282,7 +1313,7 @@ a.job-location:hover span.shine {
 .jd-action-btn{
     position: absolute;
     right: 10px;
-    top:10px;
+    top:33px;
 }
 .jd-share-btn{
     margin-top: 5px;
@@ -1305,7 +1336,7 @@ a.job-location:hover span.shine {
 }
 .jd-job-details{
     overflow: auto;
-    padding: 10px 20px;
+    padding: 0px 15px 10px 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border: 1px solid #cccccc;
     margin-bottom: 20px;
@@ -1382,8 +1413,9 @@ ul.jd-rewards li i{
     text-align: left;
     margin-left: -15px;
     margin-right: -15px;
-    width: 115.2%;                 /* 수정 */
+    width: 110%;                 /* 수정 */
 	/*width: 115.2%;*/                 /* 수정 */
+
     border-radius: 0;
 	padding-top:15px;
 	padding-bottom:15px;
@@ -1402,10 +1434,49 @@ ul.jd-rewards li i{
     margin-left: -15px;
     margin-right: -15px;    
 	/*width: 115.2%;*/                 /* 수정 */
+
     border-radius: 0;
 	padding-top:15px;
 	padding-bottom:15px;
  }
+
+ .jobApp-tabs2{
+    overflow: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #cccccc;
+    margin-bottom: 20px;
+    background: #ffffff;
+}
+.jobApp-tabs2 a{
+    display: inline-block;
+    text-align: left;
+    margin-left: -15px;
+    margin-right: -15px;    
+	width: 110%;                 /* 수정 */
+    border-radius: 0;
+	padding-top:15px;
+	padding-bottom:15px;
+ }
+
+
+.jobApp-tabs3{
+    overflow: auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #cccccc;
+    margin-bottom: 20px;
+    background: #ffffff;
+}
+.jobApp-tabs3 a{
+    display: inline-block;
+    text-align: left;
+    margin-left: -15px;
+    margin-right: -15px;
+    width: 115.2%;                 /* 수정 */
+    border-radius: 0;
+	padding-top:15px;
+	padding-bottom:15px;
+ }
+
  /*.nav-tab-active{
     border-bottom: 2px solid yellow !important;
  }*/
@@ -1815,12 +1886,27 @@ ul.jd-rewards li i{
     top: -69px;
     position: relative;
 }
+.eo-dp-box2{
+    width: 16%;
+    height: 200px;
+    overflow: hidden;
+    top: -5px;
+    position: relative;
+}
 .eo-dp{
     width: 100%;
     border: 4px solid #ffffff;
 	margin-top:30px;
 }
+.eo-dp2{
+    width: 100%;
+    border: 4px solid #ffffff;
+	margin-top:60px;
+}
 .eo-dp-box:hover .eo-dp-toolkit{
+    display: inline-block;
+}
+.eo-dp-box2:hover .eo-dp-toolkit{
     display: inline-block;
 }
 .eo-dp-toolkit{
@@ -2146,8 +2232,8 @@ ul.jd-rewards li i{
 */
 .upskill-box{
     width: 100%;
-    padding-top: 90px;
-    padding-bottom: 90px;
+    padding-top: 30px;
+    padding-bottom: 0px;
     text-align: center;
 }
 .upskill-box p{
@@ -2225,7 +2311,8 @@ ul.jd-rewards li i{
 }
 .pnj-form-section{
     padding: 10px 15px;
-   /* overflow: auto;*/
+    overflow: auto;
+	/* overflow: auto;*/  /*upskill 등록폼이 문제가 생겨서 주석처리 삭제함*/
     
 }
 #pnj-form .control-label{
@@ -2464,17 +2551,24 @@ ul.jd-rewards li i{
   ================================
 */
 .ea-top-panel{
-    margin-right: -10px;
-    margin-left: -10px;
+    margin-right: -14px;
+    margin-left: -5px;
     background: #EEEEEE;
-    padding-left: 18px;
+    padding-left: 0px;
     border-bottom: 1px solid #ccc;
 }
 .ea-panel-btn{
     position: relative;
-    padding: 15px 25px;
+	padding: 5px 0px;
+    
+	/*padding: 15px 25px;*/
+    padding: 15px 0px;
+
     border: none;
     background: transparent;
+	/*width:113px;*/
+	width:110px;
+
 }
 .ea-toolkit{
     min-width: 160px;
@@ -3009,7 +3103,7 @@ img.profile-photo-xs{
     background-repeat: no-repeat;*/
     background-position: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     border: 1px solid #cccccc;
 }
 .loginBox h3{
@@ -3023,7 +3117,7 @@ img.profile-photo-xs{
     margin-top:10px;
     border-top:1px solid #666666 ;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
 }
 .sns-box p{
     text-align: center;
@@ -3062,6 +3156,7 @@ img.profile-photo-xs{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background: #1da1f2;
     width: 22%;
+	margin-right: 2%;
     color: #ffffff;
     border: none;
     height: 28px;
@@ -3100,7 +3195,7 @@ img.profile-photo-xs{
     background-repeat: no-repeat;*/
     background-position: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     border: 1px solid #cccccc;
 }
 .signupBox h3{
@@ -3498,6 +3593,9 @@ img.profile-photo-xs{
     .eo-dp-box{
         text-align: center;
     }
+	.eo-dp-box2{
+        text-align: center;
+    }
     .eo-timeline-details{
         text-align: center;
     }
@@ -3569,6 +3667,16 @@ img.profile-photo-xs{
         color: #ffffff;
     }
 
+	.search-btn2{
+        width: 100%;
+        float: none;
+        border:2px solid #e6b706 ;
+    }
+    .search-btn2:hover{
+        background-color: #e6b706;
+        color: #ffffff;
+    }
+
     .pj-single-details .pj-job-title{
         width: 100%;
     }
@@ -3616,23 +3724,26 @@ img.profile-photo-xs{
 
     #post-job-ad-types2>li {
    
-    width: 141px !important;
+    width: 140px !important;
     min-height: 70px;
     
 }
-.pnj-form-field{
+.col-width{
+	width: 12%;
+	}
+/*.pnj-form-field{
     margin-bottom: 15px;
     padding-left: 0px;
     padding-right: 0px;
-}
+}*/
 #post-job-ad-types2>li:last-Child {
    
-    width: 77% !important;
-    min-height: 70px;
+    /*width: 77% !important;
+    min-height: 70px;*/
     
 }
 #post-job-ad-types2>li span{
-    font-size:11px !important ;
+    /*font-size:11px !important ;*/
 }
 #post-job-ad-types2>li:last-Child span:last-child b{
        padding-left: 37px;
@@ -3653,8 +3764,13 @@ img.profile-photo-xs{
         width: 100%;
         margin-bottom: 8px;
     }
+	.sns-box .tw-btn{
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 8px;
+    }
     .udp-items li{
-        width: 50% !important;
+        width: 33.3% !important;
         margin-bottom: 10px;
 
     }
@@ -3668,7 +3784,7 @@ img.profile-photo-xs{
         border-right: none;
     }
 	.udp-itemss li{
-        width: 50% !important;
+        width: 33.3% !important;
         margin-bottom: 10px;
 
     }
@@ -3705,7 +3821,14 @@ img.profile-photo-xs{
         margin-bottom: 10px !important;
     }
     .questionr-table{
+
+        width: 800px;
+    }
+	.evaluation-table{
+        width: 800px;
+=======
         width: 500px;
+>>>>>>> e0c64d832046f88b8aa9bf86a6dfcdecd6f2e6d1
     }
     .job-search{
         padding-top: 100px;
@@ -3756,11 +3879,14 @@ img.profile-photo-xs{
         height: 114px;
         overflow: hidden;
     }
+
     .jobs-suggestions img{
-        width: 70% !important;
-        height: auto;
+		/* width: 70% !important; */ 
+        width: 40% !important;
+        height: auto !important;
         position: inherit !important;
-        top: 84%;
+        top: 84% !important;
+
     }
     .la-item-img{
         height: 140px;
@@ -3800,7 +3926,16 @@ img.profile-photo-xs{
     .eo-dp-box {
         width: 44%;
         left: 27%;
+
         height: 100px;
+
+    }
+	.eo-dp-box2 {
+        width: 44%;
+        left: 27%;
+
+        height: 230px;
+
     }
 
    /* #jobs .jd-job-details img{
@@ -3832,6 +3967,7 @@ img.profile-photo-xs{
     .js-note{
         width: 100%;
         word-wrap: break-word;
+
     }
     .tabbable-line > .nav-tabs > li{
         margin-right: 0;
@@ -3926,8 +4062,22 @@ img.profile-photo-xs{
     .tabbable-panel{
         height: 250px;
     }
+	.col-width{
+	width: 12%;
+	}
+}
+@media (max-width: 700px) {
+    .tabbable-panel{
+        height: 250px;
+    }
+	.col-width{
+	width: 30%;
+	}
 }
 @media (max-width: 370px) {
+.col-width{
+	width: 12%;
+	}
     .jobs-suggestions  .js-listing li{
         width: 100%;
         margin-bottom: 9px;
@@ -4019,14 +4169,15 @@ curveIn {  0% {
 }
 #post-job-ad-types>li:not(:last-child) {
     margin-right: 4px;
-	    background-color: #282828;
+	    background-color: white;
 }
 
 #post-job-ad-types>li {
-    display: inline-grid;
-    display: -ms-inline-grid;
-    width: 132px;
-    min-height: 242px;
+    /*display: inline-grid;*/           /* 파키스탄에서 수정한 부분 IE에서 적용안됨*/
+    /*display: -ms-inline-grid;*/      /* 파키스탄에서 수정한 부분 IE에서 적용안됨*/
+	display: inline-block;
+    width: 160px;
+    min-height: 279px;
     cursor: pointer;
      padding: 0px 0px 0px 0px;
     border: 0px solid #cfd8dc;
@@ -4043,11 +4194,11 @@ curveIn {  0% {
 
 #post-job-ad-types2>li {
     display: inline-block;
-    width: 270px;
-    min-height: 70px;
+    width: 140px;
+    min-height: 90px;
     cursor: pointer;
     padding: 0px 0px 0px 0px;
-    border-bottom: 1px solid #cfd8dc;
+    border-bottom: 0px solid #cfd8dc;
 	margin-bottom:20px;
     transition: all .2s ease-in-out;
 	    background-color: white;
@@ -4055,18 +4206,18 @@ curveIn {  0% {
 
 #post-job-ad-types3>li:not(:last-child) {
     margin-right: 4px;
-	    background-color: white;
+	    /*background-color: white;*/
 }
 
 #post-job-ad-types3>li {
     display: inline-block;
     /*width: 175px;
     min-height: 280px;*/
-	width: 100%;
-  
+	width: 200px;
+    min-height: 301px;  
     cursor: pointer;
     padding: 0px 0px 0px 0px;
-    border: 1px solid #cfd8dc;
+    border:  0px solid #cfd8dc;
 	margin-top:10px;
     transition: all .2s ease-in-out;
 	    background-color: white;
@@ -4079,11 +4230,11 @@ curveIn {  0% {
 
 #post-job-ad-types-upskill>li {
     display: inline-block;
-    width: 270px;
-    min-height: 72px;
+    width: 240px;
+    min-height: 105px;
     cursor: pointer;
      padding: 0px 0px 0px 0px;
-    border: 1px solid #cfd8dc;
+    border: 0px solid #cfd8dc;
 	margin-top:10px;
     transition: all .2s ease-in-out;
 	    background-color: white;
@@ -4096,11 +4247,11 @@ curveIn {  0% {
 
 #post-job-ad-types-read>li {
     display: inline-block;
-    width: 320px;
-    min-height: 72px;
+    width: 240px;
+    min-height: 105px;
     cursor: pointer;
      padding: 0px 0px 0px 0px;
-    border: 1px solid #cfd8dc;
+    border: 0px solid #cfd8dc;
 	margin-top:10px;
     transition: all .2s ease-in-out;
 	    background-color: white;
@@ -4118,6 +4269,12 @@ curveIn {  0% {
 }
 
 #post-job-ad-types2 {
+    list-style: none;
+    margin: 0 -1px;
+    padding: 0;
+}
+
+#post-job-ad-types3 {
     list-style: none;
     margin: 0 -1px;
     padding: 0;
@@ -4457,7 +4614,8 @@ li.ui-timepicker-selected .ui-timepicker-duration,
     display: list-item;
     /* text-align: -webkit-match-parent; */
     list-style-type: disc;
-    margin-left: -5px;
+    /* margin-left: -5px; */
+	margin-left: 2px;
 
 }
 .mobile-suggestions {

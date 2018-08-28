@@ -18,41 +18,42 @@ if(Request::input('show') != ''){
                     <h3 style="margin-left: 15px">@lang('home.APPLICATION')</h3>
 				</div>
 
-
+		
+		
         <div class="col-md-12">
             <!-- Mobile View Only -->
           <div class="col-md-2 hidden-sm hidden-md hidden-lg">
                 <div class="row">
-                    <div class="col-md-12 jobApp-tabs jobMblTabs">
+                    <div class="col-md-12 jobApp-tabs2 jobMblTabs">
                         <ul class="nav nav-tabs jobMblTabs">
-                            <li>
+                            <li style="width:50%;">
                             <a id="inbox" class="btn btn-block jaTabBtn {{ $inbox }}"><i class="fa fa-users"></i> @lang('home.inbox')</a>
                             </li>
-                            <li>
+                            <li style="width:50%;padding-left:23px;">
                             <a id="junk" class="btn btn-block jaTabBtn {{ $junk }}"><i class="fa fa-ban"></i>  @lang('home.junks')</a>
                             </li>
-                            <li>
+                            <li style="width:50%;">
                             <a id="shortlist" class="btn btn-block jaTabBtn {{ $shortlist }}"><i class="fa fa-thumbs-up"></i>  @lang('home.shortlists')</a>
                             </li>
-                            <li>
+                            <li style="width:50%;padding-left:23px;">
                             <a id="screened" class="btn btn-block jaTabBtn {{ $screened }}"><i class="fa fa-mobile"></i>  @lang('home.screened')</a>
                             </li>
-                            <li>
+                            <li style="width:50%;">
                             <a id="interview" class="btn btn-block jaTabBtn {{ $interview }}"><i class="fa fa-calendar"></i>  @lang('home.interviews')</a>
                             </li>
-                            <li>
+                            <li style="width:50%;padding-left:23px;">
                             <a id="offer" class="btn btn-block jaTabBtn {{ $offer }}"><i class="fa fa-ticket"></i>  @lang('home.empoffered')</a>
                             </li>
-                            <li>
+                            <li style="width:50%;">
                             <a id="hire" class="btn btn-block jaTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
                             </li>
-                            <li>
+                            <li style="width:50%;padding-left:23px;">
                             <a id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
                             </li>
-                            <li>
+                            <li style="width:50%;">
                             <a id="review" href="{{url('employer/status/reviews/all')}}" class="btn btn-block {{ $review }}"><i class="fa fa-file-o"></i>  @lang('home.Reviews list')</a>
                             </li>
-                            <li>
+                            <li style="width:50%;padding-left:23px;">
                             <a id="offer" href="{{url('employer/status/offer/all')}}" class="btn btn-block {{ $offer }}"><i class="fa fa-bullhorn"></i> @lang('home.Offer Interview list')</a>
                             </li>
                         </ul>
@@ -81,44 +82,47 @@ if(Request::input('show') != ''){
                 </div>
             </div>
             <div class="col-md-10">
+				<div style="font-size:12px;color:#337ab7;">
+					<i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.APPLICATION_method')
+				</div>
                 <div class="ja-content">
-                    <div class="ea-top-panel">
-                        <button type="button" class="ea-panel-btn hidden-sm hidden-xs" id="full-screen"><i class="fa fa-arrows-alt" style="font-size:20px"></i>
+                    <div class="ea-top-panel hidden-xs">
+                        <button type="button" class="ea-panel-btn hidden-sm hidden-xs" id="full-screen" style="background:#337ab7;"><i class="fa fa-arrows-alt" style="font-size:20px;color:#fff;"></i>
                             <div class="ea-toolkit">@lang('home.togglescreen')</div>
                         </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="shortlist">
-                            <i class="fa fa-thumbs-up" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="shortlist" style="background:#337ab7;">
+                            <i class="fa fa-thumbs-up" style="font-size:20px;color:#fff;"></i>
                             <div class="ea-toolkit">@lang('home.shortlistapplicant')</div>
                         </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="reject">
-                            <i class="fa fa-thumbs-down" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="reject" style="background:#337ab7;">
+                            <i class="fa fa-thumbs-down" style="font-size:20px;color:#fff;"></i>
                             <div class="ea-toolkit">@lang('home.rejectapplicant')</div>
                         </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="screened">
-                            <i class="fa fa-mobile" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="screened" style="background:#337ab7;">
+                            <i class="fa fa-mobile" style="font-size:20px;color:#fff;"></i>
                             <div class="ea-toolkit"><p>@lang('home.markscreened') </p></div>
                         </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="offer">
-                            <i class="fa fa-ticket" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="offer" style="background:#337ab7;">
+                            <i class="fa fa-ticket" style="font-size:20px;color:#fff;"></i>
                             <div class="ea-toolkit"><p>@lang('home.sendjoboffer') </p></div>
                         </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="hire">
-                            <i class="fa fa-archive" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="hire" style="background:#337ab7;">
+                            <i class="fa fa-archive" style="font-size:20px;color:#fff;"></i>
                             <div class="ea-toolkit">@lang('home.markhired')</div>
                         </button>
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk">
-                            <i class="fa fa-ban" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk" style="background:#337ab7;">
+                            <i class="fa fa-ban" style="font-size:20px;color:#fff;"></i>
                             <div class="ea-toolkit">@lang('home.markjunk')</div>
                         </button>
-                        <button type="button" class="ea-panel-btn" id="ea-showFrom" style="display: none;">
-                            <i class="fa fa-envelope" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn" id="ea-showFrom" style="display: none;" style="background:#337ab7;">
+                            <i class="fa fa-envelope" style="font-size:20px;color:#fff;"></i>
                             <div class="ea-toolkit">@lang('home.sendmessageapplicant')</div>
                         </button>
-                        <button type="button" class="ea-panel-btn" id="ea-scheduleInerview">
-                            <i class="fa fa-calendar" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn" id="ea-scheduleInerview" style="background:#337ab7;">
+                            <i class="fa fa-calendar" style="font-size:20px;color:#fff;"></i>
                             <div class="ea-toolkit">@lang('home.scheduleinterview')</div>
                         </button>
-                        <button type="button" class="ea-panel-btn" id="resume-download"><i class="fa fa-download" style="font-size:20px"></i>
+                        <button type="button" class="ea-panel-btn" id="resume-download" style="background:#337ab7;"><i class="fa fa-download" style="font-size:20px;color:#fff;"></i>
                             <div class="ea-toolkit">@lang('home.exportselected')</div>
                         </button>
                         <select class="form-control pull-right select-jobs" style="width: 150px;height: 35px;" onchange="findApplication(this.value)">
@@ -128,6 +132,55 @@ if(Request::input('show') != ''){
                             @endforeach
                         </select>
                     </div>
+
+
+					<div class="ea-top-panel hidden-sm hidden-md hidden-lg">
+                        
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="shortlist" style="width:32.6%;background:#337ab7;">
+                            <i class="fa fa-thumbs-up" style="font-size:20px;color:#fff;"></i>
+                            <div class="ea-toolkit">@lang('home.shortlistapplicant')</div>
+                        </button>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="reject" style="width:32.6%;background:#337ab7;">
+                            <i class="fa fa-thumbs-down" style="font-size:20px;color:#fff;"></i>
+                            <div class="ea-toolkit">@lang('home.rejectapplicant')</div>
+                        </button>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="screened" style="width:32.6%;background:#337ab7;">
+                            <i class="fa fa-mobile" style="font-size:20px;color:#fff;"></i>
+                            <div class="ea-toolkit"><p>@lang('home.markscreened') </p></div>
+                        </button>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="offer" style="width:32.6%;background:#337ab7;">
+                            <i class="fa fa-ticket" style="font-size:20px;color:#fff;"></i>
+                            <div class="ea-toolkit"><p>@lang('home.sendjoboffer') </p></div>
+                        </button>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="hire" style="width:32.6%;background:#337ab7;">
+                            <i class="fa fa-archive" style="font-size:20px;color:#fff;"></i>
+                            <div class="ea-toolkit">@lang('home.markhired')</div>
+                        </button>
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk" style="width:32.6%;background:#337ab7;">
+                            <i class="fa fa-ban" style="font-size:20px;color:#fff;"></i>
+                            <div class="ea-toolkit">@lang('home.markjunk')</div>
+                        </button>
+                        <button type="button" class="ea-panel-btn" id="ea-showFrom" style="display: none;width:32.6%;background:#337ab7;">
+                            <i class="fa fa-envelope" style="font-size:20px;color:#fff;"></i>
+                            <div class="ea-toolkit">@lang('home.sendmessageapplicant')</div>
+                        </button>
+                        <button type="button" class="ea-panel-btn" id="ea-scheduleInerview" style="width:32.6%;background:#337ab7;">
+                            <i class="fa fa-calendar" style="font-size:20px;color:#fff;"></i>
+                            <div class="ea-toolkit">@lang('home.scheduleinterview')</div>
+                        </button>
+                        <button type="button" class="ea-panel-btn" id="resume-download" style="width:32.6%;background:#337ab7;"><i class="fa fa-download" style="font-size:20px;color:#fff;"></i>
+                            <div class="ea-toolkit">@lang('home.exportselected')</div>
+                        </button>
+                        <select class="form-control pull-right select-jobs" style="width: 150px;height: 35px;" onchange="findApplication(this.value)">
+                            <option value="0">@lang('home.alljobs')</option>
+                            @foreach($jobs as $job)
+                                <option value="{!! $job->jobId !!}">{!! $job->title !!}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
+
                     <!--Toggle message box -->
                     <div class="col-md-12 ea-messageForm">
                         <div class="col-md-offset-3 col-md-6">

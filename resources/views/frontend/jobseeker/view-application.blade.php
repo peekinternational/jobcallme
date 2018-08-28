@@ -109,7 +109,7 @@ $('.jaTabBtn').click(function () {
         })
     });
     function removeApplication(applyId){
-        if(confirm('Are you sure?')){
+        if(confirm('@lang("home.Are you sure?")')){
             $.ajax({
                 url: "{{ url('account/jobseeker/application/remove') }}/"+applyId,
                 success: function(response){

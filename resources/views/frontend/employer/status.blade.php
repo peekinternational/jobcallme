@@ -63,19 +63,19 @@ print_r($jobs);
                         <a href="{{ url('account/employer/application') }}" id="hire" class="btn btn-block jaTabBtn {{ $hire }}"><i class="fa fa-archive"></i>  @lang('home.hire')</a>
                         <a href="{{ url('account/employer/application') }}" id="reject" class="btn btn-block jaTabBtn {{ $reject }}"><i class="fa fa-thumbs-down"></i>  @lang('home.reject')</a>
                     </div>
-                    <div class="jd-job-details" style="background:#57768a">
-                <h4 style="color:#fff;"><img src="/frontend-assets/images/status-icon1.png"> @lang('home.Posted By')</h4>
+                    <div class="jd-job-details" style="background:#337ab7">
+                <h4 style="color:#fff;"><i class="fa fa-user" aria-hidden="true" style="font-size:20px"></i> @lang('home.Posted By')</h4>
                 <span style="color:#fff;">{{ $job->firstName }} {{ $job->lastName }}</span>
                 </div>
-                 <div class="jd-job-details" style="background:#57768a">
-                <h4 style="color:#fff;"><img src="/frontend-assets/images/status-icon2.png"> @lang('home.Hiring Managers')</h4>
+                 <div class="jd-job-details" style="background:#337ab7">
+                <h4 style="color:#fff;"><i class="fa fa-user" aria-hidden="true" style="font-size:20px"></i> @lang('home.Hiring Managers')</h4>
                 <span style="color:#fff;">{{ $job->firstName }} {{ $job->lastName }}</span>
                 </div>
-                 <div class="jd-job-details" style="background:#57768a">
-                <h4 style="color:#fff;"><img src="/frontend-assets/images/status-icon3.png"> @lang('home.Job Ad Type')</h4>
+                 <div class="jd-job-details" style="background:#337ab7">
+                <h4 style="color:#fff;"><i class="fa fa-podcast" aria-hidden="true" style="font-size:20px"></i> @lang('home.Job Ad Type')</h4>
                <span style="color:#fff;"> @lang('home.'.$job->p_title)</span>
                 @if ($job->p_title =='Basic')
-				<a href="{{ url('account/employer/jobupdate/'.$job->jobId) }}">(@lang('home.upgrade'))</a>
+				<a href="{{ url('account/employer/jobupdate/'.$job->jobId) }}"><span style="color:#fff;">(@lang('home.statusupgrade'))</span></a>
                  @else
 				 @endif
                 </div>
@@ -87,37 +87,37 @@ print_r($jobs);
                 <div class="ja-content">
                     <div class="ea-top-panel">
                         
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="shortlist" id="status_click">
-                            <i class="fa fa-bar-chart" aria-hidden="true"></i> @lang('home.status')
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="shortlist" id="status_click" style="background:#337ab7;">
+                            <i class="fa fa-bar-chart" aria-hidden="true" style="color:#fff;"></i> <span style="color:#fff;">@lang('home.status')</span>
                         </button>
-                       <a href="{{url('account/employer/setfilter/'.$job->jobId)}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="reject">
-                            <i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')
+                       <a href="{{url('account/employer/setfilter/'.$job->jobId)}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="reject" style="background:#337ab7;">
+                            <i class="fa fa-filter" aria-hidden="true" style="color:#fff;"></i> <span style="color:#fff;">@lang('home.filters')</span>
                         </button></a>
-                        <a href="{{url('account/employer/job/share/'.$job->jobId)}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="screened">
-                          <i class="fa fa-share-alt" aria-hidden="true"></i> @lang('home.share')
+                        <a href="{{url('account/employer/job/share/'.$job->jobId)}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="screened" style="background:#337ab7;">
+                          <i class="fa fa-share-alt" aria-hidden="true" style="color:#fff;"></i> <span style="color:#fff;">@lang('home.share')</span>
                         </button></a>
-                        <a href="{{url('account/employer/evalution/'.$job->jobId)}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="offer">
-                           <i class="fa fa-pie-chart" aria-hidden="true"></i> @lang('home.evaluation')
+                        <a href="{{url('account/employer/evalution/'.$job->jobId)}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="offer" style="background:#337ab7;">
+                           <i class="fa fa-pie-chart" aria-hidden="true" style="color:#fff;"></i> <span style="color:#fff;">@lang('home.evaluation')</span>
                         </button></a>
-                        <a href="{{url('account/employer/job_update/'.$job->jobId )}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" >
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')
+                        <a href="{{url('account/employer/job_update/'.$job->jobId )}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" style="background:#337ab7;">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true" style="color:#fff;"></i> <span style="color:#fff;">@lang('home.edit')</span>
                         </button></a>
                         
-                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk" id="showMore">
+                        <button type="button" class="ea-panel-btn ea-npm-click" data-type="junk" id="showMore" style="background:#337ab7;color:#fff;">
                         
                          <input type="hidden" id="JobId" value="{{$job->jobId}}">
                          <input type="hidden" id="checkstatus" value="{{$job->jobStatus}}">
                         </button>
                    
                         
-                        <a href="{{ url('account/employer/delete/'.$job->jobId) }}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="junk">
-                         <i class="fa fa-trash-o" aria-hidden="true"></i> @lang('home.delete')
+                        <a href="{{ url('account/employer/delete/'.$job->jobId) }}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" data-type="junk" style="background:#337ab7;">
+                         <i class="fa fa-trash-o" aria-hidden="true" style="color:#fff;"></i> <span style="color:#fff;">@lang('home.delete')</span>
                         </button></a>
-                        <a href="{{url('employer/status/reviews/all')}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" >
-                            <i class="fa fa-file-o" aria-hidden="true"></i> @lang('home.Reviews')
+                        <a href="{{url('employer/status/reviews/all')}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" style="background:#337ab7;">
+                            <i class="fa fa-file-o" aria-hidden="true" style="color:#fff;"></i> <span style="color:#fff;">@lang('home.Reviews')</span>
                         </button></a>
-						<a href="{{url('employer/status/offer/all')}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" >
-                            <i class="fa fa-bullhorn" aria-hidden="true"></i> @lang('home.Offerd Interview status')
+						<a href="{{url('employer/status/offer/all')}}" style="color: black;"><button type="button" class="ea-panel-btn ea-npm-click" style="background:#337ab7;">
+                            <i class="fa fa-bullhorn" aria-hidden="true" style="color:#fff;"></i> <span style="color:#fff;">@lang('home.Offerd Interview status')</span>
                         </button></a>
                     </div>
                
@@ -134,16 +134,16 @@ print_r($jobs);
                     <tbody>
                        <tr>
                         <td class="active">@lang('home.experience')</td>
-                        <td>@lang('home.'.$job->experience)</td>
+                        <td><span style="color:#337ab7">@lang('home.'.$job->experience)</span></td>
                         <td class="active">@lang('home.salary')</td>
-                        <td>{{ number_format($job->minSalary) }} - {{ number_format($job->maxSalary) }} {{ $job->currency }}</td>
+                        <td><span style="color:#337ab7">{{ number_format($job->minSalary) }} - {{ number_format($job->maxSalary) }} {{ $job->currency }}</span></td>
                     </tr>
 					
                     <tr>
                         <td class="active">@lang('home.shift')</td>
-                        <td>@lang('home.'.$job->jobShift)</td>
+                        <td><span style="color:#337ab7">@lang('home.'.$job->jobShift)</span></td>
                           <td class="active">@lang('home.travelling')</td>
-                        <td>@if($benefits != '')
+                        <td><span style="color:#337ab7">@if($benefits != '')
 							@foreach( $benefits as $benefit)
 						     @if($benefit == 'Travelling')
 							   <?php $travelFound = true; ?>
@@ -158,39 +158,39 @@ print_r($jobs);
 								echo No;
 							}
 							?>
-							
+							</span>
 						</td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.category')</td>
-                        <td>@lang('home.'.JobCallMe::categoryTitle($job->category))</td>
+                        <td><span style="color:#337ab7">@lang('home.'.JobCallMe::categoryTitle($job->category))</span></td>
                         <td class="active">@lang('home.careerlevel')</td>
-                        <td>@lang('home.'.$job->careerLevel)</td>
+                        <td><span style="color:#337ab7">@lang('home.'.$job->careerLevel)</span></td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.qualification')</td>
-                        <td>{{ $job->qualification }}</td>
+                        <td><span style="color:#337ab7">{{ $job->qualification }}</span></td>
                         <td class="active">@lang('home.totalvacancies')</td>
-                        <td>{{ $job->vacancies }}</td>
+                        <td><span style="color:#337ab7">{{ $job->vacancies }}</span></td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.poston')</td>
-                        <td>@if(app()->getLocale() == "kr")
+                        <td><span style="color:#337ab7">@if(app()->getLocale() == "kr")
 							  {{ date('Y-m-d',strtotime($job->createdTime))}}
 						@else
 							  {{ date('M d, Y',strtotime($job->createdTime))}}
-						@endif</td>
+						@endif</span></td>
                         <td class="active">@lang('home.lastdate')</td>
-                        <td>@if(app()->getLocale() == "kr")
+                        <td><span style="color:#337ab7">@if(app()->getLocale() == "kr")
 							  {{ date('Y-m-d',strtotime($job->expiryDate))}}
 						@else
 							  {{ date('M d, Y',strtotime($job->expiryDate))}}
-						@endif</td>
+						@endif</span></td>
 						
                     </tr>
                     <tr>
 					 <td class="active">@lang('home.location')</td>
-                        <td colspan="3">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</td>
+                        <td colspan="3"><span style="color:#337ab7">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</span></td>
                       
 						
                     </tr>
@@ -203,44 +203,52 @@ print_r($jobs);
                     <tbody>
                         <tr>
                         <td class="active">@lang('home.experience')</td>
-                        <td>{{ $job->experience }}</td>
+                        <td><span style="color:#337ab7">@lang('home.'.$job->experience)</span></td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.salary')</td>
-                        <td>{{ number_format($job->minSalary) }} - {{ number_format($job->maxSalary) }} {{ $job->currency }}</td>
+                        <td><span style="color:#337ab7">{{ number_format($job->minSalary) }} - {{ number_format($job->maxSalary) }} {{ $job->currency }}</span></td>
                     </tr>
 					
                     <tr>
                         <td class="active">@lang('home.shift')</td>
-                        <td>{{ $job->jobShift }}</td>
+                        <td><span style="color:#337ab7">@lang('home.'.$job->jobShift)</span></td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.poston')</td>
-                        <td>{{ date('M d, Y',strtotime($job->createdTime))}}</td>
+                        <td><span style="color:#337ab7">@if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($job->createdTime))}}
+						@else
+							  {{ date('M d, Y',strtotime($job->createdTime))}}
+						@endif</span></td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.lastdate')</td>
-                        <td>{{ date('M d, Y',strtotime($job->expiryDate))}}</td>
+                        <td><span style="color:#337ab7">@if(app()->getLocale() == "kr")
+							  {{ date('Y-m-d',strtotime($job->expiryDate))}}
+						@else
+							  {{ date('M d, Y',strtotime($job->expiryDate))}}
+						@endif</span></td>
                     </tr>
                     <tr>
-                        <td class="active">@lang('home.locationsss')</td>
-                        <td>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</td>
+                        <td class="active">@lang('home.location')</td>
+                        <td><span style="color:#337ab7">@lang('home.'.JobCallMe::cityName($job->city)), @lang('home.'.JobCallMe::countryName($job->country))</span></td>
                     </tr>
 					
                     <tr>
                         <td class="active">@lang('home.category')</td>
-                        <td>{{ JobCallMe::categoryTitle($job->category) }}</td>
+                        <td><span style="color:#337ab7">@lang('home.'.JobCallMe::categoryTitle($job->category))</span></td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.careerlevel')</td>
-                        <td>{{ $job->careerLevel }}</td>
+                        <td><span style="color:#337ab7">@lang('home.'.$job->careerLevel)</span></td>
                     </tr>
 					
                     <tr>
                         <td class="active">@lang('home.qualification')</td>
-                        <td>{{ $job->qualification }}</td>
+                        <td><span style="color:#337ab7">{{ $job->qualification }}</span></td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td class="active">@lang('home.poston')</td>
                         <td>{{ date('M d, Y',strtotime($job->createdTime))}}</td>
                     </tr>
@@ -251,17 +259,17 @@ print_r($jobs);
                     <tr>
                         <td class="active">@lang('home.locationsss')</td>
                         <td>{{ JobCallMe::cityName($job->city) }}, {{ JobCallMe::countryName($job->country) }}</td>
-                    </tr>
+                    </tr> -->
 					
                     </tbody>
                 </table>
-                <h4>@lang('home.description')</h4>
+                <h4><span style="color:#337ab7">@lang('home.description')</span></h4>
                 <p><strong>@lang('home.We are conveniently located in') {{ JobCallMe::getCompany($job->companyId)->companyAddress }}.</strong></p>
                 <p>{!! $job->description !!}</p>
-                <h4>@lang('home.skills')</h4>
+                <h4><span style="color:#337ab7">@lang('home.skills')</span></h4>
                 <p>{!! $job->skills !!}</p>
                 <br>
-                  <h4>@lang('home.admissionsprocess')</h4>
+                  <h4><span style="color:#337ab7">@lang('home.admissionsprocess')</span></h4>
                 @if($process != '')
 	                <ul class="jd-rewards" style="margin-bottom: 32px;">
 	                	@foreach( $process as $pro)
@@ -273,7 +281,7 @@ print_r($jobs);
                 <br>
                 <br>
                 <div>
-                <h4>@lang('home.rewardsbenefits')</h4>
+                <h4><span style="color:#337ab7">@lang('home.rewardsbenefits')</span></h4>
                 @if($benefits != '')
 	                <ul class="jd-rewards">
 	                	@foreach( $benefits as $benefit)

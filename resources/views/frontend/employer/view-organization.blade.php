@@ -41,7 +41,7 @@ if($company->companyLogo != ''){
                     <label for="eo-timeline"><i class="fa fa-camera"></i> &nbsp;@lang('home.change')</label>
                 </div>
                 <div class="eo-timeline-toolkits">
-                    <label data-toggle="modal" data-target="#myModal"><i class="fa fa-youtube"></i> &nbsp;@lang('home.change')</label>
+                    <label data-toggle="modal" data-target="#myModal"><i class="fa fa-youtube" style="font-size:17px"></i> &nbsp;@lang('home.youtubechange')</label>
                 </div>
                 
             </div>
@@ -53,17 +53,17 @@ if($company->companyLogo != ''){
                         <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Add youtube Link</h4>
+                            <h4 class="modal-title">@lang('home.Add youtube Link')</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
                             <input type="hidden" name="_token" class="token" id="you_token" value="{{ csrf_token() }}" requried>
-                            <input type="text" class="form-control" id="youtube_data" placeholder="Enter youtube link">
+                            <input type="text" class="form-control" id="youtube_data" placeholder="@lang('home.Enter youtube link')">
                     </div>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-success" id="add_youtube" data-dismiss="modal">Save</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" id="add_youtube" data-dismiss="modal">@lang('home.save')</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">@lang('home.Close')</button>
                         </div>
                         </div>
 
@@ -88,14 +88,17 @@ if($company->companyLogo != ''){
                        <h1><a href="">{{ $company->companyName }}</a></h1>
                        <div class="col-md-6 eo-section">
                            <h4>@lang('home.basicinformation')</h4>
-                           <div class="eo-details">
+                           <!-- <div class="eo-details">
                                <span>@lang('home.designation'):</span> HR
-                           </div>
+                           </div> -->
                            <div class="eo-details">
                                <span>@lang('home.businesstype'):</span> @lang('home.'.$company->businessType)
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.industry'):</span> @lang('home.'.JobCallMe::categoryName($company->category))
+                           </div>
+						   <div class="eo-details">
+                               <span>@lang('home.business sector'):</span> {{$company->business_sector}}
                            </div>
                            <div class="eo-details">
                                <span>@lang('home.address'):</span> {{ $company->companyAddress }}, @lang('home.'.JobCallMe::cityName($company->companyCity)), @lang('home.'.JobCallMe::countryName($company->companyCountry))
@@ -106,7 +109,12 @@ if($company->companyLogo != ''){
                            <div class="eo-details">
                                <span>@lang('home.phone'):</span> {{ $company->companyPhoneNumber }}
                            </div>
-                           <div class="eo-details">
+                           
+                       </div>
+                       <div class="col-md-6 eo-section">
+                           <a class="btn btn-primary eo-edit-btn" onClick="$('.eo-section').hide(); $('.eo-edit-section').show()"><i class="fa fa-edit"></i> </a>
+
+						   <div class="eo-details">
                                <span>@lang('home.website'):</span> <a href="{{ $company->companyWebsite }}">{{ $company->companyWebsite }}</a>
                            </div>
                            <div class="eo-details">
@@ -119,9 +127,25 @@ if($company->companyLogo != ''){
                            <div class="eo-details">
                                <span>@lang('home.noemployees'):</span> {{ $company->companyNoOfUsers }}
                            </div>
-                       </div>
-                       <div class="col-md-6 eo-section">
-                           <a class="btn btn-primary eo-edit-btn" onClick="$('.eo-section').hide(); $('.eo-edit-section').show()"><i class="fa fa-edit"></i> </a>
+						   <div class="eo-details">
+                               <span>@lang('home.Working day'):</span> 
+							   @if($company->companydayval != "jobday01" and $company->companydayval != "jobday10")							   
+								   @lang('home.'.$company->companydayval)
+							   @endif
+							   
+							   @if($company->companydayval_text) {{$company->companydayval_text}} @endif								 
+
+                           </div>
+						   <div class="eo-details">
+                               <span>@lang('home.Working hours'):</span>
+							   @if($company->companyhoursval != "jobhours01" and $company->companyhoursval != "jobhours06")							   
+								   @lang('home.'.$company->companyhoursval)
+							   @endif
+							   
+							   @if($company->companyhoursval_text) {{$company->companyhoursval_text}} @endif		
+							   
+                           </div>
+
                            <!-- <h4>@lang('home.operationhours')</h4>
                            <?php $opHour = json_decode($company->companyOperationalHour,true); ?>
                            <table class="table">
@@ -162,11 +186,17 @@ if($company->companyLogo != ''){
                                 <input type="hidden" name="_token" class="token">
                                <div class="pnj-form-section">
                                    <div class="form-group">
-                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.company')</label>
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.company name')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control companyName" name="companyName" id="companyName" placeholder="Company Title" value="{{ $company->companyName }}" required>
+                                           <input type="text" class="form-control companyName" name="companyName" id="companyName" placeholder="@lang('home.Company Title')" value="{{ $company->companyName }}" required>
                                        </div>
                                    </div>
+								   <!-- <div class="form-group">
+                                       <label class="control-label col-sm-3 col-xs-12">@lang('home.Company CEO')</label>
+                                       <div class="col-sm-9 pnj-form-field">
+                                           <input type="text" class="form-control companyName" name="companyceo" id="companyceo" placeholder="@lang('home.Company CEO')" value="{{ $company->companyceo }}" required>
+                                       </div>
+                                   </div> -->
 								   <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.corporatenumber')</label>
                                        <div class="col-sm-9 pnj-form-field">
@@ -179,7 +209,7 @@ if($company->companyLogo != ''){
                                            <select class="form-control select2" name="businessType" required>
                                                 <option value="Sole Proprietorship" {{ $company->businessType == 'Sole Proprietorship' ? 'selected="selected"' : '' }}>@lang('home.Sole Proprietorship')</option>
                                                 <option value="Partnership" {{ $company->businessType == 'Partnership' ? 'selected="selected"' : '' }}>@lang('home.Partnership')</option>
-                                                <option value="SME Pvt. Ltd" {{ $company->businessType == 'SME Pvt. Ltd' ? 'selected="selected"' : '' }}>@lang('home.SME Pvt Ltd')</option>
+                                                <!-- <option value="SME Pvt. Ltd" {{ $company->businessType == 'SME Pvt. Ltd' ? 'selected="selected"' : '' }}>@lang('home.SME Pvt Ltd')</option> -->
                                                 <option value="Private Limited Company Pvt Ltd" {{ $company->businessType == 'Private Limited Company Pvt Ltd' ? 'selected="selected"' : '' }}>@lang('home.Private Limited Company Pvt Ltd')</option>
                                                 <option value="Human Public Limited Company Listed" {{ $company->businessType == 'Human Public Limited Company Listed' ? 'selected="selected"' : '' }}>@lang('home.Public Limited Company Listed')</option>
                                                 <option value="Public Limited Company Unlisted" {{ $company->businessType == 'Public Limited Company Unlisted' ? 'selected="selected"' : '' }}>@lang('home.Public Limited Company Unlisted')</option>
@@ -187,6 +217,7 @@ if($company->companyLogo != ''){
                                                 <option value="Joint Venture" {{ $company->businessType == 'Joint Venture' ? 'selected="selected"' : '' }}>@lang('home.Joint Venture')</option>
                                                 <option value="Inc Incorporated" {{ $company->businessType == 'Inc Incorporated' ? 'selected="selected"' : '' }}>@lang('home.Inc Incorporated')</option>  
                                                 <option value="LLC Limited Liability Company" {{ $company->businessType == 'LLC Limited Liability Company' ? 'selected="selected"' : '' }}>@lang('home.LLC Limited Liability Company')</option>
+												<option value="Holding Company" {{ $company->businessType == 'Holding Company' ? 'selected="selected"' : '' }}>@lang('home.Holding Company')</option> 
 												<option value="Government·Pblic·Institutions·Public Corporations" {{ $company->businessType == 'Government·Pblic·Institutions·Public Corporations' ? 'selected="selected"' : '' }}>@lang('home.Government·Pblic·Institutions·Public Corporations')</option>
                                                  
                                            </select>
@@ -198,9 +229,9 @@ if($company->companyLogo != ''){
                                            <select class="form-control select2" name="industry" required>
                                               
                                                @foreach(JobCallMe::getCategories() as $cat)
-                                               @if($cat->categoryId < 17)
+                                               @if($cat->categoryId != 17 and $cat->categoryId != 18)
                                                 <option value="{{ $cat->categoryId }}" {{ $cat->categoryId == $company->category ? 'selected="selected"' : '' }}>@lang('home.'.$cat->name)</option>
-                                              @endif
+                                                @endif
                                                @endforeach
                                            </select>
                                        </div>
@@ -208,13 +239,13 @@ if($company->companyLogo != ''){
                                    <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.business sector')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="text" class="form-control business_sector" name="business_sector" id="business_sector" placeholder="Please type of your business sector" value="{{ $company->business_sector }}" required>
+                                           <input type="text" class="form-control business_sector" name="business_sector" id="business_sector" placeholder="@lang('home.Please type of your business sector')" value="{{ $company->business_sector }}" required>
                                        </div>
                                    </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.address')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <textarea required class="form-control companyAddress" placeholder="Address" name="companyAddress" style="resize: vertical">{{ $company->companyAddress }}</textarea>
+                                           <textarea required class="form-control companyAddress" placeholder="@lang('home.Address')" name="companyAddress" style="resize: vertical">{{ $company->companyAddress }}</textarea>
                                        </div>
                                    </div>
                                    <div class="form-group">
@@ -283,10 +314,16 @@ if($company->companyLogo != ''){
                                            <input type="url" class="form-control companyInstagram" name="companyInstagram" id="instagram" placeholder="Google Plus" value="{{ $company->companyInstagram }}">
                                        </div>
                                    </div>
+								   <div class="form-group">
+                                       <label class="control-label col-sm-3 col-xs-12">Talk SNS</label>
+                                       <div class="col-sm-9 pnj-form-field">
+                                           <input type="url" class="form-control companyInstagram" name="talksns" id="talksns" placeholder="Talk SNS" value="{{ $company->talksns }}">
+                                       </div>
+                                   </div>
                                    <div class="form-group">
                                        <label class="control-label col-sm-3 col-xs-12">@lang('home.noemployees')</label>
                                        <div class="col-sm-9 pnj-form-field">
-                                           <input type="number" class="form-control companyNoOfUsers" name="companyNoOfUsers" id="companyNoOfUsers" placeholder="Total Employees" value="{{ $company->companyNoOfUsers }}" required>
+                                           <input type="number" class="form-control companyNoOfUsers" name="companyNoOfUsers" id="companyNoOfUsers" placeholder="@lang('home.Total Employees')" value="{{ $company->companyNoOfUsers }}" required>
                                        </div>
                                    </div>
 
@@ -312,7 +349,12 @@ if($company->companyLogo != ''){
 												<option value="Small and Medium-sized Businesses" {{ $company->formofbussiness == 'Small and Medium-sized Businesses' ? 'selected="selected"' : '' }}>@lang('home.Small and Medium-sized Businesses')</option>
 												<option value="Midsize Business" {{ $company->formofbussiness == 'Midsize Business' ? 'selected="selected"' : '' }}>@lang('home.Midsize Business')</option>
 												<option value="Major Company" {{ $company->formofbussiness == 'Major Company' ? 'selected="selected"' : '' }}>@lang('home.Major Company')</option>
+												<option value="Major Company Affiliate" {{ $company->formofbussiness == 'Major Company Affiliate' ? 'selected="selected"' : '' }}>@lang('home.Major Company Affiliate')</option>
+												<option value="Affiliated Company" {{ $company->formofbussiness == 'Affiliated Company' ? 'selected="selected"' : '' }}>@lang('home.Affiliated Company')</option>
+												<option value="Foreign Company" {{ $company->formofbussiness == 'Foreign Company' ? 'selected="selected"' : '' }}>@lang('home.Foreign Company')</option>
 												<option value="Listed Company" {{ $company->formofbussiness == 'Listed Company' ? 'selected="selected"' : '' }}>@lang('home.Listed Company')</option>
+												<option value="Venture Company" {{ $company->formofbussiness == 'Venture Company' ? 'selected="selected"' : '' }}>@lang('home.Venture Company')</option>
+												<option value="Association" {{ $company->formofbussiness == 'Association' ? 'selected="selected"' : '' }}>@lang('home.Association')</option>
 												<option value="Government·Pblic·Institutions·Public Corporations" {{ $company->formofbussiness == 'Government·Pblic·Institutions·Public Corporations' ? 'selected="selected"' : '' }}>@lang('home.Government·Pblic·Institutions·Public Corporations')</option>
 												<option value="Etc" {{ $company->formofbussiness == 'Etc' ? 'selected="selected"' : '' }}>@lang('home.Etc')</option>
 												
@@ -328,34 +370,50 @@ if($company->companyLogo != ''){
                                    </div>
                                    <div class="form-group">
                             <label class="control-label col-md-3">@lang('home.Working day')</label>
-                                <div class="col-md-9 pnj-form-field">
+                                <div class="col-md-3 pnj-form-field">
                                     <select class="form-control" name="companydayval" required>
-										<option value="jobday01" {{ $meta->jobdayval == 'jobday01' ? 'selected="selected"' : '' }}>@lang('home.jobday01')</option>
-										<option value="jobday02" {{ $meta->jobdayval == 'jobday02' ? 'selected="selected"' : '' }}>@lang('home.jobday02')</option>
-										<option value="jobday03" {{ $meta->jobdayval == 'jobday03' ? 'selected="selected"' : '' }}>@lang('home.jobday03')</option>
-										<option value="jobday04" {{ $meta->jobdayval == 'jobday04' ? 'selected="selected"' : '' }}>@lang('home.jobday04')</option>
-										<option value="jobday05" {{ $meta->jobdayval == 'jobday05' ? 'selected="selected"' : '' }}>@lang('home.jobday05')</option>
-										<option value="jobday06" {{ $meta->jobdayval == 'jobday06' ? 'selected="selected"' : '' }}>@lang('home.jobday06')</option>
-										<option value="jobday07" {{ $meta->jobdayval == 'jobday07' ? 'selected="selected"' : '' }}>@lang('home.jobday07')</option>
-										<option value="jobday08" {{ $meta->jobdayval == 'jobday08' ? 'selected="selected"' : '' }}>@lang('home.jobday08')</option>
-										<option value="jobday09" {{ $meta->jobdayval == 'jobday09' ? 'selected="selected"' : '' }}>@lang('home.jobday09')</option>
-										<option value="jobday10" {{ $meta->jobdayval == 'jobday10' ? 'selected="selected"' : '' }}>@lang('home.jobday10')</option>
+										<option value="jobday01" {{ $company->companydayval == 'jobday01' ? 'selected="selected"' : '' }}>@lang('home.jobday01')</option>
+										<option value="jobday11" {{ $company->companydayval == 'jobday11' ? 'selected="selected"' : '' }}>@lang('home.jobday11')</option>
+										<option value="jobday02" {{ $company->companydayval == 'jobday02' ? 'selected="selected"' : '' }}>@lang('home.jobday02')</option>
+										<option value="jobday03" {{ $company->companydayval == 'jobday03' ? 'selected="selected"' : '' }}>@lang('home.jobday03')</option>
+										<option value="jobday04" {{ $company->companydayval == 'jobday04' ? 'selected="selected"' : '' }}>@lang('home.jobday04')</option>
+										<option value="jobday05" {{ $company->companydayval == 'jobday05' ? 'selected="selected"' : '' }}>@lang('home.jobday05')</option>
+										<option value="jobday06" {{ $company->companydayval == 'jobday06' ? 'selected="selected"' : '' }}>@lang('home.jobday06')</option>
+										<option value="jobday07" {{ $company->companydayval == 'jobday07' ? 'selected="selected"' : '' }}>@lang('home.jobday07')</option>
+										<option value="jobday08" {{ $company->companydayval == 'jobday08' ? 'selected="selected"' : '' }}>@lang('home.jobday08')</option>
+										<option value="jobday09" {{ $company->companydayval == 'jobday09' ? 'selected="selected"' : '' }}>@lang('home.jobday09')</option>
+										<option value="jobday12" {{ $company->companydayval == 'jobday12' ? 'selected="selected"' : '' }}>@lang('home.jobday12')</option>
+										<option value="jobday10" {{ $company->companydayval == 'jobday10' ? 'selected="selected"' : '' }}>@lang('home.jobday10')</option>
                                         
                                     </select>
                                 </div>
 
+								<div class="col-md-6 pnj-form-field">								
+								
+										<input type="text" class="form-control" name="companydayval_text" value="{!! $company->companydayval_text !!}" placeholder="@lang('home.jobdayval_text')">
+									
+								</div>
+
                                 <div class="form-group">
                             <label class="control-label col-md-3">@lang('home.Working hours')</label>
-                                <div class="col-md-9 pnj-form-field">
+                                <div class="col-md-3 pnj-form-field">
                                     <select class="form-control" name="companyhoursval" required>
-										<option value="jobhours01" {{ $meta->jobhoursval == 'jobhours01' ? 'selected="selected"' : '' }}>@lang('home.jobhours01')</option>
-										<option value="jobhours02" {{ $meta->jobhoursval == 'jobhours02' ? 'selected="selected"' : '' }}>@lang('home.jobhours02')</option>
-										<option value="jobhours03" {{ $meta->jobhoursval == 'jobhours03' ? 'selected="selected"' : '' }}>@lang('home.jobhours03')</option>
-										<option value="jobhours04" {{ $meta->jobhoursval == 'jobhours04' ? 'selected="selected"' : '' }}>@lang('home.jobhours04')</option>
-										<option value="jobhours05" {{ $meta->jobhoursval == 'jobhours05' ? 'selected="selected"' : '' }}>@lang('home.jobhours05')</option>
+										<option value="jobhours01" {{ $company->companyhoursval == 'jobhours01' ? 'selected="selected"' : '' }}>@lang('home.jobhours01')</option>
+										<option value="jobhours02" {{ $company->companyhoursval == 'jobhours02' ? 'selected="selected"' : '' }}>@lang('home.jobhours02')</option>
+										<option value="jobhours03" {{ $company->companyhoursval == 'jobhours03' ? 'selected="selected"' : '' }}>@lang('home.jobhours03')</option>
+										<option value="jobhours04" {{ $company->companyhoursval == 'jobhours04' ? 'selected="selected"' : '' }}>@lang('home.jobhours04')</option>
+										<option value="jobhours05" {{ $company->companyhoursval == 'jobhours05' ? 'selected="selected"' : '' }}>@lang('home.jobhours05')</option>
+										<option value="jobhours07" {{ $company->companyhoursval == 'jobhours07' ? 'selected="selected"' : '' }}>@lang('home.jobhours07')</option>
+										<option value="jobhours06" {{ $company->companyhoursval == 'jobhours06' ? 'selected="selected"' : '' }}>@lang('home.jobhours06')</option>
 																			
                                     </select>
                                 </div>
+
+								<div class="col-md-6 pnj-form-field">								
+								
+										<input type="text" class="form-control" name="companyhoursval_text" value="{!! $company->companyhoursval_text !!}" placeholder="@lang('home.jobhoursval_text')">
+									
+								</div>
 
                                    <hr>
                                    <!--Monday Schedule-->
@@ -529,27 +587,9 @@ if($company->companyLogo != ''){
         <div class="eo-box eo-about">
             <a class="btn btn-primary r-add-btn hideThis" onClick="$('.eo-about-org').hide(); $('.hideThis').hide();$('.eo-about-editor').show(); "><i class="fa fa-edit"></i> </a>
             <h3 class="eo-about-heading">@lang('home.aboutorganization')</h3>
-            <div class="eo-about-org" style="padding-left:30px">
-                <p><span>{!! $company->companyAbout !!}</p></span>
-            </div>
-             <div class="eo-about-editor">
-                <form action="" id="pnj-form" method="post" class="organization-desc-form">
-                    <input type="hidden" name="_token" class="token">
-                    <div class="form-group" style="padding-left:20px">
-                        <label class="control-label col-sm-3">&nbsp;</label>
-                        <div class="col-sm-7 pnj-form-field">
-                            <textarea class="form-control tex-editor" name="companyAbout" rows="10" style="resize: vertical;">{!! $company->companyAbout !!}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn btn-primary col-md-3" name="save" style="margin-right:5px">@lang('home.SAVE')</button>
-                                <button type="button" class="btn btn-default col-md-3" onClick="$('.eo-about-org').show(); $('.hideThis').show();$('.eo-about-editor').hide();">@lang('home.CANCEL')</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+            <div class="eo-about-org">
+                <textarea id="editor2" name="companyAbout">{!! $company->companyAbout !!}</textarea>
+                <button class="btn btn-success" id="save-company2"> @lang('home.SAVE')</button>
             </div>
         </div>
 
@@ -710,6 +750,17 @@ if($company->companyLogo != ''){
    filebrowserFlashUploadUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash')}}",
    height: '500px',
  });
+
+ CKEDITOR.replace( 'editor2',{
+  filebrowserBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files')}}",
+   filebrowserImageBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images')}}",
+   filebrowserFlashBrowseUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=flash')}}",
+   filebrowserUploadUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=files')}}",
+   filebrowserImageUploadUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=images')}}",
+   filebrowserFlashUploadUrl : "{{ url('frontend-assets/js/ckeditor/kcfinder/upload.php?opener=ckeditor&type=flash')}}",
+   height: '500px',
+ });
+
 var token = "{{ csrf_token() }}";
 $(document).ready(function(){
     var url= "{{ $cCover }}";
@@ -745,7 +796,22 @@ if(piclog ==1){
           }
         }
       });
+    });
+
+	$('#save-company2').on('click',function(){
+      var value = CKEDITOR.instances.editor2.getData();
+      $.ajax({
+        url:"{{ url('account/employer/savecomabout') }}",
+        type:"post",
+        data:{compabout:value,_token:"{{ csrf_token() }}"},
+        success:function(res){
+          if(res == 1){
+            toastr.success('@lang("home.company pics update successfully")');
+          }
+        }
+      });
     })
+
 })
 $('.job-country').on('change',function(){
     var countryId = $(this).val();

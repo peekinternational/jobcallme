@@ -25,20 +25,20 @@
                 <h3>@lang('home.sharejob')</h3>
                 <div class="pnj-form-section">
                     <div class="jd-share-btn" style="text-align: center;">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('jobs/'.$jobid) }}" target="_blank">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url('jobs/'.$jobId) }}" target="_blank">
                             <i class="fa fa-facebook" style="background: #2e6da4;"></i> 
                         </a>
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url('jobs/'.$jobid) }}&title=&summary=&source=" target="_blank">
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url('jobs/'.$jobId) }}&title=&summary=&source=" target="_blank">
                             <i class="fa fa-linkedin" style=" background: #007BB6;"></i> 
                         </a>
                         <a href="https://twitter.com/home?status={{ url('jobs/'.$jobId) }}" target="_blank">
                             <i class="fa fa-twitter" style="background: #15B4FD;"></i> 
                         </a>
-                        <a href="https://plus.google.com/share?url={{ url('jobs/'.$jobid) }}" target="_blank">
+                        <a href="https://plus.google.com/share?url={{ url('jobs/'.$jobId) }}" target="_blank">
                             <i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                         </a>
-                        <img src="{{asset('website/icon.ico')}}" onclick="OpenWindow('{{ url('jobs/'.$jobid) }}')" style="width: 25px !important;border-radius: 50px; cursor: pointer;">
-                        <a href="{{ url('jobs/'.$jobid) }}" style="display: block;margin-top: 25px;">@lang('home.Skip')</a>
+                        <img src="{{asset('website/icon.ico')}}" onclick="OpenWindow('{{ url('jobs/'.$jobId) }}')" style="width: 50px !important;border-radius: 50px; cursor: pointer;margin-top: -12px;">
+                        <a href="{{ url('jobs/'.$jobId) }}" style="display: block;margin-top: 25px;">@lang('home.Skip')</a>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@ $('form.job-form').submit(function(e){
     e.preventDefault();
 })
 function OpenWindow(url, windowName) {
-   newwindow = window.open('https://www.talksns.com/sharer?url=' + url, windowName, 'height=600,width=800');
+   newwindow = window.open('http://www.talksns.com/sharer?url=' + url, windowName, 'height=600,width=800');
    if (window.focus) {
       newwindow.focus();
    }

@@ -13,6 +13,13 @@ $headerC = json_decode(file_get_contents(public_path('website/web-setting.info')
     <h4>@lang('home.Employment Scams Warning - Tips for Safer Online Job Search') </h4>
 <span style="color:red">@lang('home.Very Important You Must Read')</span><br>
 <div style="padding-top:20px;">
+@lang('home.safety_text12')
+</div>
+<div style="padding-top:20px;">
+@lang('home.safety_text9')
+</div>
+
+<div style="padding-top:20px;">
 @lang('home.safety_text')
 </div>
 <div style="padding-top:20px;">

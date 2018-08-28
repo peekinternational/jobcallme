@@ -26,7 +26,7 @@
                     <br>
                     <h4>@lang('home.Order Detail'):</h4>
                     <p>@lang('home.Job Title'): {{ $inputs['title']}}</p>
-                    <p>@lang('home.Amount') : @if($input['currency'] == "KRW") ￦{{ $input['amount']}} @else ${{ $input['amount']}} @endif</p>
+                    <p>@lang('home.Amount') : @if($inputs['currency'] == "KRW") ￦{{ $inputs['amount']*1100}} @else ${{ $inputs['amount']}} @endif</p>
                     <p>@lang('home.Bank Name') : 기업은행</p>
                     <p>@lang('home.Account Holder') : <b>주식회사 잡콜미</b></p>
                     <p>@lang('home.Account Number') : 068-078905-04-012</p>

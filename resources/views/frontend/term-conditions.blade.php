@@ -6,7 +6,11 @@
 <section id="company-box">
     <div class="container">
         <div class="col-md-{{ $record->featuredImage != '' ? '8' : '12' }} company-box-left">
-            {!! $record->pageData !!}
+            @if(app()->getLocale() == "kr")
+        {!! $record->pageData !!}
+		@else
+        {!! $record->pageData2 !!}
+			@endif	
            <!--  @lang('home.term&conditionPageContent') -->
         </div>
         @if($record->featuredImage != '')

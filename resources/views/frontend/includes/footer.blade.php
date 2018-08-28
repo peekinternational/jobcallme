@@ -42,6 +42,7 @@
             <option>@lang('home.testimonial')</option>
             
         </div>
+		<div id="feed-thank" class="none">@lang('home.feedback-thank')</div>
 
         <div class="col-md-2">
             <!-- <h5><span class="footer-title-box" style="background-color: #8d7d8d">@lang('home.hourwork')</span></h5> -->
@@ -115,15 +116,10 @@
         <div class="col-md-2">
             <!-- <h5><span class="footer-title-box" style="background-color: #b0a48a">@lang('home.jobin') {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</span></h5> -->
             <h5>&nbsp;</h5>
-            <div style="width:100%;overflow: visible;background:#b0a48a;margin-bottom: 30px;">
-                <select class="form-control select3" name="career" onchange="location.href=this.value" style="width:200px;overflow: auto;">
-                    <option value="">@lang('home.jobin'){{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}</option>
-                    @foreach(JobCallMe::getJobStates(JobCallMe::getHomeCountry()) as $loca2)
-                    <option value="{{ url('jobs?country='.JobCallMe::getHomeCountry().'&state='.$loca2->id )}}">@lang('home.'.$loca2->name)<!--  @lang('home.jobsin') --></option>
-                    @endforeach
-                    <option value="{{ url('jobs?country='.JobCallMe::getHomeCountry().'&state='.$loca2->id )}}">@lang('home.globalOverseas')<!--  @lang('home.jobsin') --></option>
-                </select>
-            </div>
+            <h5><a style="color:white" href="{{ url('jobs') }}"><div style="width:100%;overflow: visible;background:#b0a48a;border: 1px solid white; padding: 9px;margin-bottom: 30px;">
+                 &nbsp;@lang('home.jobin')&nbsp;&nbsp;
+				 <span style="font-size:5px;float:right;">▶</span>
+               </div></a></h5>
 
             <h5>
                <a style="color:white" target="_blank" href="https://www.outsourcingok.com/"><div style="width:100%;overflow: visible;background:#f0ad4e;border: 1px solid white; padding: 9px;">
@@ -149,12 +145,12 @@
 					<option value="{{ url('picture-policy') }}">@lang('home.picture policy')</option>
 					<option value="{{ url('review-write') }}">@lang('home.review write')</option>
 					<option value="{{ url('video-chat-policy') }}">@lang('home.Video & Chat Policy')</option>
-					<option value="{{ url('write-resume') }}">@lang('home.Write resume')</option>
+					<!-- <option value="{{ url('write-resume') }}">@lang('home.Write resume')</option>
 					<option value="{{ url('self-introduction') }}">@lang('home.Self Introduction')</option>
 					<option value="{{ url('interview-strategy') }}">@lang('home.Interview Strategy')</option>
 					<option value="{{ url('increased-recruitment') }}">@lang('home.Increased Recruitment')</option>
 					<option value="{{ url('conformity-verification') }}">@lang('home.Conformity Verification')</option>
-					<option value="{{ url('active-communication') }}">@lang('home.Active Communication')</option>
+					<option value="{{ url('active-communication') }}">@lang('home.Active Communication')</option> -->
 					<!-- <option value="{{ url('refund-policy') }}">@lang('home.Refund Policy')</option> -->
                     <option value="{{ url('account/register') }}">@lang('home.Login')</option>
                     <option value="{{ url('account/register') }}">@lang('home.Signup')</option>
@@ -168,7 +164,9 @@
 			<a href="https://plus.google.com/people" target="_blank"><i class="fa fa-google-plus-square"></i></a>
 			<a href="https://www.linkedin.com/uas/login?_l=en" target="_blank"><i class="fa fa-linkedin-square"></i></a>
 			<a href="https://twitter.com/?lang=en" target="_blank"><i class="fa fa-twitter-square"></i></a>
-			<a href="https://www.jcmlink.com/" target="_blank"><img src="{{ asset('website/j.png') }}"></a>
+
+			<a href="https://www.talksns.com/" target="_blank"><img src="{{ asset('website/j.png') }}"></a>
+
 								   
 			</p>
            
@@ -188,7 +186,7 @@
 
 	<div class="foot-links-m hidden-sm hidden-md hidden-lg">             
         <ul>
-            <li><a id="footinfobutton" onclick="myfootinfo()" style="color:#fff;font-size:15px;"> @lang('home.jcm-foot1')</a><a id="footinfobutton2" style="color:#fff;font-size:11px;"> @lang('home.jcm-foot1-1')</a></li>			       
+            <li><a id="footinfobutton" onclick="myfootinfo()" style="color:#fff;font-size:15px;"> @lang('home.jcm-foot1')</a><br><a id="footinfobutton2" style="color:#fff;font-size:11px;"> @lang('home.jcm-foot1-1')</a></li>			       
         </ul>				
     </div>
 	
@@ -250,12 +248,14 @@ setTimeout(function(){
     var drop = $('#feedback-drop').html();
     var message = $('#feedback-message').html();
     var submit = $('#feedback-submit').html();
+	var feedbackthank = $('#feed-thank').html();
     $('#fpi_header_message').html(header); 
     $('#fpi_title h2').html(feedback); 
     $('input[type="email"]').attr('placeholder',email); 
     $('#feedback-Form select[name="type"]').html(drop); 
     $('#feedback-Form textarea[name="message"]').html(message); 
     $('#fpi_submit_submit button[type="submit"]').html(submit); 
+	$('#fpi_ajax_message h2').html(feedbackthank);
 }, 3000);      
 
 

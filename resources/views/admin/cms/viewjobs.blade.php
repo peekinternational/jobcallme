@@ -16,7 +16,16 @@ $s_app = Session()->get('jobSearch');
             <div class="row">
                 <form method="post" action="{{ url('admin/cms/alljobs') }}">
                     {{ csrf_field() }}
-                    <div class="col-md-6">
+                    <div class="col-md-3">
+                        <label>Search By</label>
+                        <select class="form-control select2" name="searchcountry">
+                            <option value=""></option>
+							@foreach(JobCallMe::getJobCountries() as $country)
+                                <option value="{{ $country->id }}" {{ $country->id == trim(Request::input('country')) ? 'selected="selected"' : '' }}>@lang('home.'.$country->name)</option>
+                            @endforeach
+                        </select>
+                    </div>
+					<div class="col-md-6">
                         <label>Search String</label>
                         <input type="text" class="form-control" name="search" placeholder="Type here ..." value="{{ $s_app['search'] }}">
                     </div>
@@ -47,6 +56,7 @@ $s_app = Session()->get('jobSearch');
                                         <th>3rdCategory</th>
                                         <th>Created On</th>
                                         <th>Status</th>
+										<th>Logo</th>
                                         <th>Action</th>
                                     </thead>
                                     <tbody>
@@ -82,9 +92,38 @@ $s_app = Session()->get('jobSearch');
                                                     <input type="checkbox" class="jobstatus" @if($job->jobStatus == 'Publish') Checked @endif>
                                                 </td>
                                                 <td>{{ $job->createdTime }}</td>
+												<?php
+					if($job->work_id){
+						
+						  $is_file_exist = file_exists('compnay-logo/'.$job->work_id.'_Logo.jpg');
+
+						  if ($is_file_exist) {
+							$cLogo = 'O';
+						  }else{
+							$cLogo = 'X';
+						  }
+
+
+						
+					}else{
+						if($job->companyLogo != ''){
+							$cLogo = 'O';
+						 }else{
+							$cLogo = 'X';
+						 }
+					}
+					?>
+
+
+												
+												<td>{{$cLogo}}</td>
+												
                                                 <td>
                                                    <!--  <a href="{{ url('admin/cms/jobs/update/'.$job->jobId) }}" data-toggle="tooltip" data-original-title="Update"><i class="icon icon-pencil"></i></a>&nbsp;&nbsp;&nbsp; -->
-                                                    <a href="javascript:;" onclick="deleteShift('{{ $job->jobId }}')" data-toggle="tooltip" data-original-title="Delete"><i class="icon icon-remove"></i></a>
+                                                    <a href="javascript:;" onclick="deleteShift('{{ $job->jobId }}')" data-toggle="tooltip" data-original-title="Delete"><i class="icon icon-remove"></i></a>&nbsp;&nbsp;&nbsp;
+
+													<a href="javascript:;" onclick="editmainAD('{{ $job->jobId }}')" data-toggle="tooltip" data-original-title="Update"><i class="icon icon-pencil"></i>광고등록</a>
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -154,6 +193,50 @@ $s_app = Session()->get('jobSearch');
             </div>
         </div>
     </div>
+
+	<div class="modal fade" tabindex="-1" role="dialog" id="mainad-modal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Category</h4>
+                </div>
+                <form onsubmit="return false" class="mainad-form">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <input type="hidden" class="jobId" name="jobId" value="0">
+                        <div class="form-group">
+                            <label>광고명</label>
+							<select class="form-control job-category" name="name">
+								<option value="">광고 선택</option>
+								<option value="7">프리미엄</option>
+								<option value="6">탑</option>
+								<option value="5">핫</option>
+								<option value="4">레이스트</option>
+								<option value="3">스페셜</option>
+								<option value="2">골드</option>								
+						   </select>
+
+                            <!-- <input type="text" class="form-control" name="name"> -->
+                        </div>
+						<div class="form-group">
+                            <label>광고마감날짜</label>
+                            <input type="text" class="form-control" name="adexpiry">
+							&nbsp;&nbsp;&nbsp;ex)2018-07-30
+                        </div>
+                        <div class="alert alert-danger" style="display: none;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary do-save">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @section('page-footer')
 <script type="text/javascript">
@@ -231,6 +314,42 @@ $('form.shift-form').submit(function(e){
     })
     e.preventDefault();
 })
+
+
+$('form.mainad-form').submit(function(e){
+    $('.mainad-form .do-save').prop('disabled',true);
+    $('.mainad-form .do-save').addClass('spinner spinner-default');
+    $('.mainad-form .alert-danger').hide();
+    $.ajax({
+        type: 'post',
+        data: $('.mainad-form').serialize(),
+        url: "{{ url('admin/cms/alljobs/save') }}",
+        success: function(response){
+            if($.trim(response) != '1'){
+                $('.mainad-form .alert-danger').show();
+                $('.mainad-form .alert-danger').html(response);
+                $('.mainad-form .do-save').prop('disabled',false);
+                $('.mainad-form .do-save').removeClass('spinner spinner-default');
+            }else{
+                window.location.href = "{{ url('admin/cms/alljobs') }}";
+            }
+        }
+    })
+    e.preventDefault();
+})
+
+function editmainAD(jobId){
+    $.ajax({
+        url: "{{ url('admin/cms/alljobs/get') }}/"+jobId,
+        success: function(response){
+            var obj = $.parseJSON(response);
+            $('.mainad-form .jobId').val(jobId);
+            $('.mainad-form select[name="name"]').val(obj.name);
+			$('.mainad-form input[name="adexpiry"]').val(obj.adexpiry);
+            $('#mainad-modal').modal();
+        }
+    })
+}
 
 </script>
 @endsection

@@ -25,7 +25,7 @@
                     <hr>
                     <br>
                     <p>@lang('home.Skill title') : {{ $order['orderBy']}}</p>
-                    <p>@lang('home.Amount') : @if($order['currency'] == "KRW") ￦{{ $order['amount']}} @else ${{ $order['amount']}} @endif</p>
+                    <p>@lang('home.Amount') : @if($order['currency'] == "KRW") ￦{{ number_format($order['amount'])}} @else ${{ number_format($order['amount'])}} @endif</p>
                     <p>@lang('home.Bank Name') : 기업은행</p>
                     <p>@lang('home.Account Holder') : <b>주식회사 잡콜미</b></p>
                     <p>@lang('home.Account Number') : 068-078905-04-012</p>

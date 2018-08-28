@@ -7,8 +7,9 @@ $gCountry = Session()->get('jcmUser')->country;
 @section('content')
 <section id="postNewJob">
     <div class="container">
-        <div class="col-md-9">
+
             <div class="pnj-box row">
+
                 <form id="pnj-form" action="" method="post" class="writing-form">
                     {{ csrf_field() }}
                     <input type="hidden" name="prevIcon" value="{{ $article->wIcon }}">
@@ -19,45 +20,49 @@ $gCountry = Session()->get('jcmUser')->country;
                     @else
                      <div>
                     <span style="padding-left:50px">@lang('home.selectcurrency'): &nbsp;</span>
-                      <input type="radio" name="gender" id="wr_kr" value="kr" checked="checked"> korean
-                      &nbsp;&nbsp;<input type="radio" name="gender" id="wr_us" value="us"> US$
+                      <input type="radio" name="gender" id="wr_kr" value="kr" checked="checked"> @lang('home.paykorean')
+                      &nbsp;&nbsp;<input type="radio" name="gender" id="wr_us" value="us"> @lang('home.US$')
                       </div>
                     <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;margin-left:20px;">
                      <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                         <ul id="post-job-ad-types-read" class="please">
 
 
-							<li style="position:relative;background:#3a79d2;" class="text-center">
+							<li style="position:relative;background-image:url('/frontend-assets/images/read-1.png');" class="text-center">
 								<!-- <spans style="color:#fff;padding-left:10px;padding-top:7px;">&nbsp;<input class="mat-radio-input cdk-visually-hidden" type="radio" id="basicplan" name="cat_id" value="0" >@lang('home.FreetillEndofOctober')</span>
                                <div class="mat-radio-label-content" style="padding-top:5px;"><span style="display:none;">&nbsp;</span>
                                <span class="b" style="color:#fff;font-size: 17px;">@lang('home.Basic')</span></div>
 
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span></div> -->
 
-							   <div class="col-md-6 col-sm-6 col-xs-6" style="padding-top:25px">    
-										
-                                        <input class="mat-radio-input cdk-visually-hidden" type="radio" id="basicplan" name="cat_id" value="0" >		
-									    <span class="b" style="color:#fff;font-size: 16px;">@lang('home.warticle')</span>                          
-                                    
-                                </div>
+							   
+						
 
-
-                                <div class="col-md-6 col-sm-6 col-xs-6" style="padding-top:10px">  
+							   <span class="pay_skill text-left">
+							   <div style="padding-left:10px;padding-top:0px;">
+                               <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="cat_id" value="{!! $payment->cat_id!!}" style="padding-top:15px;">
+							   <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
+							   </div></span>
+							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span></div>
+                                <div>
                                     <!----><label for="{!! $payment->id!!}">
                                         <!-- <ul class="list-unstyled desc" >
                                             <li>@lang('home.Featuredonhomepage') --><!-- {!! $payment->tag1!!} --><!-- </li>
                                             <li>@lang('home.adcost') --><!-- {!! $payment->tag2!!} --><!-- </li>
                                         </ul> -->
-										
-                                        <div class="credits b" style="color:#fff;font-size: 12px;padding-top:5px;">
-											<div class="text-success" style="color:#fff">@lang('home.FreetillEndofOctober')</div>
-											<div class="text-success" style="color:#fff;padding-top:10px;"><!-- @lang('home.Free') --><span style="padding-left:20px">@lang('home.pay_cost') : <strike>[@lang('home.lean1000')]</strike></span></div>
-											<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
-										</div>
+										<div class="text-left" style="font-size: 13px;color:#000;padding-left:7px;margin-top:0px;"><strike><span style="color:#000;font-size:17px;margin-top:20px;" id="wr_text{{number_format($key)}}"></span></strike>&nbsp;<span style="color:#000;font-size: 11px;">/1 @lang('home.days')</span></div>
+
+										<div style="font-size: 13px;color:#fff;padding-left:90px;margin-top:-20px;"><span style="color:#fff;padding-left:28px;">@lang('home.Free')</span></div>
+
+									<div class="col-md-12">
+										<div style="font-size: 11px;padding-top:15px;margin-right:-9px;color:#000;float:right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@lang('home.FreetillEndofOctober')</div>
+									</div>
+                                        <div style="color:#000;font-size: 11px;padding-top:5px;padding-left:110px;">
+										@lang('home.read-pay-text')</div>									
+									
+									
                                     </label>
-                                    <!---->
-                                    <!---->
-                                    <!---->
+                                    
                                 </div>
 
                             </li>
@@ -240,7 +245,7 @@ $gCountry = Session()->get('jcmUser')->country;
                     </div>
                 </form>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
 </section>
 
@@ -253,6 +258,37 @@ input[type="file"] {
 .text-danger{color: #ff0000 !important;}
 </style>
 <script type="text/javascript">
+ function number_format(data) 
+{
+    var tmp = '';
+    var number = '';
+    var cutlen = 3;
+    var comma = ',';
+    var i;
+    var data = String(data);
+    len = data.length;
+ 
+    mod = (len % cutlen);
+    k = cutlen - mod;
+    for (i=0; i<data.length; i++) 
+    {
+        number = number + data.charAt(i);
+        
+        if (i < data.length - 1) 
+        {
+            k++;
+            if ((k % cutlen) == 0) 
+            {
+                number = number + comma;
+                k = 0;
+            }
+        }
+    }
+ 
+    return number;
+}
+
+
 var alrt ='';
 $(document).ready(function(){
       $('.please li').first().find('.mat-radio-input').bind('click',function(e){
@@ -281,7 +317,7 @@ $(document).ready(function(){
      var simplearray = <?php echo json_encode($wrpayment); ?>;
 
      for(var i=0;i<simplearray.length;i++){
-     $('#wr_text'+i).html('KRNW '+simplearray[i].price*1100+'.00')
+     $('#wr_text'+i).html('￦ '+number_format(simplearray[i].price*1100)+'')
         //alert(jArray[i].amount);
        }
      
@@ -298,7 +334,7 @@ $(document).ready(function(){
     $('#wr_kr').click(function(){
     if ($(this).is(':checked')) {
     for(var i=0;i<simplearray.length;i++){
-     $('#wr_text'+i).html('KRNW '+simplearray[i].price*1100 +'.00')
+     $('#wr_text'+i).html('￦ '+number_format(simplearray[i].price*1100) +'')
        // alert(jArray[i].amount*1100);
       }
     }

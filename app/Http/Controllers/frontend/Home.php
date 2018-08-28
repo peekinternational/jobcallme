@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
-
+namespace App\Http\Controllers\frontend;  
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Facade\JobCallMe;
@@ -9,6 +8,7 @@ use DB;
 use Sajid;
 use Mail;
 use App;
+use GuzzleHttp\Client;
 date_default_timezone_set("Asia/Seoul");
 class Home extends Controller{
 
@@ -42,9 +42,10 @@ class Home extends Controller{
 		->where('jcm_jobs.jobStatus','=','Publish')
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
-		->where('jcm_countries.sortname','=',$position->countryCode)
+		//->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
-		->limit(12)->get();
+		->get();
+		//->limit(12)->get();
 		if(sizeof($premium) == 0){
 		$premium = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
@@ -54,7 +55,7 @@ class Home extends Controller{
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->orderBy('jcm_jobs.jobId','desc')
-		->limit(12)->get();
+		->get();
 		}
 		
 		/* jobs query top jobs */
@@ -66,9 +67,9 @@ class Home extends Controller{
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_jobs.jobStatus','=','Publish')
-		->where('jcm_countries.sortname','=',$position->countryCode)
+		//->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
-		->limit(12)->get();
+		->get();
 		if(sizeof($top_jobs) == 0){
 		$top_jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
@@ -78,7 +79,7 @@ class Home extends Controller{
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_jobs.jobStatus','=','Publish')
 		->orderBy('jcm_jobs.jobId','desc')
-		->limit(12)->get();
+		->get();
 		}
 		
 		/* jobs query hot jobs */
@@ -90,9 +91,9 @@ class Home extends Controller{
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_jobs.jobStatus','=','Publish')
-		->where('jcm_countries.sortname','=',$position->countryCode)
+		//->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
-		->limit(12)->get();
+		->get();
 		if(sizeof($hot) == 0){
 		$hot = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
@@ -102,7 +103,7 @@ class Home extends Controller{
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_jobs.jobStatus','=','Publish')
 		->orderBy('jcm_jobs.jobId','desc')
-		->limit(12)->get();
+		->get();
 		}
 		
 		$latest = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
@@ -113,9 +114,8 @@ class Home extends Controller{
 			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 			->where('jcm_jobs.jobStatus','=','Publish')
-			->where('jcm_countries.sortname','=',$position->countryCode)
-			->orderBy('jcm_jobs.jobId','desc')
-			->limit(12)
+			//->where('jcm_countries.sortname','=',$position->countryCode)
+			->orderBy('jcm_jobs.jobId','desc')			
 			->get();
 		if(sizeof($latest) == 0){
 			$latest = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
@@ -126,8 +126,7 @@ class Home extends Controller{
 			->where('jcm_jobs.jobStatus','=','Publish')
 			->where('jcm_jobs.p_Category','=','4')
 			->where('jcm_jobs.status','=','1')
-			->orderBy('jcm_jobs.jobId','desc')
-			->limit(12)
+			->orderBy('jcm_jobs.jobId','desc')			
 			->get();
 		}
 		$special = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
@@ -138,9 +137,8 @@ class Home extends Controller{
 			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 			->where('jcm_jobs.jobStatus','=','Publish')
-			->where('jcm_countries.sortname','=',$position->countryCode)
-			->orderBy('jcm_jobs.jobId','desc')
-			->limit(12)
+			//->where('jcm_countries.sortname','=',$position->countryCode)
+			->orderBy('jcm_jobs.jobId','desc')			
 			->get();
 		if(sizeof($special) == 0){
 			$special = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
@@ -150,8 +148,7 @@ class Home extends Controller{
 			->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 			->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 			->where('jcm_jobs.jobStatus','=','Publish')
-			->orderBy('jcm_jobs.jobId','desc')
-			->limit(12)
+			->orderBy('jcm_jobs.jobId','desc')			
 			->get();
 		}
 
@@ -163,9 +160,9 @@ class Home extends Controller{
 		->where('jcm_jobs.expiryAd','>',date('Y-m-d'))
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_jobs.jobStatus','=','Publish')
-		->where('jcm_countries.sortname','=',$position->countryCode)
+		//->where('jcm_countries.sortname','=',$position->countryCode)
 		->orderBy('jcm_jobs.jobId','desc')
-		->limit(12)->get();
+		->get();
 		if(sizeof($golden) == 0){
 		$golden = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.companyId','jcm_companies.companyName','jcm_companies.companyLogo')
 		->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId')
@@ -175,11 +172,13 @@ class Home extends Controller{
 		->where('jcm_jobs.expiryDate','>',date('Y-m-d'))
 		->where('jcm_jobs.jobStatus','=','Publish')
 		->orderBy('jcm_jobs.jobId','desc')
-		->limit(12)->get();
+		->get();
 		}
 //return $companies;
 		return view('frontend.home-page',compact('jobShifts','companies','premium','top_jobs','hot','latest','special','golden'));
 	}
+	
+	
 	public function nicepay(Request $request){
 		//return $request->all();
 		return "hello";
@@ -190,6 +189,35 @@ class Home extends Controller{
 			print_r($request->all());exit;
 		} 
 		return view('frontend.contact-us');
+	}
+	
+	public function hellosajid(Request $request){
+		$input['companyId'] = '0';
+		$input['type'] = 'User';
+		$input['secretId'] = JobCallMe::randomString();
+		$input['firstName'] = trim($request->input('firstName'));
+		$input['lastName'] = trim($request->input('lastName'));
+		$input['email'] = trim($request->input('email'));
+		$input['username'] = trim($request->input('username'));
+		$input['password'] = md5(trim($request->input('password')));
+		$input['phoneNumber'] = trim($request->input('phoneNumber'));
+		$input['country'] = JobCallMe::countryId($request->input('country'));
+		$input['state'] = '';
+		$input['user_status'] = $request->input('user_status');
+		$input['city'] = JobCallMe::cityId($request->input('city'));
+		$input['profilePhoto'] = '';
+		$input['about'] = '';
+		$input['createdTime'] = date('Y-m-d H:i:s');
+		$input['modifiedTime'] = date('Y-m-d H:i:s');
+		$userId = DB::table('jcm_users')->insertGetId($input);
+	
+		$cInput = array('companyName' => $input['firstName'].' '.$input['lastName'], 'companyEmail' => $input['email'], 'companyPhoneNumber' => $input['phoneNumber'], 'companyCountry' => $input['country'], 'companyState' => $input['state'], 'companyCity' => $input['city'], 'category' => '0', 'companyCreatedTime' => date('Y-m-d H:i:s'), 'companyModifiedTime' => date('Y-m-d H:i:s'));
+		$companyId = DB::table('jcm_companies')->insertGetId($cInput);
+
+		DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId));
+		/* end */
+		
+		return json_encode($cInput);
 	}
 
 	public function aboutUs(){
@@ -237,6 +265,32 @@ class Home extends Controller{
 		return view('frontend.video-chat-policy',compact('record'));
 	}
 
+	public function writeresume(){
+		$record = DB::table('jcm_cms_pages')->where('slug','write-resume')->first();
+		return view('frontend.write-resume',compact('record'));
+	}
+	public function selfintroduction(){
+		$record = DB::table('jcm_cms_pages')->where('slug','self-introduction')->first();
+		return view('frontend.self-introduction',compact('record'));
+	}
+	public function interviewstrategy(){
+		$record = DB::table('jcm_cms_pages')->where('slug','interview-strategy')->first();
+		return view('frontend.interview-strategy',compact('record'));
+	}
+	public function increasedrecruitment(){
+		$record = DB::table('jcm_cms_pages')->where('slug','increased-recruitment')->first();
+		return view('frontend.interview-strategy',compact('record'));
+	}
+	public function conformityverification(){
+		$record = DB::table('jcm_cms_pages')->where('slug','conformity-verification')->first();
+		return view('frontend.interview-strategy',compact('record'));
+	}
+	public function activecommunication(){
+		$record = DB::table('jcm_cms_pages')->where('slug','active-communication')->first();
+		return view('frontend.interview-strategy',compact('record'));
+	}
+
+
 	public function accountLogin(Request $request){
 		
 		if($request->session()->has('jcmUser')){
@@ -271,7 +325,7 @@ class Home extends Controller{
 			}
 			else{
 				if(JobCallMe::isResumeBuild($user->userId) == false){
-					$fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume';
+					$fNotice = 'To apply on jobs please build your resume. <a href="'.url('account/jobseeker/resume').'">Click Here</a> To create your resume<br><span style="color:#2e6da4;font-size:12px;"><i class="fa fa-info-circle" aria-hidden="true"></i> If you do not have personal resume information with final education information, you will not be able to register for the resume.</span>';
 					$request->session()->put('fNotice',$fNotice);
 				}
 				$request->session()->put('jcmUser', $user);
@@ -303,6 +357,9 @@ class Home extends Controller{
 		}
 		/* end */
 	}
+	public function check(Request $request){
+		echo "hello";
+	}
 
 	public function accountRegister(Request $request){
 		if($request->session()->has('jcmUser')){
@@ -320,8 +377,7 @@ class Home extends Controller{
 				'state' => 'required',
 				'phoneNumber' => 'required|digits_between:10,12',
 			],[
-				'username.unique' => trans('home.Username must be unique'),
-				'username.min' => trans('home.Username must be 5 more characters'),
+				'username.unique' => trans('home.Username must be unique'),				
 				'email.unique' => trans('home.Email must be unique'),
 				'username.required' => trans('home.Enter username'),
 				'email.required' => trans('home.Enter Email'),
@@ -357,7 +413,51 @@ class Home extends Controller{
 			$input['about'] = '';
 			$input['createdTime'] = date('Y-m-d H:i:s');
 			$input['modifiedTime'] = date('Y-m-d H:i:s');
-			
+			$outsourceRegistertionData = array(
+				'firstName' => $request->input('firstName'),
+		        'lastName' => $request->input('lastName'),
+		        'email' => $request->input('email'),
+		        'username' => $request->input('username'),
+		        'country' => array(
+		          'name' => $request->input('country'),
+		          'code' => $request->input('country'),
+		          'city' => $request->input('city')
+		        ),
+		        'userType' => 'individual',
+		        'mobileNumber' => $request->input('phoneNumber'),
+		        'userRole' => '',
+		        'subscribe' => '',
+		        'password' => $request->input('password'),
+		        'status' => 'offline',
+		        'jobcallme' =>'Y'
+				 );
+
+			$data = http_build_query($outsourceRegistertionData);
+			$url = "https://www.outsourcingok.com/api/auth/signup";
+			$ch = curl_init();
+		    curl_setopt($ch, CURLOPT_URL,$url);
+		    curl_setopt($ch, CURLOPT_POST, 1);
+		    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+		    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		    curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+		    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		    $server_output = curl_exec ($ch);
+		    curl_close ($ch);
+			$outsourceResponse = json_decode($server_output);
+
+			//print_r($outsourceResponse);die;
+			if($outsourceResponse->message){
+				//print_r($outsourceResponse);
+				//die();
+			}
+			if($outsourceResponse->_id){
+				$input['outsourceid'] = $outsourceResponse->_id;
+				
+			}
+
 			$userId = DB::table('jcm_users')->insertGetId($input);
 			setcookie('cc_data', $userId, time() + (86400 * 30), "/");
 			extract($request->all());
@@ -373,7 +473,10 @@ class Home extends Controller{
 			});
 			/*$user = $this->doLogin($request->input('email'),$request->input('password'));
 			$request->session()->put('jcmUser', $user);*/
-			$fNotice = trans('home.Please check your email to verify');
+
+			//$fNotice = trans('home.Please check your email to verify');
+			$fNotice = 'Please check your email to verify';
+
 			
 			$request->session()->put('fNotice',$fNotice);
 			return redirect('account/register');
@@ -477,10 +580,13 @@ class Home extends Controller{
 
     public function people(Request $request){
 		$app = $request->session()->get('jcmUser');
-    	//dd($request->all());
+    	$request->all();
     	/* peoples query */
     	$people = DB::table('jcm_users');
     	$people->select('*','privacy.profileImage as pImage');
+
+		$people->select('*','jcm_users_meta.gender as genderpeople');
+
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
     	$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
 		//$people->leftJoin('jcm_download','jcm_download.seeker_id','=','jcm_users.userId');
@@ -495,7 +601,7 @@ class Home extends Controller{
 			if($request->input('country') != ''){
 				$people->where('jcm_users.country','=',$request->input('country'));
 			}
-			if($request->input('state') != ''){
+			if($request->input('city') != ''){
 				$people->where('jcm_users.state','=',$request->input('state'));
 			}
 
@@ -510,10 +616,11 @@ class Home extends Controller{
 	    	//}
 	    	
 	    }
-		if($request->input('industry') != ''){
-			$people->where('jcm_users_meta.industry','=',$request->input('industry'));
-		}
+if($request->input('industry') != ''){
+	    		$people->where('jcm_users_meta.industry','=',$request->input('industry'));
+	    	}
     	$people->where('privacy.profile','=','Yes');
+		$people->where('jcm_users.lastName','!=','');
     	//$people->limit(30);
 
 		//$people->where('jcm_users_meta.userId','!=','');
@@ -524,10 +631,13 @@ class Home extends Controller{
     	$people->orderBy('jcm_users.userId','desc');
 		$people->groupBy('jcm_users.userId');
 		//$peopleget = $people->get();
+
     	$peoples = $people->paginate(50);
+
 		$data=$peoples;
 			//$data=[];
 	 /*  foreach($pes as $user){
+>>>>>>> 5603ec9ce04df6ce3b03272fe2fca5b70bccb50f
 		//echo $user->userId." / ";
 		$resumess = DB::table('jcm_resume')->where('userId','=',$user->userId)->get();
 		$type=$resumess->pluck('type');
@@ -618,20 +728,19 @@ class Home extends Controller{
          $people->groupBy('jcm_users.userId');
 		$peoples = $people->paginate(18);
 		$data=$peoples;
-	/* 	$pes=$peoples;
-		$data=[];
-  foreach($pes as $user){
+		//$data=[];
+ // foreach($pes as $user){
 	//echo $user->userId." / ";
-	$resumess = DB::table('jcm_resume')->where('userId','=',$user->userId)->get();
-	$type=$resumess->pluck('type');
-	$result = $type->toArray();
-	$arry=in_array('academic',$result);
+	//$resumess = DB::table('jcm_resume')->where('userId','=',$user->userId)->get();
+	//$type=$resumess->pluck('type');
+	//$result = $type->toArray();
+	//$arry=in_array('academic',$result);
 	
-	if($arry){
-	array_push($data,$user);
-	}
+	//if($arry){
+	//array_push($data,$user);
+	//}
 	
-} */
+//}
         // dd($peoples);
 
     	return view('frontend.people',compact('data','peoples'));
@@ -652,7 +761,11 @@ class Home extends Controller{
 		$readQry->limit(12);
 		$lear_record=$readQry->paginate(10);
 //dd($lear_record);
-    	return view('frontend.learn',compact('lear_record'));
+		
+		//$eventphotos = DB::table('eventphotos')->where('EventID',$lear_record->10times_id)->get();
+
+    	//return view('frontend.learn',compact('lear_record','eventphotos'));
+		return view('frontend.learn',compact('lear_record'));
     }
 
     public function read(Request $request){
@@ -660,7 +773,10 @@ class Home extends Controller{
     	$category = JobCallMe::getreadcat($request->input('category'));
     	$readQry = DB::table('jcm_writings')->join('jcm_users','jcm_users.userId','=','jcm_writings.userId');
     	$readQry->leftJoin('jcm_read_category','jcm_read_category.id','=','jcm_writings.category');
-    	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_read_category.name')->groupBy('jcm_writings.title');
+
+    	$readQry->select('jcm_writings.*','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_users.phoneNumber','jcm_read_category.name')->groupBy('jcm_writings.title');
+
+  
     	if($request->input('category') != '0' && $request->input('category') != ''){
     		$readQry->where('jcm_writings.cat_names','LIKE','%'.$category.'%');
     	}
@@ -708,9 +824,10 @@ class Home extends Controller{
     }
 
     public function viewUpskill(Request $request,$skillId){
+		$request->session()->put('skillID',$skillId);
     	$type = $request->segment(2);
     	/* upskill query */
-    	$learnQry = DB::table('jcm_upskills')->leftJoin('jcm_companies','jcm_companies.companyId','=','jcm_upskills.companyId')->where('type','=',ucfirst($type));
+    	$learnQry = DB::table('jcm_upskills')->where('type','=',ucfirst($type));
     	$learnQry->where('skillId','=',$skillId);
     	$record = $learnQry->first();
 
@@ -721,9 +838,60 @@ class Home extends Controller{
 
      $comments = DB::table('jcm_comments')->leftJoin('jcm_users','jcm_users.userId','=','jcm_comments.commenter_id')->where('post_id',$skillId)->where('table_name','learn')->orderBy('jcm_comments.comment_id','desc')->get();
 	// dd($Qry);
-    	return view('frontend.view-course',compact('comments','skillId','record','Qry'));
+
+	$upskill_10 = DB::table('events')->where('ID',$record->times10_id)->first();	
+	$upskill_hotel = DB::table('hotel')->where('HotelListPage','=',$upskill_10->HotelListPage)->paginate(3);	
+
+
+    	return view('frontend.view-course',compact('comments','skillId','record','Qry','upskill_10','upskill_hotel'));
     }
 
+	 public function viewCource(Request $request){
+		 $skillID = $request->session()->get('skillID');
+		
+    	$type = $request->segment(2);
+		
+    	/* upskill query */
+    	$learnQry = DB::table('jcm_upskills');
+    	$learnQry->where('skillId','=',$skillID);
+    	$record = $learnQry->first();
+
+    	if(count($record) == 0){
+    		return redirect('learn');
+    	}
+    
+	// dd($Qry);
+
+	$upskill_10 = DB::table('events')->where('ID',$record->times10_id)->first();	
+	$upskill_hotel = DB::table('hotel')->where('HotelListPage','=',$upskill_10->HotelListPage)->paginate(3);	
+	$vhtml = '';
+			foreach($upskill_hotel as $uphotel){
+					
+						$hotel_img = explode("H", $uphotel->ImageLocal);
+						$hotel_linkurl = explode("?", $uphotel->HotelUrl);
+						$hotel_url_link = $hotel_linkurl[0].'?aid=1595934;'.$hotel_linkurl[1];
+					
+					$vhtml .= '<div class="col-md-6" style="padding-top:10px;">';
+						
+							$is_file_exist = file_exists('upskill-images/H'.$hotel_img[1]);
+
+						    if ($is_file_exist) {
+							  $hotelLogo = url('upskill-images/H'.$hotel_img[1]);
+						    }else{
+							  $hotelLogo = url('upskill-images/hotel_Logo.jpg');
+							}		
+						
+						
+							$vhtml .= '<a href="'.$hotel_url_link.'" target="_blank"><img src="'.$hotelLogo.'" style="width: 70px;height:auto !important;border-radius: 5px;"></a>';
+						
+				
+				$vhtml .= '&nbsp;&nbsp;<a href="'.$hotel_url_link.'" target="_blank">'. $uphotel->HotelName.'</a></div>';
+			}
+			$vhtml .= '</div></td></tr></table><br> <br></div>';
+          $vhtml .= '<div style="text-align:center;"> <div style="text-align:center;color:#337ab7;margin-bottom:-15px;"><p>&nbsp;&nbsp;</p>'.trans('home.hotelpage').'</div><div style="text-align:center;">'.$upskill_hotel->render().'</div></div>';
+        return $vhtml;
+    	//return view('frontend.view-course',compact('comments','skillId','record','Qry','upskill_10','upskill_hotel'));
+    }
     public function searchSkills(Request $request){  
     //dd($request->input('country'));     / search upskills /  
      
@@ -769,15 +937,23 @@ class Home extends Controller{
 		if($request->input('state') != ''){
     		$company->where('companyState','=',$request->input('state'));
     	}
-    	if($request->input('in') != ''){
+    	//if($request->input('in') != ''){
+    		//$company->where('category','=',$request->input('in'));
+		//}
+	}
+		if($request->input('in') != ''){
     		$company->where('category','=',$request->input('in'));
 		}
-	}
+
 		$company->where('jcm_companies.category','!=','');
+		$company->where('jcm_companies.companyName','!=','주식회사잡콜미');
+		$company->where('jcm_companies.companyAddress','!=','');
 		$company->where('jcm_companies.companyAbout','!=',null);
     	
-    	$company->orderBy('package','desc');
-    	$company->orderBy('companyModifiedTime','desc');
+    	//$company->orderBy('package','desc');
+    	//$company->orderBy('companyModifiedTime','desc');
+		$company->orderBy('companyId','desc');
+		$company->orderBy('moviecom','desc');
     	
 		$companies = $company->paginate(60);
 		$companies->appends(['keyword' => $request->input('keyword')]);
@@ -788,9 +964,17 @@ class Home extends Controller{
 
     public function viewCompany(Request $request,$companyId){
     	$company = DB::table('jcm_companies')->where('companyId','=',$companyId)->first();
-
+		
+		$companyals = DB::table('jcm_companies_als')->where('companyId','=',$companyId)->first();
 
     	$jobs = DB::table('jcm_jobs')->where('companyId','=',$companyId)->limit(10)->get();
+
+		$company_work = DB::table('jobentity')->where('EmployerID','=',$company->work_id)->first();
+
+		$company_work2 = DB::table('companyemployeestat')->where('CompanyID','=',$company->work_id)->first();
+
+		$company_work3 = DB::table('employer')->where('ID','=',$company->work_id)->first();
+
 
     	$followArr = array();
 		if($request->session()->has('jcmUser')){
@@ -814,7 +998,7 @@ class Home extends Controller{
 			$allgrowing=$allrec == 0 ? 0 : ($pergrowing*100/$allrec);
 			//dd($company);
 
-    	return view('frontend.show-company',compact('allgrowing','allon','allrecmond','company','jobs','followArr','companyReview'));
+    	return view('frontend.show-company',compact('allgrowing','allon','allrecmond','company','jobs','followArr','companyReview','companyals','company_work','company_work2','company_work3'));
     }
 
     public function sendFeedback(Request $request){
@@ -858,6 +1042,7 @@ class Home extends Controller{
 }
 
 public function getjobnotifications(Request $request){
+
 	if(!session()->has('jcmUser')){
 		return redirect('account/login');
 	}
@@ -869,9 +1054,14 @@ public function getjobnotifications(Request $request){
 	$currentDate = \Carbon\Carbon::now();
 	print_r($currentDate->toDateTimeString());die;
 	Mail::send('emails.jobs',$jobstoview,function($message){
-		$message->to(session()->get('jcmUser')->email)->subject('Latest jobs');
+
+		$message->to(session()->get('jcmUser')->email)->subject(trans('home.Latest jobs Mail'));
+
 	});
+	
+
 }
+
 public function feedback(Request $request){
 		$data['email'] = $request->input('email');
 		$data['type'] = $request->input('type');
@@ -897,6 +1087,902 @@ public function deletefeedback(Request $request){
 	}
 
 }
+
+public function adddeletescrapping(Request $request){
+		
+		
+			//echo $datas->companyId;			
+			DB::table('employer2')->delete();
+			DB::table('companyemployeestat2')->delete();
+			DB::table('companyfinancialratio2')->delete();
+			DB::table('companyfinancialstatements2')->delete();
+			DB::table('companyoffices2')->delete();			
+			DB::table('jobentity2')->delete();
+			DB::table('jobhistory2')->delete();
+
+
+	echo 2;
+}
+
+public function deletescrapping(Request $request){
+
+				
+		$data = DB::table('employer2')->get();
+		foreach($data as $datas){
+			//echo $datas->companyId;
+			$data2 = DB::table('employer')->where('ID',$datas->ID)->first();
+			DB::table('employer2')->where('ID',$data2->ID)->delete();
+			DB::table('companyemployeestat2')->where('ID',$data2->ID)->delete();
+			DB::table('companyfinancialratio2')->where('CompanyID',$data2->ID)->delete();
+			DB::table('companyfinancialstatements2')->where('CompanyID',$data2->ID)->delete();
+			DB::table('companyoffices2')->where('CompanyID',$data2->ID)->delete();
+			DB::table('jobhistory2')->where('EmployerId',$data2->ID)->delete();
+
+		}
+
+		$data = DB::table('jobentity2')->get();
+		foreach($data as $datas){
+			//echo $datas->companyId;
+			$data2 = DB::table('jobentity')->where('ID',$datas->ID)->first();			
+			DB::table('jobentity2')->where('ID',$data2->ID)->delete();
+
+		}
+
+		$data = DB::table('jobentity2')->get();
+		foreach($data as $datas){
+			
+			$data2 = DB::table('bbb')->where('catname',$datas->RecruitmentOccupation)->first();
+			DB::table('jobentity2')->where('RecruitmentOccupation',$data2->catname)->update(['cat1' => $data2->cat1,'cat2' => $data2->cat2,'cat3' => $data2->cat3]);
+		}
+
+
+	echo 2;
+}
+
+public function getscrapping(Request $request){
+		
+		return view('admin.users.scrapping');
+}
+
+public function addscrapping(Request $request){
+	
+	$data = DB::table('employer2')->get();
+	 
+	  foreach($data as $datas){	
+
+		$state_array = explode(" ", $datas->CompanyAddress);
+							
+		if($state_array[1] == "서울특별시"){
+			$state_num = "2047";
+		}elseif($state_array[1] == "경기도"){
+			$state_num = "2048";
+		}elseif($state_array[1] == "인천광역시"){
+			$state_num = "2049";
+		}elseif($state_array[1] == "부산광역시"){
+			$state_num = "2050";
+		}elseif($state_array[1] == "세종특별자치시"){
+			$state_num = "2051";
+		}elseif($state_array[1] == "울산광역시"){
+			$state_num = "2052";
+		}elseif($state_array[1] == "대전광역시"){
+			$state_num = "2053";
+		}elseif($state_array[1] == "광주광역시"){
+			$state_num = "2054";
+		}elseif($state_array[1] == "대구광역시"){
+			$state_num = "2055";
+		}elseif($state_array[1] == "충청북도"){
+			$state_num = "2056";
+		}elseif($state_array[1] == "충청남도"){
+			$state_num = "2057";
+		}elseif($state_array[1] == "경상북도"){
+			$state_num = "2058";
+		}elseif($state_array[1] == "경상남도"){
+			$state_num = "2059";
+		}elseif($state_array[1] == "전라북도"){
+			$state_num = "2060";
+		}elseif($state_array[1] == "전라남도"){
+			$state_num = "2061";
+		}elseif($state_array[1] == "강원도"){
+			$state_num = "2062";
+		}elseif($state_array[1] == "제주특별자치도"){
+			$state_num = "2063";
+		}
+		
+		$state_num2 = $state_array[2];
+
+		$data2 = DB::table('jcm_cities')->where('name_ko2',$state_num2)->first();
+
+		if($data2 > 0){
+			$city_num=$data2->id;
+		}else{
+			$cityid='0';
+		}
+
+		$input['companyId'] = '0';
+		$input['type'] = 'User';
+		$input['secretId'] = JobCallMe::randomString();		
+		$input['firstName']=$datas->CompanyName;		
+		$input['email']=$datas->CompanyName;
+		$input['username']=$datas->CompanyName;
+		$input['password']='70e62ba4a094939feaf36b0b728ef97e';
+		$input['phoneNumber']='1021426637';
+		$input['country']='1';
+		$input['state']=$state_num;
+		$input['city']=$city_num;
+		$input['subscribe']='Y';
+		$input['profilePhoto'] = '';
+		$input['about'] = '';
+		$input['createdTime'] = date('Y-m-d H:i:s');
+		$input['modifiedTime'] = date('Y-m-d H:i:s');
+		$input['user_status']='Y';
+		$input['work_id']=$datas->ID;
+
+		
+		$userId = DB::table('jcm_users')->insertGetId($input);
+
+		$data3 = DB::table('jobentity2')->where('EmployerId',$datas->ID)->first();
+			
+		$input2['companyName']=$datas->CompanyName;	
+		$input2['businessType']=$datas->CompanyType;
+		$input2['companyUsername']=$datas->CompanyName;
+		$input2['category']='20';
+		$input2['companyAddress']=$datas->CompanyAddress;
+		$input2['companyCountry']='1';
+		$input2['companyCity']=$data2->id;
+		$input2['companyState']=$state_num;
+		$input2['companyEmail']=$data3->email;
+		$input2['companyWebsite']=$datas->Website;
+		$input2['companyNoOfUsers']=$datas->Employees;
+		$input2['companyAbout']=$datas->aboutus;
+		$input2['companyMap']=$datas->CompanyAddress;
+		$input2['capital']=$datas->Capital;		
+		$input2['companycreatedTime'] = date('Y-m-d H:i:s');
+		$input2['companymodifiedTime'] = date('Y-m-d H:i:s');		
+		$input2['work_id']=$datas->ID;
+
+		
+		$companyId = DB::table('jcm_companies')->insertGetId($input2);
+
+		$uemail = $companyId.'@jobcallme.com';
+
+		DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId,'email' => $uemail));
+
+		//$inputall=$datas->all();
+		//DB::table('employer')->insertGetId($data);
+
+	  }
+
+//채용공고
+
+	$data4 = DB::table('jobentity2')->get();
+	 
+	
+
+	  foreach($data4 as $datas4){	
+
+	 if($datawjobs = DB::table('jcm_jobs')->where('title',$datas4->jobname)->first()){
+		}else{
+
+		$jobreceipt04='';
+		$jobreceipt06='';
+		$jobreceipt07='';
+		$jobreceipt03='';
+		$jobreceipt05='';
+
+
+		$data5 = DB::table('jcm_users')->where('work_id',$datas4->EmployerId)->first();
+
+		if($datas4->EmploymentType == '정규직'){
+			$EmploymentType = 'Full Time';
+		}elseif($datas4->EmploymentType == '산업기능요원'){
+			$EmploymentType = 'Military Service Exception';
+		}else{
+			$EmploymentType = 'Contract Workers';
+		}
+
+		if($datas4->ApplicationDeadline == '채용시까지'){
+			$ApplicationDeadline = '2100-12-31';
+		}else{						
+
+			$name_array = explode(" ", $datas4->ApplicationDeadline);			
+			
+			
+			$end_year = substr($name_array[0],0,4);
+			
+			$end_mon = substr($name_array[1],0,2);
+			
+			$end_day = substr($name_array[2],0,2);
+			
+
+			$ymd = $end_year.'-'.$end_mon.'-'.$end_day;			
+
+			$ApplicationDeadline = $ymd;
+		}
+
+		$data61 = DB::table('jobentity2')->where('ID','=',$datas4->ID)->where('registermethod','like','%방문%')->first();
+		if($data61 > 0){
+			$jobreceipt04='yes';
+		}
+
+		$data62 = DB::table('jobentity2')->where('ID','=',$datas4->ID)->where('registermethod','like','%팩스%')->first();
+		if($data62 > 0){
+			$jobreceipt06='yes';
+		}
+
+		$data63 = DB::table('jobentity2')->where('ID','=',$datas4->ID)->where('registermethod','like','%이메일%')->first();
+		if($data63 > 0){
+			$jobreceipt07='yes';
+		}
+
+		$data64 = DB::table('jobentity2')->where('ID','=',$datas4->ID)->where('registermethod','like','%우편%')->first();
+		if($data64 > 0){
+			$jobreceipt03='yes';
+		}
+
+		$data65 = DB::table('jobentity2')->where('ID','=',$datas4->ID)->where('registermethod','like','%전화%')->first();
+		if($data65 > 0){
+			$jobreceipt05='yes';
+		}
+
+
+		$input3['userId']=$data5->userId;	
+		$input3['companyId']=$data5->companyId;		
+		$input3['amount']='0';
+		$input3['p_Category']='1';
+		$input3['title']=$datas4->jobname;
+		$input3['jType']='Free';
+		$input3['department']=$datas4->RecruitmentOccupation;
+		$input3['category']=$data5->category;
+		$input3['jobType']=$EmploymentType;
+		$input3['jobStatus']='Publish';
+		$input3['jobShift']='Following Co. regulation';
+		$input3['process']=$datas4->selectionmethod;
+		$input3['jobacademic']=$datas4->Education;
+		$input3['gender']='Nosex';
+		$input3['currency']='KRW';
+		$input3['anynational']='yes';	
+		$input3['onlynational']='no';
+		$input3['country']=$data5->country;
+		$input3['state']=$data5->state;
+		$input3['city']=$data5->city;
+		$input3['expiryDate']=$ApplicationDeadline;
+		$input3['paymentType']='0';
+		$input3['status']='1';
+		$input3['createdTime'] = date('Y-m-d H:i:s');			
+		$input3['work_id']=$datas4->EmployerId;
+		$input3['work_idx']=$datas4->ID;
+
+		$input3['jobreceipt04']=$jobreceipt04;
+		$input3['jobreceipt06']=$jobreceipt06;
+		$input3['jobreceipt07']=$jobreceipt07;
+		$input3['jobreceipt03']=$jobreceipt03;
+		$input3['jobreceipt05']=$jobreceipt05;
+
+
+		$input3['category']=$datas4->cat1;
+		$input3['subCategory']=$datas4->cat2;
+		$input3['subCategory2']=$datas4->cat3;
+
+		
+
+		
+		$jobId = DB::table('jcm_jobs')->insertGetId($input3);
+
+		}			
+		
+	  }
+echo 2;
+	 
+	
+}
+
+
+
+public function getgdscrapping(Request $request){
+		
+		return view('admin.users.gdscrapping');
+}
+
+public function deletegdscrapping(Request $request){
+
+	//$row = 1;
+	$row = 0;
+	if (($handle = fopen("jobs-20180823-170519.csv", "r")) !== FALSE) {
+		while (($data = fgetcsv($handle, 100000000)) !== FALSE) {
+			//$num = count($data);
+			
+			//$row++;
+			//for ($c=0; $c < $num; $c++) {
+				//$data[$c];
+		if($row22!=0){
+
+			if($data1 = DB::table('jcm_users')->where('firstName',trim($data[3]))->first()){
+			}else{
+
+				$data2 = DB::table('jcm_states')->where('name',trim($data[4]))->first();
+				
+					if($data2->id){
+						$stateid = $data2->id;
+					}else{
+						$stateid = '0';
+					}
+
+				$data3 = DB::table('jcm_cities')->where('name',trim($data[4]))->first();
+
+					if($data3->id){
+						$cityid = $data3->id;
+					}else{
+						$cityid = '0';
+					}
+
+				$input['companyId'] = '0';
+				$input['type'] = 'User';
+				$input['secretId'] = JobCallMe::randomString();		
+				$input['firstName']=$data[3];		
+				$input['email']=$data[3];
+				$input['username']=$data[3];
+				$input['password']='70e62ba4a094939feaf36b0b728ef97e';
+				$input['phoneNumber']='1021426637';
+				$input['country']='231';
+				$input['state']=$stateid;
+				$input['city']=$cityid;
+				$input['subscribe']='Y';
+				$input['profilePhoto'] = '';
+				$input['about'] = '';
+				$input['createdTime'] = $data[0];
+				$input['modifiedTime'] = $data[0];
+				$input['user_status']='Y';
+				
+
+				
+				$userId = DB::table('jcm_users')->insertGetId($input);
+
+
+
+
+		//기업정보	
+
+			if($data[23] == 'Government'){
+				$businessType = 'Government·Pblic·Institutions·Public Corporations';
+				$formofbussiness = 'Government·Pblic·Institutions·Public Corporations';
+			}elseif($data[23] == 'Subsidiary or Business Segment'){
+				$businessType = 'Inc Incorporated';
+				$formofbussiness = 'Midsize Business';
+			}elseif($data[23] == 'Company - Private'){
+				$businessType = 'Sole Proprietorship';
+				$formofbussiness = 'Small and Medium-sized Businesses';
+			}elseif($data[23] == 'Company - Public'){
+				$businessType = 'Inc Incorporated';
+				$formofbussiness = 'Midsize Business';
+			}elseif($data[23] == 'Non-profit Organisation'){
+				$businessType = 'Nonprofits';
+				$formofbussiness = 'Etc';
+			}elseif($data[23] == 'Other Organisation'){
+				$businessType = 'Inc Incorporated';
+				$formofbussiness = 'Etc';			
+			}else{
+				$businessType = 'Sole Proprietorship';
+				$formofbussiness = 'Small and Medium-sized Businesses';
+			}
+
+
+			if($data[24] == 'Biotech & Pharmaceuticals'){				
+				$category = '11';
+			}elseif($data[24] == 'Manufacturing'){
+				$category = '7';				
+			}elseif($data[24] == 'Government'){
+				$category = '13';	
+			}elseif($data[24] == 'Information Technology'){
+				$category = '1';	
+			}elseif($data[24] == 'Aerospace & Defense'){
+				$category = '13';				
+			}elseif($data[24] == 'Retail'){
+				$category = '10';	
+			}elseif($data[24] == 'Media'){
+				$category = '6';	
+			}elseif($data[24] == 'Health Care'){
+				$category = '11';				
+			}elseif($data[24] == 'Finance'){
+				$category = '3';	
+			}elseif($data[24] == 'Insurance'){
+				$category = '12';	
+			}elseif($data[24] == 'Transportation & Logistics'){
+				$category = '10';				
+			}elseif($data[24] == 'Oil, Gas, Energy & Utilities'){
+				$category = '7';	
+			}elseif($data[24] == 'Business Services'){
+				$category = '8';	
+			}elseif($data[24] == 'Telecommunications'){
+				$category = '1';				
+			}elseif($data[24] == 'Travel & Tourism'){
+				$category = '8';	
+			}elseif($data[24] == 'Construction, Repair & Maintenance'){
+				$category = '2';	
+			}elseif($data[24] == 'Education'){
+				$category = '4';				
+			}elseif($data[24] == 'Accounting & Legal'){
+				$category = '12';	
+			}elseif($data[24] == 'Real Estate'){
+				$category = '2';	
+			}elseif($data[24] == 'Mining & Metals'){
+				$category = '7';				
+			}elseif($data[24] == 'Travel & Tourism'){
+				$category = '8';	
+			}elseif($data[24] == 'Restaurants, Bars & Food Services'){
+				$category = '8';	
+			}elseif($data[24] == 'Non-Profit'){
+				$category = '13';				
+			}elseif($data[24] == 'Unknown'){
+				$category = '0';				
+			}else{
+				$category = '21';
+			}
+			
+			$companyLogo = explode("/",$data[9]);
+			$companyCover = explode("/",$data[10]);
+			
+			if($companyCover[6] == 'banners'){				
+				$companyCover_img = '';
+			}else{
+				$companyCover_img = $companyCover[6];
+			}
+
+			$input2['companyName']=$data[3];	
+			$input2['businessType']=$businessType;
+			$input2['companyUsername']=$data[3];
+			$input2['category']=$category;
+			$input2['companyAddress']=$data[20];
+			$input2['companyCountry']='231';
+			$input2['companyCity']=$cityid;
+			$input2['companyState']=$stateid;			
+			$input2['companyWebsite']=$data[8];
+			$input2['companyNoOfUsers']=$data[21];
+			$input2['companyAbout']=$data[6];
+			$input2['companyMap']=$data[4];
+			$input2['formofbussiness']=$formofbussiness;
+			$input2['companyEstablishDate']=$data[22];	
+			$input2['companyLogo']=$companyLogo[5];
+			$input2['companyCover']=$companyCover_img;
+			//$input2['picLgo']='1';
+			
+
+			$input2['img1']=$data[684];
+			$input2['img2']=$data[887];
+			$input2['img3']=$data[219];
+			$input2['img4']=$data[863];
+			$input2['img5']=$data[523];
+			$input2['img6']=$data[561];
+			$input2['img7']=$data[686];
+			$input2['img8']=$data[437];
+			$input2['img9']=$data[767];
+			$input2['img10']=$data[381];
+			$input2['img11']=$data[614];
+			$input2['img12']=$data[373];
+			$input2['img13']=$data[583];
+			$input2['img14']=$data[579];
+			$input2['img15']=$data[43];
+			$input2['img16']=$data[31];
+			$input2['img17']=$data[705];
+			$input2['img18']=$data[245];
+			$input2['img19']=$data[729];
+			$input2['img20']=$data[235];
+			$input2['img21']=$data[616];
+			$input2['img22']=$data[829];
+			$input2['img23']=$data[455];
+			$input2['img24']=$data[862];
+			$input2['img25']=$data[706];
+			$input2['img26']=$data[566];
+			$input2['img27']=$data[189];
+			$input2['img28']=$data[67];
+			$input2['img29']=$data[108];
+			$input2['img30']=$data[447];
+			$input2['img31']=$data[101];
+			$input2['img32']=$data[485];
+			$input2['img33']=$data[860];
+			$input2['img34']=$data[102];
+			$input2['img35']=$data[673];
+			$input2['img36']=$data[120];
+			$input2['img37']=$data[790];
+			$input2['img38']=$data[660];
+			$input2['img39']=$data[495];
+			$input2['img40']=$data[231];
+			$input2['img41']=$data[825];
+			$input2['img42']=$data[537];
+			$input2['img43']=$data[795];
+			$input2['img44']=$data[816];
+			$input2['img45']=$data[114];
+
+	
+
+
+
+
+		
+						
+			
+
+			$input2['companycreatedTime'] = $data[0];
+			$input2['companymodifiedTime'] = $data[0];				
+
+			
+			$companyId = DB::table('jcm_companies')->insertGetId($input2);
+
+			$uemail = $companyId.'@jobcallme.com';
+
+			//$reviewId = $companyId;
+
+			DB::table('jcm_users')->where('userId','=',$userId)->update(array('companyId' => $companyId,'email' => $uemail));
+
+
+		//기업리뷰			
+				
+				$review_degree = '';
+				$recommend_ceo = '';
+				$future = '';
+				$recommend = '';
+				
+				$review1 = DB::table('jcm_users')->where('firstName',$data[3])->first();
+			
+				
+			    //1
+				if($data[792]){	
+
+				if($data[487] == '5'){				
+					$review_degree = 'Excellent';
+				}elseif($data[487] == '4'){
+					$review_degree = 'Verygood';				
+				}elseif($data[487] == '3'){
+					$review_degree = 'Good';	
+				}elseif($data[487] == '2'){
+					$review_degree = 'Fair';	
+				}elseif($data[487] == '1'){
+					$review_degree = 'Poor';				
+				}else{
+					$review_degree = '';
+				}
+
+				if($data[128] == 'Approves of CEO'){				
+					$recommend_ceo = 'Recommended';
+				}elseif($data[128] == 'No opinion of CEO'){
+					$recommend_ceo = 'Natural';				
+				}elseif($data[128] == 'Disapproves of CEO'){
+					$recommend_ceo = 'Not Recommended';
+				}else{
+					$recommend_ceo = '';
+				}
+
+				if($data[654] == 'Positive Outlook'){				
+					$future = 'Growing Up';
+				}elseif($data[654] == 'Neutral Outlook'){
+					$future = 'Remain Same';				
+				}elseif($data[654] == 'Negative Outlook'){
+					$future = 'Growing Down';
+				}else{
+					$future = '';
+				}
+
+				if($data[873] == 'Recommends'){				
+					$recommend = 'on';
+				}else{
+					$recommend = 'off';				
+				}
+				
+				$inputreview['company_id']=$companyId;
+				$inputreview['user_id']=$userId;
+				$inputreview['overall_review']=$review_degree;
+				$inputreview['review_title']=$data[792];
+				$inputreview['advice_management']=$data[675];
+				$inputreview['career_opportunity']=$review_degree;
+				$inputreview['benefits']=$review_degree;
+				$inputreview['work_lifebalance']=$review_degree;
+				$inputreview['rate_management']=$review_degree;
+				$inputreview['rate_culture']=$review_degree;
+				$inputreview['recommend_ceo']=$recommend_ceo;
+				$inputreview['future']=$future;
+				$inputreview['recommend']=$recommend;
+				$inputreview['pros'] = $data[653];
+				$inputreview['cons'] = $data[188];
+				$inputreview['created_date'] = date("Y-m-d",strtotime($data[290]));
+				$inputreview['updated_date'] = date("Y-m-d",strtotime($data[290]));		
+
+				$companyreview = DB::table('jcm_companyreview')->insertGetId($inputreview);
+
+				}
+
+
+				//2
+				if($data[78]){	
+
+				if($data[346] == '5'){				
+					$review_degree = 'Excellent';
+				}elseif($data[346] == '4'){
+					$review_degree = 'Verygood';				
+				}elseif($data[346] == '3'){
+					$review_degree = 'Good';	
+				}elseif($data[346] == '2'){
+					$review_degree = 'Fair';	
+				}elseif($data[346] == '1'){
+					$review_degree = 'Poor';				
+				}else{
+					$review_degree = '';
+				}
+
+				if($data[448] == 'Approves of CEO'){				
+					$recommend_ceo = 'Recommended';
+				}elseif($data[448] == 'No opinion of CEO'){
+					$recommend_ceo = 'Natural';				
+				}elseif($data[448] == 'Disapproves of CEO'){
+					$recommend_ceo = 'Not Recommended';
+				}else{
+					$recommend_ceo = '';
+				}
+
+				if($data[266] == 'Positive Outlook'){				
+					$future = 'Growing Up';
+				}elseif($data[266] == 'Neutral Outlook'){
+					$future = 'Remain Same';				
+				}elseif($data[266] == 'Negative Outlook'){
+					$future = 'Growing Down';
+				}else{
+					$future = '';
+				}
+
+				if($data[285] == 'Recommends'){				
+					$recommend = 'on';
+				}else{
+					$recommend = 'off';				
+				}
+					
+				$inputreview['company_id']=$companyId;
+				$inputreview['user_id']=$userId;
+				$inputreview['overall_review']=$review_degree;
+				$inputreview['review_title']=$data[78];
+				$inputreview['advice_management']=$data[608];
+				$inputreview['career_opportunity']=$review_degree;
+				$inputreview['benefits']=$review_degree;
+				$inputreview['work_lifebalance']=$review_degree;
+				$inputreview['rate_management']=$review_degree;
+				$inputreview['rate_culture']=$review_degree;
+				$inputreview['recommend_ceo']=$recommend_ceo;
+				$inputreview['future']=$future;
+				$inputreview['recommend']=$recommend;
+				$inputreview['pros'] = $data[464];
+				$inputreview['cons'] = $data[480];
+				$inputreview['created_date'] = date("Y-m-d",strtotime($data[580]));
+				$inputreview['updated_date'] = date("Y-m-d",strtotime($data[580]));		
+
+				$companyreview = DB::table('jcm_companyreview')->insertGetId($inputreview);
+
+				}
+
+
+				//3
+				if($data[215]){	
+
+				if($data[409] == '5'){				
+					$review_degree = 'Excellent';
+				}elseif($data[409] == '4'){
+					$review_degree = 'Verygood';				
+				}elseif($data[409] == '3'){
+					$review_degree = 'Good';	
+				}elseif($data[409] == '2'){
+					$review_degree = 'Fair';	
+				}elseif($data[409] == '1'){
+					$review_degree = 'Poor';				
+				}else{
+					$review_degree = '';
+				}
+
+				if($data[469] == 'Approves of CEO'){				
+					$recommend_ceo = 'Recommended';
+				}elseif($data[469] == 'No opinion of CEO'){
+					$recommend_ceo = 'Natural';				
+				}elseif($data[469] == 'Disapproves of CEO'){
+					$recommend_ceo = 'Not Recommended';
+				}else{
+					$recommend_ceo = '';
+				}
+
+				if($data[155] == 'Positive Outlook'){				
+					$future = 'Growing Up';
+				}elseif($data[155] == 'Neutral Outlook'){
+					$future = 'Remain Same';				
+				}elseif($data[155] == 'Negative Outlook'){
+					$future = 'Growing Down';
+				}else{
+					$future = '';
+				}
+
+				if($data[787] == 'Recommends'){				
+					$recommend = 'on';
+				}else{
+					$recommend = 'off';				
+				}
+					
+				$inputreview['company_id']=$companyId;
+				$inputreview['user_id']=$userId;
+				$inputreview['overall_review']=$review_degree;
+				$inputreview['review_title']=$data[215];
+				$inputreview['advice_management']=$data[257];
+				$inputreview['career_opportunity']=$review_degree;
+				$inputreview['benefits']=$review_degree;
+				$inputreview['work_lifebalance']=$review_degree;
+				$inputreview['rate_management']=$review_degree;
+				$inputreview['rate_culture']=$review_degree;
+				$inputreview['recommend_ceo']=$recommend_ceo;
+				$inputreview['future']=$future;
+				$inputreview['recommend']=$recommend;
+				$inputreview['pros'] = $data[511];
+				$inputreview['cons'] = $data[846];
+				$inputreview['created_date'] = date("Y-m-d",strtotime($data[623]));
+				$inputreview['updated_date'] = date("Y-m-d",strtotime($data[623]));		
+
+				$companyreview = DB::table('jcm_companyreview')->insertGetId($inputreview);
+
+				}
+
+
+				//4
+				if($data[858]){	
+
+				if($data[307] == '5'){				
+					$review_degree = 'Excellent';
+				}elseif($data[307] == '4'){
+					$review_degree = 'Verygood';				
+				}elseif($data[307] == '3'){
+					$review_degree = 'Good';	
+				}elseif($data[307] == '2'){
+					$review_degree = 'Fair';	
+				}elseif($data[307] == '1'){
+					$review_degree = 'Poor';				
+				}else{
+					$review_degree = '';
+				}
+
+				if($data[669] == 'Approves of CEO'){				
+					$recommend_ceo = 'Recommended';
+				}elseif($data[669] == 'No opinion of CEO'){
+					$recommend_ceo = 'Natural';				
+				}elseif($data[669] == 'Disapproves of CEO'){
+					$recommend_ceo = 'Not Recommended';
+				}else{
+					$recommend_ceo = '';
+				}
+
+				if($data[54] == 'Positive Outlook'){				
+					$future = 'Growing Up';
+				}elseif($data[54] == 'Neutral Outlook'){
+					$future = 'Remain Same';				
+				}elseif($data[54] == 'Negative Outlook'){
+					$future = 'Growing Down';
+				}else{
+					$future = '';
+				}
+
+				if($data[576] == 'Recommends'){				
+					$recommend = 'on';
+				}else{
+					$recommend = 'off';				
+				}
+					
+				$inputreview['company_id']=$companyId;
+				$inputreview['user_id']=$userId;
+				$inputreview['overall_review']=$review_degree;
+				$inputreview['review_title']=$data[858];
+				$inputreview['advice_management']=$data[553];
+				$inputreview['career_opportunity']=$review_degree;
+				$inputreview['benefits']=$review_degree;
+				$inputreview['work_lifebalance']=$review_degree;
+				$inputreview['rate_management']=$review_degree;
+				$inputreview['rate_culture']=$review_degree;
+				$inputreview['recommend_ceo']=$recommend_ceo;
+				$inputreview['future']=$future;
+				$inputreview['recommend']=$recommend;
+				$inputreview['pros'] = $data[868];
+				$inputreview['cons'] = $data[418];
+				$inputreview['created_date'] = date("Y-m-d",strtotime($data[216]));
+				$inputreview['updated_date'] = date("Y-m-d",strtotime($data[216]));		
+
+				$companyreview = DB::table('jcm_companyreview')->insertGetId($inputreview);
+
+				}
+
+
+				
+		//기업리뷰
+
+
+			}	
+
+
+		//채용공고
+		if($datajobs = DB::table('jcm_jobs')->where('title',$data[1])->where('country','=','231')->first()){
+		}else{
+			
+			$data5 = DB::table('jcm_users')->where('firstName',$data[3])->first();
+			
+				$data6 = DB::table('jcm_states')->where('name',trim($data[4]))->first();
+				
+					if($data6->id){
+						$stateid2 = $data6->id;
+					}else{
+						$stateid2 = '0';
+					}
+
+				$data7 = DB::table('jcm_cities')->where('name',trim($data[4]))->first();
+
+					if($data7->id){
+						$cityid2 = $data7->id;
+					}else{
+						$cityid2 = '0';
+					}
+
+			
+			$input3['userId']=$data5->userId;	
+			$input3['companyId']=$data5->companyId;		
+			$input3['amount']='0';
+			$input3['p_Category']='1';
+			$input3['title']=$data[1];
+			$input3['jType']='Free';
+			//$input3['department']=$datas4->RecruitmentOccupation;
+			$input3['category']=$category;
+			$input3['careerLevel']='jobhours07';
+			$input3['experience']='Fresh Graduate ~ Experience';
+			$input3['vacancies']='0';
+			$input3['description']=$data[2];
+			$input3['skills']='See Description3';
+			$input3['qualification']='See Description3';
+			$input3['jobType']='Full Time/Contract Workers';
+			$input3['expptitle']='jobhours07';
+			$input3['jobStatus']='Publish';
+			$input3['jobShift']='Following Co. regulation';
+			$input3['jobaddr']=$data[4];
+			$input3['jobdayval']='jobday11';
+			$input3['jobhoursval']='jobhours07';
+			$input3['process']='See Description2';
+			$input3['jobacademic']='See Description';
+			$input3['gender']='Nosex';
+			$input3['jobreceipt02']='yes';
+			$input3['jobhomgpage']=$data[15];
+			$input3['afterinterview']='Decision after interview';
+			$input3['currency']='';
+			$input3['anynational']='yes';	
+			$input3['onlynational']='no';
+			$input3['benefits']='See Description';
+			$input3['country']='231';
+			$input3['state']=$stateid2;
+			$input3['city']=$cityid2;
+			$input3['Address']=$data[4];
+			$input3['expiryDate']='2100-12-31';
+			$input3['paymentType']='0';
+			$input3['status']='1';
+			$input3['createdTime'] = $data[0];			
+			
+
+			
+			$jobId = DB::table('jcm_jobs')->insertGetId($input3);
+		
+		}
+
+
+		}
+
+		$row22++;
+
+			//}
+		}
+		fclose($handle);
+
+		echo 2;
+	}
+
+
+	
+}
+
+
+
+
 public function readCat(){
 		$data = DB::table('jcm_read_category')->get();
        return view('admin.users.readcat',compact('data'));
@@ -933,7 +2019,25 @@ public function verifyUser(Request $request){
 	$secretId = trim($request->segment(2));
 	$data = DB::table('jcm_users')->where('secretId',$secretId)->first();
 	if($data > 0){
-		
+		$url = "https://www.outsourcingok.com/api/jobcallme/verify/$data->outsourceid";
+		$data = http_build_query(array(
+				'userInfo.verEmail' => true
+			));
+
+		$ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL,$url);
+	    //curl_setopt($ch, CURLOPT_POST, 1);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER , false);
+	    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+	    curl_setopt($ch, CURLOPT_POSTREDIR, 3);
+	    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	    //curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+	    $server_output = curl_exec ($ch);
+	    //print_r($server_output);
+	    curl_close ($ch);
+	    //die();
 		DB::table('jcm_users')->where('secretId',$secretId)->update(['user_status' => 'Y']);
 		$request->session()->flash('emailAlert', trans('home.Your account is Verified Please Login'));
 		return redirect('account/login');
@@ -999,6 +2103,15 @@ public function savecompic(Request $request){
 		echo 2;
 	}
 }
+public function savecomabout(Request $request){
+	$data = $request->input('compabout');
+	$comId = session()->get('jcmUser')->companyId;
+	if( DB::table('jcm_companies')->where('companyId',$comId)->update(['companyAbout'=> $data])){
+		echo 1;
+	}else{
+		echo 2;
+	}
+}
   public function after_payment(Request $request, $id){
     	$userinfo = session()->get('jcmUser');
     	//$request->session()->destroy();
@@ -1032,6 +2145,8 @@ public function savecompic(Request $request){
     		DB::table('jcm_likes')->where('parent_table',$data['parent_table'])->where('post_id',$data['post_id'])->where('user_id',$data['user_id'])->delete();
     	}
     }
+
+
 
 }
 ?>

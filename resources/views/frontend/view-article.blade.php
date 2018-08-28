@@ -21,7 +21,7 @@ $userimages='';
                 <div class="col-md-6 article-type">
                     {{ $record->name }}
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="jd-share-btn pull-right">
                     <a  href="javascript: void(0)" onClick="window.open('https://www.facebook.com/dialog/share?app_id=377749349357447&display=page&title=<?php echo $record->title; ?>&href=https%3A%2F%2Fwww.jobcallme.com%2Fread%2Farticle%2F<?php echo $record->writingId; ?>%2F&redirect_uri=https%3A%2F%2Fwww.jobcallme.com');return false;">
                        
@@ -36,6 +36,7 @@ $userimages='';
                         <a href="https://plus.google.com/share?url={{ url('read/article/'.$record->writingId ) }}">
                             <i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                         </a>
+						 <img src="{{asset('website/talksns.png')}}" onclick="OpenWindow('{{ url('read/article/'.$record->writingId ) }}')" style="width: 25px !important;border-radius: 50px; cursor: pointer;">
                     </div>
                 </div>
                 <div>{!! $record->description !!}</div>
@@ -89,7 +90,15 @@ $userimages='';
                                         $userimage = $comment->chatImage;
                                     }
                                     else{
-                                    $userimage = $comment->profileImage;
+
+										if($comment->profilePhoto){
+											$userimage = $comment->profilePhoto;
+										}
+										else{
+											$userimage = "profile-logo3-1.jpg";
+										} 
+
+                                    //$userimage = $comment->profileImage;
                                     } 
 
                                     ?>
@@ -98,7 +107,7 @@ $userimages='';
                                     <div class="col-md-12">
                                         <div class="comment-area">
                                             <div class="col-md-1 col-xs-3">
-                                                <img src="{{ url('profile-photos').'/'.$comment->chatImage }}" class="" alt="{{ $comment->firstName }}" style="width:80%;">
+                                                <img src="{{ url('profile-photos').'/'.$userimage }}" class="img-circle fullwidth" alt="{{ $comment->firstName }}" style="width:80%;">
                                                
                                             </div>
                                             <div class="col-md-9 col-xs-7 append-edit" style="padding: 0;">
@@ -133,7 +142,13 @@ $userimages='';
                                         $userimages = Session::get('jcmUser')->chatImage;
                                     }
                                     else{
-                                    $userimages = Session::get('jcmUser')->profilePhoto;
+										if(Session::get('jcmUser')->profilePhoto){
+											$userimages = Session::get('jcmUser')->profilePhoto;
+										}
+										else{
+											$userimages = "profile-logo3-1.jpg";
+										} 
+                                    //$userimages = Session::get('jcmUser')->profilePhoto;
                                     } 
 
                                     ?>
@@ -214,7 +229,15 @@ function changebtn(current){
     }
 }
 
-    
+       function OpenWindow(url, windowName) {
+
+   newwindow = window.open('https://www.talksns.com/sharer?url=' + url, windowName, 'height=600,width=800');
+
+   if (window.focus) {
+      newwindow.focus();
+   }
+   return false;
+}
     $(document).on("click",".edit-comment-btn",function(){
         $('.btns').show();
         $('.btns-update').hide();
@@ -257,7 +280,7 @@ function changebtn(current){
     })
     $(document).on("click",".del-comment-btn",function(){
        var comment_id = $(this).attr('delcommentId');
-        if (confirm("Are you sure to delete!")) {
+        if (confirm("@lang('home.Are you sure to delete?')")) {
              $.ajax({
                url:jsUrl()+"/read/article/comment/save",
                type:"post",
@@ -287,12 +310,12 @@ function changebtn(current){
             }
         })
     })
-$('i.fa').hover(function () {
-    $(this).addClass('animated bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
-    function () {
-        $(this).removeClass('animated bounceIn');
-    });
-});
+//$('i.fa').hover(function () {
+    //$(this).addClass('animated bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+    //function () {
+        //$(this).removeClass('animated bounceIn');
+    //});
+//});
 $('.like').on('click',function(){
     var id = '#'+$(this).closest('form').attr('id');
     var type = "like";

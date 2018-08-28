@@ -113,20 +113,20 @@ if($user->profilePhoto != ''){
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.oldpassword')</label>
                                 <div class="col-md-6">
-                                    <input type="password" name="oldPassword" class="form-control input-sm" placeholder="@lang('home.oldpassword')">
+                                    <input type="password" name="oldPassword" class="form-control input-sm" placeholder="@lang('home.oldpassword')" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.newpassword')</label>
                                 <div class="col-md-6">
-                                    <input type="password" name="password" onblur="sendpassword(this.value)" class="form-control input-sm" placeholder="@lang('home.newpassword')">
+                                    <input type="password" name="password" onblur="sendpassword(this.value)" class="form-control input-sm" placeholder="@lang('home.newpassword')" required>
                                 <p style="color:red" id="erpass"></p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3 text-right">@lang('home.confirmpassword')</label>
                                 <div class="col-md-6">
-                                    <input type="password" name="password_confirmation" class="form-control input-sm" placeholder="@lang('home.confirmpassword')">
+                                    <input type="password" name="password_confirmation" class="form-control input-sm" placeholder="@lang('home.confirmpassword')" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -534,7 +534,7 @@ if($user->profilePhoto != ''){
                     <!--Notification-->
                     <div id="notification-show" class="ja-content-item mc-item" role="tabpanel" style="display: none;">
                         <form class="form-horizontal notification-form" method="post" action="">
-                            <h4>@lang('home.account')</h4>
+                            <h4>@lang('home.accountnotification')</h4>
                             <input type="hidden" name="_token" value="">
                             <div class="form-group">
                                 <div class="col-md-12 mc-notification">
@@ -558,7 +558,7 @@ if($user->profilePhoto != ''){
                                     </div>
                                 </div>
                             </div>
-                            <h4>@lang('home.employeraccount')</h4>
+                            <h4>@lang('home.employernotification')</h4>
                             <div class="form-group">
                                 <div class="col-md-12 mc-notification">
                                     <label class="col-md-3 control-label">@lang('home.newapplications')</label>
@@ -582,7 +582,7 @@ if($user->profilePhoto != ''){
                                     </div>
                                 </div>
                             </div>
-                            <h4>@lang('home.jobalerts')</h4>
+                            <h4>@lang('home.jobalertsnotification')</h4>
                             <div class="col-md-12 mc-notification">
                                 <label class="col-md-3 control-label">@lang('home.dailyalerts')</label>
                                 <div class="col-md-9">
@@ -704,7 +704,7 @@ if($user->profilePhoto != ''){
                             <h4>@lang('home.deactivateaccount')</h4>
                             <p>@lang('home.warningdeactive')</p>
                             <button href="#" onclick="deactive({{session()->get('jcmUser')->userId}})" class="btn btn-danger">@lang('home.yesdeactive')</button>
-                            <button class="btn btn-default" data-popup-close="popup-1" >@lang('home.close')</button>
+                            <button class="btn btn-default" data-popup-close="popup-1" >@lang('home.cancel')</button>
                             <a class="popup-close" data-popup-close="popup-1" href="#">&times;</a>
                         </div>
                     </div>
@@ -1095,7 +1095,7 @@ function deactive(id){
     
 }
 function sendpassword(pass){
-    alert("hello");
+    //alert("hello");
  $.ajax({
     url:"{{ url('passwordValidate') }}",
     data:{password:pass,_token:"{{ csrf_token() }}"},

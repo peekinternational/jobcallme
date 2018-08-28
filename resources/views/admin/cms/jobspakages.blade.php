@@ -58,8 +58,9 @@ $s_app = Session()->get('shiftSearch');
                                                 </td>
                                                 <td>{{ $job->type}}</td>
                                                 <td>{{$job->email}}</td>
-                                                <td>{{ $job->amount }}</td>
-                                               
+                                                <td>{{ $job->amount }} {{ $job->currency }}</td>
+                                                
+
                                                 <td>{{ $job->quantity }}</td>
                                                 <td>{{ $job->paymentMode }}</td>
                                                 <td>

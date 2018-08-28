@@ -118,9 +118,9 @@ $$nav = 'active';
                         </ul>
                     </li>
 					 <li class="sidenav-item">
-                        <a href="{{ url ('admin/orders') }}">
+                        <a href="{{ url ('admin/cms/orderss') }}">
                         <span class="sidenav-icon icon icon-briefcase"></span>
-                        <span class="sidenav-label">Orders</span>
+                        <span class="sidenav-label">cms</span>
                         </a>
                     </li>
                     <li class="sidenav-item">
@@ -141,6 +141,23 @@ $$nav = 'active';
                         <span class="sidenav-label">Our New Services</span>
                         </a>
                     </li>
+
+					<li class="sidenav-item has-subnav {{ $Scrapping }}">
+                        <a href="#" aria-haspopup="true">
+                            <span class="sidenav-icon icon icon-users"></span>
+                            <span class="sidenav-label">Scrapping Management</span>
+                        </a>
+                        <ul class="sidenav-subnav">
+                            <li class="sidenav-subheading">Scrapping Management</li>                            
+                            <li class="{{ $getscrapping }}">
+                                <a href="{{ url('getscrapping') }}">워크넷</a>
+                            </li>
+							<li class="{{ $getfeedback }}">
+                                <a href="{{ url('getgdscrapping') }}">Glassdoor</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="sidenav-item">
                         <a href="{{ url ('admin/logout') }}">
                         <span class="sidenav-icon icon icon-sign-out"></span>

@@ -59,12 +59,12 @@ class Kernel extends ConsoleKernel
                                         $empName="{$employer->firstName} {$employer->lastName}";
                                         $applicant=User::where('userId',$items['to'])->first();
                                         $appName="{$applicant->firstName} {$applicant->lastName}";
-                                        $myContent="
-                                        Dear {$appName}, <br/>
-                                        Employer ({$empName}) has sent you message, reply him back by logging at https://www.jobcallme.com
-                                        <br/><br/>
-                                        Regards."; 
-                                        $subject="Employer Message: JobCallMe";
+                                        $myContent=
+                                        trans('home.Dear') ." {$appName} ".trans('home.Dear2') ." <br/>"
+                                        .trans('home.ChatEmployer') ."<span style='color:red'>[</span><span style='color:#337ab7'>{$empName}</span><span style='color:red'>]</span>" .trans('home.has sent you message, reply him back by logging at <a href="https://www.jobcallme.com" target="_blank">JobCallMe</a>').
+                                        "<br/><br/>"
+                                        .trans('home.Regards.').""; 
+                                        $subject=trans('home.Employer Message: JobCallMe');
                                         $email=$applicant->email;
                                         Mail::send([],[], function ($message) use($email,$myContent,$subject){  
                                             $message->to($email, $email)->subject($subject)->setBody($myContent,'text/html');
@@ -87,7 +87,8 @@ class Kernel extends ConsoleKernel
             endif; 
 			
         })->everyMinute();
-		
+
+		$schedule->command('sendjobs')->daily();
 
     }
 

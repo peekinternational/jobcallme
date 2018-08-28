@@ -31,7 +31,7 @@ class Users extends Controller{
                                 $query->where('status', '=', $s_app['status']);
                             }
                         }
-                    })->orderBy('userId','desc')->paginate(30);
+                    })->orderBy('createdTime','desc')->paginate(30);
     	//echo '<pre>'; print_r($users);exit;
     	/* end */
     	return view('admin.users.employers',compact('users'));
@@ -318,5 +318,141 @@ class Users extends Controller{
         }
         return redirect(url()->previous());
     }
+
+
+
+
+	public function addEditCompanyals(Request $request){
+        $app = session()->get('jcmAdmin');
+        $rPath = $request->segment(4);
+        if($request->isMethod('post')){
+            $companyId = $request->input('companyId',0);
+            $this->validate($request, [
+                'majorbusiness' => 'required',                
+            ]);
+            $input = array();            
+            
+
+            $input['netincome'] = $request->input('netincome');
+            $input['majorbusiness'] = $request->input('majorbusiness');
+			$input['joincompany'] = $request->input('joincompany');
+			$input['financialstatus'] = $request->input('financialstatus');
+			$input['incomestatus'] = $request->input('incomestatus');
+			$input['closingdate'] = $request->input('closingdate');
+			$input['avgsalary'] = $request->input('avgsalary');
+			$input['monthlyactualfeee'] = $request->input('monthlyactualfeee');
+            $input['begningnewemployee'] = $request->input('begningnewemployee');
+			$input['monthlyactualfee'] = $request->input('monthlyactualfee');
+			$input['sameavgsalary'] = $request->input('sameavgsalary');
+			$input['joinleave'] = $request->input('joinleave');
+			$input['avgsex'] = $request->input('avgsex');
+			$input['specificationindex'] = $request->input('specificationindex');
+			$input['foreignlanguage'] = $request->input('foreignlanguage');
+			$input['Personalmaximum'] = $request->input('Personalmaximum');
+			$input['Personalminimum'] = $request->input('Personalminimum');
+            $input['Academicachievement'] = $request->input('Academicachievement');
+			$input['avglanguage'] = $request->input('avglanguage');
+			$input['professionalability'] = $request->input('professionalability');
+			$input['activities'] = $request->input('activities');
+			$input['chodaejolcredit'] = $request->input('chodaejolcredit');
+			$input['avggraduates'] = $request->input('avggraduates');
+			$input['graduateschool'] = $request->input('graduateschool');
+            $input['toeic'] = $request->input('toeic');
+			$input['toeicspeaking'] = $request->input('toeicspeaking');
+			$input['opic'] = $request->input('opic');
+			$input['newhsk'] = $request->input('newhsk');
+			$input['hsk'] = $request->input('hsk');
+			$input['avgtoeicspeaking'] = $request->input('avgtoeicspeaking');
+			$input['toeiclevel'] = $request->input('toeiclevel');
+            $input['opicavg'] = $request->input('opicavg');
+			$input['tepsavg'] = $request->input('tepsavg');
+			$input['jptavg'] = $request->input('jptavg');
+			$input['jlptavg'] = $request->input('jlptavg');
+			$input['hskavg'] = $request->input('hskavg');
+			$input['cateficatess'] = $request->input('cateficatess');
+			$input['mos'] = $request->input('mos');
+            $input['Chacharacter'] = $request->input('Chacharacter');
+			$input['word1'] = $request->input('word1');
+			$input['processingcer'] = $request->input('processingcer');
+			$input['word2'] = $request->input('word2');
+			$input['etccer'] = $request->input('etccer');
+			$input['overseasexperience'] = $request->input('overseasexperience');
+			$input['internexperience'] = $request->input('internexperience');
+            $input['awardsexperience'] = $request->input('awardsexperience');
+			$input['schoolsocialvolunteer'] = $request->input('schoolsocialvolunteer');
+			$input['schooloforigin'] = $request->input('schooloforigin');
+			$input['schoolmajor'] = $request->input('schoolmajor');
+			$input['companyhistory'] = $request->input('companyhistory');
+			$input['companyhistory2'] = $request->input('companyhistory2');
+			$input['companyhistory3'] = $request->input('companyhistory3');
+			$input['companyhistory4'] = $request->input('companyhistory4');
+			$input['companyhistory5'] = $request->input('companyhistory5');
+			$input['companyhistory6'] = $request->input('companyhistory6');
+			$input['companyhistory7'] = $request->input('companyhistory7');
+			$input['companyhistory8'] = $request->input('companyhistory8');
+			$input['companyhistory9'] = $request->input('companyhistory9');
+			$input['companyhistory10'] = $request->input('companyhistory10');
+			$input['companyhistory11'] = $request->input('companyhistory11');
+			$input['companyhistory12'] = $request->input('companyhistory12');
+			$input['companyhistory13'] = $request->input('companyhistory13');
+			$input['companyhistory14'] = $request->input('companyhistory14');
+			$input['companyhistory15'] = $request->input('companyhistory15');
+			$input['companyhistory16'] = $request->input('companyhistory16');
+			$input['companyhistory17'] = $request->input('companyhistory17');
+			$input['companyhistory18'] = $request->input('companyhistory18');
+			$input['companyhistory19'] = $request->input('companyhistory19');
+			$input['operatingprofit'] = $request->input('operatingprofit');
+			$input['statusofcertification'] = $request->input('statusofcertification');
+			$input['associatecompany'] = $request->input('associatecompany');
+			$input['locationinindustry'] = $request->input('locationinindustry');
+			$input['companyceo'] = $request->input('companyceo');
+			$input['employmentstatus'] = $request->input('employmentstatus');
+
+            
+
+            $input['companyModifiedTime'] = date('Y-m-d H:i:s');
+            //$username = strtolower(str_replace(array(' ',')','(','-','_',',','"','`','!','|','@','#','&','%','^'),'',$request->input('companyName')));
+             //$input['companyUsername'] = $username;
+            if($companyId == '0'){
+                $input['companyCreatedTime'] = date('Y-m-d H:i:s');
+
+				$input['companyId'] = $companyId;
+
+                $companyId = DB::table('jcm_companies_als')->insertGetId($input);
+                $sMsg = 'New Company Analysis Added';
+            }else{
+				
+					DB::table('jcm_companies_als')->where('companyId', $companyId)->update($input);
+				
+                $sMsg = 'Company Analysis Updated';
+
+            }
+            $request->session()->flash('alert',['message' => $sMsg, 'type' => 'success']);
+            return redirect('admin/users/company/');
+			//return redirect('admin/users/company/'.$companyId);
+        }else{
+            $company = array();
+            $companyId = '0';
+            if($rPath == 'editals'){
+                $companyId = $request->segment(5);
+                $company = JobCallMe::getCompanyals($companyId);
+                if(count($company) == 0){
+
+                    $input['companyCreatedTime'] = date('Y-m-d H:i:s');
+					$input['companyModifiedTime'] = date('Y-m-d H:i:s');
+					$input['companyId'] = $companyId;
+					$companyId11 = DB::table('jcm_companies_als')->insertGetId($input);
+
+					//$request->session()->flash('alert',['message' => 'No Record Found', 'type' => 'danger']);
+                    //return redirect('admin/users/company');
+                }
+                $company = (array) $company;
+            }
+            return view('admin.users.add-edit-companyals',compact('company','rPath','companyId'));
+        }
+    }
+
+
+
    
 }

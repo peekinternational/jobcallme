@@ -18,12 +18,14 @@
                   <div class="" style="padding-left: 0px;padding-right: 13px;" >
                    
                         <form class="form-horizontal" method="get" id="" role="form" action="{{ action('frontend\Employer@cashpackage') }}" >
+						<input type="hidden" value="{!! $currency !!}" name="currency" >
+						<input type="hidden" value="{!! $amount !!}" name="amount" >
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-warning btn-lg" name="save">@lang('home.Cash Payment')</button> 
                         </form>
                    
                 </div>
-                <div class="" style="padding-left: 22px;padding-right: 13px;">
+                <div class="hidden-xs" style="padding-left: 22px;padding-right: 13px;">
             
                     <form action="{{url('nicepay/payRequest_utf.php')}}" method="post" id='nicepckg'> 
                         <input type="hidden" value="{!! $amount !!}" name="price" >
@@ -34,6 +36,20 @@
                         <input type="hidden" value="0" name="buyerName" id='buyer' >
                      
                         <a href='javascript:void(0)'  class="btn btn-info btn-lg nicePay">@lang('home.NicePay')</a>
+                    </form>
+                </div>
+
+				<div class="hidden-sm hidden-md hidden-lg" style="padding-left: 22px;padding-right: 13px;">
+            
+                    <form action="{{url('mobile_nicepay/payRequest_utf.php')}}" method="post" id='nicepckg2'> 
+                        <input type="hidden" value="{!! $amount !!}" name="price" >
+                        <input type="hidden" value="1" name="goodscount" >
+                        <input type="hidden" value="jobcallme" name="goodsName" >
+                        <input type="hidden" value="{!! $app->email !!}" name="Email" >
+                        <input type="hidden" value="{!! $app->phoneNumber!!}" name="tel" >
+                        <input type="hidden" value="0" name="buyerName" id='buyer2' >
+                     
+                        <a href='javascript:void(0)'  class="btn btn-info btn-lg nicePay2">@lang('home.NicePay')</a>
                     </form>
                 </div>
 
@@ -79,6 +95,22 @@ $(document).on('click','.nicePay',function(){
         success: function(result){  
             $("#buyer").val(result);
             $("#nicepckg").submit();
+        }
+    });
+});
+
+$(document).on('click','.nicePay2',function(){
+    $(this).attr('disabled',true); 
+    $.ajax({
+        type: "POST",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }, 
+        url: "<?=url('account/pckgnicepay')?>",
+        data:{'type':1}, /*make a job post*/
+        success: function(result){  
+            $("#buyer2").val(result);
+            $("#nicepckg2").submit();
         }
     });
 });

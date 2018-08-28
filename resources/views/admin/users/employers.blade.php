@@ -80,7 +80,7 @@ $s_app = Session()->get('employersSearch');
                                                         <label class="label label-danger">{{ Inactive }}</label>
                                                     @endif
                                                 </td>
-                                                <td>{{ JobCallMe::reportDate($user->createdTime) }}</td>
+                                                <td>{{$user->createdTime}}</td>
                                                 <td>
                                                     <a href="{{ url('admin/users/view/'.$user->userId) }}" data-toggle="tooltip" data-original-title="Profile"><i class="icon icon-eye"></i></a>&nbsp;&nbsp;&nbsp;
                                                     <a href="{{ url('admin/users/edit/'.$user->userId) }}" data-toggle="tooltip" data-original-title="Update"><i class="icon icon-pencil"></i></a>&nbsp;&nbsp;&nbsp;

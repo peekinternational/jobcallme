@@ -21,7 +21,7 @@ if($upskill->country != 0){
 <section id="postNewJob">
     <div class="container">
         <!-- <div class="col-md-10 mbl-view-upskills"> -->
-            <h3 class="text-center">@lang('home.up_heading')</h3>
+            <h3 class="text-center"><!-- @lang('home.up_heading') --></h3>
             <div class="pnj-box row">
                 <form id="pnj-form" action="" method="post" class="upskill-form">
                     {{ csrf_field() }}
@@ -33,73 +33,41 @@ if($upskill->country != 0){
 			               	@if($upskill->skillId)
 			
                     @else
-                       <!-- <div>
+                       <div>
                     <span style="padding-left:30px">@lang('home.selectcurrency'): &nbsp;</span>
                       <input type="radio" name="gender" id="up_kr" value="kr" checked="checked"> @lang('home.paykorean')
                       &nbsp;&nbsp;<input type="radio" name="gender" id="up_us" value="us"> @lang('home.US$')
-                      </div> -->
+                      </div>
                     <div class="mb15" form-prepend="" fxlayout="" fxlayoutwrap="" style="display: flex; box-sizing: border-box; flex-flow: row wrap;margin-bottom:14px;">
                             <div fxflex="100" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" class="ng-untouched ng-pristine ng-invalid">
                             
  
                         <ul id="post-job-ad-types-upskill" class="text-center">
 							
-							<li style="position:relative;background:#c3c3c3;">
-								<span class="pay_skill">
-							   <div  style="padding-top:12px;">
-									<span class="b" style="color:#000;font-size: 17px;"><B>@lang('home.selectcurrency')</B></span>
-							   </div></span>
-							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span></div>
-                                <div>
-                                    <!----><label for="{!! $payment->id!!}">
-                                        <!-- <ul class="list-unstyled desc" >
-                                            <li>@lang('home.Featuredonhomepage') --><!-- {!! $payment->tag1!!} --><!-- </li>
-                                            <li>@lang('home.adcost') --><!-- {!! $payment->tag2!!} --><!-- </li>
-                                        </ul> -->
-										
-                                        <div class="credits b" style="color:#fff;font-size: 13px;padding-top:3px;">
-										<span class="text-success" style="color:#fff;">
-											<span class="text-success" style="color:#fff;"><input type="radio" name="gender" id="up_kr" value="kr" checked="checked"> @lang('home.paykorean')</span>
-											
-										</span>
-										
-									<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
-									</div>
-									<div class="credits b text-left" style="color:#fff;font-size: 13px;padding-top:8px;">										
-											<span class="text-success" style="color:#fff;"><input type="radio" name="gender" id="up_us" value="us"> @lang('home.US$')</span>
-										</span>
-										
-									<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
-									</div>
-                                    </label>
-                                    <!---->
-                                    <!---->
-                                    <!---->
-                                </div>
-                            </li>
+							
 							
 							@foreach($uppayment as $key=> $payment)
 														
 								@if($payment->title == "Seminar · Fair · Exhibition")
-                            <!----><li style="position:relative;background:#6c6148;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/upskill-1.png');">
 								@endif
 								@if($payment->title == "Forum · Conference")
-                            <!----><li style="position:relative;background:#96aaa8;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/upskill-2.png');">
 								@endif
 								@if($payment->title == "Training · Workshop")
-                            <!----><li style="position:relative;background:#6d846f;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/upskill-3.png');">
 								@endif
 								@if($payment->title == "Course · Education · Academy")
-                            <!----><li style="position:relative;background:#b0a48a;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/upskill-4.png');">
 								@endif
 								@if($payment->title == "Contest · Show")
-                            <!----><li style="position:relative;background:#4e6c7c;">
+                            <!----><li style="position:relative;background-image:url('/frontend-assets/images/upskill-5.png');">
 								@endif
 
                           <span class="pay_skill text-left">
-							   <div style="padding-left:10px;padding-top:12px;">
+							   <div style="padding-left:10px;padding-top:5px;">
                                <input class="mat-radio-input cdk-visually-hidden" type="radio" id="{!! $payment->id!!}" name="cat_id" value="{!! $payment->cat_id!!}" style="padding-top:15px;">
-							   <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">&nbsp;<span class="b" style="color:#fff;font-size: 17px;">@lang('home.'.$payment->title)</span>
+							   <input class="mat-radio-input cdk-visually-hidden" id="radioval" type="hidden"   value="{!! $payment->price!!}">
 							   </div></span>
 							   <div class="mat-radio-label-content"><span style="display:none">&nbsp;</span></div>
                                 <div>
@@ -108,19 +76,19 @@ if($upskill->country != 0){
                                             <li>@lang('home.Featuredonhomepage') --><!-- {!! $payment->tag1!!} --><!-- </li>
                                             <li>@lang('home.adcost') --><!-- {!! $payment->tag2!!} --><!-- </li>
                                         </ul> -->
-										
-                                        <div class="credits b" style="color:#fff;font-size: 13px;padding-top:10px;">
-										<span class="text-success" style="color:#fff;">@lang('home.upskill-pay-text')</span>										
-									<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
+										<div class="text-left" style="font-size: 13px;color:#fff;padding-left:10px;margin-top:-10px;"><span style="color:#fff;font-size:17px;margin-top:20px;" id="up_text{{number_format($key)}}"></span>&nbsp;<span style="color:#fff;font-size: 11px;">/1 @lang('home.days')</span></div>
+
+										<div style="font-size: 13px;color:#fff;padding-left:90px;margin-top:-20px;"><span style="color:#fff;padding-left:28px;">@lang('home.pay_buynow')</span></div>
+
+									<div class="col-md-12">
+										<div style="font-size: 11px;padding-top:15px;margin-right:-9px;color:#fff;float:right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@lang('home.'.$payment->title)</div>
 									</div>
-									<div class="credits b" style="color:#fff;font-size: 13px;padding-top:10px;">										
-										<span class="text-success" style="color:#fff;">@lang('home.pay_cost') : </span><span class="text-success" style="color:#fff;padding-left:0px;" id="up_text{{number_format($key)}}"></span>&nbsp;/@lang('home.days')
-									<!-- <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-left:30px"></i> -->
-									</div>
+                                        <div style="color:#fff;font-size: 11px;padding-top:5px;padding-left:110px;">
+										@lang('home.upskill-pay-text')</div>									
+									
+									
                                     </label>
-                                    <!---->
-                                    <!---->
-                                    <!---->
+                                    
                                 </div>
                             </li>
 							@endforeach
@@ -736,7 +704,7 @@ $(document).ready(function(){
 				//alert(jArray[i].amount);
 				$('.upskill-form input[name="paycurrency"]').val('USD');
 			}else{
-				$('#up_text'+i).html('US$ '+simplearray[i].price+'00')
+				$('#up_text'+i).html('US$ '+simplearray[i].price+'0')
 				//alert(jArray[i].amount);
 				$('.upskill-form input[name="paycurrency"]').val('USD');
 			}
@@ -868,12 +836,12 @@ $('form.upskill-form').submit(function(e){
         async: false,
         success: function(response) {
             if($.trim(response) != '1'){
-               toastr.success('Upskill successfully update', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+               toastr.success('@lang("home.Upskill successfully update")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
                window.location.href = "{{ url('account/upskill') }}";
                 $('.upskill-form button[type="submit"]').prop('disabled',false);
             }else{
 				window.location.href = "{{ url('skillpayment') }}";
-                toastr.success('Upskill successfully saved', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
+                toastr.success('@lang("home.Upskill successfully saved")', '', {timeOut: 5000, positionClass: "toast-bottom-center"});
                 //window.location.href = "{{ url('account/upskill') }}";
                 $('.upskill-form button[type="submit"]').prop('disabled',false);
             }

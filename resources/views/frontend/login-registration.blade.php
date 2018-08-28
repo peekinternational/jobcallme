@@ -24,6 +24,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                         </button>
                     </div>
                 @endif
+
                  @if(Session::has('emailAlert'))
                     <div class="alert alert-success">
                         {{Session::get('emailAlert')}} 
@@ -89,9 +90,12 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 </button>
                 <!--<button class="insta-btn">
                     <a style="color:white" href="{{url('/instaApi')}}">Instagram</a>
-                </button>
+
+                </button>-->
+
 				<p class="text-center show-loginBox" style="color:#2e6da4"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.videochat_text')</p>
-                <div class="jd-share-btn" style="text-align:center;">
+             <!---   <div class="jd-share-btn" style="text-align:center;">
+
                     <a href="{{url('/fbApi')}}">
                     	<i class="fa fa-facebook" style="background: #2e6da4;"></i> 
                     </a>
@@ -103,15 +107,17 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     	<i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                     </a>
                 </div>
-            </div>
+				<p class="text-center show-loginBox" style="color:#2e6da4;"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.videochat_text')</p>
+             -->
+			</div>
 			<div>
 				<!-- <p class="text-center show-loginBox" style="color:#2e6da4">※ @lang('home.singupinfo')</p> -->
 			</div>
         </div> 		
 
-        <div id="signupBox" class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
+        <div id="signupBox"  class="col-md-6 col-md-offset-3 signupBox" style="display:{{ $pageType == 'register' ? 'block' : 'none' }}">
             <h3>@lang('home.createaccount')</h3>
-            <form id="signUpForm" class="getapi" action="{{ url('account/register') }}" method="post">
+            <form id="signUpForm" action="{{url('account/register')}}" method="post" class="getapi">
                 @if(Session::has('registerAlert'))
                     <div class="alert alert-danger">
                         {{Session::get('registerAlert')}} 
@@ -123,6 +129,14 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 @if(Session::has('fNotice'))
                     <div class="alert alert-danger">
                         @lang('home.'.Session::get('fNotice')) 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                @if(Session::has('messageoutsourcing'))
+                    <div class="alert alert-danger">
+                        {{Session::get('messageoutsourcing')}} 
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -140,7 +154,7 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 {{ csrf_field() }}
                 <div class="form-group">
                    
-                    <input id="username" type="text" class="form-control" name="username" value="{{ Session::get('email') }}" placeholder="@lang('home.username')">
+                    <input id="username" type="text" class="form-control" name="username" value="{{ Session::get('email') }}" placeholder="@lang('home.username')" requried>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" id="get_email" name="email"  value="{{ Session::get('email') }}" placeholder="@lang('home.email-text')" requried>
@@ -158,15 +172,15 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="firstName" value="{{ old('firstName') }}" placeholder="@lang('home.fname')" requried>
+                            <input type="text" class="form-control" id="firstname" name="firstName" value="{{ old('firstName') }}" placeholder="@lang('home.fname')" requried>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="lastName" value="{{ old('lastName') }}" placeholder="@lang('home.lname')" requried>
+                            <input type="text" class="form-control" id="lastname" name="lastName" value="{{ old('lastName') }}" placeholder="@lang('home.lname')" requried>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <select class="form-control select2 job-country" name="country">
+                    <select class="form-control select2 job-country" id="country" name="country">
                              <option value="">@lang('home.selectCountry')</option>
                         @foreach(JobCallMe::getJobCountries() as $country)
                             <option value="{{ $country->id }}">@lang('home.'.$country->name)</option>
@@ -178,10 +192,14 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <select class="form-control select2 job-state" name="state"><option value="">@lang('home.s_state')</option></select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control select2 job-city" name="city"><option value="">@lang('home.s_city')</option></select>
+                    <select class="form-control select2 job-city" id="city" name="city"><option value="">@lang('home.s_city')</option></select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber-text')" requried>
+
+
+                    <input type="text" class="form-control" name="phoneNumber" value="{{ old('phoneNumber') }}" placeholder="@lang('home.phonenumber-text')" required>
+
+
                 </div>
                 <div class="input-group">
                     <div class="checkbox">
@@ -214,12 +232,14 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     </button>
                     <button class="in-btn">
                         <a style="color:white" href="{{url('/lnApi')}}">LINKEDIN</a>
-                    </button>
+					</button>
+	
                     <button class="tw-btn">
                     <a style="color:white" href="{{url('/TwApi')}}">TWITTER</a>
                 </button>
 				    <p class="text-center show-loginBox" style="color:#2e6da4"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.videochat_text')</p>
                <!--      <div class="jd-share-btn" style="text-align:center;">
+>>>>>>> d552ee497e7e4f016ad27e6162fd536ebd7728f6
                     <a href="{{url('/fbApi')}}">
                     	<i class="fa fa-facebook" style="background: #2e6da4;"></i> 
                     </a>
@@ -230,7 +250,10 @@ $next = Request::input('next') != '' ? '?next='.Request::input('next') : '';
                     <a href="{{url('/googleApi')}}">
                     	<i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                     </a>
-                </div> -->
+
+                </div>
+				<p class="text-center show-loginBox" style="color:#2e6da4"><i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.videochat_text')</p>
+
                 </div>
 				<div style="padding-top:20px">
 				   <!-- <p class="text-center show-loginBox" style="color:#2e6da4"><img src="../frontend-assets/images/info-icon.png">@lang('home.singupinfo')</p> -->
@@ -395,16 +418,21 @@ function sendpassword(pass){
 }
 
 $('form.getapi').submit(function(e){
-   
+
    var email=$('#get_email').val();
     var password=$('#pwd').val();
+    var firstname=$('#firstname').val();
+    var lastname=$('#lastname').val();
+    var country=$('#country').val();
+    var city=$('#city').val();
+    var phoneNumber=$('#phoneNumber').val();
    var confirm_password=$('#confirm_password').val();
    var gender='male';
    var username=$('#username').val();
-   
+
    
     var form=$("#signUpForm");
-    $.ajax({
+	 $.ajax({
         
         type: 'POST',
         crossDomain:true,
@@ -419,21 +447,21 @@ $('form.getapi').submit(function(e){
         }
     });
     $.ajax({
-        
+
         type: 'POST',
         crossDomain:true,
-        
+        cache: false,
+
         async: false,
         url: "https://www.jcmlink.com/requests.php?f=register",
         data: {email:email,password:password,confirm_password:confirm_password,gender:gender,username:username},
-       
+
         success: function(response) {
             console.log(response);
 
         }
     });
-
-    
+  
 });
 </script>
 @endsection

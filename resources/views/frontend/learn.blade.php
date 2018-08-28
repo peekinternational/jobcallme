@@ -3,6 +3,11 @@
 @section('title', 'Learn')
 
 @section('content')
+<style>
+                                    .select2-container--default .select2-selection--single .select2-selection__rendered {
+                                        color: #cccccc !important;
+                                        line-height: 28px; }
+                                    </style>
 <section id="learn-section">
     <div class="container">
         <div class="col-md-12 learn-search-box">
@@ -50,7 +55,7 @@
                                     <i class="fa fa-search"></i>
                                     </button> 
                                     <button type="button" class="btn btn-success btn-sm" id="l_search" style="margin-left: 9px;/* width: 7%; */height: 33px;/* background: transparent; *//* border: 2px solid #cecdcd; */">
-                                    <span style="color:white">Country</span></button>
+                                    <span style="color:white">@lang('home.Country')</span></button>
                                     </div>
                                    
 								
@@ -86,7 +91,7 @@
                                 
                                 <div class="search-field-box search-item" id="mob_country" style="display:none;padding-top: 14px;">
 								
-                                    <select class="form-control select2 job-country" name="country">
+                                    <select class="form-control select2 job-country" name="country" style="background: transparent;color: #fff">
                                         <option value="">@lang('home.country')</option>
                                     @foreach(JobCallMe::getJobCountries() as $cntry)
                                         <option value="{{ $cntry->id }}" {{ Session()->get('jcmUser')->country == $cntry->id ? 'selected="selected"' : '' }}>@lang('home.'.$cntry->name)</option>
@@ -129,7 +134,7 @@
                         <?php $i++; } ?>
                     </div>
                     <div class="promote-learning-box" style="margin-bottom:30px">
-                        <a href="{{ url('account/upskill/add') }}" class="promote-learning-btn"><i class="fa fa-bullhorn"></i>&nbsp; @lang('home.promotesoluction')</a>
+                        <!-- <a href="{{ url('account/upskill/add') }}" class="promote-learning-btn"> --><a href="{{ url('account/upskill') }}" class="promote-learning-btn"><i class="fa fa-bullhorn"></i>&nbsp; @lang('home.promotesoluction')</a>
                     </div>
                 </div>
             </div>
@@ -154,7 +159,7 @@
                    <div class="la-item">
                         <div class="la-item-img">
                             @if($rec->upskillImage != '')
-                            <img class=" img-responsive" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="">
+                            <img class=" img-responsive" src="{{ url('upskill-images/'.$rec->upskillImage) }}" style="width:100%" alt="">
                             @else
                             <img src="{{ url('d-cover.jpg') }}">
                             @endif
@@ -178,15 +183,21 @@
                             <span><i class="fa fa-map-marker"></i> @lang('home.'.JobCallMe::cityName($rec->city)),@lang('home.'.JobCallMe::countryName($rec->country))</span>
                             <div>
                                 <!-- <p class="pull-right la-price">{{ $rec->currency.' '.number_format($rec->cost)}}/-</p> -->
-								<!-- <p class="pull-left la-price"> --><p class="pull-left la-price"><span style="font-size:12px">@lang('home.leancostlist') :</span> @if($rec->accommodation == "Yes") {{ $rec->currency.' '.number_format($rec->cost)}} @else @if($rec->accommodation == "on") @lang('home.free') @else @lang('home.Contact person') @endif @endif</p>
+								<!-- <p class="pull-left la-price"> --><p class="pull-left la-price"><span style="font-size:12px">@lang('home.leancostlist') :</span> @if($rec->accommodation == "Yes") {{ $rec->currency.' '.number_format($rec->cost)}} @else @if($rec->accommodation == "on") @lang('home.free') @else @if($rec->website)<a href="{!! $rec->website !!}" target="_blank">@endif @lang('home.Contact person') @endif @endif</p>
                             </div>
-                              
+
+                               <div class="newimg">
+                                @if($rec->companyLogo !="")<img src="{{ url('compnay-logo/'.$rec->companyLogo) }}" class="img-circle" style="height: 63px;margin-bottom: 0;margin-top: 0;" alt="{{ $rec->companyName }}">@endif
+
                                 <div class="ra-author" style="width: 100%;padding-top: 0px;">
                                     <a href="{{ url('companies/company/'.$rec->companyId) }}">{{ $rec->companyName}}</a><br>
                                   
                                     <div class="newimg">
-                               
-                               <img src="@if($rec->companyLogo){{ url('compnay-logo/'.$rec->companyLogo) }}@else{{ url('compnay-logo/default-logo.jpg') }} @endif" class="" style="height: 63px;margin-bottom: 0;margin-top: 0;width:63px;" alt="{{ $rec->companyName }}"></div>
+                               @if($rec->companyLogo)
+                               <img src="@if($rec->companyLogo){{ url('compnay-logo/'.$rec->companyLogo) }}@else{{ url('compnay-logo/default-logo.jpg') }} @endif" class="" style="height: 63px;margin-bottom: 0;margin-top: 0;width:63px;" alt="{{ $rec->companyName }}">
+							   
+							   @endif
+							   </div>
                                <span>@if(app()->getLocale() == "kr")
 											{{ date('Y-m-d',strtotime($rec->createdTime))}}
 										@else      

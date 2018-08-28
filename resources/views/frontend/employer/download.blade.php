@@ -12,7 +12,7 @@
 			<div class="row">
 
 			<div class="follow-companies5" style="background:#57768a;color:#fff;margin-top:50px;margin-bottom:20px;">
-                    <h3 style="margin-left: 15px">@lang('home.DOWNLOAD')<span style="float:right;font-size:14px;">@if ($mypackage->expire_date <= '0') No Package <a href="{{ url('account/manage?plan') }}" style="color: white;"> Get Package Plan</a>  @else Remain Quantity:{{$mypackage->quantity}}, Remain Days: {{ $mypackage->expire_date }} @endif &nbsp;</span></h3>
+                    <h3 style="margin-left: 15px;font-size:18px;">@lang('home.resumeDOWNLOAD')<span style="float:right;font-size:14px;">@if ($mypackage->expire_date <= '0') <i class="fa fa-info-circle" aria-hidden="true"></i> @lang('home.No Package') <a href="{{ url('account/manage?plan') }}" style="color: white;"> @lang('home.Get Package Plan')&nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>  @else @lang('home.Remain Quantity'):{{$mypackage->quantity}}, @lang('home.Remain Days'): {{ $mypackage->expire_date }} @endif &nbsp;</span></h3>
 				</div>
 			
 			<div class="col-md-3 ">
@@ -176,7 +176,19 @@
 			</div>
 		  </div>
 				<div class="col-md-9">
-				
+					
+					@if ($mypackage->expire_date <= '0')
+						
+						<div class="row  company-box-left" style="height: 300px;padding-top:80px;">
+							<div class="text-center">
+								<span style="font-size:17px;color: #676767;">@lang('home.resumedownpaydetail')</span>
+							</div>
+							<div class="text-center" style="padding-top:20px">
+								<a href="{{ url('account/manage?plan') }}" style="color: #676767;"><button class="btn btn-md" style=" border-radius:5px !important;background-color: #337ab7;border: none;color: white;"><span style="font-size:17px">@lang('home.resumedownpaydetail2') {{$mypackage->id}}</span></button></a>
+							</div>
+						</div>
+
+					@else
 				  
               @foreach($download as $people)
 			  <div class="row  company-box-left" style="height: 130px;margin-bottom: 12px;">
@@ -197,7 +209,8 @@
             <a href="{{ url('account/employer/application/applicant/'.$people->userId) }}">
               <div class="col-md-2 col-sm-4 col-xs-6">
                     <div class="fp-img" style="height:96px;width: 85%;">
-                      <img src="@if($people->pImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif" style="width: 100%;">
+                      <!-- <img src="@if($people->pImage == 'Yes') {{ $pImage }} @else {{ url('profile-photos/profile-logo.jpg ')}} @endif" style="width: 100%;"> -->
+					  <img src="{{ $pImage }}" style="width: 100%;">
 
                     </div>
 					</div>
@@ -213,6 +226,8 @@
 			   </a>
 			   </div>
               @endforeach
+
+			  @endif
 
             
             <div style="text-align:center"><?php	echo $download->render(); ?></div>

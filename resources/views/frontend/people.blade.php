@@ -27,7 +27,7 @@
                     <i class="fa fa-search"></i>
                   </button>
                   <button  type="button" data-toggle="modal" data-target="#myModal" class="btn btn-success btn-sm hidden-xs" style="margin-left: 2px;height: 33px;">
-                    <span style="color:white">See More</span></button>
+                    <span style="color:white">@lang('home.See More')</span></button>
                     <select class="people-states" name="state" id="states_people"  style="width: 67%;display:none; margin-bottom: 7px;margin-top: 7px;">
                         <option value="">@lang('home.state')</option>
                     </select>
@@ -77,9 +77,9 @@
                   <h4 class="modal-title text-center">
 
                     @if(app()->getLocale() == "kr")
-                    {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }} @lang('home.Find Peoples')
+                    <!-- {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }} --> @lang('home.Find Peoples')
                     @else
-                    Search People in {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }}
+                    Search People in the World <!-- {{ JobCallMe::countryName(JobCallMe::getHomeCountry()) }} -->
                     @endif
                   </h4>
 
@@ -248,7 +248,7 @@
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-6 pnj-form-field">
+                      <div class="col-md-6">
                         <div class="form-group">
                           <select class="form-control select2 job-state" name="state">
                           </select>
@@ -258,7 +258,7 @@
                               </div>
 						        </div>
 
-								  <div class="col-md-6 pnj-form-field">
+								  <div class="col-md-6">
 									<div class="form-group">
 									  <select class="form-control select2 job-city" name="citys">
 									  </select>
@@ -291,7 +291,7 @@
               <!-- <div class="job-locations-box"> -->
 			  <div class="job-schedule-box">
                 @foreach(JobCallMe::getCategories() as $cat)
-@if($cat->name != "New and Career Recruitment")
+@if($cat->name != "New and Career Recruitment" and $cat->name != "Occasional Recruitment")
                 @if($cat->name == "outsourcingok")
                 <a  href="https://www.outsourcingok.com" target="_blank" style="background-color: {{ $colorArr[$i++] }};box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 width: auto; 
@@ -443,21 +443,27 @@
                                     
                       @endif
                       <div class="info">
+
                       <h3 style="margin-top: 56px;"> 
+
 							@if(app()->getLocale() == "kr")
 								
 								이력서 정보 <?php echo $width; ?>%</option>
 
 							@else
 								<?php echo $width; ?>% Information Completed
+
 							@endif </h3>
+
                       </div>
                     </a>
                     </div>
                     <div class="fp-item-details" style="height: 95px;">
                     
                     @if(Session::has('jcmUser'))
+
                       @if($check)<p>{!! $people->firstName.' '.$people->lastName !!}</p>@else <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i> <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i></p> @endif
+
                      @else
                      <p>{!! $people->firstName !!} <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i> <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px;"></i></p>
                      @endif

@@ -47,17 +47,17 @@ $cPage = Request::segment(2);
                         <a href="{{ url('read') }}">@lang('home.read')</a>
                     </li>
                     <?php if(Session()->has('jcmUser')){?>
-                    <li class="{{ Request::segment(2) == 'writings' ? 'active' : '' }}">
+                    <!-- <li class="{{ Request::segment(2) == 'writings' ? 'active' : '' }}">
                         <a href="{{ url('account/writings') }}">@lang('home.writing')</a>
-                    </li>
+                    </li> -->
                     <?php } ?>
                     <li class="{{ Request::segment(1) == 'learn' ? 'active' : '' }}">
                         <a href="{{ url('learn') }}">@lang('home.learn')</a>
                     </li>
                     <?php if(Session()->has('jcmUser')){?>
-                    <li class="{{ Request::segment(2) == 'upskill' ? 'active' : '' }}">
+                    <!-- <li class="{{ Request::segment(2) == 'upskill' ? 'active' : '' }}">
                         <a href="{{ url('account/upskill') }}">@lang('home.upskill')</a>
-                    </li>
+                    </li> -->
                     <?php }else{ ?>
                     <!-- <li class="hidden-sm {{ Request::segment(1) == 'companies' ? 'active' : '' }}">
                         <a href="{{ url('companies') }}">@lang('home.companies')</a>

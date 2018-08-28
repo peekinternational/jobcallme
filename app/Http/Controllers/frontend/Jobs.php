@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Lang;
 
 class Jobs extends Controller{
     public function home(Request $request){
-			if(!$request->session()->has('jcmUser')){
-    		return redirect('account/login?next='.$request->route()->uri);
-    	}
+		//if(!$request->session()->has('jcmUser')){
+    		//return redirect('account/login?next='.$request->route()->uri);
+    	//}
 		return view('frontend.view-jobs');
 	}
 	public function ajexhome(Request $request){
@@ -44,6 +44,7 @@ class Jobs extends Controller{
 		$cityss = trim($request->input('cityss'));
 		$currency = trim($request->input('currency'));
 		$userinfo=$request->session()->get('jcmUser')->userId;
+		$usercountry=$request->session()->get('jcmUser')->country;
 		
 		$savedJobArr = array();
 		if($request->session()->has('jcmUser')){
@@ -52,11 +53,12 @@ class Jobs extends Controller{
 		}
 
 		
-		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
+		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyAddress','jcm_companies.companyLogo');
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
 		$jobs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
 		$jobs->where('jcm_jobs.status','=','1');
 		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
+		if($country == '0' || $country == "") $jobs->where('jcm_jobs.country','=','1');
 		//$jobs->where('jcm_jobs.country','=',$country);
 		/*if($_find == '0'){
 			if($request->session()->has('jcmUser')){
@@ -107,8 +109,9 @@ class Jobs extends Controller{
 		}
 	
 		$app = $request->session()->get('jcmUser');
-
-		$result = $jobs->orderBy('jobId','desc')->paginate(12);
+		
+		$result = $jobs->orderBy('createdTime','desc')->paginate(7);
+		//$result = $jobs->orderBy('jobId','desc')->paginate(8);
 		
 		//dd($result);
 		$head = '';
@@ -120,6 +123,8 @@ class Jobs extends Controller{
 		if(count($result) > 0){
 			foreach($result as $rec){
 				$jobApplied = JobCallMe::isAppliedToJob($app->userId,$rec->jobId);
+
+				$job_work = DB::table('jobentity')->where('ID',$rec->work_idx)->first();
 				
 				//dd($jobApplied);
 				$applyUrl = url('jobs/apply/'.$rec->jobId);
@@ -149,21 +154,30 @@ class Jobs extends Controller{
 					elseif($rec->jobreceipt02 != "" and $rec->jobhomgpage != ""){
                         $vhtml .= '<a href="'.$rec->jobhomgpage.'" class="btn btn-primary btn-xs" style="margin-right: 10px;" target="_blank">'.trans('home.jobhomepageapply').'</a>';
 					}
-					elseif($rec->jobreceipt03 != ""){
-                        $vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.email').'</a>';
-					}
-					elseif($rec->jobreceipt04 != ""){
-                        $vhtml .= '<button class="btn btn-primary btn-xs opener" onclick="dialogclick()" style="margin-right: 10px;">'.trans('home.post').'</button>';
+					elseif($rec->jobreceipt07 != ""){
+                        if($job_work->email){
+							//$vhtml .= '<a  href="'.$viewUrl.'" class="btn btn-primary btn-xs" style="margin-right: 10px;">'.trans('home.emailapply').'['.$job_work->email.']</a>';
+							$vhtml .= '<a href="javascript:;" class="btn btn-primary btn-xs" onclick="dialogclick2(\''.$job_work->email.'\')" style="margin-right: 10px;">'.trans('home.emailapply').'</a>';
+						}else{
+							$vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.emailapply').'</a>';
+						}
+							
 					}
 					elseif($rec->jobreceipt05 != ""){
-                        $vhtml .= '<a href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.visit').'</a>';
+                        $vhtml .= '<a href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.telephoneapply').'</a>';
 					}
 					elseif($rec->jobreceipt06 != ""){
-                        $vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.telephone').'</a>';
+                        $vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.faxapply').'</a>';
 					}
-					elseif($rec->jobreceipt07 != ""){
-                        $vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.fax').'</a>';
+					elseif($rec->jobreceipt04 != ""){
+                        $vhtml .= '<button class="btn btn-primary btn-xs opener" onclick="dialogclick3(\''.$rec->companyAddress.'\')" style="margin-right: 10px;">'.trans('home.visitapply').'</button>';
 					}
+					elseif($rec->jobreceipt03 != ""){
+                        $vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick3(\''.$rec->companyAddress.'\')" style="margin-right: 10px;" target="_blank">'.trans('home.postapply').'</a>';
+					}
+					
+					
+					
 				
 				
                         if(in_array($rec->jobId, $savedJobArr)){
@@ -196,11 +210,32 @@ class Jobs extends Controller{
 				}
 
 					if(app()->getLocale() == "kr"){
-						$joblist_date = date('Y-m-d',strtotime($rec->createdTime));
-						$joblist_date2 = date('Y-m-d',strtotime($rec->expiryDate));
+						if($rec->expiryDate == "2100-12-31"){
+							$joblist_date = date('Y-m-d',strtotime($rec->createdTime));
+							$joblist_date2 = "채용시 마감<br>(채용공고참조)";
+						}else{
+							if($rec->expiryDate == date('Y-m-d')){
+								$joblist_date = date('Y-m-d',strtotime($rec->createdTime));
+								$joblist_date2 = trans('home.daytoday');
+							}else{
+								$joblist_date = date('Y-m-d',strtotime($rec->createdTime));
+								$joblist_date2 = date('Y-m-d',strtotime($rec->expiryDate));
+							}							
+						}
 					}else{
-						$joblist_date = date('M d, Y',strtotime($rec->createdTime));
-						$joblist_date2 = date('M d, Y',strtotime($rec->expiryDate));
+						if($rec->expiryDate == "2100-12-31"){
+							$joblist_date = date('M d, Y',strtotime($rec->createdTime));
+							$joblist_date2 = "Untill Hire";
+						}else{
+							if($rec->expiryDate == date('Y-m-d')){
+								$joblist_date = date('M d, Y',strtotime($rec->createdTime));
+								$joblist_date2 = trans('home.daytoday');
+							}else{
+								$joblist_date = date('M d, Y',strtotime($rec->createdTime));
+								$joblist_date2 = date('M d, Y',strtotime($rec->expiryDate));
+							}
+							
+						}
 					}
 					
 
@@ -230,11 +265,19 @@ class Jobs extends Controller{
                         $vhtml .= '</li>';
                         $vhtml .= '<li>';
                             $vhtml .= '<p class="js-title" style="color:#008000;">'.trans('home.experience').'</p>';
-                            $vhtml .= '<p>'.trans('home.'.$rec->experience).'</p>';
+                            if($rec->work_idx){
+							$vhtml .= '<p>'.$job_work->Eligibility_Career.'</p>';
+							}else{
+							$vhtml .= '<p>'.trans('home.'.$rec->experience).'</p>';
+							}	
                         $vhtml .= '</li>';
                         $vhtml .= '<li style="border-right: 0px solid #cccccc;">';
                             $vhtml .= '<p class="js-title" style="color:#008000;">'.trans('home.salary').'</p>';
-                            $vhtml .= '<p>'.$Salary_money.'</p>';
+                            if($rec->work_idx){
+							$vhtml .= '<p>'.$job_work->WorkingCondition_Wage.'</p>';
+							}else{
+							$vhtml .= '<p>'.$Salary_money.'</p>';
+							}
                         $vhtml .= '</li>';
 						$vhtml .= '<li style="border-right: 0px solid #cccccc;">';
                             $vhtml .= '<p class="js-title" style="color:#0000ff;">'.trans('home.poston').'</p>';
@@ -265,23 +308,23 @@ class Jobs extends Controller{
 
                    
                     $vhtml .= '<p class="js-note">'.$string.'<img style="padding-top: 17px;margin-top:10px;" src="'.$cLogo.'" width="100"></p>';
-                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 50px;">'.$joblist_date.'</span></p>';
+                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 70px;">'.$joblist_date.'</span></p>';
 				
-				$job = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
-				$job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
-				$job->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
-				$job->where('jcm_jobs.status','=','1');
-				$job->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
-				$job->where('jcm_jobs.category','=',$rec->category);
-				$results = $job->limit(1)->inRandomOrder()->get();
+				// $job = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
+				// $job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
+				// $job->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
+				// $job->where('jcm_jobs.status','=','1');
+				// $job->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
+				// $job->where('jcm_jobs.category','=',$rec->category);
+				// $results = $job->limit(1)->inRandomOrder()->get();
 				//dd($results);
 				
-				foreach($results as $sim)
-				{
-					$comUrl = url('companies/company/'.$sim->companyId);
-					$cityUrl = url('jobs?city='.$sim->city);
-					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'"><span style="color:#337ab7">'.trans('home.similerjob').'</span>  '.trans('home.'.JobCallMe::cityName($sim->city)).'</a><span style="padding-left: 85px;" ><a style="color: #337ab7;" href="'.$comUrl.'">'.trans('home.jobIn').' <span style="color:#999999"> '.$sim->companyName.'</span></a></span></p>';
-				}
+				// foreach($results as $sim)
+				// {
+					$comUrl = url('companies/company/'.$rec->companyId);
+					 $cityUrl = url('jobs?state='.$rec->state);
+					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'"><span style="color:#337ab7">'.trans('home.similerjob').'</span>  '.trans('home.'.JobCallMe::stateName($rec->state)).'</a><br><span style="padding-left: 0px;" ><a style="color: #337ab7;" href="'.$comUrl.'">'.trans('home.jobIn').' <span style="color:#999999"> '.$rec->companyName.'</span></a></span></p>';
+				// }
 				$vhtml .='</div>';
 			}
 		}else{
@@ -301,6 +344,8 @@ class Jobs extends Controller{
 		$_find = trim($request->input('_find'));
 		$keyword = trim($request->input('keyword'));
 		$categoryId = trim($request->input('categoryId'));
+		$subCategory = trim($request->input('subCategory'));
+		$subCategory2 = trim($request->input('subCategory2'));
 		$htype = trim($request->input('htype'));
 		$dtype = trim($request->input('dtype'));
 		$jobType = trim($request->input('jobType'));
@@ -320,6 +365,7 @@ class Jobs extends Controller{
 		$currency = trim($request->input('currency'));
 		$userinfo=$request->session()->get('jcmUser')->userId;
 		
+		
 		$savedJobArr = array();
 		if($request->session()->has('jcmUser')){
 			$meta = JobCallMe::getUserMeta($request->session()->get('jcmUser')->userId);
@@ -327,10 +373,12 @@ class Jobs extends Controller{
 		}
 
 		
-		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
+		$jobs = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyAddress','jcm_companies.companyLogo');
 		$jobs->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
 		$jobs->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
 		$jobs->where('jcm_jobs.status','=','1');
+		//if($country == '0' || $country == "") $jobs->where('jcm_jobs.country','=','1');
+		//$jobs->where('jcm_jobs.country','=','1');
 		$jobs->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
 		//$jobs->where('jcm_jobs.country','=',$country);
 		/*if($_find == '0'){
@@ -352,8 +400,11 @@ class Jobs extends Controller{
 		
 		$cityss = JobCallMe::cityId($cityss);
 		if($country != '0' && $country != "") $jobs->where('jcm_jobs.country','=',$country);
+		
 		if($countrys != '0' && $countrys != "") $jobs->where('jcm_jobs.country','=',$countrys);
 		if($categoryId != '') $jobs->where('jcm_jobs.category','=',$categoryId);
+		if($subCategory != '') $jobs->where('jcm_jobs.subCategory','=',$subCategory);
+		if($subCategory2 != '') $jobs->where('jcm_jobs.subCategory2','=',$subCategory2);
 		if($htype != '') $jobs->where('jcm_jobs.head','=',$htype);
 		if($dtype != '') $jobs->where('jcm_jobs.dispatch','=',$dtype);
 		if($jobType != '') $jobs->where('jcm_jobs.jobType','=',$jobType);
@@ -382,9 +433,11 @@ class Jobs extends Controller{
 		}
 		$app = $request->session()->get('jcmUser');
 
-		$result = $jobs->orderBy('jobId','desc')->paginate(12);
+		$result = $jobs->orderBy('createdTime','desc')->paginate(7);
+		$rr=sizeof($result);
+		//$result = $jobs->orderBy('jobId','desc')->paginate(8);
 		
-		//dd($result);
+
 		$head = '';
 		$f_company = '';
 		$vhtml = '';
@@ -392,6 +445,8 @@ class Jobs extends Controller{
 		if(count($result) > 0){
 			foreach($result as $rec){
 				$jobApplied = JobCallMe::isAppliedToJob($app->userId,$rec->jobId);
+
+				$job_work = DB::table('jobentity')->where('ID',$rec->work_idx)->first();
 				
 				//dd($jobApplied);
 				$applyUrl = url('jobs/apply/'.$rec->jobId);
@@ -421,21 +476,26 @@ class Jobs extends Controller{
 					elseif($rec->jobreceipt02 != "" and $rec->jobhomgpage != ""){
                         $vhtml .= '<a href="'.$rec->jobhomgpage.'" class="btn btn-primary btn-xs" style="margin-right: 10px;" target="_blank">'.trans('home.jobhomepageapply').'</a>';
 					}
-					elseif($rec->jobreceipt03 != ""){
-                        $vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.email').'</a>';
-					}
-					elseif($rec->jobreceipt04 != ""){
-                        $vhtml .= '<button class="btn btn-primary btn-xs opener" onclick="dialogclick()" style="margin-right: 10px;">'.trans('home.post').'</button>';
-					}
+					elseif($rec->jobreceipt07 != ""){
+                        if($job_work->email){
+							$vhtml .= '<a href="javascript:;" class="btn btn-primary btn-xs" onclick="dialogclick2(\''.$job_work->email.'\')" style="margin-right: 10px;">'.trans('home.emailapply').'</a>';
+						}else{
+							$vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.emailapply').'</a>';
+						}
+					}	
 					elseif($rec->jobreceipt05 != ""){
-                        $vhtml .= '<a href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.visit').'</a>';
+                        $vhtml .= '<a href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.telephoneapply').'</a>';
 					}
 					elseif($rec->jobreceipt06 != ""){
-                        $vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.telephone').'</a>';
+                        $vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.faxapply').'</a>';
 					}
-					elseif($rec->jobreceipt07 != ""){
-                        $vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick()" style="margin-right: 10px;" target="_blank">'.trans('home.fax').'</a>';
+					elseif($rec->jobreceipt04 != ""){
+                        $vhtml .= '<button class="btn btn-primary btn-xs opener" onclick="dialogclick3(\''.$rec->companyAddress.'\')" style="margin-right: 10px;">'.trans('home.visitapply').'</button>';
 					}
+					elseif($rec->jobreceipt03 != ""){
+                        $vhtml .= '<a  href="javascript:(0)" class="btn btn-primary btn-xs" onclick="dialogclick3(\''.$rec->companyAddress.'\')" style="margin-right: 10px;" target="_blank">'.trans('home.postapply').'</a>';
+					}
+					
 				
 				
                         if(in_array($rec->jobId, $savedJobArr)){
@@ -468,11 +528,21 @@ class Jobs extends Controller{
 				}
 
 					if(app()->getLocale() == "kr"){
-						$joblist_date = date('Y-m-d',strtotime($rec->createdTime));
-						$joblist_date2 = date('Y-m-d',strtotime($rec->expiryDate));
+						if($rec->expiryDate == "2100-12-31"){
+							$joblist_date = date('Y-m-d',strtotime($rec->createdTime));
+							$joblist_date2 = "채용시 마감<br>(채용공고참조)";
+						}else{
+							$joblist_date = date('Y-m-d',strtotime($rec->createdTime));
+							$joblist_date2 = date('Y-m-d',strtotime($rec->expiryDate));
+						}
 					}else{
-						$joblist_date = date('M d, Y',strtotime($rec->createdTime));
-						$joblist_date2 = date('M d, Y',strtotime($rec->expiryDate));
+						if($rec->expiryDate == "2100-12-31"){
+							$joblist_date = date('M d, Y',strtotime($rec->createdTime));
+							$joblist_date2 = "Untill Hire";
+						}else{
+							$joblist_date = date('M d, Y',strtotime($rec->createdTime));
+							$joblist_date2 = date('M d, Y',strtotime($rec->expiryDate));
+						}
 					}
 					
 
@@ -502,11 +572,19 @@ class Jobs extends Controller{
                         $vhtml .= '</li>';
                         $vhtml .= '<li>';
                             $vhtml .= '<p class="js-title" style="color:#008000; border-right: 1px solid;">'.trans('home.experience').'</p>';
-                            $vhtml .= '<p >'.trans('home.'.$rec->experience).'</p>';
+                            if($rec->work_idx){
+							$vhtml .= '<p>'.$job_work->Eligibility_Career.'</p>';
+							}else{
+							$vhtml .= '<p >'.trans('home.'.$rec->experience).'</p>';
+							}
                         $vhtml .= '</li>';
                         $vhtml .= '<li style="border-right: 0px solid #cccccc; ">';
                             $vhtml .= '<p class="js-title" style="color:#008000; border-right: 1px solid;">'.trans('home.salary').'</p>';
-                            $vhtml .= '<p >'.$Salary_money.'</p>';
+                            if($rec->work_idx){
+							$vhtml .= '<p>'.$job_work->WorkingCondition_Wage.'</p>';
+							}else{
+							$vhtml .= '<p >'.$Salary_money.'</p>';
+							}	
                         $vhtml .= '</li>';
 						$vhtml .= '<li style="border-right: 0px solid #cccccc;">';
                             $vhtml .= '<p class="js-title" style="color:#0000ff; border-right: 1px solid;">'.trans('home.poston').'</p>';
@@ -518,11 +596,29 @@ class Jobs extends Controller{
                         $vhtml .= '</li>';
                     $vhtml .= '</ul>';
                     $cLogo = url('compnay-logo/default-logo.jpg');
-                    if($rec->companyLogo != ''){
-                    	$cLogo = url('compnay-logo/'.$rec->companyLogo);
-                    }
+                    
+						if($rec->work_idx){
+							
+							$is_file_exist = file_exists('compnay-logo/'.$rec->work_id.'_Logo.jpg');
+
+							  if ($is_file_exist) {
+								$cLogo = url('compnay-logo/'.$rec->work_id.'_Logo.jpg');
+							}
+
+							
+						}else{
+							if($rec->companyLogo != ''){
+								$cLogo = url('compnay-logo/'.$rec->companyLogo);
+							}
+						}	
+
+						if($rec->work_idx){
+							$string = strip_tags($job_work->jobdescription);
+						 }else{
+								$string = strip_tags($rec->description);
+						 }
 					
-                     $string = strip_tags($rec->description);
+                   
                         if (strlen($string) > 100) {
 
                         // truncate string
@@ -537,23 +633,35 @@ class Jobs extends Controller{
 
                    
                     $vhtml .= '<p class="js-note">'.$string.'<img style="padding-top: 17px;margin-top:10px;" src="'.$cLogo.'" width="100"></p>';
-                    $vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 50px;">'.$joblist_date.'</span></p>';
+					if($rec->work_idx){
+						$name_array = explode("  ", $job_work->WorkingCondition_WorkingArea);							
+
+							$vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.$name_array[0]." ".$name_array[1].', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 70px;">'.$joblist_date.'</span></p>';
+					 }else{
+							if(JobCallMe::cityName($rec->city)){
+							$vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::cityName($rec->city)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 70px;">'.$joblist_date.'</span></p>';
+							}else{
+							$vhtml .= '<p class="js-location"><i class="fa fa-map-marker"></i> '.trans('home.'.JobCallMe::stateName($rec->state)).', '.trans('home.'.JobCallMe::countryName($rec->country)).'<span class="pull-right" style="color: #0000ff;margin-top: 70px;">'.$joblist_date.'</span></p>';
+							}
+					 }	
+
+                    
 				
-				$job = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.companyName','jcm_companies.companyLogo');
-				$job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
-				$job->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
-				$job->where('jcm_jobs.status','=','1');
-				$job->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
-				$job->where('jcm_jobs.category','=',$rec->category);
-				$results = $job->limit(1)->inRandomOrder()->get();
+				// $job = DB::table('jcm_jobs')->select('*');
+				// $job->join('jcm_companies','jcm_jobs.companyId','=','jcm_companies.companyId');
+				
+				// $job->where('jcm_jobs.status','=','1');
+				// $job->where('jcm_jobs.expiryDate','>=',date('Y-m-d'));
+				// $job->where('jcm_jobs.category','=',$rec->category);
+				// $results = $job->limit(1)->inRandomOrder()->get();
 				//dd($results);
 				
-				foreach($results as $sim)
-				{
-					$comUrl = url('companies/company/'.$sim->companyId);
-					$cityUrl = url('jobs?city='.$sim->city);
-					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'"><span style="color:#337ab7">'.trans('home.similerjob').'</span>  '.trans('home.'.JobCallMe::cityName($sim->city)).'</a><span style="padding-left: 85px;" ><a style="color: #337ab7;" href="'.$comUrl.'">'.trans('home.jobIn').' <span style="color:#999999"> '.$sim->companyName.'</span></a></span></p>';
-				}
+				// foreach($results as $sim)
+				// {
+					$comUrl = url('companies/company/'.$rec->companyId);
+					 $cityUrl = url('jobs?state='.$rec->state);
+					$vhtml .= '<p style="color: #999999;text-transform: capitalize;"><a style="color: #999999;" href="'.$cityUrl.'"><span style="color:#337ab7">'.trans('home.similerjob').'</span>  '.trans('home.'.JobCallMe::stateName($rec->state)).'</a><br><span style="padding-left: 0px;" ><a style="color: #337ab7;" href="'.$comUrl.'">'.trans('home.jobIn').' <span style="color:#999999"> '.$rec->companyName.'</span></a></span></p>';
+				// }
 				$vhtml .='</div>';
 			}
 		}else{
@@ -730,9 +838,9 @@ class Jobs extends Controller{
 
 
 	public function viewJob(Request $request){
-		if(!$request->session()->has('jcmUser')){
-    		return redirect('account/login?next='.$request->route()->uri);
-    	}
+		//if(!$request->session()->has('jcmUser')){
+    		//return redirect('account/login?next='.$request->route()->uri);
+    	//}
 		
 		$jobId = $request->segment(2);
 		//dd($jobId);
@@ -752,7 +860,11 @@ class Jobs extends Controller{
 		}
 		
 		$input['userId']=$jobId;
-		$input['checker_id']=$userId;
+		if($userId){
+			$input['checker_id']=$userId;
+		}else{
+			$input['checker_id']='0';   //로그인없이 채용공고 광고 클릭할경우
+		}
 		$input['h_type']='Job';
 		DB::table('jcm_history')->insert($input);
 
@@ -772,11 +884,12 @@ class Jobs extends Controller{
 			$followArr = @explode(',', $meta->follow);
 		}
 		
-		$sug = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.*');
+		//$sug = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_payments.title as p_title','jcm_companies.*');
+		$sug = DB::table('jcm_jobs')->select('jcm_jobs.*','jcm_companies.*');
 		$sug->join('jcm_companies','jcm_companies.companyId','=','jcm_jobs.companyId');
-		$sug->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
+		//$sug->Join('jcm_payments','jcm_jobs.p_Category','=','jcm_payments.id');
 		
-		$suggest=$sug->where('jcm_jobs.country','=',JobCallMe::getHomeCountry())->limit(5)->get();
+		$suggest=$sug->where('jcm_jobs.country','=',JobCallMe::getHomeCountry())->where('jcm_jobs.category','=',$job->jobcategory)->where('jcm_jobs.expiryDate','>=',date('Y-m-d'))->orderBy('jobId','desc')->limit(5)->get();
 		$jobApplied = JobCallMe::isAppliedToJob($userId,$jobId);
 				$benefits = @explode(',', $job->benefits);
 				$process = @explode(',', $job->process);
@@ -796,8 +909,11 @@ class Jobs extends Controller{
 			$allgrowing=$allrec == 0 ? 0 : ($pergrowing*100/$allrec);
 			//dd($allrecmond);
 
+		$job_work = DB::table('jobentity')->where('ID',$job->work_idx)->first();	
+		$job_work2 = DB::table('employer')->where('ID','=',$job->work_id)->first();	
+
 			
-		return view('frontend.view-job-detail',compact('allgrowing','allon','allrecmond','fellow','learncount','reviewcount','applycount','jobcount','companyReview','job','savedJobArr','followArr','userId','suggest','jobApplied','benefits','process'));
+		return view('frontend.view-job-detail',compact('allgrowing','allon','allrecmond','fellow','learncount','reviewcount','applycount','jobcount','companyReview','job','savedJobArr','followArr','userId','suggest','jobApplied','benefits','process','job_work','job_work2'));
 		
 	}
 

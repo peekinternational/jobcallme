@@ -52,9 +52,9 @@
                                     <i class="fa fa-search"></i>
                                 </button>
                                 <button type="button" class="btn btn-success btn-sm" id="r_search" style="margin-left: 9px;/* width: 7%; */height: 33px;/* background: transparent; *//* border: 2px solid #cecdcd; */">
-                                    <span style="color:white">Country</span></button>
+                                    <span style="color:white">@lang('home.Country')</span></button>
                                     <button type="button" class="btn btn-default btn-sm" id="c_search" style="display: none;margin-left: 9px;/* width: 7%; */height: 33px;/* background: transparent; *//* border: 2px solid #cecdcd; */">
-                                    <span style="color:white">Close</span></button>
+                                    <span>@lang('home.Close')</span></button>
                             </div>
                         </form>
                     </div>
@@ -83,7 +83,7 @@
                         <?php if($i == 5){ break; } $i++; } ?>
                     </div>
                     <div class="promote-learning-box">
-                        <a href="{{ url('account/writings/article/add') }}" class="promote-learning-btn"><i class="fa fa-edit"></i>&nbsp; @lang('home.warticle')</a>
+                        <!-- <a href="{{ url('account/writings/article/add') }}" class="promote-learning-btn"> --><a href="{{ url('account/writings') }}" class="promote-learning-btn"><i class="fa fa-edit"></i>&nbsp; @lang('home.warticle')</a>
                     </div>
                 </div>
             </div>

@@ -101,11 +101,15 @@ body{
             <li id="resume-{{ $resumeId }}">
                 <div class="col-md-12">
                    
-                    <p class="rd-date">{!! date('M, Y',strtotime($academic->completionDate)) !!}</p>
+                    <p class="rd-date">@if(app()->getLocale() == "kr")
+							{!! date('Y-m',strtotime($academic->completionDate)) !!}
+						@else
+							{!! date('M, Y',strtotime($academic->completionDate)) !!}
+						@endif</p>
                     <p class="rd-title">{!! $academic->degree !!}</p>
                     <p class="rd-organization">{!! $academic->institution !!}</p>
-                    <p class="rd-location">{!! ucfirst($academic->country) !!}</p>
-                    <p class="rd-grade">Grade/GPA : {!! $academic->grade !!}</p>
+                    <p class="rd-location">@lang('home.'.JobCallMe::cityName($academic->city)),@lang('home.'.JobCallMe::countryName($academic->country))</p>
+                    <p class="rd-grade">@lang('home.GradeGPA') : {!! $academic->grade !!}</p>
                 </div>
             </li>
         @endforeach
@@ -128,10 +132,14 @@ body{
                             <i class="fa fa-trash"></i>
                         </a>&nbsp;
                     </span>
-                    <p class="rd-date">{!! date('M, Y',strtotime($certification->completionDate)) !!}</p>
+                    <p class="rd-date">@if(app()->getLocale() == "kr")
+							{!! date('Y-m',strtotime($certification->completionDate)) !!}
+						@else
+							{!! date('M, Y',strtotime($certification->completionDate)) !!}
+						@endif</p>
                     <p class="rd-title">{!! $certification->certificate !!}</p>
                     <p class="rd-organization">{!! $certification->institution !!}</p>
-                    <p class="rd-location">{!! ucfirst($certification->country) !!}</p>
+                    <p class="rd-location">@lang('home.'.JobCallMe::cityName($certification->city)),@lang('home.'.JobCallMe::countryName($certification->country))</p>
                     <p class="rd-grade">Score : {!! $certification->score !!}</p>
                 </div>
             </li>
@@ -155,10 +163,14 @@ body{
                             <i class="fa fa-trash"></i>
                         </a>&nbsp;
                     </span>
-                    <p class="rd-date">{!! date('M, Y',strtotime($experience->startDate)) !!} - {{ $experience->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($experience->endDate)) }}</p>
+                    <p class="rd-date">@if(app()->getLocale() == "kr")
+							{!! date('Y-m',strtotime($experience->startDate)) !!} - {{ $experience->currently == 'yes' ? '현재 재직중' : date('Y-m',strtotime($experience->endDate)) }}
+						@else
+							{!! date('M, Y',strtotime($experience->startDate)) !!} - {{ $experience->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($experience->endDate)) }}
+						@endif  </p>
                     <p class="rd-title">{!! $experience->jobTitle !!}</p>
                     <p class="rd-organization">{!! $experience->organization !!}</p>
-                    <p class="rd-location">{!! ucfirst($experience->country) !!}</p>
+                    <p class="rd-location">@lang('home.'.JobCallMe::cityName($experience->city)),@lang('home.'.JobCallMe::countryName($experience->country))</p>
                 </div>
             </li>
         @endforeach
@@ -183,7 +195,7 @@ body{
                         </a>&nbsp;
                     </span>
                     <p class="rd-title">{!! $skills->skill !!}</p>
-                    <p class="rd-location">{!! $skills->level !!}</p>
+                    <p class="rd-location">@lang('home.'.$skills->level)</p>
                 </div>
             </li>
         @endforeach
@@ -208,8 +220,16 @@ body{
                             </a>&nbsp;
                         </span>
                         <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
-						<p class="rd-location"> {!! $skills->startmonth !!} {!! $skills->startyear !!} - {{ $skills->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($skills->endDate)) }}</p>
-						<p class="rd-location"> As {!! $skills->position !!} - {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+						<p class="rd-location"> @if(app()->getLocale() == "kr")
+													{!! $skills->startyear !!}년 @lang('home.'.$skills->startmonth) - {{ $skills->currently == 'yes' ? '현재 재직중' : $skills->endyear.'년' }} @lang('home.'.$skills->endmonth) 
+												@else
+													{!! $skills->startmonth !!} {!! $skills->startyear !!} - {{ $skills->currently == 'yes' ? 'Currently Working' : date('M, Y',strtotime($skills->endDate)) }}
+												@endif</p>
+						<p class="rd-location"> @if(app()->getLocale() == "kr")
+													@lang('home.projectposition') : {!! $skills->position !!}, @lang('home.occupation') : {!! $skills->occupation !!}, @lang('home.projectorganization') : {!! $skills->organization !!}
+												@else
+													@lang('home.projectposition') :  {!! $skills->position !!}, @lang('home.occupation') : {!! $skills->occupation !!}, @lang('home.projectorganization') : {!! $skills->organization !!}
+												@endif</p>
 						
                        <p class="rd-location">{!! $skills->detail !!}</p>
 					  
@@ -237,8 +257,12 @@ body{
                             </a>&nbsp;
                         </span>
                         <p class="rd-title">{!! $afflls->pos !!}</p>
-						<p class="rd-location"> {!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}</p>
-						<p class="rd-location">{!! $afflls->org .', '.JobCallMe::cityName($afflls->city).' ,'.JobCallMe::countryName($afflls->country) !!}
+						<p class="rd-location"> @if(app()->getLocale() == "kr")
+							{!! $afflls->stayear !!}년 @lang('home.'.$afflls->stamonth) - {!! $afflls->enyear !!} @lang('home.'.$afflls->enmonth)
+						@else
+							{!! $afflls->stamonth !!} {!! $afflls->stayear !!} - {!! $afflls->enmonth !!} {!! $afflls->enyear !!}
+						@endif</p>
+						<p class="rd-location">{!! $afflls->org !!} , @lang('home.'.JobCallMe::cityName($afflls->city)),@lang('home.'.JobCallMe::countryName($afflls->country))
 						
 					  
                     </div>
@@ -264,8 +288,15 @@ body{
                                 <i class="fa fa-trash"></i>
                             </a>&nbsp;
                         </span>
-                        <p class="rd-title">{!! $skills->language !!}</p>
-						<p class="rd-location"> ({!! $skills->level !!})</p>
+                        <p class="rd-title">@lang('home.'.$skills->language)</p>
+						<p class="rd-location">@lang('home.'.$skills->level)</p>
+						<p class="rd-location">{!! $skills->certifiedexam !!}</p>
+						<p class="rd-location">{!! $skills->classscore !!}</p>
+						<p class="rd-location">@if(app()->getLocale() == "kr")
+							{!! $skills->languageyear !!}년 @lang('home.'.$skills->languagemonth)
+						@else
+						   @lang('home.'.$skills->languagemonth), {!! $skills->languageyear !!}
+						@endif </p>
 						
 					  
                     </div>
@@ -292,10 +323,10 @@ body{
                             </a>&nbsp;
                         </span>
                         <p class="rd-title">{!! $skills->name !!}<span class="rd-location" >({!! $skills->type !!})</span></p>
-						<p class="rd-location"> Job Title: {!! $skills->jobtitle !!}</p>
-						<p class="rd-location">Organization: {!! $skills->organization .', '.JobCallMe::cityName($skills->city).', '.JobCallMe::countryName($skills->country)  !!}</p>
-                       <p class="rd-location">Phone Number : {!! $skills->phone !!}</p>
-					   <p class="rd-location">Email : {!! $skills->email !!}</p>
+						<p class="rd-location"> @lang('home.refjobtitle') : {!! $skills->jobtitle !!}</p>
+						<p class="rd-location">@lang('home.reforganization') : {!! $skills->organization !!}, @lang('home.'.JobCallMe::cityName($skills->city)),@lang('home.'.JobCallMe::countryName($skills->country))</p>
+                       <p class="rd-location">@lang('home.phone') : {!! $skills->phone !!}</p>
+					   <p class="rd-location">@lang('home.email') : {!! $skills->email !!}</p>
                     </div>
                 </li>
             @endforeach
@@ -322,8 +353,8 @@ body{
                         </span>
                         <p class="rd-title">{!! $skills->title !!}<span class="rd-location" >({!! $skills->pu_type !!})</span></p>
 						<p class="rd-location"> {!! $skills->month !!}-{!! $skills->year !!}</p>
-						<p class="rd-location"> Author: {!! $skills->author !!}</p>
-						<p class="rd-location">Publisher: {!! $skills->publisher.', '.JobCallMe::cityName($skills->city).' ,'.JobCallMe::countryName($skills->country)  !!}</p>
+						<p class="rd-location"> @lang('home.Author') : {!! $skills->author !!}</p>
+						<p class="rd-location">@lang('home.publisher') : {!! $skills->publisher !!}, @lang('home.'.JobCallMe::cityName($skills->city)),@lang('home.'.JobCallMe::countryName($skills->country))</p>
                        <p class="rd-location">{!! $skills->detail !!}</p>
 					  
                     </div>
@@ -349,8 +380,12 @@ body{
                             </a>&nbsp;
                         </span>
                         <p class="rd-title">{!! $skills->title !!}</p>
-						<p class="rd-location"> {!! $skills->type !!},{!! $skills->startmonth !!} {!! $skills->startyear !!}</p>
-						<p class="rd-location"> {!! $skills->occupation !!} at {!! $skills->organization !!}</p>
+						<p class="rd-location"> {!! $skills->type !!},@if(app()->getLocale() == "kr")
+													{!! $skills->startyear !!}년 @lang('home.'.$skills->startmonth)
+												@else
+													{!! $skills->startmonth !!} {!! $skills->startyear !!}
+												@endif</p>
+						<p class="rd-location"> <!-- {!! $skills->occupation !!} at --> {!! $skills->organization !!}</p>
 						
                        <p class="rd-location">{!! $skills->detail !!}</p>
 					  
@@ -379,7 +414,11 @@ body{
                             </a>&nbsp;
                         </span>
                         <p class="rd-title">{!! $skills->title !!}<span class="rd-location">({!! $skills->type !!})</span></p>
-						<p class="rd-location">{!! $skills->startmonth !!} {!! $skills->startyear !!}</p>
+						<p class="rd-location">@if(app()->getLocale() == "kr")
+							{!! $skills->startyear !!}년 @lang('home.'.$skills->startmonth)
+						@else
+							{!! $skills->startmonth !!} {!! $skills->startyear !!}
+						@endif</p>
 						<p class="rd-location">http://{!! $skills->website !!}</p>
 						<p class="rd-location"> {!! $skills->occupation !!}</p>
 						

@@ -119,7 +119,7 @@ curl_close ($ch);
 	 
     public function postPaymentWithpaypals(Request $request)
     {
-	//dd($request->afterinterview);
+
 	$this->validate($request,[
 				'title' => 'required|max:255',
 				'department' => 'required',
@@ -128,7 +128,7 @@ curl_close ($ch);
 				'experience' => 'required',
 				'vacancy' => 'required|numeric',
 				'description' => 'required',
-				'skills' => 'required|max:1024',
+				'skills' => 'required',
 				'qualification' => 'required',
 				'expiryDate' => 'required|date',
 				//'minSalary' => 'numeric',
@@ -157,7 +157,7 @@ curl_close ($ch);
 	   $amount=$rec[0]->price;
 	   //dd();
 	   $durations= $amount*$request->duration;
-
+		
         $mul=$durations;
         $am=$mul*1100;
       //  dd($am);
@@ -224,6 +224,7 @@ curl_close ($ch);
 		$request->session()->put('jobreceipt06', $request->jobreceipt06);
 		$request->session()->put('jobreceipt07', $request->jobreceipt07);
 		$request->session()->put('jobhomgpage', $request->jobhomgpage);
+		$request->session()->put('moneycurrency', $request->moneycurrency);
 		$request->session()->put('afterinterview', $request->afterinterview);
 
 		if($questionaire_id){
@@ -307,7 +308,7 @@ curl_close ($ch);
 		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 		//dd($jobId);
 		\Session::put('success',trans('home.Add Job Successfully To Draft'));
-		return Redirect::route('addmoney.account/employer/job/share');	
+		return view('frontend.employer.share-job',compact('jobId'));
 		}	
 		else{
 		
@@ -330,7 +331,7 @@ curl_close ($ch);
 		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 		//dd($jobId);
 		\Session::put('success',trans('home.Add Job Successfully To Draft'));
-		return Redirect::route('addmoney.account/employer/job/share');	
+		return view('frontend.employer.share-job',compact('jobId'));
 	//	return Redirect::route('addmoney.account/employer/payment',compact('am','app','goodsname'));
 		}
 }
@@ -384,7 +385,7 @@ else{
 
 		//dd($jobId);
 		\Session::put('success',trans('home.Add Job Successfully'));
-		return Redirect::route('addmoney.account/employer/job/share');	
+		return view('frontend.employer.share-job',compact('jobId'));
 		}
 		
 		elseif($amount!='0')
@@ -422,7 +423,7 @@ else{
 		DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Category,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 		//dd($jobId);
 		\Session::put('success',trans('home.Add Job Successfully'));
-		return Redirect::route('addmoney.account/employer/job/share');	
+		return view('frontend.employer.share-job',compact('jobId'));
 		}	
 		else{
 		$request->session()->forget('postedJobId');  /*For nice pay*/
@@ -607,7 +608,7 @@ else{
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
             \Session::put('success','Payment success');
-            return Redirect::route('addmoney.account/employer/job/share');
+            return view('frontend.employer.share-job',compact('jobId'));
         }
         \Session::put('error','Payment failed');
        return redirect('account/employer');
@@ -786,8 +787,9 @@ else{
 						
 						
 		$applicants = DB::table('jcm_companies')
-    					->select('jcm_users.city','privacy.profileImage as privacyImage','jcm_users.country','jcm_companies.companyName','jcm_companies.companyId','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto')
-    					
+
+    					->select('jcm_users.city','privacy.profileImage as privacyImage','jcm_users.country','jcm_companies.companyName','jcm_companies.companyId','jcm_users.userId','jcm_users.firstName','jcm_users.lastName','jcm_users.profilePhoto','jcm_users_meta.gender')
+
 						->join('jcm_users','jcm_users.companyId','=','jcm_companies.companyId')
 						->join('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId')
 						->join('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId')
@@ -940,8 +942,8 @@ else{
 				//'careerLevel' => 'required',
 				'experience' => 'required',
 				'vacancy' => 'required|numeric',
-				'description' => 'required|max:1024',
-				'skills' => 'required|max:1024',
+				'description' => 'required',
+				'skills' => 'required',
 				'qualification' => 'required',
 				'expiryDate' => 'required|date',
 				'minSalary' => 'required|numeric',
@@ -1201,24 +1203,30 @@ else{
 		$resume = $this->userResume($userId);
 		//print_r($resume);exit;
 		$people = DB::table('jcm_users');
-    	$people->select('jcm_users.*','privacy.profileImage as privacyImage');
+
+    	$people->select('jcm_users.*','privacy.profileImage as privacyImage','jcm_users_meta.gender as genderpeople');		
+
     	$people->leftJoin('jcm_users_meta','jcm_users_meta.userId','=','jcm_users.userId');
     	$people->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_users.userId');
     	$people->where('privacy.profile','=','Yes');
-		$people->limit(6);
+		$people->limit(500);
 		$people->inRandomOrder();
 		$Query=$people->get();
 		//dd($Query);
 		$data=[];
+		$resume_num = '1';
 	  foreach($Query as $user){
 		//echo $user->userId." / ";
-		$resumess = DB::table('jcm_resume')->where('userId','=',$user->userId)->get();
-		$type=$resumess->pluck('type');
-		$result = $type->toArray();
-		$arry=in_array('academic',$result);
-		
-		if($arry){
-		array_push($data,$user);
+		if($resume_num < '6'){
+			$resumess = DB::table('jcm_resume')->where('userId','=',$user->userId)->get();
+			$type=$resumess->pluck('type');
+			$result = $type->toArray();
+			$arry=in_array('academic',$result);
+			
+			if($arry){
+			array_push($data,$user);
+			$resume_num++;
+			}
 		}
 		
 	}
@@ -1226,10 +1234,16 @@ else{
 		$plan = DB::table('jcm_save_packeges')->where('user_id',$app->userId)->where('quantity','>','0')->where('duration','=','0')->where('status','=','1')->where('type','=','Resume Download')->get();
 		$pckg=count($plan);
 
+
+
 		$resumedownload = DB::table('jcm_download')->where('emp_id',$app->userId)->where('seeker_id',$userId)->get();
 		$resumedown=count($resumedownload);
+
 		//dd($applicant);
-		return view('frontend.employer.view-applicant',compact('resumedown','cvcount','profilecount','offercount','readcount','resumess','pckg','applicant','resume','data','privacy'));
+
+		return view('frontend.employer.view-applicant',compact('cvcount','profilecount','offercount','readcount','resumess','pckg','applicant','resume','data','privacy','resumedown'));
+
+
 		//return view('frontend.employer.view-applicant',compact('applicant','resume'));
 	}
 		public function viewApplicants(Request $request){
@@ -1335,7 +1349,9 @@ public function userResume($userId){
 			$opHoursArr[$i] = array('from' => $k[0], 'to' => $k[1]);
 		} */
 		
-		$inputOr = array('business_sector' => $business_sector,'businessType' => $businessType,'category' => $industry,'Capital' =>$capital,'sales' => $sales,'formofbussiness' => $formofbusiness,'corporatenumber'=> $corporatenumber,'companyName' => $companyName, 'companyAddress' => $companyAddress,'companyhoursval' => $companyhoursval,'companydayval' => $companydayval, 'companyEmail' => $companyEmail, 'companyPhoneNumber' => $companyPhoneNumber, 'companyState' => $companyState, 'companyCity' => $companyCity, 'companyCountry' => $companyCountry, 'companyWebsite' => $companyWebsite, 'companyFb' => $companyFb, 'companyLinkedin' => $companyLinkedin, 'companyTwitter' => $companyTwitter, 'companyInstagram' => $companyInstagram,'companyNoOfUsers' => $companyNoOfUsers, 'companyEstablishDate' => $companyEstablishDate, 'companyOperationalHour' => @json_encode($opHoursArr), 'companyModifiedTime' => date('Y-m-d H:i:s'));
+
+		$inputOr = array('business_sector' => $business_sector,'businessType' => $businessType,'category' => $industry,'Capital' =>$capital,'sales' => $sales,'formofbussiness' => $formofbusiness,'corporatenumber'=> $corporatenumber,'companyName' => $companyName, 'companyAddress' => $companyAddress,'companyhoursval' => $companyhoursval,'companyhoursval_text' => $companyhoursval_text,'companydayval' => $companydayval,'companydayval_text' => $companydayval_text, 'companyEmail' => $companyEmail, 'companyPhoneNumber' => $companyPhoneNumber, 'companyState' => $companyState, 'companyCity' => $companyCity, 'companyCountry' => $companyCountry, 'companyWebsite' => $companyWebsite, 'companyFb' => $companyFb,'talksns' => $talksns, 'companyLinkedin' => $companyLinkedin, 'companyTwitter' => $companyTwitter, 'companyInstagram' => $companyInstagram,'companyNoOfUsers' => $companyNoOfUsers, 'companyEstablishDate' => $companyEstablishDate, 'companyOperationalHour' => @json_encode($opHoursArr), 'companyModifiedTime' => date('Y-m-d H:i:s'));
+
 		
 		if($companyId != '0'){
 			
@@ -1768,7 +1784,7 @@ public function mapOrganization(Request $request){
 	public function deletejob($id){
 		
 			DB::table('jcm_jobs')->where('jobId','=',$id)->delete();
-			Session::flash('message', "Successfully Delete Job");
+			Session::flash('message', trans('home.Successfully Delete Job'));
 			return redirect('account/employer');
 		}
 		
@@ -1782,7 +1798,7 @@ public function mapOrganization(Request $request){
 			$recs = DB::table('jcm_payments')->get();
 			
 			return view('frontend.employer.update-job',compact('result','recs'));
-			//Session::flash('message', "Successfully Delete Job");
+			//Session::flash('message', trans('home.Successfully Delete Job'));
 			//return redirect(url()->previous());
 		}
 		
@@ -1790,8 +1806,8 @@ public function mapOrganization(Request $request){
    public function updatepostPaymentWithpaypals(Request $request)
       {
 		  //dd($request->all());
-		$jobid = Session::get('jobId');
-		Session::put('postedJobId',$jobid);
+		$jobId = Session::get('jobId');
+		Session::put('postedJobId',$jobId);
 	 $rec = DB::table('jcm_payments')->where('id','=',$request->p_Category)->get();
 	
 	   $amount=$rec[0]->price;
@@ -1850,7 +1866,7 @@ public function mapOrganization(Request $request){
 				'experience' => 'required',
 				'vacancy' => 'required|numeric',
 				'description' => 'required',
-				'skills' => 'required|max:1024',
+				'skills' => 'required',
 				'qualification' => 'required',
 				'expiryDate' => 'required|date',
 				//'minSalary' => 'required|numeric',
@@ -1861,14 +1877,14 @@ public function mapOrganization(Request $request){
    
 			extract($request->all());
 
-			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'title' => $title,'department' => $department, 'category' => $category, 'head' => $head,'dispatch' => $dispatch,'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','),'process' => rtrim(@implode(',', $request->input('process')),','), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2);
+			$input = array('userId' => $app->userId, 'companyId' => $app->companyId,'title' => $title,'department' => $department, 'category' => $category, 'head' => $head,'dispatch' => $dispatch,'f_company' => $f_company,'subCategory' => $subCategory,'subCategory2' => $subCategory2, 'careerLevel' => $careerLevel, 'experience' => $experience, 'vacancies' => $vacancy, 'description' => $description, 'skills' => $skills, 'qualification' => $qualification, 'jobType' => $type, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shift,'jobaddr' => $jobaddr, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalary, 'maxSalary' => $maxSalary, 'afterinterview' => $afterinterview, 'currency' => $currency, 'benefits' => rtrim(@implode(',', $request->input('benefits')),','),'process' => rtrim(@implode(',', $request->input('process')),','), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage, 'country' => $country, 'state' => $state, 'city' => $city,'Address' => $Address,'Address2' => $Address2);
 			if($subCategory == ''){
 				$input['subCategory'] = '';
 			}
-			$jobId = DB::table('jcm_jobs')->where('jobId','=',$jobid)->update($input);
-			echo $jobId;
+			$jobid = DB::table('jcm_jobs')->where('jobId','=',$jobId)->update($input);
+			echo $jobid;
 			\Session::put('success',trans('home.Job Update Successfully'));
-			return view('frontend.employer.share-job',compact('jobid'));
+			return view('frontend.employer.share-job',compact('jobId'));
 		//}	
 		//else{ 
 			//$request->session()->forget('postedJobId');  /*For nice pay*/
@@ -2041,7 +2057,9 @@ public function mapOrganization(Request $request){
             return Redirect::route('addmoney.account/employer/job/share');
         }
         \Session::put('error','Payment failed');
+
         return redirect('account/employer');
+
     }
     public function orders(Request $request){
     	$to = $request->input('to');
@@ -2133,16 +2151,21 @@ public function mapOrganization(Request $request){
 			$jobhomgpage = Session::get('jobhomgpage');
 			$afterinterview = Session::get('afterinterview');
 			$evaluation_form = Session::get('evaluation_form');
+
+			$moneycurrency = Session::get('moneycurrency');
 		
-      //	dd($amounts);
+     //dd($afterinterview);
 			extract($request->all());
 
 			$inputs = array('userId' => $apps->userId, 'companyId' => $apps->companyId, 'jobStatus' => 'Draft', 'pay_id' => $payment, 'paymentType'=> '3','status'=> '2','f_company'=> $f_company,'dispatch' => $dispatch,'head' => $head,'onlynational' => $onlynational,'anynational' => $anynational, 'amount' => $amountss,'duration' => $durationss, 'p_Category' => $p_Categoryss, 'title' => $titless, 'jType' => $jTypess, 'department' => $departmentss, 'category' => $categoryss, 'subCategory' => $subCategoryss, 'subCategory2' => $subCategorys2s, 'careerLevel' => $careerLevelss, 'experience' => $experiencess, 'vacancies' => $vacancyss, 'description' => $descriptionss, 'skills' => $skillsss, 'qualification' => $qualificationss, 'jobType' => $typess, 'responsibilities' => $responsibilities, 'expptitle' => $expptitle, 'expposition' => $expposition, 'jobShift' => $shiftss,'jobaddr' => $jobaddrss, 'jobdayval' => $jobdayval,'jobdayval_text' => $jobdayval_text,'jobhoursval' => $jobhoursval,'jobhoursval_text' => $jobhoursval_text, 'minSalary' => $minSalaryss, 'maxSalary' => $maxSalaryss, 'afterinterview' => $afterinterview, 'currency' => $currencyss, 'benefits' => @implode(',', $benefitsss), 'process' => @implode(',', $processs), 'jobacademic' => $jobacademic, 'jobacademic_not' => $jobacademic_not, 'jobgraduate' => $jobgraduate, 'gender' => $gender, 'jobage1' => $jobage1, 'jobage2' => $jobage2, 'jobnoage' => $jobnoage, 'jobreceipt01' => $jobreceipt01, 'jobreceipt02' => $jobreceipt02, 'jobreceipt03' => $jobreceipt03, 'jobreceipt04' => $jobreceipt04, 'jobreceipt05' => $jobreceipt05, 'jobreceipt06' => $jobreceipt06, 'jobreceipt07' => $jobreceipt07, 'jobhomgpage' => $jobhomgpage,'country' => $countryss, 'state' => $statess, 'city' => $cityss,'Address' => $Addressss,'Address2' => $Address2,'expiryDate' => $expiryDatess,'expiryAd' => $expiryAdss, 'createdTime' => date('Y-m-d H:i:s'));
+
 			if($subCategorys == ''){
 				$inputs['subCategory'] = '';
 			}
 			
+
             $inputs['questionaire_id'] = $questionaire_id;
+
 			$jobId= DB::table('jcm_jobs')->insertGetId($inputs);
 			if($evaluation_form !=""){
 				$inputsss['job_id']=$jobId;
@@ -2150,7 +2173,8 @@ public function mapOrganization(Request $request){
 				$inputsss['evaluation_id']=$evaluation_form;
 				 DB::table('jcm_job_evaluation')->insertGetId($inputsss);
 				}
-			DB::table('jcm_companies')->where('companyId','=',$app->companyId)->update([ 'package'=>$p_Categoryss,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
+				//dd($p_Categoryss);
+			DB::table('jcm_companies')->where('companyId','=',$apps->companyId)->update([ 'package'=>$p_Categoryss,'companyModifiedTime'=>date('Y-m-d H:i:s')]); 
 			$order['job_id']=$jobId;
 			$order['user_id']=$apps->userId;
             $order['payment_mode']='Cash Payment';
@@ -2160,11 +2184,23 @@ public function mapOrganization(Request $request){
 			}else{
 				$order['amount']=$inputs['amount'];
 			}
+
+			if($moneycurrency == 'kr'){
+				$order['amount']=$inputs['amount']*1100;
+			}else{
+				$order['amount']=$inputs['amount'];
+			}
             
             $order['status']='Pending';
             $order['category']='Job';
             $order['date']= date('Y-m-d');
-			$order['currency']=$inputs['paycurrency'];
+			
+			if($inputs['paycurrency']){
+				$order['currency']=$inputs['paycurrency'];
+			}else{
+				$order['currency']= 'KRW';
+			}
+			
 
 
             DB::table('jcm_orders')->insert($order);
@@ -2311,6 +2347,7 @@ public function mapOrganization(Request $request){
 			
 			$app= session()->get('jcmUser');
 			$amount=$info['amount'] * 1100;
+			$currency=$info['currency'];
 
 			//dd($amount);
 			
@@ -2318,7 +2355,7 @@ public function mapOrganization(Request $request){
 			$get_info = $request->session()->get('pckg_info');
 			//dd($get_info['amount']);
 
-			return view('frontend.employer.package_payment',compact('app','amount'));
+			return view('frontend.employer.package_payment',compact('app','amount','currency'));
 
 			
 		}
@@ -2733,7 +2770,7 @@ public function allform(Request $request){
     	->leftJoin('jcm_privacy_setting as privacy','privacy.userId','=','jcm_download.seeker_id')
 	   ->where('jcm_download.emp_id','=',$app->userId)->groupBy('jcm_download.seeker_id')->paginate(10);
    //dd($download);
-	 $mypackage = DB::table('jcm_save_packeges')->where('user_id',$app->userId)->where('type','Resume Download')->where('quantity','>','0')->where('status','=','1')->first();
+	 $mypackage = DB::table('jcm_save_packeges')->where('user_id',$app->userId)->where('type','Resume Download')->where('quantity','>','0')->where('expire_date','>','0')->where('status','=','1')->first();
 	/* //dd($mypackage->expire_date);
 	 /*  $date = date('Y-m-d', strtotime('+1 month'));
 

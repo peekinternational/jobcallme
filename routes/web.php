@@ -22,6 +22,9 @@ Route::get('get-location-from-ip',function(){
     $data = \Location::get($ip);
     dd($data);
 });
+
+Route::get('/check','frontend\Home@check');
+
 Route::get('comments',function(){
 	return view('comments');
 });
@@ -29,6 +32,8 @@ Route::get('/event','Home@sendMessage');
 Route::get('/listen',function(){
 	return view('broadcoast');
 });
+Route::post('api/registerUser','frontend\Home@hellosajid');
+Route::get('api/registerUser','frontend\Home@hellosajid');
 Route::post('read/likes/{type}','frontend\Home@likes');
 Route::get('verifyUser/{verificationCode}','frontend\Home@verifyUser');
 Route::get('readCat','frontend\Home@readCat');
@@ -44,6 +49,15 @@ Route::post('cropCompanyProfileImage','frontend\Home@changecompanypropic');
 Route::post('deactiveUser','frontend\Home@deactiveUser');
 Route::post('passwordValidate','frontend\Home@regvalpass');
 
+Route::post('deletescrapping','frontend\Home@deletescrapping');
+Route::get('getscrapping','frontend\Home@getscrapping');
+Route::post('addscrapping','frontend\Home@addscrapping');
+Route::post('adddeletescrapping','frontend\Home@adddeletescrapping');
+
+Route::post('deletegdscrapping','frontend\Home@deletegdscrapping');
+Route::get('getgdscrapping','frontend\Home@getgdscrapping');
+Route::post('addgdscrapping','frontend\Home@addgdscrapping');
+
 Route::group(['prefix' => 'admin'], function () {
 	Auth::routes();
     Route::match(['get','post'],'/','admin\Home@login');
@@ -53,7 +67,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::match(['get','post'],'register','admin\Home@register');
 
 	Route::get('dashboard','admin\Dashboard@index');
-	Route::get('orders','admin\Dashboard@home');
+	Route::get('cms/orderss','admin\Dashboard@home');
 	Route::get('gift','admin\Cms@gift');
 	Route::get('receivepayment','admin\Dashboard@receive');
 	Route::post('cms/jobs/delete','admin\Cms@deleteJob');
@@ -77,6 +91,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::match(['get','post'],'users/company','admin\Users@companies');
 	Route::match(['get','post'],'users/company/add','admin\Users@addEditCompany');
 	Route::match(['get','post'],'users/company/edit/{id}','admin\Users@addEditCompany');
+	Route::match(['get','post'],'users/company/editals/{id}','admin\Users@addEditCompanyals');
 	Route::get('users/company/{id}','admin\Users@viewCompany');
 	Route::delete('company/delete','admin\Users@deleteCompany');
 
@@ -97,6 +112,9 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('cms/sub-category/save2','admin\Cms@saveSubCategory2');
 	Route::get('cms/sub-category/get/{id}/{id2}','admin\Cms@getSubCategory');
 	Route::delete('cms/sub-category/delete','admin\Cms@deleteSubCategory');
+
+	Route::post('cms/alljobs/save','admin\Cms@saveMainAD');
+	Route::get('cms/alljobs/get/{id}','admin\Cms@getMainAD');
 
 	/* job shift */
 	Route::match(['get','post'],'cms/shift','admin\Cms@viewJobShift');
@@ -180,6 +198,7 @@ Route::get('account/logout','frontend\Home@logout');
 Route::get('account/manage','frontend\Home@manageUser');
 Route::match(['get','post'],'account/people','frontend\Home@people');
 Route::match(['get','post'],'account/peoples','frontend\Home@peoples');
+Route::get('cource','frontend\Home@viewCource');
 Route::match(['get','post'],'learn','frontend\Home@learn');
 Route::match(['get','post'],'read','frontend\Home@read');
 Route::get('read/article/{id}','frontend\Home@viewArticle');
@@ -219,6 +238,7 @@ Route::group(['prefix' => 'account'], function () {
 	Route::get('employer/evaluation/edit/{id}','frontend\Employer@editevaluation');
 	/*end evalutation routes*/
 	Route::post('employer/savecompic','frontend\Home@savecompic');
+	Route::post('employer/savecomabout','frontend\Home@savecomabout');
 	Route::get('writings','frontend\ExtraSkills@writings');
 	Route::match(['get','post'],'writings/article/add','frontend\ExtraSkills@addEditArticle');
 	Route::match(['get','post'],'writings/article/edit/{id}','frontend\ExtraSkills@addEditArticle');
@@ -494,4 +514,7 @@ Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');
     // return what you want
 });
+Route::get('companies/companyals/{id}','frontend\Home@viewCompanyals');
+Route::post('/curl-data','frontend\Jobseeker@curlcall');
+
 

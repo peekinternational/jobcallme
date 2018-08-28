@@ -7,7 +7,7 @@
         <div class="layout-content-body">
             <div class="title-bar">
                 <h1 class="title-bar-title">
-                    <span class="d-ib">Orders</span>
+                    <span class="d-ib">Or</span>
                 </h1>
             </div>
 			<div class="row">
@@ -23,12 +23,12 @@
                                         <th>Company Name</th>
 										<th>Job Tittle</th>
 										<th>Email</th>
-										<th>Amount</th>
+										<th>Am</th>
 										<th>Ad Duration Days</th>
 										<th>Job Category</th>
-										<th>Payment Status</th>
-										<th>Payment Type</th>
-                                        <th>Payment Date</th>
+										<th> Status</th>
+										<th> Type</th>
+                                        <th> Date</th>
                                     </thead>
                                      <tbody>
                                         @foreach($jobs as $i => $job)
@@ -50,13 +50,13 @@
                                                 <td style="text-align: center;"><label class="label label-danger">Unpaid</label></td>
                                                 @endif
 												@if($job->paymentType==1)
-												<td style="text-align: center;"><label class="label label-success">Paypal</label></td>
+												<td style="text-align: center;"><label class="label label-success">Pay</label></td>
 									            @elseif($job->paymentType==2)
-												<td style="text-align: center;"><label class="label label-success">Nicepay</label></td>
+												<td style="text-align: center;"><label class="label label-success">Nice</label></td>
                                                 @elseif($job->paymentType==4)
 												<td style="text-align: center;"><label class="label label-success">Package Plan</label></td>
                                                 @else
-                                                <td style="text-align: center;"><label class="label label-success">Cash Payment</label></td>
+                                                <td style="text-align: center;"><label class="label label-success">C</label></td>
 											@endif
 												<td>{!! $job->createdTime!!}</td>
                                                    

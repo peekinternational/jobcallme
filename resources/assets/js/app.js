@@ -18,5 +18,32 @@ window.Vue = require('vue');
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    created(){
+    	Echo.channel('TestChannel')
+    	    .listen('TaskEvent', (e) => {
+    	        console.log(e.message);
+    	        $('body').append('<h1>'+e.message+'</h1>');
+	    });
+	    Echo.channel('comments')
+	    	.listen('comments', (e) => {
+                
+            if(e.comment.type == 'edit'){
+                $('#'+e.comment.comment_id).remove();
+                $('#put-comments').prepend(e.comment.html);
+            }else if(e.comment.type == 'delete'){
+                var noti = $('.bell .badge').text();
+                noti = parseInt(noti) - 1;
+                $('.bell .badge').text(noti);
+                $('#'+e.comment.comment_id).remove();
+            }else{
+                var noti = $('.bell .badge').text();
+                noti = parseInt(noti) + 1;
+                $('.bell .badge').text(noti);
+                $('#put-comments').prepend(e.comment.html);
+            }
+            
+	       
+    	});
+    }
 });

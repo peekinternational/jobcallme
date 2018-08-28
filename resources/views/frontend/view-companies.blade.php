@@ -16,7 +16,7 @@
                                 <div class="search-field-box search-item">
                                     <input type="search" placeholder="@lang('home.key')" name="keyword" >
                                 </div>
-                                <div class="search-field-box search-item" style="width:45%;">
+                                <div class="search-field-box search-item">
                                 <div class="" id="r_country" style="">
                                     <select class="company-countrys" name="country" style="width: 100% !important;">
                                         <option value="">@lang('home.country')</option>
@@ -34,7 +34,7 @@
                                     </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="search-btn">
+                                <button type="submit" class="search-btn2">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
@@ -50,19 +50,19 @@
             <div class="row text-sm  companies-list">
                 <div class="col-md-12">
                     <h4 class="category-label">@lang('home.companiesindustry')</h4>
-                    <div class="col-md-4">
+                    <div class="col-md-3 col-xs-6">
                     <ul class="list-unstyled">
                     <?php 
                     $i = 1; 
                     foreach(JobCallMe::getCategories() as $cat){
                         //if($i == 10){
-						if($i == 7){
+						if($i == 5){
                             $i = 1; 
                             echo '</ul></div>';
-                            echo '<div class="col-md-4">';
+                            echo '<div class="col-md-3 col-xs-6">';
                             echo '<ul class="list-unstyled">';
                         }
-						if($cat->categoryId < 17){
+						if($cat->categoryId != 17 and $cat->categoryId !=18){
                         echo '<li class="ellipsis"><a href="'.url('companies?in='.$cat->categoryId).'" class="hvr-forward">'.trans('home.'.$cat->name).'</a></li>';
                         $i++;
 						}
@@ -89,9 +89,30 @@
                     <?php
                     //print_r($company);exit;
                     $cLogo = url('compnay-logo/default-logo.jpg');
-                    if($company->companyLogo != ''){
-                      $cLogo = url('compnay-logo/'.$company->companyLogo);
-                    }
+                    
+					if($company->work_id){
+						
+						  $is_file_exist = file_exists('compnay-logo/'.$company->work_id.'_Logo.jpg');
+
+						  if ($is_file_exist) {
+							$cLogo = url('compnay-logo/'.$company->work_id.'_Logo.jpg');
+						  }
+
+
+						
+					}else{
+						if($company->companyLogo != ''){
+						  
+							  $is_file_exist = file_exists('compnay-logo/'.$company->companyLogo);
+
+							  if ($is_file_exist) {
+								$cLogo = url('compnay-logo/'.$company->companyLogo);
+							  }
+						  
+						}
+					}
+
+					
                     ?>
                     <div class="col-pr-10 col-xs-6 hvr-bob companies-mbl-vew" style="padding-right: 0px;margin-bottom: 5px;">
                         <!-- normal -->
@@ -99,8 +120,12 @@
                             <a href="{{ url('companies/company/'.$company->companyId) }}">
                           
                             <div class="jobs-logo">
-                            <img src="{{ $cLogo }}" alt="img" style="width:100%" >
-                            </div>
+							@if($cLogo == "https://www.jobcallme.com/compnay-logo/default-logo.jpg")
+							<span style="margin: 0 auto;"><b><center>{!! $company->companyName !!}</center></b></span>
+                            @else
+							<img src="{{ $cLogo }}" alt="img" style="width:100%" >
+                            @endif
+							</div>
                           
                             <div class="info">
                                 <h3>{!! $company->companyName !!}</h3>

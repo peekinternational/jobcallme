@@ -79,7 +79,7 @@
                 </section>
                 <!-- edit question area start -->
                 <section class="resume-box" id="aquestion-edit" style="display: none;">
-                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.AddQuestionnaire')</c></h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i>  <c>@lang('home.AddQuestionnaire2')</c></h4>
                         <form method="post" action="{{ url('account/employer/evaluation/question/new') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="evaluation_id" value="{{ $evaluation->evaluation_id }}">
@@ -131,7 +131,7 @@ function addquestion(){
     $('#aquestion-edit').find('input[name="question"]').val('');
     $('#aquestion-edit').find('input[name="marks"]').val('');
     $('#addoption').html('');
-    $('#addoption').append('<label for="days">Option:</label><input type="text" name="options[]" class="form-control" id="days">');
+    $('#addoption').append('<label for="days">@lang("home.Option"):</label><input type="text" name="options[]" class="form-control" id="days">');
 }
 $('#addMore').on("click",function(){
    $('#addoption').append('<div><input type="text" name="options[]" style="width:98%;display:inline" class="form-control" id="days"><span style="font-size:25px;cursor:pointer;" onclick="$(this).parent().remove()" class="remove">&times;</span></div>');
@@ -153,7 +153,7 @@ $('.queseditbtn').on('click',function(){
 })
 $('.quesdelid').on('click',function(){
     var q_id = $(this).closest('li').find('#eva_ques_id').val();
-    if(confirm("Are you sure want to delete!")){
+    if(confirm("@lang('home.Are you sure want to delete!')")){
         $.ajax({
             url:"{{url('account/employer/evaluation/delete')}}",
             type:"post",

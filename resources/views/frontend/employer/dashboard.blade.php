@@ -91,7 +91,7 @@
                                 </div>
 									<div class="col-xs-2 col-md-2" style="padding-left: 0;margin-top: 20px;padding-right: 0;"><div class="dropdown">
 									  <i class="fa fa-ellipsis-v" aria-hidden="true" style="padding-top:5px;padding-left:10px;font-size: 17px;color:#008000;"></i>
-                                      <i class="fa fa-ellipsis-v" aria-hidden="true" style="padding-top:5px;font-size: 17px;color:#008000;"></i>
+                                      <!-- <i class="fa fa-ellipsis-v" aria-hidden="true" style="padding-top:5px;font-size: 17px;color:#008000;"></i> -->
 									  <div class="dropdown-content">
 										<a href="{{url('account/employer/job_update/'.$pjobs->jobId)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> @lang('home.edit')</a>
 										<a href="{{url('account/employer/setfilter/'.$pjobs->jobId)}}"><i class="fa fa-filter" aria-hidden="true"></i> @lang('home.filters')</a>
@@ -116,7 +116,11 @@
                         <div class="tab-pane" id="rtj_tab_recent_application">
                         @foreach($applicant as $appl)
                                 <div class="col-md-12 rtj-item">
-                                    <img src="{{ url('profile-photos/'.$appl->profilePhoto) }}" style="width: 50px">
+                                    @if($appl->profilePhoto)
+									<img src="{{ url('profile-photos/'.$appl->profilePhoto) }}" style="width: 50px">
+									@else
+									<img src="{{ url('profile-photos/profile-logo3-1.jpg') }}" style="width: 50px">
+									@endif
                                     <div class="rtj-details">
                                         <p><strong><a href="{{ url('account/employer/application/candidate/'.$appl->userId) }}?jobId={{$appl->jobId}}">{!! $appl->firstName.' '.$appl->lastName !!}</a></strong></p>
                                         <p>{!! $appl->title !!}</p>
@@ -167,11 +171,11 @@
 					@foreach($data as $appl)
 					 <?php
 						if($appl->gender == 'Male' or $appl->gender == 'Man'){
-							$pImage = url('profile-photos/profile-logo.jpg');
+							$pImage = url('profile-photos/profile-logo3-1.jpg');
 						}elseif($applicant->gender == 'Female'){
-							$pImage = url('profile-photos/profile-logo2.jpg');
+							$pImage = url('profile-photos/profile-logo3-1.jpg');
 						}else{
-							$pImage = url('profile-photos/profile-logo3.jpg');
+							$pImage = url('profile-photos/profile-logo3-1.jpg');
 						}
 
                         //$pImage = url('profile-photos/profile-logo.jpg');
@@ -202,9 +206,9 @@
                          <div class="col-md-4 col-xs-6 sp-item" style="padding-top:10px">
 						 <a href="{{ url('account/employer/application/applicant/'.$appl->userId) }}">
                                     @if(Session::has('jcmUser'))
-                                <img src="@if($check) {{ $pImage }} @else @if($appl->gender == 'Male' or $appl->gender == 'Man') {{url('profile-photos/profile-logo.jpg')}} @elseif($appl->gender == 'Female') {{url('profile-photos/profile-logo2.jpg')}} @else {{url('profile-photos/profile-logo3.jpg')}} @endif @endif" style="width: 70px;height:75px;">
+                                <img src="@if($check) {{ $pImage }} @else @if($appl->gender == 'Male' or $appl->gender == 'Man') {{url('profile-photos/profile-logo3-1.jpg')}} @elseif($appl->gender == 'Female') {{url('profile-photos/profile-logo3-1.jpg')}} @else {{url('profile-photos/profile-logo3-1.jpg')}} @endif @endif" style="width: 70px;height:75px;">
                                 @else
-                                <img src=" {{ url('profile-photos/profile-logo.jpg ')}}" style="width: 70px;height:75px !important;">
+                                <img src=" {{ url('profile-photos/profile-logo3-1.jpg ')}}" style="width: 70px;height:75px !important;">
                                 @endif
                             @if(Session::has('jcmUser'))
                                     @if($check)<p>{!! $appl->firstName.' '.$appl->lastName !!}</p>@else <p>{!! $appl->firstName !!} <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i> <i class="fa fa-circle-o" aria-hidden="true" style="font-size:8px"></i></p> @endif

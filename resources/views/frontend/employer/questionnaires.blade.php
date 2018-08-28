@@ -9,7 +9,7 @@
 				<div class="col-md-12">
 				 <section class="resume-box" id="academic">
                         <a class="btn btn-primary r-add-btn" onclick="addAcademic()"><i class="fa fa-plus"></i> </a>
-                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Test/Questionnaires')</h4>
+                        <h4><i class="fa fa-book r-icon bg-primary"></i> @lang('home.Test/Questionnaireslist')</h4>
                         <?php //print_r($resume); ?>
                         <table class="table questionr-table">
                             <thead>

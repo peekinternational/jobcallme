@@ -325,7 +325,7 @@ class JobCallMe{
 	}
 
 	public function getCareerLevel(){
-		return array('Entry ~ Employee','Chief ~ Asst.Manager','Manager ~ Deputy General Manager','General Manager','Executive ~ CEO');
+		return array('Intern','Entry ~ Employee','Chief ~ Asst.Manager','Manager ~ Deputy General Manager','General Manager','Executive ~ CEO');
 	}
 
 	public function getUpkillsType(){
@@ -335,7 +335,7 @@ class JobCallMe{
 	}
 
 	public function getExperienceLevel(){
-		return array('Student', 'Fresh Graduate', 'Experience', 'Fresh Graduate ~ Experience', '-1  Year', '+1  Year', '+2  Year', '+3  Year', '+4  Year', '+5  Year', '+6  Year', '+7  Year', '+8  Year', '+9  Year', '+10 Year', '+15 Year', '-20 Year', '-30 Year', '-50 Year', 'No Need Career');
+		return array('Student', 'Internship','Fresh Graduate', 'Experience', 'Fresh Graduate ~ Experience', '-1  Year', '+1  Year', '+2  Year', '+3  Year', '+4  Year', '+5  Year', '+6  Year', '+7  Year', '+8  Year', '+9  Year', '+10 Year', '+15 Year', '-20 Year', '-30 Year', '-50 Year', 'No Need Career');
 		//return array('Student', 'Fresh Graduate', '< 1 Year', '1 Year', '2 Year', '3 Year', '4 Year', '5 Year', '< 10 Year', '10 Year', '< 20 Year', '< 30 Year', '< 50 Year');
 	}
 
@@ -345,7 +345,7 @@ class JobCallMe{
 
 	public function jobBenefits(){
 
-		return array('National pension', 'Employment Insurance', 'Industrial accident insurance', 'Health Insurance', 'Severance Pay', 'Lunch offer', 'Vehicle oil subsidy', 'Overtime pay', 'See Homepage', 'See Description');
+		return array('National pension', 'Employment Insurance', 'Industrial accident insurance', 'Health Insurance', 'Severance Pay', 'Lunch offer', 'Vehicle oil subsidy', 'Overtime pay', 'See Homepage', 'See Description', 'Housing Loan', 'Club Operation', 'Comprehensive Health Checkup', 'Birthday / Anniversary Cake', 'Child Tuition', 'Medical Expenses Support', 'Long-term Tenure', 'Support for Congratulatory Address', 'Home Support', 'Operate In-house Library', 'On-site Restaurant Operation', 'Vacation / Recreational Facility Support', 'Festive Souvenir Payments');
 
 	}
 
@@ -691,6 +691,25 @@ class JobCallMe{
 		}
 		
 	}
+
+
+
+	public function getCompanyals($companyId){
+		if($companyId == '0'){
+			$app = \Session::get('jcmUser');
+			$user = $this->getUser($app->userId);
+			if($user->companyId == '0'){
+				$cInput = array('companyName' => $app->firstName.' '.$app->lastName, 'companyEmail' => $app->email, 'companyPhoneNumber' => $app->phoneNumber, 'companyCountry' => $app->country, 'companyState' => $app->state, 'companyCity' => $app->city, 'companyCreatedTime' => date('Y-m-d H:i:s'), 'companyModifiedTime' => date('Y-m-d H:i:s'));
+				$companyId = DB::table('jcm_companies')->insertGetId($cInput);
+				DB::table('jcm_users')->where('userId','=',$app->userId)->update(array('companyId' => $companyId));
+			}else{
+				$companyId = $user->companyId;
+			}
+		}
+		return DB::table('jcm_companies_als')->where('companyId','=',$companyId)->first();
+	}
+
+
 	
 }
 

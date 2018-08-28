@@ -40,19 +40,19 @@ if($user->profilePhoto != ''){
 									<div class="re-img-toolkit">
 										<div class="re-file-btn">
 											@lang('home.change') <i class="fa fa-camera"></i>
-											<input type="file" class="upload profile-pic" onchange="profilePic()" name="image" />
+											<input type="file" class="upload profile-pic" name="image" />
 										</div>
 										<span id="remove-re-image" style="margin-right: 42px;" onclick="removeResumePic('profile')">@lang('home.remove') <i class="fa fa-remove"></i></span>
 										<p id="remove-re-image" style="margin-right: 71px;" onclick="editResumeProPic()">@lang('home.Edit') <i class="fa fa-edit"><input type="hidden" value="{{ session()->get('jcmUser')->userId }}" id="userID" ></i></p>
 									</div>
 								</div>
 								<h3 class="hidden-md hidden-lg" style="font-weight: 600">{{ $user->firstName.' '.$user->lastName }}</h3>
-								<p class="user-sns">
+								<!-- <p class="user-sns">
 								    <a href="{{ $meta->instagram }}"><i class="fa fa-instagram"></i></a>
 									<a href="{{ $meta->twitter }}"><i class="fa fa-twitter-square"></i></a>
 									<a href="{{ $meta->linkedin }}"><i class="fa fa-linkedin-square"></i></a>
 									<a href="{{ $meta->facebook }}"><i class="fa fa-facebook-square"></i></a>
-								</p>
+								</p> -->
 								<p><span class="pi-title">@lang('home.email'):</span>  {{ $user->email }}</p>
 								<p><span class="pi-title">@lang('home.mobile'):</span>  {{ $user->phoneNumber }}</p>
 								<p><span class="pi-title">@lang('home.cnic'):</span>  {{ $meta->cnicNumber }}</p>
@@ -4348,7 +4348,7 @@ $('#giftbtn').click(function(){
 		success: function(response){
 			console.log(response);
 			$('#giftbtn').remove();
-			toastr.success('Please check your email for get token ', '', {timeOut: 20000, positionClass: "toast-bottom-center"});
+			toastr.success('@lang("home.Please check your email for get token")', '', {timeOut: 20000, positionClass: "toast-bottom-center"});
 		}
 
 	});

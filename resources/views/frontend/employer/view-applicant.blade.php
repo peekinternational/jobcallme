@@ -48,7 +48,12 @@
                               <span ><button class="btn btn-success" onclick="$('#offerdModel').modal('show')"><i class="fa fa-bullhorn"></i> @lang('home.Offerd Interview')</button></span>
                               </div>
 								<div class="" style="text-align:center">
-                                   <a href="{{ url('account/jobseeker/cv/'.$applicant->userId)}}" style="color:#337ab7" class=""><i class="fa fa-download"></i> @lang('home.DOWNLOAD')</a>
+                                   @if($applicant->userId)
+								   <a href="{{ url('account/jobseeker/cv/'.$applicant->userId)}}" style="color:#337ab7" class=""><i class="fa fa-download"></i> @lang('home.DOWNLOAD')</a>
+								   @else
+								   <a href="#" onclick="$('#resumedown').modal('show')" style="color:#337ab7" class=""><i class="fa fa-download"></i> @lang('home.DOWNLOAD')</a>
+								   @endif
+								   <!-- <a href="{{ url('account/jobseeker/cv/'.$applicant->userId)}}" style="color:#337ab7" class=""><i class="fa fa-download"></i> @lang('home.DOWNLOAD')</a> -->
                                   </div>
                             </div>
 
@@ -515,7 +520,7 @@
                                     <li id="resume-{{ $resumeId }}">
                                         <div class="col-md-12">
                                             <p class="rd-title">{!! $skills->skill !!}</p>
-                                            <p class="rd-location">{!! $skills->level !!}</p>
+                                            <p class="rd-location">@lang('home.'.$skills->level)</p>
                                         </div>
                                     </li>
                                 @endforeach
@@ -790,7 +795,7 @@
 
    $yo = array("SUN","MON","TUE","WED","THU","FRI","SAT");
    
-   $resume_yo = $yo[date("w",strtotime(date(strtotime($applicant->createdTime))))];
+   $resume_yo = $yo[date("w",strtotime(date($applicant->createdTime)))];
 
 ?>
 					<section class="resume-box">   								
@@ -826,10 +831,12 @@
              </div>
 				<div class="col-md-3">
                 @if($resumedown > 0)
-                <button class="btn btn-md" style=" border-radius:0px !important;background-color: #337ab7;border: none;color: white;">Cv Download: {{$cvcount}}</button> <button class="btn btn-md" style=" border-radius:0px !important;background-color: #a0b1b9;border: none;color: white;">Total Post Articals: {{$readcount}} </button> 
-                <br>
-                <br>
-                <button class="btn btn-md" style=" border-radius:0px !important;background-color: #5b5c5e;border: none;color: white;">Interview Offered: {{ $offercount }} </button> <button class="btn btn-md" style=" border-radius:0px !important;background-color: #57768a;border: none;color: white;">Profile Searching: &nbsp; {{ $profilecount }}</button>
+					<div><button class="btn btn-md" style=" border-radius:5px !important;background-color: #337ab7;border: none;color: white;width:100%;"><span style="float:left;padding-left:10px;">@lang('home.Cv Download')</span> <span style="font-size:20px;color:#f7d23a;float:right;padding-right:10px;">{{$cvcount}}</span></button></div>
+					<div style="padding-top:10px;"><button class="btn btn-md" style=" border-radius:5px !important;background-color: #a0b1b9;border: none;color: white;width:100%;"><span style="float:left;padding-left:10px;">@lang('home.Total Post Articals')</span> <span style="font-size:20px;color:#f7d23a;float:right;padding-right:10px;">{{$readcount}}</span> </button> </div>
+					<div style="padding-top:10px;"><button class="btn btn-md" style=" border-radius:5px !important;background-color: #5b5c5e;border: none;color: white;width:100%;"><span style="float:left;padding-left:10px;">@lang('home.Interview Offered')</span> <span style="font-size:20px;color:#f7d23a;float:right;padding-right:10px;">{{ $offercount }}</span> </button></div>
+					<div style="padding-top:10px;"><button class="btn btn-md" style=" border-radius:5px !important;background-color: #57768a;border: none;color: white;width:100%;"><span style="float:left;padding-left:10px;">@lang('home.Profile Searching')</span> <span style="font-size:20px;color:#f7d23a;float:right;padding-right:10px;">{{ $profilecount }}</span></button></div>
+				
+				
                     @endif
                     <br>
             <br>
@@ -927,6 +934,22 @@
         </div>
     </div>
 </div>
+
+<div id="resumedown" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><i class="fa fa-bullhorn"></i> @lang('home.No Resume')</h4>
+          </div>          
+          <div class="modal-footer">             
+            <button type="button" class="btn btn-default" data-dismiss="modal">@lang('home.close')</button>
+          </div>
+        </div>
+    </div>
+</div>
+
 </section>
 @endsection
 @section('page-footer')

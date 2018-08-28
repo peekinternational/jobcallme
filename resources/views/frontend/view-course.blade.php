@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title', "$record->title")
-
+<?php $courrent=Request::url(); ?>
 @section('content')
 <!--Read Articles-->
 <section id="postNewJob">
@@ -28,6 +28,7 @@
                     <a href="https://plus.google.com/share?url={{ url('learn/'.strtolower($record->type).'/'.$record->skillId) }}">
                         <i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                     </a>
+					 <img src="{{asset('website/talksns.png')}}" onclick="OpenWindow('{{ rawurlencode($courrent) }}')" style="width: 25px !important;border-radius: 50px; cursor: pointer;">
                 </div>
                 <table class="table table-bordered">
                     <tr>
@@ -56,7 +57,10 @@
                     </tr>
                     <tr>
                         <td class="active">@lang('home.cost')</td>
-                        <td>{{ $record->currency.' '.number_format($record->cost)}}/-</td>
+                        <td>
+							@if($rec->accommodation == "Yes") {{ $record->currency.' '.number_format($record->cost)}} @else @if($record->accommodation == "on") @lang('home.free') @else @if($record->website)<a href="{!! $record->website !!}" target="_blank">@endif @lang('home.Contact person') @endif @endif
+							
+							<!-- {{ $record->currency.' '.number_format($record->cost)}} --></td>
                     </tr>
                     <tr>
                         <td class="active">@lang('home.contactperson')</td>
@@ -88,6 +92,7 @@
                     <a href="https://plus.google.com/share?url={{ url('learn/'.strtolower($record->type).'/'.$record->skillId) }}">
                         <i class="fa fa-google-plus" style="background: #F63E28;"></i> 
                     </a>
+					<img src="{{asset('website/talksns.png')}}" onclick="OpenWindow('{{ rawurlencode($courrent) }}')" style="width: 25px !important;border-radius: 50px; cursor: pointer;">
                             </div>
                         </td>
                     </tr>
@@ -109,7 +114,7 @@
                 <table class="table">
                    
                            <tr>
-                               <th class="la-text">{!! $record->website !!}</th>
+                               <th class="la-text"><a href="{!! $record->website !!}" target="_blank">{!! $record->website !!}</a></th>
                             
                            </tr>
                         
@@ -145,6 +150,61 @@
 					  <td>
                 <h4><span style="padding-left:20px">@lang('home.details')</span></h4>
                 <p>{!! $record->description !!}</p></td></tr></table>
+
+
+				<table class="table">
+					<tr>
+					  <td>
+                <h4><span style="padding-left:20px;padding-bottom:20px;">@lang('home.hoteldetails')</span></h4>     
+				<div class="col-md-6" style="padding-top:10px">
+
+					<ins class="bookingaff" data-aid="1595960" data-target_aid="1595960" data-prod="nsb" data-width="100%" data-height="auto" data-lang="ualng">
+    <!-- Anything inside will go away once widget is loaded. -->
+    <a href="//www.booking.com?aid=1595960">Booking.com</a>
+</ins>
+<script type="text/javascript">
+    (function(d, sc, u) {
+      var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = u + '?v=' + (+new Date());
+      p.parentNode.insertBefore(s,p);
+      })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
+</script>
+
+				</div>
+				<div id="hellodear">
+				@foreach($upskill_hotel as $uphotel)
+					<?php
+						$hotel_img = explode("H", $uphotel->ImageLocal);
+						$hotel_linkurl = explode("?", $uphotel->HotelUrl);
+						$hotel_url_link = $hotel_linkurl[0].'?aid=1595934;'.$hotel_linkurl[1];
+					?>
+					<div class="col-md-6" style="padding-top:10px;">
+							<?php
+							$is_file_exist = file_exists('upskill-images/H'.$hotel_img[1]);
+
+						    if ($is_file_exist) {
+							  $hotelLogo = url('upskill-images/H'.$hotel_img[1]);
+						    }else{
+							  $hotelLogo = url('upskill-images/hotel_Logo.jpg');
+							}		
+							?>
+						
+							<a href="{!! $hotel_url_link !!}" target="_blank"><img src="{{ $hotelLogo }}" style="width: 70px;height:auto !important;border-radius: 5px;"></a>
+						
+				
+				&nbsp;&nbsp;<a href="{!! $hotel_url_link !!}" target="_blank">{!! $uphotel->HotelName !!}</a></div>
+				@endforeach
+				</div>
+				</td></tr></table>
+
+<div style="text-align:center;" id="hello"><div style="margin-bottom:-15px;color:#337ab7;">@lang('home.hotelpage')</div><?php echo $upskill_hotel->render(); ?></div>
+				
+
+
+<div class="row">
+                    <div class="col-md-12">
                 <div class="ra-author-box">
                     <form id="{{ $record->skillId }}">
                     <img src="{{ url('compnay-logo/'.$record->companyLogo) }}" class="img-circle" alt="{{ $record->companyName }}">
@@ -164,6 +224,9 @@
                     <input type="hidden" class="userId" value="{{  Session::get('jcmUser')->userId }}">
                 </form>
                 </div>
+</div>      
+                </div>
+
                 <div class="row">
                      <div class="col-md-12">
                         <hr>
@@ -191,7 +254,13 @@
                                         $userimage = $comment->chatImage;
                                     }
                                     else{
-                                    $userimage = $comment->profileImage;
+										if($comment->profilePhoto){
+											$userimage = $comment->profilePhoto;
+										}
+										else{
+											$userimage = "profile-logo3-1.jpg";
+										} 
+									//$userimage = $comment->profileImage;
                                     } 
 
                                     ?>
@@ -200,7 +269,7 @@
                                     <div class="col-md-12">
                                         <div class="comment-area">
                                             <div class="col-md-1 col-xs-3">
-                                                <img src="{{ url('profile-photos').'/'.$comment->chatImage }}" class="" alt="{{ $comment->firstName }}" style="width:80%;">
+                                                <img src="{{ url('profile-photos').'/'.$userimage }}" class="img-circle fullwidth" alt="{{ $comment->firstName }}" style="width:80%;">
                                                
                                             </div>
                                             <div class="col-md-9 col-xs-7 append-edit" style="padding:0;">
@@ -235,7 +304,13 @@
                                         $userimages = Session::get('jcmUser')->chatImage;
                                     }
                                     else{
-                                    $userimages = Session::get('jcmUser')->profilePhoto;
+										if(Session::get('jcmUser')->profilePhoto){
+											$userimages = Session::get('jcmUser')->profilePhoto;
+										}
+										else{
+											$userimages = "profile-logo3-1.jpg";
+										} 
+									//$userimages = Session::get('jcmUser')->profilePhoto;
                                     } 
 
                                     ?>
@@ -243,15 +318,18 @@
                                         <div class="col-md-1 col-xs-3">
                                             <img src="{{ url('profile-photos').'/'.$userimages }}" class="img-circle fullwidth" alt="{{ Session::get('jcmUser')->firstName }}">
                                         </div>
-                                        <div class="col-md-9 col-xs-9">
-                                            <div class="form-group">
+                                        <div class="col-md-9 col-xs-9" style="padding:0px;">
+                                            
+
+											<div class="form-group">
                                                 <textarea name="comment" id="comment" class="form-control" rows="3"></textarea>
                                             </div> 
-                                            <p style="color: #999999;"><img src="/frontend-assets/images/video_icon2.png"> @lang('home.Need more dicuss, use Jobcallme live MultiㆍGroupㆍIndividual Video & Chat')&nbsp;<a href="/messages"><img src="/frontend-assets/images/video_icon.png">@lang('home.videochatlink')</a></p>   
+
+											<p style="color: #999999;"><img src="/frontend-assets/images/video_icon2.png"> @lang('home.Need more dicuss, use Jobcallme live MultiㆍGroupㆍIndividual Video & Chat')&nbsp;<a href="/messages"><img src="/frontend-assets/images/video_icon.png">@lang('home.videochatlink')</a></p>
+                                              
                                         </div>
 
-
-                                        <div class="col-md-2 col-xs-offset-8" style="padding-top: 15px;"><button class="btn btn-success" id="comment-btn">@lang('home.reviewsubmit')</button></div>
+                                        <div class="col-md-2 col-xs-offset-8" style="padding-top: 5px;"><button class="btn btn-success" id="comment-btn">@lang('home.reviewsubmit')</button></div>
 
 
 
@@ -265,6 +343,35 @@
                     </div>
                 </div>
             </div>
+
+
+
+			<div class="row">
+                     <div class="col-md-12">
+						
+						<div style="position: relative;
+                                    overflow: auto;
+                                    padding: 10px 20px;
+                                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                                    border: 1px solid #cccccc;
+                                    margin-bottom: 20px;
+                                    background: #ffffff;">
+                   
+			
+					
+						<input id="pac-input" class="controls" type="hidden" value="{!! $record->address !!}" >							
+					
+					  
+                    <!-- google map code html -->
+                    <div id="map" style="width: 100%; height: 500px;"></div>
+                    </div>
+                    </div>
+        
+		
+			</div>
+
+
+
              
         </div>
         <div class="col-md-3">
@@ -276,7 +383,8 @@
                       <div class="la-item">
 				      <div class="col-md-4 suggestedreading-img-mbl">
                         @if($rec->upskillImage != '')
-                        <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:auto !important;">
+                        <!-- <img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:auto !important;"> -->
+						<img class=" img-responsive sp-item" src="{{ url('upskill-images/'.$rec->upskillImage) }}" alt="" style="width: 100%;height:35% !important;">
                         @else
                         <img src="{{ url('upskill-images/d-cover.jpg') }}" style="width: 180px;height:80px;">
                         @endif
@@ -308,6 +416,32 @@
 @section('page-footer')
 <script type="text/javascript">
 /*comment code start*/
+  $('body').on('click', '.pagination a', function(e) {
+        e.preventDefault();
+
+        $('#load a').css('color', '#dfecf6');
+        $('#load').append('<img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="/images/loading.gif" />');
+
+        var page = $(this).attr('href').split('page=')[1];  
+       //alert(page);
+       getCource(page)
+    });
+     function getCource(page) {
+         location.hash=page;
+         
+        $.ajax({
+            url : jsUrl()+'/cource?page='+page,
+            
+        }).done(function (data) {
+           console.log(data+"jjshfhsfasfasf");
+		   $('#hellodear').html(data);
+		   $('#hello').hide();
+            
+        }).fail(function () {
+            alert('Articles could not be loaded.');
+        });
+    }
+
 function changebtns(current){
     if($(current).hasClass('btn-primary')){
         $(current).removeClass('btn-primary').addClass('btn-danger');
@@ -318,6 +452,15 @@ function changebtns(current){
         $(current).html('@lang("home.open review") <i class="fa fa-plus"></i>');
          $('#show_reviews').hide();
     }
+}
+   function OpenWindow(url, windowName) {
+
+   newwindow = window.open('https://www.talksns.com/sharer?url=' + encodeURIComponent(url.trim()), windowName, 'height=600,width=800');
+
+   if (window.focus) {
+      newwindow.focus();
+   }
+   return false;
 }
 $(document).on("click",".edit-comment-btn",function(){
         $('.btns').show();
@@ -361,7 +504,7 @@ $(document).on("click",".edit-comment-btn",function(){
     })
     $(document).on("click",".del-comment-btn",function(){
        var comment_id = $(this).attr('delcommentId');
-        if (confirm("Are you sure to delete!")) {
+        if (confirm("@lang('home.Are you sure to delete?')")) {
              $.ajax({
                url:jsUrl()+"/read/article/comment/save",
                type:"post",
@@ -393,12 +536,12 @@ $(document).on("click",".edit-comment-btn",function(){
     })
 
 /*comment js code end*/
-$('i.fa').hover(function () {
-    $(this).addClass('animated bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
-    function () {
-        $(this).removeClass('animated bounceIn');
-    });
-});
+//$('i.fa').hover(function () {
+    //$(this).addClass('animated bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+    //function () {
+        //$(this).removeClass('animated bounceIn');
+    //});
+//});
 $('.like').on('click',function(){
         var id = '#'+$(this).closest('form').attr('id');
         var type = "like";
@@ -427,4 +570,63 @@ $('.like').on('click',function(){
         });
     });
 </script>
+
+
+<script>
+$(document).ready(function(){
+ 
+});
+  
+ 
+    var addr=$('#pac-input').val();
+        
+   
+
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      function initAutocomplete() {
+               var geocoder = new google.maps.Geocoder();
+               var address = addr;
+               var longitude="";
+               var latitude="";
+               var myLatLng="";
+
+geocoder.geocode( { 'address': address}, function(results, status) {
+
+  if (status == google.maps.GeocoderStatus.OK) {
+        latitude = results[0].geometry.location.lat();
+        longitude = results[0].geometry.location.lng();
+         myLatLng={lat: latitude, lng: longitude}
+    //alert(latitude);
+     var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: latitude, lng: longitude},
+          zoom: 16,
+          mapTypeId: 'roadmap'
+        });
+
+  } 
+   var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: addr
+        });
+});
+     
+      }
+    
+    </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1RaWWrKsEf2xeBjiZ5hk1gannqeFxMmw&libraries=places&callback=initAutocomplete" async defer></script>
+
+
 @endsection

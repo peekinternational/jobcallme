@@ -61,17 +61,17 @@ if(file_exists('/website/'.$headerWeb['webFavicon'])){
 </style>
 <script type="text/javascript">
 
-var isAjaxRunning = false;
-$( document ).ajaxStart(function() {
-    $('.ajax-laoding').show();
-    $('.layout-content').addClass('ajax-class');
-    $('body').addClass('is-loading');
-    isAjaxRunning = true;
-});
-$( document ).ajaxStop(function() {
-    $('.ajax-laoding').hide();
-    $('.layout-content').removeClass('ajax-class');
-    $('body').removeClass('is-loading');
-    isAjaxRunning = false;
-});
+//var isAjaxRunning = false;
+//$( document ).ajaxStart(function() {
+    //$('.ajax-laoding').show();
+    //$('.layout-content').addClass('ajax-class');
+    //$('body').addClass('is-loading');
+    //isAjaxRunning = true;
+//});
+//$( document ).ajaxStop(function() {
+    //$('.ajax-laoding').hide();
+    //$('.layout-content').removeClass('ajax-class');
+    //$('body').removeClass('is-loading');
+    //isAjaxRunning = false;
+//});
 </script>

@@ -989,7 +989,7 @@ class Jobseeker extends Controller{
 				$companyPhoto = url('compnay-logo/'.$company->companyLogo);
 
 				$vhtml .= '<li id="apply-'.$rec->applyId.'">';
-					$vhtml .= '<span class="ja-applyDate">'.date('M d, Y',strtotime($rec->applyTime)).' <a href="javascript:;" class="application-remove" title="Remove/Cancel Application" onclick="removeApplication('.$rec->applyId.')">&times;</a></span>';
+					$vhtml .= '<span class="ja-applyDate">'.date('Y-m-d',strtotime($rec->applyTime)).' <a href="javascript:;" class="application-remove" title="'.trans('home.Remove/Cancel Application').'" onclick="removeApplication('.$rec->applyId.')">&times;</a></span>';
 					$vhtml .= '<img src="'.$companyPhoto.'" class="ja-item-img">';
 					$vhtml .= '<div class="ja-item-details">';
 						$vhtml .= '<p class="ja-item-title"><a href="'.url('jobs/'.$rec->jobId).'" >'.$rec->title.'</a></p>';
@@ -999,14 +999,14 @@ class Jobseeker extends Controller{
 							$interviewUrl = url('account/jobseeker/interview/'.$getInterview->interviewId);
 							$vhtml .= '<p class="ja-item-status"><a href="'.$interviewUrl.'"><i class="fa fa-'.$fontIcon.'"></i> '.trans('home.'.ucfirst($appType)).'</a></p>';
 						}else{
-							$vhtml .= '<p class="ja-item-status"><i class="fa fa-'.$fontIcon.'"></i> '.ucfirst($appType).'</p>';
+							$vhtml .= '<p class="ja-item-status"><i class="fa fa-'.$fontIcon.'"></i> '.trans('home.'.ucfirst($appType)).'</p>';
 						}
 					$vhtml .= '</div>';
 				$vhtml .= '</li>';
 			}
 			$vhtml .= '</ul>';
 		}else{
-			$vhtml = '<div class="col-md-12 ea-no-record">No records found.</div>';
+			$vhtml = '<div class="col-md-12 ea-no-record">'.trans('home.No records found.').'</div>';
 		}
 		echo $vhtml;
 	}
@@ -1108,14 +1108,20 @@ class Jobseeker extends Controller{
                     DB::table('jcm_download')->insert($input);
                     DB::table('jcm_save_packeges')->where('user_id','=',$app->userId)->where('id','=',$pckg_id)->update($inputs);
 					$user = DB::table('jcm_users')->where('userId',$id)->first();
-					$name= $user->firstName;
-						
+
+					$name= $user->firstName .$user->lastName;
+					$ExName = iconv('UTF-8', 'EUC-KR', $name);	
+
 					$meta = DB::table('jcm_users_meta')->where('userId',$id)->first();
 					$resume = $this->userResume($id);
 				
 					$pdf = PDF::loadView('frontend.cv',compact('user','meta','resume'));
+
+				//	return $pdf->download($ExName.'_cv.pdf');
+
 					return $pdf->download($name.'_cv.pdf');
 					}
+
 				}
 				
 		}
@@ -1192,7 +1198,8 @@ class Jobseeker extends Controller{
 				">'.$a."</button><br/><br/>"
 				.trans('home.Regards').""; 
 				$subject=trans('home.coupon issue: JobCallMe');                           
-				$email='catmig24@naver.com';
+				//$email='catmig24@naver.com';
+				$email='oceeasycha@jobcallme.com';
 				Mail::send([],[], function ($message) use($email,$myContent,$subject){  
 					$message->to($email, $email)->subject($subject)->setBody($myContent,'text/html');
 				}); 
@@ -1209,9 +1216,12 @@ class Jobseeker extends Controller{
 				text-decoration: none;
 				background-color: #3097d1;
 				">'.$a."</button><br/><br/>"
-				.trans('home.Regards').""; 
+				.trans('home.Regards').
+				"<br/>"
+				.trans('home.JobCallMe').""; 
 				$subject=trans('home.coupon issue: JobCallMe');                           
-				$email='gmulimstudio@naver.com';
+				//$email='gmulimstudio@naver.com';
+				$email='oceeasycha@jobcallme.com';
 				Mail::send([],[], function ($message) use($email,$myContent,$subject){  
 					$message->to($email, $email)->subject($subject)->setBody($myContent,'text/html');
 				}); 
@@ -1227,7 +1237,9 @@ class Jobseeker extends Controller{
 				text-decoration: none;
 				background-color: #3097d1;
 				">'.$a."</button><br/><br/>"
-				.trans('home.Regards').""; 
+				.trans('home.Regards').
+				"<br/>"
+				.trans('home.JobCallMe').""; 
 				$subject=trans('home.coupon issue: JobCallMe');                           
 				$email='info@jobcallme.com';
 				Mail::send([],[], function ($message) use($email,$myContent,$subject){  
@@ -1253,7 +1265,9 @@ class Jobseeker extends Controller{
 				.trans('home.Seocho-gu')."<br/>"
 				.trans('home.1st floor Nonhyeon-ro 27-gil 39, Seocho-gu, Seoul, Korea, 5avenue 88-11 Yangjae-dong, Seocho-gu, Seoul').
 				"<br/><br/>"
-				.trans('home.Regards').""; 
+				.trans('home.Regards').
+				"<br/>"
+				.trans('home.JobCallMe').""; 
 				$subject=trans('home.coupon issue: JobCallMe');                           
 				$email=$app->email;
 				Mail::send([],[], function ($message) use($email,$myContent,$subject){  
@@ -1271,6 +1285,9 @@ class Jobseeker extends Controller{
 				exit(1);
 			}
 			echo 'already save';
+		}
+		function curlcall(Request $request){
+			dd($request->all());
 		}
 		
 }
